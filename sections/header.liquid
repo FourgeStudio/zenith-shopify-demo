@@ -1,6 +1,8 @@
 <link rel="stylesheet" href="{{ 'component-list-menu.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-search.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-menu-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
+{%- comment -%} zenith: custom mobile menu drawer (snippets/zenith-header-drawer.liquid) {%- endcomment -%}
+<link rel="stylesheet" href="{{ 'zenith-header-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
 <link
   rel="stylesheet"
   href="{{ 'component-cart-notification.css' | asset_url }}"
@@ -172,7 +174,7 @@
       endif
 
       if section.settings.menu != blank
-        render 'header-drawer', show_country_selector: country_selector, show_language_selector: language_selector, show_social_links: social_links
+        render 'zenith-header-drawer', show_country_selector: country_selector, show_language_selector: language_selector
       endif
 
       if render_search_left
@@ -656,6 +658,97 @@
     {
       "type": "paragraph",
       "content": "t:sections.header.settings.customer_account_menu.content"
+    },
+    {
+      "type": "header",
+      "content": "Mobile menu"
+    },
+    {
+      "type": "paragraph",
+      "content": "Styles the slide-out menu. Social links come from Theme settings > Social media."
+    },
+    {
+      "type": "checkbox",
+      "id": "drawer_show_dividers",
+      "label": "Show dividers between links",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "drawer_uppercase",
+      "label": "Uppercase links",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "drawer_button_label",
+      "label": "Button label",
+      "default": "Add to Cart"
+    },
+    {
+      "type": "url",
+      "id": "drawer_button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "product",
+      "id": "drawer_button_product",
+      "label": "Button product",
+      "info": "Used when Button link is empty. Adds this product to the cart."
+    },
+    {
+      "type": "select",
+      "id": "drawer_button_style",
+      "label": "Button style",
+      "default": "gradient",
+      "options": [
+        {
+          "value": "gradient",
+          "label": "Gold gradient"
+        },
+        {
+          "value": "solid",
+          "label": "Solid gold"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "drawer_show_social",
+      "label": "Show social icons",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "drawer_email",
+      "label": "Email",
+      "default": "hello@tryzenith.ph"
+    },
+    {
+      "type": "image_picker",
+      "id": "drawer_payment_image",
+      "label": "Payment logos image",
+      "info": "e.g. GCash, Maya, Visa, Mastercard, BPI, BDO, UnionBank"
+    },
+    {
+      "type": "checkbox",
+      "id": "drawer_show_payment_icons",
+      "label": "Show store payment icons",
+      "info": "Used when no payment logos image is selected",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "drawer_badge_image",
+      "label": "Badge image",
+      "info": "e.g. An Amare Group Brand seal"
+    },
+    {
+      "type": "text",
+      "id": "drawer_copyright",
+      "label": "Copyright text",
+      "info": "[year] is replaced with the current year",
+      "default": "An Amare Group Brand © [year] TryZenith PH"
     },
     {
       "type": "header",

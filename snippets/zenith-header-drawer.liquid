@@ -1,0 +1,238 @@
+{% comment %}
+  Zenith mobile/drawer menu. Keeps Dawn's <header-drawer> markup contract (details/summary,
+  .menu-drawer__submenu, .menu-drawer__close-button) so global.js open/close/submenu logic still works.
+  Settings live in the header section under "Mobile menu".
+
+  Accepts: show_country_selector {Boolean}, show_language_selector {Boolean}
+
+  Note: Dawn's MenuDrawer treats every <button> inside the drawer as a submenu close button,
+  so the CTA is always a link (GET /cart/add for add-to-cart).
+{% endcomment %}
+{%- liquid
+  assign s = section.settings
+  assign drawer_classes = 'zenith-drawer'
+  if s.drawer_show_dividers
+    assign drawer_classes = drawer_classes | append: ' zenith-drawer--dividers'
+  endif
+  if s.drawer_uppercase
+    assign drawer_classes = drawer_classes | append: ' zenith-drawer--uppercase'
+  endif
+
+  assign cta_url = s.drawer_button_link
+  assign cta_product = s.drawer_button_product
+  if cta_url == blank and cta_product != blank
+    assign cta_variant = cta_product.selected_or_first_available_variant
+    if cta_variant.available
+      assign cta_url = routes.cart_add_url | append: '?id=' | append: cta_variant.id | append: '&quantity=1'
+    else
+      assign cta_url = cta_product.url
+    endif
+  endif
+
+  assign year = 'now' | date: '%Y'
+  assign copyright = s.drawer_copyright | replace: '[year]', year
+-%}
+
+<header-drawer data-breakpoint="{% if section.settings.menu_type_desktop == 'drawer' %}desktop{% else %}tablet{% endif %}">
+  <details id="Details-menu-drawer-container" class="menu-drawer-container">
+    <summary
+      class="header__icon header__icon--menu header__icon--summary link focus-inset"
+      aria-label="{{ 'sections.header.menu' | t }}"
+    >
+      <span>
+        {{- 'icon-hamburger.svg' | inline_asset_content -}}
+        {{- 'icon-close.svg' | inline_asset_content -}}
+      </span>
+    </summary>
+    <div id="menu-drawer" class="gradient menu-drawer motion-reduce color-{{ section.settings.menu_color_scheme }} {{ drawer_classes }}">
+      <div class="menu-drawer__inner-container">
+        <div class="menu-drawer__navigation-container">
+          <div class="zenith-drawer__main">
+            <nav class="menu-drawer__navigation">
+              <ul class="menu-drawer__menu has-submenu list-menu" role="list">
+                {%- for link in section.settings.menu.links -%}
+                  <li>
+                    {%- if link.links != blank -%}
+                      <details id="Details-menu-drawer-menu-item-{{ forloop.index }}">
+                        <summary
+                          id="HeaderDrawer-{{ link.handle }}"
+                          class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.child_active %} menu-drawer__menu-item--active{% endif %}"
+                        >
+                          {{ link.title | escape }}
+                          {%- render 'zenith-icon', icon: 'chevron_right', class: 'zenith-drawer__chevron' -%}
+                        </summary>
+                        <div
+                          id="link-{{ link.handle | escape }}"
+                          class="menu-drawer__submenu has-submenu gradient motion-reduce"
+                          tabindex="-1"
+                        >
+                          <div class="menu-drawer__inner-submenu">
+                            <button class="menu-drawer__close-button link link--text focus-inset" aria-expanded="true">
+                              {%- render 'zenith-icon', icon: 'chevron_left', class: 'zenith-drawer__chevron' -%}
+                              {{ link.title | escape }}
+                            </button>
+                            <ul class="menu-drawer__menu list-menu" role="list" tabindex="-1">
+                              {%- for childlink in link.links -%}
+                                <li>
+                                  {%- if childlink.links == blank -%}
+                                    <a
+                                      id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}"
+                                      href="{{ childlink.url }}"
+                                      class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"
+                                      {% if childlink.current %}
+                                        aria-current="page"
+                                      {% endif %}
+                                    >
+                                      {{ childlink.title | escape }}
+                                    </a>
+                                  {%- else -%}
+                                    <details id="Details-menu-drawer-{{ link.handle }}-{{ childlink.handle }}">
+                                      <summary
+                                        id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}"
+                                        class="menu-drawer__menu-item link link--text list-menu__item focus-inset"
+                                      >
+                                        {{ childlink.title | escape }}
+                                        {%- render 'zenith-icon', icon: 'chevron_right', class: 'zenith-drawer__chevron' -%}
+                                      </summary>
+                                      <div
+                                        id="childlink-{{ childlink.handle | escape }}"
+                                        class="menu-drawer__submenu has-submenu gradient motion-reduce"
+                                      >
+                                        <button
+                                          class="menu-drawer__close-button link link--text focus-inset"
+                                          aria-expanded="true"
+                                        >
+                                          {%- render 'zenith-icon', icon: 'chevron_left', class: 'zenith-drawer__chevron' -%}
+                                          {{ childlink.title | escape }}
+                                        </button>
+                                        <ul class="menu-drawer__menu list-menu" role="list" tabindex="-1">
+                                          {%- for grandchildlink in childlink.links -%}
+                                            <li>
+                                              <a
+                                                id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
+                                                href="{{ grandchildlink.url }}"
+                                                class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if grandchildlink.current %} menu-drawer__menu-item--active{% endif %}"
+                                                {% if grandchildlink.current %}
+                                                  aria-current="page"
+                                                {% endif %}
+                                              >
+                                                {{ grandchildlink.title | escape }}
+                                              </a>
+                                            </li>
+                                          {%- endfor -%}
+                                        </ul>
+                                      </div>
+                                    </details>
+                                  {%- endif -%}
+                                </li>
+                              {%- endfor -%}
+                            </ul>
+                          </div>
+                        </div>
+                      </details>
+                    {%- else -%}
+                      <a
+                        id="HeaderDrawer-{{ link.handle }}"
+                        href="{{ link.url }}"
+                        class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.current %} menu-drawer__menu-item--active{% endif %}"
+                        {% if link.current %}
+                          aria-current="page"
+                        {% endif %}
+                      >
+                        {{ link.title | escape }}
+                      </a>
+                    {%- endif -%}
+                  </li>
+                {%- endfor -%}
+              </ul>
+            </nav>
+
+            {%- if s.drawer_button_label != blank -%}
+              <div class="zenith-drawer__cta-wrap">
+                <a
+                  {% if cta_url != blank %}href="{{ cta_url }}"{% else %}role="link" aria-disabled="true"{% endif %}
+                  class="zenith-drawer__cta zenith-drawer__cta--{{ s.drawer_button_style }}"
+                >
+                  <span>{{ s.drawer_button_label | escape }}</span>
+                  {%- render 'zenith-icon', icon: 'chevron_right', class: 'zenith-drawer__cta-icon' -%}
+                </a>
+              </div>
+            {%- endif -%}
+          </div>
+
+          <div class="menu-drawer__utility-links zenith-drawer__footer">
+            {%- if show_country_selector or show_language_selector -%}
+              <div class="menu-drawer__localization header-localization">
+                {%- if show_country_selector -%}
+                  <localization-form>
+                    {%- form 'localization', id: 'HeaderCountryMobileForm', class: 'localization-form' -%}
+                      <div>
+                        <h2 class="visually-hidden" id="HeaderCountryMobileLabel">
+                          {{ 'localization.country_label' | t }}
+                        </h2>
+                        {%- render 'country-localization', localPosition: 'HeaderCountryMobile' -%}
+                      </div>
+                    {%- endform -%}
+                  </localization-form>
+                {% endif %}
+                {%- if show_language_selector -%}
+                  <localization-form>
+                    {%- form 'localization', id: 'HeaderLanguageMobileForm', class: 'localization-form' -%}
+                      <div>
+                        <h2 class="visually-hidden" id="HeaderLanguageMobileLabel">
+                          {{ 'localization.language_label' | t }}
+                        </h2>
+                        {%- render 'language-localization', localPosition: 'HeaderLanguageMobile' -%}
+                      </div>
+                    {%- endform -%}
+                  </localization-form>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+
+            <div class="zenith-drawer__footer-top">
+              <div class="zenith-drawer__footer-info">
+                {%- if s.drawer_show_social -%}
+                  {%- render 'social-icons', class: 'zenith-drawer__social' -%}
+                {%- endif -%}
+
+                {%- if s.drawer_email != blank -%}
+                  <a href="mailto:{{ s.drawer_email | escape }}" class="zenith-drawer__email link">
+                    {%- render 'zenith-icon', icon: 'mail' -%}
+                    <span>{{ s.drawer_email | escape }}</span>
+                  </a>
+                {%- endif -%}
+
+                {%- if s.drawer_payment_image != blank -%}
+                  {{
+                    s.drawer_payment_image
+                    | image_url: width: 800
+                    | image_tag: loading: 'lazy', widths: '300, 500, 800', sizes: '240px', class: 'zenith-drawer__payments-image', alt: 'Accepted payment methods'
+                  }}
+                {%- elsif s.drawer_show_payment_icons -%}
+                  <ul class="zenith-drawer__payments" role="list">
+                    {%- for type in shop.enabled_payment_types -%}
+                      <li>{{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}</li>
+                    {%- endfor -%}
+                  </ul>
+                {%- endif -%}
+              </div>
+
+              {%- if s.drawer_badge_image != blank -%}
+                {{
+                  s.drawer_badge_image
+                  | image_url: width: 300
+                  | image_tag: loading: 'lazy', widths: '100, 200, 300', sizes: '96px', class: 'zenith-drawer__badge'
+                }}
+              {%- endif -%}
+            </div>
+
+            {%- if copyright != blank -%}
+              <p class="zenith-drawer__copyright">{{ copyright | escape }}</p>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </details>
+</header-drawer>
