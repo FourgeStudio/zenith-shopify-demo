@@ -1,39 +1,72 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "zenith-hero",
-      "settings": {}
+      "settings": {
+        "eyebrow": "Trusted by 100,000+ Filipino men",
+        "heading": "The Maintenance System Built for Filipino Men",
+        "text": "<p>Everything you need to stay in your prime.</p>",
+        "button_label": "Add to Cart",
+        "button_link": "",
+        "content_position": "left",
+        "content_vertical": "middle",
+        "height": 560,
+        "color_scheme": "",
+        "overlay_style": "left",
+        "overlay_color": "#121212",
+        "overlay_opacity": 80,
+        "overlay_coverage": 70,
+        "heading_size": "xl",
+        "heading_tag": "h2",
+        "mobile_overlay_style": "bottom",
+        "mobile_height": 560,
+        "mobile_alignment": "bottom",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
     },
     "trust_bar": {
       "type": "zenith-icon-bar",
-      "settings": {},
       "blocks": {
         "item_1": {
           "type": "item",
           "settings": {
             "icon": "refresh",
-            "text": "30-Day Money-Back Guarantee"
+            "text": "30-Day Money-Back Guarantee",
+            "link": ""
           }
         },
         "item_2": {
           "type": "item",
           "settings": {
             "icon": "cash",
-            "text": "Cash On Delivery"
+            "text": "Cash On Delivery",
+            "link": ""
           }
         },
         "item_3": {
           "type": "item",
           "settings": {
             "icon": "certified",
-            "text": "FDA-Notified Products"
+            "text": "FDA-Notified Products",
+            "link": ""
           }
         },
         "item_4": {
           "type": "item",
           "settings": {
             "icon": "leaf",
-            "text": "100% Grass-Fed Beef Tallow"
+            "text": "100% Grass-Fed Beef Tallow",
+            "link": ""
           }
         }
       },
@@ -42,44 +75,81 @@
         "item_2",
         "item_3",
         "item_4"
-      ]
+      ],
+      "settings": {
+        "alignment": "spread",
+        "show_border": true,
+        "color_scheme": "",
+        "icon_color": "accent",
+        "text_size": "sm",
+        "mobile_layout": "scroll",
+        "padding_top": 16,
+        "padding_bottom": 16
+      }
     },
     "promo_top": {
       "type": "zenith-promo-banner",
-      "settings": {}
+      "settings": {
+        "eyebrow": "",
+        "heading": "Exclusive Offers for this Season",
+        "text": "<p>Bundles and deals built for value. Here for a moment, then gone.</p>",
+        "button_label": "Get This Exclusive Offer",
+        "button_link": "",
+        "countdown_label": "This Exclusive Offer Ends in",
+        "end_date": "2026-12-31",
+        "end_time": "23:59",
+        "timezone": "+08:00",
+        "hide_when_expired": true,
+        "image_position": "right",
+        "color_scheme": "",
+        "card_color_scheme": "",
+        "countdown_color_scheme": "",
+        "overlay_style": "none",
+        "overlay_color": "#121212",
+        "overlay_opacity": 20,
+        "overlay_coverage": 100,
+        "heading_size": "lg",
+        "mobile_image_first": false,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
     },
     "press": {
       "type": "zenith-logo-strip",
-      "settings": {},
       "blocks": {
         "logo_1": {
           "type": "logo",
           "settings": {
-            "name": "Inquirer"
+            "name": "Inquirer",
+            "link": ""
           }
         },
         "logo_2": {
           "type": "logo",
           "settings": {
-            "name": "GMA"
+            "name": "GMA",
+            "link": ""
           }
         },
         "logo_3": {
           "type": "logo",
           "settings": {
-            "name": "Esquire"
+            "name": "Esquire",
+            "link": ""
           }
         },
         "logo_4": {
           "type": "logo",
           "settings": {
-            "name": "SunStar"
+            "name": "SunStar",
+            "link": ""
           }
         },
         "logo_5": {
           "type": "logo",
           "settings": {
-            "name": "Manila Bulletin"
+            "name": "Manila Bulletin",
+            "link": ""
           }
         }
       },
@@ -89,57 +159,73 @@
         "logo_3",
         "logo_4",
         "logo_5"
-      ]
+      ],
+      "settings": {
+        "heading": "As seen on",
+        "logo_height": 28,
+        "color_scheme": "",
+        "monochrome": true,
+        "mobile_layout": "wrap",
+        "padding_top": 32,
+        "padding_bottom": 32
+      }
     },
     "results": {
       "type": "zenith-results-marquee",
-      "settings": {},
       "blocks": {
         "result_1": {
           "type": "result",
           "settings": {
+            "caption": "4 weeks with Zenith Tallow Cream",
             "row": "1"
           }
         },
         "result_2": {
           "type": "result",
           "settings": {
+            "caption": "4 weeks with Zenith Tallow Cream",
             "row": "1"
           }
         },
         "result_3": {
           "type": "result",
           "settings": {
+            "caption": "4 weeks with Zenith Tallow Cream",
             "row": "1"
           }
         },
         "result_4": {
           "type": "result",
           "settings": {
+            "caption": "4 weeks with Zenith Tallow Cream",
             "row": "1"
           }
         },
         "result_5": {
           "type": "result",
           "settings": {
+            "caption": "4 weeks with Zenith Tallow Cream",
             "row": "2"
           }
         },
         "result_6": {
           "type": "result",
           "settings": {
+            "caption": "4 weeks with Zenith Tallow Cream",
             "row": "2"
           }
         },
         "result_7": {
           "type": "result",
           "settings": {
+            "caption": "4 weeks with Zenith Tallow Cream",
             "row": "2"
           }
         },
         "result_8": {
           "type": "result",
           "settings": {
+            "caption": "4 weeks with Zenith Tallow Cream",
             "row": "2"
           }
         }
@@ -153,31 +239,78 @@
         "result_6",
         "result_7",
         "result_8"
-      ]
+      ],
+      "settings": {
+        "eyebrow": "Verified customer results",
+        "heading": "Real Men. Real Results.",
+        "subheading": "<p>See the difference a proper regimen makes. From uneven skin to thinner hair, every transformation here comes from verified Zenith customers putting in the consistent work.</p>",
+        "link_label": "See more results",
+        "link": "",
+        "heading_alignment": "center",
+        "rows": "2",
+        "card_width": 220,
+        "aspect_ratio": "portrait",
+        "speed": 60,
+        "alternate_direction": true,
+        "pause_on_hover": true,
+        "color_scheme": "",
+        "overlay_style": "bottom",
+        "overlay_color": "#121212",
+        "overlay_opacity": 75,
+        "overlay_coverage": 45,
+        "heading_size": "lg",
+        "mobile_card_width": 160,
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
     },
     "videos": {
       "type": "zenith-video-carousel",
-      "settings": {},
       "blocks": {
         "video_1": {
           "type": "video",
-          "settings": {}
+          "settings": {
+            "quote": "Anti-aging cream is all in one solution. Barrier protection, lightweight, and it absorbs fast.",
+            "author": "Customer name",
+            "author_meta": "Verified buyer",
+            "product": ""
+          }
         },
         "video_2": {
           "type": "video",
-          "settings": {}
+          "settings": {
+            "quote": "Anti-aging cream is all in one solution. Barrier protection, lightweight, and it absorbs fast.",
+            "author": "Customer name",
+            "author_meta": "Verified buyer",
+            "product": ""
+          }
         },
         "video_3": {
           "type": "video",
-          "settings": {}
+          "settings": {
+            "quote": "Anti-aging cream is all in one solution. Barrier protection, lightweight, and it absorbs fast.",
+            "author": "Customer name",
+            "author_meta": "Verified buyer",
+            "product": ""
+          }
         },
         "video_4": {
           "type": "video",
-          "settings": {}
+          "settings": {
+            "quote": "Anti-aging cream is all in one solution. Barrier protection, lightweight, and it absorbs fast.",
+            "author": "Customer name",
+            "author_meta": "Verified buyer",
+            "product": ""
+          }
         },
         "video_5": {
           "type": "video",
-          "settings": {}
+          "settings": {
+            "quote": "Anti-aging cream is all in one solution. Barrier protection, lightweight, and it absorbs fast.",
+            "author": "Customer name",
+            "author_meta": "Verified buyer",
+            "product": ""
+          }
         }
       },
       "block_order": [
@@ -186,33 +319,61 @@
         "video_3",
         "video_4",
         "video_5"
-      ]
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "Clinically Proven. The Complete Regimen.",
+        "subheading": "<p>Hear from the men who use Zenith every day.</p>",
+        "heading_alignment": "center",
+        "slides_desktop": 4,
+        "show_peek": true,
+        "show_dots": true,
+        "show_arrows": true,
+        "autoplay": 0,
+        "color_scheme": "",
+        "card_color_scheme": "",
+        "overlay_style": "bottom",
+        "overlay_color": "#121212",
+        "overlay_opacity": 40,
+        "overlay_coverage": 40,
+        "heading_size": "lg",
+        "mobile_slide_width": 75,
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
     },
     "guarantee": {
       "type": "zenith-feature-columns",
-      "settings": {},
       "blocks": {
         "column_1": {
           "type": "column",
           "settings": {
+            "icon": "none",
+            "title": "",
             "text": "<p>Our friendly team will text or call to confirm your order details, ensuring you're ready to go.</p>"
           }
         },
         "column_2": {
           "type": "column",
           "settings": {
+            "icon": "none",
+            "title": "",
             "text": "<p>Every box includes a unique serial QR code. Scan it to verify your product is 100% authentic.</p>"
           }
         },
         "column_3": {
           "type": "column",
           "settings": {
+            "icon": "none",
+            "title": "",
             "text": "<p>Discreet packaging, delivered straight to your door anywhere in the Philippines.</p>"
           }
         },
         "column_4": {
           "type": "column",
           "settings": {
+            "icon": "none",
+            "title": "",
             "text": "<p>Pay only when the product is in your hands with Cash on Delivery.</p>"
           }
         }
@@ -222,38 +383,62 @@
         "column_2",
         "column_3",
         "column_4"
-      ]
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "The Zenith Guarantee",
+        "subheading": "",
+        "show_payment_icons": false,
+        "footer_text": "<p>Secure checkout. Cash on delivery available nationwide.</p>",
+        "heading_alignment": "center",
+        "columns_desktop": 4,
+        "media_position": "left",
+        "image_ratio": "portrait",
+        "text_alignment": "left",
+        "color_scheme": "",
+        "heading_size": "lg",
+        "columns_mobile": "1",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
     },
     "categories": {
       "type": "zenith-category-cards",
-      "settings": {},
       "blocks": {
         "card_1": {
           "type": "card",
           "settings": {
             "title": "The tallow cream that repairs and restores your skin",
-            "button_label": "Shop Skin Products"
+            "button_label": "Shop Skin Products",
+            "link": "",
+            "product": ""
           }
         },
         "card_2": {
           "type": "card",
           "settings": {
             "title": "Thin density sprays built for the dryness on your scalp",
-            "button_label": "Shop Hair Products"
+            "button_label": "Shop Hair Products",
+            "link": "",
+            "product": ""
           }
         },
         "card_3": {
           "type": "card",
           "settings": {
             "title": "Full body care for the hard-working man",
-            "button_label": "Add to Cart"
+            "button_label": "Add to Cart",
+            "link": "",
+            "product": ""
           }
         },
         "card_4": {
           "type": "card",
           "settings": {
             "title": "Personal care to complete your routine",
-            "button_label": "Add to Cart"
+            "button_label": "Add to Cart",
+            "link": "",
+            "product": ""
           }
         }
       },
@@ -262,11 +447,29 @@
         "card_2",
         "card_3",
         "card_4"
-      ]
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "Products formulated for the Philippine Climate",
+        "subheading": "<p>Honest gear for your skin, your hair, and the men wearing it.</p>",
+        "heading_alignment": "center",
+        "columns_desktop": 4,
+        "aspect_ratio": "portrait",
+        "color_scheme": "",
+        "card_color_scheme": "",
+        "overlay_style": "bottom",
+        "overlay_color": "#121212",
+        "overlay_opacity": 80,
+        "overlay_coverage": 60,
+        "heading_size": "lg",
+        "mobile_layout": "carousel",
+        "mobile_card_width": 75,
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
     },
     "featured_product": {
       "type": "zenith-featured-product",
-      "settings": {},
       "blocks": {
         "benefit_1": {
           "type": "benefit",
@@ -315,11 +518,26 @@
         "trust_4",
         "trust_5",
         "trust_6"
-      ]
+      ],
+      "settings": {
+        "product": "zenith-anti-aging-tallow-cream",
+        "placeholder_title": "Zenith Anti-Aging Tallow Cream",
+        "badge": "Best Seller",
+        "button_label": "Add to Cart",
+        "show_rating": true,
+        "image_position": "right",
+        "full_width": true,
+        "color_scheme": "",
+        "media_color_scheme": "",
+        "badge_color_scheme": "",
+        "heading_size": "lg",
+        "mobile_image_first": true,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
     },
     "brand_story": {
       "type": "zenith-image-story",
-      "settings": {},
       "blocks": {
         "column_1": {
           "type": "column",
@@ -339,55 +557,115 @@
       "block_order": [
         "column_1",
         "column_2"
-      ]
+      ],
+      "settings": {
+        "use_brand_logo": true,
+        "eyebrow": "",
+        "heading": "",
+        "text": "<p>Zenith has over 100,000 men who have trusted us for their long-term grooming. We started because mature Filipino men were underserved: products built for younger men, for other climates, or loaded with hype.</p><p>We build honest, high-performance essentials that work in Philippine heat and humidity, and we stand behind every one of them.</p>",
+        "button_label": "",
+        "button_link": "",
+        "image_position": "left",
+        "image_ratio": "adapt",
+        "color_scheme": "",
+        "overlay_style": "none",
+        "overlay_color": "#121212",
+        "overlay_opacity": 30,
+        "overlay_coverage": 60,
+        "heading_size": "lg",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
     },
     "collection": {
       "type": "zenith-product-carousel",
       "settings": {
+        "eyebrow": "All Products",
+        "heading": "The Zenith Grooming Collection",
+        "subheading": "<p>The products men come back for. Simple. Effective. Proven.</p>",
         "collection": "all",
-        "view_all_link": "shopify://collections/all"
+        "products_to_show": 10,
+        "show_rating": true,
+        "button_label": "Add to Cart",
+        "view_all_label": "Shop All Products",
+        "view_all_link": "shopify://collections/all",
+        "slides_desktop": 5,
+        "show_peek": true,
+        "show_dots": false,
+        "show_arrows": true,
+        "autoplay": 0,
+        "color_scheme": "",
+        "heading_size": "lg",
+        "mobile_slide_width": 60,
+        "padding_top": 64,
+        "padding_bottom": 64
       }
     },
     "money_back": {
       "type": "zenith-guarantee-banner",
-      "settings": {}
+      "settings": {
+        "eyebrow": "",
+        "heading": "The Zenith Money-Back Guarantee",
+        "text": "<p>We stand behind every Zenith formula with complete confidence. We know different issues take different times to fix, which is why we give you 30 days for skincare and 60 days for hair care to see real changes.</p><p>If you don't see visible improvements by then, simply contact us. We'll refund your purchase, just show us proof. Because real results speak louder than promises.</p>",
+        "button_label": "",
+        "button_link": "",
+        "image_position": "right",
+        "image_width": 260,
+        "color_scheme": "",
+        "heading_size": "lg",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
     },
     "reviews": {
       "type": "zenith-reviews",
-      "settings": {}
+      "settings": {
+        "eyebrow": "",
+        "heading": "100,000+ Filipino Men Trust Zenith Products",
+        "subheading": "<p>Real men using the cream. Unedited and verified.</p>",
+        "heading_alignment": "center",
+        "color_scheme": "",
+        "heading_size": "lg",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
     },
     "faq": {
       "type": "zenith-faq",
-      "settings": {},
       "blocks": {
         "question_1": {
           "type": "question",
           "settings": {
-            "question": "What makes Zenith different from drugstore brands?"
+            "question": "What makes Zenith different from drugstore brands?",
+            "answer": "<p>Zenith products are built for the skin and hair of mature Filipino men and tested for Philippine heat and humidity.</p>"
           }
         },
         "question_2": {
           "type": "question",
           "settings": {
-            "question": "Is it safe for sensitive skin?"
+            "question": "Is it safe for sensitive skin?",
+            "answer": "<p>Zenith products are built for the skin and hair of mature Filipino men and tested for Philippine heat and humidity.</p>"
           }
         },
         "question_3": {
           "type": "question",
           "settings": {
-            "question": "How long before I see results?"
+            "question": "How long before I see results?",
+            "answer": "<p>Zenith products are built for the skin and hair of mature Filipino men and tested for Philippine heat and humidity.</p>"
           }
         },
         "question_4": {
           "type": "question",
           "settings": {
-            "question": "What is Cash on Delivery?"
+            "question": "What is Cash on Delivery?",
+            "answer": "<p>Zenith products are built for the skin and hair of mature Filipino men and tested for Philippine heat and humidity.</p>"
           }
         },
         "question_5": {
           "type": "question",
           "settings": {
-            "question": "Why are my products sold out?"
+            "question": "Why are my products sold out?",
+            "answer": "<p>Zenith products are built for the skin and hair of mature Filipino men and tested for Philippine heat and humidity.</p>"
           }
         }
       },
@@ -397,11 +675,47 @@
         "question_3",
         "question_4",
         "question_5"
-      ]
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "Frequently Asked Questions",
+        "subheading": "<p>No-nonsense answers about your daily essentials.</p>",
+        "enable_schema": true,
+        "heading_alignment": "center",
+        "max_width": 800,
+        "open_first": true,
+        "color_scheme": "",
+        "heading_size": "lg",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
     },
     "promo_bottom": {
       "type": "zenith-promo-banner",
-      "settings": {}
+      "settings": {
+        "eyebrow": "",
+        "heading": "Exclusive Offers for this Season",
+        "text": "<p>Bundles and deals built for value. Here for a moment, then gone.</p>",
+        "button_label": "Get This Exclusive Offer",
+        "button_link": "",
+        "countdown_label": "This Exclusive Offer Ends in",
+        "end_date": "2026-12-31",
+        "end_time": "23:59",
+        "timezone": "+08:00",
+        "hide_when_expired": true,
+        "image_position": "right",
+        "color_scheme": "",
+        "card_color_scheme": "",
+        "countdown_color_scheme": "",
+        "overlay_style": "none",
+        "overlay_color": "#121212",
+        "overlay_opacity": 20,
+        "overlay_coverage": 100,
+        "heading_size": "lg",
+        "mobile_image_first": false,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
     }
   },
   "order": [
