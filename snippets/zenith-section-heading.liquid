@@ -1,0 +1,19 @@
+{% comment %}
+  Eyebrow + heading + subheading block used by all zenith sections.
+  Accepts: eyebrow, heading, subheading (richtext), alignment ('left'|'center'),
+           size ('sm'|'md'|'lg'|'xl'), tag ('h1'|'h2'|'h3'), class optional
+{% endcomment %}
+{%- if eyebrow != blank or heading != blank or subheading != blank -%}
+  {%- assign heading_tag = tag | default: 'h2' -%}
+  <div class="zenith-heading zenith-heading--{{ alignment | default: 'center' }} {{ class }}">
+    {%- if eyebrow != blank -%}
+      <p class="zenith-eyebrow">{{ eyebrow | escape }}</p>
+    {%- endif -%}
+    {%- if heading != blank -%}
+      <{{ heading_tag }} class="zenith-title--{{ size | default: 'lg' }}">{{ heading | escape }}</{{ heading_tag }}>
+    {%- endif -%}
+    {%- if subheading != blank -%}
+      <div class="zenith-subheading">{{ subheading }}</div>
+    {%- endif -%}
+  </div>
+{%- endif -%}

@@ -1,0 +1,14 @@
+{% comment %}
+  Accepts: rating {Number} 0-5, count {Number} optional
+{% endcomment %}
+{%- assign rounded = rating | round -%}
+<span class="zenith-stars">
+  <span class="zenith-stars__icons" role="img" aria-label="{{ rating }} out of 5 stars">
+    {%- for i in (1..5) -%}
+      <span{% if i > rounded %} style="opacity: 0.3"{% endif %}>{% render 'zenith-icon', icon: 'star' %}</span>
+    {%- endfor -%}
+  </span>
+  {%- if count != blank -%}
+    <span>({{ count }})</span>
+  {%- endif -%}
+</span>

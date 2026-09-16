@@ -1,0 +1,146 @@
+.zenith-fp__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.zenith-fp--m-image-first .zenith-fp__media-wrap {
+  order: -1;
+}
+
+.zenith-fp__content {
+  display: flex;
+  align-items: center;
+}
+
+.zenith-fp__content-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--z-space-4);
+  width: 100%;
+  max-width: 56rem;
+  padding: var(--z-space-7) var(--z-space-5);
+}
+
+.zenith-fp__badge {
+  padding: var(--z-space-1) var(--z-space-3);
+  font-size: var(--z-text-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.zenith-fp__title {
+  margin: 0;
+}
+
+.zenith-fp__price {
+  margin: 0;
+  font-size: 2.4rem;
+  font-weight: 600;
+}
+
+.zenith-fp__price s {
+  margin-left: var(--z-space-2);
+  font-size: 1.6rem;
+  font-weight: 400;
+  opacity: 0.6;
+}
+
+.zenith-fp__benefits,
+.zenith-fp__trust {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.zenith-fp__benefits {
+  display: flex;
+  flex-direction: column;
+  gap: var(--z-space-3);
+  font-size: var(--z-text-sm);
+}
+
+.zenith-fp__benefits li,
+.zenith-fp__trust li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--z-space-2);
+}
+
+.zenith-fp__benefits .zenith-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--z-gold);
+}
+
+.zenith-fp__actions {
+  width: 100%;
+  max-width: 40rem;
+  margin-top: var(--z-space-2);
+}
+
+.zenith-fp__trust {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--z-space-3) var(--z-space-5);
+  padding-top: var(--z-space-4);
+  border-top: 1px solid rgba(var(--color-foreground), 0.15);
+  width: 100%;
+  font-size: var(--z-text-xs);
+}
+
+.zenith-fp__trust li {
+  align-items: center;
+}
+
+.zenith-fp__trust .zenith-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.zenith-fp__media-wrap {
+  display: flex;
+}
+
+.zenith-fp__media {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: transparent;
+}
+
+.zenith-fp__media img {
+  object-fit: contain;
+  padding: var(--z-space-6);
+}
+
+@media screen and (min-width: 750px) {
+  .zenith-fp__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .zenith-fp--m-image-first .zenith-fp__media-wrap {
+    order: 0;
+  }
+
+  .zenith-fp--image-left .zenith-fp__media-wrap {
+    order: -1;
+  }
+
+  .zenith-fp__content {
+    justify-content: flex-end;
+  }
+
+  .zenith-fp--image-left .zenith-fp__content {
+    justify-content: flex-start;
+  }
+
+  .zenith-fp__content-inner {
+    padding: var(--z-space-8) var(--z-space-7);
+  }
+
+  .zenith-fp__media {
+    aspect-ratio: auto;
+    min-height: 56rem;
+  }
+}

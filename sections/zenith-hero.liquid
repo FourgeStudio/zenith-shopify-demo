@@ -1,0 +1,391 @@
+{{ 'zenith-hero.css' | asset_url | stylesheet_tag }}
+
+{%- capture extra -%}
+  --z-hero-h: {{ section.settings.height }}px;
+  --z-hero-h-m: {{ section.settings.mobile_height }}px;
+  {%- render 'zenith-overlay-vars', settings: section.settings -%}
+{%- endcapture -%}
+{%- render 'zenith-section-style', section: section, extra: extra -%}
+
+<section
+  id="Zenith-{{ section.id }}"
+  class="zenith-section zenith-hero color-{{ section.settings.color_scheme }} gradient zenith-hero--{{ section.settings.content_position }} zenith-hero--v-{{ section.settings.content_vertical }} zenith-hero--m-{{ section.settings.mobile_alignment }}"
+>
+  <div class="zenith-hero__inner">
+    <div class="zenith-media zenith-hero__media">
+      {%- if section.settings.image != blank -%}
+        {%- assign desktop_class = '' -%}
+        {%- if section.settings.mobile_image != blank -%}
+          {%- assign desktop_class = 'zenith-hide-mobile' -%}
+        {%- endif -%}
+        {{
+          section.settings.image
+          | image_url: width: 2400
+          | image_tag:
+            widths: '750, 1100, 1500, 1920, 2400',
+            sizes: '100vw',
+            fetchpriority: 'high',
+            loading: 'eager',
+            class: desktop_class
+        }}
+        {%- if section.settings.mobile_image != blank -%}
+          {{
+            section.settings.mobile_image
+            | image_url: width: 1500
+            | image_tag:
+              widths: '375, 550, 750, 1100, 1500',
+              sizes: '100vw',
+              fetchpriority: 'high',
+              loading: 'eager',
+              class: 'zenith-hide-desktop'
+          }}
+        {%- endif -%}
+      {%- else -%}
+        {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+    </div>
+    {%- render 'zenith-overlay', style: section.settings.overlay_style, mobile_style: section.settings.mobile_overlay_style -%}
+
+    <div class="page-width zenith-hero__content-wrap">
+      <div class="zenith-hero__content">
+        {%- render 'zenith-section-heading',
+          eyebrow: section.settings.eyebrow,
+          heading: section.settings.heading,
+          subheading: section.settings.text,
+          alignment: section.settings.content_position,
+          size: section.settings.heading_size,
+          tag: section.settings.heading_tag,
+          class: 'zenith-hero__heading'
+        -%}
+        {%- if section.settings.button_label != blank -%}
+          <a
+            {% if section.settings.button_link != blank %}
+              href="{{ section.settings.button_link }}"
+            {% else %}
+              role="link" aria-disabled="true"
+            {% endif %}
+            class="button zenith-hero__button"
+          >
+            {{- section.settings.button_label | escape -}}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Zenith · Hero",
+  "tag": "div",
+  "class": "section",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Trusted by 100,000+ Filipino men"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The Maintenance System Built for Filipino Men"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Everything you need to stay in your prime.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Add to Cart"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Desktop image",
+      "info": "Recommended 2880 × 1120px"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile image",
+      "info": "Optional. Recommended 1125 × 1500px"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "Content alignment",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "content_vertical",
+      "label": "Content vertical position",
+      "default": "middle",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "middle",
+          "label": "Middle"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "height",
+      "label": "Height",
+      "min": 360,
+      "max": 900,
+      "step": 20,
+      "unit": "px",
+      "default": 560
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "select",
+      "id": "overlay_style",
+      "label": "Image overlay",
+      "default": "left",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "solid",
+          "label": "Solid"
+        },
+        {
+          "value": "bottom",
+          "label": "Gradient from bottom"
+        },
+        {
+          "value": "top",
+          "label": "Gradient from top"
+        },
+        {
+          "value": "left",
+          "label": "Gradient from left"
+        },
+        {
+          "value": "right",
+          "label": "Gradient from right"
+        }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay color",
+      "default": "#121212"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "overlay_coverage",
+      "label": "Gradient length",
+      "info": "How far the gradient reaches across the image",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 70
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "default": "xl",
+      "options": [
+        {
+          "value": "md",
+          "label": "Medium"
+        },
+        {
+          "value": "lg",
+          "label": "Large"
+        },
+        {
+          "value": "xl",
+          "label": "Extra large"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading tag",
+      "default": "h2",
+      "info": "The header already uses H1 on the home page",
+      "options": [
+        {
+          "value": "h1",
+          "label": "H1"
+        },
+        {
+          "value": "h2",
+          "label": "H2"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "type": "select",
+      "id": "mobile_overlay_style",
+      "label": "Mobile image overlay",
+      "default": "bottom",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "solid",
+          "label": "Solid"
+        },
+        {
+          "value": "bottom",
+          "label": "Gradient from bottom"
+        },
+        {
+          "value": "top",
+          "label": "Gradient from top"
+        },
+        {
+          "value": "left",
+          "label": "Gradient from left"
+        },
+        {
+          "value": "right",
+          "label": "Gradient from right"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "mobile_height",
+      "label": "Mobile height",
+      "min": 360,
+      "max": 800,
+      "step": 20,
+      "unit": "px",
+      "default": 560
+    },
+    {
+      "type": "select",
+      "id": "mobile_alignment",
+      "label": "Mobile content position",
+      "default": "bottom",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "middle",
+          "label": "Middle"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zenith · Hero"
+    }
+  ]
+}
+{% endschema %}

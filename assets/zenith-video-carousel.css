@@ -1,0 +1,111 @@
+.zenith-video-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.zenith-video-card__media {
+  display: block;
+  aspect-ratio: 9 / 16;
+}
+
+.zenith-video-card__play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  color: var(--z-obsidian);
+  background: rgba(255, 255, 255, 0.9);
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+button.zenith-video-card__play:hover {
+  transform: translate(-50%, -50%) scale(1.06);
+}
+
+.zenith-video-card__play .zenith-icon {
+  width: 22px;
+  height: 22px;
+  margin-left: 3px;
+}
+
+zenith-video.is-playing .zenith-overlay {
+  opacity: 0;
+}
+
+zenith-video.is-playing .zenith-video-card__play {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.zenith-video-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--z-space-3);
+  flex: 1;
+  padding: var(--z-space-4);
+}
+
+.zenith-video-card__quote {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: var(--z-text-sm);
+  line-height: 1.5;
+  font-style: normal;
+}
+
+.zenith-video-card__author {
+  margin: 0;
+  font-size: var(--z-text-xs);
+  font-weight: 600;
+}
+
+.zenith-video-card__author span {
+  display: block;
+  font-weight: 400;
+  color: rgba(var(--color-foreground), 0.6);
+}
+
+.zenith-video-card__product {
+  display: flex;
+  align-items: center;
+  gap: var(--z-space-3);
+  margin-top: auto;
+  padding-top: var(--z-space-3);
+  border-top: 1px solid rgba(var(--color-foreground), 0.12);
+  color: inherit;
+  text-decoration: none;
+}
+
+.zenith-video-card__product-media {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  background: var(--z-rock);
+}
+
+.zenith-video-card__product-media img {
+  object-fit: contain;
+}
+
+.zenith-video-card__product-info {
+  display: flex;
+  flex-direction: column;
+  font-size: var(--z-text-xs);
+  line-height: 1.3;
+}
+
+.zenith-video-card__product-price {
+  color: var(--z-gold);
+  font-weight: 600;
+}

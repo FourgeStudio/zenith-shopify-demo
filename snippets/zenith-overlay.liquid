@@ -1,0 +1,20 @@
+{% comment %}
+  Image overlay layer. Place inside a positioned media wrapper.
+  Colors come from CSS vars set by 'zenith-overlay-vars' on the section root.
+  Accepts: style {String} none|solid|bottom|top|left|right, mobile_style {String} optional
+{% endcomment %}
+{%- liquid
+  assign show_overlay = false
+  if style != 'none'
+    assign show_overlay = true
+  endif
+  if mobile_style != blank and mobile_style != 'none'
+    assign show_overlay = true
+  endif
+-%}
+{%- if show_overlay -%}
+  <div
+    class="zenith-overlay zenith-overlay--{{ style }}{% if mobile_style != blank %} zenith-overlay--m-{{ mobile_style }}{% endif %}"
+    aria-hidden="true"
+  ></div>
+{%- endif -%}
