@@ -17,8 +17,8 @@
   justify-content: space-between;
   gap: var(--z-space-4);
   min-height: 44px;
-  padding: var(--z-space-4) 0;
-  font-size: 1.6rem;
+  padding: var(--z-ipad-m, var(--z-space-4)) 0;
+  font-size: var(--z-ttfs-m, 1.6rem);
   font-weight: 500;
   cursor: pointer;
   list-style: none;
@@ -46,7 +46,7 @@
 
 .zenith-faq__answer {
   padding: 0 0 var(--z-space-5);
-  font-size: var(--z-text-sm);
+  font-size: var(--z-tfs-m, var(--z-text-sm));
   line-height: 1.6;
   color: rgba(var(--color-foreground), 0.8);
 }
@@ -59,6 +59,11 @@
 
 @media screen and (min-width: 750px) {
   .zenith-faq__question {
-    font-size: 1.8rem;
+    padding: var(--z-ipad, var(--z-space-4)) 0;
+    font-size: var(--z-ttfs, 1.8rem);
+  }
+
+  .zenith-faq__answer {
+    font-size: var(--z-tfs, var(--z-text-sm));
   }
 }

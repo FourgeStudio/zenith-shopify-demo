@@ -7,7 +7,7 @@
 
 .zenith-logos__heading {
   margin: 0;
-  font-size: var(--z-text-xs);
+  font-size: var(--z-tfs, var(--z-text-xs));
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: rgba(var(--color-foreground), 0.6);
@@ -21,14 +21,14 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: var(--z-space-5) var(--z-space-7);
+  gap: var(--z-space-5) var(--z-gap-m, var(--z-space-5));
 }
 
 .zenith-logos__item img {
   display: block;
   height: var(--z-logo-h-m);
   width: auto;
-  max-width: 16rem;
+  max-width: var(--z-lmw, 16rem);
   object-fit: contain;
 }
 
@@ -68,6 +68,6 @@
   }
 
   .zenith-logos__list {
-    gap: var(--z-space-6) var(--z-space-8);
+    gap: var(--z-space-6) var(--z-gap, var(--z-space-8));
   }
 }

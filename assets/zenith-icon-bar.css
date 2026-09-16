@@ -8,7 +8,8 @@
   margin: 0;
   padding: 0;
   display: flex;
-  gap: var(--z-space-5);
+  gap: var(--z-gap-m, var(--z-space-5));
+  font-size: var(--z-tfs-m, var(--z-text-sm));
 }
 
 .zenith-icon-bar__item,
@@ -22,17 +23,14 @@
 }
 
 .zenith-icon-bar__item .zenith-icon {
-  width: 20px;
-  height: 20px;
+  width: var(--z-icon-m, 20px);
+  height: var(--z-icon-m, 20px);
 }
 
 .zenith-icon-bar--icon-accent .zenith-icon {
   color: var(--z-gold);
 }
 
-.zenith-icon-bar--text-xs { font-size: var(--z-text-xs); }
-.zenith-icon-bar--text-sm { font-size: var(--z-text-sm); }
-.zenith-icon-bar--text-md { font-size: 1.6rem; }
 
 @media screen and (max-width: 749px) {
   .zenith-icon-bar__list--m-scroll {
@@ -52,7 +50,7 @@
   .zenith-icon-bar__list--m-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--z-space-3) var(--z-space-4);
+    gap: var(--z-space-3) var(--z-gap-m, var(--z-space-4));
   }
 
   .zenith-icon-bar__list--m-grid .zenith-icon-bar__item {
@@ -63,7 +61,13 @@
 @media screen and (min-width: 750px) {
   .zenith-icon-bar__list {
     flex-wrap: wrap;
-    gap: var(--z-space-5) var(--z-space-6);
+    gap: var(--z-space-5) var(--z-gap, var(--z-space-6));
+    font-size: var(--z-tfs, var(--z-text-sm));
+  }
+
+  .zenith-icon-bar__item .zenith-icon {
+    width: var(--z-icon, 20px);
+    height: var(--z-icon, 20px);
   }
 
   .zenith-icon-bar__list--spread {

@@ -34,11 +34,10 @@
       <div class="zenith-promo__body">
         <div class="zenith-promo__content">
           {%- render 'zenith-section-heading',
-            eyebrow: section.settings.eyebrow,
             heading: section.settings.heading,
             subheading: section.settings.text,
             alignment: 'left',
-            size: section.settings.heading_size,
+            uppercase: section.settings.heading_uppercase,
             tag: 'h2',
             class: 'zenith-promo__heading'
           -%}
@@ -110,11 +109,6 @@
     {
       "type": "header",
       "content": "Content"
-    },
-    {
-      "type": "text",
-      "id": "eyebrow",
-      "label": "Eyebrow"
     },
     {
       "type": "text",
@@ -218,6 +212,56 @@
       ]
     },
     {
+      "type": "range",
+      "id": "content_max_width",
+      "label": "Content max width",
+      "min": 300,
+      "max": 900,
+      "step": 20,
+      "unit": "px",
+      "default": 560
+    },
+    {
+      "type": "range",
+      "id": "content_gap",
+      "label": "Space between heading and button",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "content_padding",
+      "label": "Banner inner padding",
+      "min": 16,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "image_max_width",
+      "label": "Image max width",
+      "min": 120,
+      "max": 900,
+      "step": 20,
+      "unit": "px",
+      "default": 480
+    },
+    {
+      "type": "range",
+      "id": "image_max_height",
+      "label": "Image max height",
+      "min": 120,
+      "max": 700,
+      "step": 20,
+      "unit": "px",
+      "default": 320
+    },
+    {
       "type": "header",
       "content": "Colors"
     },
@@ -303,24 +347,50 @@
       "content": "Typography"
     },
     {
-      "type": "select",
-      "id": "heading_size",
+      "type": "range",
+      "id": "heading_font_size",
       "label": "Heading size",
-      "default": "lg",
-      "options": [
-        {
-          "value": "md",
-          "label": "Medium"
-        },
-        {
-          "value": "lg",
-          "label": "Large"
-        },
-        {
-          "value": "xl",
-          "label": "Extra large"
-        }
-      ]
+      "min": 16,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 44
+    },
+    {
+      "type": "checkbox",
+      "id": "heading_uppercase",
+      "label": "Uppercase heading",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "subheading_font_size",
+      "label": "Subheading size",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "countdown_font_size",
+      "label": "Countdown number size",
+      "min": 14,
+      "max": 56,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "text_font_size",
+      "label": "Countdown label size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
     },
     {
       "type": "header",
@@ -331,6 +401,66 @@
       "id": "mobile_image_first",
       "label": "Show image above text on mobile",
       "default": false
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size_mobile",
+      "label": "Heading size",
+      "min": 16,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "subheading_font_size_mobile",
+      "label": "Subheading size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "content_gap_mobile",
+      "label": "Space between heading and button",
+      "min": 0,
+      "max": 64,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "content_padding_mobile",
+      "label": "Banner inner padding",
+      "min": 8,
+      "max": 64,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "image_max_height_mobile",
+      "label": "Image max height",
+      "min": 120,
+      "max": 500,
+      "step": 20,
+      "unit": "px",
+      "default": 240
+    },
+    {
+      "type": "range",
+      "id": "countdown_font_size_mobile",
+      "label": "Countdown number size",
+      "min": 12,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 20
     },
     {
       "type": "header",
@@ -355,6 +485,26 @@
       "step": 4,
       "unit": "px",
       "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Top padding (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Bottom padding (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
     }
   ],
   "presets": [

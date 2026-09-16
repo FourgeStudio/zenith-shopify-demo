@@ -1,3 +1,6 @@
+.zenith-pc--portrait { --z-card-ratio: 4 / 5; }
+.zenith-pc--landscape { --z-card-ratio: 4 / 3; }
+
 .zenith-pc__header {
   display: flex;
   flex-direction: column;
@@ -11,7 +14,10 @@
 }
 
 @media screen and (min-width: 750px) {
-  .zenith-pc__header {
+  .zenith-pc--portrait { --z-card-ratio: 4 / 5; }
+.zenith-pc--landscape { --z-card-ratio: 4 / 3; }
+
+.zenith-pc__header {
     flex-direction: row;
     align-items: flex-end;
     justify-content: space-between;

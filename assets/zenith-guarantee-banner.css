@@ -8,8 +8,8 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--z-space-5);
-  max-width: 72rem;
+  gap: var(--z-cgap-m, var(--z-space-4));
+  max-width: var(--z-cmw, 72rem);
 }
 
 .zenith-guarantee__heading {
@@ -17,14 +17,14 @@
 }
 
 .zenith-guarantee__text {
-  font-size: var(--z-text-sm);
+  font-size: var(--z-tfs-m, var(--z-text-sm));
   line-height: 1.6;
   color: rgba(var(--color-foreground), 0.8);
 }
 
 .zenith-guarantee__badge {
   align-self: center;
-  width: calc(var(--z-badge-w) * 0.75);
+  width: var(--z-badge-w-m, calc(var(--z-badge-w) * 0.75));
   flex-shrink: 0;
 }
 
@@ -68,5 +68,13 @@
 
   .zenith-guarantee__badge {
     width: var(--z-badge-w);
+  }
+
+  .zenith-guarantee__content {
+    gap: var(--z-cgap, var(--z-space-5));
+  }
+
+  .zenith-guarantee__text {
+    font-size: var(--z-tfs, var(--z-text-sm));
   }
 }

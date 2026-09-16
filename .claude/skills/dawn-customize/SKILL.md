@@ -71,6 +71,13 @@ Rules:
   5. `Mobile` — mobile layout/columns/alignment overrides, hide-on-mobile toggles
   6. `Spacing` — `padding_top`, `padding_bottom` (range 0–100, step 4, unit px, default 36)
 - Setting ids: `snake_case`, prefixed by group when ambiguous (`mobile_columns`, `button_label_1`).
+- **Size/spacing settings → CSS vars automatically**: `snippets/zenith-section-style.liquid` has a `map` of standard ids
+  (`heading_font_size[_mobile]`, `subheading_font_size[_mobile]`, `eyebrow_font_size`, `heading_max_width`, `heading_spacing[_mobile]`,
+  `text_font_size[_mobile]`, `title_font_size[_mobile]`, `price_font_size[_mobile]`, `gap[_mobile]`, `content_max_width`, `content_gap[_mobile]`,
+  `content_padding[_mobile]`, `icon_size[_mobile]`, `media_width[_mobile]`, `media_min_height`, `media_height_mobile`, `image_padding`, …).
+  Reuse these ids first; CSS reads `var(--z-<suffix>-m, fallback)` mobile-first and `var(--z-<suffix>, fallback)` ≥750px. New id → add one map entry.
+- Every text element gets a desktop + mobile size range; every layout gap/width/height the design varies gets a range. Mobile values live in the `Mobile` group.
+- **Never change a setting's type under the same id** — the theme editor saves every setting into `templates/*.json`; reuse of an id with a new type breaks sync. Use a new id and delete stale keys from templates.
 - Blocks for repeatable items (cards, slides, FAQ items) with `max_blocks`; block settings follow same group order.
 - Always include `presets` (with sensible default blocks) so it's addable in editor; `"disabled_on": {"groups": ["header","footer"]}` for body sections.
 - Plain English labels + `info` hints for non-obvious settings.

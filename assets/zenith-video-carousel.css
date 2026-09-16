@@ -9,6 +9,9 @@
   aspect-ratio: 9 / 16;
 }
 
+.zenith-videos--4-5 .zenith-video-card__media { aspect-ratio: 4 / 5; }
+.zenith-videos--1-1 .zenith-video-card__media { aspect-ratio: 1 / 1; }
+
 .zenith-video-card__play {
   position: absolute;
   top: 50%;
@@ -59,14 +62,20 @@ zenith-video.is-playing .zenith-video-card__play {
   margin: 0;
   padding: 0;
   border: 0;
-  font-size: var(--z-text-sm);
+  font-size: var(--z-tfs-m, var(--z-text-sm));
   line-height: 1.5;
   font-style: normal;
 }
 
+@media screen and (min-width: 750px) {
+  .zenith-video-card__quote {
+    font-size: var(--z-tfs, var(--z-text-sm));
+  }
+}
+
 .zenith-video-card__author {
   margin: 0;
-  font-size: var(--z-text-xs);
+  font-size: var(--z-ttfs, var(--z-text-xs));
   font-weight: 600;
 }
 
@@ -101,7 +110,7 @@ zenith-video.is-playing .zenith-video-card__play {
 .zenith-video-card__product-info {
   display: flex;
   flex-direction: column;
-  font-size: var(--z-text-xs);
+  font-size: var(--z-ttfs, var(--z-text-xs));
   line-height: 1.3;
 }
 

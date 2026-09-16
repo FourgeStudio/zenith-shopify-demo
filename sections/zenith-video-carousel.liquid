@@ -4,14 +4,14 @@
 
 {%- liquid
   assign cols = section.settings.slides_desktop
-  assign gaps = section.settings.slides_desktop | minus: 1 | times: 24
+  assign gap_count = section.settings.slides_desktop | minus: 1
   if section.settings.show_peek
     assign cols = cols | plus: 0.35
-    assign gaps = gaps | plus: 24
+    assign gap_count = gap_count | plus: 1
   endif
 -%}
 {%- capture extra -%}
-  --z-slide: calc((100% - {{ gaps }}px) / {{ cols }});
+  --z-slide: calc((100% - {{ gap_count }} * var(--z-gap, 24px)) / {{ cols }});
   --z-slide-m: {{ section.settings.mobile_slide_width }}%;
   {%- render 'zenith-overlay-vars', settings: section.settings -%}
 {%- endcapture -%}
@@ -19,7 +19,7 @@
 
 <section
   id="Zenith-{{ section.id }}"
-  class="zenith-section zenith-videos color-{{ section.settings.color_scheme }} gradient"
+  class="zenith-section zenith-videos zenith-videos--{{ section.settings.video_ratio }} color-{{ section.settings.color_scheme }} gradient"
 >
   <div class="page-width">
     {%- render 'zenith-section-heading',
@@ -27,7 +27,7 @@
       heading: section.settings.heading,
       subheading: section.settings.subheading,
       alignment: section.settings.heading_alignment,
-      size: section.settings.heading_size
+      uppercase: section.settings.heading_uppercase
     -%}
 
     <zenith-carousel data-autoplay="{{ section.settings.autoplay }}" data-slide-label="Video">
@@ -197,6 +197,56 @@
       "default": 0
     },
     {
+      "type": "range",
+      "id": "heading_max_width",
+      "label": "Heading max width",
+      "min": 300,
+      "max": 1400,
+      "step": 20,
+      "unit": "px",
+      "default": 760
+    },
+    {
+      "type": "range",
+      "id": "heading_spacing",
+      "label": "Space below heading",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Space between cards",
+      "min": 0,
+      "max": 64,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "select",
+      "id": "video_ratio",
+      "label": "Video shape",
+      "default": "9-16",
+      "options": [
+        {
+          "value": "9-16",
+          "label": "Vertical 9:16"
+        },
+        {
+          "value": "4-5",
+          "label": "Portrait 4:5"
+        },
+        {
+          "value": "1-1",
+          "label": "Square"
+        }
+      ]
+    },
+    {
       "type": "header",
       "content": "Colors"
     },
@@ -276,24 +326,60 @@
       "content": "Typography"
     },
     {
-      "type": "select",
-      "id": "heading_size",
+      "type": "range",
+      "id": "heading_font_size",
       "label": "Heading size",
-      "default": "lg",
-      "options": [
-        {
-          "value": "md",
-          "label": "Medium"
-        },
-        {
-          "value": "lg",
-          "label": "Large"
-        },
-        {
-          "value": "xl",
-          "label": "Extra large"
-        }
-      ]
+      "min": 16,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 44
+    },
+    {
+      "type": "checkbox",
+      "id": "heading_uppercase",
+      "label": "Uppercase heading",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "subheading_font_size",
+      "label": "Subheading size",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_font_size",
+      "label": "Eyebrow size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "text_font_size",
+      "label": "Quote size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "label": "Name and product size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 12
     },
     {
       "type": "header",
@@ -308,6 +394,56 @@
       "step": 5,
       "unit": "%",
       "default": 75
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size_mobile",
+      "label": "Heading size",
+      "min": 16,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "subheading_font_size_mobile",
+      "label": "Subheading size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "heading_spacing_mobile",
+      "label": "Space below heading",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "gap_mobile",
+      "label": "Space between cards",
+      "min": 0,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "text_font_size_mobile",
+      "label": "Quote size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 13
     },
     {
       "type": "header",
@@ -332,6 +468,26 @@
       "step": 4,
       "unit": "px",
       "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Top padding (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Bottom padding (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 48
     }
   ],
   "blocks": [

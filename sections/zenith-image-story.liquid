@@ -39,7 +39,7 @@
           heading: section.settings.heading,
           subheading: blank,
           alignment: 'left',
-          size: section.settings.heading_size,
+          uppercase: section.settings.heading_uppercase,
           class: 'zenith-story__heading'
         -%}
 
@@ -176,6 +176,47 @@
       ]
     },
     {
+      "type": "range",
+      "id": "gap",
+      "label": "Space between image and content",
+      "min": 16,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "content_gap",
+      "label": "Space between content items",
+      "min": 4,
+      "max": 64,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "media_min_height",
+      "label": "Image min height",
+      "min": 240,
+      "max": 1000,
+      "step": 20,
+      "unit": "px",
+      "default": 480,
+      "info": "Used when Image shape is \"Fill content height\""
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "Logo width",
+      "min": 60,
+      "max": 400,
+      "step": 10,
+      "unit": "px",
+      "default": 200
+    },
+    {
       "type": "header",
       "content": "Colors"
     },
@@ -249,24 +290,104 @@
       "content": "Typography"
     },
     {
-      "type": "select",
-      "id": "heading_size",
+      "type": "range",
+      "id": "heading_font_size",
       "label": "Heading size",
-      "default": "lg",
-      "options": [
-        {
-          "value": "md",
-          "label": "Medium"
-        },
-        {
-          "value": "lg",
-          "label": "Large"
-        },
-        {
-          "value": "xl",
-          "label": "Extra large"
-        }
-      ]
+      "min": 16,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 44
+    },
+    {
+      "type": "checkbox",
+      "id": "heading_uppercase",
+      "label": "Uppercase heading",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_font_size",
+      "label": "Eyebrow size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "text_font_size",
+      "label": "Text size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "label": "Column title size",
+      "min": 12,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size_mobile",
+      "label": "Heading size",
+      "min": 16,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "text_font_size_mobile",
+      "label": "Text size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "title_font_size_mobile",
+      "label": "Column title size",
+      "min": 12,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "gap_mobile",
+      "label": "Space between image and content",
+      "min": 8,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "content_gap_mobile",
+      "label": "Space between content items",
+      "min": 4,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "default": 16
     },
     {
       "type": "header",
@@ -291,6 +412,26 @@
       "step": 4,
       "unit": "px",
       "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Top padding (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Bottom padding (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 48
     }
   ],
   "blocks": [

@@ -92,12 +92,14 @@ h1, h2, h3, h4, h5, .h0, .h1, .h2, .h3, .h4, .h5 {
   }
 }
 
-/* ---------- Section heading ---------- */
+/* ---------- Section heading ----------
+   Sizes come from section settings (see snippets/zenith-section-style.liquid); fallbacks = brand scale. */
 .zenith-heading {
   display: flex;
   flex-direction: column;
   gap: var(--z-space-3);
-  margin-bottom: var(--z-space-6);
+  max-width: var(--z-hmw, 76rem);
+  margin-bottom: var(--z-hsp-m, var(--z-space-5));
 }
 
 .zenith-heading--center {
@@ -105,7 +107,6 @@ h1, h2, h3, h4, h5, .h0, .h1, .h2, .h3, .h4, .h5 {
   text-align: center;
   margin-left: auto;
   margin-right: auto;
-  max-width: 76rem;
 }
 
 .zenith-heading--left {
@@ -117,27 +118,44 @@ h1, h2, h3, h4, h5, .h0, .h1, .h2, .h3, .h4, .h5 {
   margin: 0;
 }
 
+.zenith-heading__title {
+  font-size: var(--z-hfs-m, var(--z-h2));
+}
+
+.zenith-heading--uppercase .zenith-heading__title {
+  text-transform: uppercase;
+}
+
 .zenith-eyebrow {
-  font-size: var(--z-text-xs);
+  font-size: var(--z-efs, var(--z-text-xs));
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--z-gold);
 }
 
-.zenith-title--sm { font-size: var(--z-h4); }
-.zenith-title--md { font-size: var(--z-h3); }
-.zenith-title--lg { font-size: var(--z-h2); }
-.zenith-title--xl { font-size: var(--z-h1); }
-
 .zenith-subheading {
-  font-size: var(--z-text-sm);
+  font-size: var(--z-sfs-m, var(--z-text-sm));
   color: rgba(var(--color-foreground), 0.7);
   line-height: 1.5;
 }
 
 .zenith-subheading p {
   margin: 0;
+}
+
+@media screen and (min-width: 750px) {
+  .zenith-heading {
+    margin-bottom: var(--z-hsp, var(--z-space-6));
+  }
+
+  .zenith-heading__title {
+    font-size: var(--z-hfs, var(--z-h2));
+  }
+
+  .zenith-subheading {
+    font-size: var(--z-sfs, var(--z-text-sm));
+  }
 }
 
 /* ---------- Media ---------- */
@@ -315,7 +333,7 @@ zenith-carousel {
 }
 
 .zenith-card__media {
-  aspect-ratio: 1 / 1;
+  aspect-ratio: var(--z-card-ratio, 1 / 1);
   background: var(--z-rock);
   display: block;
 }
@@ -327,7 +345,7 @@ zenith-carousel {
 
 .zenith-card__title {
   font-family: var(--font-body-family);
-  font-size: 1.5rem;
+  font-size: var(--z-ttfs-m, 1.5rem);
   font-weight: 500;
   line-height: 1.3;
   margin: 0;
@@ -343,7 +361,7 @@ zenith-carousel {
 }
 
 .zenith-card__price {
-  font-size: 1.5rem;
+  font-size: var(--z-pfs-m, 1.5rem);
   font-weight: 600;
 }
 
@@ -355,6 +373,16 @@ zenith-carousel {
 
 .zenith-card__form {
   margin-top: auto;
+}
+
+@media screen and (min-width: 750px) {
+  .zenith-card__title {
+    font-size: var(--z-ttfs, 1.5rem);
+  }
+
+  .zenith-card__price {
+    font-size: var(--z-pfs, 1.5rem);
+  }
 }
 
 .zenith-atc {
