@@ -1,0 +1,139 @@
+{{ 'zenith-image-story.css' | asset_url | stylesheet_tag }}
+{%- render 'zenith-section-style', section: section -%}
+
+<section
+  id="Zenith-{{ section.id }}"
+  class="zenith-section zenith-story color-{{ section.settings.color_scheme }} gradient{% if section.settings.image_position == 'right' %} zenith-story--image-right{% endif %} zenith-story--{{ section.settings.image_ratio }}"
+>
+  <div class="page-width">
+    <div class="zenith-story__grid">
+      <div class="zenith-media zenith-story__media">
+        {%- if section.settings.image != blank -%}
+          {{
+            section.settings.image
+            | image_url: width: 1600
+            | image_tag: loading: 'lazy', widths: '550, 750, 1100, 1600', sizes: '(min-width: 750px) 50vw, 100vw'
+          }}
+        {%- else -%}
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+      </div>
+
+      <div class="zenith-story__content">
+        {%- if section.settings.logo != blank -%}
+          {{
+            section.settings.logo
+            | image_url: width: 600
+            | image_tag: loading: 'lazy', widths: '200, 400, 600', sizes: '240px', class: 'zenith-story__logo'
+          }}
+        {%- elsif section.settings.use_brand_logo -%}
+          <img src="{{ 'footer-logo.png' | asset_url }}" alt="{{ shop.name | escape }}" width="204" height="80" loading="lazy" class="zenith-story__logo">
+        {%- endif -%}
+
+        {%- render 'zenith-section-heading',
+          eyebrow: section.settings.eyebrow,
+          heading: section.settings.heading,
+          subheading: blank,
+          alignment: 'left',
+          size: section.settings.heading_size,
+          class: 'zenith-story__heading'
+        -%}
+
+        {%- if section.settings.text != blank -%}
+          <div class="zenith-story__text zenith-rte">{{ section.settings.text }}</div>
+        {%- endif -%}
+
+        {%- if section.blocks.size > 0 -%}
+          <div class="zenith-story__columns">
+            {%- for block in section.blocks -%}
+              <div class="zenith-story__column" id="Block-{{ block.id }}" {{ block.shopify_attributes }}>
+                {%- if block.settings.title != blank -%}
+                  <h3 class="zenith-story__column-title">{{ block.settings.title | escape }}</h3>
+                {%- endif -%}
+                {%- if block.settings.text != blank -%}
+                  <div class="zenith-rte">{{ block.settings.text }}</div>
+                {%- endif -%}
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.button_label != blank -%}
+          <a
+            {% if section.settings.button_link != blank %}href="{{ section.settings.button_link }}"{% else %}role="link" aria-disabled="true"{% endif %}
+            class="button button--secondary"
+          >
+            {{- section.settings.button_label | escape -}}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Zenith · Brand story",
+  "tag": "div",
+  "class": "section",
+  "max_blocks": 4,
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "header", "content": "Content" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "image_picker", "id": "logo", "label": "Logo", "info": "Optional" },
+    { "type": "checkbox", "id": "use_brand_logo", "label": "Use theme logo when no logo is selected", "default": true },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "heading", "label": "Heading" },
+    {
+      "type": "richtext", "id": "text", "label": "Text",
+      "default": "<p>Zenith has over 100,000 men who have trusted us for their long-term grooming. We started because mature Filipino men were underserved: products built for younger men, for other climates, or loaded with hype.</p><p>We build honest, high-performance essentials that work in Philippine heat and humidity, and we stand behind every one of them.</p>"
+    },
+    { "type": "text", "id": "button_label", "label": "Button label" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+
+    { "type": "header", "content": "Layout" },
+    {
+      "type": "select", "id": "image_position", "label": "Desktop image position", "default": "left",
+      "options": [ { "value": "left", "label": "Left" }, { "value": "right", "label": "Right" } ]
+    },
+    {
+      "type": "select", "id": "image_ratio", "label": "Image shape", "default": "adapt",
+      "options": [ { "value": "adapt", "label": "Fill content height" }, { "value": "portrait", "label": "Portrait" }, { "value": "square", "label": "Square" } ]
+    },
+
+    { "type": "header", "content": "Colors" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+
+    { "type": "header", "content": "Typography" },
+    {
+      "type": "select", "id": "heading_size", "label": "Heading size", "default": "lg",
+      "options": [ { "value": "md", "label": "Medium" }, { "value": "lg", "label": "Large" }, { "value": "xl", "label": "Extra large" } ]
+    },
+
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 64 }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Text column",
+      "settings": [
+        { "type": "header", "content": "Content" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Mission" },
+        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>To build premium, high-performance self-care for mature Filipino men, and give them easy access to it.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zenith · Brand story",
+      "blocks": [
+        { "type": "column", "settings": { "title": "Mission", "text": "<p>To build premium, high-performance self-care for mature Filipino men, and give them easy access to it.</p>" } },
+        { "type": "column", "settings": { "title": "Vision", "text": "<p>To empower mature Filipino men to always feel in their prime.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

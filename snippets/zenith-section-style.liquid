@@ -1,0 +1,14 @@
+{% comment %}
+  Per-instance CSS variables scoped to the section's unique id.
+  Accepts: section {Object}, extra {String} optional extra declarations
+  Root element must have id="Zenith-{{ section.id }}" and class "zenith-section".
+{% endcomment %}
+{%- style -%}
+  #Zenith-{{ section.id }} {
+    --z-pt: {{ section.settings.padding_top }}px;
+    --z-pb: {{ section.settings.padding_bottom }}px;
+    --z-pt-m: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    --z-pb-m: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    {{ extra }}
+  }
+{%- endstyle -%}

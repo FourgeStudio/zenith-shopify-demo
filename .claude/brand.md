@@ -42,16 +42,16 @@ Gradients:
 - Altitude: Horizon Blue → White `linear-gradient(90deg, #294850, #FFFFFF)`
 - Summit: Dawn Gold → Summit Gold `linear-gradient(90deg, #EABE5F, #C59300)`
 
-### Dawn color schemes (planned)
-| Scheme | Background | Text | Button | Button label | Secondary btn label |
-|---|---|---|---|---|---|
-| scheme-1 Light | #FFFFFF | #121212 | #121212 | #FFFFFF | #121212 |
-| scheme-2 Rock | #E7E7E7 | #121212 | #121212 | #FFFFFF | #121212 |
-| scheme-3 Obsidian | #121212 | #FFFFFF | #FFFFFF | #121212 | #FFFFFF |
-| scheme-4 Obsidian Gold | #121212 | #FFFFFF | #C59300 | #121212 | #C59300 |
-| scheme-5 Gold | #C59300 | #121212 | #121212 | #FFFFFF | #121212 |
-| scheme-6 Horizon | #112328 | #FFFFFF | #EABE5F | #121212 | #FFFFFF |
-| scheme-7 Basalt | #202020 | #E7E7E7 | #C59300 | #121212 | #E7E7E7 |
+### Dawn color schemes (live in config/settings_data.json)
+| Scheme | Use | Background | Text | Button / label |
+|---|---|---|---|---|
+| scheme-1 Obsidian (site default) | page, header, most sections | #121212 | #FFFFFF | #C59300 / #121212 |
+| scheme-2 White | promo banner card | #FFFFFF | #121212 | #121212 / #FFFFFF |
+| scheme-3 Rock | product image backgrounds | #E7E7E7 | #121212 | #121212 / #FFFFFF |
+| scheme-4 Basalt | cards (video, reviews), guarantee banner | #202020 | #E7E7E7 | #C59300 / #121212 |
+| scheme-5 Gold | announcement bar, badges | #C59300 | #121212 | #121212 / #FFFFFF |
+| scheme-6 Horizon | featured product panel (gradient #112328 to #294850) | #112328 | #FFFFFF | #C59300 / #121212 |
+| scheme-7 Obsidian / white button | alt dark with white CTA | #121212 | #FFFFFF | #FFFFFF / #121212 |
 
 ## Typography
 | Role | Font | Web use |
@@ -61,7 +61,7 @@ Gradients:
 | Packaging headline | Bebas Neue | Packaging only (not web) |
 | Packaging body | Acumin Pro | Packaging only (not web) |
 
-- Both web fonts are Google Fonts, not in Shopify font library → self-host woff2 in `assets/`, `@font-face` in `zenith-base.css`, `font-display: swap`.
+- Both web fonts self-hosted: `assets/zenith-special-gothic-condensed-one-400.woff2`, `assets/zenith-geist-variable.woff2` (OFL). Declared in `assets/zenith-base.css`, which overrides Dawn font vars → Theme settings font pickers are set to system fonts and have no visual effect.
 - Geist weights to load: 400, 500, 600 (700 if needed). Heading: 400 only.
 - Type scale (desktop / mobile) default: H1 64/40 · H2 48/32 · H3 32/24 · H4 24/20 · body 16/15 · small 14/13. Heading line-height 1.0–1.1, body 1.5. TBD confirm from Figma.
 

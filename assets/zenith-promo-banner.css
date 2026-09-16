@@ -1,0 +1,134 @@
+.zenith-promo__card {
+  position: relative;
+  overflow: hidden;
+}
+
+.zenith-promo__bg {
+  position: absolute;
+  inset: 0;
+  background: transparent;
+}
+
+.zenith-promo__body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--z-space-5);
+  padding: var(--z-space-6) var(--z-space-5);
+}
+
+.zenith-promo__card--m-image-first .zenith-promo__image {
+  order: -1;
+}
+
+.zenith-promo__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--z-space-5);
+}
+
+.zenith-promo__heading {
+  margin-bottom: 0;
+}
+
+.zenith-promo__image {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.zenith-promo__image img,
+.zenith-promo__image .placeholder-svg {
+  width: 100%;
+  max-width: 48rem;
+  height: auto;
+  max-height: 32rem;
+  object-fit: contain;
+}
+
+.zenith-promo__image .placeholder-svg {
+  aspect-ratio: 4 / 3;
+  fill: rgba(var(--color-foreground), 0.3);
+}
+
+.zenith-promo__countdown {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--z-space-3) var(--z-space-5);
+  padding: var(--z-space-4) var(--z-space-5);
+}
+
+.zenith-promo__countdown[hidden] {
+  display: none;
+}
+
+.zenith-promo__countdown-label {
+  font-size: var(--z-text-sm);
+  font-weight: 500;
+}
+
+.zenith-countdown {
+  display: flex;
+  gap: var(--z-space-2);
+}
+
+.zenith-countdown__unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 48px;
+  padding: var(--z-space-1) var(--z-space-2);
+  border: 1px solid var(--z-gold);
+}
+
+.zenith-countdown__value {
+  font-family: var(--font-heading-family);
+  font-size: 2.4rem;
+  line-height: 1.1;
+  color: var(--z-gold);
+  font-variant-numeric: tabular-nums;
+}
+
+.zenith-countdown__label {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.7;
+}
+
+@media screen and (min-width: 750px) {
+  .zenith-promo__body {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--z-space-7);
+    padding: var(--z-space-7) var(--z-space-8);
+  }
+
+  .zenith-promo__content {
+    flex: 1 1 50%;
+  }
+
+  .zenith-promo__image {
+    flex: 1 1 45%;
+    order: 0;
+  }
+
+  .zenith-promo__card--m-image-first .zenith-promo__image {
+    order: 0;
+  }
+
+  .zenith-promo__card--image-left .zenith-promo__image {
+    order: -1;
+  }
+
+  .zenith-promo__countdown {
+    justify-content: flex-start;
+    padding-left: var(--z-space-8);
+    padding-right: var(--z-space-8);
+  }
+}

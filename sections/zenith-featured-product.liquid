@@ -1,0 +1,185 @@
+{{ 'zenith-featured-product.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+{%- render 'zenith-section-style', section: section -%}
+
+{%- assign fp_product = section.settings.product -%}
+
+<section
+  id="Zenith-{{ section.id }}"
+  class="zenith-section zenith-fp{% if section.settings.image_position == 'left' %} zenith-fp--image-left{% endif %}{% if section.settings.mobile_image_first %} zenith-fp--m-image-first{% endif %}"
+>
+  <div class="{% unless section.settings.full_width %}page-width{% endunless %}">
+    <div class="zenith-fp__grid">
+      <div class="zenith-fp__content color-{{ section.settings.color_scheme }} gradient">
+        <div class="zenith-fp__content-inner">
+          {%- if section.settings.badge != blank -%}
+            <span class="zenith-fp__badge color-{{ section.settings.badge_color_scheme }}">{{ section.settings.badge | escape }}</span>
+          {%- endif -%}
+
+          <h2 class="zenith-fp__title zenith-title--{{ section.settings.heading_size }}">
+            {%- if fp_product != blank -%}{{ fp_product.title | escape }}{%- else -%}{{ section.settings.placeholder_title | escape }}{%- endif -%}
+          </h2>
+
+          {%- if fp_product != blank and section.settings.show_rating and fp_product.metafields.reviews.rating.value != blank -%}
+            {%- render 'zenith-stars',
+              rating: fp_product.metafields.reviews.rating.value.rating,
+              count: fp_product.metafields.reviews.rating_count
+            -%}
+          {%- endif -%}
+
+          <p class="zenith-fp__price">
+            {%- if fp_product != blank -%}
+              {{ fp_product.price | money }}
+              {%- if fp_product.compare_at_price > fp_product.price -%}
+                <s>{{ fp_product.compare_at_price | money }}</s>
+              {%- endif -%}
+            {%- else -%}
+              {{ 89900 | money }}
+            {%- endif -%}
+          </p>
+
+          {%- assign benefits = section.blocks | where: 'type', 'benefit' -%}
+          {%- if benefits.size > 0 -%}
+            <ul class="zenith-fp__benefits" role="list">
+              {%- for block in benefits -%}
+                <li id="Block-{{ block.id }}" {{ block.shopify_attributes }}>
+                  {%- render 'zenith-icon', icon: 'check_circle' -%}
+                  <span>{{ block.settings.text | escape }}</span>
+                </li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+
+          <div class="zenith-fp__actions">
+            {%- if fp_product != blank -%}
+              {%- assign form_id = 'ZenithFeatured-' | append: section.id -%}
+              {%- render 'zenith-add-to-cart',
+                product: fp_product,
+                form_id: form_id,
+                label: section.settings.button_label
+              -%}
+            {%- else -%}
+              <button type="button" class="button zenith-atc" disabled>{{ section.settings.button_label | default: 'Add to cart' | escape }}</button>
+            {%- endif -%}
+          </div>
+
+          {%- assign trust_items = section.blocks | where: 'type', 'trust' -%}
+          {%- if trust_items.size > 0 -%}
+            <ul class="zenith-fp__trust" role="list">
+              {%- for block in trust_items -%}
+                <li id="Block-{{ block.id }}" {{ block.shopify_attributes }}>
+                  {%- render 'zenith-icon', icon: block.settings.icon -%}
+                  <span>{{ block.settings.text | escape }}</span>
+                </li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <div class="zenith-fp__media-wrap color-{{ section.settings.media_color_scheme }} gradient">
+        {%- liquid
+          assign media = section.settings.image
+          if media == blank and fp_product != blank
+            assign media = fp_product.featured_media
+          endif
+        -%}
+        <div class="zenith-media zenith-fp__media">
+          {%- if media != blank -%}
+            {{
+              media
+              | image_url: width: 1600
+              | image_tag: loading: 'lazy', widths: '550, 750, 1100, 1600', sizes: '(min-width: 750px) 50vw, 100vw'
+            }}
+          {%- else -%}
+            {{ 'product-2' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Zenith · Featured product",
+  "tag": "div",
+  "class": "section",
+  "max_blocks": 12,
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "header", "content": "Content" },
+    { "type": "product", "id": "product", "label": "Product" },
+    { "type": "text", "id": "placeholder_title", "label": "Title shown when no product is selected", "default": "Zenith Anti-Aging Tallow Cream" },
+    { "type": "text", "id": "badge", "label": "Badge", "default": "Best Seller" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Add to Cart" },
+    { "type": "image_picker", "id": "image", "label": "Image", "info": "Optional. Defaults to the product's featured image." },
+    { "type": "checkbox", "id": "show_rating", "label": "Show product rating", "default": true },
+
+    { "type": "header", "content": "Layout" },
+    {
+      "type": "select", "id": "image_position", "label": "Desktop image position", "default": "right",
+      "options": [ { "value": "left", "label": "Left" }, { "value": "right", "label": "Right" } ]
+    },
+    { "type": "checkbox", "id": "full_width", "label": "Full width", "default": true },
+
+    { "type": "header", "content": "Colors" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Content color scheme", "default": "scheme-6" },
+    { "type": "color_scheme", "id": "media_color_scheme", "label": "Image background scheme", "default": "scheme-3" },
+    { "type": "color_scheme", "id": "badge_color_scheme", "label": "Badge color scheme", "default": "scheme-5" },
+
+    { "type": "header", "content": "Typography" },
+    {
+      "type": "select", "id": "heading_size", "label": "Title size", "default": "lg",
+      "options": [ { "value": "md", "label": "Medium" }, { "value": "lg", "label": "Large" }, { "value": "xl", "label": "Extra large" } ]
+    },
+
+    { "type": "header", "content": "Mobile" },
+    { "type": "checkbox", "id": "mobile_image_first", "label": "Show image above text on mobile", "default": true },
+
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 0 }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        { "type": "header", "content": "Content" },
+        { "type": "text", "id": "text", "label": "Text", "default": "Fights signs of aging" }
+      ]
+    },
+    {
+      "type": "trust",
+      "name": "Trust item",
+      "settings": [
+        { "type": "header", "content": "Content" },
+        {
+          "type": "select", "id": "icon", "label": "Icon", "default": "shield",
+          "options": [
+            { "value": "shield", "label": "Shield" }, { "value": "refresh", "label": "Money back" }, { "value": "cash", "label": "Cash" },
+            { "value": "truck", "label": "Delivery" }, { "value": "certified", "label": "Certified" }, { "value": "leaf", "label": "Natural" },
+            { "value": "flag", "label": "Flag" }, { "value": "lock", "label": "Secure" }
+          ]
+        },
+        { "type": "text", "id": "text", "label": "Text", "default": "30-Day Money-Back Guarantee" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zenith · Featured product",
+      "blocks": [
+        { "type": "benefit", "settings": { "text": "Fights signs of aging and smooths fine lines" } },
+        { "type": "benefit", "settings": { "text": "Reduces acne and dark spots while protecting the skin" } },
+        { "type": "benefit", "settings": { "text": "Fast-absorbing and non-greasy for the PH climate" } },
+        { "type": "trust", "settings": { "icon": "refresh", "text": "30-Day Money-Back Guarantee" } },
+        { "type": "trust", "settings": { "icon": "certified", "text": "FDA-Notified" } },
+        { "type": "trust", "settings": { "icon": "cash", "text": "Cash On Delivery" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

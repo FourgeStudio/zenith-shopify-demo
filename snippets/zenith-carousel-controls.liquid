@@ -1,0 +1,21 @@
+{% comment %}
+  Dots + prev/next arrows for <zenith-carousel>.
+  Accepts: show_dots {Boolean}, show_arrows {Boolean}, label {String} optional
+{% endcomment %}
+{%- if show_dots or show_arrows -%}
+  <div class="zenith-carousel__controls{% unless show_dots %} zenith-carousel__controls--end{% endunless %}">
+    {%- if show_dots -%}
+      <div class="zenith-carousel__dots"></div>
+    {%- endif -%}
+    {%- if show_arrows -%}
+      <div class="zenith-carousel__arrows">
+        <button type="button" class="zenith-carousel__arrow" data-carousel-prev aria-label="Previous {{ label | default: 'slide' }}">
+          {%- render 'zenith-icon', icon: 'arrow_left' -%}
+        </button>
+        <button type="button" class="zenith-carousel__arrow" data-carousel-next aria-label="Next {{ label | default: 'slide' }}">
+          {%- render 'zenith-icon', icon: 'arrow_right' -%}
+        </button>
+      </div>
+    {%- endif -%}
+  </div>
+{%- endif -%}

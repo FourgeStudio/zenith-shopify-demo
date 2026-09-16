@@ -1,0 +1,24 @@
+.zenith-pc__header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--z-space-4);
+  margin-bottom: var(--z-space-6);
+}
+
+.zenith-pc__heading {
+  margin-bottom: 0;
+}
+
+@media screen and (min-width: 750px) {
+  .zenith-pc__header {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--z-space-6);
+  }
+
+  .zenith-pc__view-all {
+    flex-shrink: 0;
+  }
+}

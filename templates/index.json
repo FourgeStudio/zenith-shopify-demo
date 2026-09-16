@@ -1,75 +1,468 @@
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "hero": {
+      "type": "zenith-hero",
+      "settings": {}
+    },
+    "trust_bar": {
+      "type": "zenith-icon-bar",
+      "settings": {},
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "item_1": {
+          "type": "item",
           "settings": {
-            "heading": "Browse our latest products",
-            "heading_size": "h0"
+            "icon": "refresh",
+            "text": "30-Day Money-Back Guarantee"
           }
         },
-        "button": {
-          "type": "buttons",
+        "item_2": {
+          "type": "item",
           "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "icon": "cash",
+            "text": "Cash On Delivery"
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "icon": "certified",
+            "text": "FDA-Notified Products"
+          }
+        },
+        "item_4": {
+          "type": "item",
+          "settings": {
+            "icon": "leaf",
+            "text": "100% Grass-Fed Beef Tallow"
           }
         }
       },
       "block_order": [
-        "heading",
-        "button"
-      ],
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4"
+      ]
+    },
+    "promo_top": {
+      "type": "zenith-promo-banner",
+      "settings": {}
+    },
+    "press": {
+      "type": "zenith-logo-strip",
+      "settings": {},
+      "blocks": {
+        "logo_1": {
+          "type": "logo",
+          "settings": {
+            "name": "Inquirer"
+          }
+        },
+        "logo_2": {
+          "type": "logo",
+          "settings": {
+            "name": "GMA"
+          }
+        },
+        "logo_3": {
+          "type": "logo",
+          "settings": {
+            "name": "Esquire"
+          }
+        },
+        "logo_4": {
+          "type": "logo",
+          "settings": {
+            "name": "SunStar"
+          }
+        },
+        "logo_5": {
+          "type": "logo",
+          "settings": {
+            "name": "Manila Bulletin"
+          }
+        }
+      },
+      "block_order": [
+        "logo_1",
+        "logo_2",
+        "logo_3",
+        "logo_4",
+        "logo_5"
+      ]
+    },
+    "results": {
+      "type": "zenith-results-marquee",
+      "settings": {},
+      "blocks": {
+        "result_1": {
+          "type": "result",
+          "settings": {
+            "row": "1"
+          }
+        },
+        "result_2": {
+          "type": "result",
+          "settings": {
+            "row": "1"
+          }
+        },
+        "result_3": {
+          "type": "result",
+          "settings": {
+            "row": "1"
+          }
+        },
+        "result_4": {
+          "type": "result",
+          "settings": {
+            "row": "1"
+          }
+        },
+        "result_5": {
+          "type": "result",
+          "settings": {
+            "row": "2"
+          }
+        },
+        "result_6": {
+          "type": "result",
+          "settings": {
+            "row": "2"
+          }
+        },
+        "result_7": {
+          "type": "result",
+          "settings": {
+            "row": "2"
+          }
+        },
+        "result_8": {
+          "type": "result",
+          "settings": {
+            "row": "2"
+          }
+        }
+      },
+      "block_order": [
+        "result_1",
+        "result_2",
+        "result_3",
+        "result_4",
+        "result_5",
+        "result_6",
+        "result_7",
+        "result_8"
+      ]
+    },
+    "videos": {
+      "type": "zenith-video-carousel",
+      "settings": {},
+      "blocks": {
+        "video_1": {
+          "type": "video",
+          "settings": {}
+        },
+        "video_2": {
+          "type": "video",
+          "settings": {}
+        },
+        "video_3": {
+          "type": "video",
+          "settings": {}
+        },
+        "video_4": {
+          "type": "video",
+          "settings": {}
+        },
+        "video_5": {
+          "type": "video",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "video_1",
+        "video_2",
+        "video_3",
+        "video_4",
+        "video_5"
+      ]
+    },
+    "guarantee": {
+      "type": "zenith-feature-columns",
+      "settings": {},
+      "blocks": {
+        "column_1": {
+          "type": "column",
+          "settings": {
+            "text": "<p>Our friendly team will text or call to confirm your order details, ensuring you're ready to go.</p>"
+          }
+        },
+        "column_2": {
+          "type": "column",
+          "settings": {
+            "text": "<p>Every box includes a unique serial QR code. Scan it to verify your product is 100% authentic.</p>"
+          }
+        },
+        "column_3": {
+          "type": "column",
+          "settings": {
+            "text": "<p>Discreet packaging, delivered straight to your door anywhere in the Philippines.</p>"
+          }
+        },
+        "column_4": {
+          "type": "column",
+          "settings": {
+            "text": "<p>Pay only when the product is in your hands with Cash on Delivery.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "column_1",
+        "column_2",
+        "column_3",
+        "column_4"
+      ]
+    },
+    "categories": {
+      "type": "zenith-category-cards",
+      "settings": {},
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "title": "The tallow cream that repairs and restores your skin",
+            "button_label": "Shop Skin Products"
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "title": "Thin density sprays built for the dryness on your scalp",
+            "button_label": "Shop Hair Products"
+          }
+        },
+        "card_3": {
+          "type": "card",
+          "settings": {
+            "title": "Full body care for the hard-working man",
+            "button_label": "Add to Cart"
+          }
+        },
+        "card_4": {
+          "type": "card",
+          "settings": {
+            "title": "Personal care to complete your routine",
+            "button_label": "Add to Cart"
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2",
+        "card_3",
+        "card_4"
+      ]
+    },
+    "featured_product": {
+      "type": "zenith-featured-product",
+      "settings": {},
+      "blocks": {
+        "benefit_1": {
+          "type": "benefit",
+          "settings": {
+            "text": "Fights signs of aging and smooths fine lines"
+          }
+        },
+        "benefit_2": {
+          "type": "benefit",
+          "settings": {
+            "text": "Reduces acne and dark spots while protecting the skin"
+          }
+        },
+        "benefit_3": {
+          "type": "benefit",
+          "settings": {
+            "text": "Fast-absorbing and non-greasy for the PH climate"
+          }
+        },
+        "trust_4": {
+          "type": "trust",
+          "settings": {
+            "icon": "refresh",
+            "text": "30-Day Money-Back Guarantee"
+          }
+        },
+        "trust_5": {
+          "type": "trust",
+          "settings": {
+            "icon": "certified",
+            "text": "FDA-Notified"
+          }
+        },
+        "trust_6": {
+          "type": "trust",
+          "settings": {
+            "icon": "cash",
+            "text": "Cash On Delivery"
+          }
+        }
+      },
+      "block_order": [
+        "benefit_1",
+        "benefit_2",
+        "benefit_3",
+        "trust_4",
+        "trust_5",
+        "trust_6"
+      ]
+    },
+    "brand_story": {
+      "type": "zenith-image-story",
+      "settings": {},
+      "blocks": {
+        "column_1": {
+          "type": "column",
+          "settings": {
+            "title": "Mission",
+            "text": "<p>To build premium, high-performance self-care for mature Filipino men, and give them easy access to it.</p>"
+          }
+        },
+        "column_2": {
+          "type": "column",
+          "settings": {
+            "title": "Vision",
+            "text": "<p>To empower mature Filipino men to always feel in their prime.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "column_1",
+        "column_2"
+      ]
+    },
+    "collection": {
+      "type": "zenith-product-carousel",
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
-        "image_behavior": "none",
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
+        "collection": "all",
+        "view_all_link": "shopify://collections/all"
       }
     },
-    "featured_collection": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "Featured products",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "all",
-        "products_to_show": 8,
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": false,
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "padding_top": 44,
-        "padding_bottom": 36
-      }
+    "money_back": {
+      "type": "zenith-guarantee-banner",
+      "settings": {}
+    },
+    "reviews": {
+      "type": "zenith-reviews-grid",
+      "settings": {},
+      "blocks": {
+        "review_1": {
+          "type": "review",
+          "settings": {}
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {}
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {}
+        },
+        "review_4": {
+          "type": "review",
+          "settings": {}
+        },
+        "review_5": {
+          "type": "review",
+          "settings": {}
+        },
+        "review_6": {
+          "type": "review",
+          "settings": {}
+        },
+        "review_7": {
+          "type": "review",
+          "settings": {}
+        },
+        "review_8": {
+          "type": "review",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "review_1",
+        "review_2",
+        "review_3",
+        "review_4",
+        "review_5",
+        "review_6",
+        "review_7",
+        "review_8"
+      ]
+    },
+    "faq": {
+      "type": "zenith-faq",
+      "settings": {},
+      "blocks": {
+        "question_1": {
+          "type": "question",
+          "settings": {
+            "question": "What makes Zenith different from drugstore brands?"
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "Is it safe for sensitive skin?"
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "How long before I see results?"
+          }
+        },
+        "question_4": {
+          "type": "question",
+          "settings": {
+            "question": "What is Cash on Delivery?"
+          }
+        },
+        "question_5": {
+          "type": "question",
+          "settings": {
+            "question": "Why are my products sold out?"
+          }
+        }
+      },
+      "block_order": [
+        "question_1",
+        "question_2",
+        "question_3",
+        "question_4",
+        "question_5"
+      ]
+    },
+    "promo_bottom": {
+      "type": "zenith-promo-banner",
+      "settings": {}
     }
   },
   "order": [
-    "image_banner",
-    "featured_collection"
+    "hero",
+    "trust_bar",
+    "promo_top",
+    "press",
+    "results",
+    "videos",
+    "guarantee",
+    "categories",
+    "featured_product",
+    "brand_story",
+    "collection",
+    "money_back",
+    "reviews",
+    "faq",
+    "promo_bottom"
   ]
 }

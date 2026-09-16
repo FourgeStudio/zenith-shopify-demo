@@ -1,0 +1,120 @@
+{{ 'zenith-faq.css' | asset_url | stylesheet_tag }}
+{%- capture extra -%}
+  --z-faq-w: {{ section.settings.max_width }}px;
+{%- endcapture -%}
+{%- render 'zenith-section-style', section: section, extra: extra -%}
+
+<section
+  id="Zenith-{{ section.id }}"
+  class="zenith-section zenith-faq color-{{ section.settings.color_scheme }} gradient"
+>
+  <div class="page-width">
+    <div class="zenith-faq__inner">
+      {%- render 'zenith-section-heading',
+        eyebrow: section.settings.eyebrow,
+        heading: section.settings.heading,
+        subheading: section.settings.subheading,
+        alignment: section.settings.heading_alignment,
+        size: section.settings.heading_size
+      -%}
+
+      <div class="zenith-faq__list">
+        {%- for block in section.blocks -%}
+          <details
+            class="zenith-faq__item"
+            id="Block-{{ block.id }}"
+            {% if forloop.first and section.settings.open_first %}open{% endif %}
+            {{ block.shopify_attributes }}
+          >
+            <summary class="zenith-faq__question" id="FaqQuestion-{{ block.id }}">
+              <span>{{ block.settings.question | escape }}</span>
+              {%- render 'zenith-icon', icon: 'plus', class: 'zenith-faq__icon' -%}
+            </summary>
+            <div class="zenith-faq__answer zenith-rte" role="region" aria-labelledby="FaqQuestion-{{ block.id }}">
+              {{ block.settings.answer }}
+            </div>
+          </details>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{%- if section.settings.enable_schema and section.blocks.size > 0 -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {%- for block in section.blocks -%}
+          {
+            "@type": "Question",
+            "name": {{ block.settings.question | json }},
+            "acceptedAnswer": { "@type": "Answer", "text": {{ block.settings.answer | strip_html | json }} }
+          }{% unless forloop.last %},{% endunless %}
+        {%- endfor -%}
+      ]
+    }
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Zenith · FAQ",
+  "tag": "div",
+  "class": "section",
+  "max_blocks": 30,
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Frequently Asked Questions" },
+    { "type": "richtext", "id": "subheading", "label": "Subheading", "default": "<p>No-nonsense answers about your daily essentials.</p>" },
+    { "type": "checkbox", "id": "enable_schema", "label": "Add FAQ structured data for search engines", "info": "Use on only one FAQ section per page", "default": true },
+
+    { "type": "header", "content": "Layout" },
+    {
+      "type": "select", "id": "heading_alignment", "label": "Heading alignment", "default": "center",
+      "options": [ { "value": "left", "label": "Left" }, { "value": "center", "label": "Center" } ]
+    },
+    { "type": "range", "id": "max_width", "label": "Content width", "min": 600, "max": 1200, "step": 20, "unit": "px", "default": 800 },
+    { "type": "checkbox", "id": "open_first", "label": "Open first question", "default": true },
+
+    { "type": "header", "content": "Colors" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+
+    { "type": "header", "content": "Typography" },
+    {
+      "type": "select", "id": "heading_size", "label": "Heading size", "default": "lg",
+      "options": [ { "value": "md", "label": "Medium" }, { "value": "lg", "label": "Large" }, { "value": "xl", "label": "Extra large" } ]
+    },
+
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 64 }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        { "type": "header", "content": "Content" },
+        { "type": "text", "id": "question", "label": "Question", "default": "What makes Zenith different?" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Zenith products are built for the skin and hair of mature Filipino men and tested for Philippine heat and humidity.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zenith · FAQ",
+      "blocks": [
+        { "type": "question", "settings": { "question": "What makes Zenith different from drugstore brands?" } },
+        { "type": "question", "settings": { "question": "Is it safe for sensitive skin?" } },
+        { "type": "question", "settings": { "question": "How long before I see results?" } },
+        { "type": "question", "settings": { "question": "What is Cash on Delivery?" } },
+        { "type": "question", "settings": { "question": "Why are my products sold out?" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

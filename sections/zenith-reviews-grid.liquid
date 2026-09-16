@@ -1,0 +1,152 @@
+{{ 'zenith-reviews-grid.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'zenith-show-more.js' | asset_url }}" defer="defer"></script>
+{%- capture extra -%}
+  --z-cols: {{ section.settings.columns_desktop }};
+{%- endcapture -%}
+{%- render 'zenith-section-style', section: section, extra: extra -%}
+
+{%- assign limit = section.settings.initial_count -%}
+
+<section
+  id="Zenith-{{ section.id }}"
+  class="zenith-section zenith-reviews color-{{ section.settings.color_scheme }} gradient{% if section.settings.masonry %} zenith-reviews--masonry{% endif %}"
+>
+  <div class="page-width">
+    {%- render 'zenith-section-heading',
+      eyebrow: section.settings.eyebrow,
+      heading: section.settings.heading,
+      subheading: section.settings.subheading,
+      alignment: section.settings.heading_alignment,
+      size: section.settings.heading_size
+    -%}
+
+    <zenith-show-more>
+      <ul class="zenith-reviews__grid" role="list">
+        {%- if section.blocks.size > 0 -%}
+          {%- for block in section.blocks -%}
+            <li
+              class="zenith-reviews__item{% if limit > 0 and forloop.index > limit %} hidden{% endif %}"
+              id="Block-{{ block.id }}"
+              {% if limit > 0 and forloop.index > limit %}data-show-more-item{% endif %}
+              {{ block.shopify_attributes }}
+            >
+              <article class="zenith-review color-{{ section.settings.card_color_scheme }} gradient">
+                {%- if block.settings.image != blank -%}
+                  <div class="zenith-media zenith-review__media">
+                    {{
+                      block.settings.image
+                      | image_url: width: 800
+                      | image_tag: loading: 'lazy', widths: '300, 500, 800', sizes: '(min-width: 990px) 25vw, (min-width: 750px) 50vw, 100vw'
+                    }}
+                  </div>
+                {%- endif -%}
+                <div class="zenith-review__body">
+                  {%- render 'zenith-stars', rating: block.settings.rating -%}
+                  {%- if block.settings.quote != blank -%}
+                    <blockquote class="zenith-review__quote">{{ block.settings.quote | escape | newline_to_br }}</blockquote>
+                  {%- endif -%}
+                  <footer class="zenith-review__author">
+                    <span class="zenith-review__name">{{ block.settings.name | escape }}</span>
+                    {%- if block.settings.verified -%}
+                      <span class="zenith-review__verified">{%- render 'zenith-icon', icon: 'check_circle' -%}Verified buyer</span>
+                    {%- endif -%}
+                    {%- if block.settings.meta != blank -%}
+                      <span class="zenith-review__meta">{{ block.settings.meta | escape }}</span>
+                    {%- endif -%}
+                  </footer>
+                </div>
+              </article>
+            </li>
+          {%- endfor -%}
+        {%- else -%}
+          {%- for i in (1..8) -%}
+            <li class="zenith-reviews__item">
+              <article class="zenith-review color-{{ section.settings.card_color_scheme }} gradient">
+                {%- if i == 1 or i == 4 or i == 6 -%}
+                  <div class="zenith-media zenith-review__media">{{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}</div>
+                {%- endif -%}
+                <div class="zenith-review__body">
+                  {%- render 'zenith-stars', rating: 5 -%}
+                  <blockquote class="zenith-review__quote">Add customer reviews as blocks in the theme editor.</blockquote>
+                  <footer class="zenith-review__author"><span class="zenith-review__name">Customer name</span></footer>
+                </div>
+              </article>
+            </li>
+          {%- endfor -%}
+        {%- endif -%}
+      </ul>
+
+      {%- if limit > 0 and section.blocks.size > limit -%}
+        <div class="zenith-reviews__more">
+          <button type="button" class="button button--secondary" data-show-more-button>
+            {{- section.settings.show_more_label | escape -}}
+          </button>
+        </div>
+      {%- endif -%}
+    </zenith-show-more>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Zenith · Reviews grid",
+  "tag": "div",
+  "class": "section",
+  "max_blocks": 50,
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "100,000+ Filipino Men Trust Zenith Products" },
+    { "type": "richtext", "id": "subheading", "label": "Subheading", "default": "<p>Real men using the cream. Unedited and verified.</p>" },
+    { "type": "text", "id": "show_more_label", "label": "Show more label", "default": "Show more reviews" },
+
+    { "type": "header", "content": "Layout" },
+    {
+      "type": "select", "id": "heading_alignment", "label": "Heading alignment", "default": "center",
+      "options": [ { "value": "left", "label": "Left" }, { "value": "center", "label": "Center" } ]
+    },
+    { "type": "range", "id": "columns_desktop", "label": "Columns on desktop", "min": 2, "max": 5, "step": 1, "default": 4 },
+    { "type": "checkbox", "id": "masonry", "label": "Masonry layout", "info": "Cards stack by height instead of aligned rows", "default": true },
+    { "type": "range", "id": "initial_count", "label": "Reviews shown before \"Show more\"", "info": "0 shows all", "min": 0, "max": 24, "step": 1, "default": 12 },
+
+    { "type": "header", "content": "Colors" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Section color scheme", "default": "scheme-1" },
+    { "type": "color_scheme", "id": "card_color_scheme", "label": "Card color scheme", "default": "scheme-4" },
+
+    { "type": "header", "content": "Typography" },
+    {
+      "type": "select", "id": "heading_size", "label": "Heading size", "default": "lg",
+      "options": [ { "value": "md", "label": "Medium" }, { "value": "lg", "label": "Large" }, { "value": "xl", "label": "Extra large" } ]
+    },
+
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 64 }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "header", "content": "Content" },
+        { "type": "image_picker", "id": "image", "label": "Photo", "info": "Optional" },
+        { "type": "range", "id": "rating", "label": "Rating", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "textarea", "id": "quote", "label": "Review", "default": "The tallow cream is the first thing that didn't make my face feel tight. It just works in the heat." },
+        { "type": "text", "id": "name", "label": "Name", "default": "Customer name" },
+        { "type": "text", "id": "meta", "label": "Details", "info": "e.g. Quezon City, 54" },
+        { "type": "checkbox", "id": "verified", "label": "Verified buyer", "default": true }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zenith · Reviews grid",
+      "blocks": [
+        { "type": "review" }, { "type": "review" }, { "type": "review" }, { "type": "review" },
+        { "type": "review" }, { "type": "review" }, { "type": "review" }, { "type": "review" }
+      ]
+    }
+  ]
+}
+{% endschema %}

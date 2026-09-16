@@ -1,0 +1,173 @@
+{{ 'zenith-results-marquee.css' | asset_url | stylesheet_tag }}
+{%- capture extra -%}
+  --z-card-w: {{ section.settings.card_width }}px;
+  --z-card-w-m: {{ section.settings.mobile_card_width }}px;
+  --z-speed: {{ section.settings.speed }}s;
+{%- endcapture -%}
+{%- render 'zenith-section-style', section: section, extra: extra -%}
+
+{%- assign row_count = section.settings.rows | plus: 0 -%}
+
+<section
+  id="Zenith-{{ section.id }}"
+  class="zenith-section zenith-results color-{{ section.settings.color_scheme }} gradient zenith-results--{{ section.settings.aspect_ratio }}{% if section.settings.pause_on_hover %} zenith-results--pause{% endif %}"
+>
+  <div class="page-width">
+    {%- render 'zenith-section-heading',
+      eyebrow: section.settings.eyebrow,
+      heading: section.settings.heading,
+      subheading: section.settings.subheading,
+      alignment: section.settings.heading_alignment,
+      size: section.settings.heading_size
+    -%}
+  </div>
+
+  <div class="zenith-results__rows">
+    {%- for r in (1..row_count) -%}
+      {%- liquid
+        assign row_key = r | append: ''
+        assign item_count = 0
+        for block in section.blocks
+          if row_count == 1 or block.settings.row == row_key
+            assign item_count = item_count | plus: 1
+          endif
+        endfor
+        assign reverse = false
+        if r == 2 and section.settings.alternate_direction
+          assign reverse = true
+        endif
+      -%}
+      <div class="zenith-results__row{% if reverse %} zenith-results__row--reverse{% endif %}">
+        <div class="zenith-results__track">
+          {%- for pass in (1..4) -%}
+            <ul class="zenith-results__group" role="list"{% if pass > 1 %} aria-hidden="true"{% endif %}>
+              {%- if item_count > 0 -%}
+                {%- for block in section.blocks -%}
+                  {%- unless row_count == 1 or block.settings.row == row_key -%}{%- continue -%}{%- endunless -%}
+                  <li class="zenith-results__card"{% if pass == 1 %} id="Block-{{ block.id }}" {{ block.shopify_attributes }}{% endif %}>
+                    <div class="zenith-media zenith-results__media">
+                      {%- if block.settings.image != blank -%}
+                        {{
+                          block.settings.image
+                          | image_url: width: 600
+                          | image_tag: loading: 'lazy', widths: '200, 300, 400, 600', sizes: '(min-width: 750px) 240px, 160px'
+                        }}
+                      {%- else -%}
+                        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                      {%- endif -%}
+                    </div>
+                    {%- if block.settings.caption != blank -%}
+                      <p class="zenith-results__caption">{{ block.settings.caption | escape }}</p>
+                    {%- endif -%}
+                  </li>
+                {%- endfor -%}
+              {%- else -%}
+                {%- for i in (1..8) -%}
+                  <li class="zenith-results__card">
+                    <div class="zenith-media zenith-results__media">{{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}</div>
+                    <p class="zenith-results__caption">Add a result in the theme editor</p>
+                  </li>
+                {%- endfor -%}
+              {%- endif -%}
+            </ul>
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+
+  {%- if section.settings.link_label != blank -%}
+    <div class="page-width zenith-results__footer">
+      <a
+        {% if section.settings.link != blank %}href="{{ section.settings.link }}"{% else %}role="link" aria-disabled="true"{% endif %}
+        class="link underlined-link"
+      >
+        {{- section.settings.link_label | escape -}}
+      </a>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Zenith · Results marquee",
+  "tag": "div",
+  "class": "section",
+  "max_blocks": 40,
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Verified customer results" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Real Men. Real Results." },
+    { "type": "richtext", "id": "subheading", "label": "Subheading", "default": "<p>See the difference a proper regimen makes. From uneven skin to thinner hair, every transformation here comes from verified Zenith customers putting in the consistent work.</p>" },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "See more results" },
+    { "type": "url", "id": "link", "label": "Link" },
+
+    { "type": "header", "content": "Layout" },
+    {
+      "type": "select", "id": "heading_alignment", "label": "Heading alignment", "default": "center",
+      "options": [ { "value": "left", "label": "Left" }, { "value": "center", "label": "Center" } ]
+    },
+    {
+      "type": "select", "id": "rows", "label": "Rows", "default": "2",
+      "info": "With 2 rows, pick each result's row in its block settings",
+      "options": [ { "value": "1", "label": "1 row" }, { "value": "2", "label": "2 rows" } ]
+    },
+    { "type": "range", "id": "card_width", "label": "Card width", "min": 140, "max": 360, "step": 10, "unit": "px", "default": 220 },
+    {
+      "type": "select", "id": "aspect_ratio", "label": "Card shape", "default": "portrait",
+      "options": [ { "value": "portrait", "label": "Portrait 4:5" }, { "value": "square", "label": "Square" }, { "value": "tall", "label": "Tall 3:4" } ]
+    },
+    { "type": "range", "id": "speed", "label": "Scroll duration", "info": "Seconds for one full loop. Higher is slower.", "min": 10, "max": 120, "step": 5, "unit": "s", "default": 60 },
+    { "type": "checkbox", "id": "alternate_direction", "label": "Scroll second row in reverse", "default": true },
+    { "type": "checkbox", "id": "pause_on_hover", "label": "Pause on hover", "default": true },
+
+    { "type": "header", "content": "Colors" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+
+    { "type": "header", "content": "Typography" },
+    {
+      "type": "select", "id": "heading_size", "label": "Heading size", "default": "lg",
+      "options": [ { "value": "md", "label": "Medium" }, { "value": "lg", "label": "Large" }, { "value": "xl", "label": "Extra large" } ]
+    },
+
+    { "type": "header", "content": "Mobile" },
+    { "type": "range", "id": "mobile_card_width", "label": "Mobile card width", "min": 120, "max": 300, "step": 10, "unit": "px", "default": 160 },
+
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 64 }
+  ],
+  "blocks": [
+    {
+      "type": "result",
+      "name": "Result",
+      "settings": [
+        { "type": "header", "content": "Content" },
+        { "type": "image_picker", "id": "image", "label": "Image", "info": "Before/after photo" },
+        { "type": "text", "id": "caption", "label": "Caption", "default": "4 weeks with Zenith Tallow Cream" },
+        { "type": "header", "content": "Layout" },
+        {
+          "type": "select", "id": "row", "label": "Row", "default": "1",
+          "options": [ { "value": "1", "label": "Row 1" }, { "value": "2", "label": "Row 2" } ]
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zenith · Results marquee",
+      "blocks": [
+        { "type": "result", "settings": { "row": "1" } },
+        { "type": "result", "settings": { "row": "1" } },
+        { "type": "result", "settings": { "row": "1" } },
+        { "type": "result", "settings": { "row": "1" } },
+        { "type": "result", "settings": { "row": "2" } },
+        { "type": "result", "settings": { "row": "2" } },
+        { "type": "result", "settings": { "row": "2" } },
+        { "type": "result", "settings": { "row": "2" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

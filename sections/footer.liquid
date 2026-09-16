@@ -121,6 +121,20 @@
                               width: settings.brand_image_width
                           }}
                         </div>
+                      {%- else -%}
+                        {%- comment -%} zenith: fallback to bundled logo until Theme settings > Brand image is set {%- endcomment -%}
+                        <div
+                          class="footer-block__image-wrapper"
+                          style="max-width: min(100%, {{ settings.brand_image_width }}px);"
+                        >
+                          <img
+                            src="{{ 'footer-logo.png' | asset_url }}"
+                            alt="{{ shop.name | escape }}"
+                            width="{{ settings.brand_image_width }}"
+                            height="{{ settings.brand_image_width | times: 80 | divided_by: 204 }}"
+                            loading="lazy"
+                          >
+                        </div>
                       {%- endif -%}
                       {%- if settings.brand_headline != blank -%}
                         <h2 class="footer-block__heading rte">{{ settings.brand_headline }}</h2>

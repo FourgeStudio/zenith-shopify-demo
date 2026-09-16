@@ -1,0 +1,73 @@
+.zenith-logos__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--z-space-4);
+}
+
+.zenith-logos__heading {
+  margin: 0;
+  font-size: var(--z-text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(var(--color-foreground), 0.6);
+}
+
+.zenith-logos__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--z-space-5) var(--z-space-7);
+}
+
+.zenith-logos__item img {
+  display: block;
+  height: var(--z-logo-h-m);
+  width: auto;
+  max-width: 16rem;
+  object-fit: contain;
+}
+
+.zenith-logos--mono .zenith-logos__item img {
+  filter: grayscale(1);
+  opacity: 0.7;
+}
+
+.zenith-logos__placeholder {
+  font-family: var(--font-heading-family);
+  font-size: 2rem;
+  text-transform: uppercase;
+  color: rgba(var(--color-foreground), 0.5);
+}
+
+@media screen and (max-width: 749px) {
+  .zenith-logos__list--m-scroll {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    max-width: 100%;
+    scrollbar-width: none;
+  }
+
+  .zenith-logos__list--m-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .zenith-logos__list--m-scroll .zenith-logos__item {
+    flex-shrink: 0;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .zenith-logos__item img {
+    height: var(--z-logo-h);
+  }
+
+  .zenith-logos__list {
+    gap: var(--z-space-6) var(--z-space-8);
+  }
+}

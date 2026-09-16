@@ -1,0 +1,56 @@
+{% comment %}
+  Zenith product card. Renders a placeholder card when product is blank.
+  Accepts: product {Object}, show_rating {Boolean}, button_label {String}, index {Number} for placeholders
+  Rating reads the standard `reviews.rating` / `reviews.rating_count` metafields (set by review apps).
+{% endcomment %}
+<div class="zenith-card">
+  {%- if product != blank -%}
+    <a href="{{ product.url }}" class="zenith-media zenith-card__media" tabindex="-1" aria-hidden="true">
+      {%- if product.featured_media -%}
+        {{
+          product.featured_media
+          | image_url: width: 800
+          | image_tag:
+            loading: 'lazy',
+            widths: '300, 400, 600, 800',
+            sizes: '(min-width: 990px) 20vw, (min-width: 750px) 33vw, 60vw',
+            alt: product.featured_media.alt
+        }}
+      {%- else -%}
+        {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+    </a>
+    <h3 class="zenith-card__title">
+      <a href="{{ product.url }}">{{ product.title | escape }}</a>
+    </h3>
+    {%- if show_rating and product.metafields.reviews.rating.value != blank -%}
+      {%- render 'zenith-stars',
+        rating: product.metafields.reviews.rating.value.rating,
+        count: product.metafields.reviews.rating_count
+      -%}
+    {%- endif -%}
+    <div class="zenith-card__price">
+      {{ product.price | money }}
+      {%- if product.compare_at_price > product.price -%}
+        <s>{{ product.compare_at_price | money }}</s>
+      {%- endif -%}
+    </div>
+    {%- assign form_id = 'ZenithCard-' | append: section.id | append: '-' | append: product.id -%}
+    {%- render 'zenith-add-to-cart',
+      product: product,
+      form_id: form_id,
+      label: button_label
+    -%}
+  {%- else -%}
+    <div class="zenith-media zenith-card__media">
+      {%- assign placeholder = index | modulo: 6 | plus: 1 | prepend: 'product-' -%}
+      {{ placeholder | placeholder_svg_tag: 'placeholder-svg' }}
+    </div>
+    <h3 class="zenith-card__title">Product name</h3>
+    {%- if show_rating -%}
+      {%- render 'zenith-stars', rating: 5, count: 120 -%}
+    {%- endif -%}
+    <div class="zenith-card__price">{{ 89900 | money }}</div>
+    <button type="button" class="button zenith-atc" disabled>{{ button_label | default: 'Add to cart' | escape }}</button>
+  {%- endif -%}
+</div>

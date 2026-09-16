@@ -1,0 +1,114 @@
+.zenith-cats__card {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+}
+
+.zenith-cats__media {
+  aspect-ratio: 4 / 5;
+  height: 100%;
+}
+
+.zenith-cats--tall .zenith-cats__media { aspect-ratio: 3 / 4; }
+.zenith-cats--square .zenith-cats__media { aspect-ratio: 1 / 1; }
+
+.zenith-cats__media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(var(--color-background), var(--z-overlay)) 15%, rgba(var(--color-background), 0) 60%);
+}
+
+.zenith-cats__media img {
+  transition: transform 0.6s ease;
+}
+
+.zenith-cats__card:hover .zenith-cats__media img {
+  transform: scale(1.04);
+}
+
+.zenith-cats__content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--z-space-4);
+  padding: var(--z-space-5);
+  pointer-events: none;
+}
+
+.zenith-cats__content a,
+.zenith-cats__content button,
+.zenith-cats__content product-form {
+  pointer-events: auto;
+}
+
+.zenith-cats__title {
+  margin: 0;
+  font-family: var(--font-body-family);
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: 1.35;
+  color: rgb(var(--color-foreground));
+}
+
+.zenith-cats__button,
+.zenith-cats__content .zenith-card__form {
+  width: auto;
+  margin-top: 0;
+}
+
+.zenith-cats__overlay-link {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zenith-cats__media img {
+    transition: none;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .zenith-cats--m-grid .zenith-cats__grid,
+  .zenith-cats--m-stack .zenith-cats__grid {
+    display: grid;
+    overflow: visible;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--z-space-3);
+  }
+
+  .zenith-cats--m-stack .zenith-cats__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .zenith-cats--m-grid .zenith-cats__content {
+    padding: var(--z-space-3);
+    gap: var(--z-space-2);
+  }
+
+  .zenith-cats--m-grid .zenith-cats__title {
+    font-size: 1.3rem;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .zenith-cats__grid.zenith-carousel__track {
+    display: grid;
+    overflow: visible;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--z-space-5);
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .zenith-cats__grid.zenith-carousel__track {
+    grid-template-columns: repeat(var(--z-cols), minmax(0, 1fr));
+  }
+}

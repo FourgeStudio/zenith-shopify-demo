@@ -1,0 +1,39 @@
+{% comment %}
+  AJAX add-to-cart using Dawn's <product-form> (cart drawer / notification aware).
+  Section must load product-form.js.
+  Accepts: product {Object}, form_id {String} unique, label {String} optional, class {String} optional
+{% endcomment %}
+{%- assign variant = product.selected_or_first_available_variant -%}
+<product-form data-section-id="{{ section.id }}" data-hide-errors="true" class="zenith-card__form">
+  {%- form 'product', product, id: form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+    <input
+      type="hidden"
+      name="id"
+      value="{{ variant.id }}"
+      class="product-variant-id"
+      {% unless variant.available %}
+        disabled
+      {% endunless %}
+    >
+    <button
+      id="{{ form_id }}-submit"
+      type="submit"
+      name="add"
+      class="button zenith-atc {{ class }}"
+      aria-haspopup="dialog"
+      {% unless variant.available %}
+        disabled
+      {% endunless %}
+    >
+      <span>
+        {%- if variant.available -%}
+          {%- if label != blank -%}{{ label | escape }}{%- else -%}{{ 'products.product.add_to_cart' | t }}{%- endif -%}
+        {%- else -%}
+          {{ 'products.product.sold_out' | t }}
+        {%- endif -%}
+      </span>
+      <span class="sold-out-message hidden">{{ 'products.product.sold_out' | t }}</span>
+      {%- render 'loading-spinner' -%}
+    </button>
+  {%- endform -%}
+</product-form>
