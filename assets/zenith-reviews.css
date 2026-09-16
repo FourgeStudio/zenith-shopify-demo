@@ -1,0 +1,15 @@
+.zenith-reviews__placeholder img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.zenith-reviews__placeholder-media {
+  aspect-ratio: 16 / 9;
+}
+
+.zenith-reviews__apps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--z-space-5);
+}
