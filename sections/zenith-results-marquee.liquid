@@ -3,6 +3,7 @@
   --z-card-w: {{ section.settings.card_width }}px;
   --z-card-w-m: {{ section.settings.mobile_card_width }}px;
   --z-speed: {{ section.settings.speed }}s;
+  {%- render 'zenith-overlay-vars', settings: section.settings -%}
 {%- endcapture -%}
 {%- render 'zenith-section-style', section: section, extra: extra -%}
 
@@ -55,6 +56,7 @@
                       {%- else -%}
                         {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
                       {%- endif -%}
+                      {%- render 'zenith-overlay', style: section.settings.overlay_style -%}
                     </div>
                     {%- if block.settings.caption != blank -%}
                       <p class="zenith-results__caption">{{ block.settings.caption | escape }}</p>
@@ -64,7 +66,7 @@
               {%- else -%}
                 {%- for i in (1..8) -%}
                   <li class="zenith-results__card">
-                    <div class="zenith-media zenith-results__media">{{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}</div>
+                    <div class="zenith-media zenith-results__media">{{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}{%- render 'zenith-overlay', style: section.settings.overlay_style -%}</div>
                     <p class="zenith-results__caption">Add a result in the theme editor</p>
                   </li>
                 {%- endfor -%}
@@ -94,62 +96,308 @@
   "tag": "div",
   "class": "section",
   "max_blocks": 40,
-  "disabled_on": { "groups": ["header", "footer"] },
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
   "settings": [
-    { "type": "header", "content": "Content" },
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Verified customer results" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Real Men. Real Results." },
-    { "type": "richtext", "id": "subheading", "label": "Subheading", "default": "<p>See the difference a proper regimen makes. From uneven skin to thinner hair, every transformation here comes from verified Zenith customers putting in the consistent work.</p>" },
-    { "type": "text", "id": "link_label", "label": "Link label", "default": "See more results" },
-    { "type": "url", "id": "link", "label": "Link" },
-
-    { "type": "header", "content": "Layout" },
     {
-      "type": "select", "id": "heading_alignment", "label": "Heading alignment", "default": "center",
-      "options": [ { "value": "left", "label": "Left" }, { "value": "center", "label": "Center" } ]
+      "type": "header",
+      "content": "Content"
     },
     {
-      "type": "select", "id": "rows", "label": "Rows", "default": "2",
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Verified customer results"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Real Men. Real Results."
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "<p>See the difference a proper regimen makes. From uneven skin to thinner hair, every transformation here comes from verified Zenith customers putting in the consistent work.</p>"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Link label",
+      "default": "See more results"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Heading alignment",
+      "default": "center",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "rows",
+      "label": "Rows",
+      "default": "2",
       "info": "With 2 rows, pick each result's row in its block settings",
-      "options": [ { "value": "1", "label": "1 row" }, { "value": "2", "label": "2 rows" } ]
+      "options": [
+        {
+          "value": "1",
+          "label": "1 row"
+        },
+        {
+          "value": "2",
+          "label": "2 rows"
+        }
+      ]
     },
-    { "type": "range", "id": "card_width", "label": "Card width", "min": 140, "max": 360, "step": 10, "unit": "px", "default": 220 },
     {
-      "type": "select", "id": "aspect_ratio", "label": "Card shape", "default": "portrait",
-      "options": [ { "value": "portrait", "label": "Portrait 4:5" }, { "value": "square", "label": "Square" }, { "value": "tall", "label": "Tall 3:4" } ]
+      "type": "range",
+      "id": "card_width",
+      "label": "Card width",
+      "min": 140,
+      "max": 360,
+      "step": 10,
+      "unit": "px",
+      "default": 220
     },
-    { "type": "range", "id": "speed", "label": "Scroll duration", "info": "Seconds for one full loop. Higher is slower.", "min": 10, "max": 120, "step": 5, "unit": "s", "default": 60 },
-    { "type": "checkbox", "id": "alternate_direction", "label": "Scroll second row in reverse", "default": true },
-    { "type": "checkbox", "id": "pause_on_hover", "label": "Pause on hover", "default": true },
-
-    { "type": "header", "content": "Colors" },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
-
-    { "type": "header", "content": "Typography" },
     {
-      "type": "select", "id": "heading_size", "label": "Heading size", "default": "lg",
-      "options": [ { "value": "md", "label": "Medium" }, { "value": "lg", "label": "Large" }, { "value": "xl", "label": "Extra large" } ]
+      "type": "select",
+      "id": "aspect_ratio",
+      "label": "Card shape",
+      "default": "portrait",
+      "options": [
+        {
+          "value": "portrait",
+          "label": "Portrait 4:5"
+        },
+        {
+          "value": "square",
+          "label": "Square"
+        },
+        {
+          "value": "tall",
+          "label": "Tall 3:4"
+        }
+      ]
     },
-
-    { "type": "header", "content": "Mobile" },
-    { "type": "range", "id": "mobile_card_width", "label": "Mobile card width", "min": 120, "max": 300, "step": 10, "unit": "px", "default": 160 },
-
-    { "type": "header", "content": "Spacing" },
-    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 64 },
-    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 64 }
+    {
+      "type": "range",
+      "id": "speed",
+      "label": "Scroll duration",
+      "info": "Seconds for one full loop. Higher is slower.",
+      "min": 10,
+      "max": 120,
+      "step": 5,
+      "unit": "s",
+      "default": 60
+    },
+    {
+      "type": "checkbox",
+      "id": "alternate_direction",
+      "label": "Scroll second row in reverse",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "pause_on_hover",
+      "label": "Pause on hover",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "select",
+      "id": "overlay_style",
+      "label": "Image overlay",
+      "default": "bottom",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "solid",
+          "label": "Solid"
+        },
+        {
+          "value": "bottom",
+          "label": "Gradient from bottom"
+        },
+        {
+          "value": "top",
+          "label": "Gradient from top"
+        },
+        {
+          "value": "left",
+          "label": "Gradient from left"
+        },
+        {
+          "value": "right",
+          "label": "Gradient from right"
+        }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay color",
+      "default": "#121212"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 75
+    },
+    {
+      "type": "range",
+      "id": "overlay_coverage",
+      "label": "Gradient length",
+      "info": "How far the gradient reaches across the image",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 45
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "default": "lg",
+      "options": [
+        {
+          "value": "md",
+          "label": "Medium"
+        },
+        {
+          "value": "lg",
+          "label": "Large"
+        },
+        {
+          "value": "xl",
+          "label": "Extra large"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "type": "range",
+      "id": "mobile_card_width",
+      "label": "Mobile card width",
+      "min": 120,
+      "max": 300,
+      "step": 10,
+      "unit": "px",
+      "default": 160
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    }
   ],
   "blocks": [
     {
       "type": "result",
       "name": "Result",
       "settings": [
-        { "type": "header", "content": "Content" },
-        { "type": "image_picker", "id": "image", "label": "Image", "info": "Before/after photo" },
-        { "type": "text", "id": "caption", "label": "Caption", "default": "4 weeks with Zenith Tallow Cream" },
-        { "type": "header", "content": "Layout" },
         {
-          "type": "select", "id": "row", "label": "Row", "default": "1",
-          "options": [ { "value": "1", "label": "Row 1" }, { "value": "2", "label": "Row 2" } ]
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Before/after photo"
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Caption",
+          "default": "4 weeks with Zenith Tallow Cream"
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "select",
+          "id": "row",
+          "label": "Row",
+          "default": "1",
+          "options": [
+            {
+              "value": "1",
+              "label": "Row 1"
+            },
+            {
+              "value": "2",
+              "label": "Row 2"
+            }
+          ]
         }
       ]
     }
@@ -158,14 +406,54 @@
     {
       "name": "Zenith · Results marquee",
       "blocks": [
-        { "type": "result", "settings": { "row": "1" } },
-        { "type": "result", "settings": { "row": "1" } },
-        { "type": "result", "settings": { "row": "1" } },
-        { "type": "result", "settings": { "row": "1" } },
-        { "type": "result", "settings": { "row": "2" } },
-        { "type": "result", "settings": { "row": "2" } },
-        { "type": "result", "settings": { "row": "2" } },
-        { "type": "result", "settings": { "row": "2" } }
+        {
+          "type": "result",
+          "settings": {
+            "row": "1"
+          }
+        },
+        {
+          "type": "result",
+          "settings": {
+            "row": "1"
+          }
+        },
+        {
+          "type": "result",
+          "settings": {
+            "row": "1"
+          }
+        },
+        {
+          "type": "result",
+          "settings": {
+            "row": "1"
+          }
+        },
+        {
+          "type": "result",
+          "settings": {
+            "row": "2"
+          }
+        },
+        {
+          "type": "result",
+          "settings": {
+            "row": "2"
+          }
+        },
+        {
+          "type": "result",
+          "settings": {
+            "row": "2"
+          }
+        },
+        {
+          "type": "result",
+          "settings": {
+            "row": "2"
+          }
+        }
       ]
     }
   ]

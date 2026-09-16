@@ -13,7 +13,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  z-index: 1;
+  z-index: 2;
   display: grid;
   place-items: center;
   width: 56px;
@@ -36,6 +36,10 @@ button.zenith-video-card__play:hover {
   width: 22px;
   height: 22px;
   margin-left: 3px;
+}
+
+zenith-video.is-playing .zenith-overlay {
+  opacity: 0;
 }
 
 zenith-video.is-playing .zenith-video-card__play {

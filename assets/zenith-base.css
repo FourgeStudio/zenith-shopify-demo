@@ -377,3 +377,28 @@ zenith-carousel {
 @media screen and (min-width: 750px) {
   .zenith-hide-desktop { display: none !important; }
 }
+
+/* ---------- Image overlay (see snippets/zenith-overlay.liquid) ---------- */
+.zenith-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.zenith-overlay--none { background: none; }
+.zenith-overlay--solid { background: rgba(var(--z-ov-rgb), var(--z-ov-a)); }
+.zenith-overlay--bottom { background: linear-gradient(to top, rgba(var(--z-ov-rgb), var(--z-ov-a)) 0%, rgba(var(--z-ov-rgb), 0) var(--z-ov-cover)); }
+.zenith-overlay--top { background: linear-gradient(to bottom, rgba(var(--z-ov-rgb), var(--z-ov-a)) 0%, rgba(var(--z-ov-rgb), 0) var(--z-ov-cover)); }
+.zenith-overlay--left { background: linear-gradient(to right, rgba(var(--z-ov-rgb), var(--z-ov-a)) 0%, rgba(var(--z-ov-rgb), 0) var(--z-ov-cover)); }
+.zenith-overlay--right { background: linear-gradient(to left, rgba(var(--z-ov-rgb), var(--z-ov-a)) 0%, rgba(var(--z-ov-rgb), 0) var(--z-ov-cover)); }
+
+@media screen and (max-width: 749px) {
+  .zenith-overlay.zenith-overlay--m-none { background: none; }
+  .zenith-overlay.zenith-overlay--m-solid { background: rgba(var(--z-ov-rgb), var(--z-ov-a)); }
+  .zenith-overlay.zenith-overlay--m-bottom { background: linear-gradient(to top, rgba(var(--z-ov-rgb), var(--z-ov-a)) 0%, rgba(var(--z-ov-rgb), 0) var(--z-ov-cover)); }
+  .zenith-overlay.zenith-overlay--m-top { background: linear-gradient(to bottom, rgba(var(--z-ov-rgb), var(--z-ov-a)) 0%, rgba(var(--z-ov-rgb), 0) var(--z-ov-cover)); }
+  .zenith-overlay.zenith-overlay--m-left { background: linear-gradient(to right, rgba(var(--z-ov-rgb), var(--z-ov-a)) 0%, rgba(var(--z-ov-rgb), 0) var(--z-ov-cover)); }
+  .zenith-overlay.zenith-overlay--m-right { background: linear-gradient(to left, rgba(var(--z-ov-rgb), var(--z-ov-a)) 0%, rgba(var(--z-ov-rgb), 0) var(--z-ov-cover)); }
+}

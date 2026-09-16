@@ -1,0 +1,7 @@
+{% comment %}
+  CSS declarations for 'zenith-overlay'. Use inside the 'extra' capture of 'zenith-section-style'.
+  Accepts: settings {Object} with overlay_color, overlay_opacity, overlay_coverage
+{% endcomment %}
+--z-ov-rgb: {{ settings.overlay_color.red | default: 18 }}, {{ settings.overlay_color.green | default: 18 }}, {{ settings.overlay_color.blue | default: 18 }};
+--z-ov-a: {{ settings.overlay_opacity | divided_by: 100.0 }};
+--z-ov-cover: {{ settings.overlay_coverage | default: 70 }}%;
