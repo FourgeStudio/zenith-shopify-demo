@@ -32,7 +32,9 @@
         "padding_top": 48,
         "padding_bottom": 80,
         "padding_top_mobile": 36,
-        "padding_bottom_mobile": 48
+        "padding_bottom_mobile": 48,
+        "faq_open_first": true,
+        "show_phone": true
       },
       "blocks": {
         "office_manila": {
