@@ -1,6 +1,7 @@
 /* Countdown boxes (snippets/zenith-countdown.liquid). Per-instance vars on the section root:
    --z-cdfs-m / --z-cdfs digit size, --z-cd-box box color, --z-cd-digit digit color. */
 .zenith-countdown {
+  --z-cd-line: 1.12em;
   display: inline-flex;
   align-items: flex-start;
   gap: var(--z-space-1);
@@ -14,28 +15,85 @@
 }
 
 .zenith-countdown__value {
-  display: block;
+  display: flex;
+  justify-content: center;
   overflow: hidden;
   min-width: 2.2ch;
+  height: var(--z-cd-line);
   padding: 0 var(--z-space-1);
   border-radius: 2px;
   background: var(--z-cd-box, #4e3a05);
   color: var(--z-cd-digit, #ffffff);
   font-family: var(--font-heading-family);
   font-size: var(--z-cdfs-m, 1.6rem);
-  line-height: 1.12;
+  line-height: var(--z-cd-line);
   text-align: center;
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.02em;
 }
 
-.zenith-countdown__value > span {
+/* ---------- Slot-machine reels ----------
+   Rolling reel: strip = [previous digit, current digit], resting on the current one (-50%).
+   A change replays the roll: previous digit leaves through the top, the new one comes up from below. */
+.zenith-countdown__reel {
   display: block;
+  min-width: 1ch;
+  height: var(--z-cd-line);
 }
 
-/* Short digit roll on change (design shows mid-roll digits). */
-.zenith-countdown__value > span.is-rolling {
-  animation: zenith-countdown-roll 0.3s ease-out;
+.zenith-countdown__strip {
+  display: block;
+  transform: translateY(-50%);
+}
+
+.zenith-countdown__strip > span {
+  display: block;
+  height: var(--z-cd-line);
+}
+
+.zenith-countdown__strip.is-rolling {
+  animation: zenith-countdown-roll 0.55s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+@keyframes zenith-countdown-roll {
+  0% {
+    transform: translateY(0);
+    filter: blur(0);
+  }
+  35% {
+    filter: blur(0.08em);
+  }
+  75% {
+    transform: translateY(-56%);
+    filter: blur(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+/* Hundredths: 11-digit strip (9 → 0, 9) spinning upward nonstop; phase synced by zenith-countdown.js. */
+.zenith-countdown__strip--spin {
+  transform: none;
+  animation: zenith-countdown-spin 1s linear infinite;
+}
+
+.zenith-countdown__strip--spin-2 {
+  animation-duration: 0.1s;
+}
+
+.zenith-countdown.is-expired .zenith-countdown__strip--spin {
+  animation: none;
+  transform: translateY(calc(-100% * 9 / 11));
+}
+
+@keyframes zenith-countdown-spin {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(calc(-100% * 10 / 11));
+  }
 }
 
 .zenith-countdown__label {
@@ -46,17 +104,6 @@
   opacity: 0.75;
 }
 
-@keyframes zenith-countdown-roll {
-  from {
-    transform: translateY(-50%);
-    opacity: 0.2;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
 @media screen and (min-width: 750px) {
   .zenith-countdown__value {
     font-size: var(--z-cdfs, 1.8rem);
@@ -64,7 +111,11 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .zenith-countdown__value > span.is-rolling {
+  .zenith-countdown__strip.is-rolling {
     animation: none;
+  }
+
+  .zenith-countdown__unit--ms {
+    display: none;
   }
 }
