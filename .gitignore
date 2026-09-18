@@ -12,3 +12,7 @@ node_modules
 *.zip
 # Claude Code local settings
 .claude/settings.local.json
+
+# Design exports stay on this machine only (not pushed); the section map README stays tracked
+design/*
+!design/README.md

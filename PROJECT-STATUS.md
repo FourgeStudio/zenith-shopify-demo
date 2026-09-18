@@ -17,7 +17,7 @@ _Last updated: 2026-09-18. Keep this file current at the end of each work sessio
 - Shopify's GitHub app commits theme-editor saves back to the connected branch (`Update from Shopify for theme…`), so `git pull` before starting, and merge `main` → `staging` after editor sessions on `main`.
 
 ## Design sources
-- `design/homepage/`, `design/contact-us/`, `design/about-us/` — desktop + mobile full pages, per-section layer exports, designer notes (`guide*.png`). `design/README.md` maps every file to its section.
+- `design/homepage/`, `design/contact-us/`, `design/about-us/` — desktop + mobile full pages, per-section layer exports, designer notes (`guide*.png`). `design/README.md` maps every file to its section. **Exports are local-only** (gitignored since 2026-09-19; only the README is on GitHub) — a fresh clone needs them copied in.
 - `.claude/brand.md` = colors, fonts, logo rules, voice, plus design-verified UI rules (buttons, gutters, header).
 
 ## Shared building blocks (added in the design pass)

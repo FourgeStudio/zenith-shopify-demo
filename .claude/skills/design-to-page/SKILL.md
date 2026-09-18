@@ -45,7 +45,7 @@ Then fill `brief-template.md` → `<scratchpad>/BRIEF.md` (placeholders + "Measu
 5. Spot-render risky pieces yourself: static HTML mock linking the real CSS → `scripts/shot.ps1 -Html … -Out … -Width 1440` → compare with the design crop (build a side-by-side PNG and view it). Mobile: Chrome won't lay out narrower than ~500px, so wrap the mock in a 401px `<iframe>` page and shoot that. Mocks lack `layout/theme.liquid`'s global `box-sizing: border-box` — set it on your own inputs anyway.
 
 ## 5. Ship + hand off
-- Commits on `staging`, one logical change each: design files → shared infra → sections + template → header/footer → docs. Push, then (per CLAUDE.md) merge `staging` → `main`, push (main theme is unpublished preview until the user publishes).
+- Commits on `staging`, one logical change each: shared infra → sections + template → header/footer → docs. Design exports are gitignored (local only) — never `git add -f` them; only `design/README.md` (the section map) is tracked. Push, then (per CLAUDE.md) merge `staging` → `main`, push (main theme is unpublished preview until the user publishes).
 - Update `PROJECT-STATUS.md` (what changed, client content list, gotchas), `.claude/brand.md` (design-verified tokens), `design/README.md` (map).
 - Tell the user: what changed per area, how it was verified (static renders ≠ live store → ask them to eyeball the preview), decisions made from the design (hidden-on-mobile, defaults), and the exact content/menus/images they must add.
 

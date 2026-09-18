@@ -1,6 +1,6 @@
 # Design sources
 
-Design exports live here so any session (any device, any agent) can read them. Images pasted into a chat are **not** saved — only files in this repo survive.
+Design exports live here **on the working machine only**: `design/*` is gitignored (removed from GitHub 2026-09-19), only this README is tracked. Another device or a fresh clone has the map below but not the images — copy the exports over first. Images pasted into a chat are **not** saved.
 Shopify's GitHub sync ignores this folder (it only reads theme directories), so nothing here ships to the store.
 
 ## Layout
