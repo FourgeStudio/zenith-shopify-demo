@@ -5,22 +5,19 @@ description: Conventions for editing this Dawn 16 Shopify theme — git branchin
 
 # Dawn customization playbook
 
-## 1. Git — branch per new work (always first)
-Branches:
+## 1. Git — two branches only
 | Branch | Purpose | Shopify theme (GitHub integration) |
 |---|---|---|
-| `main` | production | Live theme |
-| `staging` | QA / client review | Unpublished "Zenith – Staging" theme |
-| `feat/*` `fix/*` `style/*` `chore/*` | one unit of work | local `shopify theme dev` |
+| `staging` | all work happens here | connect as unpublished preview theme |
+| `main` | production | "zenith-shopify/main" theme (publish when ready) |
 
 Flow:
-- Start: `git checkout staging; git pull; git checkout -b feat/<kebab-name>` **before editing**.
-- Commits: `feat(zenith-hero): add section` — one logical change each.
-- Push: `git push -u origin <branch>`; PR into `staging` (`gh` not installed → give compare URL `https://github.com/zenithph/zenith-shopify/compare/staging...<branch>`).
-- Release: PR `staging` → `main` after review on staging theme.
-- Hotfix: `fix/*` off `main` → PR to `main`, then merge `main` back into `staging`.
-- Shopify's GitHub integration commits theme-editor changes (`config/settings_data.json`, `templates/*.json`) back to the connected branch → always `git pull` before starting; on JSON conflicts keep the editor's content values, re-apply only structural changes.
-- Never commit directly to `main`/`staging` (except initial setup). Never force-push.
+- Start every session: `git checkout staging; git pull`.
+- Commit to `staging` directly, one logical change per commit: `feat(zenith-hero): add section`. Push after each commit.
+- Release: `git checkout main; git pull; git merge staging; git push; git checkout staging`.
+- Feature branches only when the user asks for one; delete after merging.
+- Shopify's GitHub integration commits theme-editor changes (`config/settings_data.json`, `templates/*.json`) back to the connected branch → always `git pull` before starting; after editor sessions on `main`, merge `main` back into `staging`. On JSON conflicts keep the editor's content values, re-apply only structural changes.
+- Never force-push.
 
 ## 2. Decision order (cheapest first)
 1. **Theme setting** — `config/settings_data.json` (color schemes, fonts, buttons, radius, spacing). No code.

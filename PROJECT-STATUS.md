@@ -8,13 +8,14 @@ _Last updated: 2026-09-18. Keep this file current at the end of each work sessio
 - Homepage (desktop) built and rendering on the preview theme. Mobile not yet matched to design.
 - Brand tokens, colors, fonts, logos: see `.claude/brand.md`.
 
-## Branch flow
-`feat|fix|style|chore/*` → PR into `staging` → PR into `main`. Never commit to `main`/`staging`.
-Shopify's GitHub app commits theme-editor saves back to `main` (e.g. `Update from Shopify for theme…`), so `git pull` before starting and merge `main` → `staging` after editor sessions.
+## Branch flow (two branches only)
+- `staging` — all work is committed here and pushed.
+- `main` — production; updated by merging `staging` when a piece of work is done.
+- No feature branches unless explicitly asked; delete them after merge.
+- Shopify's GitHub app commits theme-editor saves back to the connected branch (`Update from Shopify for theme…`), so `git pull` before starting, and merge `main` → `staging` after editor sessions on `main`.
 
-### Open PRs / unmerged branches
-- [ ] `feat/section-style-settings` — size/spacing/mobile settings for every section (pushed, not merged). PR: https://github.com/zenithph/zenith-shopify/compare/staging...feat/section-style-settings
-- Merged already: `feat/homepage` (#1), `fix/settings-data-validation` (#2), `style/sticky-header` (#3), `feat/mobile-menu-drawer` (#4).
+### History
+All earlier feature branches are merged and deleted: homepage build, settings-data fix, sticky header, mobile menu drawer, section style settings, status doc.
 
 ## Remaining work
 
