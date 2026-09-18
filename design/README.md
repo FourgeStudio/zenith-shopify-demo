@@ -35,7 +35,7 @@ Figma layer names can stay as exported — the map below says which file is whic
 | `faq` | `FAQ/2.png` | `FAQ/2.png` |
 | Footer (footer-group) | `Desktop Footer.png` | `Mobile Footer.png` |
 
-Revisions: `revisions/promo-banner/` — promotion switch states: `no-promo-hero.png` / `mobile-hero-no-promo.png` (promotion off → hero), `new-promo-banner-turned-on-promo.png` / `mobile-hero-turned-on-promo.png` (promotion on → split promo banner in the hero spot).
+Revisions: `revisions/promo-banner/` — promotion switch states: `no-promo-hero.png` / `mobile-hero-no-promo.png` (promotion off → hero), `new-promo-banner-turned-on-promo.png` / `mobile-hero-turned-on-promo.png` (promotion on → split promo banner in the hero spot). `revisions/results/` — `Stars.png`, `Verified Badge.png` (redrawn as SVG: `star`, `verified_seal` in `snippets/zenith-icon.liquid`, #C5930E); the review-card layout came from chat screenshots (2026-09-19): photo + "Used <product>" left, stars / quote / avatar / name + badge / product right, card 440×220 (340×180 mobile).
 
 Designer notes: `guide.png` (customer count is a theme setting → `[customers]` token), `guide1.png` (before/after results card), `guide2.png` (mobile sale-hero variant with ribbon, FDA badge and a countdown with seconds).
 
