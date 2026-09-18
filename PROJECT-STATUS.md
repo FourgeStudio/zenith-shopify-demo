@@ -24,7 +24,7 @@ _Last updated: 2026-09-18. Keep this file current at the end of each work sessio
 - `snippets/zenith-add-to-cart.liquid` takes `style` + `icon`.
 - `snippets/zenith-countdown.liquid` + `assets/zenith-countdown.css/js` — days/hours/min/sec countdown (hero sale strip, promo banners).
 - Theme settings → **Zenith → Customer count** (`settings.customer_count`, default "100,000+"). Write `[customers]` in section copy; headings, captions and FAQ replace it.
-- Global page gutters in `assets/zenith-base.css` (20 / 40 / 80px; header excluded). `page_width` = max content width.
+- Page frame: Theme settings → Layout → Page width = **1440** (whole frame incl. margins → content 1280, like the design; 20px steps). Gutters 20 / 40 / 80px in `assets/zenith-base.css`. Header content is capped to the same frame; full-bleed backgrounds (header bar, hero image, bands) still span the screen.
 - **Global promo**: Theme settings → **Zenith · Promo** holds the promo content + countdown. Every "Zenith · Promo banner" with *Promo content = Global* shows it (edit once → updates everywhere); *This section only* uses the section's own fields. Hero countdown strip can follow the same end date (*Countdown dates = Global*). Styling (colors, sizes, layout) stays per section.
 - **Skill `design-to-page`** (`.claude/skills/design-to-page/`) = the repeatable workflow + scripts used for the homepage; use it for every next page.
 - Pattern for future shared sections: global content in Theme settings + per-section source select (see zenith-promo-banner). Candidates when product/collection pages are built: trust bar, money-back guarantee, Zenith Guarantee, press logos.
