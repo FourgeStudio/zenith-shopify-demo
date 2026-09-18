@@ -13,7 +13,7 @@
 
 ## Store
 - Market: Philippines · Currency: PHP (₱)
-- URL: TBD (.myshopify.com)
+- URL: tryzenith.ph (myshopify handle TBD — needed for `shopify theme dev --store`)
 - Categories seen: Skin, Hygiene (e.g. Anti-Aging Tallow Cream)
 
 ## Logo
@@ -45,10 +45,10 @@ Gradients:
 ### Dawn color schemes (live in config/settings_data.json)
 | Scheme | Use | Background | Text | Button / label |
 |---|---|---|---|---|
-| scheme-1 Obsidian (site default) | page, header, most sections | #121212 | #FFFFFF | #C59300 / #121212 |
+| scheme-1 Obsidian (site default) | page, most sections | #0E0E0E (design page bg) | #FFFFFF | #C59300 / #121212 |
 | scheme-2 White | promo banner card | #FFFFFF | #121212 | #121212 / #FFFFFF |
 | scheme-3 Rock | product image backgrounds | #E7E7E7 | #121212 | #121212 / #FFFFFF |
-| scheme-4 Basalt | cards (video, reviews), guarantee banner | #202020 | #E7E7E7 | #C59300 / #121212 |
+| scheme-4 Basalt | trust bar, money-back band, review cards | #202020 | #FFFFFF | #C59300 / #121212 |
 | scheme-5 Gold | announcement bar, badges | #C59300 | #121212 | #121212 / #FFFFFF |
 | scheme-6 Horizon | featured product panel (gradient #112328 to #294850) | #112328 | #FFFFFF | #C59300 / #121212 |
 | scheme-7 Obsidian / white button | alt dark with white CTA | #121212 | #FFFFFF | #FFFFFF / #121212 |
@@ -67,11 +67,13 @@ Gradients:
 
 ## UI
 - Corners: square (radius 0) on buttons, cards, media, inputs — per brand application.
-- Buttons: solid; dark on light (Obsidian/White), white or Summit Gold on dark. Label Geist 500, sentence/title case.
+- Buttons (per homepage design): label in the HEADING font (~22px) + arrow/cart icon, square. Styles via `snippets/zenith-button.liquid`: gold = Summit gradient #EABE5F→#C59300 with dark text (default CTA); dark = #112328 with white text (on light promo cards); outline = 1px #EABE5F border, white text ("Shop All Products").
 - Announcement bar: Summit Gold background, dark text.
-- Header: Obsidian Black, white nav, centered logo.
+- Header: pure black #000, hamburger (desktop too), centered logo, account + cart right; announcement bar BELOW it, gold gradient.
+- Page gutters: 20px mobile / 40px tablet / 80px ≥990 (content 1280 at 1440) — set globally in zenith-base.css.
+- Customer count: Theme settings → Zenith → Customer count; write `[customers]` in section copy.
 - Product card: light/rock background, product on neutral, black full-width "Add to cart".
-- Page width: 1440 (TBD) · section spacing default 64px desktop / 48px mobile.
+- Page width: design frame 1440 · section spacing varies per section (set per section from the design).
 - Shadows: none.
 
 ## Art direction
