@@ -1,16 +1,20 @@
-.zenith-logos__inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--z-space-4);
-}
+/* Zenith · Logo strip. Per-instance values come from CSS vars on #Zenith-{section.id}. */
 
 .zenith-logos__heading {
-  margin: 0;
-  font-size: var(--z-tfs, var(--z-text-xs));
+  margin: 0 0 var(--z-cgap-m, var(--z-space-3));
+  font-size: var(--z-tfs-m, 1.4rem);
+  line-height: 1.4;
+  text-align: center;
+  color: rgba(var(--color-foreground), var(--z-label-opacity, 0.7));
+}
+
+.zenith-logos--upper .zenith-logos__heading {
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: rgba(var(--color-foreground), 0.6);
+}
+
+.zenith-logos__viewport {
+  overflow: hidden;
 }
 
 .zenith-logos__list {
@@ -18,56 +22,155 @@
   margin: 0;
   padding: 0;
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
-  gap: var(--z-space-5) var(--z-gap-m, var(--z-space-5));
+  gap: var(--z-space-5) var(--z-gap-m, 4rem);
+}
+
+.zenith-logos--align-bottom .zenith-logos__list {
+  align-items: flex-end;
+}
+
+.zenith-logos__item {
+  flex-shrink: 0;
+}
+
+.zenith-logos__link {
+  display: block;
 }
 
 .zenith-logos__item img {
   display: block;
-  height: var(--z-logo-h-m);
+  height: calc(var(--z-logo-h-m) * var(--z-logo-scale, 1));
   width: auto;
   max-width: var(--z-lmw, 16rem);
   object-fit: contain;
+  opacity: var(--z-logo-opacity, 1);
 }
 
-.zenith-logos--mono .zenith-logos__item img {
-  filter: grayscale(1);
-  opacity: 0.7;
-}
+.zenith-logos--white .zenith-logos__item img { filter: brightness(0) invert(1); }
+.zenith-logos--black .zenith-logos__item img { filter: brightness(0); }
+.zenith-logos--grayscale .zenith-logos__item img { filter: grayscale(1); }
 
 .zenith-logos__placeholder {
+  display: block;
   font-family: var(--font-heading-family);
-  font-size: 2rem;
+  font-size: calc(var(--z-logo-h-m) * var(--z-logo-scale, 1));
+  line-height: 1;
+  white-space: nowrap;
   text-transform: uppercase;
   color: rgba(var(--color-foreground), 0.5);
 }
 
+/* ---------- Static layouts (row / wrap / swipe): one list, copies hidden ---------- */
+.zenith-logos__list--copy {
+  display: none;
+}
+
+.zenith-logos__list:not(.zenith-logos__list--copy) {
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: calc(var(--page-width) + 2 * var(--z-gutter, 2rem));
+  margin: 0 auto;
+  padding: 0 var(--z-gutter, 2rem);
+}
+
+/* ---------- Marquee (built once, switched on per breakpoint) ---------- */
+@keyframes zenith-logos-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-25%); }
+}
+
 @media screen and (max-width: 749px) {
-  .zenith-logos__list--m-scroll {
-    flex-wrap: nowrap;
-    justify-content: flex-start;
+  .zenith-logos--m-scroll .zenith-logos__viewport {
     overflow-x: auto;
-    max-width: 100%;
     scrollbar-width: none;
   }
 
-  .zenith-logos__list--m-scroll::-webkit-scrollbar {
+  .zenith-logos--m-scroll .zenith-logos__viewport::-webkit-scrollbar {
     display: none;
   }
 
-  .zenith-logos__list--m-scroll .zenith-logos__item {
+  .zenith-logos--m-scroll .zenith-logos__list:not(.zenith-logos__list--copy) {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    width: max-content;
+    max-width: none;
+  }
+
+  .zenith-logos--m-marquee .zenith-logos__track {
+    display: flex;
+    width: max-content;
+    animation: zenith-logos-marquee var(--z-speed, 30s) linear infinite;
+  }
+
+  .zenith-logos--m-marquee .zenith-logos__list,
+  .zenith-logos--m-marquee .zenith-logos__list:not(.zenith-logos__list--copy) {
+    display: flex;
+    flex-wrap: nowrap;
     flex-shrink: 0;
+    max-width: none;
+    margin: 0;
+    padding: 0 var(--z-gap-m, 4rem) 0 0;
   }
 }
 
 @media screen and (min-width: 750px) {
-  .zenith-logos__item img {
-    height: var(--z-logo-h);
+  .zenith-logos__heading {
+    margin-bottom: var(--z-cgap, var(--z-space-3));
+    font-size: var(--z-tfs, 1.4rem);
   }
 
   .zenith-logos__list {
-    gap: var(--z-space-6) var(--z-gap, var(--z-space-8));
+    gap: var(--z-space-6) var(--z-gap, 4rem);
+  }
+
+  .zenith-logos__item img {
+    height: calc(var(--z-logo-h) * var(--z-logo-scale, 1));
+  }
+
+  .zenith-logos__placeholder {
+    font-size: calc(var(--z-logo-h) * var(--z-logo-scale, 1));
+  }
+
+  .zenith-logos--d-marquee .zenith-logos__track {
+    display: flex;
+    width: max-content;
+    animation: zenith-logos-marquee var(--z-speed, 30s) linear infinite;
+  }
+
+  .zenith-logos--d-marquee .zenith-logos__list,
+  .zenith-logos--d-marquee .zenith-logos__list:not(.zenith-logos__list--copy) {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    max-width: none;
+    margin: 0;
+    padding: 0 var(--z-gap, 4rem) 0 0;
   }
 }
+
+.zenith-logos__viewport:hover .zenith-logos__track,
+.zenith-logos__viewport:focus-within .zenith-logos__track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zenith-logos .zenith-logos__track {
+    display: block;
+    width: auto;
+    animation: none;
+  }
+
+  .zenith-logos .zenith-logos__list--copy {
+    display: none;
+  }
+
+  .zenith-logos .zenith-logos__list:not(.zenith-logos__list--copy) {
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: calc(var(--page-width) + 2 * var(--z-gutter, 2rem));
+    margin: 0 auto;
+    padding: 0 var(--z-gutter, 2rem);
+  }
+}
+

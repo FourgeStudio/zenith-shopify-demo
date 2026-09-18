@@ -1,15 +1,27 @@
+/* Zenith · Featured product. Per-instance values come from CSS vars on #Zenith-{section.id}. */
+.zenith-fp {
+  background: var(--z-sec-bg-m, var(--z-sec-bg, transparent));
+}
+
 .zenith-fp__grid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .zenith-fp--m-image-first .zenith-fp__media-wrap {
   order: -1;
 }
 
+/* ---------- Content panel ---------- */
 .zenith-fp__content {
   display: flex;
   align-items: center;
+  min-width: 0;
+  padding: var(--z-cpd-m, var(--z-space-5));
+}
+
+.zenith-fp__content.gradient {
+  background: var(--z-panel-m, var(--z-panel, var(--gradient-background)));
 }
 
 .zenith-fp__content-inner {
@@ -18,21 +30,35 @@
   align-items: flex-start;
   gap: var(--z-cgap-m, var(--z-space-3));
   width: 100%;
-  max-width: var(--z-cmw, 56rem);
-  padding: var(--z-cpd-m, var(--z-space-5));
+  max-width: var(--z-cmw, 50rem);
 }
 
 .zenith-fp__badge {
-  padding: var(--z-space-1) var(--z-space-3);
-  font-size: var(--z-text-xs);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  display: inline-flex;
+  align-items: center;
+  padding: calc(var(--z-space-1) * 1.5) var(--z-space-3);
+  border-radius: 999px;
+  background: var(--z-badge-bg, var(--z-dawn-gold));
+  color: var(--z-badge-fg, var(--z-obsidian));
+  font-family: var(--font-body-family);
+  font-size: var(--z-bfs-m, 1.4rem);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.zenith-fp__badge--media {
+  position: absolute;
+  top: var(--z-space-3);
+  left: var(--z-space-2);
+  z-index: 2;
 }
 
 .zenith-fp__title {
   margin: 0;
-  font-size: var(--z-hfs-m, var(--z-h2));
+  font-size: var(--z-hfs-m, 3.2rem);
+  color: rgb(var(--color-foreground));
 }
 
 .zenith-fp__title--uppercase {
@@ -41,87 +67,164 @@
 
 .zenith-fp__price {
   margin: 0;
-  font-size: var(--z-pfs-m, 2rem);
-  font-weight: 600;
+  font-family: var(--font-body-family);
+  font-size: var(--z-pfs-m, 2.2rem);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0;
+  color: var(--z-price, var(--z-dawn-gold));
 }
 
 .zenith-fp__price s {
   margin-left: var(--z-space-2);
-  font-size: 1.6rem;
-  font-weight: 400;
-  opacity: 0.6;
+  font-size: 0.7em;
+  color: rgba(var(--color-foreground), 0.6);
 }
 
 .zenith-fp__benefits,
 .zenith-fp__trust {
   list-style: none;
-  margin: 0;
   padding: 0;
 }
 
 .zenith-fp__benefits {
   display: flex;
   flex-direction: column;
-  gap: var(--z-space-3);
-  font-size: var(--z-tfs-m, var(--z-text-sm));
+  gap: var(--z-space-2);
+  margin: var(--z-space-1) 0 0;
+  font-size: var(--z-tfs-m, 1.4rem);
+  line-height: 1.5;
+  color: rgb(var(--color-foreground));
 }
 
-.zenith-fp__benefits li,
-.zenith-fp__trust li {
+.zenith-fp__benefit {
   display: flex;
   align-items: flex-start;
   gap: var(--z-space-2);
 }
 
-.zenith-fp__benefits .zenith-icon {
-  width: 20px;
-  height: 20px;
-  color: var(--z-gold);
+.zenith-fp__check {
+  flex-shrink: 0;
+  width: 1.8rem;
+  height: 1.8rem;
+  margin-top: calc((1.5em - 1.8rem) / 2);
+  color: var(--z-check, var(--z-dawn-gold));
+}
+
+.zenith-fp__check path {
+  stroke: rgb(var(--color-background));
 }
 
 .zenith-fp__actions {
   width: 100%;
-  max-width: 40rem;
-  margin-top: var(--z-space-2);
+  margin-top: var(--z-space-3);
+}
+
+.zenith-fp__actions product-form {
+  display: block;
+}
+
+.zenith-fp__actions .button.zenith-fp__atc {
+  width: 100%;
 }
 
 .zenith-fp__trust {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--z-space-3) var(--z-space-5);
-  padding-top: var(--z-space-4);
-  border-top: 1px solid rgba(var(--color-foreground), 0.15);
+  align-items: center;
+  gap: calc(var(--z-space-1) * 1.5) var(--z-space-2);
   width: 100%;
-  font-size: var(--z-text-xs);
+  margin: var(--z-space-2) 0 0;
+  font-size: var(--z-trfs-m, 1rem);
+  line-height: 1.3;
+  color: rgb(var(--color-foreground));
 }
 
+.zenith-fp__trust--m-left { justify-content: flex-start; }
+.zenith-fp__trust--m-center { justify-content: center; }
+
 .zenith-fp__trust li {
+  display: inline-flex;
   align-items: center;
+  gap: calc(var(--z-space-1) * 1.5);
 }
 
 .zenith-fp__trust .zenith-icon {
-  width: 18px;
-  height: 18px;
+  width: 1.6rem;
+  height: 1.6rem;
+  color: var(--z-trust-icon, var(--z-dawn-gold));
 }
 
+/* ---------- Media ---------- */
 .zenith-fp__media-wrap {
-  display: flex;
+  position: relative;
+  min-width: 0;
 }
 
 .zenith-fp__media {
   width: 100%;
-  height: var(--z-mh-m, 36rem);
+  aspect-ratio: 1 / 1;
   background: transparent;
 }
 
-.zenith-fp__media img {
+.zenith-fp--m-portrait .zenith-fp__media { aspect-ratio: 4 / 5; }
+.zenith-fp--m-landscape .zenith-fp__media { aspect-ratio: 4 / 3; }
+
+.zenith-fp--m-fixed .zenith-fp__media {
+  aspect-ratio: auto;
+  height: var(--z-mh-m, 36rem);
+}
+
+.zenith-fp--fit-contain .zenith-fp__media > img {
   object-fit: contain;
-  padding: var(--z-ipd, var(--z-space-6));
+  padding: var(--z-ipd, 0);
+}
+
+/* Product image slider (shared zenith-carousel), dots over the image */
+.zenith-fp .zenith-fp__track {
+  gap: 0;
+}
+
+.zenith-fp .zenith-fp__slide {
+  flex: 0 0 100%;
+}
+
+.zenith-fp .zenith-carousel__controls {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: var(--z-space-5);
+  z-index: 2;
+  justify-content: center;
+  margin: 0;
+  pointer-events: none;
+}
+
+.zenith-fp .zenith-carousel__dots {
+  gap: calc(var(--z-space-1) * 1.5);
+  pointer-events: auto;
+}
+
+.zenith-fp .zenith-carousel__dot {
+  background: rgba(var(--z-pager-rgb, 41, 72, 80), 0.12);
+}
+
+.zenith-fp .zenith-carousel__dot[aria-current='true'] {
+  width: calc(var(--z-space-6) + var(--z-space-2));
+  background: rgba(var(--z-pager-rgb, 41, 72, 80), 0.56);
 }
 
 @media screen and (min-width: 750px) {
+  .zenith-fp {
+    background: var(--z-sec-bg, transparent);
+  }
+
   .zenith-fp__grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) var(--z-mw, 48%);
+  }
+
+  .zenith-fp--image-left .zenith-fp__grid {
+    grid-template-columns: var(--z-mw, 48%) minmax(0, 1fr);
   }
 
   .zenith-fp--m-image-first .zenith-fp__media-wrap {
@@ -133,32 +236,58 @@
   }
 
   .zenith-fp__content {
-    justify-content: flex-end;
+    padding: var(--z-cpd, var(--z-space-6));
   }
 
-  .zenith-fp--image-left .zenith-fp__content {
-    justify-content: flex-start;
+  .zenith-fp__content.gradient {
+    background: var(--z-panel, var(--gradient-background));
   }
 
   .zenith-fp__content-inner {
-    gap: var(--z-cgap, var(--z-space-4));
-    padding: var(--z-cpd, var(--z-space-8));
+    gap: var(--z-cgap, var(--z-space-3));
+  }
+
+  .zenith-fp__badge {
+    padding: var(--z-space-2) var(--z-space-3);
+    font-size: var(--z-bfs, 1.2rem);
   }
 
   .zenith-fp__title {
-    font-size: var(--z-hfs, var(--z-h2));
+    font-size: var(--z-hfs, 3.6rem);
   }
 
   .zenith-fp__price {
-    font-size: var(--z-pfs, 2.4rem);
+    font-size: var(--z-pfs, 2.2rem);
   }
 
   .zenith-fp__benefits {
-    font-size: var(--z-tfs, var(--z-text-sm));
+    font-size: var(--z-tfs, 1.4rem);
   }
 
-  .zenith-fp__media {
-    height: auto;
-    min-height: var(--z-mmh, 56rem);
+  .zenith-fp__trust {
+    font-size: var(--z-trfs, 1rem);
+  }
+
+  .zenith-fp__trust--left { justify-content: flex-start; }
+  .zenith-fp__trust--center { justify-content: center; }
+
+  .zenith-fp__media-wrap {
+    min-height: var(--z-mmh, 54rem);
+  }
+
+  .zenith-fp .zenith-fp__media-wrap > .zenith-fp__media,
+  .zenith-fp .zenith-fp__media-wrap > .zenith-fp__carousel {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto;
+  }
+
+  .zenith-fp .zenith-fp__carousel .zenith-fp__track,
+  .zenith-fp .zenith-fp__carousel .zenith-fp__slide,
+  .zenith-fp .zenith-fp__carousel .zenith-fp__media {
+    height: 100%;
+    aspect-ratio: auto;
   }
 }

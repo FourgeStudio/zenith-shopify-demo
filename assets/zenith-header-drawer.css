@@ -1,17 +1,24 @@
-/* Zenith mobile menu drawer — layered on top of component-menu-drawer.css */
+/* Zenith menu drawer — layered on top of component-menu-drawer.css.
+   Per-instance values (--zd-*, --z-btnfs*) are set on the header wrapper #Zenith-{{ section.id }}. */
+
+.menu-drawer.zenith-drawer,
+.zenith-drawer .menu-drawer__submenu {
+  background: var(--zd-bg, rgb(var(--color-background)));
+}
 
 .zenith-drawer .menu-drawer__navigation-container {
   grid-template-rows: 1fr auto;
 }
 
+/* Stretches to fill the 1fr grid row (CTA pinned above the footer); grows and scrolls on short
+   viewports. No min-height:100% — it disables the row's content minimum and lets the CTA overlap the footer. */
 .zenith-drawer__main {
   display: flex;
   flex-direction: column;
-  min-height: 100%;
 }
 
 .zenith-drawer .menu-drawer__navigation {
-  padding: var(--z-space-3) var(--z-space-5) 0;
+  padding: var(--zd-pt, 2rem) var(--zd-px, 2rem) 0;
 }
 
 .zenith-drawer .menu-drawer__menu > li {
@@ -19,20 +26,24 @@
 }
 
 .zenith-drawer--dividers .menu-drawer__menu > li:not(:last-child) {
-  border-bottom: 1px solid rgba(var(--color-foreground), 0.12);
+  border-bottom: 1px solid var(--zd-divider, rgba(var(--color-foreground), 0.1));
 }
 
-.zenith-drawer .menu-drawer__menu-item {
+/* (0,3,0) beats Dawn's `.menu-drawer summary.menu-drawer__menu-item` padding */
+.menu-drawer.zenith-drawer .menu-drawer__menu-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 48px;
-  padding: var(--z-space-3) 0;
+  gap: var(--z-space-3);
+  min-height: var(--zd-item-h, 4.7rem);
+  padding: 0;
   font-family: var(--font-body-family);
-  font-size: 1.5rem;
+  font-size: var(--zd-fs, 1.6rem);
   font-weight: 400;
-  letter-spacing: 0.01em;
+  line-height: 1.25;
+  letter-spacing: 0;
   color: rgb(var(--color-foreground));
+  background-color: transparent;
 }
 
 .zenith-drawer--uppercase .menu-drawer__menu-item,
@@ -40,8 +51,8 @@
   text-transform: uppercase;
 }
 
-.zenith-drawer .menu-drawer__menu-item--active,
-.zenith-drawer .menu-drawer__menu-item:hover {
+.menu-drawer.zenith-drawer .menu-drawer__menu-item--active,
+.menu-drawer.zenith-drawer .menu-drawer__menu-item:hover {
   background-color: transparent;
   color: var(--z-gold);
 }
@@ -51,15 +62,19 @@
 }
 
 .zenith-drawer__chevron {
-  width: 20px;
-  height: 20px;
+  width: 2.8rem;
+  height: 2.8rem;
   position: static;
   transform: none;
 }
 
+.zenith-drawer .menu-drawer__menu-item > .zenith-drawer__chevron {
+  margin-right: -0.2rem;
+}
+
 /* Submenu panel */
 .zenith-drawer .menu-drawer__submenu {
-  padding: var(--z-space-3) var(--z-space-5) 0;
+  padding: var(--zd-pt, 2rem) var(--zd-px, 2rem) 0;
 }
 
 .zenith-drawer .menu-drawer__inner-submenu {
@@ -67,68 +82,41 @@
   overflow-y: auto;
 }
 
-.zenith-drawer .menu-drawer__close-button {
+.menu-drawer.zenith-drawer .menu-drawer__close-button {
   display: flex;
   align-items: center;
   gap: var(--z-space-2);
   width: 100%;
-  min-height: 48px;
+  min-height: var(--zd-item-h, 4.7rem);
   margin: 0;
-  padding: var(--z-space-3) 0;
+  padding: 0;
   font-family: var(--font-body-family);
-  font-size: 1.3rem;
+  font-size: calc(var(--zd-fs, 1.6rem) - 0.2rem);
   font-weight: 500;
   color: var(--z-gold);
-  border-bottom: 1px solid rgba(var(--color-foreground), 0.12);
+  background-color: transparent;
+  border-bottom: 1px solid var(--zd-divider, rgba(var(--color-foreground), 0.1));
 }
 
-.zenith-drawer .menu-drawer__submenu .menu-drawer__menu-item {
-  padding-left: 0;
+.zenith-drawer .menu-drawer__close-button .zenith-drawer__chevron {
+  margin-left: calc(var(--z-space-2) * -1);
 }
 
-/* CTA */
+/* CTA (zenith-button) */
 .zenith-drawer__cta-wrap {
   margin-top: auto;
-  padding: var(--z-space-6) var(--z-space-5) var(--z-space-5);
+  padding: var(--z-space-6) var(--zd-px, 2rem) var(--zd-px, 2rem);
 }
 
-.zenith-drawer__cta {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--z-space-3);
-  min-height: 48px;
-  padding: var(--z-space-2) var(--z-space-5);
-  font-family: var(--font-heading-family);
-  font-size: 2.4rem;
-  line-height: 1;
-  text-decoration: none;
-  color: var(--z-obsidian);
-  transition: filter 0.2s ease;
-}
-
-.zenith-drawer__cta--gradient {
-  background: linear-gradient(90deg, var(--z-dawn-gold), var(--z-gold));
-}
-
-.zenith-drawer__cta--solid {
-  background: var(--z-gold);
-}
-
-.zenith-drawer__cta:hover {
-  filter: brightness(1.06);
-}
-
-.zenith-drawer__cta-icon {
-  width: 16px;
-  height: 16px;
-  stroke-width: 2;
+.zenith-drawer__cta--chevron_right .zenith-btn__icon {
+  width: 0.8em;
+  height: 0.8em;
 }
 
 /* Footer */
-.zenith-drawer .zenith-drawer__footer {
-  padding: var(--z-space-5);
-  background-color: rgba(var(--color-foreground), 0.04);
+.menu-drawer.zenith-drawer .zenith-drawer__footer {
+  padding: var(--zd-px, 2rem);
+  background: var(--zd-footer-bg, rgba(var(--color-foreground), 0.04));
 }
 
 .zenith-drawer__footer-top {
@@ -141,45 +129,70 @@
 .zenith-drawer__footer-info {
   display: flex;
   flex-direction: column;
-  gap: var(--z-space-4);
+  align-items: flex-start;
+  gap: var(--z-space-3);
   min-width: 0;
 }
 
-.zenith-drawer .zenith-drawer__social {
+/* Social: 44px tap targets, glyphs 36px apart, top edge aligned with the badge */
+.menu-drawer.zenith-drawer .zenith-drawer__social {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   justify-content: flex-start;
-  gap: var(--z-space-2);
-  margin: 0 0 0 -1rem;
+  gap: 0;
+  margin: -1.1rem 0 -1.3rem -1.1rem;
+  padding: 0;
+  list-style: none;
 }
 
-.zenith-drawer__social .list-social__link {
-  padding: 1rem;
+.zenith-drawer__social .list-social__item + .list-social__item {
+  margin-left: -0.8rem;
+}
+
+.menu-drawer.zenith-drawer .list-social__link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.4rem;
+  height: 4.4rem;
+  padding: 0;
   color: rgb(var(--color-foreground));
 }
 
 .zenith-drawer__social .svg-wrapper,
-.zenith-drawer__social svg {
-  width: 18px;
-  height: 18px;
+.zenith-drawer__social .icon {
+  width: 2.2rem;
+  height: 2.2rem;
 }
 
 .zenith-drawer__email {
   display: inline-flex;
   align-items: center;
   gap: var(--z-space-2);
-  font-size: 1.4rem;
+  /* 44px tap target without changing layout */
+  padding: var(--z-space-3) 0;
+  margin: calc(var(--z-space-3) * -1) 0;
+  font-size: var(--zd-email-fs, 1.4rem);
+  line-height: 1.43;
   color: rgb(var(--color-foreground));
   text-decoration: none;
 }
 
-.zenith-drawer__email .zenith-icon {
-  width: 18px;
-  height: 18px;
+.zenith-drawer__email:hover span {
+  text-decoration: underline;
+}
+
+.zenith-drawer__email-icon {
+  width: 1.4rem;
+  height: 1.4rem;
+  flex-shrink: 0;
 }
 
 .zenith-drawer__payments-image {
   display: block;
-  width: 100%;
-  max-width: 24rem;
+  width: var(--zd-pay-w, 23rem);
+  max-width: 100%;
   height: auto;
 }
 
@@ -199,25 +212,25 @@
 
 .zenith-drawer__badge {
   flex-shrink: 0;
-  width: 88px;
+  width: var(--zd-badge-w, 8.3rem);
   height: auto;
 }
 
 .zenith-drawer__copyright {
-  margin: var(--z-space-5) 0 0;
+  margin: var(--z-space-4) 0 0;
   padding-top: var(--z-space-4);
-  border-top: 1px solid rgba(var(--color-foreground), 0.25);
-  font-size: 1.2rem;
-  color: rgba(var(--color-foreground), 0.85);
+  border-top: 1px solid var(--zd-footer-divider, rgba(var(--color-foreground), 0.45));
+  font-size: var(--zd-copy-fs, 1.2rem);
+  line-height: 1.5;
+  color: rgb(var(--color-foreground));
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .zenith-drawer__cta {
-    transition: none;
-  }
+/* Page overlay beside the desktop drawer: dark veil instead of Dawn's foreground tint */
+.zenith-header .header__icon--menu[aria-expanded='true']::before {
+  background: rgba(var(--color-shadow), 0.6);
 }
 
-/* Header bar while the drawer is open (mobile): logo left, icons, close on the right */
+/* Header bar while the drawer is open (mobile): logo left, then account/cart, close on the right */
 @media screen and (max-width: 749px) {
   .section-header.menu-open .header {
     grid-template-areas: 'heading icons left-icons' !important;
@@ -229,16 +242,20 @@
     justify-self: start;
   }
 
+  .section-header.menu-open .header__heading-link {
+    margin-left: var(--z-space-1);
+  }
+
   .section-header.menu-open .header__search {
     display: none !important;
   }
 
   .section-header.menu-open header-drawer {
     grid-area: left-icons;
-    margin-left: 0;
+    margin-left: calc(var(--zh-icon-gap, 3.6rem) + 0.2rem - 4.4rem);
   }
 
   .section-header.menu-open .header__icon--menu {
-    margin-right: -1.2rem;
+    margin-right: 0;
   }
 }

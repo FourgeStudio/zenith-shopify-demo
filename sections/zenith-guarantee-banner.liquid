@@ -2,15 +2,42 @@
 {%- capture extra -%}
   --z-badge-w: {{ section.settings.image_width }}px;
   --z-badge-w-m: {{ section.settings.image_width_mobile }}px;
+  --z-gb-inset: {{ section.settings.badge_inset }}px;
+  --z-gb-over: {{ section.settings.band_overhang }}px;
+  --z-gb-bsp-m: {{ section.settings.badge_spacing_mobile }}px;
+  --z-gb-border: {{ section.settings.border_color }};
+  --z-gb-text-a: {{ section.settings.text_opacity | divided_by: 100.0 }};
+  --z-gb-text-a-m: {{ section.settings.text_opacity_mobile | divided_by: 100.0 }};
 {%- endcapture -%}
 {%- render 'zenith-section-style', section: section, extra: extra -%}
 
 <section
   id="Zenith-{{ section.id }}"
-  class="zenith-section zenith-guarantee color-{{ section.settings.color_scheme }} gradient{% if section.settings.image_position == 'left' %} zenith-guarantee--image-left{% endif %}"
+  class="zenith-section zenith-guarantee color-{{ section.settings.color_scheme }} gradient zenith-guarantee--{{ section.settings.desktop_layout }}{% if section.settings.image_position == 'left' %} zenith-guarantee--image-left{% endif %} zenith-guarantee--m-badge-{{ section.settings.badge_align_mobile }}"
 >
   <div class="page-width">
-    <div class="zenith-guarantee__inner">
+    <div class="zenith-guarantee__band color-{{ section.settings.band_color_scheme }}">
+      <div class="zenith-guarantee__badge">
+        {%- if section.settings.image != blank -%}
+          {%- comment -%} Seal repeats the heading, so it is decorative unless the image has its own alt text {%- endcomment -%}
+          {{
+            section.settings.image
+            | image_url: width: 800
+            | image_tag:
+              loading: 'lazy',
+              widths: '160, 240, 320, 480, 600, 800',
+              sizes: '(min-width: 750px) 400px, 160px',
+              alt: section.settings.image.alt
+          }}
+        {%- else -%}
+          <div class="zenith-guarantee__badge-placeholder" aria-hidden="true">
+            <span>Money-Back</span>
+            <strong>Zenith</strong>
+            <span>Guarantee</span>
+          </div>
+        {%- endif -%}
+      </div>
+
       <div class="zenith-guarantee__content">
         {%- render 'zenith-section-heading',
           eyebrow: section.settings.eyebrow,
@@ -21,30 +48,17 @@
           class: 'zenith-guarantee__heading'
         -%}
         {%- if section.settings.text != blank -%}
-          <div class="zenith-guarantee__text zenith-rte">{{ section.settings.text }}</div>
+          <div class="zenith-guarantee__text zenith-rte">
+            {{- section.settings.text | replace: '[customers]', settings.customer_count -}}
+          </div>
         {%- endif -%}
         {%- if section.settings.button_label != blank -%}
-          <a
-            {% if section.settings.button_link != blank %}href="{{ section.settings.button_link }}"{% else %}role="link" aria-disabled="true"{% endif %}
-            class="button"
-          >
-            {{- section.settings.button_label | escape -}}
-          </a>
-        {%- endif -%}
-      </div>
-
-      <div class="zenith-guarantee__badge">
-        {%- if section.settings.image != blank -%}
-          {{
-            section.settings.image
-            | image_url: width: 800
-            | image_tag: loading: 'lazy', widths: '200, 400, 600, 800', sizes: '(min-width: 750px) 320px, 200px'
-          }}
-        {%- else -%}
-          <div class="zenith-guarantee__badge-placeholder" aria-hidden="true">
-            <span>30-Day</span>
-            <strong>Zenith</strong>
-            <span>Guarantee</span>
+          <div class="zenith-guarantee__actions">
+            {%- render 'zenith-button',
+              label: section.settings.button_label,
+              link: section.settings.button_link,
+              style: section.settings.button_style
+            -%}
           </div>
         {%- endif -%}
       </div>
@@ -58,10 +72,7 @@
   "tag": "div",
   "class": "section",
   "disabled_on": {
-    "groups": [
-      "header",
-      "footer"
-    ]
+    "groups": ["header", "footer"]
   },
   "settings": [
     {
@@ -83,7 +94,7 @@
       "type": "richtext",
       "id": "text",
       "label": "Text",
-      "default": "<p>We stand behind every Zenith formula with complete confidence. We know different issues take different times to fix, which is why we give you 30 days for skincare and 60 days for hair care to see real changes.</p><p>If you don't see visible improvements by then, simply contact us. We'll refund your purchase, just show us proof. Because real results speak louder than promises.</p>"
+      "default": "<p>We stand behind every Zenith formula with complete confidence. Every order carries the Zenith Money-Back Guarantee, so you can try it on your own terms.</p><p>Not happy with your purchase? Simply contact us and we'll refund it. No hassle. Just show us proof. Full terms on our Refunds and Returns page.</p>"
     },
     {
       "type": "text",
@@ -107,29 +118,55 @@
     },
     {
       "type": "select",
+      "id": "desktop_layout",
+      "label": "Desktop layout",
+      "default": "band",
+      "options": [
+        { "value": "band", "label": "Full-width band with rounded badge end" },
+        { "value": "card", "label": "Bordered card" }
+      ]
+    },
+    {
+      "type": "select",
       "id": "image_position",
       "label": "Desktop badge position",
       "default": "right",
       "options": [
-        {
-          "value": "left",
-          "label": "Left"
-        },
-        {
-          "value": "right",
-          "label": "Right"
-        }
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
       ]
     },
     {
       "type": "range",
       "id": "image_width",
-      "label": "Badge width",
+      "label": "Desktop badge width",
       "min": 120,
       "max": 400,
       "step": 10,
       "unit": "px",
-      "default": 260
+      "default": 290
+    },
+    {
+      "type": "range",
+      "id": "badge_inset",
+      "label": "Space around badge",
+      "info": "Band height is at least badge width plus this space on both sides.",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "band_overhang",
+      "label": "Band extends past page width",
+      "info": "Band layout: how far the rounded end reaches beyond the page width.",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 16
     },
     {
       "type": "range",
@@ -139,17 +176,27 @@
       "max": 1000,
       "step": 20,
       "unit": "px",
-      "default": 720
+      "default": 700
     },
     {
       "type": "range",
       "id": "content_gap",
-      "label": "Space between content items",
+      "label": "Space between heading, text and button",
       "min": 4,
       "max": 64,
       "step": 4,
       "unit": "px",
       "default": 24
+    },
+    {
+      "type": "range",
+      "id": "content_padding",
+      "label": "Band inner top/bottom padding",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
     },
     {
       "type": "header",
@@ -158,8 +205,43 @@
     {
       "type": "color_scheme",
       "id": "color_scheme",
-      "label": "Color scheme",
+      "label": "Section color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "band_color_scheme",
+      "label": "Band / card color scheme",
       "default": "scheme-4"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Band / card border color",
+      "default": "#363636"
+    },
+    {
+      "type": "range",
+      "id": "text_opacity",
+      "label": "Text opacity",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "default": "gold",
+      "options": [
+        { "value": "gold", "label": "Gold gradient" },
+        { "value": "dark", "label": "Dark" },
+        { "value": "outline", "label": "Outline" },
+        { "value": "light", "label": "Light" },
+        { "value": "scheme", "label": "Color scheme button" }
+      ]
     },
     {
       "type": "header",
@@ -173,7 +255,7 @@
       "max": 120,
       "step": 2,
       "unit": "px",
-      "default": 44
+      "default": 40
     },
     {
       "type": "checkbox",
@@ -189,7 +271,7 @@
       "max": 20,
       "step": 1,
       "unit": "px",
-      "default": 12
+      "default": 14
     },
     {
       "type": "range",
@@ -199,7 +281,17 @@
       "max": 24,
       "step": 1,
       "unit": "px",
-      "default": 14
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "label": "Button text size",
+      "min": 14,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 22
     },
     {
       "type": "header",
@@ -223,27 +315,77 @@
       "max": 20,
       "step": 1,
       "unit": "px",
-      "default": 13
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "text_opacity_mobile",
+      "label": "Text opacity",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 70
+    },
+    {
+      "type": "range",
+      "id": "button_font_size_mobile",
+      "label": "Button text size",
+      "min": 14,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 20
     },
     {
       "type": "range",
       "id": "image_width_mobile",
       "label": "Badge width",
-      "min": 80,
+      "min": 40,
       "max": 400,
-      "step": 10,
+      "step": 4,
       "unit": "px",
-      "default": 200
+      "default": 80
+    },
+    {
+      "type": "select",
+      "id": "badge_align_mobile",
+      "label": "Badge alignment",
+      "default": "left",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "badge_spacing_mobile",
+      "label": "Space below badge",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 12
     },
     {
       "type": "range",
       "id": "content_gap_mobile",
-      "label": "Space between content items",
+      "label": "Space between heading, text and button",
       "min": 4,
       "max": 48,
       "step": 4,
       "unit": "px",
-      "default": 16
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "content_padding_mobile",
+      "label": "Card inner padding",
+      "min": 0,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 20
     },
     {
       "type": "header",
@@ -257,7 +399,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "default": 64
+      "default": 48
     },
     {
       "type": "range",
@@ -267,7 +409,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "default": 64
+      "default": 48
     },
     {
       "type": "range",
@@ -277,7 +419,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "default": 48
+      "default": 20
     },
     {
       "type": "range",
@@ -287,7 +429,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "default": 48
+      "default": 20
     }
   ],
   "presets": [

@@ -1,14 +1,32 @@
+/* Zenith · FAQ — per-instance values are CSS vars on #Zenith-{section.id}. Mobile first. */
+
 .zenith-faq__inner {
-  max-width: var(--z-faq-w);
+  max-width: var(--z-faq-w, 72rem);
   margin: 0 auto;
 }
 
-.zenith-faq__list {
-  border-top: 1px solid rgba(var(--color-foreground), 0.15);
+.zenith-faq .zenith-subheading {
+  color: rgba(var(--color-foreground), var(--z-sub-a-m, 1));
 }
 
+/* Mobile heading alignment (setting heading_alignment_mobile) overrides the desktop one below 750px. */
+.zenith-faq--m-left .zenith-heading {
+  align-items: flex-start;
+  text-align: left;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.zenith-faq--m-center .zenith-heading {
+  align-items: center;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Divider above every question (none below the last), per design. */
 .zenith-faq__item {
-  border-bottom: 1px solid rgba(var(--color-foreground), 0.15);
+  border-top: 1px solid rgba(var(--color-foreground), var(--z-faq-div, 0.1));
 }
 
 .zenith-faq__question {
@@ -17,9 +35,13 @@
   justify-content: space-between;
   gap: var(--z-space-4);
   min-height: 44px;
-  padding: var(--z-ipad-m, var(--z-space-4)) 0;
-  font-size: var(--z-ttfs-m, 1.6rem);
-  font-weight: 500;
+  padding: var(--z-ipad-m, var(--z-space-3)) 0;
+  font-family: var(--font-heading-family);
+  font-weight: var(--font-heading-weight, 400);
+  font-size: var(--z-ttfs-m, 2.4rem);
+  line-height: 1.2;
+  letter-spacing: 0;
+  color: rgb(var(--color-foreground));
   cursor: pointer;
   list-style: none;
 }
@@ -28,16 +50,29 @@
   display: none;
 }
 
+.zenith-faq__question::marker {
+  content: '';
+}
+
 .zenith-faq__question:focus-visible {
   outline: 2px solid rgb(var(--color-foreground));
   outline-offset: 2px;
 }
 
+/* One "+" glyph; rotated 45° it becomes the gold "×" of the open state. */
 .zenith-faq__icon {
-  width: 20px;
-  height: 20px;
-  color: var(--z-gold);
-  transition: transform 0.2s ease;
+  display: block;
+  flex-shrink: 0;
+  width: var(--z-icon-m, 20px);
+  height: var(--z-icon-m, 20px);
+  color: var(--z-faq-icon, var(--z-dawn-gold));
+  transition: transform var(--duration-short, 0.2s) ease;
+}
+
+.zenith-faq__icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .zenith-faq__item[open] .zenith-faq__icon {
@@ -45,10 +80,10 @@
 }
 
 .zenith-faq__answer {
-  padding: 0 0 var(--z-space-5);
-  font-size: var(--z-tfs-m, var(--z-text-sm));
-  line-height: 1.6;
-  color: rgba(var(--color-foreground), 0.8);
+  padding: 0 0 var(--z-cgap-m, var(--z-space-5));
+  font-size: var(--z-tfs-m, 1.6rem);
+  line-height: 1.5;
+  color: rgba(var(--color-foreground), var(--z-faq-ans, 0.7));
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -58,12 +93,37 @@
 }
 
 @media screen and (min-width: 750px) {
+  .zenith-faq .zenith-subheading {
+    color: rgba(var(--color-foreground), var(--z-sub-a, 1));
+  }
+
+  /* Restore the desktop alignment chosen in heading_alignment. */
+  .zenith-faq--m-left .zenith-heading--center {
+    align-items: center;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .zenith-faq--m-center .zenith-heading--left {
+    align-items: flex-start;
+    text-align: left;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
   .zenith-faq__question {
-    padding: var(--z-ipad, var(--z-space-4)) 0;
-    font-size: var(--z-ttfs, 1.8rem);
+    padding: var(--z-ipad, var(--z-space-3)) 0;
+    font-size: var(--z-ttfs, 2.4rem);
+  }
+
+  .zenith-faq__icon {
+    width: var(--z-icon, 20px);
+    height: var(--z-icon, 20px);
   }
 
   .zenith-faq__answer {
-    font-size: var(--z-tfs, var(--z-text-sm));
+    padding-bottom: var(--z-cgap, var(--z-space-5));
+    font-size: var(--z-tfs, 1.6rem);
   }
 }

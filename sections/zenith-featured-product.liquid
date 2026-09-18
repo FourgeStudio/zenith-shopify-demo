@@ -1,27 +1,83 @@
 {{ 'zenith-featured-product.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
-{%- render 'zenith-section-style', section: section -%}
-
-{%- assign fp_product = section.settings.product -%}
+{%- liquid
+  assign s = section.settings
+  assign fp_product = s.product
+  assign btn_style = s.button_style | default: 'gold'
+  assign btn_icon = s.button_icon | default: 'cart'
+  assign use_slides = false
+  assign single = s.image
+  if single == blank and fp_product != blank
+    assign product_images = fp_product.media | where: 'media_type', 'image'
+    if s.show_media_pager and product_images.size > 1
+      assign use_slides = true
+    else
+      assign single = fp_product.featured_media.preview_image
+    endif
+  endif
+  assign media_sizes = '(min-width: 750px) ' | append: s.media_width | append: 'vw, 100vw'
+-%}
+{%- if use_slides -%}
+  <script src="{{ 'zenith-carousel.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+{%- capture extra -%}
+  --z-bfs: {{ s.badge_font_size }}px;
+  --z-bfs-m: {{ s.badge_font_size_mobile }}px;
+  --z-trfs: {{ s.trust_font_size }}px;
+  --z-trfs-m: {{ s.trust_font_size_mobile }}px;
+  {%- if s.section_background != blank %}
+  --z-sec-bg: {{ s.section_background }};
+  {%- endif -%}
+  {%- if s.section_background_mobile != blank %}
+  --z-sec-bg-m: {{ s.section_background_mobile }};
+  {%- endif -%}
+  {%- if s.panel_background != blank %}
+  --z-panel: {{ s.panel_background }};
+  {%- endif -%}
+  {%- if s.panel_background_mobile != blank %}
+  --z-panel-m: {{ s.panel_background_mobile }};
+  {%- endif -%}
+  {%- if s.badge_background != blank %}
+  --z-badge-bg: {{ s.badge_background }};
+  {%- endif -%}
+  {%- if s.badge_text_color != blank %}
+  --z-badge-fg: {{ s.badge_text_color }};
+  {%- endif -%}
+  {%- if s.price_color != blank %}
+  --z-price: {{ s.price_color }};
+  {%- endif -%}
+  {%- if s.check_color != blank %}
+  --z-check: {{ s.check_color }};
+  {%- endif -%}
+  {%- if s.icon_color != blank %}
+  --z-trust-icon: {{ s.icon_color }};
+  {%- endif -%}
+  {%- if s.pager_color != blank %}
+  --z-pager-rgb: {{ s.pager_color.red }}, {{ s.pager_color.green }}, {{ s.pager_color.blue }};
+  {%- endif %}
+{%- endcapture -%}
+{%- render 'zenith-section-style', section: section, extra: extra -%}
 
 <section
   id="Zenith-{{ section.id }}"
-  class="zenith-section zenith-fp{% if section.settings.image_position == 'left' %} zenith-fp--image-left{% endif %}{% if section.settings.mobile_image_first %} zenith-fp--m-image-first{% endif %}"
+  class="zenith-section zenith-fp zenith-fp--fit-{{ s.image_fit }} zenith-fp--m-{{ s.media_ratio_mobile }}{% if s.image_position == 'left' %} zenith-fp--image-left{% endif %}{% if s.mobile_image_first %} zenith-fp--m-image-first{% endif %}"
 >
-  <div class="{% unless section.settings.full_width %}page-width{% endunless %}">
+  <div class="{% unless s.full_width %}page-width{% endunless %}">
     <div class="zenith-fp__grid">
-      <div class="zenith-fp__content color-{{ section.settings.color_scheme }} gradient">
+      <div class="zenith-fp__content color-{{ s.color_scheme }} gradient">
         <div class="zenith-fp__content-inner">
-          {%- if section.settings.badge != blank -%}
-            <span class="zenith-fp__badge color-{{ section.settings.badge_color_scheme }}">{{ section.settings.badge | escape }}</span>
+          {%- if s.badge != blank -%}
+            <span class="zenith-fp__badge{% if s.badge_position_mobile == 'image' %} zenith-hide-mobile{% endif %}">
+              {{- s.badge | escape -}}
+            </span>
           {%- endif -%}
 
-          <h2 class="zenith-fp__title{% if section.settings.heading_uppercase %} zenith-fp__title--uppercase{% endif %}">
-            {%- if fp_product != blank -%}{{ fp_product.title | escape }}{%- else -%}{{ section.settings.placeholder_title | escape }}{%- endif -%}
+          <h2 class="zenith-fp__title{% if s.heading_uppercase %} zenith-fp__title--uppercase{% endif %}">
+            {%- if fp_product != blank -%}{{ fp_product.title | escape }}{%- else -%}{{ s.placeholder_title | escape }}{%- endif -%}
           </h2>
 
-          {%- if fp_product != blank and section.settings.show_rating and fp_product.metafields.reviews.rating.value != blank -%}
+          {%- if fp_product != blank and s.show_rating and fp_product.metafields.reviews.rating.value != blank -%}
             {%- render 'zenith-stars',
               rating: fp_product.metafields.reviews.rating.value.rating,
               count: fp_product.metafields.reviews.rating_count
@@ -43,9 +99,12 @@
           {%- if benefits.size > 0 -%}
             <ul class="zenith-fp__benefits" role="list">
               {%- for block in benefits -%}
-                <li id="Block-{{ block.id }}" {{ block.shopify_attributes }}>
-                  {%- render 'zenith-icon', icon: 'check_circle' -%}
-                  <span>{{ block.settings.text | escape }}</span>
+                <li class="zenith-fp__benefit" id="Block-{{ block.id }}" {{ block.shopify_attributes }}>
+                  <svg class="zenith-fp__check" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <circle cx="12" cy="12" r="12" fill="currentColor"/>
+                    <path d="M7.4 12.4l3.1 3.1 6.1-6.3" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <span>{{ block.settings.text | escape | replace: '[customers]', settings.customer_count }}</span>
                 </li>
               {%- endfor -%}
             </ul>
@@ -57,20 +116,34 @@
               {%- render 'zenith-add-to-cart',
                 product: fp_product,
                 form_id: form_id,
-                label: section.settings.button_label
+                label: s.button_label,
+                style: btn_style,
+                icon: btn_icon,
+                class: 'zenith-fp__atc'
               -%}
             {%- else -%}
-              <button type="button" class="button zenith-atc" disabled>{{ section.settings.button_label | default: 'Add to cart' | escape }}</button>
+              <button
+                type="button"
+                class="button zenith-atc{% unless btn_style == 'scheme' %} zenith-btn zenith-btn--{{ btn_style }}{% endunless %} zenith-fp__atc"
+                disabled
+              >
+                <span>
+                  {%- if s.button_label != blank -%}{{ s.button_label | escape }}{%- else -%}{{ 'products.product.add_to_cart' | t }}{%- endif -%}
+                </span>
+                {%- if btn_icon != 'none' and btn_style != 'scheme' -%}
+                  {%- render 'zenith-icon', icon: btn_icon, class: 'zenith-btn__icon' -%}
+                {%- endif -%}
+              </button>
             {%- endif -%}
           </div>
 
           {%- assign trust_items = section.blocks | where: 'type', 'trust' -%}
           {%- if trust_items.size > 0 -%}
-            <ul class="zenith-fp__trust" role="list">
+            <ul class="zenith-fp__trust zenith-fp__trust--{{ s.trust_alignment }} zenith-fp__trust--m-{{ s.trust_alignment_mobile }}" role="list">
               {%- for block in trust_items -%}
                 <li id="Block-{{ block.id }}" {{ block.shopify_attributes }}>
                   {%- render 'zenith-icon', icon: block.settings.icon -%}
-                  <span>{{ block.settings.text | escape }}</span>
+                  <span>{{ block.settings.text | escape | replace: '[customers]', settings.customer_count }}</span>
                 </li>
               {%- endfor -%}
             </ul>
@@ -78,24 +151,42 @@
         </div>
       </div>
 
-      <div class="zenith-fp__media-wrap color-{{ section.settings.media_color_scheme }} gradient">
-        {%- liquid
-          assign media = section.settings.image
-          if media == blank and fp_product != blank
-            assign media = fp_product.featured_media
-          endif
-        -%}
-        <div class="zenith-media zenith-fp__media">
-          {%- if media != blank -%}
-            {{
-              media
-              | image_url: width: 1600
-              | image_tag: loading: 'lazy', widths: '550, 750, 1100, 1600', sizes: '(min-width: 750px) 50vw, 100vw'
-            }}
-          {%- else -%}
-            {{ 'product-2' | placeholder_svg_tag: 'placeholder-svg' }}
-          {%- endif -%}
-        </div>
+      <div class="zenith-fp__media-wrap color-{{ s.media_color_scheme }} gradient">
+        {%- if s.badge != blank and s.badge_position_mobile == 'image' -%}
+          <span class="zenith-fp__badge zenith-fp__badge--media zenith-hide-desktop">{{ s.badge | escape }}</span>
+        {%- endif -%}
+
+        {%- if use_slides -%}
+          <zenith-carousel class="zenith-fp__carousel" data-slide-label="Image">
+            <ul class="zenith-carousel__track zenith-fp__track" role="list">
+              {%- for media in product_images -%}
+                {%- assign media_alt = media.alt | default: fp_product.title -%}
+                <li class="zenith-carousel__slide zenith-fp__slide">
+                  <div class="zenith-media zenith-fp__media">
+                    {{
+                      media.preview_image
+                      | image_url: width: 1600
+                      | image_tag: loading: 'lazy', widths: '400, 600, 800, 1100, 1600', sizes: media_sizes, alt: media_alt
+                    }}
+                  </div>
+                </li>
+              {%- endfor -%}
+            </ul>
+            {%- render 'zenith-carousel-controls', show_dots: true, show_arrows: false, label: 'image' -%}
+          </zenith-carousel>
+        {%- else -%}
+          <div class="zenith-media zenith-fp__media">
+            {%- if single != blank -%}
+              {{
+                single
+                | image_url: width: 1600
+                | image_tag: loading: 'lazy', widths: '400, 600, 800, 1100, 1600', sizes: media_sizes
+              }}
+            {%- else -%}
+              {{ 'product-2' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+          </div>
+        {%- endif -%}
       </div>
     </div>
   </div>
@@ -133,7 +224,7 @@
       "type": "text",
       "id": "badge",
       "label": "Badge",
-      "default": "Best Seller"
+      "default": "Featured Product"
     },
     {
       "type": "text",
@@ -142,16 +233,43 @@
       "default": "Add to Cart"
     },
     {
+      "type": "select",
+      "id": "button_icon",
+      "label": "Button icon",
+      "default": "cart",
+      "options": [
+        {
+          "value": "cart",
+          "label": "Cart"
+        },
+        {
+          "value": "arrow_right",
+          "label": "Arrow"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ]
+    },
+    {
       "type": "image_picker",
       "id": "image",
       "label": "Image",
-      "info": "Optional. Defaults to the product's featured image."
+      "info": "Optional. Defaults to the product's images."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_media_pager",
+      "label": "Show all product images as a slider",
+      "info": "Used when no image is selected above and the product has more than one image",
+      "default": true
     },
     {
       "type": "checkbox",
       "id": "show_rating",
       "label": "Show product rating",
-      "default": true
+      "default": false
     },
     {
       "type": "header",
@@ -177,7 +295,27 @@
       "type": "checkbox",
       "id": "full_width",
       "label": "Full width",
-      "default": true
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "media_width",
+      "label": "Image column width",
+      "min": 30,
+      "max": 70,
+      "step": 1,
+      "unit": "%",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "media_min_height",
+      "label": "Minimum height",
+      "min": 240,
+      "max": 1000,
+      "step": 20,
+      "unit": "px",
+      "default": 540
     },
     {
       "type": "range",
@@ -187,7 +325,7 @@
       "max": 900,
       "step": 20,
       "unit": "px",
-      "default": 560
+      "default": 500
     },
     {
       "type": "range",
@@ -197,7 +335,7 @@
       "max": 120,
       "step": 4,
       "unit": "px",
-      "default": 64
+      "default": 40
     },
     {
       "type": "range",
@@ -207,27 +345,50 @@
       "max": 48,
       "step": 4,
       "unit": "px",
-      "default": 16
+      "default": 12
     },
     {
-      "type": "range",
-      "id": "media_min_height",
-      "label": "Image area height",
-      "min": 240,
-      "max": 1000,
-      "step": 20,
-      "unit": "px",
-      "default": 560
+      "type": "select",
+      "id": "image_fit",
+      "label": "Image fit",
+      "default": "cover",
+      "options": [
+        {
+          "value": "cover",
+          "label": "Fill area"
+        },
+        {
+          "value": "contain",
+          "label": "Show whole image"
+        }
+      ]
     },
     {
       "type": "range",
       "id": "image_padding",
       "label": "Image padding",
+      "info": "Used when Image fit is Show whole image",
       "min": 0,
       "max": 120,
       "step": 4,
       "unit": "px",
-      "default": 32
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "trust_alignment",
+      "label": "Trust items alignment",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ]
     },
     {
       "type": "header",
@@ -240,16 +401,87 @@
       "default": "scheme-6"
     },
     {
+      "type": "color",
+      "id": "panel_background",
+      "label": "Content panel background",
+      "info": "Clear to use the color scheme background",
+      "default": "#203940"
+    },
+    {
       "type": "color_scheme",
       "id": "media_color_scheme",
       "label": "Image background scheme",
       "default": "scheme-3"
     },
     {
-      "type": "color_scheme",
-      "id": "badge_color_scheme",
-      "label": "Badge color scheme",
-      "default": "scheme-5"
+      "type": "color",
+      "id": "section_background",
+      "label": "Section background",
+      "info": "Behind the panel and image. Leave empty to show the page background."
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "default": "gold",
+      "options": [
+        {
+          "value": "gold",
+          "label": "Gold gradient"
+        },
+        {
+          "value": "dark",
+          "label": "Dark"
+        },
+        {
+          "value": "outline",
+          "label": "Outline"
+        },
+        {
+          "value": "light",
+          "label": "Light"
+        },
+        {
+          "value": "scheme",
+          "label": "Color scheme button"
+        }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "badge_background",
+      "label": "Badge background",
+      "default": "#EABE5F"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Badge text",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "price_color",
+      "label": "Price",
+      "default": "#EABE5F"
+    },
+    {
+      "type": "color",
+      "id": "check_color",
+      "label": "Benefit check icons",
+      "default": "#EABE5F"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Trust icons",
+      "default": "#EABE5F"
+    },
+    {
+      "type": "color",
+      "id": "pager_color",
+      "label": "Image slider dots",
+      "default": "#294850"
     },
     {
       "type": "header",
@@ -263,7 +495,7 @@
       "max": 120,
       "step": 2,
       "unit": "px",
-      "default": 44
+      "default": 36
     },
     {
       "type": "checkbox",
@@ -279,7 +511,7 @@
       "max": 56,
       "step": 2,
       "unit": "px",
-      "default": 24
+      "default": 22
     },
     {
       "type": "range",
@@ -292,6 +524,36 @@
       "default": 14
     },
     {
+      "type": "range",
+      "id": "badge_font_size",
+      "label": "Badge text size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "trust_font_size",
+      "label": "Trust item text size",
+      "min": 8,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "label": "Button text size",
+      "min": 12,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 22
+    },
+    {
       "type": "header",
       "content": "Mobile"
     },
@@ -300,6 +562,87 @@
       "id": "mobile_image_first",
       "label": "Show image above text on mobile",
       "default": true
+    },
+    {
+      "type": "select",
+      "id": "badge_position_mobile",
+      "label": "Badge position",
+      "default": "image",
+      "options": [
+        {
+          "value": "image",
+          "label": "On the image"
+        },
+        {
+          "value": "content",
+          "label": "Above the title"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "media_ratio_mobile",
+      "label": "Image shape",
+      "default": "square",
+      "options": [
+        {
+          "value": "square",
+          "label": "Square"
+        },
+        {
+          "value": "portrait",
+          "label": "Portrait 4:5"
+        },
+        {
+          "value": "landscape",
+          "label": "Landscape 4:3"
+        },
+        {
+          "value": "fixed",
+          "label": "Fixed height"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "media_height_mobile",
+      "label": "Image height",
+      "info": "Used when Image shape is Fixed height",
+      "min": 200,
+      "max": 700,
+      "step": 20,
+      "unit": "px",
+      "default": 360
+    },
+    {
+      "type": "select",
+      "id": "trust_alignment_mobile",
+      "label": "Trust items alignment",
+      "default": "center",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "panel_background_mobile",
+      "label": "Content panel background",
+      "info": "Clear to use the desktop panel color",
+      "default": "#112328"
+    },
+    {
+      "type": "color",
+      "id": "section_background_mobile",
+      "label": "Section background",
+      "info": "Clear to use the desktop section background",
+      "default": "#202020"
     },
     {
       "type": "range",
@@ -319,7 +662,7 @@
       "max": 40,
       "step": 2,
       "unit": "px",
-      "default": 20
+      "default": 22
     },
     {
       "type": "range",
@@ -329,7 +672,37 @@
       "max": 20,
       "step": 1,
       "unit": "px",
-      "default": 13
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "badge_font_size_mobile",
+      "label": "Badge text size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "trust_font_size_mobile",
+      "label": "Trust item text size",
+      "min": 8,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "button_font_size_mobile",
+      "label": "Button text size",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 22
     },
     {
       "type": "range",
@@ -339,7 +712,7 @@
       "max": 64,
       "step": 4,
       "unit": "px",
-      "default": 24
+      "default": 20
     },
     {
       "type": "range",
@@ -350,16 +723,6 @@
       "step": 4,
       "unit": "px",
       "default": 12
-    },
-    {
-      "type": "range",
-      "id": "media_height_mobile",
-      "label": "Image area height",
-      "min": 200,
-      "max": 700,
-      "step": 20,
-      "unit": "px",
-      "default": 360
     },
     {
       "type": "header",
@@ -373,7 +736,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "default": 0
+      "default": 48
     },
     {
       "type": "range",
@@ -393,7 +756,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "default": 0
+      "default": 20
     },
     {
       "type": "range",
@@ -403,7 +766,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "default": 0
+      "default": 20
     }
   ],
   "blocks": [
@@ -419,7 +782,7 @@
           "type": "text",
           "id": "text",
           "label": "Text",
-          "default": "Fights signs of aging"
+          "default": "Fights aging and smooths lines with zero irritation."
         }
       ]
     },
@@ -450,6 +813,22 @@
               "label": "Cash"
             },
             {
+              "value": "badge_check",
+              "label": "Badge check"
+            },
+            {
+              "value": "sun",
+              "label": "Climate"
+            },
+            {
+              "value": "shield_plus",
+              "label": "Shield plus"
+            },
+            {
+              "value": "thermometer",
+              "label": "Thermometer"
+            },
+            {
               "value": "truck",
               "label": "Delivery"
             },
@@ -468,6 +847,14 @@
             {
               "value": "lock",
               "label": "Secure"
+            },
+            {
+              "value": "phone",
+              "label": "Phone"
+            },
+            {
+              "value": "qr",
+              "label": "QR code"
             }
           ]
         },
@@ -475,7 +862,7 @@
           "type": "text",
           "id": "text",
           "label": "Text",
-          "default": "30-Day Money-Back Guarantee"
+          "default": "Zenith Money-Back Guarantee"
         }
       ]
     }
@@ -487,33 +874,38 @@
         {
           "type": "benefit",
           "settings": {
-            "text": "Fights signs of aging and smooths fine lines"
+            "text": "Fights aging and smooths lines with zero irritation."
           }
         },
         {
           "type": "benefit",
           "settings": {
-            "text": "Reduces acne and dark spots while protecting the skin"
+            "text": "Reduces acne and dark spots while smoothing fine lines"
           }
         },
         {
           "type": "benefit",
           "settings": {
-            "text": "Fast-absorbing and non-greasy for the PH climate"
+            "text": "Fast-absorbing and non-greasy for the PH climate."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "text": "One jar replaces multiple complicated steps."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "text": "Premium ingredients for maximum results, minimal effort."
           }
         },
         {
           "type": "trust",
           "settings": {
-            "icon": "refresh",
-            "text": "30-Day Money-Back Guarantee"
-          }
-        },
-        {
-          "type": "trust",
-          "settings": {
-            "icon": "certified",
-            "text": "FDA-Notified"
+            "icon": "shield",
+            "text": "Zenith Money-Back Guarantee"
           }
         },
         {
@@ -521,6 +913,20 @@
           "settings": {
             "icon": "cash",
             "text": "Cash On Delivery"
+          }
+        },
+        {
+          "type": "trust",
+          "settings": {
+            "icon": "badge_check",
+            "text": "FDA-Notified"
+          }
+        },
+        {
+          "type": "trust",
+          "settings": {
+            "icon": "sun",
+            "text": "Formulated For Filipinos"
           }
         }
       ]

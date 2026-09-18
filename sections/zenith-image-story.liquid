@@ -1,12 +1,20 @@
 {{ 'zenith-image-story.css' | asset_url | stylesheet_tag }}
 {%- capture extra -%}
   {%- render 'zenith-overlay-vars', settings: section.settings -%}
+  --z-story-title-color: {{ section.settings.column_title_color }};
+  --z-story-text-a: {{ section.settings.text_opacity | divided_by: 100.0 }};
+  --z-story-colsp: {{ section.settings.columns_spacing }}px;
+  --z-story-colsp-m: {{ section.settings.columns_spacing_mobile }}px;
+  --z-story-colgap: {{ section.settings.columns_gap }}px;
+  --z-story-colgap-m: {{ section.settings.columns_gap_mobile }}px;
+  --z-story-coltsp: {{ section.settings.column_title_spacing }}px;
+  --z-story-cols-m: {{ section.settings.columns_mobile }};
 {%- endcapture -%}
 {%- render 'zenith-section-style', section: section, extra: extra -%}
 
 <section
   id="Zenith-{{ section.id }}"
-  class="zenith-section zenith-story color-{{ section.settings.color_scheme }} gradient{% if section.settings.image_position == 'right' %} zenith-story--image-right{% endif %} zenith-story--{{ section.settings.image_ratio }}"
+  class="zenith-section zenith-story color-{{ section.settings.color_scheme }} gradient{% if section.settings.image_position == 'right' %} zenith-story--image-right{% endif %} zenith-story--{{ section.settings.image_ratio }} zenith-story--m-{{ section.settings.image_ratio_mobile }} zenith-story--align-{{ section.settings.content_align }}"
 >
   <div class="page-width">
     <div class="zenith-story__grid">
@@ -15,7 +23,10 @@
           {{
             section.settings.image
             | image_url: width: 1600
-            | image_tag: loading: 'lazy', widths: '550, 750, 1100, 1600', sizes: '(min-width: 750px) 50vw, 100vw'
+            | image_tag:
+              loading: 'lazy',
+              widths: '400, 550, 750, 1100, 1600',
+              sizes: '(min-width: 990px) calc((100vw - 10rem) / 2), (min-width: 750px) calc(100vw - 10rem), calc(100vw - 3rem)'
           }}
         {%- else -%}
           {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
@@ -27,11 +38,18 @@
         {%- if section.settings.logo != blank -%}
           {{
             section.settings.logo
-            | image_url: width: 600
-            | image_tag: loading: 'lazy', widths: '200, 400, 600', sizes: '240px', class: 'zenith-story__logo'
+            | image_url: width: 800
+            | image_tag: loading: 'lazy', widths: '200, 400, 600, 800', sizes: '(min-width: 750px) 240px, 200px', class: 'zenith-story__logo'
           }}
         {%- elsif section.settings.use_brand_logo -%}
-          <img src="{{ 'footer-logo.png' | asset_url }}" alt="{{ shop.name | escape }}" width="204" height="80" loading="lazy" class="zenith-story__logo">
+          <img
+            src="{{ 'footer-logo.png' | asset_url }}"
+            alt="{{ shop.name | escape }}"
+            width="204"
+            height="80"
+            loading="lazy"
+            class="zenith-story__logo"
+          >
         {%- endif -%}
 
         {%- render 'zenith-section-heading',
@@ -44,7 +62,9 @@
         -%}
 
         {%- if section.settings.text != blank -%}
-          <div class="zenith-story__text zenith-rte">{{ section.settings.text }}</div>
+          <div class="zenith-story__text zenith-rte">
+            {{- section.settings.text | replace: '[customers]', settings.customer_count -}}
+          </div>
         {%- endif -%}
 
         {%- if section.blocks.size > 0 -%}
@@ -52,10 +72,14 @@
             {%- for block in section.blocks -%}
               <div class="zenith-story__column" id="Block-{{ block.id }}" {{ block.shopify_attributes }}>
                 {%- if block.settings.title != blank -%}
-                  <h3 class="zenith-story__column-title">{{ block.settings.title | escape }}</h3>
+                  <h3 class="zenith-story__column-title">
+                    {{- block.settings.title | escape | replace: '[customers]', settings.customer_count -}}
+                  </h3>
                 {%- endif -%}
                 {%- if block.settings.text != blank -%}
-                  <div class="zenith-rte">{{ block.settings.text }}</div>
+                  <div class="zenith-story__column-text zenith-rte">
+                    {{- block.settings.text | replace: '[customers]', settings.customer_count -}}
+                  </div>
                 {%- endif -%}
               </div>
             {%- endfor -%}
@@ -63,12 +87,13 @@
         {%- endif -%}
 
         {%- if section.settings.button_label != blank -%}
-          <a
-            {% if section.settings.button_link != blank %}href="{{ section.settings.button_link }}"{% else %}role="link" aria-disabled="true"{% endif %}
-            class="button button--secondary"
-          >
-            {{- section.settings.button_label | escape -}}
-          </a>
+          <div class="zenith-story__actions">
+            {%- render 'zenith-button',
+              label: section.settings.button_label,
+              link: section.settings.button_link,
+              style: section.settings.button_style
+            -%}
+          </div>
         {%- endif -%}
       </div>
     </div>
@@ -82,10 +107,7 @@
   "class": "section",
   "max_blocks": 4,
   "disabled_on": {
-    "groups": [
-      "header",
-      "footer"
-    ]
+    "groups": ["header", "footer"]
   },
   "settings": [
     {
@@ -101,7 +123,7 @@
       "type": "image_picker",
       "id": "logo",
       "label": "Logo",
-      "info": "Optional"
+      "info": "Optional. White wordmark on transparent background works best."
     },
     {
       "type": "checkbox",
@@ -123,7 +145,8 @@
       "type": "richtext",
       "id": "text",
       "label": "Text",
-      "default": "<p>Zenith has over 100,000 men who have trusted us for their long-term grooming. We started because mature Filipino men were underserved: products built for younger men, for other climates, or loaded with hype.</p><p>We build honest, high-performance essentials that work in Philippine heat and humidity, and we stand behind every one of them.</p>"
+      "info": "[customers] shows the customer count from Theme settings → Zenith.",
+      "default": "<p>Filipino men over 35 have been underserved for too long. Forced to choose between overly complicated routines or generic imported products not built for the climate, Zenith was built to fix that.</p><p>The brand wasn't created to be just another skincare line focused on aesthetics or flashy packaging. Instead, Zenith is committed to building high-performance personal care gear designed for real conditions, real needs, and real lives.</p><p>No hype and no shortcuts. Just straightforward, highly effective products that solve real, everyday problems for men who just want things that actually work.</p><p>Fast forward to today, and [customers] men have made Zenith a part of their daily routine. But looking back on this growth, this milestone isn't really about the company or its logos. It is a testament to the customers who truly built the brand.</p>"
     },
     {
       "type": "text",
@@ -145,35 +168,52 @@
       "label": "Desktop image position",
       "default": "left",
       "options": [
-        {
-          "value": "left",
-          "label": "Left"
-        },
-        {
-          "value": "right",
-          "label": "Right"
-        }
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
       ]
     },
     {
       "type": "select",
       "id": "image_ratio",
-      "label": "Image shape",
+      "label": "Desktop image shape",
       "default": "adapt",
       "options": [
-        {
-          "value": "adapt",
-          "label": "Fill content height"
-        },
-        {
-          "value": "portrait",
-          "label": "Portrait"
-        },
-        {
-          "value": "square",
-          "label": "Square"
-        }
+        { "value": "adapt", "label": "Match content height" },
+        { "value": "portrait", "label": "Portrait" },
+        { "value": "square", "label": "Square" }
       ]
+    },
+    {
+      "type": "range",
+      "id": "media_min_height",
+      "label": "Desktop image min height",
+      "min": 240,
+      "max": 1000,
+      "step": 20,
+      "unit": "px",
+      "default": 720,
+      "info": "Used when image shape is \"Match content height\""
+    },
+    {
+      "type": "select",
+      "id": "content_align",
+      "label": "Desktop content vertical alignment",
+      "default": "top",
+      "options": [
+        { "value": "top", "label": "Top" },
+        { "value": "center", "label": "Center" },
+        { "value": "bottom", "label": "Bottom" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "content_padding",
+      "label": "Desktop content top/bottom padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 44
     },
     {
       "type": "range",
@@ -188,23 +228,12 @@
     {
       "type": "range",
       "id": "content_gap",
-      "label": "Space between content items",
+      "label": "Space between logo, text and button",
       "min": 4,
       "max": 64,
       "step": 4,
       "unit": "px",
-      "default": 24
-    },
-    {
-      "type": "range",
-      "id": "media_min_height",
-      "label": "Image min height",
-      "min": 240,
-      "max": 1000,
-      "step": 20,
-      "unit": "px",
-      "default": 480,
-      "info": "Used when Image shape is \"Fill content height\""
+      "default": 20
     },
     {
       "type": "range",
@@ -217,6 +246,36 @@
       "default": 200
     },
     {
+      "type": "range",
+      "id": "columns_spacing",
+      "label": "Space above text columns",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "columns_gap",
+      "label": "Space between text columns",
+      "min": 0,
+      "max": 96,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "column_title_spacing",
+      "label": "Space below column title",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 14
+    },
+    {
       "type": "header",
       "content": "Colors"
     },
@@ -227,35 +286,46 @@
       "default": "scheme-1"
     },
     {
+      "type": "color",
+      "id": "column_title_color",
+      "label": "Column title color",
+      "default": "#EABE5F"
+    },
+    {
+      "type": "range",
+      "id": "text_opacity",
+      "label": "Body text opacity",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 70
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "default": "gold",
+      "options": [
+        { "value": "gold", "label": "Gold gradient" },
+        { "value": "dark", "label": "Dark" },
+        { "value": "outline", "label": "Outline" },
+        { "value": "light", "label": "Light" },
+        { "value": "scheme", "label": "Color scheme button" }
+      ]
+    },
+    {
       "type": "select",
       "id": "overlay_style",
       "label": "Image overlay",
       "default": "none",
       "options": [
-        {
-          "value": "none",
-          "label": "None"
-        },
-        {
-          "value": "solid",
-          "label": "Solid"
-        },
-        {
-          "value": "bottom",
-          "label": "Gradient from bottom"
-        },
-        {
-          "value": "top",
-          "label": "Gradient from top"
-        },
-        {
-          "value": "left",
-          "label": "Gradient from left"
-        },
-        {
-          "value": "right",
-          "label": "Gradient from right"
-        }
+        { "value": "none", "label": "None" },
+        { "value": "solid", "label": "Solid" },
+        { "value": "bottom", "label": "Gradient from bottom" },
+        { "value": "top", "label": "Gradient from top" },
+        { "value": "left", "label": "Gradient from left" },
+        { "value": "right", "label": "Gradient from right" }
       ]
     },
     {
@@ -313,7 +383,7 @@
       "max": 20,
       "step": 1,
       "unit": "px",
-      "default": 12
+      "default": 14
     },
     {
       "type": "range",
@@ -323,7 +393,7 @@
       "max": 24,
       "step": 1,
       "unit": "px",
-      "default": 14
+      "default": 16
     },
     {
       "type": "range",
@@ -333,11 +403,35 @@
       "max": 48,
       "step": 2,
       "unit": "px",
-      "default": 24
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "label": "Button text size",
+      "min": 14,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 22
     },
     {
       "type": "header",
       "content": "Mobile"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio_mobile",
+      "label": "Image shape",
+      "info": "Also used on tablet, where image and text stack.",
+      "default": "landscape",
+      "options": [
+        { "value": "landscape", "label": "Landscape 3:2" },
+        { "value": "classic", "label": "Landscape 4:3" },
+        { "value": "wide", "label": "Wide 16:9" },
+        { "value": "square", "label": "Square" },
+        { "value": "portrait", "label": "Portrait 4:5" }
+      ]
     },
     {
       "type": "range",
@@ -357,7 +451,7 @@
       "max": 20,
       "step": 1,
       "unit": "px",
-      "default": 13
+      "default": 16
     },
     {
       "type": "range",
@@ -366,6 +460,16 @@
       "min": 12,
       "max": 40,
       "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "button_font_size_mobile",
+      "label": "Button text size",
+      "min": 14,
+      "max": 28,
+      "step": 1,
       "unit": "px",
       "default": 20
     },
@@ -377,14 +481,44 @@
       "max": 80,
       "step": 4,
       "unit": "px",
-      "default": 32
+      "default": 20
     },
     {
       "type": "range",
       "id": "content_gap_mobile",
-      "label": "Space between content items",
+      "label": "Space between logo, text and button",
       "min": 4,
       "max": 48,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "columns_spacing_mobile",
+      "label": "Space above text columns",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Text columns per row",
+      "default": "1",
+      "options": [
+        { "value": "1", "label": "1 (stacked)" },
+        { "value": "2", "label": "2" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "columns_gap_mobile",
+      "label": "Space between text columns",
+      "min": 0,
+      "max": 64,
       "step": 4,
       "unit": "px",
       "default": 16
@@ -401,7 +535,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "default": 64
+      "default": 32
     },
     {
       "type": "range",
@@ -411,7 +545,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "default": 64
+      "default": 32
     },
     {
       "type": "range",
@@ -421,7 +555,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "default": 48
+      "default": 20
     },
     {
       "type": "range",
@@ -431,7 +565,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "default": 48
+      "default": 20
     }
   ],
   "blocks": [

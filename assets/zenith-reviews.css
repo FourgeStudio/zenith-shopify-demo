@@ -1,15 +1,484 @@
-.zenith-reviews__placeholder img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
+/* Zenith · Reviews — heading + Judge.me app block host.
+   Per-instance values are CSS vars on #Zenith-{section.id} (see sections/zenith-reviews.liquid). */
 
-.zenith-reviews__placeholder-media {
-  aspect-ratio: 16 / 9;
+.zenith-reviews .zenith-subheading {
+  color: rgba(var(--color-foreground), var(--z-sub-a-m, 0.7));
 }
 
 .zenith-reviews__apps {
   display: flex;
   flex-direction: column;
   gap: var(--z-space-5);
+}
+
+/* ---------- Editor-only empty state ---------- */
+.zenith-reviews__empty-note {
+  margin: 0 auto var(--z-space-5);
+  max-width: 56rem;
+  padding: var(--z-space-3) var(--z-space-4);
+  border: 1px dashed rgba(var(--color-foreground), 0.25);
+  font-size: var(--z-text-sm);
+  line-height: 1.5;
+  text-align: center;
+  color: rgba(var(--color-foreground), 0.7);
+}
+
+.zenith-reviews__skeleton {
+  column-count: var(--z-cols-m, 2);
+  column-gap: var(--z-gap-m, var(--z-space-5));
+}
+
+.zenith-reviews__skeleton-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--z-space-3);
+  margin: 0 0 var(--z-gap-m, var(--z-space-5));
+  padding: var(--z-cpd-m, var(--z-space-3));
+  background: var(--z-jdgm-card, var(--z-basalt));
+  border: 1px solid var(--z-jdgm-card-border, transparent);
+  border-radius: var(--z-radius, 0);
+  break-inside: avoid;
+}
+
+.zenith-reviews__skeleton-photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 289 / 372;
+  background: rgba(var(--color-foreground), 0.08);
+}
+
+.zenith-reviews__skeleton-stars {
+  display: flex;
+  gap: 2px;
+  color: var(--z-jdgm-star, #d6b356);
+}
+
+.zenith-reviews__skeleton-stars .zenith-icon {
+  width: var(--z-icon, 14px);
+  height: var(--z-icon, 14px);
+}
+
+.zenith-reviews__skeleton-line {
+  display: block;
+  height: 10px;
+  background: rgba(var(--color-foreground), 0.14);
+}
+
+.zenith-reviews__skeleton-line--short {
+  width: 45%;
+}
+
+.zenith-reviews__skeleton-line--name {
+  width: 60%;
+  background: rgba(var(--color-foreground), 0.3);
+}
+
+.zenith-reviews__skeleton-line--meta {
+  width: 85%;
+  height: 8px;
+}
+
+.zenith-reviews__skeleton-author {
+  display: flex;
+  align-items: center;
+  gap: var(--z-space-2);
+  margin-top: var(--z-space-2);
+}
+
+.zenith-reviews__skeleton-avatar {
+  flex: 0 0 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(var(--color-foreground), 0.86);
+}
+
+.zenith-reviews__skeleton-meta {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 6px;
+}
+
+@media screen and (min-width: 750px) {
+  .zenith-reviews .zenith-subheading {
+    color: rgba(var(--color-foreground), var(--z-sub-a, 1));
+  }
+
+  /* subheading_spacing = total heading→subheading distance; the shared heading gap is --z-space-3. */
+  .zenith-reviews .zenith-heading__title + .zenith-subheading {
+    margin-top: calc(var(--z-sub-sp, var(--z-space-3)) - var(--z-space-3));
+  }
+
+  .zenith-reviews__skeleton {
+    column-count: var(--z-cols, 4);
+    column-gap: var(--z-gap, var(--z-space-5));
+  }
+
+  .zenith-reviews__skeleton-card {
+    margin-bottom: var(--z-gap, var(--z-space-5));
+    padding: var(--z-cpd, var(--z-space-3));
+  }
+}
+
+/* =====================================================================
+   Judge.me dark theme.
+   Only matches when the app block renders its .jdgm-* markup. Selectors are
+   prefixed with two section classes so they outrank Judge.me's own CSS
+   without !important (except where the app writes inline styles).
+   ===================================================================== */
+.zenith-reviews--jdgm {
+  /* Judge.me reads these from :root — redefine them for this section only. */
+  --jdgm-primary-color: var(--z-jdgm-accent);
+  --jdgm-secondary-color: rgba(var(--color-foreground), 0.1);
+  --jdgm-star-color: var(--z-jdgm-star);
+  --jdgm-write-review-text-color: rgb(var(--color-foreground));
+  --jdgm-write-review-bg-color: transparent;
+  --jdgm-paginator-color: var(--z-jdgm-star);
+  --jdgm-border-radius: var(--z-radius, 0);
+  --jdgm-reviewer-name-color: rgb(var(--color-foreground));
+}
+
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-widget,
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-rev-widg,
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-all-reviews-widget {
+  background: transparent;
+  border-color: rgba(var(--color-foreground), 0.1);
+  color: rgb(var(--color-foreground));
+  font-family: var(--font-body-family);
+}
+
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-rev-widg {
+  padding-left: 0;
+  padding-right: 0;
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+}
+
+/* Summary header */
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-rev-widg__header,
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-all-reviews__header,
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-rev-widg__sort-wrapper,
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-gallery-wrapper {
+  border-color: rgba(var(--color-foreground), 0.1);
+}
+
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-rev-widg__title,
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-all-reviews__title {
+  color: rgb(var(--color-foreground));
+  font-family: var(--font-body-family);
+  font-weight: 400;
+  font-size: 2.2rem;
+  letter-spacing: 0;
+}
+
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-rev-widg__summary,
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-rev-widg__summary-text,
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-rev-widg__summary-average,
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-all-reviews__summary,
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-all-reviews-text {
+  color: rgba(var(--color-foreground), 0.9);
+}
+
+/* Stars */
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-star,
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-star.jdgm--on,
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-star.jdgm--half {
+  color: var(--z-jdgm-star);
+}
+
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-star.jdgm--off {
+  color: rgba(var(--color-foreground), 0.25);
+}
+
+/* Rating histogram */
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-histogram__bar {
+  background-color: rgba(var(--color-foreground), 0.12);
+  border-radius: 0;
+}
+
+/* Dawn hides div:empty (base.css) — the bar fill is an empty div. */
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-histogram__bar-content {
+  display: block;
+  background-color: var(--z-jdgm-accent);
+  border-radius: 0;
+}
+
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-histogram__percentage,
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-histogram__frequency,
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-histogram__clear-filter {
+  color: rgba(var(--color-foreground), 0.8);
+}
+
+/* Buttons ("Write a review", "Ask a question", form buttons).
+   Section setting button_style → .zenith-reviews--btn-<style>; "App default" skips these rules. */
+.zenith-reviews--btn-outline {
+  --z-rbtn-bg: transparent;
+  --z-rbtn-hover: rgba(var(--color-foreground), 0.06);
+  --z-rbtn-fg: rgb(var(--color-foreground));
+  --z-rbtn-border: var(--z-jdgm-accent);
+}
+
+.zenith-reviews--btn-gold {
+  --z-rbtn-bg: linear-gradient(90deg, var(--z-dawn-gold) 0%, var(--z-gold) 100%);
+  --z-rbtn-fg: var(--z-obsidian);
+}
+
+.zenith-reviews--btn-dark {
+  --z-rbtn-bg: var(--z-obsidian-blue);
+  --z-rbtn-fg: #fff;
+}
+
+.zenith-reviews--btn-light {
+  --z-rbtn-bg: #fff;
+  --z-rbtn-fg: var(--z-obsidian);
+}
+
+.zenith-reviews--brand-btn .zenith-reviews__apps .jdgm-write-rev-link,
+.zenith-reviews--brand-btn .zenith-reviews__apps .jdgm-ask-question-btn,
+.zenith-reviews--brand-btn .zenith-reviews__apps .jdgm-btn--border,
+.zenith-reviews--brand-btn .zenith-reviews__apps .jdgm-cancel-rev {
+  padding: var(--z-space-3) var(--z-space-5);
+  background: var(--z-rbtn-bg);
+  border: 1px solid var(--z-rbtn-border, transparent);
+  border-radius: 0;
+  box-shadow: none;
+  color: var(--z-rbtn-fg);
+  font-family: var(--font-heading-family);
+  font-size: var(--z-btnfs-m, 2rem);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
+  text-transform: none;
+  transition: filter var(--duration-short) ease, background-color var(--duration-short) ease;
+}
+
+.zenith-reviews--brand-btn .zenith-reviews__apps .jdgm-write-rev-link:hover,
+.zenith-reviews--brand-btn .zenith-reviews__apps .jdgm-ask-question-btn:hover,
+.zenith-reviews--brand-btn .zenith-reviews__apps .jdgm-btn--border:hover,
+.zenith-reviews--brand-btn .zenith-reviews__apps .jdgm-cancel-rev:hover {
+  background: var(--z-rbtn-hover, var(--z-rbtn-bg));
+  color: var(--z-rbtn-fg);
+  filter: brightness(1.08);
+}
+
+/* Solid form button (submit review) = brand gold CTA */
+.zenith-reviews--brand-btn .zenith-reviews__apps .jdgm-btn--solid,
+.zenith-reviews--brand-btn .zenith-reviews__apps .jdgm-submit-rev {
+  padding: var(--z-space-3) var(--z-space-5);
+  background: linear-gradient(90deg, var(--z-dawn-gold) 0%, var(--z-gold) 100%);
+  border: 0;
+  border-radius: 0;
+  color: var(--z-obsidian);
+  font-family: var(--font-heading-family);
+  font-size: var(--z-btnfs-m, 2rem);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-write-rev-link:focus-visible,
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-ask-question-btn:focus-visible,
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-btn:focus-visible,
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-paginate__page:focus-visible,
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-gallery__thumbnail-link:focus-visible {
+  outline: 2px solid rgb(var(--color-foreground));
+  outline-offset: 2px;
+}
+
+/* Review form + sort dropdown on dark */
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-form input,
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-form textarea,
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-sort-dropdown {
+  background-color: var(--z-jdgm-card);
+  border: 1px solid rgba(var(--color-foreground), 0.2);
+  border-radius: 0;
+  color: rgb(var(--color-foreground));
+}
+
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-form label,
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-form__title {
+  color: rgb(var(--color-foreground));
+}
+
+/* Customer photos gallery */
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-gallery-title {
+  color: rgba(var(--color-foreground), 0.5);
+  font-size: 1.4rem;
+  font-weight: 400;
+}
+
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-gallery__thumbnail-wrapper,
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-gallery__thumbnail {
+  border-radius: var(--z-radius, 0);
+}
+
+/* Review cards */
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-rev {
+  padding: var(--z-cpd-m, var(--z-space-3));
+  background-color: var(--z-jdgm-card);
+  border: 1px solid var(--z-jdgm-card-border);
+  border-radius: var(--z-radius, 0);
+  color: rgb(var(--color-foreground));
+}
+
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-rev__rating {
+  font-size: var(--z-icon, 14px);
+}
+
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-rev__rating .jdgm-star {
+  font-size: inherit;
+}
+
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-rev__title {
+  color: rgb(var(--color-foreground));
+  font-weight: 600;
+}
+
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-rev__body,
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-rev__body p {
+  color: rgb(var(--color-foreground));
+  font-size: var(--z-tfs-m, 1.4rem);
+  line-height: 1.5;
+}
+
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-rev__author,
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-rev__author-wrapper {
+  color: rgb(var(--color-foreground));
+  font-weight: 600;
+}
+
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-rev__timestamp,
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-rev__location,
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-rev__votes,
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-rev__actions,
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-rev__product-title {
+  color: rgba(var(--color-foreground), 0.55);
+  font-size: 1.2rem;
+}
+
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-rev__icon {
+  background-color: rgba(var(--color-foreground), 0.86);
+  color: var(--z-jdgm-card);
+}
+
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-rev__buyer-badge {
+  background-color: var(--z-jdgm-accent);
+  border-color: var(--z-jdgm-accent);
+  border-radius: 0;
+  color: var(--z-obsidian);
+}
+
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-rev__pic-img,
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-rev__pic-link {
+  border-radius: var(--z-radius, 0);
+}
+
+/* A single review photo fills the card width, like the design's photo cards. */
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-rev__pic-link:first-child:last-child {
+  width: 100%;
+  max-width: none;
+  height: auto;
+  margin: 0;
+}
+
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-rev__pic-link:first-child:last-child .jdgm-rev__pic-img {
+  width: 100%;
+  height: auto;
+  max-height: none;
+  object-fit: cover;
+}
+
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-rev__reply {
+  background: rgba(var(--color-foreground), 0.05);
+  border-left: 2px solid var(--z-jdgm-accent);
+  color: rgba(var(--color-foreground), 0.8);
+}
+
+/* Pagination: gold numbers, current page larger; ≥44px hit area */
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-paginate {
+  margin-top: var(--z-space-5);
+  text-align: center;
+}
+
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-paginate__page {
+  min-width: 44px;
+  padding: 12px var(--z-space-2);
+  color: var(--z-jdgm-star);
+  font-size: 1.4rem;
+  line-height: 20px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-paginate__page:hover {
+  color: var(--z-jdgm-star);
+  text-decoration: underline;
+}
+
+.zenith-reviews--jdgm .zenith-reviews__apps .jdgm-paginate__page.jdgm-curt {
+  color: var(--z-jdgm-star);
+  font-size: 2rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* Masonry (section setting "Masonry review cards"). Judge.me's card layout
+   positions cards with inline styles — neutralise them and use CSS columns. */
+.zenith-reviews--masonry .zenith-reviews__apps .jdgm-rev-widg__reviews {
+  display: block !important;
+  position: static !important;
+  height: auto !important;
+  column-count: var(--z-cols-m, 2);
+  column-gap: var(--z-gap-m, var(--z-space-5));
+}
+
+.zenith-reviews--masonry .zenith-reviews__apps .jdgm-rev-widg__reviews .jdgm-rev {
+  position: static !important;
+  top: auto !important;
+  left: auto !important;
+  transform: none !important;
+  width: auto !important;
+  margin: 0 0 var(--z-gap-m, var(--z-space-5));
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+@media screen and (min-width: 750px) {
+  .zenith-reviews--brand-btn .zenith-reviews__apps .jdgm-write-rev-link,
+  .zenith-reviews--brand-btn .zenith-reviews__apps .jdgm-ask-question-btn,
+  .zenith-reviews--brand-btn .zenith-reviews__apps .jdgm-btn--border,
+  .zenith-reviews--brand-btn .zenith-reviews__apps .jdgm-cancel-rev,
+  .zenith-reviews--brand-btn .zenith-reviews__apps .jdgm-btn--solid,
+  .zenith-reviews--brand-btn .zenith-reviews__apps .jdgm-submit-rev {
+    font-size: var(--z-btnfs, 2.2rem);
+  }
+
+  .zenith-reviews--jdgm .zenith-reviews__apps .jdgm-rev {
+    padding: var(--z-cpd, var(--z-space-3));
+  }
+
+  .zenith-reviews--jdgm .zenith-reviews__apps .jdgm-rev__body,
+  .zenith-reviews--jdgm .zenith-reviews__apps .jdgm-rev__body p {
+    font-size: var(--z-tfs, 1.4rem);
+  }
+
+  .zenith-reviews--masonry .zenith-reviews__apps .jdgm-rev-widg__reviews {
+    column-count: var(--z-cols, 4);
+    column-gap: var(--z-gap, var(--z-space-5));
+  }
+
+  .zenith-reviews--masonry .zenith-reviews__apps .jdgm-rev-widg__reviews .jdgm-rev {
+    margin-bottom: var(--z-gap, var(--z-space-5));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zenith-reviews--brand-btn .zenith-reviews__apps .jdgm-write-rev-link,
+  .zenith-reviews--brand-btn .zenith-reviews__apps .jdgm-ask-question-btn,
+  .zenith-reviews--brand-btn .zenith-reviews__apps .jdgm-btn--border,
+  .zenith-reviews--brand-btn .zenith-reviews__apps .jdgm-cancel-rev {
+    transition: none;
+  }
 }

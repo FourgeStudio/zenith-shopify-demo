@@ -1,0 +1,370 @@
+/* Zenith footer (sections/footer.liquid). Mobile first.
+   Per-instance values are CSS vars on #Zenith-{{ section.id }} (see the section's `extra` + zenith-section-style). */
+
+footer.footer.zenith-footer {
+  margin-top: var(--z-mt-m, 0);
+  border-top: var(--z-tl-h, 0) solid transparent;
+  border-image: var(--z-tl-bg-m, var(--z-tl-bg, none)) 1;
+}
+
+/* ---------- Main grid ----------
+   Mobile:  brand / menus / info | seal
+   Desktop: brand | menus / info | seal
+   Newsletter / Follow on Shop (optional) add an implicit full-width row. */
+.zenith-footer__main {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    'brand brand'
+    'menus menus'
+    'info seal';
+  column-gap: var(--z-space-5);
+  align-items: end;
+}
+
+.zenith-footer__brand {
+  grid-area: brand;
+  align-self: start;
+  margin-bottom: var(--z-logo-sp-m, var(--z-space-6));
+}
+
+.zenith-footer__logo-link {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.zenith-footer__logo {
+  display: block;
+  width: var(--z-logow-m, 145px);
+  max-width: 100%;
+  height: auto;
+}
+
+/* ---------- Menus ---------- */
+.zenith-footer__menus {
+  grid-area: menus;
+  align-self: start;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: var(--z-gap-m, 40px);
+  row-gap: var(--z-mrg-m, var(--z-space-6));
+  min-width: 0;
+}
+
+.zenith-footer__block {
+  min-width: 0;
+}
+
+.zenith-footer__block--full-m {
+  flex-basis: 100%;
+}
+
+.zenith-footer__heading {
+  margin: 0 0 var(--z-space-4);
+  font-size: var(--z-tfs-m, 1.4rem);
+  line-height: 1.4;
+}
+
+.zenith-footer__links {
+  display: flex;
+  flex-direction: column;
+  margin: calc(var(--z-lsp-m, 12px) / -2) 0;
+}
+
+.zenith-footer__links li {
+  display: flex;
+}
+
+.zenith-footer__link {
+  padding: calc(var(--z-lsp-m, 12px) / 2) 0;
+  font-size: var(--z-tfs-m, 1.4rem);
+  line-height: 1.43;
+  color: rgb(var(--color-foreground));
+  text-decoration: none;
+}
+
+.zenith-footer__link:hover,
+.zenith-footer__link--active {
+  text-decoration: underline;
+  text-underline-offset: 0.3rem;
+}
+
+.zenith-footer__text {
+  font-size: var(--z-tfs-m, 1.4rem);
+}
+
+.zenith-footer__text > *:first-child,
+.zenith-footer__brand-headline {
+  margin-top: 0;
+}
+
+/* ---------- Info: social, email, payments ---------- */
+.zenith-footer__info {
+  grid-area: info;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--z-space-3);
+  min-width: 0;
+  margin-top: var(--z-cgap-m, 40px);
+}
+
+.zenith-footer__social.list-social {
+  justify-content: flex-start;
+  margin: 0 calc(var(--z-social-gap, 14px) / -2);
+}
+
+/* 44px tall tap targets; negative margins keep the icon row at icon height */
+.zenith-footer__social .list-social__link {
+  justify-content: center;
+  min-height: 44px;
+  margin: calc((var(--z-icon-m, 22px) - 44px) / 2) 0;
+  padding: 0 calc(var(--z-social-gap, 14px) / 2);
+}
+
+.zenith-footer__social .svg-wrapper,
+.zenith-footer__social .list-social__item .icon {
+  width: var(--z-icon-m, 22px);
+  height: var(--z-icon-m, 22px);
+}
+
+.zenith-footer__email {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--z-space-1);
+  min-height: 44px;
+  margin: calc(var(--z-space-3) * -1) 0;
+  max-width: 100%;
+  font-size: var(--z-tfs-m, 1.4rem);
+  line-height: 1.43;
+  color: rgb(var(--color-foreground));
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.zenith-footer__email:hover span {
+  text-decoration: underline;
+  text-underline-offset: 0.3rem;
+}
+
+.zenith-footer__email-icon {
+  width: 1.15em;
+  height: 1.15em;
+  flex-shrink: 0;
+}
+
+.zenith-footer__payments-image {
+  display: block;
+  height: var(--z-pay-h-m, 18px);
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.zenith-footer__payments {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(var(--z-pay-h-m, 18px) * 0.375);
+}
+
+.zenith-footer__payments li {
+  display: flex;
+}
+
+.zenith-footer__payments svg {
+  display: block;
+  height: var(--z-pay-h-m, 18px);
+  width: auto;
+}
+
+/* ---------- Seal ---------- */
+.zenith-footer__seal {
+  grid-area: seal;
+  justify-self: end;
+  margin-top: var(--z-cgap-m, 40px);
+}
+
+.zenith-footer__seal-link {
+  display: block;
+}
+
+.zenith-footer__seal img {
+  display: block;
+  width: var(--z-seal-w-m, 83px);
+  max-width: 100%;
+  height: auto;
+}
+
+.zenith-footer__seal--m-muted img {
+  filter: grayscale(1);
+  opacity: 0.55;
+}
+
+/* ---------- Newsletter / Follow on Shop (optional) ---------- */
+.zenith-footer__extras.footer-block--newsletter {
+  grid-column: 1 / -1;
+  margin-top: var(--z-cgap-m, 40px);
+}
+
+/* ---------- Bottom bar ---------- */
+.zenith-footer__bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--z-space-2) var(--z-space-5);
+  margin-top: var(--z-div-sp, 15px);
+  padding-top: var(--z-div-sp, 15px);
+  border-top: 1px solid var(--z-div-c-m, rgba(var(--color-foreground), 0.15));
+  font-size: var(--z-cfs-m, 1.2rem);
+  line-height: 1.5;
+}
+
+.zenith-footer__small {
+  margin: 0;
+  font-size: inherit;
+  line-height: inherit;
+  letter-spacing: 0;
+}
+
+.zenith-footer__small a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.zenith-footer__small a:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.3rem;
+}
+
+.zenith-footer__legal {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--z-space-1) var(--z-space-4);
+  margin-left: auto;
+  text-align: right;
+}
+
+.zenith-footer__policies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--z-space-1) var(--z-space-3);
+}
+
+.zenith-footer__localization.footer__localization {
+  padding: 0;
+}
+
+@media screen and (min-width: 750px) {
+  footer.footer.zenith-footer {
+    margin-top: var(--z-mt, 0);
+    border-image: var(--z-tl-bg, none) 1;
+  }
+
+  /* Explicit placement: info spans both columns (seal sits on top of its right end),
+     so the first column is only as wide as the logo and the menus keep one row on tablets. */
+  .zenith-footer__main {
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas: none;
+    column-gap: var(--z-space-7);
+    row-gap: var(--z-cgap, 20px);
+  }
+
+  .zenith-footer__brand {
+    grid-area: 1 / 1;
+    margin-bottom: 0;
+  }
+
+  .zenith-footer__menus {
+    grid-area: 1 / 2;
+  }
+
+  .zenith-footer__info {
+    grid-area: 2 / 1 / 3 / -1;
+    justify-self: start;
+  }
+
+  .zenith-footer__seal {
+    grid-area: 2 / 2;
+  }
+
+  .zenith-footer__logo {
+    width: var(--z-logow, 145px);
+  }
+
+  .zenith-footer__menus {
+    justify-self: end;
+    justify-content: flex-end;
+    column-gap: var(--z-gap, 40px);
+    row-gap: var(--z-cgap, 20px);
+  }
+
+  .zenith-footer__block--full-m {
+    flex-basis: auto;
+  }
+
+  .zenith-footer__heading,
+  .zenith-footer__text,
+  .zenith-footer__link,
+  .zenith-footer__email {
+    font-size: var(--z-tfs, 1.4rem);
+  }
+
+  .zenith-footer__links {
+    margin: calc(var(--z-lsp, 12px) / -2) 0;
+  }
+
+  .zenith-footer__link {
+    padding: calc(var(--z-lsp, 12px) / 2) 0;
+  }
+
+  .zenith-footer__info,
+  .zenith-footer__seal,
+  .zenith-footer__extras.footer-block--newsletter {
+    margin-top: 0;
+  }
+
+  .zenith-footer__social .list-social__link {
+    margin: calc((var(--z-icon, 22px) - 44px) / 2) 0;
+  }
+
+  .zenith-footer__social .svg-wrapper,
+  .zenith-footer__social .list-social__item .icon {
+    width: var(--z-icon, 22px);
+    height: var(--z-icon, 22px);
+  }
+
+  .zenith-footer__payments-image,
+  .zenith-footer__payments svg {
+    height: var(--z-pay-h, 20px);
+  }
+
+  .zenith-footer__payments {
+    gap: calc(var(--z-pay-h, 20px) * 0.375);
+  }
+
+  .zenith-footer__seal img {
+    width: var(--z-seal-w, 85px);
+    filter: none;
+    opacity: 1;
+  }
+
+  .zenith-footer__seal--muted img {
+    filter: grayscale(1);
+    opacity: 0.55;
+  }
+
+  .zenith-footer__bottom {
+    border-top-color: var(--z-div-c, rgba(var(--color-foreground), 0.15));
+    font-size: var(--z-cfs, 1.2rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zenith-footer__social .list-social__link:hover .icon {
+    transform: none;
+  }
+}

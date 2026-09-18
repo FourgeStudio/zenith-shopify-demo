@@ -5,21 +5,37 @@
 {%- liquid
   assign cols = section.settings.slides_desktop
   assign gap_count = section.settings.slides_desktop | minus: 1
+  assign cols_t = section.settings.slides_desktop | minus: 1 | at_least: 2
+  assign gap_count_t = cols_t | minus: 1
   if section.settings.show_peek
     assign cols = cols | plus: 0.35
     assign gap_count = gap_count | plus: 1
+    assign cols_t = cols_t | plus: 0.35
+    assign gap_count_t = gap_count_t | plus: 1
   endif
   assign pc_collection = section.settings.collection
+  assign card_sizes = '(min-width: 990px) calc((100vw - 10rem) / ' | append: cols | append: '), (min-width: 750px) calc((100vw - 10rem) / ' | append: cols_t | append: '), ' | append: section.settings.mobile_slide_width | append: 'vw'
 -%}
 {%- capture extra -%}
   --z-slide: calc((100% - {{ gap_count }} * var(--z-gap, 24px)) / {{ cols }});
+  --z-slide-t: calc((100% - {{ gap_count_t }} * var(--z-gap, 24px)) / {{ cols_t }});
   --z-slide-m: {{ section.settings.mobile_slide_width }}%;
+  --z-pc-ebsp: {{ section.settings.eyebrow_spacing }}px;
+  --z-pc-txtsp: {{ section.settings.card_text_spacing }}px;
+  --z-pc-btnsp: {{ section.settings.card_button_spacing }}px;
+  --z-pc-btnh: {{ section.settings.card_button_height }}px;
+  --z-pc-btnh-m: {{ section.settings.card_button_height_mobile }}px;
+  --z-pc-atcfs: {{ section.settings.card_button_font_size }}px;
+  --z-pc-atcfs-m: {{ section.settings.card_button_font_size_mobile }}px;
+  --z-pc-ctlsp: {{ section.settings.controls_spacing }}px;
+  --z-pc-img-bg: {{ section.settings.card_image_bg }};
+  --z-pc-fit: {{ section.settings.image_fit }};
 {%- endcapture -%}
 {%- render 'zenith-section-style', section: section, extra: extra -%}
 
 <section
   id="Zenith-{{ section.id }}"
-  class="zenith-section zenith-pc zenith-pc--{{ section.settings.image_ratio }} color-{{ section.settings.color_scheme }} gradient"
+  class="zenith-section zenith-pc zenith-pc--{{ section.settings.image_ratio }}{% if section.settings.bleed_right %} zenith-pc--bleed{% endif %} color-{{ section.settings.color_scheme }} gradient"
 >
   <div class="page-width">
     <div class="zenith-pc__header">
@@ -38,12 +54,12 @@
             assign view_all_url = pc_collection.url
           endif
         -%}
-        <a
-          {% if view_all_url != blank %}href="{{ view_all_url }}"{% else %}role="link" aria-disabled="true"{% endif %}
-          class="button zenith-pc__view-all"
-        >
-          {{- section.settings.view_all_label | escape -}}
-        </a>
+        {%- render 'zenith-button',
+          label: section.settings.view_all_label,
+          link: view_all_url,
+          style: section.settings.button_style,
+          class: 'zenith-pc__view-all'
+        -%}
       {%- endif -%}
     </div>
 
@@ -55,7 +71,10 @@
               {%- render 'zenith-product-card',
                 product: product,
                 show_rating: section.settings.show_rating,
-                button_label: section.settings.button_label
+                button_label: section.settings.button_label,
+                button_style: section.settings.card_button_style,
+                button_icon: section.settings.card_button_icon,
+                image_sizes: card_sizes
               -%}
             </li>
           {%- endfor -%}
@@ -66,6 +85,8 @@
                 product: blank,
                 show_rating: section.settings.show_rating,
                 button_label: section.settings.button_label,
+                button_style: section.settings.card_button_style,
+                button_icon: section.settings.card_button_icon,
                 index: forloop.index0
               -%}
             </li>
@@ -88,10 +109,7 @@
   "tag": "div",
   "class": "section",
   "disabled_on": {
-    "groups": [
-      "header",
-      "footer"
-    ]
+    "groups": ["header", "footer"]
   },
   "settings": [
     {
@@ -135,13 +153,24 @@
       "id": "show_rating",
       "label": "Show product rating",
       "info": "Requires a reviews app that sets product ratings",
-      "default": true
+      "default": false
     },
     {
       "type": "text",
       "id": "button_label",
       "label": "Card button label",
       "default": "Add to Cart"
+    },
+    {
+      "type": "select",
+      "id": "card_button_icon",
+      "label": "Card button icon",
+      "default": "arrow_right",
+      "options": [
+        { "value": "arrow_right", "label": "Arrow" },
+        { "value": "cart", "label": "Cart" },
+        { "value": "none", "label": "None" }
+      ]
     },
     {
       "type": "text",
@@ -163,22 +192,30 @@
       "type": "range",
       "id": "slides_desktop",
       "label": "Products per view on desktop",
+      "info": "Tablet shows one less.",
       "min": 2,
       "max": 6,
       "step": 1,
-      "default": 5
+      "default": 4
+    },
+    {
+      "type": "checkbox",
+      "id": "bleed_right",
+      "label": "Extend carousel to the right screen edge",
+      "info": "Shows part of the next product outside the page width.",
+      "default": true
     },
     {
       "type": "checkbox",
       "id": "show_peek",
-      "label": "Show part of the next product",
-      "default": true
+      "label": "Show part of the next product inside the page width",
+      "default": false
     },
     {
       "type": "checkbox",
       "id": "show_dots",
       "label": "Show pagination dots",
-      "default": false
+      "default": true
     },
     {
       "type": "checkbox",
@@ -209,6 +246,16 @@
     },
     {
       "type": "range",
+      "id": "eyebrow_spacing",
+      "label": "Space below eyebrow",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
       "id": "heading_spacing",
       "label": "Space below heading",
       "min": 0,
@@ -233,19 +280,70 @@
       "label": "Product image shape",
       "default": "square",
       "options": [
-        {
-          "value": "square",
-          "label": "Square"
-        },
-        {
-          "value": "portrait",
-          "label": "Portrait 4:5"
-        },
-        {
-          "value": "landscape",
-          "label": "Landscape 4:3"
-        }
+        { "value": "square", "label": "Square" },
+        { "value": "portrait", "label": "Portrait 4:5" },
+        { "value": "landscape", "label": "Landscape 4:3" }
       ]
+    },
+    {
+      "type": "select",
+      "id": "image_fit",
+      "label": "Product image fit",
+      "default": "cover",
+      "options": [
+        { "value": "cover", "label": "Fill (crop)" },
+        { "value": "contain", "label": "Fit (no crop)" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "image_padding",
+      "label": "Product image padding",
+      "min": 0,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "card_text_spacing",
+      "label": "Space between image and title",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "card_button_spacing",
+      "label": "Space above card button",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "card_button_height",
+      "label": "Card button height",
+      "min": 32,
+      "max": 64,
+      "step": 1,
+      "unit": "px",
+      "default": 38
+    },
+    {
+      "type": "range",
+      "id": "controls_spacing",
+      "label": "Space above dots and arrows",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 32
     },
     {
       "type": "header",
@@ -256,6 +354,38 @@
       "id": "color_scheme",
       "label": "Color scheme",
       "default": "scheme-1"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "View all button style",
+      "default": "outline",
+      "options": [
+        { "value": "gold", "label": "Gold gradient" },
+        { "value": "dark", "label": "Dark" },
+        { "value": "outline", "label": "Outline" },
+        { "value": "light", "label": "Light" },
+        { "value": "scheme", "label": "Color scheme button" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "card_button_style",
+      "label": "Card button style",
+      "default": "gold",
+      "options": [
+        { "value": "gold", "label": "Gold gradient" },
+        { "value": "dark", "label": "Dark" },
+        { "value": "outline", "label": "Outline" },
+        { "value": "light", "label": "Light" },
+        { "value": "scheme", "label": "Color scheme button" }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "card_image_bg",
+      "label": "Product image background",
+      "default": "#FFFFFF"
     },
     {
       "type": "header",
@@ -269,7 +399,7 @@
       "max": 120,
       "step": 2,
       "unit": "px",
-      "default": 44
+      "default": 36
     },
     {
       "type": "checkbox",
@@ -295,7 +425,7 @@
       "max": 20,
       "step": 1,
       "unit": "px",
-      "default": 12
+      "default": 14
     },
     {
       "type": "range",
@@ -305,7 +435,7 @@
       "max": 28,
       "step": 1,
       "unit": "px",
-      "default": 15
+      "default": 16
     },
     {
       "type": "range",
@@ -315,7 +445,27 @@
       "max": 32,
       "step": 1,
       "unit": "px",
-      "default": 15
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "label": "View all button text size",
+      "min": 14,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "card_button_font_size",
+      "label": "Card button text size",
+      "min": 14,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 23
     },
     {
       "type": "header",
@@ -324,12 +474,13 @@
     {
       "type": "range",
       "id": "mobile_slide_width",
-      "label": "Mobile card width",
+      "label": "Card width",
+      "info": "Percent of the page width",
       "min": 40,
-      "max": 90,
-      "step": 5,
+      "max": 100,
+      "step": 1,
       "unit": "%",
-      "default": 60
+      "default": 83
     },
     {
       "type": "range",
@@ -339,7 +490,7 @@
       "max": 80,
       "step": 2,
       "unit": "px",
-      "default": 32
+      "default": 36
     },
     {
       "type": "range",
@@ -349,17 +500,27 @@
       "max": 24,
       "step": 1,
       "unit": "px",
-      "default": 15
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "content_gap_mobile",
+      "label": "Space between heading and view all button",
+      "min": 0,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "default": 24
     },
     {
       "type": "range",
       "id": "heading_spacing_mobile",
-      "label": "Space below heading",
+      "label": "Space above cards",
       "min": 0,
       "max": 80,
       "step": 4,
       "unit": "px",
-      "default": 24
+      "default": 20
     },
     {
       "type": "range",
@@ -369,7 +530,7 @@
       "max": 48,
       "step": 4,
       "unit": "px",
-      "default": 12
+      "default": 24
     },
     {
       "type": "range",
@@ -379,7 +540,7 @@
       "max": 24,
       "step": 1,
       "unit": "px",
-      "default": 14
+      "default": 16
     },
     {
       "type": "range",
@@ -389,7 +550,38 @@
       "max": 28,
       "step": 1,
       "unit": "px",
-      "default": 14
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "button_font_size_mobile",
+      "label": "View all button text size",
+      "min": 14,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "card_button_font_size_mobile",
+      "label": "Card button text size",
+      "min": 14,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 23
+    },
+    {
+      "type": "range",
+      "id": "card_button_height_mobile",
+      "label": "Card button height",
+      "info": "44px or more keeps the button easy to tap.",
+      "min": 32,
+      "max": 64,
+      "step": 1,
+      "unit": "px",
+      "default": 44
     },
     {
       "type": "header",
@@ -423,7 +615,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "default": 48
+      "default": 20
     },
     {
       "type": "range",
@@ -433,7 +625,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "default": 48
+      "default": 20
     }
   ],
   "presets": [

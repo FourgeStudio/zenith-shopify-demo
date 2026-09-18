@@ -1,0 +1,142 @@
+/* Zenith header bar + announcement bar (header group). Loaded by sections/header.liquid and
+   sections/announcement-bar.liquid. Per-instance values are CSS vars on #Zenith-{{ section.id }}:
+   header  → --zh-* (bar) / --zd-* (drawer, see zenith-header-drawer.css)
+   announcement → --zab-*  */
+
+/* ---------- Header bar ---------- */
+.header-wrapper.zenith-header-wrapper {
+  background: var(--zh-bg, var(--gradient-background));
+  background-attachment: scroll;
+}
+
+.zenith-header.header.page-width {
+  min-height: var(--zh-h-m, 5.6rem);
+  padding-left: var(--zh-px-m, 1.1rem);
+  padding-right: var(--zh-px-m, 1.1rem);
+}
+
+/* Icon boxes stay 44px tap targets; the design's tighter glyph spacing comes from overlapping boxes. */
+.zenith-header header-drawer {
+  margin-left: 0;
+}
+
+.zenith-header .header__icons {
+  padding-right: 0;
+}
+
+.zenith-header .header__icon--cart {
+  margin-right: 0;
+}
+
+.zenith-header .header__icons > :is(.header__search, .header__icon, .shopify-app-block) ~ :is(.header__search, .header__icon, .shopify-app-block) {
+  margin-left: calc(var(--zh-icon-gap, 3.6rem) - 4.4rem);
+}
+
+.zenith-header .header__icon--menu .zenith-header__hamburger {
+  width: 2.2rem;
+  height: 1.6rem;
+}
+
+.zenith-header .header__icon--menu .zenith-header__close {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+/* (0,3,0) beats Dawn's `.svg-wrapper > svg { width: 100% }` inside the 44px icon wrapper */
+.header__icon .svg-wrapper > .zenith-header__icon {
+  width: 2.4rem;
+  height: 2.4rem;
+  stroke-width: 1.75;
+  transition: transform var(--duration-short) ease;
+}
+
+.header__icon:hover .zenith-header__icon {
+  transform: scale(1.07);
+}
+
+/* Logo */
+.zenith-header .header__heading-link {
+  position: relative;
+  top: var(--zh-logo-y, 0);
+}
+
+.zenith-header .header__heading-logo-wrapper {
+  width: var(--zh-logo-m, 11.4rem);
+}
+
+.scrolled-past-header [data-sticky-type='reduce-logo-size'] .zenith-header .header__heading-logo-wrapper {
+  width: calc(var(--zh-logo-m, 11.4rem) * 0.75);
+}
+
+/* Cart count badge: small circle on the cart's top-right corner */
+.zenith-header .cart-count-bubble {
+  width: var(--zh-badge, 1.1rem);
+  height: var(--zh-badge, 1.1rem);
+  top: calc(50% - 0.6rem - var(--zh-badge, 1.1rem) / 2);
+  left: calc(50% + 0.85rem - var(--zh-badge, 1.1rem) / 2);
+  bottom: auto;
+  background: var(--zh-badge-bg, rgb(var(--color-button)));
+  color: var(--zh-badge-fg, rgb(var(--color-button-text)));
+  font-family: var(--font-body-family);
+  font-size: calc(var(--zh-badge, 1.1rem) * 0.6);
+  font-weight: 600;
+  line-height: 1;
+}
+
+/* Without the search icon, keep the logo centred between menu and account/cart */
+@media screen and (max-width: 989px) {
+  .header.zenith-header--no-search:not(.header--mobile-left):not(.header--has-app) {
+    grid-template-areas: 'left-icons heading icons';
+    grid-template-columns: 1fr auto 1fr;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .zenith-header.header.page-width {
+    min-height: var(--zh-h, 7.2rem);
+    padding-left: var(--zh-px, 9.1rem);
+    padding-right: var(--zh-px, 9.1rem);
+  }
+
+  .zenith-header .header__heading-logo-wrapper {
+    width: var(--zh-logo, 11.4rem);
+  }
+
+  .scrolled-past-header [data-sticky-type='reduce-logo-size'] .zenith-header .header__heading-logo-wrapper {
+    width: calc(var(--zh-logo, 11.4rem) * 0.75);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zenith-header__icon {
+    transition: none;
+  }
+}
+
+/* ---------- Announcement bar ---------- */
+.utility-bar.zenith-announcement {
+  background: var(--zab-bg, var(--gradient-background));
+  background-attachment: scroll;
+}
+
+.zenith-announcement .announcement-bar__message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--zab-h-m, 3.3rem);
+  padding: var(--z-space-1) 0;
+  font-family: var(--zab-font, var(--font-body-family));
+  font-weight: var(--zab-weight, 500);
+  font-size: var(--zab-fs-m, 1.4rem);
+  line-height: 1.2;
+  letter-spacing: 0;
+  text-transform: var(--zab-transform, none);
+  color: rgb(var(--color-foreground));
+}
+
+@media screen and (min-width: 750px) {
+  .zenith-announcement .announcement-bar__message {
+    min-height: var(--zab-h, 4rem);
+    font-size: var(--zab-fs, 1.4rem);
+  }
+}

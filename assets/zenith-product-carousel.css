@@ -1,30 +1,129 @@
+/* Zenith · Product carousel — per-instance values come from CSS vars on #Zenith-{{ section.id }} */
 .zenith-pc--portrait { --z-card-ratio: 4 / 5; }
 .zenith-pc--landscape { --z-card-ratio: 4 / 3; }
 
+/* ---------- Header ---------- */
 .zenith-pc__header {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--z-space-4);
-  margin-bottom: var(--z-space-6);
+  gap: var(--z-cgap-m, var(--z-space-5));
+  margin-bottom: var(--z-hsp-m, 20px);
 }
 
-.zenith-pc__heading {
+.zenith-pc__heading.zenith-heading {
   margin-bottom: 0;
 }
 
-@media screen and (min-width: 750px) {
-  .zenith-pc--portrait { --z-card-ratio: 4 / 5; }
-.zenith-pc--landscape { --z-card-ratio: 4 / 3; }
+.zenith-pc__heading .zenith-heading__title {
+  line-height: 1.1;
+  letter-spacing: 0;
+}
 
-.zenith-pc__header {
+/* Eyebrow sits tight on the heading in the design; base heading gap is --z-space-3 */
+.zenith-pc__heading .zenith-eyebrow + * {
+  margin-top: calc(var(--z-pc-ebsp, 0px) - var(--z-space-3));
+}
+
+.zenith-pc__view-all {
+  flex-shrink: 0;
+}
+
+/* ---------- Track: optional bleed to the right screen edge ---------- */
+.zenith-pc--bleed {
+  overflow-x: clip;
+}
+
+.zenith-pc--bleed .zenith-carousel__track {
+  margin-right: calc((100% - 100vw) / 2);
+  padding-right: calc((100vw - 100%) / 2);
+}
+
+.zenith-pc .zenith-carousel__controls {
+  margin-top: var(--z-pc-ctlsp, var(--z-space-6));
+}
+
+/* ---------- Card ---------- */
+.zenith-pc .zenith-card {
+  gap: 0;
+}
+
+.zenith-pc .zenith-card__media {
+  background: var(--z-pc-img-bg, #fff);
+}
+
+.zenith-pc .zenith-card__media > img {
+  object-fit: var(--z-pc-fit, cover);
+  padding: var(--z-ipd, 0);
+}
+
+.zenith-pc .zenith-card__info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  margin-top: var(--z-pc-txtsp, var(--z-space-3));
+}
+
+.zenith-pc .zenith-card__title {
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0;
+}
+
+.zenith-pc .zenith-card__info .zenith-stars {
+  margin: var(--z-space-1) 0;
+}
+
+.zenith-pc .zenith-card__price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 var(--z-space-1);
+  font-weight: 500;
+  line-height: 1.4;
+  color: rgb(var(--color-foreground));
+}
+
+.zenith-pc .zenith-card__price s {
+  margin-left: 0;
+  font-weight: inherit;
+  color: rgba(var(--color-foreground), 0.5);
+}
+
+.zenith-pc .zenith-card__form {
+  margin-top: var(--z-pc-btnsp, var(--z-space-2));
+}
+
+.zenith-pc .zenith-card .button.zenith-atc {
+  min-height: var(--z-pc-btnh-m, 44px);
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.zenith-pc .zenith-card .button.zenith-atc.zenith-btn {
+  font-size: var(--z-pc-atcfs-m, 2.2rem);
+}
+
+@media screen and (min-width: 750px) {
+  .zenith-pc__header {
     flex-direction: row;
     align-items: flex-end;
     justify-content: space-between;
     gap: var(--z-space-6);
+    margin-bottom: var(--z-hsp, var(--z-space-6));
   }
 
-  .zenith-pc__view-all {
-    flex-shrink: 0;
+  .zenith-pc .zenith-card .button.zenith-atc {
+    min-height: var(--z-pc-btnh, 38px);
+  }
+
+  .zenith-pc .zenith-card .button.zenith-atc.zenith-btn {
+    font-size: var(--z-pc-atcfs, 2.2rem);
+  }
+}
+
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .zenith-pc .zenith-carousel__slide {
+    flex-basis: var(--z-slide-t, 33%);
   }
 }

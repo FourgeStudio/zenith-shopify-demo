@@ -5,36 +5,79 @@
 {%- liquid
   assign cols = section.settings.slides_desktop
   assign gap_count = section.settings.slides_desktop | minus: 1
-  if section.settings.show_peek
-    assign cols = cols | plus: 0.35
-    assign gap_count = gap_count | plus: 1
-  endif
+  assign play_alpha = section.settings.play_opacity | divided_by: 100.0
 -%}
 {%- capture extra -%}
-  --z-slide: calc((100% - {{ gap_count }} * var(--z-gap, 24px)) / {{ cols }});
-  --z-slide-m: {{ section.settings.mobile_slide_width }}%;
+  --z-slide: calc((100cqi - {{ gap_count }} * var(--z-gap, 24px)) / {{ cols }});
+  --z-slide-m: calc({{ section.settings.mobile_slide_width }} * 1cqi);
+  --z-hgap: {{ section.settings.heading_gap }}px;
+  --z-hgap-m: {{ section.settings.heading_gap_mobile }}px;
+  --z-ctrl-sp: {{ section.settings.controls_spacing }}px;
+  --z-card-border: {{ section.settings.card_border_color }};
+  --z-title-color: {{ section.settings.title_color }};
+  --z-play: {{ section.settings.play_size }}px;
+  --z-play-y: {{ section.settings.play_position }}%;
+  --z-play-y-m: {{ section.settings.play_position_mobile }}%;
+  --z-play-bg: {{ section.settings.play_color | color_modify: 'alpha', play_alpha }};
+  --z-play-icon: {{ section.settings.play_icon_color }};
+  --z-thumb: {{ section.settings.thumb_size }}px;
+  --z-thumb-m: {{ section.settings.thumb_size_mobile }}px;
+  --z-body-h: {{ section.settings.body_min_height }}px;
+  --z-body-h-m: {{ section.settings.body_min_height_mobile }}px;
+  --z-handle-fs: {{ section.settings.handle_font_size }}px;
+  --z-handle-fs-m: {{ section.settings.handle_font_size_mobile }}px;
   {%- render 'zenith-overlay-vars', settings: section.settings -%}
 {%- endcapture -%}
 {%- render 'zenith-section-style', section: section, extra: extra -%}
 
+{%- liquid
+  assign heading = section.settings.heading | escape | replace: '[customers]', settings.customer_count
+  assign heading_mobile = section.settings.heading_mobile | escape | replace: '[customers]', settings.customer_count | newline_to_br
+-%}
+
 <section
   id="Zenith-{{ section.id }}"
-  class="zenith-section zenith-videos zenith-videos--{{ section.settings.video_ratio }} color-{{ section.settings.color_scheme }} gradient"
+  class="zenith-section zenith-videos zenith-videos--{{ section.settings.video_ratio }} zenith-videos--q-{{ section.settings.quote_align }} zenith-videos--qm-{{ section.settings.quote_align_mobile }}{% if section.settings.show_peek %} zenith-videos--bleed{% endif %} color-{{ section.settings.color_scheme }} gradient"
 >
   <div class="page-width">
-    {%- render 'zenith-section-heading',
-      eyebrow: section.settings.eyebrow,
-      heading: section.settings.heading,
-      subheading: section.settings.subheading,
-      alignment: section.settings.heading_alignment,
-      uppercase: section.settings.heading_uppercase
-    -%}
+    {%- if section.settings.eyebrow != blank or heading != blank or section.settings.subheading != blank -%}
+      <div class="zenith-heading zenith-heading--{{ section.settings.heading_alignment }} zenith-heading--m-{{ section.settings.heading_alignment_mobile }}{% if section.settings.heading_uppercase %} zenith-heading--uppercase{% endif %}">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="zenith-eyebrow">
+            {{- section.settings.eyebrow | escape | replace: '[customers]', settings.customer_count -}}
+          </p>
+        {%- endif -%}
+        {%- if heading_mobile != blank -%}
+          <h2 class="zenith-heading__title zenith-hide-mobile">{{ heading }}</h2>
+          <h2 class="zenith-heading__title zenith-hide-desktop">{{ heading_mobile }}</h2>
+        {%- elsif heading != blank -%}
+          <h2 class="zenith-heading__title">{{ heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.subheading != blank -%}
+          <div class="zenith-subheading">
+            {{- section.settings.subheading | replace: '[customers]', settings.customer_count -}}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
 
     <zenith-carousel data-autoplay="{{ section.settings.autoplay }}" data-slide-label="Video">
       <ul class="zenith-carousel__track" role="list">
         {%- for block in section.blocks -%}
+          {%- liquid
+            assign card_product = block.settings.product
+            assign thumb = block.settings.thumbnail
+            if thumb == blank and card_product != blank
+              assign thumb = card_product.featured_image
+            endif
+            assign title_link = block.settings.link
+            if title_link == blank and card_product != blank
+              assign title_link = card_product.url
+            endif
+            assign handle = block.settings.author | escape
+          -%}
           <li class="zenith-carousel__slide" id="Block-{{ block.id }}" {{ block.shopify_attributes }}>
-            <article class="zenith-video-card color-{{ section.settings.card_color_scheme }} gradient">
+            <article class="zenith-video-card color-{{ section.settings.card_color_scheme }}">
               <zenith-video class="zenith-media zenith-video-card__media">
                 {%- if block.settings.video != blank -%}
                   {{
@@ -45,49 +88,84 @@
                       playsinline: true,
                       class: 'zenith-video-card__video'
                   }}
-                  <button type="button" class="zenith-video-card__play" data-video-toggle aria-pressed="false" aria-label="Play video{% if block.settings.author != blank %} from {{ block.settings.author | escape }}{% endif %}">
-                    {%- render 'zenith-icon', icon: 'play' -%}
-                  </button>
+                  {%- if block.settings.poster != blank -%}
+                    {{
+                      block.settings.poster
+                      | image_url: width: 720
+                      | image_tag:
+                        loading: 'lazy',
+                        widths: '360, 540, 720',
+                        sizes: '(min-width: 750px) 25vw, 85vw',
+                        class: 'zenith-video-card__poster',
+                        alt: ''
+                    }}
+                  {%- endif -%}
                 {%- elsif block.settings.poster != blank -%}
                   {{
                     block.settings.poster
                     | image_url: width: 720
-                    | image_tag: loading: 'lazy', widths: '360, 540, 720', sizes: '(min-width: 750px) 25vw, 75vw'
+                    | image_tag: loading: 'lazy', widths: '360, 540, 720', sizes: '(min-width: 750px) 25vw, 85vw'
                   }}
-                  <span class="zenith-video-card__play" aria-hidden="true">{%- render 'zenith-icon', icon: 'play' -%}</span>
                 {%- else -%}
                   {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
-                  <span class="zenith-video-card__play" aria-hidden="true">{%- render 'zenith-icon', icon: 'play' -%}</span>
                 {%- endif -%}
                 {%- render 'zenith-overlay', style: section.settings.overlay_style -%}
+                {%- if block.settings.video != blank -%}
+                  <button
+                    type="button"
+                    class="zenith-video-card__play"
+                    data-video-toggle
+                    aria-pressed="false"
+                    aria-label="{{ section.settings.play_label | escape }}{% if handle != blank %} – {{ handle }}{% endif %}"
+                  >
+                    <svg viewBox="0 0 24 32" fill="currentColor" aria-hidden="true" focusable="false">
+                      <path d="M0 0v32l24-16z"/>
+                    </svg>
+                  </button>
+                {%- elsif section.settings.show_play_without_video -%}
+                  <span class="zenith-video-card__play" aria-hidden="true">
+                    <svg viewBox="0 0 24 32" fill="currentColor" aria-hidden="true" focusable="false">
+                      <path d="M0 0v32l24-16z"/>
+                    </svg>
+                  </span>
+                {%- endif -%}
               </zenith-video>
 
               <div class="zenith-video-card__body">
-                {%- if block.settings.quote != blank -%}
-                  <blockquote class="zenith-video-card__quote">{{ block.settings.quote | escape | newline_to_br }}</blockquote>
-                {%- endif -%}
-                {%- if block.settings.author != blank -%}
-                  <p class="zenith-video-card__author">
-                    {{ block.settings.author | escape }}
-                    {%- if block.settings.author_meta != blank -%}
-                      <span>{{ block.settings.author_meta | escape }}</span>
-                    {%- endif -%}
-                  </p>
-                {%- endif -%}
+                <div class="zenith-video-card__quote-wrap">
+                  {%- if block.settings.quote != blank -%}
+                    <blockquote class="zenith-video-card__quote">
+                      {{- block.settings.quote | escape | replace: '[customers]', settings.customer_count | newline_to_br -}}
+                    </blockquote>
+                  {%- endif -%}
+                </div>
 
-                {%- assign p = block.settings.product -%}
-                {%- if p != blank -%}
-                  <a href="{{ p.url }}" class="zenith-video-card__product">
-                    <span class="zenith-media zenith-video-card__product-media">
-                      {%- if p.featured_media -%}
-                        {{ p.featured_media | image_url: width: 120 | image_tag: loading: 'lazy', alt: '' }}
+                {%- if thumb != blank or block.settings.title != blank or handle != blank -%}
+                  <div class="zenith-video-card__meta">
+                    {%- if thumb != blank -%}
+                      <span class="zenith-video-card__thumb">
+                        {{
+                          thumb
+                          | image_url: width: 160
+                          | image_tag: loading: 'lazy', widths: '80, 120, 160', sizes: '56px', alt: ''
+                        }}
+                      </span>
+                    {%- endif -%}
+                    <div class="zenith-video-card__info">
+                      {%- if block.settings.title != blank -%}
+                        {%- if title_link != blank -%}
+                          <a href="{{ title_link }}" class="zenith-video-card__title">
+                            {{- block.settings.title | escape -}}
+                          </a>
+                        {%- else -%}
+                          <p class="zenith-video-card__title">{{ block.settings.title | escape }}</p>
+                        {%- endif -%}
                       {%- endif -%}
-                    </span>
-                    <span class="zenith-video-card__product-info">
-                      <span class="zenith-video-card__product-title">{{ p.title | escape }}</span>
-                      <span class="zenith-video-card__product-price">{{ p.price | money }}</span>
-                    </span>
-                  </a>
+                      {%- if handle != blank -%}
+                        <p class="zenith-video-card__handle">{{ handle }}</p>
+                      {%- endif -%}
+                    </div>
+                  </div>
                 {%- endif -%}
               </div>
             </article>
@@ -133,10 +211,24 @@
       "default": "Clinically Proven. The Complete Regimen."
     },
     {
+      "type": "textarea",
+      "id": "heading_mobile",
+      "label": "Mobile heading",
+      "info": "Leave blank to use the heading above. Line breaks are kept.",
+      "default": "A Complete Routine,\nBuilt for Men."
+    },
+    {
       "type": "richtext",
       "id": "subheading",
       "label": "Subheading",
       "default": "<p>Hear from the men who use Zenith every day.</p>"
+    },
+    {
+      "type": "text",
+      "id": "play_label",
+      "label": "Play button label",
+      "info": "Read by screen readers",
+      "default": "Play video"
     },
     {
       "type": "header",
@@ -171,6 +263,7 @@
       "type": "checkbox",
       "id": "show_peek",
       "label": "Show part of the next video",
+      "info": "Lets the carousel run to the right edge of the screen",
       "default": true
     },
     {
@@ -208,6 +301,17 @@
     },
     {
       "type": "range",
+      "id": "heading_gap",
+      "label": "Space between heading lines",
+      "info": "Gap between eyebrow, heading and subheading",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "range",
       "id": "heading_spacing",
       "label": "Space below heading",
       "min": 0,
@@ -227,14 +331,28 @@
       "default": 24
     },
     {
+      "type": "range",
+      "id": "controls_spacing",
+      "label": "Space above dots and arrows",
+      "min": 0,
+      "max": 64,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
       "type": "select",
       "id": "video_ratio",
       "label": "Video shape",
-      "default": "9-16",
+      "default": "13-18",
       "options": [
         {
           "value": "9-16",
           "label": "Vertical 9:16"
+        },
+        {
+          "value": "13-18",
+          "label": "Tall 13:18"
         },
         {
           "value": "4-5",
@@ -245,6 +363,69 @@
           "label": "Square"
         }
       ]
+    },
+    {
+      "type": "range",
+      "id": "play_size",
+      "label": "Play button size",
+      "min": 40,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "play_position",
+      "label": "Play button vertical position",
+      "info": "50% is the middle of the video",
+      "min": 30,
+      "max": 70,
+      "step": 1,
+      "unit": "%",
+      "default": 53
+    },
+    {
+      "type": "checkbox",
+      "id": "show_play_without_video",
+      "label": "Show play icon on cards without a video",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "quote_align",
+      "label": "Quote position",
+      "default": "center",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "center",
+          "label": "Middle"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "body_min_height",
+      "label": "Text panel min height",
+      "min": 0,
+      "max": 400,
+      "step": 8,
+      "unit": "px",
+      "default": 200
+    },
+    {
+      "type": "range",
+      "id": "thumb_size",
+      "label": "Product thumbnail size",
+      "min": 32,
+      "max": 96,
+      "step": 2,
+      "unit": "px",
+      "default": 56
     },
     {
       "type": "header",
@@ -260,7 +441,20 @@
       "type": "color_scheme",
       "id": "card_color_scheme",
       "label": "Card color scheme",
-      "default": "scheme-4"
+      "info": "Card uses the scheme's flat background color",
+      "default": "scheme-6"
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Card border",
+      "default": "#294850"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Video title color",
+      "default": "#D6B356"
     },
     {
       "type": "select",
@@ -298,7 +492,8 @@
       "type": "color",
       "id": "overlay_color",
       "label": "Overlay color",
-      "default": "#121212"
+      "info": "Match the card background for a seamless fade",
+      "default": "#112328"
     },
     {
       "type": "range",
@@ -308,7 +503,7 @@
       "max": 100,
       "step": 5,
       "unit": "%",
-      "default": 40
+      "default": 100
     },
     {
       "type": "range",
@@ -319,7 +514,29 @@
       "max": 100,
       "step": 5,
       "unit": "%",
-      "default": 40
+      "default": 30
+    },
+    {
+      "type": "color",
+      "id": "play_color",
+      "label": "Play button background",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "play_opacity",
+      "label": "Play button background opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "color",
+      "id": "play_icon_color",
+      "label": "Play icon",
+      "default": "#FFFFFF"
     },
     {
       "type": "header",
@@ -333,7 +550,7 @@
       "max": 120,
       "step": 2,
       "unit": "px",
-      "default": 44
+      "default": 48
     },
     {
       "type": "checkbox",
@@ -349,7 +566,7 @@
       "max": 28,
       "step": 1,
       "unit": "px",
-      "default": 16
+      "default": 18
     },
     {
       "type": "range",
@@ -359,7 +576,7 @@
       "max": 20,
       "step": 1,
       "unit": "px",
-      "default": 12
+      "default": 14
     },
     {
       "type": "range",
@@ -369,12 +586,12 @@
       "max": 24,
       "step": 1,
       "unit": "px",
-      "default": 14
+      "default": 16
     },
     {
       "type": "range",
       "id": "title_font_size",
-      "label": "Name and product size",
+      "label": "Video title size",
       "min": 10,
       "max": 20,
       "step": 1,
@@ -382,18 +599,45 @@
       "default": 12
     },
     {
+      "type": "range",
+      "id": "handle_font_size",
+      "label": "Handle size",
+      "min": 8,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    },
+    {
       "type": "header",
       "content": "Mobile"
     },
     {
+      "type": "select",
+      "id": "heading_alignment_mobile",
+      "label": "Heading alignment",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ]
+    },
+    {
       "type": "range",
       "id": "mobile_slide_width",
-      "label": "Mobile card width",
+      "label": "Card width",
+      "info": "Percent of the page width",
       "min": 60,
       "max": 100,
-      "step": 5,
+      "step": 1,
       "unit": "%",
-      "default": 75
+      "default": 83
     },
     {
       "type": "range",
@@ -403,7 +647,7 @@
       "max": 80,
       "step": 2,
       "unit": "px",
-      "default": 32
+      "default": 36
     },
     {
       "type": "range",
@@ -413,7 +657,17 @@
       "max": 24,
       "step": 1,
       "unit": "px",
-      "default": 15
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "heading_gap_mobile",
+      "label": "Space between heading lines",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 4
     },
     {
       "type": "range",
@@ -433,7 +687,53 @@
       "max": 48,
       "step": 4,
       "unit": "px",
-      "default": 16
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "play_position_mobile",
+      "label": "Play button vertical position",
+      "min": 30,
+      "max": 70,
+      "step": 1,
+      "unit": "%",
+      "default": 57
+    },
+    {
+      "type": "select",
+      "id": "quote_align_mobile",
+      "label": "Quote position",
+      "default": "top",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "center",
+          "label": "Middle"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "body_min_height_mobile",
+      "label": "Text panel min height",
+      "min": 0,
+      "max": 400,
+      "step": 8,
+      "unit": "px",
+      "default": 232
+    },
+    {
+      "type": "range",
+      "id": "thumb_size_mobile",
+      "label": "Product thumbnail size",
+      "min": 32,
+      "max": 96,
+      "step": 2,
+      "unit": "px",
+      "default": 56
     },
     {
       "type": "range",
@@ -443,7 +743,27 @@
       "max": 20,
       "step": 1,
       "unit": "px",
-      "default": 13
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "title_font_size_mobile",
+      "label": "Video title size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "handle_font_size_mobile",
+      "label": "Handle size",
+      "min": 8,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 10
     },
     {
       "type": "header",
@@ -457,7 +777,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "default": 64
+      "default": 32
     },
     {
       "type": "range",
@@ -467,7 +787,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "default": 64
+      "default": 32
     },
     {
       "type": "range",
@@ -477,7 +797,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "default": 48
+      "default": 20
     },
     {
       "type": "range",
@@ -487,7 +807,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "default": 48
+      "default": 20
     }
   ],
   "blocks": [
@@ -503,36 +823,48 @@
           "type": "video",
           "id": "video",
           "label": "Video",
-          "info": "Vertical 9:16 recommended. Upload in Content > Files."
+          "info": "Vertical video recommended. Upload in Content > Files."
         },
         {
           "type": "image_picker",
           "id": "poster",
           "label": "Cover image",
-          "info": "Used when no video is selected"
+          "info": "Shown before the video plays, or on its own when no video is selected"
         },
         {
           "type": "textarea",
           "id": "quote",
           "label": "Quote",
-          "default": "Anti-aging cream is all in one solution. Barrier protection, lightweight, and it absorbs fast."
+          "default": "\"Anti-aging cream is all in one solution. Barrier protection, retinol. Clinically proven anti-aging. It's lightweight.\""
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Video title",
+          "default": "A Gym Instructor's Secret to Younger-Looking Skin"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Video title link",
+          "info": "Defaults to the product page"
         },
         {
           "type": "text",
           "id": "author",
-          "label": "Name",
-          "default": "Customer name"
-        },
-        {
-          "type": "text",
-          "id": "author_meta",
-          "label": "Details",
-          "default": "Verified buyer"
+          "label": "Creator handle",
+          "default": "@creator"
         },
         {
           "type": "product",
           "id": "product",
           "label": "Featured product"
+        },
+        {
+          "type": "image_picker",
+          "id": "thumbnail",
+          "label": "Thumbnail",
+          "info": "Defaults to the featured product's image"
         }
       ]
     }
