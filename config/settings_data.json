@@ -231,7 +231,9 @@
             "color_scheme": "scheme-1"
           }
         }
-      }
+      },
+      "promo_enabled": true,
+      "promo_auto_end": true
     }
   }
 }

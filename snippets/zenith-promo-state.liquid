@@ -1,0 +1,50 @@
+{% comment %}
+  Store-wide promotion switch: Theme settings → Zenith · Promo → "Promotion is running".
+  A section with a "Show" (promo_visibility) setting renders this on its root element:
+    class="...{% render 'zenith-promo-state', visibility: section.settings.promo_visibility %}"
+      → ' zenith-promo-hidden' when the section must be hidden right now (display: none; stays in the HTML for crawlers)
+    <section{% render 'zenith-promo-state', visibility: section.settings.promo_visibility, output: 'attrs' %}>
+      → data attributes read by assets/zenith-promo-state.js, which swaps the sections when the promo ends on an open page
+  Accepts:
+    visibility {String} 'promo_on' (only while the promotion runs) | 'promo_off' (only while it doesn't) | 'always'
+    output {String} 'class' (default) | 'attrs'
+{% endcomment %}
+{%- liquid
+  assign pv = visibility | default: 'always'
+  if pv != 'always'
+    assign promo_on = settings.promo_enabled
+    assign promo_end = ''
+    if settings.promo_end_date != blank
+      assign pe_time = settings.promo_end_time | default: '23:59' | strip
+      assign pe_tz = settings.promo_timezone | default: '+08:00'
+      assign promo_end = settings.promo_end_date | strip | append: 'T' | append: pe_time | append: ':00' | append: pe_tz
+    endif
+
+    # Auto end: once the end date/time has passed, the promotion counts as off.
+    assign watch_end = false
+    if promo_on and settings.promo_auto_end and promo_end != ''
+      assign end_s = promo_end | date: '%s' | plus: 0
+      assign now_s = 'now' | date: '%s' | plus: 0
+      if end_s > 1000000000
+        if now_s >= end_s
+          assign promo_on = false
+        else
+          assign watch_end = true
+        endif
+      endif
+    endif
+
+    if output == 'attrs'
+      echo ' data-promo-visibility="' | append: pv | append: '"'
+      if watch_end
+        echo ' data-promo-end="' | append: promo_end | append: '"'
+      endif
+    else
+      if pv == 'promo_on' and promo_on == false
+        echo ' zenith-promo-hidden'
+      elsif pv == 'promo_off' and promo_on
+        echo ' zenith-promo-hidden'
+      endif
+    endif
+  endif
+-%}

@@ -35,8 +35,24 @@
   if s.button_label_mobile != blank or s.button_link_mobile != blank
     assign split_buttons = true
   endif
+
+  # Store-wide promotion switch (Theme settings → Zenith · Promo) can hide this hero, e.g. while a promo banner takes its place.
+  capture promo_class
+    render 'zenith-promo-state', visibility: s.promo_visibility
+  endcapture
+
+  # Only a visible hero at the top of the page loads its image eagerly with high priority.
+  assign img_loading = 'lazy'
+  assign img_priority = 'auto'
+  if section.index <= 2 and promo_class == blank
+    assign img_loading = 'eager'
+    assign img_priority = 'high'
+  endif
 -%}
 
+{%- if s.promo_visibility != 'always' -%}
+  <script src="{{ 'zenith-promo-state.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
 {%- if show_countdown -%}
   {{ 'zenith-countdown.css' | asset_url | stylesheet_tag }}
   <script src="{{ 'zenith-countdown.js' | asset_url }}" defer="defer"></script>
@@ -74,7 +90,8 @@
 
 <section
   id="Zenith-{{ section.id }}"
-  class="zenith-section zenith-hero color-{{ s.color_scheme }} gradient zenith-hero--{{ s.content_position }} zenith-hero--v-{{ s.content_vertical }} zenith-hero--m-{{ s.mobile_alignment }} zenith-hero--m-text-{{ s.mobile_text_alignment }}{% if s.mobile_button_bottom %} zenith-hero--m-pin{% endif %}{% if s.mobile_button_full %} zenith-hero--m-full{% endif %}"
+  class="zenith-section zenith-hero color-{{ s.color_scheme }} gradient zenith-hero--{{ s.content_position }} zenith-hero--v-{{ s.content_vertical }} zenith-hero--m-{{ s.mobile_alignment }} zenith-hero--m-text-{{ s.mobile_text_alignment }}{% if s.mobile_button_bottom %} zenith-hero--m-pin{% endif %}{% if s.mobile_button_full %} zenith-hero--m-full{% endif %}{{ promo_class }}"
+  {%- render 'zenith-promo-state', visibility: s.promo_visibility, output: 'attrs' %}
 >
   <div class="zenith-hero__inner">
     <div class="zenith-media zenith-hero__media">
@@ -89,8 +106,8 @@
           | image_tag:
             widths: '750, 1100, 1500, 1920, 2400',
             sizes: '100vw',
-            fetchpriority: 'high',
-            loading: 'eager',
+            fetchpriority: img_priority,
+            loading: img_loading,
             class: desktop_class
         }}
         {%- if s.mobile_image != blank -%}
@@ -100,8 +117,8 @@
             | image_tag:
               widths: '375, 550, 750, 1100, 1500',
               sizes: '100vw',
-              fetchpriority: 'high',
-              loading: 'eager',
+              fetchpriority: img_priority,
+              loading: img_loading,
               class: 'zenith-hide-desktop'
           }}
         {%- endif -%}
@@ -112,8 +129,8 @@
           | image_tag:
             widths: '375, 550, 750, 1100, 1500',
             sizes: '100vw',
-            fetchpriority: 'high',
-            loading: 'eager'
+            fetchpriority: img_priority,
+            loading: img_loading
         }}
       {%- else -%}
         {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
@@ -420,6 +437,18 @@
     {
       "type": "header",
       "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "promo_visibility",
+      "label": "Show",
+      "default": "always",
+      "options": [
+        { "value": "always", "label": "Always" },
+        { "value": "promo_off", "label": "Only when no promotion runs" },
+        { "value": "promo_on", "label": "Only while the promotion runs" }
+      ],
+      "info": "Follows Theme settings → Zenith · Promo → \"Promotion is running\". Hidden sections stay in the page code for search engines."
     },
     {
       "type": "select",

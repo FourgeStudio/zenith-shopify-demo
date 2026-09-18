@@ -549,6 +549,9 @@ zenith-carousel {
   .zenith-hide-desktop { display: none !important; }
 }
 
+/* Store-wide promotion switch (snippets/zenith-promo-state.liquid): hidden, but kept in the HTML for crawlers. */
+.zenith-promo-hidden { display: none !important; }
+
 /* ---------- Image overlay (see snippets/zenith-overlay.liquid) ---------- */
 /* div.* beats Dawn's div:empty { display: none } */
 div.zenith-overlay {

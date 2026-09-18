@@ -70,6 +70,20 @@
         "content": "One promo for the whole store. Every \"Zenith · Promo banner\" section set to \"Global promo\" (and the hero countdown strip, if set to use it) shows this content — edit once, it updates everywhere."
       },
       {
+        "type": "checkbox",
+        "id": "promo_enabled",
+        "label": "Promotion is running",
+        "default": false,
+        "info": "On: sections whose \"Show\" setting is \"Only while the promotion runs\" appear (promo banners) and sections set to \"Only when no promotion runs\" are hidden (homepage hero). Off: the reverse."
+      },
+      {
+        "type": "checkbox",
+        "id": "promo_auto_end",
+        "label": "End the promotion automatically at the countdown end",
+        "default": true,
+        "info": "After the end date/time below, the store switches back as if the promotion were off."
+      },
+      {
         "type": "header",
         "content": "Content"
       },
@@ -100,13 +114,13 @@
         "type": "image_picker",
         "id": "promo_background_image",
         "label": "Background image",
-        "info": "Fills the banner, e.g. gold confetti + product photo with a light left side for the text. Recommended 2752 × 640px."
+        "info": "\"Background image\" banner layout only: fills the banner behind the text. Recommended 2752 × 640px."
       },
       {
         "type": "image_picker",
         "id": "promo_image",
         "label": "Product image",
-        "info": "Optional. Transparent PNG beside the text. Leave empty when the background image already shows the products."
+        "info": "\"Split\" banner layout (default): the photo beside the colour panel, cropped to fill — recommended 1400 × 700px. \"Background image\" layout: optional transparent PNG beside the text."
       },
       {
         "type": "header",
