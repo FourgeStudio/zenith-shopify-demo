@@ -41,7 +41,7 @@ Then fill `brief-template.md` → `<scratchpad>/BRIEF.md` (placeholders + "Measu
 2. Validate + merge patches (copy finished ones to `<scratchpad>/ready/`):
    `node scripts/merge-patches.js . templates/<page>.json "<scratchpad>/ready"` → fix every error → re-run with `--write`.
 3. Reconcile neighbour spacing: gap between sections = prev `padding_bottom` + next `padding_top`; compare to design y-positions (desktop and mobile) and fix in the patch.
-4. Validate all JSON (`templates`, `*-group.json`, `settings_data`, `settings_schema`) + every `{% schema %}`; run `npx -y @shopify/cli@latest theme check --output json` → 0 errors (ExcessiveSettingsCount warnings are acceptable).
+4. Validate all JSON (`templates`, `*-group.json`, `settings_data`, `settings_schema`) + every `{% schema %}`; run `node scripts/validate-schemas.js .` (Shopify upload rules theme check misses — MUST pass) and `npx -y @shopify/cli@latest theme check --output json` → 0 errors (ExcessiveSettingsCount warnings are acceptable).
 5. Spot-render risky pieces yourself: static HTML mock linking the real CSS → `scripts/shot.ps1 -Html … -Out … -Width 1440` → compare with the design crop (build a side-by-side PNG and view it). Mobile: Chrome won't lay out narrower than ~500px, so wrap the mock in a 401px `<iframe>` page and shoot that. Mocks lack `layout/theme.liquid`'s global `box-sizing: border-box` — set it on your own inputs anyway.
 
 ## 5. Ship + hand off
@@ -85,6 +85,9 @@ Global-toggle candidates when a section repeats across pages with the same conte
 - Bash heredocs strip backslashes → write scripts with the Write tool.
 - PowerShell 5.1 `Start-Process -ArgumentList @(...)` doesn't quote spaces ("Work - Cals") → quote each arg (see `shot.ps1`).
 - `settings_data.json` invalid → Shopify drops all colour schemes. Validate after every edit.
+- **Shopify silently rejects a section file** whose schema breaks an upload rule (range > 101 steps or < 2 steps, default off-step, bad url/richtext default…). The store keeps the OLD file, and the next theme-editor save commits that old file back to GitHub over yours (bot commit "Update from Shopify…"). `theme check` does not catch these → always run `scripts/validate-schemas.js`.
+- After every pull, look for `Update from Shopify` commits touching `.liquid`/`.css`: diff them against your last version (`git show <bot> -- <file>`). Restore code you own; keep the editor's CONTENT changes in templates/groups (use a key-level merge, not a file checkout).
+- An editor save made while a push is still syncing can capture half-synced files. Tell the team to reload the editor after a push and wait a minute before saving.
 - Upload-dependent visuals (backgrounds with baked-in confetti, logos with taglines) → note in the handoff what the client must upload and how.
 - **Frame vs screen edge**: anything that touches the edge of the 1440 design frame (carousels running off-screen, bands from the edge, marquees) bleeds to the SCREEN edge on wider screens (`calc((100% - 100vw) / 2)` / `100cqi` formulas + `overflow-x: clip` on the section). Only content that sits inside the margins in the design is capped to the frame. Check every section against the design before changing widths globally.
 - Font size from a PNG: **cap height ≈ 0.70 × font-size** for both Special Gothic Condensed One and Geist (measure a flat letter like H/F/D, not a round one). Cross-check with text width vs a mock at a known size.

@@ -57,6 +57,7 @@ _Last updated: 2026-09-18. Keep this file current at the end of each work sessio
 
 ## Known issues / gotchas
 - Theme settings **font pickers do nothing**: brand fonts are self-hosted in `assets/zenith-*.woff2` and forced via `assets/zenith-base.css`. Pickers are set to a system font so `settings_data.json` stays valid.
+- **Shopify rejects a section file with an invalid schema without telling git** (range > 101 or < 2 steps, etc.) and keeps the old file; the next theme-editor save commits the old file back. Happened 2026-09-18: confetti (hero/promo), reviews theming and the video bleed were reverted by a bot commit from Henson's editor save. Fixed + `node .claude/skills/design-to-page/scripts/validate-schemas.js .` added — run it before every push. Reload the theme editor after a push before saving.
 - `settings_data.json` must stay schema-valid or Shopify drops **all color schemes** (editor error "color schemes must be defined…"). Caused once by an invalid font handle + `animations_hover_elements: "none"`.
 - The editor writes **every** setting into `templates/*.json`. Never reuse a setting id with a different type; add a new id and strip the stale key from templates.
 - Dawn's `div:empty { display: none }` hides empty divs — overlays use `div.zenith-overlay` to beat it; watch for this with any new empty decorative div.
