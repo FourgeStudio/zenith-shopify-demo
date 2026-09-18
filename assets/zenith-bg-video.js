@@ -21,18 +21,66 @@ if (!customElements.get('zenith-bg-video')) {
     disconnectedCallback() {
       if (this.observer) this.observer.disconnect();
       this.observer = null;
+      if (this.onMessage) window.removeEventListener('message', this.onMessage);
     }
 
     mount() {
       if (this.dataset.kind === 'youtube') {
         const frame = document.createElement('iframe');
-        frame.src = this.dataset.src;
+        // origin= lets the player send its state back to this page (postMessage)
+        frame.src = `${this.dataset.src}&origin=${encodeURIComponent(window.location.origin)}`;
         frame.title = this.dataset.title || 'Video';
         frame.allow = 'autoplay; encrypted-media; picture-in-picture';
+        // YouTube refuses embeds without a referrer (error 153)
+        frame.referrerPolicy = 'strict-origin-when-cross-origin';
         frame.tabIndex = -1;
         frame.setAttribute('frameborder', '0');
-        // YouTube paints black before the first frame: fade in a moment after load
-        frame.addEventListener('load', () => setTimeout(() => this.classList.add('is-ready'), 800), { once: true });
+        // Fade in only once YouTube reports "playing" (its spinner/logo stay hidden behind the cover image).
+        // Blocked autoplay → no "playing" → the cover image stays. No messages at all → fade in after 6s.
+        this.onMessage = (event) => {
+          if (event.source !== frame.contentWindow) return;
+          this.heard = true;
+          let data;
+          try {
+            data = typeof event.data === 'string' ? JSON.parse(event.data) : event.data;
+          } catch (e) {
+            return;
+          }
+          const state = data && data.info && typeof data.info === 'object' ? data.info.playerState : data && data.info;
+          // YouTube shows its title and a pause button for a few seconds after (re)starting: keep the cover up until they fade
+          if (state === 1 && !this.classList.contains('is-ready') && !this.revealTimer) {
+            this.revealTimer = setTimeout(() => {
+              this.revealTimer = null;
+              this.classList.add('is-ready');
+            }, 3500);
+          }
+          // Loop without YouTube's playlist mode (that pins Shorts buttons and prev/next over the video)
+          if (state === 0 && this.visible) {
+            this.classList.remove('is-ready');
+            // restart once the cover has faded back in (0.4s), so the restart buttons are never seen
+            setTimeout(() => {
+              this.command('seekTo', [0, true]);
+              this.command('playVideo');
+            }, 450);
+          }
+        };
+        window.addEventListener('message', this.onMessage);
+        frame.addEventListener(
+          'load',
+          () => {
+            // Like YouTube's own API script: repeat the handshake until the player answers
+            let tries = 0;
+            const hello = setInterval(() => {
+              if (this.heard || ++tries > 24) {
+                clearInterval(hello);
+                if (!this.heard) this.classList.add('is-ready');
+                return;
+              }
+              frame.contentWindow?.postMessage(JSON.stringify({ event: 'listening', id: 1, channel: 'widget' }), '*');
+            }, 250);
+          },
+          { once: true }
+        );
         this.media = frame;
       } else {
         const video = document.createElement('video');
@@ -51,6 +99,7 @@ if (!customElements.get('zenith-bg-video')) {
     }
 
     toggle(play) {
+      this.visible = play;
       const media = this.media;
       if (!media) return;
       if (media.tagName === 'VIDEO') {
@@ -60,12 +109,15 @@ if (!customElements.get('zenith-bg-video')) {
         } else {
           media.pause();
         }
-      } else if (media.contentWindow && this.classList.contains('is-ready')) {
-        media.contentWindow.postMessage(
-          JSON.stringify({ event: 'command', func: play ? 'playVideo' : 'pauseVideo', args: [] }),
-          '*'
-        );
+      } else if (this.heard) {
+        // Paused off screen → back to the cover, so YouTube's resume buttons stay hidden too
+        if (!play) this.classList.remove('is-ready');
+        this.command(play ? 'playVideo' : 'pauseVideo');
       }
+    }
+
+    command(func, args = []) {
+      this.media?.contentWindow?.postMessage(JSON.stringify({ event: 'command', func, args }), '*');
     }
   }
 

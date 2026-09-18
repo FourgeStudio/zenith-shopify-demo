@@ -1,0 +1,30 @@
+{%- comment -%}
+  Outputs the 11-character YouTube id from a link, followed by ":short" for Shorts links. Outputs nothing when the link isn't valid.
+  Accepts: url {String} youtube.com/shorts/ID, watch?v=ID, youtu.be/ID, embed/ID, live/ID or a bare ID
+  Usage:
+    {%- capture yt -%}{% render 'zenith-youtube-id', url: block.settings.youtube_url %}{%- endcapture -%}
+    {%- assign yt_id = yt | split: ':' | first -%}  and  {%- if yt contains ':short' -%}
+{%- endcomment -%}
+{%- liquid
+  assign ytid_short = false
+  assign ytid = url | strip
+  if ytid contains 'shorts/'
+    assign ytid = ytid | split: 'shorts/' | last
+    assign ytid_short = true
+  elsif ytid contains 'v='
+    assign ytid = ytid | split: 'v=' | last
+  elsif ytid contains 'youtu.be/'
+    assign ytid = ytid | split: 'youtu.be/' | last
+  elsif ytid contains 'embed/'
+    assign ytid = ytid | split: 'embed/' | last
+  elsif ytid contains 'live/'
+    assign ytid = ytid | split: 'live/' | last
+  endif
+  assign ytid = ytid | split: '?' | first | split: '&' | first | split: '#' | first | split: '/' | first | strip
+  if ytid.size == 11
+    echo ytid
+    if ytid_short
+      echo ':short'
+    endif
+  endif
+-%}

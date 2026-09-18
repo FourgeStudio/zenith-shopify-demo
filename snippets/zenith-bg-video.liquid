@@ -33,35 +33,27 @@
       assign bgv_portrait = true
     endif
   elsif youtube != blank
-    assign bgv_id = youtube | strip
-    if bgv_id contains 'shorts/'
-      assign bgv_id = bgv_id | split: 'shorts/' | last
+    capture bgv_yt
+      render 'zenith-youtube-id', url: youtube
+    endcapture
+    assign bgv_id = bgv_yt | split: ':' | first
+    if bgv_yt contains ':short'
       assign bgv_portrait = true
-    elsif bgv_id contains 'v='
-      assign bgv_id = bgv_id | split: 'v=' | last
-    elsif bgv_id contains 'youtu.be/'
-      assign bgv_id = bgv_id | split: 'youtu.be/' | last
-    elsif bgv_id contains 'embed/'
-      assign bgv_id = bgv_id | split: 'embed/' | last
-    elsif bgv_id contains 'live/'
-      assign bgv_id = bgv_id | split: 'live/' | last
     endif
-    assign bgv_id = bgv_id | split: '?' | first | split: '&' | first | split: '#' | first | split: '/' | first | strip
-    if bgv_id.size == 11
+    if bgv_id != blank
       assign bgv_kind = 'youtube'
-      assign bgv_src = 'https://www.youtube-nocookie.com/embed/' | append: bgv_id | append: '?autoplay=1&mute=1&loop=1&playlist=' | append: bgv_id | append: '&controls=0&playsinline=1&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&enablejsapi=1'
+      assign bgv_src = 'https://www.youtube-nocookie.com/embed/' | append: bgv_id | append: '?autoplay=1&mute=1&controls=0&playsinline=1&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&enablejsapi=1'
     endif
   endif
 -%}
 {%- if bgv_src != blank -%}
   {%- if thumbnail and bgv_kind == 'youtube' -%}
-    <img
-      src="https://i.ytimg.com/vi/{{ bgv_id }}/hqdefault.jpg"
-      alt=""
-      width="480"
-      height="360"
-      loading="lazy"
-    >
+    {%- comment -%} Shorts have a portrait thumbnail (oar2, 1080×1920); other videos use the 4:3 one {%- endcomment -%}
+    {%- if bgv_portrait -%}
+      <img src="https://i.ytimg.com/vi/{{ bgv_id }}/oar2.jpg" alt="" width="1080" height="1920" loading="lazy">
+    {%- else -%}
+      <img src="https://i.ytimg.com/vi/{{ bgv_id }}/hqdefault.jpg" alt="" width="480" height="360" loading="lazy">
+    {%- endif -%}
   {%- endif -%}
   <zenith-bg-video
     class="zenith-bg-video zenith-bg-video--{{ bgv_kind }}{% if bgv_portrait %} zenith-bg-video--portrait{% endif %}"
