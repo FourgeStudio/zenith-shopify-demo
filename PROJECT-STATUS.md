@@ -17,10 +17,15 @@ _Last updated: 2026-09-18. Keep this file current at the end of each work sessio
 ### History
 All earlier feature branches are merged and deleted: homepage build, settings-data fix, sticky header, mobile menu drawer, section style settings, status doc.
 
+## Design sources
+- `design/` holds design exports (see `design/README.md` for naming). **Empty so far** — the homepage desktop + mobile designs were only pasted into chat, which is not persisted.
+- `.claude/brand.md` = colors, fonts, logo rules, voice (transcribed from the style guide one-pager).
+- Until `design/` is populated, a new session has no visual reference beyond the built theme and the preview link.
+
 ## Remaining work
 
 ### 1. Mobile polish (next task)
-- Need from client: mobile design exported **cropped per section at 1x** (full-page export came through unreadable).
+- Need from client: mobile design exported **cropped per section at 1x** into `design/` (full-page export came through unreadable).
 - Known deltas from the mobile design: category cards stacked full-width; product carousel ~2 cards per view; results section single row with bigger cards; brand story image above text.
 - Most of this is now theme-editor settings (Mobile group on each section), not code.
 - Branch: `style/homepage-mobile` off `staging`.
