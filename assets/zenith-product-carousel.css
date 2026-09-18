@@ -29,14 +29,14 @@
   flex-shrink: 0;
 }
 
-/* ---------- Track: optional bleed to the right screen edge ---------- */
+/* ---------- Track: optional bleed to the right edge of the page frame ---------- */
 .zenith-pc--bleed {
   overflow-x: clip;
 }
 
 .zenith-pc--bleed .zenith-carousel__track {
-  margin-right: calc((100% - 100vw) / 2);
-  padding-right: calc((100vw - 100%) / 2);
+  margin-right: calc(-1 * var(--z-gutter, 3rem));
+  padding-right: var(--z-gutter, 3rem);
 }
 
 .zenith-pc .zenith-carousel__controls {

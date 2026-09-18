@@ -66,7 +66,7 @@ Then fill `brief-template.md` → `<scratchpad>/BRIEF.md` (placeholders + "Measu
 | Icons | `snippets/zenith-icon.liquid` (1.5px line set; add new ones there, not inline) |
 | Store-wide number | `settings.customer_count` via `[customers]` token |
 | Store-wide content, edit once | Theme settings group + per-section source select `global` / `custom` (pattern: `zenith-promo-banner` `content_source`, hero `countdown_source`) |
-| Page width + gutters | Theme settings → Page width = whole frame incl. gutters (1440 = design frame, content 1280); global `--z-gutter` (20 / 40 / 80px) on `.page-width` — never pad sections to fake gutters; header content capped to the same frame |
+| Page width + gutters | Theme settings → Page width = whole frame incl. gutters (1440); gutter = Theme settings → Zenith → Page side margin (30 / 20) → `--z-gutter` on `.page-width` — never pad sections to fake gutters. Bleeds use `calc(-1 * var(--z-gutter))` (stop at the frame edge), never `100vw`. Header icons align via `zenith-header--align-page` |
 | Desktop/mobile differences | `*_mobile` copy settings, `heading_alignment_mobile`, `hide_on_mobile` / `hide_on_desktop`, per-block "Hide on mobile" |
 
 Global-toggle candidates when a section repeats across pages with the same content: trust bar, money-back guarantee, Zenith Guarantee, press logos, promo. Page-specific sections (hero, story, featured product) stay per section.
