@@ -78,6 +78,7 @@ Global-toggle candidates when a section repeats across pages with the same conte
 - **Pages (about, contact)**: `templates/page.<name>.json`; reuse `zenith-image-story`, `zenith-feature-columns`, `zenith-faq`. Contact = `zenith-contact` in `templates/page.contact.json` (Dawn `main-page` kept but disabled). The admin page must use that template.
 
 ## Gotchas (all hit on the homepage)
+- YouTube embeds (`zenith-bg-video.js`, `zenith-video.js`): set `referrerPolicy = 'strict-origin-when-cross-origin'` (no referrer → "Error 153"), add `&origin=<page origin>` + `enablejsapi=1` and repeat the `{"event":"listening"}` handshake every 250ms or the player never reports its state; test in real time (puppeteer-core + installed Edge over a local http server) — `--virtual-time-budget` fast-forwards page timers past the handshake and `file://` pages get Error 153. Shorts thumbnail: `i.ytimg.com/vi/<id>/oar2.jpg` (1080×1920).
 - Dawn `div:empty { display: none }` hides empty decorative divs → select with `div.<class>` + `display: block`, or use an `<img>`.
 - `sections/cart-icon-bubble.liquid` must carry the same cart SVG as `sections/header.liquid` (Dawn re-renders it after add-to-cart).
 - Never reuse a setting id with a new type; the editor saved every setting into the template.
