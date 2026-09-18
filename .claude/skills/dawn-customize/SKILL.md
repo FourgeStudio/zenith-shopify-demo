@@ -100,7 +100,7 @@ Rules:
 - Fonts: `font-display: swap`, preload only the heading woff2.
 
 ## 9. Done checklist
-- On a feature branch (§1).
+- On `staging`, pulled before starting (§1).
 - `shopify theme check` — 0 new errors; JSON parses.
 - Two instances of the section on one page styled independently (unique-id check).
 - Editor: all groups present in order, presets addable.
