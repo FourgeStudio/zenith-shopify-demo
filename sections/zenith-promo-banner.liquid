@@ -178,7 +178,8 @@
             end_time: p_end_time,
             timezone: p_timezone,
             hide_expired: p_hide_expired,
-            show_labels: s.countdown_show_labels
+            show_labels: s.countdown_show_labels,
+            show_ms: s.countdown_show_ms
           -%}
         </div>
       {%- endif -%}
@@ -303,6 +304,13 @@
       "id": "countdown_show_labels",
       "label": "Show unit labels (Days, Hrs, Min, Sec)",
       "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "countdown_show_ms",
+      "label": "Show milliseconds",
+      "info": "Adds a spinning hundredths-of-a-second box. Hidden for visitors who turn off animations.",
+      "default": true
     },
     {
       "type": "header",
