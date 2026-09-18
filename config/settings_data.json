@@ -12,6 +12,14 @@
   "presets": {
     "Dawn": {
       "logo_width": 120,
+      "promo_heading": "Exclusive Offers for this Season",
+      "promo_text": "<p>Bundles and deals built for value. Here for a moment, then gone.</p>",
+      "promo_button_label": "Get This Exclusive Offer",
+      "promo_countdown_label": "This Exclusive Offer Ends In",
+      "promo_end_date": "2026-12-31",
+      "promo_end_time": "23:59",
+      "promo_timezone": "+08:00",
+      "promo_hide_when_expired": true,
       "customer_account_menu": "customer-account-main-menu",
       "color_schemes": {
         "scheme-1": {

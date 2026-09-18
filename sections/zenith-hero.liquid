@@ -8,8 +8,23 @@
     assign has_promo = true
   endif
 
+  # Countdown strip: own dates, or the store-wide promo from Theme settings → Zenith · Promo.
+  if s.countdown_source == 'global'
+    assign cd_label = s.countdown_label | default: settings.promo_countdown_label
+    assign cd_end_date = settings.promo_end_date
+    assign cd_end_time = settings.promo_end_time
+    assign cd_timezone = settings.promo_timezone
+    assign cd_hide_expired = settings.promo_hide_when_expired
+  else
+    assign cd_label = s.countdown_label
+    assign cd_end_date = s.countdown_end_date
+    assign cd_end_time = s.countdown_end_time
+    assign cd_timezone = s.countdown_timezone
+    assign cd_hide_expired = s.countdown_hide_expired
+  endif
+
   assign show_countdown = false
-  if s.countdown_end_date != blank
+  if cd_end_date != blank and s.countdown_source != 'off'
     assign show_countdown = true
   endif
 
@@ -207,16 +222,16 @@
   {%- if show_countdown -%}
     <div class="zenith-hero__countdown" data-countdown-wrapper>
       <div class="page-width zenith-hero__countdown-inner">
-        {%- if s.countdown_label != blank -%}
+        {%- if cd_label != blank -%}
           <p class="zenith-hero__countdown-label">
-            {{- s.countdown_label | escape | replace: '[customers]', settings.customer_count -}}
+            {{- cd_label | escape | replace: '[customers]', settings.customer_count -}}
           </p>
         {%- endif -%}
         {%- render 'zenith-countdown',
-          end_date: s.countdown_end_date,
-          end_time: s.countdown_end_time,
-          timezone: s.countdown_timezone,
-          hide_expired: s.countdown_hide_expired,
+          end_date: cd_end_date,
+          end_time: cd_end_time,
+          timezone: cd_timezone,
+          hide_expired: cd_hide_expired,
           show_labels: s.countdown_show_labels
         -%}
       </div>
@@ -333,6 +348,18 @@
     {
       "type": "header",
       "content": "Countdown strip (optional)"
+    },
+    {
+      "type": "select",
+      "id": "countdown_source",
+      "label": "Countdown dates",
+      "default": "custom",
+      "options": [
+        { "value": "custom", "label": "This section (fields below)" },
+        { "value": "global", "label": "Global promo (Theme settings → Zenith · Promo)" },
+        { "value": "off", "label": "Off" }
+      ],
+      "info": "Global uses the promo end date/time from Theme settings, so the strip ends together with every promo banner. Countdown text below overrides the global label."
     },
     {
       "type": "text",
