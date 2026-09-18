@@ -21,6 +21,7 @@
         "button_product": "zenith-anti-aging-tallow-cream",
         "button_label_mobile": "Shop Zenith Products",
         "button_link_mobile": "",
+        "show_confetti": false,
         "ribbon_text": "",
         "highlight_title": "",
         "badge_text": "",
@@ -39,6 +40,8 @@
         "eyebrow_spacing": 4,
         "text_spacing": 8,
         "content_gap": 32,
+        "confetti_align": "stretch",
+        "confetti_width": 970,
         "color_scheme": "scheme-1",
         "button_style": "gold",
         "overlay_style": "top_left",
@@ -54,6 +57,7 @@
         "countdown_text_color": "#121212",
         "countdown_box_color": "#010101",
         "countdown_digit_color": "#ffffff",
+        "confetti_opacity": 100,
         "heading_tag": "h2",
         "heading_font_size": 56,
         "heading_uppercase": false,
@@ -82,15 +86,11 @@
         "text_font_size_mobile": 14,
         "countdown_font_size_mobile": 16,
         "content_gap_mobile": 24,
+        "confetti_width_mobile": 100,
         "padding_top": 0,
         "padding_bottom": 0,
         "padding_top_mobile": 0,
-        "padding_bottom_mobile": 0,
-        "show_confetti": false,
-        "confetti_align": "stretch",
-        "confetti_width": 970,
-        "confetti_opacity": 100,
-        "confetti_width_mobile": 100
+        "padding_bottom_mobile": 0
       }
     },
     "trust_bar": {
@@ -171,6 +171,7 @@
         "text": "<p>Bundles and deals built for value. Here for a moment, then gone.</p>",
         "button_label": "Get This Exclusive Offer",
         "button_link": "",
+        "show_confetti": true,
         "countdown_label": "This Exclusive Offer Ends In",
         "end_date": "2026-12-31",
         "end_time": "23:59",
@@ -189,6 +190,8 @@
         "image_max_width": 480,
         "image_max_height": 320,
         "hide_on_desktop": false,
+        "confetti_align": "left",
+        "confetti_width": 970,
         "color_scheme": "scheme-1",
         "card_color_scheme": "scheme-2",
         "button_style": "dark",
@@ -200,6 +203,7 @@
         "countdown_text_color": "#1a1a1a",
         "countdown_box_color": "#4e3a05",
         "countdown_digit_color": "#ffffff",
+        "confetti_opacity": 100,
         "heading_font_size": 56,
         "heading_uppercase": false,
         "subheading_font_size": 18,
@@ -217,15 +221,11 @@
         "image_max_height_mobile": 240,
         "text_font_size_mobile": 14,
         "countdown_font_size_mobile": 16,
+        "confetti_width_mobile": 100,
         "padding_top": 32,
         "padding_bottom": 32,
         "padding_top_mobile": 24,
-        "padding_bottom_mobile": 24,
-        "show_confetti": true,
-        "confetti_align": "left",
-        "confetti_width": 970,
-        "confetti_opacity": 100,
-        "confetti_width_mobile": 100
+        "padding_bottom_mobile": 24
       }
     },
     "press": {
@@ -485,6 +485,56 @@
             "product": ""
           }
         },
+        "video_gBwH3B": {
+          "type": "video",
+          "settings": {
+            "quote": "\"Anti-aging cream is all in one solution. Barrier protection, retinol. Clinically proven anti-aging. It's lightweight.\"",
+            "title": "A Gym Instructor's Secret to Younger-Looking Skin",
+            "link": "",
+            "author": "@creator",
+            "product": ""
+          }
+        },
+        "video_EFcBCe": {
+          "type": "video",
+          "settings": {
+            "quote": "\"Anti-aging cream is all in one solution. Barrier protection, retinol. Clinically proven anti-aging. It's lightweight.\"",
+            "title": "A Gym Instructor's Secret to Younger-Looking Skin",
+            "link": "",
+            "author": "@creator",
+            "product": ""
+          }
+        },
+        "video_g3Q4A9": {
+          "type": "video",
+          "settings": {
+            "quote": "\"Anti-aging cream is all in one solution. Barrier protection, retinol. Clinically proven anti-aging. It's lightweight.\"",
+            "title": "A Gym Instructor's Secret to Younger-Looking Skin",
+            "link": "",
+            "author": "@creator",
+            "product": ""
+          }
+        },
+        "video_y4FpEf": {
+          "type": "video",
+          "settings": {
+            "quote": "\"Anti-aging cream is all in one solution. Barrier protection, retinol. Clinically proven anti-aging. It's lightweight.\"",
+            "title": "A Gym Instructor's Secret to Younger-Looking Skin",
+            "link": "",
+            "author": "@creator",
+            "product": ""
+          }
+        },
+        "video_4VztWm": {
+          "type": "video",
+          "settings": {
+            "quote": "\"Anti-aging cream is all in one solution. Barrier protection, retinol. Clinically proven anti-aging. It's lightweight.\"",
+            "title": "A Gym Instructor's Secret to Younger-Looking Skin",
+            "link": "",
+            "author": "@creator",
+            "product": ""
+          }
+        },
         "video_5": {
           "type": "video",
           "settings": {
@@ -501,6 +551,11 @@
         "video_2",
         "video_3",
         "video_4",
+        "video_gBwH3B",
+        "video_EFcBCe",
+        "video_g3Q4A9",
+        "video_y4FpEf",
+        "video_4VztWm",
         "video_5"
       ],
       "settings": {
@@ -1063,40 +1118,41 @@
         "subheading": "<p>Men in Manila using the cream. Unedited and verified.</p>",
         "heading_alignment": "center",
         "heading_max_width": 760,
-        "heading_spacing": 48,
-        "color_scheme": "scheme-1",
-        "heading_font_size": 48,
-        "heading_uppercase": false,
-        "subheading_font_size": 18,
-        "eyebrow_font_size": 14,
-        "heading_font_size_mobile": 36,
-        "subheading_font_size_mobile": 16,
-        "heading_spacing_mobile": 24,
-        "padding_top": 52,
-        "padding_bottom": 48,
-        "padding_top_mobile": 20,
-        "padding_bottom_mobile": 8,
         "subheading_spacing": 28,
+        "heading_spacing": 48,
         "jdgm_masonry": true,
         "columns_desktop": 4,
         "gap": 20,
         "content_padding": 12,
         "card_radius": 4,
-        "button_style": "outline",
+        "color_scheme": "scheme-1",
         "card_color": "#202020",
-        "star_color": "#D6B356",
-        "accent_color": "#C59300",
+        "card_border_color": "",
+        "button_style": "outline",
+        "star_color": "#d6b356",
+        "accent_color": "#c59300",
+        "heading_font_size": 48,
+        "heading_uppercase": false,
+        "subheading_font_size": 18,
         "subheading_opacity": 100,
+        "eyebrow_font_size": 14,
         "text_font_size": 14,
         "icon_size": 14,
         "button_font_size": 20,
         "subheading_mobile": "<p>Real Filipino men using Zenith. Unedited and verified.</p>",
+        "heading_font_size_mobile": 36,
+        "subheading_font_size_mobile": 16,
         "subheading_opacity_mobile": 70,
+        "heading_spacing_mobile": 24,
         "columns_mobile": 2,
         "gap_mobile": 20,
         "content_padding_mobile": 12,
         "text_font_size_mobile": 14,
-        "button_font_size_mobile": 20
+        "button_font_size_mobile": 20,
+        "padding_top": 52,
+        "padding_bottom": 48,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 8
       }
     },
     "faq": {
@@ -1192,6 +1248,7 @@
         "text": "<p>Bundles and deals built for value. Here for a moment, then gone.</p>",
         "button_label": "Get This Exclusive Offer",
         "button_link": "",
+        "show_confetti": true,
         "countdown_label": "This Exclusive Offer Ends In",
         "end_date": "2026-12-31",
         "end_time": "23:59",
@@ -1210,6 +1267,8 @@
         "image_max_width": 480,
         "image_max_height": 320,
         "hide_on_desktop": false,
+        "confetti_align": "left",
+        "confetti_width": 970,
         "color_scheme": "scheme-1",
         "card_color_scheme": "scheme-2",
         "button_style": "dark",
@@ -1221,6 +1280,7 @@
         "countdown_text_color": "#1a1a1a",
         "countdown_box_color": "#4e3a05",
         "countdown_digit_color": "#ffffff",
+        "confetti_opacity": 100,
         "heading_font_size": 56,
         "heading_uppercase": false,
         "subheading_font_size": 18,
@@ -1238,15 +1298,11 @@
         "image_max_height_mobile": 240,
         "text_font_size_mobile": 14,
         "countdown_font_size_mobile": 16,
+        "confetti_width_mobile": 100,
         "padding_top": 32,
         "padding_bottom": 32,
         "padding_top_mobile": 24,
-        "padding_bottom_mobile": 24,
-        "show_confetti": true,
-        "confetti_align": "left",
-        "confetti_width": 970,
-        "confetti_opacity": 100,
-        "confetti_width_mobile": 100
+        "padding_bottom_mobile": 24
       }
     }
   },
