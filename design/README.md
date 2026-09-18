@@ -40,4 +40,5 @@ Designer notes: `guide.png` (customer count is a theme setting → `[customers]`
 Shared art: `design/confetti.png` (969 × 161 transparent gold confetti) → shipped as `assets/zenith-confetti.png`, toggled per section (promo banners on, hero off by default).
 
 ## Adding a new page
+Drop the exports in, then ask Claude to run the `design-to-page` skill for that page.
 Same layout under `design/<page>/` (`product`, `collection`, `cart`, `about`, `contact`, `global`). Export sections at 1x; full-page export optional.
