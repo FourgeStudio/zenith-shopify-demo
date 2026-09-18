@@ -157,8 +157,9 @@ h1, h2, h3, h4, h5, .h0, .h1, .h2, .h3, .h4, .h5 {
   }
 }
 
-/* ---------- Page gutters ----------
-   Design: 20px mobile, 80px at 1440 (content 1280). Theme settings page_width = max CONTENT width.
+/* ---------- Page width + gutters ----------
+   Theme settings → Layout → Page width = max width of the whole frame INCLUDING gutters
+   (design: 1440 → content 1280). Gutters: 20px mobile, 40px tablet, 80px ≥990.
    Header keeps Dawn's own padding (header section handles it). */
 :root {
   --z-gutter: 2rem;
@@ -177,7 +178,7 @@ h1, h2, h3, h4, h5, .h0, .h1, .h2, .h3, .h4, .h5 {
 }
 
 .page-width:not(.header):not(.utility-bar__grid):not(.page-width--narrow) {
-  max-width: calc(var(--page-width) + 2 * var(--z-gutter));
+  max-width: var(--page-width);
   padding-left: var(--z-gutter);
   padding-right: var(--z-gutter);
 }

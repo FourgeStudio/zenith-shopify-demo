@@ -15,6 +15,12 @@
   padding-right: var(--zh-px-m, 1.1rem);
 }
 
+/* Dawn stretches drawer-menu headers to 100%; keep the bar content inside the page frame (Theme settings → Page width)
+   so it lines up with the page on wide screens. The black bar background stays full width (header-wrapper). */
+.zenith-header.header.page-width.drawer-menu {
+  max-width: var(--page-width);
+}
+
 /* Icon boxes stay 44px tap targets; the design's tighter glyph spacing comes from overlapping boxes. */
 .zenith-header header-drawer {
   margin-left: 0;

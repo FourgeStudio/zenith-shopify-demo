@@ -70,7 +70,7 @@ Gradients:
 - Buttons (per homepage design): label in the HEADING font (~22px) + arrow/cart icon, square. Styles via `snippets/zenith-button.liquid`: gold = Summit gradient #EABE5F→#C59300 with dark text (default CTA); dark = #112328 with white text (on light promo cards); outline = 1px #EABE5F border, white text ("Shop All Products").
 - Announcement bar: Summit Gold background, dark text.
 - Header: pure black #000, hamburger (desktop too), centered logo, account + cart right; announcement bar BELOW it, gold gradient.
-- Page gutters: 20px mobile / 40px tablet / 80px ≥990 (content 1280 at 1440) — set globally in zenith-base.css.
+- Page width: max 1440px frame incl. gutters (Theme settings → Page width = 1440) → content 1280. Gutters 20px mobile / 40px tablet / 80px ≥990 — set globally in zenith-base.css.
 - Customer count: Theme settings → Zenith → Customer count; write `[customers]` in section copy.
 - Product card: light/rock background, product on neutral, black full-width "Add to cart".
 - Page width: design frame 1440 · section spacing varies per section (set per section from the design).
