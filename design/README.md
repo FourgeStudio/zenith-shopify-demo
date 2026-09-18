@@ -37,5 +37,7 @@ Figma layer names can stay as exported — the map below says which file is whic
 
 Designer notes: `guide.png` (customer count is a theme setting → `[customers]` token), `guide1.png` (before/after results card), `guide2.png` (mobile sale-hero variant with ribbon, FDA badge and a countdown with seconds).
 
+Shared art: `design/confetti.png` (969 × 161 transparent gold confetti) → shipped as `assets/zenith-confetti.png`, toggled per section (promo banners on, hero off by default).
+
 ## Adding a new page
 Same layout under `design/<page>/` (`product`, `collection`, `cart`, `about`, `contact`, `global`). Export sections at 1x; full-page export optional.

@@ -1,0 +1,32 @@
+{% comment %}
+  Decorative gold confetti layer (styles in zenith-base.css → "Confetti").
+  Default art: assets/zenith-confetti.png (969 × 161, transparent). A section can upload its own.
+  Place inside a position: relative container, before the content (content must sit at z-index ≥ 1).
+  Accepts: settings {Object} section settings with show_confetti, confetti_image, confetti_align
+  Size/opacity come from confetti_width, confetti_width_mobile, confetti_opacity via zenith-section-style.
+{% endcomment %}
+{%- if settings.show_confetti -%}
+  {%- assign cf_align = settings.confetti_align | default: 'left' -%}
+  {%- assign cf_class = 'zenith-confetti zenith-confetti--' | append: cf_align -%}
+  {%- if settings.confetti_image != blank -%}
+    {{
+      settings.confetti_image
+      | image_url: width: 2000
+      | image_tag:
+        class: cf_class,
+        widths: '600, 1000, 1500, 2000',
+        sizes: '100vw',
+        loading: 'lazy',
+        alt: ''
+    }}
+  {%- else -%}
+    <img
+      class="zenith-confetti zenith-confetti--{{ cf_align }}"
+      src="{{ 'zenith-confetti.png' | asset_url }}"
+      width="969"
+      height="161"
+      alt=""
+      loading="lazy"
+    >
+  {%- endif -%}
+{%- endif -%}

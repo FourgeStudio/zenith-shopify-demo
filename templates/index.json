@@ -84,7 +84,12 @@
         "padding_bottom": 0,
         "padding_top_mobile": 0,
         "padding_bottom_mobile": 0,
-        "countdown_source": "custom"
+        "countdown_source": "custom",
+        "show_confetti": false,
+        "confetti_align": "stretch",
+        "confetti_width": 970,
+        "confetti_opacity": 100,
+        "confetti_width_mobile": 100
       }
     },
     "trust_bar": {
@@ -214,7 +219,12 @@
         "padding_bottom": 32,
         "padding_top_mobile": 24,
         "padding_bottom_mobile": 24,
-        "content_source": "global"
+        "content_source": "global",
+        "show_confetti": true,
+        "confetti_align": "left",
+        "confetti_width": 970,
+        "confetti_opacity": 100,
+        "confetti_width_mobile": 100
       }
     },
     "press": {
@@ -1221,7 +1231,12 @@
         "padding_bottom": 32,
         "padding_top_mobile": 24,
         "padding_bottom_mobile": 24,
-        "content_source": "global"
+        "content_source": "global",
+        "show_confetti": true,
+        "confetti_align": "left",
+        "confetti_width": 970,
+        "confetti_opacity": 100,
+        "confetti_width_mobile": 100
       }
     }
   },

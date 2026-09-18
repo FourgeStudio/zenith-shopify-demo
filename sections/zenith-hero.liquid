@@ -120,6 +120,7 @@
       {%- endif -%}
     </div>
     {%- render 'zenith-overlay', style: s.overlay_style, mobile_style: s.mobile_overlay_style -%}
+    {%- render 'zenith-confetti', settings: s -%}
 
     <div class="page-width zenith-hero__content-wrap">
       <div class="zenith-hero__content">
@@ -320,6 +321,19 @@
       "info": "Optional. Recommended 1206 × 1620px"
     },
     {
+      "type": "checkbox",
+      "id": "show_confetti",
+      "label": "Show gold confetti",
+      "default": false,
+      "info": "For sale campaigns (design: 9.9 sale hero). Shows across the top of the hero."
+    },
+    {
+      "type": "image_picker",
+      "id": "confetti_image",
+      "label": "Custom confetti image",
+      "info": "Optional transparent PNG. Leave empty for the built-in gold confetti."
+    },
+    {
       "type": "header",
       "content": "Sale extras (optional)"
     },
@@ -489,6 +503,40 @@
       "default": 32
     },
     {
+      "type": "select",
+      "id": "confetti_align",
+      "label": "Confetti position",
+      "default": "stretch",
+      "options": [
+        {
+          "value": "left",
+          "label": "Top left"
+        },
+        {
+          "value": "center",
+          "label": "Top center"
+        },
+        {
+          "value": "right",
+          "label": "Top right"
+        },
+        {
+          "value": "stretch",
+          "label": "Full width"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "confetti_width",
+      "label": "Confetti width (desktop)",
+      "min": 300,
+      "max": 1600,
+      "step": 10,
+      "unit": "px",
+      "default": 970
+    },
+    {
       "type": "header",
       "content": "Colors"
     },
@@ -606,6 +654,16 @@
       "id": "countdown_digit_color",
       "label": "Countdown numbers",
       "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "confetti_opacity",
+      "label": "Confetti opacity",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
     },
     {
       "type": "header",
@@ -889,6 +947,16 @@
       "step": 4,
       "unit": "px",
       "default": 24
+    },
+    {
+      "type": "range",
+      "id": "confetti_width_mobile",
+      "label": "Confetti width (mobile)",
+      "min": 30,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
     },
     {
       "type": "header",
