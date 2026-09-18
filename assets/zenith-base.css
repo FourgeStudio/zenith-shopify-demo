@@ -319,6 +319,60 @@ h1, h2, h3, h4, h5, .h0, .h1, .h2, .h3, .h4, .h5 {
   background: rgba(var(--color-foreground), 0.08);
 }
 
+/* ---------- Background video (snippets/zenith-bg-video.liquid + zenith-bg-video.js) ----------
+   Sits over the cover image and fades in once playing. YouTube iframes are cover-cropped with container units
+   (16:9, or 9:16 for Shorts). */
+zenith-bg-video {
+  position: absolute;
+  inset: 0;
+  display: block;
+  overflow: hidden;
+  container-type: size;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+zenith-bg-video.is-ready {
+  opacity: 1;
+}
+
+zenith-bg-video > video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+zenith-bg-video > iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: max(100cqw, 177.78cqh);
+  height: max(100cqh, 56.25cqw);
+  border: 0;
+  transform: translate(-50%, -50%);
+}
+
+.zenith-bg-video--portrait > iframe {
+  width: max(100cqw, 56.25cqh);
+  height: max(100cqh, 177.78cqw);
+}
+
+@supports not (width: 1cqw) {
+  zenith-bg-video > iframe {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  zenith-bg-video {
+    display: none;
+  }
+}
+
 /* ---------- Stars ---------- */
 .zenith-stars {
   display: inline-flex;

@@ -1,0 +1,73 @@
+{%- comment -%}
+  Muted, looping background video with no controls, mounted only when near the viewport (assets/zenith-bg-video.js).
+  Place inside a positioned box (e.g. .zenith-media) above the cover image; the image stays as the poster until the video plays,
+  and is all that shows for visitors with reduced motion turned on.
+
+  Accepts:
+  - video: {video} Shopify-hosted video (video setting). Takes priority over youtube.
+  - youtube: {string} YouTube link: Shorts (youtube.com/shorts/ID, cropped portrait), watch?v=, youtu.be/, embed/ or a bare ID
+  - title: {string} Accessible frame title (optional)
+  - thumbnail: {boolean} Output YouTube's thumbnail as the cover image (when there's no other image)
+
+  The section must load: <script src="{{ 'zenith-bg-video.js' | asset_url }}" defer="defer"></script>
+{%- endcomment -%}
+{%- liquid
+  assign bgv_src = ''
+  assign bgv_kind = ''
+  assign bgv_portrait = false
+  assign bgv_id = ''
+
+  if video != blank
+    assign bgv_kind = 'video'
+    assign bgv_mp4s = video.sources | where: 'format', 'mp4' | sort: 'width'
+    for s in bgv_mp4s
+      assign bgv_short = s.width
+      if s.height < bgv_short
+        assign bgv_short = s.height
+      endif
+      if bgv_src == blank or bgv_short <= 720
+        assign bgv_src = s.url
+      endif
+    endfor
+    if video.aspect_ratio < 1
+      assign bgv_portrait = true
+    endif
+  elsif youtube != blank
+    assign bgv_id = youtube | strip
+    if bgv_id contains 'shorts/'
+      assign bgv_id = bgv_id | split: 'shorts/' | last
+      assign bgv_portrait = true
+    elsif bgv_id contains 'v='
+      assign bgv_id = bgv_id | split: 'v=' | last
+    elsif bgv_id contains 'youtu.be/'
+      assign bgv_id = bgv_id | split: 'youtu.be/' | last
+    elsif bgv_id contains 'embed/'
+      assign bgv_id = bgv_id | split: 'embed/' | last
+    elsif bgv_id contains 'live/'
+      assign bgv_id = bgv_id | split: 'live/' | last
+    endif
+    assign bgv_id = bgv_id | split: '?' | first | split: '&' | first | split: '#' | first | split: '/' | first | strip
+    if bgv_id.size == 11
+      assign bgv_kind = 'youtube'
+      assign bgv_src = 'https://www.youtube-nocookie.com/embed/' | append: bgv_id | append: '?autoplay=1&mute=1&loop=1&playlist=' | append: bgv_id | append: '&controls=0&playsinline=1&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&enablejsapi=1'
+    endif
+  endif
+-%}
+{%- if bgv_src != blank -%}
+  {%- if thumbnail and bgv_kind == 'youtube' -%}
+    <img
+      src="https://i.ytimg.com/vi/{{ bgv_id }}/hqdefault.jpg"
+      alt=""
+      width="480"
+      height="360"
+      loading="lazy"
+    >
+  {%- endif -%}
+  <zenith-bg-video
+    class="zenith-bg-video zenith-bg-video--{{ bgv_kind }}{% if bgv_portrait %} zenith-bg-video--portrait{% endif %}"
+    data-kind="{{ bgv_kind }}"
+    data-src="{{ bgv_src }}"
+    data-title="{{ title | default: 'Video' | escape }}"
+    aria-hidden="true"
+  ></zenith-bg-video>
+{%- endif -%}

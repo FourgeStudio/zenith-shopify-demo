@@ -23,11 +23,16 @@
   height: var(--z-card-h-m, 44rem);
 }
 
-.zenith-cats__media img {
+.zenith-cats__media > img {
   transition: transform 0.6s ease;
 }
 
-.zenith-cats__card:hover .zenith-cats__media img {
+.zenith-cats__media > zenith-bg-video {
+  transition: transform 0.6s ease, opacity 0.4s ease;
+}
+
+.zenith-cats__card:hover .zenith-cats__media > img,
+.zenith-cats__card:hover .zenith-cats__media > zenith-bg-video {
   transform: scale(1.04);
 }
 

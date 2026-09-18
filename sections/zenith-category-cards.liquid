@@ -3,6 +3,19 @@
 {%- if section.settings.mobile_layout == 'carousel' -%}
   <script src="{{ 'zenith-carousel.js' | asset_url }}" defer="defer"></script>
 {%- endif -%}
+{%- liquid
+  assign needs_bg_video = false
+  for b in section.blocks
+    if b.settings.media_type == 'video' and b.settings.video != blank
+      assign needs_bg_video = true
+    elsif b.settings.media_type == 'youtube' and b.settings.youtube_url != blank
+      assign needs_bg_video = true
+    endif
+  endfor
+-%}
+{%- if needs_bg_video -%}
+  <script src="{{ 'zenith-bg-video.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
 {%- capture extra -%}
   --z-cols: {{ section.settings.columns_desktop }};
   {%- render 'zenith-overlay-vars', settings: section.settings -%}
@@ -43,17 +56,49 @@
             id="Block-{{ block.id }}"
             {{ block.shopify_attributes }}
           >
+            {%- liquid
+              # Media: the linked collection's featured image (or the add-to-cart product's), a custom image/GIF,
+              # an uploaded video or a YouTube link. Videos keep an image underneath as the poster.
+              assign media_type = block.settings.media_type | default: 'featured'
+              assign featured_img = block.settings.collection.featured_image | default: block.settings.product.featured_image
+              assign has_video = false
+              if media_type == 'video' and block.settings.video != blank
+                assign has_video = true
+              endif
+              assign has_youtube = false
+              if media_type == 'youtube' and block.settings.youtube_url != blank
+                assign has_youtube = true
+              endif
+              case media_type
+                when 'image', 'youtube'
+                  assign card_img = block.settings.image | default: featured_img
+                when 'video'
+                  assign card_img = block.settings.image | default: block.settings.video.preview_image | default: featured_img
+                else
+                  assign card_img = featured_img | default: block.settings.image
+              endcase
+              assign yt_thumb = false
+              if card_img == blank
+                assign yt_thumb = true
+              endif
+              assign card_link = block.settings.link | default: block.settings.collection.url
+            -%}
             <div class="zenith-cats__card color-{{ section.settings.card_color_scheme }}">
               <div class="zenith-media zenith-cats__media">
-                {%- if block.settings.image != blank -%}
+                {%- if card_img != blank -%}
                   {{
-                    block.settings.image
+                    card_img
                     | image_url: width: 1000
                     | image_tag: loading: 'lazy', widths: '375, 550, 750, 1000', sizes: '(min-width: 990px) 25vw, (min-width: 750px) 50vw, 100vw'
                   }}
-                {%- else -%}
+                {%- elsif has_youtube == false -%}
                   {%- assign placeholder = forloop.index0 | modulo: 6 | plus: 1 | prepend: 'collection-' -%}
                   {{ placeholder | placeholder_svg_tag: 'placeholder-svg' }}
+                {%- endif -%}
+                {%- if has_video -%}
+                  {%- render 'zenith-bg-video', video: block.settings.video, title: block.settings.title -%}
+                {%- elsif has_youtube -%}
+                  {%- render 'zenith-bg-video', youtube: block.settings.youtube_url, title: block.settings.title, thumbnail: yt_thumb -%}
                 {%- endif -%}
                 {%- render 'zenith-overlay', style: section.settings.overlay_style -%}
               </div>
@@ -63,7 +108,7 @@
                 {%- endif -%}
                 {%- liquid
                   assign use_atc = false
-                  if block.settings.product != blank and block.settings.link == blank
+                  if block.settings.product != blank and card_link == blank
                     assign use_atc = true
                   endif
                 -%}
@@ -82,7 +127,7 @@
                     {%- else -%}
                       {%- render 'zenith-button',
                         label: block.settings.button_label,
-                        link: block.settings.link,
+                        link: card_link,
                         style: btn_style,
                         icon: btn_icon,
                         class: 'zenith-cats__button'
@@ -91,8 +136,8 @@
                   </div>
                 {%- endif -%}
               </div>
-              {%- if block.settings.link != blank -%}
-                <a href="{{ block.settings.link }}" class="zenith-cats__overlay-link" tabindex="-1" aria-hidden="true"></a>
+              {%- if card_link != blank -%}
+                <a href="{{ card_link }}" class="zenith-cats__overlay-link" tabindex="-1" aria-hidden="true"></a>
               {%- endif -%}
             </div>
           </li>
@@ -661,9 +706,52 @@
           "content": "Content"
         },
         {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection",
+          "info": "The card links to this collection and shows its featured image (or its first product's image when the collection has none)."
+        },
+        {
+          "type": "select",
+          "id": "media_type",
+          "label": "Media",
+          "default": "featured",
+          "options": [
+            {
+              "value": "featured",
+              "label": "Collection / product featured image"
+            },
+            {
+              "value": "image",
+              "label": "Custom image or GIF"
+            },
+            {
+              "value": "video",
+              "label": "Uploaded video (MP4)"
+            },
+            {
+              "value": "youtube",
+              "label": "YouTube video or Short"
+            }
+          ]
+        },
+        {
           "type": "image_picker",
           "id": "image",
-          "label": "Image"
+          "label": "Custom image or GIF",
+          "info": "Shown when Media is Custom image. With a video it's the cover shown before the video plays (and for visitors who turn off motion)."
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video (MP4, MOV or WebM)",
+          "info": "Plays muted on a loop with no controls. Keep it short and small, under 10 MB."
+        },
+        {
+          "type": "text",
+          "id": "youtube_url",
+          "label": "YouTube link",
+          "info": "A Shorts link (youtube.com/shorts/…), a watch link or a youtu.be link. Plays muted on a loop with no controls. Shorts fill the card top to bottom."
         },
         {
           "type": "text",
@@ -680,13 +768,14 @@
         {
           "type": "url",
           "id": "link",
-          "label": "Link"
+          "label": "Link",
+          "info": "Leave empty to use the collection's link."
         },
         {
           "type": "product",
           "id": "product",
           "label": "Add-to-cart product",
-          "info": "Used only when Link is empty. The button adds this product to the cart."
+          "info": "Used when Link and Collection are empty: the button adds this product to the cart, and the card shows its featured image."
         },
         {
           "type": "header",
