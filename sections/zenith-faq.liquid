@@ -24,54 +24,16 @@
       -%}
 
       <div class="zenith-faq__list">
-        {%- for block in section.blocks -%}
-          <details
-            class="zenith-faq__item"
-            id="Block-{{ block.id }}"
-            {% if forloop.first and section.settings.open_first %}open{% endif %}
-            {{ block.shopify_attributes }}
-          >
-            <summary class="zenith-faq__question" id="FaqQuestion-{{ block.id }}-{{ section.id }}">
-              <span class="zenith-faq__question-text">
-                {{- block.settings.question | escape | replace: '[customers]', settings.customer_count -}}
-              </span>
-              <span class="zenith-faq__icon" aria-hidden="true">
-                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" focusable="false">
-                  <path d="M10 1v18M1 10h18"/>
-                </svg>
-              </span>
-            </summary>
-            <div
-              class="zenith-faq__answer zenith-rte"
-              role="region"
-              aria-labelledby="FaqQuestion-{{ block.id }}-{{ section.id }}"
-            >
-              {{ block.settings.answer | replace: '[customers]', settings.customer_count }}
-            </div>
-          </details>
-        {%- endfor -%}
+        {%- render 'zenith-faq-items',
+          blocks: section.blocks,
+          open_first: section.settings.open_first,
+          schema: section.settings.enable_schema,
+          section_id: section.id
+        -%}
       </div>
     </div>
   </div>
 </section>
-
-{%- if section.settings.enable_schema and section.blocks.size > 0 -%}
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {%- for block in section.blocks -%}
-          {
-            "@type": "Question",
-            "name": {{ block.settings.question | replace: '[customers]', settings.customer_count | json }},
-            "acceptedAnswer": { "@type": "Answer", "text": {{ block.settings.answer | replace: '[customers]', settings.customer_count | strip_html | json }} }
-          }{% unless forloop.last %},{% endunless %}
-        {%- endfor -%}
-      ]
-    }
-  </script>
-{%- endif -%}
 
 {% schema %}
 {

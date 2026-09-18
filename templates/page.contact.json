@@ -5,21 +5,111 @@
       "settings": {
         "padding_top": 36,
         "padding_bottom": 36
-      }
+      },
+      "disabled": true
     },
-    "form": {
-      "type": "contact-form",
+    "contact": {
+      "type": "zenith-contact",
       "settings": {
-        "heading": "",
-        "heading_size": "h1",
+        "heading": "Direct Contact",
+        "heading_tag": "h2",
+        "subheading": "<p>Prefer to reach out directly? <br>Connect with the Zenith support team through the channels below.</p>",
+        "show_social": true,
+        "faq_heading": "Frequently Asked Questions",
+        "faq_subheading": "<p>No-nonsense answers about your daily essentials.</p>",
+        "faq_schema": true,
+        "form_heading": "Contact Us",
+        "form_heading_tag": "h1",
+        "form_text": "<p>Need assistance with an order or have questions about your routine?</p><p>Send us a message below or email us directly at <a href=\"mailto:hello@tryzenith.ph\" title=\"Email Zenith\">hello@tryzenith.ph</a>. Our team will get back to you within 24 hours.</p>",
+        "button_label": "Send a Message",
+        "button_label_mobile": "Send Message",
+        "button_style": "gold",
         "color_scheme": "scheme-1",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
+        "background_top": "#191919",
+        "background_bottom": "#0E0E0E",
+        "gradient_length": 1100,
+        "gradient_length_mobile": 690,
+        "padding_top": 48,
+        "padding_bottom": 80,
+        "padding_top_mobile": 36,
+        "padding_bottom_mobile": 48
+      },
+      "blocks": {
+        "office_manila": {
+          "type": "office",
+          "settings": {
+            "title": "Fulfillment Center & Manila Office",
+            "address": "1208 Pablo Ocampo, Cor. Alfonso St. Vito Cruz, Brgy 757, Manila, Metro Manila 1017 Philippines.",
+            "icon": "pin"
+          }
+        },
+        "office_cebu": {
+          "type": "office",
+          "settings": {
+            "title": "Corporate Head Office.",
+            "address": "MIT Bldg 2 Unit #3B-3, 117 Gorordo Ave., Cor. Sanjercasville Rd. Lahug, Cebu City, Cebu 6000 Philippines.",
+            "icon": "pin"
+          }
+        },
+        "line_phone": {
+          "type": "line",
+          "settings": {
+            "text": "0977 444 3717",
+            "link_type": "phone",
+            "icon": "phone_call"
+          }
+        },
+        "line_email": {
+          "type": "line",
+          "settings": {
+            "text": "hello@tryzenith.ph",
+            "link_type": "email",
+            "icon": "mail"
+          }
+        },
+        "faq_guarantee": {
+          "type": "faq",
+          "settings": {
+            "question": "How does the Zenith Money-Back Guarantee work?",
+            "answer": "<p>If you don't see or feel the difference after using our products consistently, let us know within 30 days (for skin) or 60 days (for hair) from delivery. We will issue a full refund. Just show us proof.</p>"
+          }
+        },
+        "faq_sensitive": {
+          "type": "faq",
+          "settings": {
+            "question": "Are your products safe for sensitive skin?",
+            "answer": "<p>[Add answer]</p>"
+          }
+        },
+        "faq_shipping": {
+          "type": "faq",
+          "settings": {
+            "question": "How long does shipping take?",
+            "answer": "<p>[Add answer]</p>"
+          }
+        },
+        "faq_international": {
+          "type": "faq",
+          "settings": {
+            "question": "Can I use Zenith products if I'm outside the Philippines?",
+            "answer": "<p>[Add answer]</p>"
+          }
+        }
+      },
+      "block_order": [
+        "office_manila",
+        "office_cebu",
+        "line_phone",
+        "line_email",
+        "faq_guarantee",
+        "faq_sensitive",
+        "faq_shipping",
+        "faq_international"
+      ]
     }
   },
   "order": [
     "main",
-    "form"
+    "contact"
   ]
 }

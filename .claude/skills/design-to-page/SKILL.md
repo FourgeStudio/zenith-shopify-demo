@@ -18,7 +18,7 @@ Workflow that took the homepage from "not accurate" to within 1–3px of the des
 2. Slice each full page into the scratchpad (never Read a 10 000px image whole):
    `powershell -File scripts/slice.ps1 -Src "<full.png>" -OutDir "<scratchpad>/slices" -Prefix d -Height 1000` (mobile: `-Prefix m -Height 1100`).
 3. Read every slice top to bottom, then every `guide*.png`. Designer notes are requirements (they produced: global customer count, before/after card, sale hero, countdown seconds).
-4. Map every crop → section (template key or group). Ambiguous crops: view them; small unnamed frames are often device chrome ("MOBILE NAV AREA"). Write the map into `design/README.md`.
+4. Map every crop → section (template key or group). **Reuse existing sections first** (`ls sections/zenith-*`): add an existing section to the template and set it up before building anything new. Build a new section only when the layout needs pieces side by side that Shopify can't stack as separate sections (e.g. contact details + FAQ beside a form) — and then reuse the shared snippets inside it. Ambiguous crops: view them; small unnamed frames are often device chrome ("MOBILE NAV AREA"). Write the map into `design/README.md`.
 5. Note desktop↔mobile differences per section: order, hidden sections, different copy, alignment, card counts.
 6. Measure page-level facts with `scripts/measure.ps1` (colours at points, row/column run lengths, zoomed crops): page bg, gutters (content edge at 1440 and mobile), header/footer colours, card gradients, eyebrow colour, button fills, carousel controls.
 
@@ -42,7 +42,7 @@ Then fill `brief-template.md` → `<scratchpad>/BRIEF.md` (placeholders + "Measu
    `node scripts/merge-patches.js . templates/<page>.json "<scratchpad>/ready"` → fix every error → re-run with `--write`.
 3. Reconcile neighbour spacing: gap between sections = prev `padding_bottom` + next `padding_top`; compare to design y-positions (desktop and mobile) and fix in the patch.
 4. Validate all JSON (`templates`, `*-group.json`, `settings_data`, `settings_schema`) + every `{% schema %}`; run `npx -y @shopify/cli@latest theme check --output json` → 0 errors (ExcessiveSettingsCount warnings are acceptable).
-5. Spot-render risky pieces yourself: static HTML mock linking the real CSS → `scripts/shot.ps1 -Html … -Out … -Width 1440` → compare with the design crop.
+5. Spot-render risky pieces yourself: static HTML mock linking the real CSS → `scripts/shot.ps1 -Html … -Out … -Width 1440` → compare with the design crop (build a side-by-side PNG and view it). Mobile: Chrome won't lay out narrower than ~500px, so wrap the mock in a 401px `<iframe>` page and shoot that. Mocks lack `layout/theme.liquid`'s global `box-sizing: border-box` — set it on your own inputs anyway.
 
 ## 5. Ship + hand off
 - Commits on `staging`, one logical change each: design files → shared infra → sections + template → header/footer → docs. Push, then (per CLAUDE.md) merge `staging` → `main`, push (main theme is unpublished preview until the user publishes).
@@ -54,7 +54,10 @@ Then fill `brief-template.md` → `<scratchpad>/BRIEF.md` (placeholders + "Measu
 |---|---|
 | CTA / link button | `snippets/zenith-button.liquid` (`style`: gold / dark / outline / light / scheme, `icon`: arrow_right / cart / none) + section `button_style`, `button_font_size[_mobile]` |
 | Add to cart | `snippets/zenith-add-to-cart.liquid` (`style`, `icon`); section loads `product-form.js` |
-| Eyebrow / heading / subheading | `snippets/zenith-section-heading.liquid` (replaces `[customers]`) |
+| Eyebrow / heading / subheading | `snippets/zenith-section-heading.liquid` (replaces `[customers]`); several headings in one section → override `--z-hfs`/`--z-hsp`/`--z-sfs` on a wrapper |
+| FAQ accordion (+ FAQPage JSON-LD) | `snippets/zenith-faq-items.liquid` + `assets/zenith-faq.css` (used by `zenith-faq` and `zenith-contact`; `type` filters blocks; wrapper class `zenith-faq-q-body-m` = body-font questions on mobile) |
+| Contact form + details | `sections/zenith-contact.liquid` (Shopify `form 'contact'`, office/line/FAQ blocks) |
+| Marketplace links | `settings.social_lazada_link`, `settings.social_shopee_link` (Theme settings → Zenith); icons `lazada`, `shopee` |
 | Per-instance CSS vars | `snippets/zenith-section-style.liquid` map — add `setting_id:var:unit` for new sizes |
 | Carousel | `<zenith-carousel>` + `snippets/zenith-carousel-controls.liquid` (design dots/arrows) |
 | Countdown (d/h/m/s) | `snippets/zenith-countdown.liquid` + `zenith-countdown.css/js` |
@@ -71,7 +74,7 @@ Global-toggle candidates when a section repeats across pages with the same conte
 ## Page notes
 - **Product**: Dawn `main-product` (extend with `zenith:` edits/blocks) + zenith sections below it in `templates/product.json`; one template serves all products — alternate templates (`product.<name>.json`) only for different layouts. Reviews = Judge.me block.
 - **Collection / search**: Dawn `main-collection-product-grid` / facets; restyle cards via shared card CSS rather than new sections.
-- **Pages (about, contact)**: `templates/page.<name>.json`; reuse `zenith-image-story`, `zenith-feature-columns`, `zenith-faq`.
+- **Pages (about, contact)**: `templates/page.<name>.json`; reuse `zenith-image-story`, `zenith-feature-columns`, `zenith-faq`. Contact = `zenith-contact` in `templates/page.contact.json` (Dawn `main-page` kept but disabled). The admin page must use that template.
 
 ## Gotchas (all hit on the homepage)
 - Dawn `div:empty { display: none }` hides empty decorative divs → select with `div.<class>` + `display: block`, or use an `<img>`.
@@ -83,3 +86,6 @@ Global-toggle candidates when a section repeats across pages with the same conte
 - PowerShell 5.1 `Start-Process -ArgumentList @(...)` doesn't quote spaces ("Work - Cals") → quote each arg (see `shot.ps1`).
 - `settings_data.json` invalid → Shopify drops all colour schemes. Validate after every edit.
 - Upload-dependent visuals (backgrounds with baked-in confetti, logos with taglines) → note in the handoff what the client must upload and how.
+- Font size from a PNG: **cap height ≈ 0.70 × font-size** for both Special Gothic Condensed One and Geist (measure a flat letter like H/F/D, not a round one). Cross-check with text width vs a mock at a known size.
+- Dawn `input[type='checkbox'] { width: auto }` beats a class selector → use `input.<class>[type='checkbox']`.
+- Desktop and mobile designs can disagree on CONTENT (e.g. two different addresses, a placeholder answer on one breakpoint). Pick the one that fits the label/brand, and list the conflict in the handoff for the client to confirm.

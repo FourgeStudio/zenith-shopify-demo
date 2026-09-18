@@ -86,6 +86,15 @@
   color: rgba(var(--color-foreground), var(--z-faq-ans, 0.7));
 }
 
+/* Optional: questions in the body font on mobile (wrapper class zenith-faq-q-body-m; contact page design). */
+@media screen and (max-width: 749px) {
+  .zenith-faq-q-body-m .zenith-faq__question {
+    font-family: var(--font-body-family);
+    font-weight: 500;
+    line-height: 1.5;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .zenith-faq__icon {
     transition: none;

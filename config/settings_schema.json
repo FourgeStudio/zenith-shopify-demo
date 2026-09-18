@@ -20,6 +20,20 @@
         "label": "Customer count",
         "default": "100,000+",
         "info": "Shown wherever a Zenith section text contains [customers], e.g. \"Trusted by [customers] Filipino men\"."
+      },
+      {
+        "type": "header",
+        "content": "Marketplaces"
+      },
+      {
+        "type": "url",
+        "id": "social_lazada_link",
+        "label": "Lazada store link"
+      },
+      {
+        "type": "url",
+        "id": "social_shopee_link",
+        "label": "Shopee store link"
       }
     ]
   },
