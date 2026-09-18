@@ -6,6 +6,7 @@ _Last updated: 2026-09-18. Keep this file current at the end of each work sessio
 - Theme: Dawn 16.0.0 + custom `zenith-*` sections. Store `tryzenith.ph` (Zenith Philippines).
 - GitHub-connected themes: branch `main` → unpublished theme "zenith-shopify/main". **Live theme is still the old one** — nothing published yet.
 - Homepage (desktop + mobile), header, announcement bar, menu drawer and footer rebuilt to the design exports in `design/homepage/` (2026-09-18 design-accuracy pass). Verified against static renders of the CSS, **not yet eyeballed on the real store** → first job next session.
+- Contact page (`templates/page.contact.json` → new `zenith-contact` section: contact details + FAQ + contact form) built to `design/contact-us/` (2026-09-18). Same verification caveat.
 - Brand tokens, colors, fonts, logos: see `.claude/brand.md`.
 
 ## Branch flow (two branches only)
@@ -45,11 +46,12 @@ _Last updated: 2026-09-18. Keep this file current at the end of each work sessio
 - [ ] Header → Menu drawer: payment logos image, Amare badge image, CTA product/link.
 - [ ] Judge.me: install app, then add its widget block inside "Zenith · Reviews". Until then the section is hidden on the live store (shows a preview in the editor).
 - [ ] FAQ answers 2–5 are placeholders (design repeats one answer).
+- [ ] Contact page: admin page "Contact" must use template **contact**; FAQ answers 2–4 are "[Add answer]"; confirm the Manila office address (desktop design shows "2F Revilles Building, Osmena Blvd…" (a Cebu address), mobile shows "1208 Pablo Ocampo… Manila" — using the Manila one); Theme settings → Zenith → Marketplaces: Lazada + Shopee links; contact topics list (my defaults: Order status / Product question / Returns & refunds / Wholesale & partnerships / Other). Form messages go to the store sender email.
 - [ ] Decide: featured-product check colour (desktop design orange #EF931C vs mobile #EABE5F — using #EABE5F).
 
 ### 3. Not started
 - [ ] Product page template (design pending) → export to `design/product/`.
-- [ ] Collection, cart, search, 404, about, contact pages.
+- [ ] Collection, cart, search, 404, about pages. (Contact page done 2026-09-18.)
 - [ ] Analytics/pixels, SEO metafields, shipping/policy pages.
 - [ ] Performance + a11y pass (Lighthouse on preview), then publish `main` theme.
 
