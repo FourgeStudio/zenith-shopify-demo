@@ -39,6 +39,15 @@ Designer notes: `guide.png` (customer count is a theme setting → `[customers]`
 
 Shared art: `design/confetti.png` (969 × 161 transparent gold confetti) → shipped as `assets/zenith-confetti.png`, toggled per section (promo banners on, hero off by default).
 
+## Contact page map (`design/contact-us/`, full pages exported at 2x)
+| Section (templates/page.contact.json key) | Desktop (`desktop/sections/`) | Mobile (`mobile/sections/`) |
+|---|---|---|
+| Header + announcement (header-group) | `Navbar Desktop/10.png` | `Navbar/10.png` |
+| `contact` (Zenith · Contact: details + FAQ + form) | `Contact/4.png` | `Contact/4.png` (form), `Layout/251.png` (details), `FAQ/2.png` |
+| Footer (footer-group) | `Desktop Footer.png` | `Mobile Footer.png` |
+
+`mobile/sections/Frame 1000005205.png` = phone "MOBILE NAV AREA" chrome, not a section.
+
 ## Adding a new page
 Drop the exports in, then ask Claude to run the `design-to-page` skill for that page.
 Same layout under `design/<page>/` (`product`, `collection`, `cart`, `about`, `contact`, `global`). Export sections at 1x; full-page export optional.
