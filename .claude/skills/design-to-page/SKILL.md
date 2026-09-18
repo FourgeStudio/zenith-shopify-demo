@@ -14,7 +14,7 @@ Workflow that took the homepage from "not accurate" to within 1–3px of the des
 - `git checkout staging && git pull` first (the theme editor commits back).
 
 ## 1. Read the design (lead, ~15 min)
-1. `node scripts/png-sizes.js "design/<page>"` → every file with size.
+1. `node scripts/png-sizes.js "design/<page>"` → every file with size. Folder names vary (`desktop version/sections`, `desktop/sections`, `section`/`sections`) — discover, don't assume. Scale: 1440 / ~400 wide = 1x; 2880 / ~800 wide = 2x → halve every measurement (slice 2x pages with `-Height 2000` / `2200`).
 2. Slice each full page into the scratchpad (never Read a 10 000px image whole):
    `powershell -File scripts/slice.ps1 -Src "<full.png>" -OutDir "<scratchpad>/slices" -Prefix d -Height 1000` (mobile: `-Prefix m -Height 1100`).
 3. Read every slice top to bottom, then every `guide*.png`. Designer notes are requirements (they produced: global customer count, before/after card, sale hero, countdown seconds).
