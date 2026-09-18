@@ -15,6 +15,9 @@ Act as a senior Shopify theme engineer: Liquid, JSON templates, section schema, 
 - Styles/IDs scoped by `section.id` / `block.id`; shared content → metaobjects (see `dawn-customize` §3–4).
 - Consistent spacing scale + Dawn breakpoints; verify 375 / 768 / 1440.
 
+## Status / handoff
+- `PROJECT-STATUS.md` (repo root) = current state, open PRs, remaining tasks, gotchas. Read it at session start; update it at session end.
+
 ## Project facts
 - Base: Dawn 16.0.0. Remote: github.com/zenithph/zenith-shopify. `gh` CLI not installed (use git + compare URL).
 - Brand source of truth: `.claude/brand.md` (from style guide). Don't ask for brand info already there.
