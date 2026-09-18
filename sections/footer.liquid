@@ -1,188 +1,305 @@
 {% comment %}theme-check-disable UndefinedObject{% endcomment %}
+{%- comment -%}
+  zenith: footer rebuilt to the Zenith design.
+  Desktop: logo | menus (top row) · social + email + payment badges | seal (bottom row) · divider · bottom bar.
+  Mobile: logo · first menu full width · remaining menus in columns · info | seal · divider · bottom bar.
+  Dawn features (newsletter, Follow on Shop, country/language selectors, policy links, powered by) stay as toggles.
+  Per-instance values are CSS vars on #Zenith-{{ section.id }}; static rules live in assets/zenith-footer.css.
+{%- endcomment -%}
 {{ 'section-footer.css' | asset_url | stylesheet_tag }}
-{{ 'component-newsletter.css' | asset_url | stylesheet_tag }}
-{{ 'component-list-menu.css' | asset_url | stylesheet_tag }}
-{{ 'component-list-payment.css' | asset_url | stylesheet_tag }}
+{%- if section.settings.newsletter_enable -%}
+  {{ 'component-newsletter.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
 {{ 'component-list-social.css' | asset_url | stylesheet_tag }}
+{{ 'zenith-footer.css' | asset_url | stylesheet_tag }}
 
-{%- style -%}
-  .footer {
-    margin-top: {{ section.settings.margin_top | times: 0.75 | round: 0 }}px;
-  }
+{%- liquid
+  assign s = section.settings
 
-  .section-{{ section.id }}-padding {
-    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
-    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
-  }
+  assign has_social_icons = true
+  if settings.social_facebook_link == blank and settings.social_instagram_link == blank and settings.social_youtube_link == blank and settings.social_tiktok_link == blank and settings.social_twitter_link == blank and settings.social_pinterest_link == blank and settings.social_snapchat_link == blank and settings.social_tumblr_link == blank and settings.social_vimeo_link == blank
+    assign has_social_icons = false
+  endif
 
-  @media screen and (min-width: 750px) {
-    .footer {
-      margin-top: {{ section.settings.margin_top }}px;
-    }
+  # zenith: top line — gradient wins over the solid colour; mobile falls back to desktop
+  assign top_line = 'none'
+  if s.top_line_gradient != blank
+    assign top_line = s.top_line_gradient
+  elsif s.top_line_color != blank
+    assign top_line_color = s.top_line_color | append: ''
+    assign top_line = 'linear-gradient(' | append: top_line_color | append: ', ' | append: top_line_color | append: ')'
+  endif
+  assign top_line_mobile = s.top_line_gradient_mobile | default: top_line
 
-    .section-{{ section.id }}-padding {
-      padding-top: {{ section.settings.padding_top }}px;
-      padding-bottom: {{ section.settings.padding_bottom }}px;
-    }
-  }
-{%- endstyle -%}
+  assign divider_color = s.divider_color | default: 'rgba(var(--color-foreground), 0.15)'
+  assign divider_color_mobile = s.divider_color_mobile | default: divider_color
 
-<footer class="footer color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
-  {%- liquid
-    assign has_social_icons = true
-    if settings.social_facebook_link == blank and settings.social_instagram_link == blank and settings.social_youtube_link == blank and settings.social_tiktok_link == blank and settings.social_twitter_link == blank and settings.social_pinterest_link == blank and settings.social_snapchat_link == blank and settings.social_tumblr_link == blank and settings.social_vimeo_link == blank
-      assign has_social_icons = false
-    endif
+  assign logo = s.logo | default: settings.brand_image
+  assign logo_alt = logo.alt | default: shop.name
+  assign seal_alt = s.seal_image.alt | default: shop.name
+  assign payment_alt = s.payment_image.alt
+  if payment_alt == blank
+    assign payment_alt = 'sections.footer.payment' | t
+  endif
+  assign show_follow_on_shop = false
+  if shop.features.follow_on_shop? and s.enable_follow_on_shop
+    assign show_follow_on_shop = true
+  endif
+  assign show_country = false
+  if s.enable_country_selector and localization.available_countries.size > 1
+    assign show_country = true
+  endif
+  assign show_language = false
+  if s.enable_language_selector and localization.available_languages.size > 1
+    assign show_language = true
+  endif
 
-    if settings.brand_image == blank and settings.brand_headline == blank and settings.brand_description == blank
-      assign brand_empty = true
-    endif
+  assign current_year = 'now' | date: '%Y'
+-%}
 
-    if section.blocks.size == 1 and section.blocks[0].type == 'brand_information' and brand_empty and has_social_icons == false and section.settings.newsletter_enable == false and section.settings.enable_follow_on_shop == false
-      assign only_empty_brand = true
-    endif
-  -%}
-  {%- if section.blocks.size > 0
-    or section.settings.newsletter_enable
-    or section.settings.show_social
-    and has_social_icons == true
-    or section.settings.enable_follow_on_shop
-  -%}
-    {%- unless only_empty_brand -%}
-      <div class="footer__content-top page-width">
-        {%- if section.blocks.size > 0 -%}
-          {%- liquid
-            if section.blocks.size == 9
-              assign footer_grid_class = 'grid--3-col-tablet'
-            elsif section.blocks.size > 6
-              assign footer_grid_class = 'grid--4-col-desktop'
-            elsif section.blocks.size > 4
-              assign footer_grid_class = 'grid--3-col-tablet'
-            endif
-          -%}
-          <div
-            class="footer__blocks-wrapper grid grid--1-col grid--2-col grid--4-col-tablet {{ footer_grid_class }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-            {% if settings.animations_reveal_on_scroll %}
-              data-cascade
-            {% endif %}
-          >
-            {%- for block in section.blocks -%}
-              <div
-                class="footer-block grid__item{% if block.type == 'link_list' %} footer-block--menu{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-                {{ block.shopify_attributes }}
-                {% if settings.animations_reveal_on_scroll %}
-                  data-cascade
-                  style="--animation-order: {{ forloop.index }};"
-                {% endif %}
-              >
-                {%- if block.settings.heading != blank -%}
-                  <h2 class="footer-block__heading inline-richtext">{{- block.settings.heading -}}</h2>
-                {%- endif -%}
+{%- capture extra -%}
+  --z-mt: {{ s.margin_top }}px;
+  --z-mt-m: {{ s.margin_top | times: 0.75 | round: 0 }}px;
+  --z-tl-h: {{ s.top_line_height }}px;
+  --z-tl-bg: {{ top_line }};
+  --z-tl-bg-m: {{ top_line_mobile }};
+  --z-div-c: {{ divider_color }};
+  --z-div-c-m: {{ divider_color_mobile }};
+  --z-div-sp: {{ s.divider_spacing }}px;
+  --z-logow-m: {{ s.logo_width_mobile }}px;
+  --z-logo-sp-m: {{ s.logo_spacing_mobile }}px;
+  --z-lsp: {{ s.link_spacing }}px;
+  --z-lsp-m: {{ s.link_spacing_mobile }}px;
+  --z-mrg-m: {{ s.menu_row_gap_mobile }}px;
+  --z-social-gap: {{ s.social_gap }}px;
+  --z-pay-h: {{ s.payment_image_height }}px;
+  --z-pay-h-m: {{ s.payment_image_height_mobile }}px;
+  --z-seal-w: {{ s.seal_width }}px;
+  --z-seal-w-m: {{ s.seal_width_mobile }}px;
+  --z-cfs: {{ s.caption_font_size }}px;
+  --z-cfs-m: {{ s.caption_font_size_mobile }}px;
+  {%- if s.background_color != blank and s.background_color.alpha != 0 %}
+  --color-background: {{ s.background_color.red }},{{ s.background_color.green }},{{ s.background_color.blue }};
+  --gradient-background: {{ s.background_color }};
+  {%- endif %}
+{%- endcapture -%}
+{%- render 'zenith-section-style', section: section, extra: extra -%}
 
-                {%- case block.type -%}
-                  {%- when '@app' -%}
-                    {% render block %}
-                  {%- when 'text' -%}
-                    <div class="footer-block__details-content rte">
-                      {{ block.settings.subtext }}
-                    </div>
-                  {%- when 'link_list' -%}
-                    {%- if block.settings.menu != blank -%}
-                      <ul class="footer-block__details-content list-unstyled">
-                        {%- for link in block.settings.menu.links -%}
-                          <li>
-                            <a
-                              href="{{ link.url }}"
-                              class="link link--text list-menu__item list-menu__item--link{% if link.active %} list-menu__item--active{% endif %}"
-                            >
-                              {{ link.title | escape }}
-                            </a>
-                          </li>
-                        {%- endfor -%}
-                      </ul>
-                    {%- endif -%}
-                  {%- when 'brand_information' -%}
-                    <div class="footer-block__brand-info">
-                      {%- if settings.brand_image != blank -%}
-                        {%- assign brand_image_height = settings.brand_image_width
-                          | divided_by: settings.brand_image.aspect_ratio
+<footer
+  id="Zenith-{{ section.id }}"
+  class="footer zenith-footer zenith-section color-{{ s.color_scheme }} gradient"
+>
+  <div class="page-width">
+    <div
+      class="zenith-footer__main{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+      {% if settings.animations_reveal_on_scroll %}
+        data-cascade
+      {% endif %}
+    >
+      <div class="zenith-footer__brand">
+        <a href="{{ routes.root_url }}" class="zenith-footer__logo-link">
+          {%- if logo != blank -%}
+            {%- capture logo_sizes -%}(min-width: 750px) {{ s.logo_width }}px, {{ s.logo_width_mobile }}px{%- endcapture -%}
+            {{
+              logo
+              | image_url: width: 600
+              | image_tag:
+                loading: 'lazy',
+                widths: '150, 300, 450, 600',
+                sizes: logo_sizes,
+                class: 'zenith-footer__logo',
+                alt: logo_alt
+            }}
+          {%- else -%}
+            {%- comment -%} zenith: bundled lockup until a logo is chosen here or in Theme settings > Brand information {%- endcomment -%}
+            <img
+              src="{{ 'footer-logo.png' | asset_url }}"
+              alt="{{ shop.name | escape }}"
+              width="204"
+              height="80"
+              loading="lazy"
+              class="zenith-footer__logo"
+            >
+          {%- endif -%}
+        </a>
+      </div>
+
+      {%- if section.blocks.size > 0 -%}
+        <div class="zenith-footer__menus">
+          {%- for block in section.blocks -%}
+            <div
+              class="zenith-footer__block zenith-footer__block--{{ block.type | handleize }}{% if block.settings.mobile_full_width %} zenith-footer__block--full-m{% endif %}"
+              {{ block.shopify_attributes }}
+            >
+              {%- if block.settings.heading != blank -%}
+                <h2 class="zenith-footer__heading inline-richtext">{{ block.settings.heading }}</h2>
+              {%- endif -%}
+
+              {%- case block.type -%}
+                {%- when '@app' -%}
+                  {% render block %}
+                {%- when 'link_list' -%}
+                  {%- liquid
+                    assign menu = block.settings.menu
+                    assign menu_mobile = block.settings.menu_mobile
+                    assign has_mobile_menu = false
+                    if menu_mobile != blank and menu_mobile.handle != menu.handle
+                      assign has_mobile_menu = true
+                    endif
+                    assign nav_label = block.settings.heading | strip_html
+                    if nav_label == blank
+                      assign nav_label = menu.title | default: menu_mobile.title
+                    endif
+                  -%}
+                  {%- if menu != blank or has_mobile_menu -%}
+                    <nav aria-label="{{ nav_label | escape }}">
+                      {%- for pass in (1..2) -%}
+                        {%- liquid
+                          assign links_menu = nil
+                          assign links_class = ''
+                          if pass == 1
+                            assign links_menu = menu
+                            if has_mobile_menu
+                              assign links_class = ' zenith-hide-mobile'
+                            endif
+                          elsif has_mobile_menu
+                            assign links_menu = menu_mobile
+                            assign links_class = ' zenith-hide-desktop'
+                          endif
                         -%}
-                        <div
-                          class="footer-block__image-wrapper"
-                          style="max-width: min(100%, {{ settings.brand_image_width }}px);"
+                        {%- if links_menu != blank -%}
+                          <ul class="zenith-footer__links list-unstyled{{ links_class }}" role="list">
+                            {%- for link in links_menu.links -%}
+                              <li>
+                                <a
+                                  href="{{ link.url }}"
+                                  class="zenith-footer__link{% if link.active %} zenith-footer__link--active{% endif %}"
+                                  {% if link.current %}
+                                    aria-current="page"
+                                  {% endif %}
+                                >
+                                  {{- link.title | escape -}}
+                                </a>
+                              </li>
+                            {%- endfor -%}
+                          </ul>
+                        {%- endif -%}
+                      {%- endfor -%}
+                    </nav>
+                  {%- endif -%}
+                {%- when 'text' -%}
+                  <div class="zenith-footer__text rte">{{ block.settings.subtext }}</div>
+                {%- when 'brand_information' -%}
+                  <div class="zenith-footer__text">
+                    {%- if settings.brand_headline != blank -%}
+                      <p class="zenith-footer__brand-headline">{{ settings.brand_headline }}</p>
+                    {%- endif -%}
+                    {%- if settings.brand_description != blank -%}
+                      <div class="rte">{{ settings.brand_description }}</div>
+                    {%- endif -%}
+                    {%- if block.settings.show_social and has_social_icons -%}
+                      {%- render 'social-icons', class: 'zenith-footer__social' -%}
+                    {%- endif -%}
+                  </div>
+                {%- when 'image' -%}
+                  <div class="footer-block-image {{ block.settings.alignment }}">
+                    {%- if block.settings.image != blank -%}
+                      {%- assign image_size_2x = block.settings.image_width | times: 2 | at_most: 5760 -%}
+                      <div
+                        class="footer-block__image-wrapper"
+                        style="max-width: min(100%, {{ block.settings.image_width }}px);"
+                      >
+                        <img
+                          srcset="{{ block.settings.image | image_url: width: block.settings.image_width }}, {{ block.settings.image | image_url: width: image_size_2x }} 2x"
+                          src="{{ block.settings.image | image_url: width: 760 }}"
+                          alt="{{ block.settings.image.alt | escape }}"
+                          loading="lazy"
+                          width="{{ block.settings.image.width }}"
+                          height="{{ block.settings.image.height }}"
                         >
-                          {{
-                            settings.brand_image
-                            | image_url: width: 1100
-                            | image_tag:
-                              loading: 'lazy',
-                              widths: '50, 100, 150, 200, 300, 400, 550, 800, 1100',
-                              height: brand_image_height,
-                              width: settings.brand_image_width
-                          }}
-                        </div>
-                      {%- else -%}
-                        {%- comment -%} zenith: fallback to bundled logo until Theme settings > Brand image is set {%- endcomment -%}
-                        <div
-                          class="footer-block__image-wrapper"
-                          style="max-width: min(100%, {{ settings.brand_image_width }}px);"
-                        >
-                          <img
-                            src="{{ 'footer-logo.png' | asset_url }}"
-                            alt="{{ shop.name | escape }}"
-                            width="{{ settings.brand_image_width }}"
-                            height="{{ settings.brand_image_width | times: 80 | divided_by: 204 }}"
-                            loading="lazy"
-                          >
-                        </div>
-                      {%- endif -%}
-                      {%- if settings.brand_headline != blank -%}
-                        <h2 class="footer-block__heading rte">{{ settings.brand_headline }}</h2>
-                      {%- endif -%}
-                      {%- if settings.brand_description != blank -%}
-                        <div class="rte">{{ settings.brand_description }}</div>
-                      {%- endif -%}
-                      {%- if block.settings.show_social and has_social_icons -%}
-                        {%- render 'social-icons', class: 'footer__list-social' -%}
-                      {%- endif -%}
-                    </div>
-                  {%- when 'image' -%}
-                    <div class="footer-block__details-content footer-block-image {{ block.settings.alignment }}">
-                      {%- if block.settings.image != blank -%}
-                        {%- assign image_size_2x = block.settings.image_width | times: 2 | at_most: 5760 -%}
-                        <div
-                          class="footer-block__image-wrapper"
-                          style="max-width: min(100%, {{ block.settings.image_width }}px);"
-                        >
-                          <img
-                            srcset="{{ block.settings.image | image_url: width: block.settings.image_width }}, {{ block.settings.image | image_url: width: image_size_2x }} 2x"
-                            src="{{ block.settings.image | image_url: width: 760 }}"
-                            alt="{{ block.settings.image.alt | escape }}"
-                            loading="lazy"
-                            width="{{ block.settings.image.width }}"
-                            height="{{ block.settings.image.height }}"
-                          >
-                        </div>
-                      {%- else -%}
-                        {{ 'image' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
-                      {%- endif -%}
-                    </div>
-                {%- endcase -%}
-              </div>
-            {%- endfor -%}
-          </div>
+                      </div>
+                    {%- else -%}
+                      {{ 'image' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+                    {%- endif -%}
+                  </div>
+              {%- endcase -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      {%- capture info -%}
+        {%- if s.show_social and has_social_icons -%}
+          {%- render 'social-icons', class: 'zenith-footer__social' -%}
         {%- endif -%}
 
-        <div
-          class="footer-block--newsletter{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-          {% if settings.animations_reveal_on_scroll %}
-            data-cascade
-          {% endif %}
-        >
-          {%- if section.settings.newsletter_enable -%}
+        {%- if s.email != blank -%}
+          <a href="mailto:{{ s.email | strip | escape }}" class="zenith-footer__email">
+            {%- comment -%} zenith: filled open-envelope icon from the design {%- endcomment -%}
+            <svg class="zenith-footer__email-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+              <path fill="currentColor" fill-rule="evenodd" d="M1 6.2 8 1.6l7 4.6V14a.9.9 0 0 1-.9.9H1.9A.9.9 0 0 1 1 14zm0 .9 7 4.2 7-4.2v1.3l-7 4.2-7-4.2z"/>
+            </svg>
+            <span>{{ s.email | strip | escape }}</span>
+          </a>
+        {%- endif -%}
+
+        {%- if s.payment_image != blank -%}
+          {%- capture payment_sizes -%}(min-width: 750px) {{ s.payment_image_height | times: s.payment_image.aspect_ratio | ceil }}px, {{ s.payment_image_height_mobile | times: s.payment_image.aspect_ratio | ceil }}px{%- endcapture -%}
+          {{
+            s.payment_image
+            | image_url: width: 1200
+            | image_tag:
+              loading: 'lazy',
+              widths: '300, 600, 900, 1200',
+              sizes: payment_sizes,
+              class: 'zenith-footer__payments-image',
+              alt: payment_alt
+          }}
+        {%- elsif s.payment_enable and shop.enabled_payment_types.size > 0 -%}
+          <ul
+            class="zenith-footer__payments list-unstyled"
+            role="list"
+            aria-label="{{ 'sections.footer.payment' | t | escape }}"
+          >
+            {%- for type in shop.enabled_payment_types -%}
+              <li>{{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}</li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      {%- endcapture -%}
+
+      {%- assign info = info | strip -%}
+      {%- if info != blank -%}
+        <div class="zenith-footer__info">{{ info }}</div>
+      {%- endif -%}
+
+      {%- if s.seal_image != blank -%}
+        {%- capture seal_sizes -%}(min-width: 750px) {{ s.seal_width }}px, {{ s.seal_width_mobile }}px{%- endcapture -%}
+        <div class="zenith-footer__seal zenith-footer__seal--{{ s.seal_style }} zenith-footer__seal--m-{{ s.seal_style_mobile }}">
+          {%- if s.seal_link != blank -%}
+            <a href="{{ s.seal_link }}" class="zenith-footer__seal-link">
+          {%- endif -%}
+          {{
+            s.seal_image
+            | image_url: width: 400
+            | image_tag:
+              loading: 'lazy',
+              widths: '100, 200, 300, 400',
+              sizes: seal_sizes,
+              alt: seal_alt
+          }}
+          {%- if s.seal_link != blank -%}
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {%- if s.newsletter_enable or show_follow_on_shop -%}
+        <div class="zenith-footer__extras footer-block--newsletter">
+          {%- if s.newsletter_enable -%}
             <div class="footer-block__newsletter">
-              {%- if section.settings.newsletter_heading != blank -%}
-                <h2 class="footer-block__heading inline-richtext">{{ section.settings.newsletter_heading }}</h2>
+              {%- if s.newsletter_heading != blank -%}
+                <h2 class="zenith-footer__heading inline-richtext">{{ s.newsletter_heading }}</h2>
               {%- endif -%}
               {%- form 'customer', id: 'ContactFooter', class: 'footer__newsletter newsletter-form' -%}
                 <input type="hidden" name="contact[tags]" value="newsletter">
@@ -250,85 +367,69 @@
             </div>
           {%- endif -%}
 
-          {%- if shop.features.follow_on_shop? and section.settings.enable_follow_on_shop -%}
+          {%- if show_follow_on_shop -%}
             <div class="footer__follow-on-shop">
               {{ shop | login_button: action: 'follow' }}
             </div>
           {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
 
-          {%- if section.settings.show_social and has_social_icons -%}
-            {%- render 'social-icons', class: 'footer__list-social' -%}
+    <div class="zenith-footer__bottom">
+      {%- if s.bottom_text != blank -%}
+        <p class="zenith-footer__small">{{ s.bottom_text | escape }}</p>
+      {%- endif -%}
+
+      {%- if show_country or show_language -%}
+        <div class="footer__localization zenith-footer__localization isolate">
+          {%- if show_country -%}
+            <localization-form>
+              {%- form 'localization', id: 'FooterCountryForm', class: 'localization-form' -%}
+                <div>
+                  <h2 class="caption-large text-body" id="FooterCountryLabel">{{ 'localization.country_label' | t }}</h2>
+                  {%- render 'country-localization', localPosition: 'FooterCountry' -%}
+                </div>
+              {%- endform -%}
+            </localization-form>
+          {%- endif -%}
+
+          {%- if show_language -%}
+            <localization-form>
+              {%- form 'localization', id: 'FooterLanguageForm', class: 'localization-form' -%}
+                <div>
+                  <h2 class="caption-large text-body" id="FooterLanguageLabel">
+                    {{ 'localization.language_label' | t }}
+                  </h2>
+                  {%- render 'language-localization', localPosition: 'FooterLanguage' -%}
+                </div>
+              {%- endform -%}
+            </localization-form>
           {%- endif -%}
         </div>
-      </div>
-    {%- endunless -%}
-  {%- endif -%}
+      {%- endif -%}
 
-  <div
-    class="footer__content-bottom{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-    {% if settings.animations_reveal_on_scroll %}
-      data-cascade
-    {% endif %}
-  >
-    <div class="footer__content-bottom-wrapper page-width">
-      <div class="footer__column footer__localization isolate">
-        {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
-          <localization-form>
-            {%- form 'localization', id: 'FooterCountryForm', class: 'localization-form' -%}
-              <div>
-                <h2 class="caption-large text-body" id="FooterCountryLabel">{{ 'localization.country_label' | t }}</h2>
-                {%- render 'country-localization', localPosition: 'FooterCountry' -%}
-              </div>
-            {%- endform -%}
-          </localization-form>
-        {%- endif -%}
-
-        {%- if section.settings.enable_language_selector and localization.available_languages.size > 1 -%}
-          <localization-form>
-            {%- form 'localization', id: 'FooterLanguageForm', class: 'localization-form' -%}
-              <div>
-                <h2 class="caption-large text-body" id="FooterLanguageLabel">
-                  {{ 'localization.language_label' | t }}
-                </h2>
-                {%- render 'language-localization', localPosition: 'FooterLanguage' -%}
-              </div>
-            {%- endform -%}
-          </localization-form>
-        {%- endif -%}
-      </div>
-      <div class="footer__column footer__column--info">
-        {%- if section.settings.payment_enable -%}
-          <div class="footer__payment">
-            <span class="visually-hidden">{{ 'sections.footer.payment' | t }}</span>
-            <ul class="list list-payment" role="list">
-              {%- for type in shop.enabled_payment_types -%}
-                <li class="list-payment__item">
-                  {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
-                </li>
-              {%- endfor -%}
-            </ul>
-          </div>
-        {%- endif -%}
-      </div>
-    </div>
-    <div class="footer__content-bottom-wrapper page-width{% if section.settings.enable_country_selector == false and section.settings.enable_language_selector == false %} footer__content-bottom-wrapper--center{% endif %}">
-      <div class="footer__copyright caption">
-        <small class="copyright__content"
-          >&copy; {{ 'now' | date: '%Y' }}, {{ shop.name | link_to: routes.root_url -}}
-        </small>
-        <small class="copyright__content">{{ powered_by_link }}</small>
-        {%- if section.settings.show_policy -%}
-          <ul class="policies list-unstyled">
+      <div class="zenith-footer__legal">
+        <p class="zenith-footer__small">
+          {%- if s.copyright_text != blank -%}
+            {{ s.copyright_text | escape | replace: '[year]', current_year }}
+          {%- else -%}
+            &copy; {{ current_year }}, {{ shop.name | link_to: routes.root_url -}}
+          {%- endif -%}
+        </p>
+        {%- if s.show_policy -%}
+          <ul class="zenith-footer__policies list-unstyled" role="list">
             {%- for policy in shop.policies -%}
               {%- if policy != blank -%}
-                <li>
-                  <small class="copyright__content"
-                    ><a href="{{ policy.url }}">{{ policy.title | escape }}</a></small
-                  >
+                <li class="zenith-footer__small">
+                  <a href="{{ policy.url }}">{{ policy.title | escape }}</a>
                 </li>
               {%- endif -%}
             {%- endfor -%}
           </ul>
+        {%- endif -%}
+        {%- if s.show_powered_by -%}
+          <p class="zenith-footer__small">{{ powered_by_link }}</p>
         {%- endif -%}
       </div>
     </div>
@@ -347,16 +448,37 @@
       "name": "t:sections.footer.blocks.link_list.name",
       "settings": [
         {
+          "type": "header",
+          "content": "Content"
+        },
+        {
           "type": "inline_richtext",
           "id": "heading",
-          "default": "t:sections.footer.blocks.link_list.settings.heading.default",
-          "label": "t:sections.footer.blocks.link_list.settings.heading.label"
+          "label": "t:sections.footer.blocks.link_list.settings.heading.label",
+          "info": "Optional. The design has no menu headings."
         },
         {
           "type": "link_list",
           "id": "menu",
           "default": "footer",
           "label": "t:sections.footer.blocks.link_list.settings.menu.label"
+        },
+        {
+          "type": "header",
+          "content": "Mobile"
+        },
+        {
+          "type": "link_list",
+          "id": "menu_mobile",
+          "label": "Menu on mobile",
+          "info": "Optional. Replaces the menu above on mobile. Leave empty to use the same menu."
+        },
+        {
+          "type": "checkbox",
+          "id": "mobile_full_width",
+          "label": "Full width on mobile",
+          "info": "Puts this menu on its own row on mobile.",
+          "default": false
         }
       ]
     },
@@ -439,21 +561,88 @@
   ],
   "settings": [
     {
-      "type": "color_scheme",
-      "id": "color_scheme",
-      "label": "t:sections.all.colors.label",
-      "default": "scheme-1"
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo",
+      "info": "Logo with tagline. Empty = Theme settings > Brand information image, then the bundled Zenith lockup."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social",
+      "default": true,
+      "label": "Show social media icons",
+      "info": "Add the links in Theme settings > Social media."
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email address",
+      "default": "hello@tryzenith.ph"
+    },
+    {
+      "type": "image_picker",
+      "id": "payment_image",
+      "label": "Payment badges image",
+      "info": "One image with all badges (GCash, Maya, Visa…). Empty = the store's payment icons, if enabled below."
+    },
+    {
+      "type": "checkbox",
+      "id": "payment_enable",
+      "default": true,
+      "label": "Show store payment icons",
+      "info": "Used only when no payment badges image is selected."
+    },
+    {
+      "type": "image_picker",
+      "id": "seal_image",
+      "label": "Seal image",
+      "info": "e.g. An Amare Group Brand seal. Set its alt text in Content > Files."
+    },
+    {
+      "type": "url",
+      "id": "seal_link",
+      "label": "Seal link"
+    },
+    {
+      "type": "text",
+      "id": "bottom_text",
+      "label": "Bottom bar text (left)",
+      "default": "TryZenith PH"
+    },
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Copyright text (right)",
+      "default": "© [year] Amare Group Inc. All rights reserved.",
+      "info": "[year] shows the current year. Empty = © year, store name."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_policy",
+      "default": false,
+      "label": "t:sections.footer.settings.show_policy.label",
+      "info": "t:sections.footer.settings.show_policy.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_powered_by",
+      "default": false,
+      "label": "Show \"Powered by Shopify\""
     },
     {
       "type": "header",
-      "content": "t:sections.footer.settings.header__1.content",
-      "info": "t:sections.footer.settings.header__1.info"
+      "content": "Content: newsletter & selectors"
     },
     {
       "type": "checkbox",
       "id": "newsletter_enable",
-      "default": true,
-      "label": "t:sections.footer.settings.newsletter_enable.label"
+      "default": false,
+      "label": "t:sections.footer.settings.newsletter_enable.label",
+      "info": "t:sections.footer.settings.header__1.info"
     },
     {
       "type": "inline_richtext",
@@ -462,53 +651,342 @@
       "label": "t:sections.footer.settings.newsletter_heading.label"
     },
     {
-      "type": "header",
-      "content": "t:sections.footer.settings.header__9.content"
-    },
-    {
       "type": "checkbox",
       "id": "enable_follow_on_shop",
-      "default": true,
+      "default": false,
       "label": "t:sections.footer.settings.enable_follow_on_shop.label",
       "info": "t:sections.footer.settings.enable_follow_on_shop.info"
     },
     {
       "type": "checkbox",
-      "id": "show_social",
-      "default": true,
-      "label": "t:sections.footer.settings.show_social.label",
-      "info": "t:sections.footer.settings.show_social.info"
-    },
-    {
-      "type": "checkbox",
       "id": "enable_country_selector",
-      "default": true,
+      "default": false,
       "label": "t:sections.footer.settings.enable_country_selector.label",
       "info": "t:sections.footer.settings.enable_country_selector.info"
     },
     {
       "type": "checkbox",
       "id": "enable_language_selector",
-      "default": true,
+      "default": false,
       "label": "t:sections.footer.settings.enable_language_selector.label",
       "info": "t:sections.footer.settings.enable_language_selector.info"
     },
     {
-      "type": "checkbox",
-      "id": "payment_enable",
-      "default": true,
-      "label": "t:sections.footer.settings.payment_enable.label"
+      "type": "header",
+      "content": "Layout"
     },
     {
-      "type": "checkbox",
-      "id": "show_policy",
-      "default": true,
-      "label": "t:sections.footer.settings.show_policy.label",
-      "info": "t:sections.footer.settings.show_policy.info"
+      "type": "range",
+      "id": "logo_width",
+      "min": 80,
+      "max": 180,
+      "step": 1,
+      "unit": "px",
+      "label": "Logo width",
+      "default": 145
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Space between menus",
+      "default": 42
+    },
+    {
+      "type": "range",
+      "id": "link_spacing",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Space between links",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "content_gap",
+      "min": 0,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "label": "Space between menus and social row",
+      "default": 19
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "min": 14,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Social icon size",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "social_gap",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Space between social icons",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "payment_image_height",
+      "min": 12,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "label": "Payment badges height",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "seal_width",
+      "min": 40,
+      "max": 140,
+      "step": 1,
+      "unit": "px",
+      "label": "Seal width",
+      "default": 85
+    },
+    {
+      "type": "select",
+      "id": "seal_style",
+      "label": "Seal style",
+      "options": [
+        {
+          "value": "original",
+          "label": "Original colors"
+        },
+        {
+          "value": "muted",
+          "label": "Muted (grey)"
+        }
+      ],
+      "default": "muted"
+    },
+    {
+      "type": "range",
+      "id": "top_line_height",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Top line thickness",
+      "default": 6
     },
     {
       "type": "header",
-      "content": "t:sections.all.spacing"
+      "content": "Colors"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "info": "Overrides the color scheme background. Clear to use the scheme.",
+      "default": "#1A1A1A"
+    },
+    {
+      "type": "color",
+      "id": "top_line_color",
+      "label": "Top line color",
+      "default": "#D6B356"
+    },
+    {
+      "type": "color_background",
+      "id": "top_line_gradient",
+      "label": "Top line gradient",
+      "info": "Optional. Replaces the top line color."
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "Divider color",
+      "default": "#808080"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "text_font_size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Links and email size",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "caption_font_size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Bottom bar text size",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "type": "range",
+      "id": "logo_width_mobile",
+      "min": 80,
+      "max": 180,
+      "step": 1,
+      "unit": "px",
+      "label": "Logo width",
+      "default": 145
+    },
+    {
+      "type": "range",
+      "id": "logo_spacing_mobile",
+      "min": 0,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "label": "Space below logo",
+      "default": 27
+    },
+    {
+      "type": "range",
+      "id": "gap_mobile",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Space between menu columns",
+      "default": 42
+    },
+    {
+      "type": "range",
+      "id": "menu_row_gap_mobile",
+      "min": 0,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "label": "Space between menu rows",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "link_spacing_mobile",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Space between links",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "content_gap_mobile",
+      "min": 0,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "label": "Space between menus and social row",
+      "default": 39
+    },
+    {
+      "type": "range",
+      "id": "icon_size_mobile",
+      "min": 14,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Social icon size",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "payment_image_height_mobile",
+      "min": 12,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "label": "Payment badges height",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "seal_width_mobile",
+      "min": 40,
+      "max": 140,
+      "step": 1,
+      "unit": "px",
+      "label": "Seal width",
+      "default": 83
+    },
+    {
+      "type": "select",
+      "id": "seal_style_mobile",
+      "label": "Seal style",
+      "options": [
+        {
+          "value": "original",
+          "label": "Original colors"
+        },
+        {
+          "value": "muted",
+          "label": "Muted (grey)"
+        }
+      ],
+      "default": "original"
+    },
+    {
+      "type": "color_background",
+      "id": "top_line_gradient_mobile",
+      "label": "Top line gradient",
+      "info": "Empty = same as desktop.",
+      "default": "linear-gradient(90deg, rgba(234, 190, 95, 1), rgba(197, 147, 0, 1) 100%)"
+    },
+    {
+      "type": "color",
+      "id": "divider_color_mobile",
+      "label": "Divider color",
+      "info": "Clear to use the desktop divider color.",
+      "default": "#3C3C3C"
+    },
+    {
+      "type": "range",
+      "id": "text_font_size_mobile",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Links and email size",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "caption_font_size_mobile",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Bottom bar text size",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
     },
     {
       "type": "range",
@@ -521,37 +999,69 @@
       "default": 0
     },
     {
-      "type": "header",
-      "content": "t:sections.all.padding.section_padding_heading"
-    },
-    {
       "type": "range",
       "id": "padding_top",
       "min": 0,
       "max": 100,
-      "step": 4,
+      "step": 2,
       "unit": "px",
       "label": "t:sections.all.padding.padding_top",
-      "default": 36
+      "default": 26
     },
     {
       "type": "range",
       "id": "padding_bottom",
       "min": 0,
       "max": 100,
-      "step": 4,
+      "step": 2,
       "unit": "px",
       "label": "t:sections.all.padding.padding_bottom",
-      "default": 36
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Top padding (mobile)",
+      "default": 26
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Bottom padding (mobile)",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "divider_spacing",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "label": "Space above and below divider",
+      "default": 15
     }
   ],
   "default": {
     "blocks": [
       {
+        "type": "link_list",
+        "settings": {
+          "mobile_full_width": true
+        }
+      },
+      {
         "type": "link_list"
       },
       {
-        "type": "text"
+        "type": "link_list"
       }
     ]
   }

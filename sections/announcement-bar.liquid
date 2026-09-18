@@ -18,8 +18,26 @@
   {{ 'component-list-social.css' | asset_url | stylesheet_tag }}
 {% endif %}
 
+{%- comment -%} zenith: design styling (gradient bg, Geist text, fixed height) — static rules in zenith-header.css {%- endcomment -%}
+{{ 'zenith-header.css' | asset_url | stylesheet_tag }}
+{%- style -%}
+  #Zenith-{{ section.id }} {
+    {%- if section.settings.zenith_background_gradient != blank %}
+    --zab-bg: {{ section.settings.zenith_background_gradient }};
+    {%- endif %}
+    --zab-h: {{ section.settings.zenith_height }}px;
+    --zab-h-m: {{ section.settings.zenith_height_mobile }}px;
+    --zab-fs: {{ section.settings.zenith_font_size }}px;
+    --zab-fs-m: {{ section.settings.zenith_font_size_mobile }}px;
+    --zab-weight: {{ section.settings.zenith_font_weight }};
+    --zab-font: var(--font-{{ section.settings.zenith_font }}-family);
+    --zab-transform: {% if section.settings.zenith_uppercase %}uppercase{% else %}none{% endif %};
+  }
+{%- endstyle -%}
+
 <div
-  class="utility-bar color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator and section.blocks.size > 0 %} utility-bar--bottom-border{% elsif section.settings.show_line_separator and section.settings.show_social and social_icons%} utility-bar--bottom-border-social-only{% endif %}{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header-localization{% endif %}"
+  id="Zenith-{{ section.id }}"
+  class="utility-bar zenith-announcement color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator and section.blocks.size > 0 %} utility-bar--bottom-border{% elsif section.settings.show_line_separator and section.settings.show_social and social_icons%} utility-bar--bottom-border-social-only{% endif %}{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header-localization{% endif %}"
 >
   <div class="page-width utility-bar__grid{% if announcement_bar and language_country_selector or section.settings.show_social and social_icons %} utility-bar__grid--3-col{% elsif language_country_selector or section.settings.show_social and social_icons %} utility-bar__grid--2-col{% endif %}">
     {%- if section.settings.show_social and social_icons -%}
@@ -40,7 +58,7 @@
             >
           {%- endif -%}
           <p class="announcement-bar__message h5">
-            <span>{{ section.blocks.first.settings.text | escape }}</span>
+            <span>{{ section.blocks.first.settings.text | replace: '[customers]', settings.customer_count | escape }}</span>
             {%- if section.blocks.first.settings.link != blank -%}
               {{- 'icon-arrow.svg' | inline_asset_content -}}
             {%- endif -%}
@@ -100,7 +118,7 @@
                       >
                     {%- endif -%}
                     <p class="announcement-bar__message h5">
-                      <span>{{ block.settings.text | escape }}</span>
+                      <span>{{ block.settings.text | replace: '[customers]', settings.customer_count | escape }}</span>
                       {%- if block.settings.link != blank -%}
                         {{- 'icon-arrow.svg' | inline_asset_content -}}
                       {%- endif -%}
@@ -191,13 +209,118 @@
       "type": "color_scheme",
       "id": "color_scheme",
       "label": "t:sections.all.colors.label",
-      "default": "scheme-4"
-    },  
+      "default": "scheme-5"
+    },
+    {
+      "type": "color_background",
+      "id": "zenith_background_gradient",
+      "label": "Background gradient",
+      "info": "Overrides the color scheme background. Clear to use the scheme.",
+      "default": "linear-gradient(90deg, rgba(234, 190, 95, 1) 0%, rgba(197, 147, 14, 1) 100%)"
+    },
     {
       "type": "checkbox",
       "id": "show_line_separator",
-      "default": true,
+      "default": false,
       "label": "t:sections.header.settings.show_line_separator.label"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "zenith_height",
+      "label": "Bar height",
+      "min": 24,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "select",
+      "id": "zenith_font",
+      "label": "Font",
+      "default": "body",
+      "options": [
+        {
+          "value": "body",
+          "label": "Body (Geist)"
+        },
+        {
+          "value": "heading",
+          "label": "Heading (condensed)"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "zenith_font_weight",
+      "label": "Font weight",
+      "default": "500",
+      "options": [
+        {
+          "value": "400",
+          "label": "Regular"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semibold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "zenith_font_size",
+      "label": "Text size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "checkbox",
+      "id": "zenith_uppercase",
+      "label": "Uppercase",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "type": "range",
+      "id": "zenith_height_mobile",
+      "label": "Bar height",
+      "min": 24,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "default": 33
+    },
+    {
+      "type": "range",
+      "id": "zenith_font_size_mobile",
+      "label": "Text size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
     },
     {
       "type": "header",
@@ -237,7 +360,8 @@
         {
           "type": "text",
           "id": "text",
-          "default": "t:sections.announcement-bar.blocks.announcement.settings.text.default",
+          "default": "Zenith money-back guarantee.",
+          "info": "[customers] is replaced with Theme settings > Zenith > Customer count.",
           "label": "t:sections.announcement-bar.blocks.announcement.settings.text.label"
         },
         {
