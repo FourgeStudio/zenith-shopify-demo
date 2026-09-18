@@ -2,8 +2,36 @@
 
 {%- liquid
   assign s = section.settings
+
+  # Content + countdown come from Theme settings → Zenith · Promo unless this section is set to its own content.
+  if s.content_source == 'custom'
+    assign p_heading = s.heading
+    assign p_text = s.text
+    assign p_button_label = s.button_label
+    assign p_button_link = s.button_link
+    assign p_background = s.background_image
+    assign p_image = s.image
+    assign p_cd_label = s.countdown_label
+    assign p_end_date = s.end_date
+    assign p_end_time = s.end_time
+    assign p_timezone = s.timezone
+    assign p_hide_expired = s.hide_when_expired
+  else
+    assign p_heading = settings.promo_heading
+    assign p_text = settings.promo_text
+    assign p_button_label = settings.promo_button_label
+    assign p_button_link = settings.promo_button_link
+    assign p_background = settings.promo_background_image
+    assign p_image = settings.promo_image
+    assign p_cd_label = settings.promo_countdown_label
+    assign p_end_date = settings.promo_end_date
+    assign p_end_time = settings.promo_end_time
+    assign p_timezone = settings.promo_timezone
+    assign p_hide_expired = settings.promo_hide_when_expired
+  endif
+
   assign show_countdown = false
-  if s.end_date != blank
+  if p_end_date != blank
     assign show_countdown = true
   endif
 -%}
@@ -36,10 +64,10 @@
   <div class="zenith-promo__container{% if s.card_width == 'page' %} page-width{% endif %}">
     <div class="zenith-promo__card color-{{ s.card_color_scheme }} gradient{% if s.image_position == 'left' %} zenith-promo__card--image-left{% endif %}{% if s.mobile_image_first %} zenith-promo__card--m-image-first{% endif %}">
       <div class="zenith-promo__body">
-        {%- if s.background_image != blank -%}
+        {%- if p_background != blank -%}
           <div class="zenith-media zenith-promo__bg" aria-hidden="true">
             {{
-              s.background_image
+              p_background
               | image_url: width: 2800
               | image_tag:
                 loading: 'lazy',
@@ -53,30 +81,30 @@
 
         <div class="zenith-promo__content">
           {%- render 'zenith-section-heading',
-            heading: s.heading,
-            subheading: s.text,
+            heading: p_heading,
+            subheading: p_text,
             alignment: 'left',
             uppercase: s.heading_uppercase,
             tag: 'h2',
             class: 'zenith-promo__heading'
           -%}
           {%- render 'zenith-button',
-            label: s.button_label,
-            link: s.button_link,
+            label: p_button_label,
+            link: p_button_link,
             style: s.button_style,
             class: 'zenith-promo__button'
           -%}
         </div>
 
-        {%- if s.image != blank -%}
+        {%- if p_image != blank -%}
           <div class="zenith-promo__image">
             {{
-              s.image
+              p_image
               | image_url: width: 1200
               | image_tag: loading: 'lazy', widths: '400, 600, 800, 1200', sizes: '(min-width: 750px) 45vw, 90vw'
             }}
           </div>
-        {%- elsif s.background_image == blank -%}
+        {%- elsif p_background == blank -%}
           <div class="zenith-promo__image">
             {{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
           </div>
@@ -85,16 +113,16 @@
 
       {%- if show_countdown -%}
         <div class="zenith-promo__countdown" data-countdown-wrapper>
-          {%- if s.countdown_label != blank -%}
+          {%- if p_cd_label != blank -%}
             <p class="zenith-promo__countdown-label">
-              {{- s.countdown_label | escape | replace: '[customers]', settings.customer_count -}}
+              {{- p_cd_label | escape | replace: '[customers]', settings.customer_count -}}
             </p>
           {%- endif -%}
           {%- render 'zenith-countdown',
-            end_date: s.end_date,
-            end_time: s.end_time,
-            timezone: s.timezone,
-            hide_expired: s.hide_when_expired,
+            end_date: p_end_date,
+            end_time: p_end_time,
+            timezone: p_timezone,
+            hide_expired: p_hide_expired,
             show_labels: s.countdown_show_labels
           -%}
         </div>
@@ -115,6 +143,17 @@
     {
       "type": "header",
       "content": "Content"
+    },
+    {
+      "type": "select",
+      "id": "content_source",
+      "label": "Promo content",
+      "default": "global",
+      "options": [
+        { "value": "global", "label": "Global promo (Theme settings → Zenith · Promo)" },
+        { "value": "custom", "label": "This section only" }
+      ],
+      "info": "Global: edit the promo once in Theme settings → Zenith · Promo and every banner set to Global updates. The content and countdown fields below are only used with \"This section only\"."
     },
     {
       "type": "text",

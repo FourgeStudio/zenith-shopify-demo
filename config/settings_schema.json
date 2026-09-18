@@ -24,6 +24,100 @@
     ]
   },
   {
+    "name": "Zenith · Promo",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "One promo for the whole store. Every \"Zenith · Promo banner\" section set to \"Global promo\" (and the hero countdown strip, if set to use it) shows this content — edit once, it updates everywhere."
+      },
+      {
+        "type": "header",
+        "content": "Content"
+      },
+      {
+        "type": "text",
+        "id": "promo_heading",
+        "label": "Heading",
+        "default": "Exclusive Offers for this Season"
+      },
+      {
+        "type": "richtext",
+        "id": "promo_text",
+        "label": "Text",
+        "default": "<p>Bundles and deals built for value. Here for a moment, then gone.</p>"
+      },
+      {
+        "type": "text",
+        "id": "promo_button_label",
+        "label": "Button label",
+        "default": "Get This Exclusive Offer"
+      },
+      {
+        "type": "url",
+        "id": "promo_button_link",
+        "label": "Button link"
+      },
+      {
+        "type": "image_picker",
+        "id": "promo_background_image",
+        "label": "Background image",
+        "info": "Fills the banner, e.g. gold confetti + product photo with a light left side for the text. Recommended 2752 × 640px."
+      },
+      {
+        "type": "image_picker",
+        "id": "promo_image",
+        "label": "Product image",
+        "info": "Optional. Transparent PNG beside the text. Leave empty when the background image already shows the products."
+      },
+      {
+        "type": "header",
+        "content": "Countdown"
+      },
+      {
+        "type": "text",
+        "id": "promo_countdown_label",
+        "label": "Countdown label",
+        "default": "This Exclusive Offer Ends In"
+      },
+      {
+        "type": "text",
+        "id": "promo_end_date",
+        "label": "End date",
+        "default": "2026-12-31",
+        "info": "Format YYYY-MM-DD. Leave empty to hide the countdown everywhere."
+      },
+      {
+        "type": "text",
+        "id": "promo_end_time",
+        "label": "End time",
+        "default": "23:59",
+        "info": "24-hour HH:MM"
+      },
+      {
+        "type": "select",
+        "id": "promo_timezone",
+        "label": "Timezone",
+        "default": "+08:00",
+        "options": [
+          {
+            "value": "+08:00",
+            "label": "Philippines (UTC+8)"
+          },
+          {
+            "value": "Z",
+            "label": "UTC"
+          }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "promo_hide_when_expired",
+        "label": "Hide countdown when it ends",
+        "default": true
+      }
+    ]
+  },
+  {
     "name": "t:settings_schema.logo.name",
     "settings": [
       {
