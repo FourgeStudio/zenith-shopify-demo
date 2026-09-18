@@ -3,23 +3,23 @@ if (!customElements.get('zenith-countdown')) {
     'zenith-countdown',
     class ZenithCountdown extends HTMLElement {
       connectedCallback() {
+        clearInterval(this.timer);
         this.end = Date.parse(this.dataset.end);
         if (Number.isNaN(this.end)) return;
-        this.units = {
-          days: this.querySelector('[data-unit="days"]'),
-          hours: this.querySelector('[data-unit="hours"]'),
-          minutes: this.querySelector('[data-unit="minutes"]'),
-          seconds: this.querySelector('[data-unit="seconds"]'),
-        };
-        this.tick();
-        this.timer = setInterval(() => this.tick(), 1000);
+        this.units = {};
+        ['days', 'hours', 'minutes', 'seconds'].forEach((unit) => {
+          const el = this.querySelector(`[data-unit="${unit}"]`);
+          if (el) this.units[unit] = el;
+        });
+        this.tick(true);
+        this.timer = setInterval(() => this.tick(false), 1000);
       }
 
       disconnectedCallback() {
         clearInterval(this.timer);
       }
 
-      tick() {
+      tick(initial) {
         const remaining = Math.max(0, this.end - Date.now());
         const s = Math.floor(remaining / 1000);
         const values = {
@@ -29,12 +29,21 @@ if (!customElements.get('zenith-countdown')) {
           seconds: s % 60,
         };
         for (const [unit, el] of Object.entries(this.units)) {
-          if (el) el.textContent = String(values[unit]).padStart(2, '0');
+          const text = String(values[unit]).padStart(2, '0');
+          if (el.textContent === text) continue;
+          el.textContent = text;
+          if (!initial) {
+            el.classList.remove('is-rolling');
+            void el.offsetWidth;
+            el.classList.add('is-rolling');
+          }
         }
         if (remaining === 0) {
           clearInterval(this.timer);
           this.classList.add('is-expired');
-          if (this.dataset.hideExpired === 'true') this.closest('[data-countdown-wrapper]')?.setAttribute('hidden', '');
+          if (this.dataset.hideExpired === 'true') {
+            this.closest('[data-countdown-wrapper]')?.setAttribute('hidden', '');
+          }
         }
       }
     }

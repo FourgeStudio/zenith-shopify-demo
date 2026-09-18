@@ -3,18 +3,19 @@
   Sizes, spacing and max width come from section settings via 'zenith-section-style' CSS variables.
   Accepts: eyebrow, heading, subheading (richtext), alignment ('left'|'center'),
            tag ('h1'|'h2'|'h3'), uppercase {Boolean}, class optional
+  [customers] in any text is replaced by Theme settings → Zenith → Customer count.
 {% endcomment %}
 {%- if eyebrow != blank or heading != blank or subheading != blank -%}
   {%- assign heading_tag = tag | default: 'h2' -%}
   <div class="zenith-heading zenith-heading--{{ alignment | default: 'center' }}{% if uppercase %} zenith-heading--uppercase{% endif %} {{ class }}">
     {%- if eyebrow != blank -%}
-      <p class="zenith-eyebrow">{{ eyebrow | escape }}</p>
+      <p class="zenith-eyebrow">{{ eyebrow | escape | replace: '[customers]', settings.customer_count }}</p>
     {%- endif -%}
     {%- if heading != blank -%}
-      <{{ heading_tag }} class="zenith-heading__title">{{ heading | escape }}</{{ heading_tag }}>
+      <{{ heading_tag }} class="zenith-heading__title">{{ heading | escape | replace: '[customers]', settings.customer_count }}</{{ heading_tag }}>
     {%- endif -%}
     {%- if subheading != blank -%}
-      <div class="zenith-subheading">{{ subheading }}</div>
+      <div class="zenith-subheading">{{ subheading | replace: '[customers]', settings.customer_count }}</div>
     {%- endif -%}
   </div>
 {%- endif -%}
