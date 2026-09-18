@@ -35,6 +35,8 @@ Figma layer names can stay as exported — the map below says which file is whic
 | `faq` | `FAQ/2.png` | `FAQ/2.png` |
 | Footer (footer-group) | `Desktop Footer.png` | `Mobile Footer.png` |
 
+Revisions: `revisions/promo-banner/` — promotion switch states: `no-promo-hero.png` / `mobile-hero-no-promo.png` (promotion off → hero), `new-promo-banner-turned-on-promo.png` / `mobile-hero-turned-on-promo.png` (promotion on → split promo banner in the hero spot).
+
 Designer notes: `guide.png` (customer count is a theme setting → `[customers]` token), `guide1.png` (before/after results card), `guide2.png` (mobile sale-hero variant with ribbon, FDA badge and a countdown with seconds).
 
 Shared art: `design/confetti.png` (969 × 161 transparent gold confetti) → shipped as `assets/zenith-confetti.png`, toggled per section (promo banners on, hero off by default).
