@@ -758,6 +758,7 @@
         "logo_gogo": {
           "type": "logo",
           "settings": {
+            "logo": "shopify://shop_images/vector-icons_4.png",
             "name": "GOGO Xpress",
             "link": "",
             "logo_scale": 100
@@ -766,6 +767,7 @@
         "logo_spx": {
           "type": "logo",
           "settings": {
+            "logo": "shopify://shop_images/vector-icons_5.png",
             "name": "SPX Express",
             "link": "",
             "logo_scale": 100
@@ -774,6 +776,7 @@
         "logo_lbc": {
           "type": "logo",
           "settings": {
+            "logo": "shopify://shop_images/vector-icons_6.png",
             "name": "LBC",
             "link": "",
             "logo_scale": 100
@@ -782,6 +785,7 @@
         "logo_jnt": {
           "type": "logo",
           "settings": {
+            "logo": "shopify://shop_images/vector-icons_3.png",
             "name": "J&T Express",
             "link": "",
             "logo_scale": 100
@@ -790,6 +794,7 @@
         "logo_ninjavan": {
           "type": "logo",
           "settings": {
+            "logo": "shopify://shop_images/vector-icons_2.png",
             "name": "Ninja Van",
             "link": "",
             "logo_scale": 100
@@ -832,6 +837,9 @@
         "text_max_width": 0,
         "footer_spacing": 32,
         "footer_image_width": 336,
+        "logo_height": 24,
+        "logo_max_width": 120,
+        "logo_gap": 18,
         "color_scheme": "scheme-1",
         "icon_color": "#eabe5f",
         "card_background": "",
@@ -839,6 +847,8 @@
         "badge_background": "#4e3a05",
         "badge_color": "#eabe5f",
         "text_opacity": 70,
+        "logo_style": "original",
+        "logo_opacity": 100,
         "heading_font_size": 48,
         "heading_uppercase": false,
         "subheading_font_size": 16,
@@ -873,6 +883,8 @@
         "text_line_height_mobile": 130,
         "footer_spacing_mobile": 32,
         "footer_image_width_mobile": 336,
+        "logo_height_mobile": 20,
+        "logo_gap_mobile": 12,
         "footer_text_size_mobile": 10,
         "footer_max_width_mobile": 256,
         "padding_top": 48,
