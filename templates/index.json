@@ -326,7 +326,6 @@
         "result_1": {
           "type": "result",
           "settings": {
-            "caption": "Used Zenith Anti-Aging Tallow Cream",
             "product": "",
             "row": "1"
           }
@@ -334,7 +333,6 @@
         "result_2": {
           "type": "result",
           "settings": {
-            "caption": "Used Zenith Anti-Aging Tallow Cream",
             "product": "",
             "row": "1"
           }
@@ -342,7 +340,6 @@
         "result_3": {
           "type": "result",
           "settings": {
-            "caption": "Used Zenith Anti-Aging Tallow Cream",
             "product": "",
             "row": "1"
           }
@@ -350,7 +347,6 @@
         "result_4": {
           "type": "result",
           "settings": {
-            "caption": "Used Zenith Anti-Aging Tallow Cream",
             "product": "",
             "row": "1"
           }
@@ -358,7 +354,6 @@
         "result_5": {
           "type": "result",
           "settings": {
-            "caption": "Used Zenith Anti-Aging Tallow Cream",
             "product": "",
             "row": "2"
           }
@@ -366,7 +361,6 @@
         "result_6": {
           "type": "result",
           "settings": {
-            "caption": "Used Zenith Anti-Aging Tallow Cream",
             "product": "",
             "row": "2"
           }
@@ -374,7 +368,6 @@
         "result_7": {
           "type": "result",
           "settings": {
-            "caption": "Used Zenith Anti-Aging Tallow Cream",
             "product": "",
             "row": "2"
           }
@@ -382,7 +375,6 @@
         "result_8": {
           "type": "result",
           "settings": {
-            "caption": "Used Zenith Anti-Aging Tallow Cream",
             "product": "",
             "row": "2"
           }
@@ -404,31 +396,26 @@
         "heading_mobile": "Built for Filipino men over 35",
         "subheading": "<p>See the difference a proper regimen makes.</p><p>From clearer skin to thicker hair, every transformation here comes from verified Zenith customers putting in the consistent work.</p>",
         "disclaimer": "Individual results may vary.*",
-        "before_label": "Before",
-        "after_label": "After",
         "link_label": "",
         "link": "",
         "heading_alignment": "center",
         "rows": "2",
-        "card_width": 220,
-        "aspect_ratio": "square",
-        "speed": 60,
+        "card_width": 440,
+        "speed": 120,
         "alternate_direction": true,
         "pause_on_hover": true,
-        "show_arrow": true,
         "heading_max_width": 760,
         "heading_gap": 8,
         "heading_spacing": 32,
         "gap": 20,
-        "content_padding": 12,
+        "content_padding": 16,
         "thumb_size": 40,
-        "arrow_size": 26,
         "disclaimer_spacing": 16,
         "color_scheme": "scheme-1",
         "overlay_style": "bottom",
         "overlay_color": "#294850",
         "overlay_opacity": 100,
-        "overlay_coverage": 50,
+        "overlay_coverage": 45,
         "caption_color": "#ffffff",
         "thumb_bg_color": "#ffffff",
         "disclaimer_color": "#a88946",
@@ -439,16 +426,15 @@
         "text_font_size": 12,
         "disclaimer_font_size": 12,
         "heading_alignment_mobile": "left",
-        "mobile_card_width": 300,
+        "mobile_card_width": 340,
         "heading_font_size_mobile": 36,
         "subheading_font_size_mobile": 16,
         "heading_gap_mobile": 4,
         "heading_spacing_mobile": 24,
         "gap_mobile": 16,
-        "content_padding_mobile": 12,
-        "thumb_size_mobile": 40,
-        "arrow_size_mobile": 34,
-        "text_font_size_mobile": 12,
+        "content_padding_mobile": 10,
+        "thumb_size_mobile": 32,
+        "text_font_size_mobile": 10,
         "disclaimer_font_size_mobile": 10,
         "disclaimer_spacing_mobile": 16,
         "padding_top": 32,

@@ -2,15 +2,35 @@
 {%- capture extra -%}
   --z-card-w: {{ section.settings.card_width }}px;
   --z-card-w-m: {{ section.settings.mobile_card_width }}px;
+  --z-card-h: {{ section.settings.card_height }}px;
+  --z-card-h-m: {{ section.settings.card_height_mobile }}px;
   --z-speed: {{ section.settings.speed }}s;
   --z-hgap: {{ section.settings.heading_gap }}px;
   --z-hgap-m: {{ section.settings.heading_gap_mobile }}px;
   --z-thumb: {{ section.settings.thumb_size }}px;
   --z-thumb-m: {{ section.settings.thumb_size_mobile }}px;
-  --z-arrow: {{ section.settings.arrow_size }}px;
-  --z-arrow-m: {{ section.settings.arrow_size_mobile }}px;
+  --z-thumb-r: {{ section.settings.thumb_radius }}px;
+  --z-rv-pad: {{ section.settings.review_padding }}px;
+  --z-rv-pad-m: {{ section.settings.review_padding_mobile }}px;
+  --z-rv-lines: {{ section.settings.quote_lines }};
+  --z-star: {{ section.settings.star_size }}px;
+  --z-star-m: {{ section.settings.star_size_mobile }}px;
+  --z-avatar: {{ section.settings.avatar_size }}px;
+  --z-avatar-m: {{ section.settings.avatar_size_mobile }}px;
+  --z-qfs: {{ section.settings.quote_font_size }}px;
+  --z-qfs-m: {{ section.settings.quote_font_size_mobile }}px;
+  --z-nfs: {{ section.settings.name_font_size }}px;
+  --z-nfs-m: {{ section.settings.name_font_size_mobile }}px;
+  --z-dfs: {{ section.settings.detail_font_size }}px;
+  --z-dfs-m: {{ section.settings.detail_font_size_mobile }}px;
   --z-caption-color: {{ section.settings.caption_color }};
   --z-thumb-bg: {{ section.settings.thumb_bg_color }};
+  --z-rv-bg: {{ section.settings.review_bg_color }};
+  --z-rv-quote: {{ section.settings.quote_color }};
+  --z-rv-name: {{ section.settings.name_color }};
+  --z-rv-detail: {{ section.settings.detail_color }};
+  --z-rv-star: {{ section.settings.star_color }};
+  --z-rv-badge: {{ section.settings.badge_color }};
   --z-disc-color: {{ section.settings.disclaimer_color }};
   --z-disc-fs: {{ section.settings.disclaimer_font_size }}px;
   --z-disc-fs-m: {{ section.settings.disclaimer_font_size_mobile }}px;
@@ -24,11 +44,16 @@
   assign row_count = section.settings.rows | plus: 0
   assign heading = section.settings.heading | escape | replace: '[customers]', settings.customer_count
   assign heading_mobile = section.settings.heading_mobile | escape | replace: '[customers]', settings.customer_count | newline_to_br
+  assign prefix = section.settings.product_prefix | escape
+  assign verified_label = section.settings.verified_label | escape
+  assign photo_w = section.settings.card_width | times: section.settings.media_width | divided_by: 100
+  assign photo_w_m = section.settings.mobile_card_width | times: section.settings.media_width_mobile | divided_by: 100
+  assign photo_sizes = '(min-width: 750px) ' | append: photo_w | append: 'px, ' | append: photo_w_m | append: 'px'
 -%}
 
 <section
   id="Zenith-{{ section.id }}"
-  class="zenith-section zenith-results color-{{ section.settings.color_scheme }} gradient zenith-results--{{ section.settings.aspect_ratio }}{% if section.settings.pause_on_hover %} zenith-results--pause{% endif %}"
+  class="zenith-section zenith-results color-{{ section.settings.color_scheme }} gradient{% if section.settings.pause_on_hover %} zenith-results--pause{% endif %}"
 >
   {%- if section.settings.eyebrow != blank or heading != blank or section.settings.subheading != blank -%}
     <div class="page-width">
@@ -82,15 +107,24 @@
                 {%- for block in section.blocks -%}
                   {%- unless row_count == 1 or block.settings.row == row_key -%}{%- continue -%}{%- endunless -%}
                   {%- liquid
-                    assign caption = block.settings.caption | escape | replace: '[customers]', settings.customer_count
+                    assign photo = block.settings.image
                     assign result_product = block.settings.product
                     assign thumb = block.settings.thumbnail
                     if thumb == blank and result_product != blank
                       assign thumb = result_product.featured_image
                     endif
-                    assign before = block.settings.before_image
-                    assign after = block.settings.image
-                    assign after_alt = after.alt | default: caption
+                    assign author = block.settings.author | escape
+                    assign photo_alt = photo.alt | default: block.settings.author | escape
+                    assign rating = block.settings.rating | plus: 0
+                    assign detail = block.settings.author_detail | default: result_product.title | escape
+                    assign avatar = block.settings.avatar | default: photo
+
+                    assign quote = block.settings.quote | strip
+                    assign quote_text = quote | escape | newline_to_br
+                    assign q_first = quote | slice: 0
+                    if quote != blank and q_first != '"' and q_first != '“'
+                      assign quote_text = '“' | append: quote_text | append: '”'
+                    endif
                   -%}
                   <li
                     class="zenith-results__card"
@@ -99,100 +133,108 @@
                     {% endif %}
                   >
                     <div class="zenith-media zenith-results__media">
-                      {%- if before != blank -%}
-                        <div class="zenith-results__split">
-                          <div class="zenith-results__half">
-                            {{
-                              before
-                              | image_url: width: 400
-                              | image_tag:
-                                loading: 'lazy',
-                                widths: '150, 200, 300, 400',
-                                sizes: '(min-width: 750px) 110px, 150px',
-                                alt: section.settings.before_label
-                            }}
-                          </div>
-                          <div class="zenith-results__half">
-                            {%- if after != blank -%}
-                              {{
-                                after
-                                | image_url: width: 400
-                                | image_tag:
-                                  loading: 'lazy',
-                                  widths: '150, 200, 300, 400',
-                                  sizes: '(min-width: 750px) 110px, 150px',
-                                  alt: section.settings.after_label
-                              }}
-                            {%- else -%}
-                              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-                            {%- endif -%}
-                          </div>
-                        </div>
-                        {%- if section.settings.show_arrow -%}
-                          <svg class="zenith-results__arrow" viewBox="0 0 26 24" fill="currentColor" aria-hidden="true" focusable="false">
-                            <path d="M0 6h12V0l14 12-14 12v-6H0z"/>
-                          </svg>
-                        {%- endif -%}
-                      {%- elsif after != blank -%}
+                      {%- if photo != blank -%}
                         {{
-                          after
+                          photo
                           | image_url: width: 720
                           | image_tag:
                             loading: 'lazy',
-                            widths: '240, 360, 480, 600, 720',
-                            sizes: '(min-width: 750px) 220px, 300px',
-                            alt: after_alt
+                            widths: '180, 240, 360, 480, 720',
+                            sizes: photo_sizes,
+                            alt: photo_alt
                         }}
                       {%- else -%}
                         {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
                       {%- endif -%}
                       {%- render 'zenith-overlay', style: section.settings.overlay_style -%}
-
-                      {%- if caption != blank or thumb != blank -%}
-                        <div class="zenith-results__meta">
-                          {%- if caption != blank -%}
-                            <p class="zenith-results__caption">{{ caption }}</p>
-                          {%- endif -%}
+                      {%- if result_product != blank -%}
+                        <a
+                          href="{{ result_product.url }}"
+                          class="zenith-results__meta"
+                          {% if pass > 1 %}
+                            tabindex="-1"
+                          {% endif %}
+                        >
                           {%- if thumb != blank -%}
-                            {%- if result_product != blank -%}
-                              <a
-                                href="{{ result_product.url }}"
-                                class="zenith-results__thumb"
-                                {% if pass > 1 %}
-                                  tabindex="-1"
-                                {% endif %}
-                              >
-                                {{
-                                  thumb
-                                  | image_url: width: 160
-                                  | image_tag: loading: 'lazy', widths: '80, 120, 160', sizes: '40px', alt: result_product.title
-                                }}
-                              </a>
-                            {%- else -%}
-                              <span class="zenith-results__thumb">
-                                {{
-                                  thumb
-                                  | image_url: width: 160
-                                  | image_tag: loading: 'lazy', widths: '80, 120, 160', sizes: '40px', alt: thumb.alt
-                                }}
-                              </span>
-                            {%- endif -%}
+                            <span class="zenith-results__thumb">
+                              {{
+                                thumb
+                                | image_url: width: 160
+                                | image_tag: loading: 'lazy', widths: '80, 120, 160', sizes: '40px', alt: ''
+                              }}
+                            </span>
                           {%- endif -%}
-                        </div>
+                          <span class="zenith-results__used">
+                            {%- if prefix != blank -%}
+                              <span>{{ prefix }}</span>
+                            {%- endif -%}
+                            <span class="zenith-results__product">{{ result_product.title | escape }}</span>
+                          </span>
+                        </a>
                       {%- endif -%}
                     </div>
+
+                    <figure class="zenith-results__review">
+                      <div class="zenith-results__body">
+                        {%- if rating > 0 -%}
+                          <div class="zenith-results__stars" role="img" aria-label="{{ rating }} out of 5 stars">
+                            {%- for i in (1..5) -%}
+                              <span class="zenith-results__star{% if i > rating %} zenith-results__star--off{% endif %}">
+                                {%- render 'zenith-icon', icon: 'star' -%}
+                              </span>
+                            {%- endfor -%}
+                          </div>
+                        {%- endif -%}
+                        {%- if quote != blank -%}
+                          <blockquote class="zenith-results__quote">{{ quote_text }}</blockquote>
+                        {%- endif -%}
+                      </div>
+                      {%- if author != blank or detail != blank -%}
+                        <figcaption class="zenith-results__author">
+                          {%- if avatar != blank -%}
+                            <span class="zenith-results__avatar">
+                              {{
+                                avatar
+                                | image_url: width: 128
+                                | image_tag: loading: 'lazy', widths: '48, 64, 96, 128', sizes: '40px', alt: ''
+                              }}
+                            </span>
+                          {%- elsif author != blank -%}
+                            <span class="zenith-results__avatar zenith-results__avatar--initial" aria-hidden="true">
+                              {{- author | slice: 0 | upcase -}}
+                            </span>
+                          {%- endif -%}
+                          {%- if author != blank -%}
+                            <span class="zenith-results__name">
+                              <span>{{ author }}</span>
+                              {%- if block.settings.verified -%}
+                                <span class="zenith-results__badge" title="{{ verified_label }}">
+                                  {%- render 'zenith-icon', icon: 'verified_seal' -%}
+                                  <span class="visually-hidden">{{ verified_label }}</span>
+                                </span>
+                              {%- endif -%}
+                            </span>
+                          {%- endif -%}
+                          {%- if detail != blank -%}
+                            <span class="zenith-results__detail">{{ detail }}</span>
+                          {%- endif -%}
+                        </figcaption>
+                      {%- endif -%}
+                    </figure>
                   </li>
                 {%- endfor -%}
               {%- else -%}
-                {%- for i in (1..8) -%}
+                {%- for i in (1..4) -%}
                   <li class="zenith-results__card">
                     <div class="zenith-media zenith-results__media">
                       {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
                       {%- render 'zenith-overlay', style: section.settings.overlay_style -%}
-                      <div class="zenith-results__meta">
-                        <p class="zenith-results__caption">Add a result in the theme editor</p>
-                      </div>
                     </div>
+                    <figure class="zenith-results__review">
+                      <div class="zenith-results__body">
+                        <blockquote class="zenith-results__quote">Add a review in the theme editor</blockquote>
+                      </div>
+                    </figure>
                   </li>
                 {%- endfor -%}
               {%- endif -%}
@@ -271,23 +313,23 @@
     },
     {
       "type": "text",
+      "id": "product_prefix",
+      "label": "Word before the product name",
+      "info": "Shown on the photo above the product's name when a review has a product",
+      "default": "Used"
+    },
+    {
+      "type": "text",
+      "id": "verified_label",
+      "label": "Verified badge text",
+      "info": "Read by screen readers and shown when hovering the badge",
+      "default": "Verified buyer"
+    },
+    {
+      "type": "text",
       "id": "disclaimer",
       "label": "Disclaimer",
       "default": "Individual results may vary.*"
-    },
-    {
-      "type": "text",
-      "id": "before_label",
-      "label": "Before photo label",
-      "info": "Alt text for before photos",
-      "default": "Before"
-    },
-    {
-      "type": "text",
-      "id": "after_label",
-      "label": "After photo label",
-      "info": "Alt text for after photos",
-      "default": "After"
     },
     {
       "type": "text",
@@ -325,7 +367,7 @@
       "id": "rows",
       "label": "Rows",
       "default": "2",
-      "info": "With 2 rows, pick each result's row in its block settings",
+      "info": "With 2 rows, pick each review's row in its block settings",
       "options": [
         {
           "value": "1",
@@ -341,31 +383,43 @@
       "type": "range",
       "id": "card_width",
       "label": "Card width",
-      "min": 140,
-      "max": 360,
+      "info": "Photo and review together",
+      "min": 320,
+      "max": 720,
+      "step": 10,
+      "unit": "px",
+      "default": 440
+    },
+    {
+      "type": "range",
+      "id": "card_height",
+      "label": "Card height",
+      "info": "Cards grow taller when a review needs more room",
+      "min": 160,
+      "max": 400,
       "step": 10,
       "unit": "px",
       "default": 220
     },
     {
-      "type": "select",
-      "id": "aspect_ratio",
-      "label": "Card shape",
-      "default": "square",
-      "options": [
-        {
-          "value": "portrait",
-          "label": "Portrait 4:5"
-        },
-        {
-          "value": "square",
-          "label": "Square"
-        },
-        {
-          "value": "tall",
-          "label": "Tall 3:4"
-        }
-      ]
+      "type": "range",
+      "id": "media_width",
+      "label": "Photo width",
+      "min": 30,
+      "max": 70,
+      "step": 5,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "quote_lines",
+      "label": "Max review lines",
+      "info": "Longer reviews end with …",
+      "min": 2,
+      "max": 10,
+      "step": 1,
+      "default": 4
     },
     {
       "type": "range",
@@ -373,10 +427,10 @@
       "label": "Scroll duration",
       "info": "Seconds for one full loop. Higher is slower.",
       "min": 10,
-      "max": 120,
+      "max": 240,
       "step": 5,
       "unit": "s",
-      "default": 60
+      "default": 120
     },
     {
       "type": "checkbox",
@@ -388,12 +442,6 @@
       "type": "checkbox",
       "id": "pause_on_hover",
       "label": "Pause on hover",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "show_arrow",
-      "label": "Show arrow between before and after photos",
       "default": true
     },
     {
@@ -440,12 +488,22 @@
     {
       "type": "range",
       "id": "content_padding",
-      "label": "Card inner padding",
+      "label": "Photo caption padding",
       "min": 0,
       "max": 32,
       "step": 2,
       "unit": "px",
-      "default": 12
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "review_padding",
+      "label": "Review padding",
+      "min": 8,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 20
     },
     {
       "type": "range",
@@ -459,13 +517,23 @@
     },
     {
       "type": "range",
-      "id": "arrow_size",
-      "label": "Arrow size",
-      "min": 12,
+      "id": "thumb_radius",
+      "label": "Product thumbnail corners",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "avatar_size",
+      "label": "Reviewer photo size",
+      "min": 20,
       "max": 64,
       "step": 2,
       "unit": "px",
-      "default": 26
+      "default": 32
     },
     {
       "type": "range",
@@ -488,9 +556,45 @@
       "default": "scheme-1"
     },
     {
+      "type": "color",
+      "id": "review_bg_color",
+      "label": "Review background",
+      "default": "#202020"
+    },
+    {
+      "type": "color",
+      "id": "quote_color",
+      "label": "Review text",
+      "default": "#BCBCBC"
+    },
+    {
+      "type": "color",
+      "id": "name_color",
+      "label": "Reviewer name",
+      "default": "#BCBCBC"
+    },
+    {
+      "type": "color",
+      "id": "detail_color",
+      "label": "Text under the name",
+      "default": "#B8B8B8"
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Stars",
+      "default": "#C5930E"
+    },
+    {
+      "type": "color",
+      "id": "badge_color",
+      "label": "Verified badge",
+      "default": "#C5930E"
+    },
+    {
       "type": "select",
       "id": "overlay_style",
-      "label": "Image overlay",
+      "label": "Photo overlay",
       "default": "bottom",
       "options": [
         {
@@ -539,17 +643,17 @@
       "type": "range",
       "id": "overlay_coverage",
       "label": "Gradient length",
-      "info": "How far the gradient reaches across the image",
+      "info": "How far the gradient reaches across the photo",
       "min": 20,
       "max": 100,
       "step": 5,
       "unit": "%",
-      "default": 50
+      "default": 45
     },
     {
       "type": "color",
       "id": "caption_color",
-      "label": "Caption color",
+      "label": "Photo caption color",
       "default": "#FFFFFF"
     },
     {
@@ -607,8 +711,48 @@
     {
       "type": "range",
       "id": "text_font_size",
-      "label": "Caption size",
+      "label": "Photo caption size",
       "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "star_size",
+      "label": "Star size",
+      "min": 8,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "quote_font_size",
+      "label": "Review text size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "name_font_size",
+      "label": "Reviewer name size",
+      "min": 10,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "detail_font_size",
+      "label": "Text under the name size",
+      "min": 8,
       "max": 20,
       "step": 1,
       "unit": "px",
@@ -648,11 +792,31 @@
       "type": "range",
       "id": "mobile_card_width",
       "label": "Card width",
+      "min": 260,
+      "max": 420,
+      "step": 10,
+      "unit": "px",
+      "default": 340
+    },
+    {
+      "type": "range",
+      "id": "card_height_mobile",
+      "label": "Card height",
       "min": 120,
       "max": 360,
       "step": 10,
       "unit": "px",
-      "default": 300
+      "default": 180
+    },
+    {
+      "type": "range",
+      "id": "media_width_mobile",
+      "label": "Photo width",
+      "min": 30,
+      "max": 70,
+      "step": 5,
+      "unit": "%",
+      "default": 50
     },
     {
       "type": "range",
@@ -707,8 +871,18 @@
     {
       "type": "range",
       "id": "content_padding_mobile",
-      "label": "Card inner padding",
+      "label": "Photo caption padding",
       "min": 0,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "review_padding_mobile",
+      "label": "Review padding",
+      "min": 6,
       "max": 32,
       "step": 2,
       "unit": "px",
@@ -718,31 +892,71 @@
       "type": "range",
       "id": "thumb_size_mobile",
       "label": "Product thumbnail size",
-      "min": 24,
+      "min": 20,
       "max": 80,
       "step": 2,
       "unit": "px",
-      "default": 40
+      "default": 32
     },
     {
       "type": "range",
-      "id": "arrow_size_mobile",
-      "label": "Arrow size",
-      "min": 12,
-      "max": 64,
+      "id": "avatar_size_mobile",
+      "label": "Reviewer photo size",
+      "min": 16,
+      "max": 56,
       "step": 2,
       "unit": "px",
-      "default": 34
+      "default": 26
     },
     {
       "type": "range",
       "id": "text_font_size_mobile",
-      "label": "Caption size",
+      "label": "Photo caption size",
+      "min": 8,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "star_size_mobile",
+      "label": "Star size",
+      "min": 8,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 11
+    },
+    {
+      "type": "range",
+      "id": "quote_font_size_mobile",
+      "label": "Review text size",
       "min": 10,
       "max": 20,
       "step": 1,
       "unit": "px",
       "default": 12
+    },
+    {
+      "type": "range",
+      "id": "name_font_size_mobile",
+      "label": "Reviewer name size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "detail_font_size_mobile",
+      "label": "Text under the name size",
+      "min": 8,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 10
     },
     {
       "type": "range",
@@ -812,7 +1026,7 @@
   "blocks": [
     {
       "type": "result",
-      "name": "Result",
+      "name": "Review",
       "settings": [
         {
           "type": "header",
@@ -820,33 +1034,62 @@
         },
         {
           "type": "image_picker",
-          "id": "before_image",
-          "label": "Before photo",
-          "info": "Shown on the left half with an arrow. Leave blank to use one combined photo below."
-        },
-        {
-          "type": "image_picker",
           "id": "image",
-          "label": "After photo",
-          "info": "Right half, or the full card when no before photo is set"
-        },
-        {
-          "type": "text",
-          "id": "caption",
-          "label": "Caption",
-          "default": "Used Zenith Anti-Aging Tallow Cream"
+          "label": "Photo",
+          "info": "Customer or lifestyle photo on the left of the card"
         },
         {
           "type": "product",
           "id": "product",
-          "label": "Product",
-          "info": "Thumbnail links to this product"
+          "label": "Product used",
+          "info": "Shows its thumbnail with “Used” + the product's name on the photo, and the name under the reviewer. Leave empty to hide both."
         },
         {
           "type": "image_picker",
           "id": "thumbnail",
           "label": "Product thumbnail",
           "info": "Defaults to the product's image"
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Star rating",
+          "info": "0 hides the stars",
+          "min": 0,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Review",
+          "info": "Quotation marks are added automatically",
+          "default": "my hair appeared fuller. I love the effects it gave on me."
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Reviewer name",
+          "default": "Norman V."
+        },
+        {
+          "type": "checkbox",
+          "id": "verified",
+          "label": "Show verified badge",
+          "default": true
+        },
+        {
+          "type": "image_picker",
+          "id": "avatar",
+          "label": "Reviewer photo",
+          "info": "Small round photo. Leave empty to use the photo above."
+        },
+        {
+          "type": "text",
+          "id": "author_detail",
+          "label": "Text under the name",
+          "info": "Leave empty to show the product's name"
         },
         {
           "type": "header",
@@ -891,18 +1134,6 @@
           "type": "result",
           "settings": {
             "row": "1"
-          }
-        },
-        {
-          "type": "result",
-          "settings": {
-            "row": "1"
-          }
-        },
-        {
-          "type": "result",
-          "settings": {
-            "row": "2"
           }
         },
         {
