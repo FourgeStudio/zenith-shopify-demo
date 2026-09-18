@@ -32,7 +32,8 @@
 
 /* ---------- Carousel sizing ----------
    Slide widths are measured against the page width (container units), so the
-   track can bleed to the right screen edge without changing the card size. */
+   track can bleed to both screen edges without changing the card size. The first card
+   starts on the page margin (padding + scroll-padding); scrolled cards stay visible in the left margin. */
 .zenith-videos zenith-carousel {
   container-type: inline-size;
 }
@@ -43,7 +44,12 @@
 }
 
 .zenith-videos--bleed .zenith-carousel__track {
+  margin-left: calc((100cqi - 100vw) / 2);
   margin-right: calc((100cqi - 100vw) / 2);
+  padding-left: calc((100vw - 100cqi) / 2);
+  padding-right: calc((100vw - 100cqi) / 2);
+  scroll-padding-left: calc((100vw - 100cqi) / 2);
+  scroll-padding-right: calc((100vw - 100cqi) / 2);
 }
 
 .zenith-videos .zenith-carousel__controls {
@@ -52,7 +58,7 @@
 
 @supports not (width: 1cqi) {
   .zenith-videos .zenith-carousel__slide { flex-basis: 80%; }
-  .zenith-videos--bleed .zenith-carousel__track { margin-right: 0; }
+  .zenith-videos--bleed .zenith-carousel__track { margin: 0; padding: 0; scroll-padding: 0; }
 }
 
 /* ---------- Card ---------- */
