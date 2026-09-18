@@ -261,6 +261,45 @@ h1, h2, h3, h4, h5, .h0, .h1, .h2, .h3, .h4, .h5 {
   }
 }
 
+/* ---------- Confetti (snippets/zenith-confetti.liquid) ----------
+   Top-anchored decorative layer. Width: confetti_width px (desktop), confetti_width_mobile % (mobile). */
+.zenith-confetti {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: var(--z-cfw-m, 100%);
+  max-width: 100%;
+  height: auto;
+  opacity: var(--z-cfo, 100%);
+  pointer-events: none;
+  user-select: none;
+}
+
+.zenith-confetti--center {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.zenith-confetti--right {
+  left: auto;
+  right: 0;
+}
+
+.zenith-confetti--stretch {
+  width: 100%;
+}
+
+@media screen and (min-width: 750px) {
+  .zenith-confetti {
+    width: var(--z-cfw, 969px);
+  }
+
+  .zenith-confetti--stretch {
+    width: 100%;
+  }
+}
+
 /* ---------- Media ---------- */
 .zenith-media {
   position: relative;
