@@ -30,18 +30,29 @@
 }
 
 /* ---------- Track: optional bleed to both screen edges ----------
-   First card starts on the page margin (padding + scroll-padding); scrolled cards stay visible in the left margin. */
+   First card starts on the page margin (padding + scroll-padding); scrolled cards stay visible in the left margin.
+   Container units (100cqi = page content width): a % in scroll-padding resolves against the track itself,
+   which snapped the first card to the screen edge on wide screens. */
+.zenith-pc zenith-carousel {
+  container-type: inline-size;
+}
+
 .zenith-pc--bleed {
+  overflow-x: hidden;
   overflow-x: clip;
 }
 
 .zenith-pc--bleed .zenith-carousel__track {
-  margin-left: calc((100% - 100vw) / 2);
-  margin-right: calc((100% - 100vw) / 2);
-  padding-left: calc((100vw - 100%) / 2);
-  padding-right: calc((100vw - 100%) / 2);
-  scroll-padding-left: calc((100vw - 100%) / 2);
-  scroll-padding-right: calc((100vw - 100%) / 2);
+  margin-left: calc((100cqi - 100vw) / 2);
+  margin-right: calc((100cqi - 100vw) / 2);
+  padding-left: calc((100vw - 100cqi) / 2);
+  padding-right: calc((100vw - 100cqi) / 2);
+  scroll-padding-left: calc((100vw - 100cqi) / 2);
+  scroll-padding-right: calc((100vw - 100cqi) / 2);
+}
+
+@supports not (width: 1cqi) {
+  .zenith-pc--bleed .zenith-carousel__track { margin: 0; padding: 0; scroll-padding: 0; }
 }
 
 .zenith-pc .zenith-carousel__controls {
