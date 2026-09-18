@@ -63,7 +63,7 @@
 
 .zenith-promo__heading .zenith-subheading {
   margin-top: var(--z-promo-tg, var(--z-space-1));
-  color: rgb(var(--color-foreground));
+  color: rgba(var(--color-foreground), var(--z-promo-ta, 1));
 }
 
 .zenith-promo__image {
@@ -93,7 +93,7 @@
   flex-wrap: wrap;
   align-items: center;
   gap: var(--z-space-2) var(--z-space-3);
-  padding: var(--z-space-2) var(--z-cpd-m, var(--z-space-5));
+  padding: var(--z-space-2) var(--z-promo-cdx-m, var(--z-cpd-m, var(--z-space-5)));
   background: var(--z-cd-strip-bg, linear-gradient(90deg, #d6b356 50%, #c59300 100%));
   color: var(--z-cd-strip-fg, #1a1a1a);
 }
@@ -106,6 +106,81 @@
   margin: 0;
   font-size: var(--z-tfs-m, 1.4rem);
   line-height: 1.5;
+}
+
+/* ---------- Split layout: flat colour panel with the text + photo filling the other side ---------- */
+.zenith-promo--panel .zenith-promo__card {
+  background: var(--z-promo-panel);
+}
+
+.zenith-promo--split .zenith-promo__body {
+  gap: 0;
+  padding: 0;
+}
+
+.zenith-promo--split .zenith-promo__content {
+  max-width: none;
+  padding: var(--z-promo-pym, var(--z-space-5)) var(--z-cpd-m, var(--z-space-5));
+}
+
+.zenith-promo--split .zenith-promo__photo {
+  height: var(--z-promo-ih-m, 40rem);
+}
+
+.zenith-promo__card--m-image-first .zenith-promo__photo {
+  order: -1;
+}
+
+@media screen and (max-width: 749px) {
+  .zenith-section.zenith-promo.zenith-promo--m-full .zenith-promo__container.zenith-promo__container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .zenith-promo__heading .zenith-heading__title {
+    max-width: var(--z-promo-hmw-m, none);
+  }
+
+  .zenith-promo__heading .zenith-subheading {
+    max-width: var(--z-promo-tmw-m, none);
+  }
+
+  .zenith-promo--m-btn-full .zenith-promo__content {
+    align-items: stretch;
+  }
+
+  .zenith-promo--m-btn-full .zenith-promo__button {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .zenith-promo--split .zenith-promo__body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) var(--z-promo-iw, 50%);
+    align-items: stretch;
+    gap: 0;
+    padding: 0;
+  }
+
+  .zenith-promo--split .zenith-promo__card--image-left .zenith-promo__body {
+    grid-template-columns: var(--z-promo-iw, 50%) minmax(0, 1fr);
+  }
+
+  .zenith-promo--split .zenith-promo__content {
+    justify-content: center;
+    padding: var(--z-space-6) var(--z-cpd, var(--z-space-8));
+  }
+
+  .zenith-promo--split .zenith-promo__photo {
+    height: auto;
+    min-height: 100%;
+    order: 0;
+  }
+
+  .zenith-promo--split .zenith-promo__card--image-left .zenith-promo__photo {
+    order: -1;
+  }
 }
 
 @media screen and (min-width: 750px) {

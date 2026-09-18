@@ -34,8 +34,31 @@
   if p_end_date != blank
     assign show_countdown = true
   endif
+
+  # Split layout: colour panel with the text + photo filling the other half (Product image, else Background image).
+  assign is_split = false
+  if s.layout_style == 'split'
+    assign is_split = true
+    assign split_photo = p_image | default: p_background
+  endif
+
+  # Store-wide promotion switch (Theme settings → Zenith · Promo → "Promotion is running").
+  capture promo_class
+    render 'zenith-promo-state', visibility: s.promo_visibility
+  endcapture
+
+  # A visible banner at the top of the page (in the hero's place) loads its photo eagerly.
+  assign img_loading = 'lazy'
+  assign img_priority = 'auto'
+  if section.index <= 2 and promo_class == blank
+    assign img_loading = 'eager'
+    assign img_priority = 'high'
+  endif
 -%}
 
+{%- if s.promo_visibility != 'always' -%}
+  <script src="{{ 'zenith-promo-state.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
 {%- if show_countdown -%}
   {{ 'zenith-countdown.css' | asset_url | stylesheet_tag }}
   <script src="{{ 'zenith-countdown.js' | asset_url }}" defer="defer"></script>
@@ -47,6 +70,20 @@
   --z-promo-mh: {{ s.card_min_height }}px;
   --z-promo-tg: {{ s.text_spacing }}px;
   --z-promo-bgpos: {{ s.background_position }};
+  --z-promo-ta: {{ s.text_opacity | divided_by: 100.0 }};
+  --z-promo-iw: {{ s.split_image_width }}%;
+  --z-promo-ih-m: {{ s.split_image_height_mobile }}px;
+  --z-promo-pym: {{ s.content_padding_y_mobile }}px;
+  --z-promo-cdx-m: {{ s.countdown_inset_mobile }}px;
+  {%- if s.heading_max_width_mobile > 0 %}
+  --z-promo-hmw-m: {{ s.heading_max_width_mobile }}px;
+  {%- endif %}
+  {%- if s.text_max_width_mobile > 0 %}
+  --z-promo-tmw-m: {{ s.text_max_width_mobile }}px;
+  {%- endif %}
+  {%- if s.panel_color != blank %}
+  --z-promo-panel: {{ s.panel_color }};
+  {%- endif %}
   {%- if s.countdown_background != blank %}
   --z-cd-strip-bg: {{ s.countdown_background }};
   {%- endif %}
@@ -59,12 +96,13 @@
 
 <div
   id="Zenith-{{ section.id }}"
-  class="zenith-section zenith-promo color-{{ s.color_scheme }} gradient zenith-promo--{{ s.card_width }}{% if s.hide_on_mobile %} zenith-hide-mobile{% endif %}{% if s.hide_on_desktop %} zenith-hide-desktop{% endif %}"
+  class="zenith-section zenith-promo color-{{ s.color_scheme }} gradient zenith-promo--{{ s.card_width }} zenith-promo--{{ s.layout_style }}{% if is_split and s.panel_color != blank %} zenith-promo--panel{% endif %}{% if s.full_width_mobile %} zenith-promo--m-full{% endif %}{% if s.button_full_mobile %} zenith-promo--m-btn-full{% endif %}{% if s.hide_on_mobile %} zenith-hide-mobile{% endif %}{% if s.hide_on_desktop %} zenith-hide-desktop{% endif %}{{ promo_class }}"
+  {%- render 'zenith-promo-state', visibility: s.promo_visibility, output: 'attrs' %}
 >
   <div class="zenith-promo__container{% if s.card_width == 'page' %} page-width{% endif %}">
     <div class="zenith-promo__card color-{{ s.card_color_scheme }} gradient{% if s.image_position == 'left' %} zenith-promo__card--image-left{% endif %}{% if s.mobile_image_first %} zenith-promo__card--m-image-first{% endif %}">
       <div class="zenith-promo__body">
-        {%- if p_background != blank -%}
+        {%- if is_split == false and p_background != blank -%}
           <div class="zenith-media zenith-promo__bg" aria-hidden="true">
             {{
               p_background
@@ -97,7 +135,23 @@
           -%}
         </div>
 
-        {%- if p_image != blank -%}
+        {%- if is_split -%}
+          <div class="zenith-media zenith-promo__photo">
+            {%- if split_photo != blank -%}
+              {{
+                split_photo
+                | image_url: width: 1600
+                | image_tag:
+                  loading: img_loading,
+                  fetchpriority: img_priority,
+                  widths: '400, 600, 800, 1100, 1600',
+                  sizes: '(min-width: 750px) 50vw, 100vw'
+              }}
+            {%- else -%}
+              {{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+          </div>
+        {%- elsif p_image != blank -%}
           <div class="zenith-promo__image">
             {{
               p_image
@@ -195,8 +249,8 @@
       "type": "checkbox",
       "id": "show_confetti",
       "label": "Show gold confetti",
-      "default": true,
-      "info": "Per design: gold confetti across the top-left of the banner. Upload background images without confetti."
+      "default": false,
+      "info": "Gold confetti across the top of the banner (earlier white banner design). Upload background images without confetti."
     },
     {
       "type": "image_picker",
@@ -253,6 +307,39 @@
     {
       "type": "header",
       "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "promo_visibility",
+      "label": "Show",
+      "default": "promo_on",
+      "options": [
+        { "value": "promo_on", "label": "Only while the promotion runs" },
+        { "value": "promo_off", "label": "Only when no promotion runs" },
+        { "value": "always", "label": "Always" }
+      ],
+      "info": "Follows Theme settings → Zenith · Promo → \"Promotion is running\". Hidden sections stay in the page code for search engines."
+    },
+    {
+      "type": "select",
+      "id": "layout_style",
+      "label": "Banner layout",
+      "default": "split",
+      "options": [
+        { "value": "split", "label": "Split: colour panel + photo" },
+        { "value": "background", "label": "Background image" }
+      ],
+      "info": "Split uses the Product image as the photo (Background image if empty)."
+    },
+    {
+      "type": "range",
+      "id": "split_image_width",
+      "label": "Photo width (split, desktop)",
+      "min": 30,
+      "max": 70,
+      "step": 5,
+      "unit": "%",
+      "default": 50
     },
     {
       "type": "select",
@@ -422,13 +509,30 @@
       "type": "color_scheme",
       "id": "card_color_scheme",
       "label": "Banner color scheme",
-      "default": "scheme-2"
+      "default": "scheme-6"
+    },
+    {
+      "type": "color",
+      "id": "panel_color",
+      "label": "Panel colour",
+      "info": "Optional flat colour behind the text (split layout), instead of the banner color scheme background.",
+      "default": "#112328"
+    },
+    {
+      "type": "range",
+      "id": "text_opacity",
+      "label": "Text opacity",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 80
     },
     {
       "type": "select",
       "id": "button_style",
       "label": "Button style",
-      "default": "dark",
+      "default": "gold",
       "options": [
         { "value": "gold", "label": "Gold gradient" },
         { "value": "dark", "label": "Dark" },
@@ -597,6 +701,71 @@
       "step": 4,
       "unit": "px",
       "default": 20
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width_mobile",
+      "label": "Edge to edge",
+      "info": "Banner touches both screen edges (no side margin).",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "button_full_mobile",
+      "label": "Full-width button",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "content_padding_y_mobile",
+      "label": "Text panel top/bottom padding",
+      "min": 8,
+      "max": 64,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "heading_max_width_mobile",
+      "label": "Heading max width",
+      "info": "0 = full width",
+      "min": 0,
+      "max": 400,
+      "step": 10,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "text_max_width_mobile",
+      "label": "Text max width",
+      "info": "0 = full width",
+      "min": 0,
+      "max": 400,
+      "step": 10,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "split_image_height_mobile",
+      "label": "Photo height (split)",
+      "min": 160,
+      "max": 600,
+      "step": 10,
+      "unit": "px",
+      "default": 400
+    },
+    {
+      "type": "range",
+      "id": "countdown_inset_mobile",
+      "label": "Countdown bar side padding",
+      "min": 0,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "default": 24
     },
     {
       "type": "range",
