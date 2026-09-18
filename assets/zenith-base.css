@@ -549,6 +549,13 @@ zenith-carousel {
   .zenith-hide-desktop { display: none !important; }
 }
 
+/* Drawer overlays: one dark veil everywhere (menu drawer in zenith-header-drawer.css). Dawn tints with the
+   foreground colour, which is white on the dark schemes → the cart drawer page veil looked white. */
+cart-drawer.drawer,
+html.js menu-drawer > details > summary::before {
+  background-color: rgba(var(--color-shadow, 0, 0, 0), 0.6);
+}
+
 /* Store-wide promotion switch (snippets/zenith-promo-state.liquid): hidden, but kept in the HTML for crawlers. */
 .zenith-promo-hidden { display: none !important; }
 
