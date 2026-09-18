@@ -259,3 +259,29 @@
     margin-right: 0;
   }
 }
+
+/* Tablet/desktop: the drawer (40rem) opens from the screen's left edge, but the menu toggle sits on the page frame —
+   on wide screens the close X ended up far from the drawer. While open, the bar row above the drawer mirrors mobile:
+   logo on the left, close X on the drawer's right edge (both relative to the full-width .header-wrapper).
+   The icon <span> moves, not the <summary>, so the summary's page overlay (::before) keeps its full-width box. */
+@media screen and (min-width: 750px) {
+  .section-header.menu-open .zenith-header .header__icon--menu > span {
+    position: absolute;
+    top: 50%;
+    left: calc(var(--zd-w, 40rem) - var(--zd-px, 2rem) - 3rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4.4rem;
+    height: 4.4rem;
+    transform: translateY(-50%);
+  }
+
+  .section-header.menu-open .zenith-header .header__heading-link {
+    position: absolute;
+    top: calc(50% + var(--zh-logo-y, 0px));
+    /* header-logo.png has ~0.8rem transparent padding: the Z lines up with the menu text, as on mobile */
+    left: calc(var(--zd-px, 2rem) - 0.8rem);
+    transform: translateY(-50%);
+  }
+}
