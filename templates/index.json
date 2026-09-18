@@ -61,6 +61,7 @@
         "button_font_size": 22,
         "text_font_size": 16,
         "countdown_font_size": 18,
+        "countdown_label_font_size": 14,
         "hide_on_mobile": false,
         "mobile_image_first": false,
         "card_inset_mobile": 20,
@@ -79,13 +80,12 @@
         "image_max_height_mobile": 240,
         "text_font_size_mobile": 16,
         "countdown_font_size_mobile": 16,
+        "countdown_label_font_size_mobile": 12,
         "confetti_width_mobile": 100,
         "padding_top": 32,
         "padding_bottom": 32,
         "padding_top_mobile": 0,
-        "padding_bottom_mobile": 0,
-        "countdown_label_font_size": 14,
-        "countdown_label_font_size_mobile": 12
+        "padding_bottom_mobile": 0
       }
     },
     "hero": {
@@ -149,6 +149,7 @@
         "badge_font_size": 14,
         "text_font_size": 16,
         "countdown_font_size": 18,
+        "countdown_label_font_size": 14,
         "mobile_text_alignment": "center",
         "mobile_alignment": "top",
         "mobile_button_bottom": true,
@@ -165,6 +166,7 @@
         "badge_font_size_mobile": 14,
         "text_font_size_mobile": 14,
         "countdown_font_size_mobile": 16,
+        "countdown_label_font_size_mobile": 12,
         "content_gap_mobile": 24,
         "confetti_width_mobile": 100,
         "padding_top": 0,
@@ -326,81 +328,157 @@
         "result_1": {
           "type": "result",
           "settings": {
-            "product": "",
+            "image": "shopify://shop_images/zenith-advanced-hair-density-shampoo_3.jpg",
+            "product": "zenith-advanced-hair-density-shampoo",
+            "rating": 5,
+            "quote": "my hair appeared fuller. I love the effects it gave on me.",
+            "author": "Norman V.",
+            "verified": true,
+            "avatar": "shopify://shop_images/rinse.jpg",
+            "author_detail": "",
             "row": "1"
           }
         },
-        "result_2": {
+        "result_3CXeT6": {
           "type": "result",
           "settings": {
-            "product": "",
+            "image": "shopify://shop_images/zenith-advanced-hair-density-shampoo_3.jpg",
+            "product": "zenith-advanced-hair-density-shampoo",
+            "rating": 5,
+            "quote": "my hair appeared fuller. I love the effects it gave on me.",
+            "author": "Norman V.",
+            "verified": true,
+            "avatar": "shopify://shop_images/rinse.jpg",
+            "author_detail": "",
             "row": "1"
           }
         },
-        "result_3": {
+        "result_aMALBM": {
           "type": "result",
           "settings": {
-            "product": "",
+            "image": "shopify://shop_images/zenith-advanced-hair-density-shampoo_3.jpg",
+            "product": "zenith-advanced-hair-density-shampoo",
+            "rating": 5,
+            "quote": "my hair appeared fuller. I love the effects it gave on me.",
+            "author": "Norman V.",
+            "verified": true,
+            "avatar": "shopify://shop_images/rinse.jpg",
+            "author_detail": "",
             "row": "1"
           }
         },
-        "result_4": {
+        "result_yRjHzR": {
           "type": "result",
           "settings": {
-            "product": "",
+            "image": "shopify://shop_images/zenith-advanced-hair-density-shampoo_3.jpg",
+            "product": "zenith-advanced-hair-density-shampoo",
+            "rating": 5,
+            "quote": "my hair appeared fuller. I love the effects it gave on me.",
+            "author": "Norman V.",
+            "verified": true,
+            "avatar": "shopify://shop_images/rinse.jpg",
+            "author_detail": "",
             "row": "1"
           }
         },
-        "result_5": {
+        "result_ygcJdT": {
           "type": "result",
           "settings": {
-            "product": "",
+            "image": "shopify://shop_images/zenith-advanced-hair-density-shampoo_3.jpg",
+            "product": "zenith-advanced-hair-density-shampoo",
+            "rating": 5,
+            "quote": "my hair appeared fuller. I love the effects it gave on me.",
+            "author": "Norman V.",
+            "verified": true,
+            "avatar": "shopify://shop_images/rinse.jpg",
+            "author_detail": "",
+            "row": "1"
+          }
+        },
+        "result_ta7EM3": {
+          "type": "result",
+          "settings": {
+            "image": "shopify://shop_images/zenith-advanced-hair-density-shampoo_3.jpg",
+            "product": "zenith-advanced-hair-density-shampoo",
+            "rating": 5,
+            "quote": "my hair appeared fuller. I love the effects it gave on me.",
+            "author": "Norman V.",
+            "verified": true,
+            "avatar": "shopify://shop_images/rinse.jpg",
+            "author_detail": "",
             "row": "2"
           }
         },
-        "result_6": {
+        "result_ppKj9F": {
           "type": "result",
           "settings": {
-            "product": "",
+            "image": "shopify://shop_images/zenith-advanced-hair-density-shampoo_3.jpg",
+            "product": "zenith-advanced-hair-density-shampoo",
+            "rating": 5,
+            "quote": "my hair appeared fuller. I love the effects it gave on me.",
+            "author": "Norman V.",
+            "verified": true,
+            "avatar": "shopify://shop_images/rinse.jpg",
+            "author_detail": "",
             "row": "2"
           }
         },
-        "result_7": {
+        "result_xiATdb": {
           "type": "result",
           "settings": {
-            "product": "",
+            "image": "shopify://shop_images/zenith-advanced-hair-density-shampoo_3.jpg",
+            "product": "zenith-advanced-hair-density-shampoo",
+            "rating": 5,
+            "quote": "my hair appeared fuller. I love the effects it gave on me.",
+            "author": "Norman V.",
+            "verified": true,
+            "avatar": "shopify://shop_images/rinse.jpg",
+            "author_detail": "",
             "row": "2"
           }
         },
-        "result_8": {
+        "result_9KPqQJ": {
           "type": "result",
           "settings": {
-            "product": "",
+            "image": "shopify://shop_images/zenith-advanced-hair-density-shampoo_3.jpg",
+            "product": "zenith-advanced-hair-density-shampoo",
+            "rating": 5,
+            "quote": "my hair appeared fuller. I love the effects it gave on me.",
+            "author": "Norman V.",
+            "verified": true,
+            "avatar": "shopify://shop_images/rinse.jpg",
+            "author_detail": "",
             "row": "2"
           }
         }
       },
       "block_order": [
         "result_1",
-        "result_2",
-        "result_3",
-        "result_4",
-        "result_5",
-        "result_6",
-        "result_7",
-        "result_8"
+        "result_3CXeT6",
+        "result_aMALBM",
+        "result_yRjHzR",
+        "result_ygcJdT",
+        "result_ta7EM3",
+        "result_ppKj9F",
+        "result_xiATdb",
+        "result_9KPqQJ"
       ],
       "settings": {
         "eyebrow": "Used by [customers] Filipino men",
         "heading": "Real Men. Real Results.",
         "heading_mobile": "Built for Filipino men over 35",
         "subheading": "<p>See the difference a proper regimen makes.</p><p>From clearer skin to thicker hair, every transformation here comes from verified Zenith customers putting in the consistent work.</p>",
+        "product_prefix": "Used",
+        "verified_label": "Verified buyer",
         "disclaimer": "Individual results may vary.*",
         "link_label": "",
         "link": "",
         "heading_alignment": "center",
         "rows": "2",
         "card_width": 440,
+        "card_height": 220,
+        "media_width": 50,
+        "quote_lines": 4,
         "speed": 120,
         "alternate_direction": true,
         "pause_on_hover": true,
@@ -409,9 +487,18 @@
         "heading_spacing": 32,
         "gap": 20,
         "content_padding": 16,
+        "review_padding": 20,
         "thumb_size": 40,
+        "thumb_radius": 4,
+        "avatar_size": 32,
         "disclaimer_spacing": 16,
         "color_scheme": "scheme-1",
+        "review_bg_color": "#202020",
+        "quote_color": "#bcbcbc",
+        "name_color": "#bcbcbc",
+        "detail_color": "#b8b8b8",
+        "star_color": "#c5930e",
+        "badge_color": "#c5930e",
         "overlay_style": "bottom",
         "overlay_color": "#294850",
         "overlay_opacity": 100,
@@ -424,17 +511,29 @@
         "subheading_font_size": 18,
         "eyebrow_font_size": 14,
         "text_font_size": 12,
+        "star_size": 14,
+        "quote_font_size": 14,
+        "name_font_size": 15,
+        "detail_font_size": 12,
         "disclaimer_font_size": 12,
         "heading_alignment_mobile": "left",
         "mobile_card_width": 340,
+        "card_height_mobile": 180,
+        "media_width_mobile": 50,
         "heading_font_size_mobile": 36,
         "subheading_font_size_mobile": 16,
         "heading_gap_mobile": 4,
         "heading_spacing_mobile": 24,
         "gap_mobile": 16,
         "content_padding_mobile": 10,
+        "review_padding_mobile": 12,
         "thumb_size_mobile": 32,
+        "avatar_size_mobile": 26,
         "text_font_size_mobile": 10,
+        "star_size_mobile": 11,
+        "quote_font_size_mobile": 12,
+        "name_font_size_mobile": 13,
+        "detail_font_size_mobile": 10,
         "disclaimer_font_size_mobile": 10,
         "disclaimer_spacing_mobile": 16,
         "padding_top": 32,
@@ -738,6 +837,9 @@
         "card_1": {
           "type": "card",
           "settings": {
+            "collection": "",
+            "media_type": "featured",
+            "youtube_url": "",
             "title": "The tallow cream that repairs and restores your skin",
             "button_label": "Shop Skin Products",
             "link": "",
@@ -749,6 +851,9 @@
         "card_2": {
           "type": "card",
           "settings": {
+            "collection": "",
+            "media_type": "featured",
+            "youtube_url": "",
             "title": "Hair density without the itch or the dryness on your scalp",
             "button_label": "Shop Hair Products",
             "link": "",
@@ -760,6 +865,9 @@
         "card_3": {
           "type": "card",
           "settings": {
+            "collection": "",
+            "media_type": "featured",
+            "youtube_url": "",
             "title": "Full-body care for the hard-working man",
             "button_label": "Add to Cart",
             "link": "",
@@ -771,6 +879,9 @@
         "card_4": {
           "type": "card",
           "settings": {
+            "collection": "",
+            "media_type": "featured",
+            "youtube_url": "",
             "title": "Personal care to complete your routine",
             "button_label": "Add to Cart",
             "link": "",
@@ -1332,6 +1443,7 @@
         "button_font_size": 22,
         "text_font_size": 16,
         "countdown_font_size": 18,
+        "countdown_label_font_size": 14,
         "hide_on_mobile": true,
         "mobile_image_first": false,
         "card_inset_mobile": 20,
@@ -1350,13 +1462,12 @@
         "image_max_height_mobile": 240,
         "text_font_size_mobile": 16,
         "countdown_font_size_mobile": 16,
+        "countdown_label_font_size_mobile": 12,
         "confetti_width_mobile": 100,
         "padding_top": 32,
         "padding_bottom": 32,
         "padding_top_mobile": 24,
-        "padding_bottom_mobile": 24,
-        "countdown_label_font_size": 14,
-        "countdown_label_font_size_mobile": 12
+        "padding_bottom_mobile": 24
       }
     }
   },
