@@ -1,0 +1,1183 @@
+{{ 'zenith-contact.css' | asset_url | stylesheet_tag }}
+{{ 'zenith-faq.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign s = section.settings
+  assign form_id = 'ContactForm-' | append: section.id
+  assign button_label_mobile = s.button_label_mobile | default: s.button_label
+  assign topics = s.topics | newline_to_br | split: '<br />'
+
+  assign has_faq = false
+  for block in section.blocks
+    if block.type == 'faq'
+      assign has_faq = true
+      break
+    endif
+  endfor
+
+  assign has_social = false
+  if settings.social_facebook_link != blank or settings.social_instagram_link != blank or settings.social_tiktok_link != blank or settings.social_lazada_link != blank or settings.social_shopee_link != blank
+    assign has_social = true
+  endif
+-%}
+
+{%- capture extra -%}
+  --z-ct-bg-top: {{ s.background_top }};
+  --z-ct-bg-bottom: {{ s.background_bottom }};
+  --z-ct-bg-len: {{ s.gradient_length }}px;
+  --z-ct-bg-len-m: {{ s.gradient_length_mobile }}px;
+  --z-ct-form-w: {{ s.form_width }}px;
+  --z-ct-col-gap: {{ s.column_gap }}px;
+  --z-ct-stack-m: {{ s.stack_gap_mobile }}px;
+  --z-ct-card: {{ s.form_background }};
+  --z-ct-card-pad: {{ s.card_padding }}px;
+  --z-ct-item-gap: {{ s.item_spacing }}px;
+  --z-ct-item-gap-m: {{ s.item_spacing_mobile }}px;
+  --z-ct-icon: {{ s.icon_color }};
+  --z-ct-accent: {{ s.checkbox_color }};
+  --z-ct-link-line: {{ s.link_underline_color }};
+  --z-ct-muted: {{ s.muted_opacity | divided_by: 100.0 }};
+  --z-ct-field-a: {{ s.field_opacity | divided_by: 100.0 }};
+  --z-ct-ph-a: {{ s.placeholder_opacity | divided_by: 100.0 }};
+  --z-ct-fh: {{ s.field_height }}px;
+  --z-ct-fh-m: {{ s.field_height_mobile }}px;
+  --z-ct-fgap: {{ s.field_gap }}px;
+  --z-ct-msg-h: {{ s.message_height }}px;
+  --z-ct-ifs: {{ s.input_font_size }}px;
+  --z-ct-ifs-m: {{ s.input_font_size_mobile }}px;
+  --z-ct-soc: {{ s.social_icon_size }}px;
+  --z-ct-soc-gap: {{ s.social_gap }}px;
+  --z-ct-form-hfs: {{ s.form_heading_font_size }}px;
+  --z-ct-form-hfs-m: {{ s.form_heading_font_size_mobile }}px;
+  --z-ct-faq-hfs: {{ s.faq_heading_font_size }}px;
+  --z-ct-faq-hfs-m: {{ s.faq_heading_font_size_mobile }}px;
+  --z-ct-faq-q: {{ s.faq_question_size }}px;
+  --z-ct-faq-q-m: {{ s.faq_question_size_mobile }}px;
+  --z-ct-faq-gap: {{ s.faq_spacing }}px;
+  --z-ct-faq-gap-m: {{ s.faq_spacing_mobile }}px;
+  --z-ct-faq-w: {{ s.faq_max_width }}px;
+  --z-icon-cut: {{ s.background_bottom }};
+{%- endcapture -%}
+{%- render 'zenith-section-style', section: section, extra: extra -%}
+
+<section
+  id="Zenith-{{ section.id }}"
+  class="zenith-section zenith-contact color-{{ s.color_scheme }}{% if s.form_first_mobile %} zenith-contact--m-form-first{% endif %}{% unless s.form_card_mobile %} zenith-contact--m-flat{% endunless %}{% if s.form_text_inline_mobile %} zenith-contact--m-inline-text{% endif %}"
+>
+  <div class="page-width zenith-contact__grid">
+    <div class="zenith-contact__info">
+      {%- render 'zenith-section-heading',
+        heading: s.heading,
+        subheading: s.subheading,
+        alignment: 'left',
+        tag: s.heading_tag,
+        class: 'zenith-contact__intro'
+      -%}
+
+      <div class="zenith-contact__items">
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'office' -%}
+              <div class="zenith-contact__office" id="Block-{{ block.id }}-{{ section.id }}" {{ block.shopify_attributes }}>
+                {%- if block.settings.title != blank -%}
+                  <h3 class="zenith-contact__office-title">{{ block.settings.title | escape }}</h3>
+                {%- endif -%}
+                {%- if block.settings.address != blank -%}
+                  <p class="zenith-contact__line">
+                    {%- if block.settings.icon != 'none' -%}
+                      {%- render 'zenith-icon', icon: block.settings.icon, class: 'zenith-contact__icon' -%}
+                    {%- endif -%}
+                    <span>{{ block.settings.address | escape | newline_to_br }}</span>
+                  </p>
+                {%- endif -%}
+              </div>
+            {%- when 'line' -%}
+              {%- liquid
+                assign line_href = blank
+                case block.settings.link_type
+                  when 'phone'
+                    assign digits = block.settings.text | remove: ' ' | remove: '-' | remove: '(' | remove: ')' | remove: '.'
+                    assign line_href = 'tel:' | append: digits
+                  when 'email'
+                    assign line_href = 'mailto:' | append: block.settings.text
+                  when 'url'
+                    assign line_href = block.settings.link
+                endcase
+              -%}
+              {%- if block.settings.text != blank -%}
+                <p class="zenith-contact__line" id="Block-{{ block.id }}-{{ section.id }}" {{ block.shopify_attributes }}>
+                  {%- if block.settings.icon != 'none' -%}
+                    {%- render 'zenith-icon', icon: block.settings.icon, class: 'zenith-contact__icon' -%}
+                  {%- endif -%}
+                  {%- if line_href != blank -%}
+                    <a href="{{ line_href }}" class="zenith-contact__link">{{ block.settings.text | escape }}</a>
+                  {%- else -%}
+                    <span>{{ block.settings.text | escape }}</span>
+                  {%- endif -%}
+                </p>
+              {%- endif -%}
+          {%- endcase -%}
+        {%- endfor -%}
+      </div>
+
+      {%- if s.show_social and has_social -%}
+        <ul class="zenith-contact__social list-unstyled" role="list">
+          {%- if settings.social_facebook_link != blank -%}
+            <li>
+              <a href="{{ settings.social_facebook_link }}" class="zenith-contact__social-link" target="_blank" rel="noopener">
+                <span class="svg-wrapper">{{- 'icon-facebook.svg' | inline_asset_content -}}</span>
+                <span class="visually-hidden">{{ 'general.social.links.facebook' | t }}</span>
+              </a>
+            </li>
+          {%- endif -%}
+          {%- if settings.social_instagram_link != blank -%}
+            <li>
+              <a href="{{ settings.social_instagram_link }}" class="zenith-contact__social-link" target="_blank" rel="noopener">
+                <span class="svg-wrapper">{{- 'icon-instagram.svg' | inline_asset_content -}}</span>
+                <span class="visually-hidden">{{ 'general.social.links.instagram' | t }}</span>
+              </a>
+            </li>
+          {%- endif -%}
+          {%- if settings.social_tiktok_link != blank -%}
+            <li>
+              <a href="{{ settings.social_tiktok_link }}" class="zenith-contact__social-link" target="_blank" rel="noopener">
+                <span class="svg-wrapper">{{- 'icon-tiktok.svg' | inline_asset_content -}}</span>
+                <span class="visually-hidden">{{ 'general.social.links.tiktok' | t }}</span>
+              </a>
+            </li>
+          {%- endif -%}
+          {%- if settings.social_lazada_link != blank -%}
+            <li>
+              <a href="{{ settings.social_lazada_link }}" class="zenith-contact__social-link" target="_blank" rel="noopener">
+                <span class="svg-wrapper">{%- render 'zenith-icon', icon: 'lazada' -%}</span>
+                <span class="visually-hidden">Lazada</span>
+              </a>
+            </li>
+          {%- endif -%}
+          {%- if settings.social_shopee_link != blank -%}
+            <li>
+              <a href="{{ settings.social_shopee_link }}" class="zenith-contact__social-link" target="_blank" rel="noopener">
+                <span class="svg-wrapper">{%- render 'zenith-icon', icon: 'shopee' -%}</span>
+                <span class="visually-hidden">Shopee</span>
+              </a>
+            </li>
+          {%- endif -%}
+        </ul>
+      {%- endif -%}
+
+      {%- if has_faq -%}
+        <div class="zenith-contact__faq zenith-faq{% if s.faq_question_font_mobile == 'body' %} zenith-faq-q-body-m{% endif %}">
+          {%- render 'zenith-section-heading',
+            heading: s.faq_heading,
+            subheading: s.faq_subheading,
+            alignment: 'left',
+            tag: 'h2'
+          -%}
+          <div class="zenith-faq__list">
+            {%- render 'zenith-faq-items',
+              blocks: section.blocks,
+              type: 'faq',
+              open_first: s.faq_open_first,
+              schema: s.faq_schema,
+              section_id: section.id
+            -%}
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="zenith-contact__form-card">
+      {%- render 'zenith-section-heading',
+        heading: s.form_heading,
+        subheading: s.form_text,
+        alignment: 'left',
+        tag: s.form_heading_tag,
+        class: 'zenith-contact__form-heading'
+      -%}
+
+      {%- form 'contact', id: form_id, class: 'zenith-contact__form' -%}
+        {%- if form.posted_successfully? -%}
+          <p class="zenith-contact__status zenith-contact__status--success" role="status" tabindex="-1" autofocus>
+            {%- if s.success_message != blank -%}
+              {{ s.success_message | escape }}
+            {%- else -%}
+              {{ 'templates.contact.form.post_success' | t }}
+            {%- endif -%}
+          </p>
+        {%- elsif form.errors -%}
+          <div class="zenith-contact__status zenith-contact__status--error" role="alert" tabindex="-1" autofocus>
+            <p>{{ 'templates.contact.form.error_heading' | t }}</p>
+            <ul>
+              {%- for field in form.errors -%}
+                <li>
+                  <a href="#{{ form_id }}-{{ field }}">
+                    {{- form.errors.translated_fields[field] | capitalize }}
+                    {{ form.errors.messages[field] -}}
+                  </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+
+        <div class="zenith-contact__fields">
+          <div class="zenith-contact__field zenith-contact__field--half">
+            <label class="visually-hidden" for="{{ form_id }}-first">{{ s.first_name_label | escape }}</label>
+            <input
+              class="zenith-contact__input"
+              type="text"
+              id="{{ form_id }}-first"
+              name="contact[First name]"
+              autocomplete="given-name"
+              value="{% if customer %}{{ customer.first_name }}{% endif %}"
+              placeholder="{{ s.first_name_label | escape }}"
+            >
+          </div>
+          <div class="zenith-contact__field zenith-contact__field--half">
+            <label class="visually-hidden" for="{{ form_id }}-last">{{ s.last_name_label | escape }}</label>
+            <input
+              class="zenith-contact__input"
+              type="text"
+              id="{{ form_id }}-last"
+              name="contact[Last name]"
+              autocomplete="family-name"
+              value="{% if customer %}{{ customer.last_name }}{% endif %}"
+              placeholder="{{ s.last_name_label | escape }}"
+            >
+          </div>
+          <div class="zenith-contact__field{% if s.show_phone %} zenith-contact__field--half-desktop{% endif %}">
+            <label class="visually-hidden" for="{{ form_id }}-email">{{ s.email_label | escape }}</label>
+            <input
+              class="zenith-contact__input"
+              type="email"
+              id="{{ form_id }}-email"
+              name="contact[email]"
+              autocomplete="email"
+              spellcheck="false"
+              autocapitalize="off"
+              required
+              aria-required="true"
+              value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+              placeholder="{{ s.email_label | escape }}"
+              {% if form.errors contains 'email' %}
+                aria-invalid="true"
+              {% endif %}
+            >
+          </div>
+          {%- if s.show_phone -%}
+            <div class="zenith-contact__field zenith-contact__field--half-desktop">
+              <label class="visually-hidden" for="{{ form_id }}-phone">{{ s.phone_label | escape }}</label>
+              <input
+                class="zenith-contact__input"
+                type="tel"
+                id="{{ form_id }}-phone"
+                name="contact[Phone]"
+                autocomplete="tel"
+                pattern="[0-9\-\+\s\(\)]*"
+                value="{% if customer %}{{ customer.phone }}{% endif %}"
+                placeholder="{{ s.phone_label | escape }}"
+              >
+            </div>
+          {%- endif -%}
+          {%- if s.topics != blank -%}
+            <div class="zenith-contact__field zenith-contact__field--select">
+              <label class="visually-hidden" for="{{ form_id }}-topic">{{ s.topic_label | escape }}</label>
+              <select class="zenith-contact__input zenith-contact__select" id="{{ form_id }}-topic" name="contact[Topic]">
+                <option value="" selected disabled>{{ s.topic_label | escape }}</option>
+                {%- for topic in topics -%}
+                  {%- assign topic_name = topic | strip | strip_newlines -%}
+                  {%- if topic_name != blank -%}
+                    <option value="{{ topic_name | escape }}">{{ topic_name | escape }}</option>
+                  {%- endif -%}
+                {%- endfor -%}
+              </select>
+              {%- render 'zenith-icon', icon: 'chevron_down', class: 'zenith-contact__select-icon' -%}
+            </div>
+          {%- endif -%}
+          <div class="zenith-contact__field">
+            <label class="visually-hidden" for="{{ form_id }}-body">{{ s.message_label | escape }}</label>
+            <textarea
+              class="zenith-contact__input zenith-contact__textarea"
+              id="{{ form_id }}-body"
+              name="contact[body]"
+              rows="5"
+              placeholder="{{ s.message_label | escape }}"
+            >
+              {{- form.body -}}
+            </textarea>
+          </div>
+        </div>
+
+        {%- if s.privacy_text != blank -%}
+          <div class="zenith-contact__consent">
+            <input
+              class="zenith-contact__checkbox"
+              type="checkbox"
+              id="{{ form_id }}-consent"
+              name="contact[Privacy policy]"
+              value="Agreed"
+              required
+            >
+            <label for="{{ form_id }}-consent">{{ s.privacy_text }}</label>
+          </div>
+        {%- endif -%}
+
+        <button type="submit" class="button zenith-btn zenith-btn--{{ s.button_style }} zenith-contact__submit">
+          <span class="zenith-hide-mobile">{{ s.button_label | escape }}</span>
+          <span class="zenith-hide-desktop">{{ button_label_mobile | escape }}</span>
+        </button>
+      {%- endform -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Zenith · Contact",
+  "tag": "div",
+  "class": "section",
+  "max_blocks": 40,
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "paragraph",
+      "content": "Left: contact details (Office / Contact line blocks), social icons and FAQ (FAQ blocks). Right: contact form — messages go to the store email (Settings → Notifications → Sender email)."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Direct Contact"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading tag",
+      "default": "h2",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" }
+      ]
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Text",
+      "default": "<p>Prefer to reach out directly? <br>Connect with the Zenith support team through the channels below.</p>",
+      "info": "Line breaks (Shift + Enter) show on desktop only."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social",
+      "label": "Show social icons",
+      "default": true,
+      "info": "Facebook / Instagram / TikTok from Theme settings → Social media; Lazada / Shopee from Theme settings → Zenith → Marketplaces. Icons without a link are hidden."
+    },
+    {
+      "type": "text",
+      "id": "faq_heading",
+      "label": "FAQ heading",
+      "default": "Frequently Asked Questions"
+    },
+    {
+      "type": "richtext",
+      "id": "faq_subheading",
+      "label": "FAQ text",
+      "default": "<p>No-nonsense answers about your daily essentials.</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "faq_schema",
+      "label": "Add FAQ structured data (Google)",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "form_heading",
+      "label": "Form heading",
+      "default": "Contact Us"
+    },
+    {
+      "type": "select",
+      "id": "form_heading_tag",
+      "label": "Form heading tag",
+      "default": "h1",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" }
+      ],
+      "info": "Keep one H1 per page."
+    },
+    {
+      "type": "richtext",
+      "id": "form_text",
+      "label": "Form text",
+      "default": "<p>Need assistance with an order or have questions about your routine?</p><p>Send us a message below or email us directly at <a href=\"mailto:hello@tryzenith.ph\" title=\"Email Zenith\">hello@tryzenith.ph</a>. Our team will get back to you within 24 hours.</p>"
+    },
+    {
+      "type": "text",
+      "id": "first_name_label",
+      "label": "First name placeholder",
+      "default": "First name"
+    },
+    {
+      "type": "text",
+      "id": "last_name_label",
+      "label": "Last name placeholder",
+      "default": "Last name"
+    },
+    {
+      "type": "text",
+      "id": "email_label",
+      "label": "Email placeholder",
+      "default": "Email address"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_phone",
+      "label": "Show phone field",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "phone_label",
+      "label": "Phone placeholder",
+      "default": "Phone number"
+    },
+    {
+      "type": "text",
+      "id": "topic_label",
+      "label": "Topic placeholder",
+      "default": "Select one..."
+    },
+    {
+      "type": "textarea",
+      "id": "topics",
+      "label": "Topic options",
+      "default": "Order status\nProduct question\nReturns & refunds\nWholesale & partnerships\nOther",
+      "info": "One per line. Leave empty to hide the dropdown."
+    },
+    {
+      "type": "text",
+      "id": "message_label",
+      "label": "Message placeholder",
+      "default": "Type your message..."
+    },
+    {
+      "type": "inline_richtext",
+      "id": "privacy_text",
+      "label": "Consent checkbox text",
+      "default": "I agree to the <a href=\"/policies/privacy-policy\">Privacy Policy</a>",
+      "info": "Required to send. Leave empty to remove the checkbox."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Send a Message"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success message",
+      "placeholder": "Thanks for contacting us. We'll get back to you as soon as possible."
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "form_width",
+      "label": "Form card width (desktop)",
+      "min": 400,
+      "max": 720,
+      "step": 10,
+      "unit": "px",
+      "default": 600
+    },
+    {
+      "type": "range",
+      "id": "column_gap",
+      "label": "Space between columns",
+      "min": 40,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "card_padding",
+      "label": "Form card padding",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "heading_spacing",
+      "label": "Space below heading text",
+      "min": 0,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "item_spacing",
+      "label": "Space between contact details",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "social_icon_size",
+      "label": "Social icon size",
+      "min": 16,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "social_gap",
+      "label": "Space between social icons",
+      "min": 8,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "faq_spacing",
+      "label": "Space above FAQ",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "faq_max_width",
+      "label": "FAQ width (desktop)",
+      "min": 320,
+      "max": 800,
+      "step": 10,
+      "unit": "px",
+      "default": 480
+    },
+    {
+      "type": "checkbox",
+      "id": "faq_open_first",
+      "label": "Open first question",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "field_height",
+      "label": "Field height",
+      "min": 36,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "field_gap",
+      "label": "Space between fields",
+      "min": 8,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "message_height",
+      "label": "Message box height",
+      "min": 80,
+      "max": 240,
+      "step": 4,
+      "unit": "px",
+      "default": 128
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color",
+      "id": "background_top",
+      "label": "Background top",
+      "default": "#191919",
+      "info": "Background fades from top to bottom. Use the same colour twice for a flat background."
+    },
+    {
+      "type": "color",
+      "id": "background_bottom",
+      "label": "Background bottom",
+      "default": "#0E0E0E"
+    },
+    {
+      "type": "range",
+      "id": "gradient_length",
+      "label": "Background fade length (desktop)",
+      "min": 200,
+      "max": 2000,
+      "step": 20,
+      "unit": "px",
+      "default": 1100
+    },
+    {
+      "type": "color",
+      "id": "form_background",
+      "label": "Form card background",
+      "default": "#010101"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon colour",
+      "default": "#EABE5F"
+    },
+    {
+      "type": "color",
+      "id": "checkbox_color",
+      "label": "Checkbox colour",
+      "default": "#C5930E"
+    },
+    {
+      "type": "color",
+      "id": "link_underline_color",
+      "label": "Form text link underline",
+      "default": "#D6B356"
+    },
+    {
+      "type": "range",
+      "id": "muted_opacity",
+      "label": "Secondary text opacity",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 70
+    },
+    {
+      "type": "range",
+      "id": "field_opacity",
+      "label": "Field background strength",
+      "min": 5,
+      "max": 40,
+      "step": 1,
+      "unit": "%",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "placeholder_opacity",
+      "label": "Placeholder opacity",
+      "min": 30,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 60
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "default": "gold",
+      "options": [
+        { "value": "gold", "label": "Gold gradient" },
+        { "value": "dark", "label": "Dark" },
+        { "value": "outline", "label": "Outline" },
+        { "value": "light", "label": "Light" },
+        { "value": "scheme", "label": "Color scheme button" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size",
+      "label": "Heading size",
+      "min": 24,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "subheading_font_size",
+      "label": "Heading text size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "label": "Office title size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "text_font_size",
+      "label": "Contact details + form text size",
+      "min": 12,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "form_heading_font_size",
+      "label": "Form heading size",
+      "min": 24,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 38
+    },
+    {
+      "type": "range",
+      "id": "input_font_size",
+      "label": "Field text size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "faq_heading_font_size",
+      "label": "FAQ heading size",
+      "min": 24,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "faq_question_size",
+      "label": "FAQ question size",
+      "min": 14,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 26
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "label": "Button text size",
+      "min": 14,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "type": "checkbox",
+      "id": "form_first_mobile",
+      "label": "Show form first",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "form_card_mobile",
+      "label": "Show form card background",
+      "default": false,
+      "info": "Design: the form sits directly on the page background on mobile."
+    },
+    {
+      "type": "checkbox",
+      "id": "form_text_inline_mobile",
+      "label": "Join form text paragraphs",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "button_label_mobile",
+      "label": "Button label",
+      "default": "Send Message",
+      "info": "Leave empty to use the desktop label."
+    },
+    {
+      "type": "range",
+      "id": "stack_gap_mobile",
+      "label": "Space between form and contact details",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size_mobile",
+      "label": "Heading size",
+      "min": 20,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "subheading_font_size_mobile",
+      "label": "Heading text size",
+      "min": 12,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "heading_spacing_mobile",
+      "label": "Space below heading text",
+      "min": 0,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "title_font_size_mobile",
+      "label": "Office title size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "text_font_size_mobile",
+      "label": "Contact details + form text size",
+      "min": 12,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "item_spacing_mobile",
+      "label": "Space between contact details",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "form_heading_font_size_mobile",
+      "label": "Form heading size",
+      "min": 20,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "field_height_mobile",
+      "label": "Field height",
+      "min": 36,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "input_font_size_mobile",
+      "label": "Field text size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "faq_spacing_mobile",
+      "label": "Space above FAQ",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "faq_heading_font_size_mobile",
+      "label": "FAQ heading size",
+      "min": 20,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "faq_question_size_mobile",
+      "label": "FAQ question size",
+      "min": 14,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "select",
+      "id": "faq_question_font_mobile",
+      "label": "FAQ question font",
+      "default": "body",
+      "options": [
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "gradient_length_mobile",
+      "label": "Background fade length",
+      "min": 200,
+      "max": 2000,
+      "step": 10,
+      "unit": "px",
+      "default": 690
+    },
+    {
+      "type": "range",
+      "id": "button_font_size_mobile",
+      "label": "Button text size",
+      "min": 14,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Top padding (mobile)",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Bottom padding (mobile)",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "office",
+      "name": "Office / address",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Corporate Head Office."
+        },
+        {
+          "type": "textarea",
+          "id": "address",
+          "label": "Address",
+          "default": "MIT Bldg 2 Unit #3B-3, 117 Gorordo Ave., Cor. Sanjercasville Rd. Lahug, Cebu City, Cebu 6000 Philippines."
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "pin",
+          "options": [
+            { "value": "pin", "label": "Map pin" },
+            { "value": "box", "label": "Box" },
+            { "value": "truck", "label": "Truck" },
+            { "value": "none", "label": "None" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "line",
+      "name": "Contact line",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "0977 444 3717"
+        },
+        {
+          "type": "select",
+          "id": "link_type",
+          "label": "Link",
+          "default": "phone",
+          "options": [
+            { "value": "none", "label": "No link" },
+            { "value": "phone", "label": "Call this number" },
+            { "value": "email", "label": "Email this address" },
+            { "value": "url", "label": "Custom link" }
+          ]
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Custom link",
+          "info": "Used when Link = Custom link."
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "phone_call",
+          "options": [
+            { "value": "phone_call", "label": "Phone" },
+            { "value": "mail", "label": "Email" },
+            { "value": "pin", "label": "Map pin" },
+            { "value": "clock", "label": "Clock" },
+            { "value": "chat", "label": "Chat" },
+            { "value": "none", "label": "None" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "faq",
+      "name": "FAQ question",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "How does the Zenith Money-Back Guarantee work?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>If you don't see or feel the difference after using our products consistently, let us know within 30 days (for skin) or 60 days (for hair) from delivery. We will issue a full refund. Just show us proof.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zenith · Contact",
+      "blocks": [
+        {
+          "type": "office",
+          "settings": {
+            "title": "Fulfillment Center & Manila Office",
+            "address": "1208 Pablo Ocampo, Cor. Alfonso St. Vito Cruz, Brgy 757, Manila, Metro Manila 1017 Philippines."
+          }
+        },
+        { "type": "office" },
+        { "type": "line" },
+        {
+          "type": "line",
+          "settings": { "text": "hello@tryzenith.ph", "link_type": "email", "icon": "mail" }
+        },
+        { "type": "faq" },
+        { "type": "faq", "settings": { "question": "Are your products safe for sensitive skin?", "answer": "<p>[Add answer]</p>" } },
+        { "type": "faq", "settings": { "question": "How long does shipping take?", "answer": "<p>[Add answer]</p>" } },
+        { "type": "faq", "settings": { "question": "Can I use Zenith products if I'm outside the Philippines?", "answer": "<p>[Add answer]</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

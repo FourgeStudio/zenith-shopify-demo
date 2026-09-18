@@ -1,0 +1,423 @@
+/* Zenith · Contact — mobile first. Per-instance values are CSS vars on #Zenith-{section.id}.
+   FAQ items reuse assets/zenith-faq.css (snippets/zenith-faq-items.liquid). */
+
+.zenith-contact {
+  background: linear-gradient(180deg, var(--z-ct-bg-top, #191919) 0, var(--z-ct-bg-bottom, #0e0e0e) var(--z-ct-bg-len-m, 690px));
+}
+
+.zenith-contact .zenith-heading {
+  gap: var(--z-space-2);
+}
+
+.zenith-contact .zenith-subheading {
+  color: rgba(var(--color-foreground), var(--z-ct-muted, 0.7));
+}
+
+/* ---------- Grid ---------- */
+.zenith-contact__grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--z-ct-stack-m, 56px);
+}
+
+.zenith-contact__info,
+.zenith-contact__form-card {
+  min-width: 0;
+}
+
+.zenith-contact--m-form-first .zenith-contact__form-card {
+  order: -1;
+}
+
+/* ---------- Contact details ---------- */
+/* Desktop-only line breaks in the intro text (richtext Shift+Enter). */
+.zenith-contact__intro .zenith-subheading br {
+  display: none;
+}
+
+.zenith-contact__items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--z-ct-item-gap-m, 20px);
+}
+
+.zenith-contact__office-title {
+  margin: 0 0 var(--z-space-2);
+  font-family: var(--font-body-family);
+  font-weight: 500;
+  font-size: var(--z-ttfs-m, 1.8rem);
+  line-height: 1.4;
+  letter-spacing: 0;
+  color: rgb(var(--color-foreground));
+}
+
+.zenith-contact__line {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--z-space-3);
+  margin: 0;
+  font-size: var(--z-tfs-m, 1.6rem);
+  line-height: 1.5;
+  color: rgb(var(--color-foreground));
+}
+
+.zenith-contact__line .zenith-contact__icon {
+  width: 20px;
+  height: 20px;
+  margin-top: calc((1.5em - 20px) / 2);
+  color: var(--z-ct-icon, var(--z-dawn-gold));
+}
+
+.zenith-contact__link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.zenith-contact__link:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ---------- Social ---------- */
+.zenith-contact__social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--z-ct-soc-gap, 20px);
+  margin: var(--z-ct-item-gap-m, 20px) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* 44px tap target around a 22px icon without changing the visual spacing. */
+.zenith-contact__social-link {
+  display: grid;
+  place-items: center;
+  padding: calc((44px - var(--z-ct-soc, 22px)) / 2);
+  margin: calc((var(--z-ct-soc, 22px) - 44px) / 2);
+  color: rgb(var(--color-foreground));
+  transition: opacity var(--duration-short, 0.1s) ease;
+}
+
+.zenith-contact__social-link:hover {
+  opacity: 0.75;
+}
+
+.zenith-contact__social .svg-wrapper,
+.zenith-contact__social .svg-wrapper svg {
+  width: var(--z-ct-soc, 22px);
+  height: var(--z-ct-soc, 22px);
+}
+
+/* ---------- FAQ (in the info column) ---------- */
+.zenith-contact__faq {
+  margin-top: var(--z-ct-faq-gap-m, 64px);
+  --z-hfs-m: var(--z-ct-faq-hfs-m, 3.2rem);
+  --z-hfs: var(--z-ct-faq-hfs, 3.6rem);
+  --z-hsp-m: var(--z-space-6);
+  --z-hsp: var(--z-space-6);
+  --z-sfs-m: 1.8rem;
+  --z-sfs: 1.8rem;
+  /* zenith-faq.css colours the FAQ text with these: design = white on mobile, muted on desktop. */
+  --z-sub-a-m: 1;
+  --z-sub-a: var(--z-ct-muted, 0.7);
+  --z-ttfs-m: var(--z-ct-faq-q-m, 1.8rem);
+  --z-ttfs: var(--z-ct-faq-q, 2.4rem);
+  --z-ipad-m: 14px;
+  --z-ipad: 14px;
+  --z-icon-m: 18px;
+  --z-icon: 18px;
+  --z-faq-icon: var(--z-ct-icon, var(--z-dawn-gold));
+  --z-faq-ans: var(--z-ct-muted, 0.7);
+}
+
+.zenith-contact__faq .zenith-heading {
+  align-items: flex-start;
+  text-align: left;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* ---------- Form card ---------- */
+.zenith-contact__form-card {
+  padding: var(--z-space-5);
+  background: var(--z-ct-card, #010101);
+  --z-hfs-m: var(--z-ct-form-hfs-m, 3.2rem);
+  --z-hfs: var(--z-ct-form-hfs, 3.4rem);
+  --z-hsp-m: 20px;
+  --z-hsp: 20px;
+  --z-sfs-m: var(--z-tfs-m, 1.6rem);
+  --z-sfs: var(--z-tfs, 1.6rem);
+}
+
+.zenith-contact--m-flat .zenith-contact__form-card {
+  padding: 0;
+  background: none;
+}
+
+.zenith-contact__form-card .zenith-subheading p + p {
+  margin-top: var(--z-space-5);
+}
+
+.zenith-contact--m-inline-text .zenith-contact__form-card .zenith-subheading p {
+  display: inline;
+}
+
+.zenith-contact--m-inline-text .zenith-contact__form-card .zenith-subheading p + p::before {
+  content: ' ';
+}
+
+.zenith-contact__form-card .zenith-subheading a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--z-ct-link-line, var(--z-gold));
+  text-underline-offset: 3px;
+}
+
+/* ---------- Fields ---------- */
+.zenith-contact__fields {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--z-ct-fgap, 14px);
+}
+
+.zenith-contact__field {
+  position: relative;
+  grid-column: 1 / -1;
+}
+
+.zenith-contact__field--half {
+  grid-column: auto;
+}
+
+.zenith-contact__input {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  height: var(--z-ct-fh-m, 40px);
+  margin: 0;
+  padding: 0 var(--z-space-3);
+  font-family: var(--font-body-family);
+  font-size: var(--z-ct-ifs-m, 1.4rem);
+  line-height: 1.4;
+  color: rgb(var(--color-foreground));
+  background: rgba(var(--color-foreground), var(--z-ct-field-a, 0.15));
+  background-clip: padding-box;
+  border: 1px solid rgba(var(--color-foreground), 0.1);
+  border-radius: 0;
+  box-shadow: none;
+  appearance: none;
+  transition: border-color var(--duration-short, 0.1s) ease;
+}
+
+.zenith-contact__input::placeholder {
+  color: rgba(var(--color-foreground), var(--z-ct-ph-a, 0.6));
+  opacity: 1;
+}
+
+.zenith-contact__input:hover {
+  border-color: rgba(var(--color-foreground), 0.25);
+}
+
+.zenith-contact__input:focus,
+.zenith-contact__input:focus-visible {
+  outline: none;
+  border-color: var(--z-dawn-gold);
+  box-shadow: 0 0 0 1px var(--z-dawn-gold);
+}
+
+.zenith-contact__input[aria-invalid='true'] {
+  border-color: rgb(var(--color-foreground));
+}
+
+.zenith-contact__textarea {
+  height: var(--z-ct-msg-h, 128px);
+  min-height: 8rem;
+  padding-top: var(--z-space-3);
+  padding-bottom: var(--z-space-3);
+  resize: vertical;
+}
+
+.zenith-contact__select {
+  padding-right: 4.4rem;
+  cursor: pointer;
+}
+
+.zenith-contact__select:has(option[value='']:checked) {
+  color: rgba(var(--color-foreground), var(--z-ct-ph-a, 0.6));
+}
+
+.zenith-contact__select option {
+  color: #fff;
+  background: #1a1a1a;
+}
+
+.zenith-contact__select-icon {
+  position: absolute;
+  top: 50%;
+  right: var(--z-space-4);
+  width: 18px;
+  height: 18px;
+  transform: translateY(-50%);
+  color: rgb(var(--color-foreground));
+  pointer-events: none;
+}
+
+/* ---------- Consent + submit ---------- */
+.zenith-contact__consent {
+  display: flex;
+  align-items: center;
+  gap: var(--z-space-2);
+  margin-top: var(--z-space-4);
+  font-size: 1.4rem;
+  line-height: 1.4;
+  color: rgb(var(--color-foreground));
+}
+
+.zenith-contact__consent label {
+  cursor: pointer;
+}
+
+.zenith-contact__consent a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* input[type] beats Dawn's input[type='checkbox'] { width: auto }. */
+input.zenith-contact__checkbox[type='checkbox'] {
+  display: block;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  border: 1px solid rgba(var(--color-foreground), 0.4);
+  border-radius: 0;
+  background: transparent;
+  appearance: none;
+  cursor: pointer;
+}
+
+input.zenith-contact__checkbox[type='checkbox']:checked {
+  border-color: var(--z-ct-accent, var(--z-gold));
+  background: var(--z-ct-accent, var(--z-gold)) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M4.5 10.5l3.5 3.5 7.5-8' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 16px no-repeat;
+}
+
+.zenith-contact__checkbox:focus-visible {
+  outline: 2px solid var(--z-dawn-gold);
+  outline-offset: 2px;
+}
+
+.zenith-contact__submit {
+  margin-top: var(--z-space-6);
+  padding: 0 var(--z-space-5);
+}
+
+.zenith-contact__status {
+  margin: 0 0 var(--z-space-4);
+  padding: var(--z-space-3) var(--z-space-4);
+  font-size: 1.4rem;
+  line-height: 1.5;
+  color: rgb(var(--color-foreground));
+  border-left: 3px solid var(--z-dawn-gold);
+  background: rgba(var(--color-foreground), 0.06);
+}
+
+.zenith-contact__status p,
+.zenith-contact__status ul {
+  margin: 0;
+}
+
+.zenith-contact__status ul {
+  padding-left: var(--z-space-4);
+}
+
+.zenith-contact__status a {
+  color: inherit;
+}
+
+/* ---------- Tablet + desktop ---------- */
+@media screen and (min-width: 750px) {
+  .zenith-contact .zenith-heading {
+    gap: var(--z-space-3);
+  }
+
+  .zenith-contact {
+    background: linear-gradient(180deg, var(--z-ct-bg-top, #191919) 0, var(--z-ct-bg-bottom, #0e0e0e) var(--z-ct-bg-len, 1100px));
+  }
+
+  .zenith-contact__intro .zenith-subheading br {
+    display: inline;
+  }
+
+  .zenith-contact__items {
+    gap: var(--z-ct-item-gap, 24px);
+  }
+
+  .zenith-contact__office-title {
+    font-size: var(--z-ttfs, 1.8rem);
+  }
+
+  .zenith-contact__line {
+    font-size: var(--z-tfs, 1.6rem);
+  }
+
+  .zenith-contact__social {
+    margin-top: var(--z-ct-item-gap, 24px);
+  }
+
+  .zenith-contact__faq {
+    margin-top: var(--z-ct-faq-gap, 80px);
+  }
+
+  .zenith-contact__form-card,
+  .zenith-contact--m-flat .zenith-contact__form-card {
+    padding: var(--z-ct-card-pad, 40px);
+    background: var(--z-ct-card, #010101);
+  }
+
+  .zenith-contact--m-inline-text .zenith-contact__form-card .zenith-subheading p {
+    display: block;
+  }
+
+  .zenith-contact--m-inline-text .zenith-contact__form-card .zenith-subheading p + p::before {
+    content: none;
+  }
+
+  .zenith-contact__field--half-desktop {
+    grid-column: auto;
+  }
+
+  .zenith-contact__input {
+    height: var(--z-ct-fh, 50px);
+    font-size: var(--z-ct-ifs, 1.6rem);
+  }
+
+  .zenith-contact__textarea {
+    height: var(--z-ct-msg-h, 128px);
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .zenith-contact__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) min(var(--z-ct-form-w, 600px), 50%);
+    column-gap: min(var(--z-ct-col-gap, 120px), 6vw);
+    align-items: start;
+  }
+
+  .zenith-contact--m-form-first .zenith-contact__form-card {
+    order: 0;
+  }
+
+  .zenith-contact__faq {
+    max-width: var(--z-ct-faq-w, 480px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zenith-contact__input,
+  .zenith-contact__social-link {
+    transition: none;
+  }
+}
