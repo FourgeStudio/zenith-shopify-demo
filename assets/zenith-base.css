@@ -158,22 +158,17 @@ h1, h2, h3, h4, h5, .h0, .h1, .h2, .h3, .h4, .h5 {
 }
 
 /* ---------- Page width + gutters ----------
-   Theme settings → Layout → Page width = max width of the whole frame INCLUDING gutters
-   (design: 1440 → content 1280). Gutters: 20px mobile, 40px tablet, 80px ≥990.
-   Header keeps Dawn's own padding (header section handles it). */
+   Theme settings → Layout → Page width = max width of the whole frame INCLUDING gutters (1440).
+   Gutters = Theme settings → Zenith → Page side margin (desktop 30 / mobile 20; vars set in theme.liquid).
+   Header aligns its icons to the same gutter (zenith-header.css). Full-bleed pieces that should stop at the
+   frame use var(--z-gutter) as the bleed distance, not 100vw. */
 :root {
-  --z-gutter: 2rem;
+  --z-gutter: var(--z-gutter-m, 2rem);
 }
 
 @media screen and (min-width: 750px) {
   :root {
-    --z-gutter: 4rem;
-  }
-}
-
-@media screen and (min-width: 990px) {
-  :root {
-    --z-gutter: 8rem;
+    --z-gutter: var(--z-gutter-d, 3rem);
   }
 }
 

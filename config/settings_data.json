@@ -105,6 +105,8 @@
       "type_body_font": "assistant_n4",
       "body_scale": 100,
       "page_width": 1440,
+      "page_margin": 30,
+      "page_margin_mobile": 20,
       "spacing_sections": 0,
       "spacing_grid_horizontal": 16,
       "spacing_grid_vertical": 16,

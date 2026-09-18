@@ -15,6 +15,12 @@
   padding-right: var(--zh-px-m, 1.1rem);
 }
 
+/* "Align icons with page margin": the menu/cart glyphs (1.1rem inside their 44px boxes) sit on the page gutter. */
+.zenith-header--align-page.zenith-header.header.page-width {
+  padding-left: max(0px, calc(var(--z-gutter, 2rem) - 1.1rem));
+  padding-right: max(0px, calc(var(--z-gutter, 2rem) - 1.1rem));
+}
+
 /* Dawn stretches drawer-menu headers to 100%; keep the bar content inside the page frame (Theme settings → Page width)
    so it lines up with the page on wide screens. The black bar background stays full width (header-wrapper). */
 .zenith-header.header.page-width.drawer-menu {

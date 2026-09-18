@@ -23,6 +23,31 @@
       },
       {
         "type": "header",
+        "content": "Layout"
+      },
+      {
+        "type": "range",
+        "id": "page_margin",
+        "label": "Page side margin (desktop)",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "default": 30,
+        "info": "Space between the screen/page frame edge and the content. Header icons line up with it."
+      },
+      {
+        "type": "range",
+        "id": "page_margin_mobile",
+        "label": "Page side margin (mobile)",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "default": 20
+      },
+      {
+        "type": "header",
         "content": "Marketplaces"
       },
       {

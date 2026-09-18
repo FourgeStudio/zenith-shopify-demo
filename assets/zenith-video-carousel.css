@@ -32,7 +32,7 @@
 
 /* ---------- Carousel sizing ----------
    Slide widths are measured against the page width (container units), so the
-   track can bleed to the right screen edge without changing the card size. */
+   track can bleed to the right edge of the page frame without changing the card size. */
 .zenith-videos zenith-carousel {
   container-type: inline-size;
 }
@@ -43,7 +43,7 @@
 }
 
 .zenith-videos--bleed .zenith-carousel__track {
-  margin-right: calc((100cqi - 100vw) / 2);
+  margin-right: calc(-1 * var(--z-gutter, 3rem));
 }
 
 .zenith-videos .zenith-carousel__controls {
