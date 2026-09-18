@@ -75,11 +75,63 @@
               assign title_link = card_product.url
             endif
             assign handle = block.settings.author | escape
+
+            # YouTube link (incl. Shorts): used when no video file is picked; the player loads on tap
+            assign yt_id = ''
+            assign yt_src = ''
+            if block.settings.video == blank and block.settings.youtube_url != blank
+              capture yt
+                render 'zenith-youtube-id', url: block.settings.youtube_url
+              endcapture
+              assign yt_id = yt | split: ':' | first
+              if yt_id != blank
+                assign yt_src = 'https://www.youtube-nocookie.com/embed/' | append: yt_id | append: '?autoplay=1&playsinline=1&rel=0&modestbranding=1&enablejsapi=1'
+                if yt contains ':short'
+                  assign yt_thumb = 'oar2'
+                else
+                  assign yt_thumb = 'hqdefault'
+                endif
+              endif
+            endif
+            assign has_player = false
+            if block.settings.video != blank or yt_src != blank
+              assign has_player = true
+            endif
           -%}
           <li class="zenith-carousel__slide" id="Block-{{ block.id }}" {{ block.shopify_attributes }}>
             <article class="zenith-video-card color-{{ section.settings.card_color_scheme }}">
-              <zenith-video class="zenith-media zenith-video-card__media">
-                {%- if block.settings.video != blank -%}
+              <zenith-video
+                class="zenith-media zenith-video-card__media"
+                {% if yt_src != blank %}
+                  data-youtube-src="{{ yt_src }}" data-title="{{ block.settings.title | default: block.settings.author | escape }}"
+                {% endif %}
+              >
+                {%- if yt_src != blank -%}
+                  {%- if block.settings.poster != blank -%}
+                    {{
+                      block.settings.poster
+                      | image_url: width: 720
+                      | image_tag:
+                        loading: 'lazy',
+                        widths: '360, 540, 720',
+                        sizes: '(min-width: 750px) 25vw, 85vw',
+                        class: 'zenith-video-card__poster',
+                        alt: ''
+                    }}
+                  {%- else -%}
+                    <img
+                      src="https://i.ytimg.com/vi/{{ yt_id }}/{{ yt_thumb }}.jpg"
+                      class="zenith-video-card__poster"
+                      alt=""
+                      {% if yt_thumb == 'oar2' %}
+                        width="1080" height="1920"
+                      {% else %}
+                        width="480" height="360"
+                      {% endif %}
+                      loading="lazy"
+                    >
+                  {%- endif -%}
+                {%- elsif block.settings.video != blank -%}
                   {{
                     block.settings.video
                     | video_tag:
@@ -110,7 +162,7 @@
                   {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
                 {%- endif -%}
                 {%- render 'zenith-overlay', style: section.settings.overlay_style -%}
-                {%- if block.settings.video != blank -%}
+                {%- if has_player -%}
                   <button
                     type="button"
                     class="zenith-video-card__play"
@@ -822,14 +874,20 @@
         {
           "type": "video",
           "id": "video",
-          "label": "Video",
-          "info": "Vertical video recommended. Upload in Content > Files."
+          "label": "Video (MP4, MOV or WebM)",
+          "info": "Vertical video recommended. Plays with sound when tapped."
+        },
+        {
+          "type": "text",
+          "id": "youtube_url",
+          "label": "YouTube link",
+          "info": "Used when no video file is selected. A Shorts link (youtube.com/shorts/…), a watch link or a youtu.be link. Plays in the card when tapped."
         },
         {
           "type": "image_picker",
           "id": "poster",
-          "label": "Cover image",
-          "info": "Shown before the video plays, or on its own when no video is selected"
+          "label": "Cover image or GIF",
+          "info": "Shown before the video plays. With no video or YouTube link, the image (or GIF) is the card. Leave empty to use the video's own cover or the YouTube thumbnail."
         },
         {
           "type": "textarea",

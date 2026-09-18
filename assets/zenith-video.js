@@ -1,18 +1,23 @@
+/* Zenith video card player: an uploaded <video>, or a YouTube embed (data-youtube-src) created on the first tap.
+   One video plays at a time; playback pauses when the card leaves the screen. */
 if (!customElements.get('zenith-video')) {
   customElements.define(
     'zenith-video',
     class ZenithVideo extends HTMLElement {
       connectedCallback() {
         this.video = this.querySelector('video');
+        this.youtubeSrc = this.dataset.youtubeSrc;
         this.button = this.querySelector('[data-video-toggle]');
-        if (!this.video || !this.button) return;
+        if ((!this.video && !this.youtubeSrc) || !this.button) return;
 
         this.onToggle = () => this.toggle();
         this.onPause = () => this.setPlaying(false);
         this.onPlay = () => this.setPlaying(true);
         this.button.addEventListener('click', this.onToggle);
-        this.video.addEventListener('pause', this.onPause);
-        this.video.addEventListener('play', this.onPlay);
+        if (this.video) {
+          this.video.addEventListener('pause', this.onPause);
+          this.video.addEventListener('play', this.onPlay);
+        }
 
         // Stop playback when the card is swiped or scrolled out of view.
         if ('IntersectionObserver' in window) {
@@ -34,10 +39,10 @@ if (!customElements.get('zenith-video')) {
       }
 
       toggle() {
-        if (this.video.paused) {
-          this.play();
-        } else {
+        if (this.classList.contains('is-playing')) {
           this.pause();
+        } else {
+          this.play();
         }
       }
 
@@ -47,23 +52,49 @@ if (!customElements.get('zenith-video')) {
           if (other !== this && typeof other.pause === 'function') other.pause();
         });
         this.setPlaying(true);
-        const attempt = this.video.play();
-        if (attempt && typeof attempt.catch === 'function') {
-          attempt.catch(() => this.setPlaying(false));
+
+        if (this.video) {
+          const attempt = this.video.play();
+          if (attempt && typeof attempt.catch === 'function') {
+            attempt.catch(() => this.setPlaying(false));
+          }
+          return;
+        }
+
+        if (!this.frame) {
+          this.frame = document.createElement('iframe');
+          this.frame.className = 'zenith-video-card__frame';
+          this.frame.src = `${this.youtubeSrc}&origin=${encodeURIComponent(window.location.origin)}`;
+          this.frame.title = this.dataset.title || 'YouTube video';
+          this.frame.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+          // YouTube refuses embeds without a referrer (error 153)
+          this.frame.referrerPolicy = 'strict-origin-when-cross-origin';
+          this.frame.allowFullscreen = true;
+          this.frame.setAttribute('frameborder', '0');
+          this.prepend(this.frame);
+        } else {
+          this.command('playVideo');
         }
       }
 
       pause() {
-        if (!this.video) return;
-        if (!this.video.paused) this.video.pause();
+        if (this.video) {
+          if (!this.video.paused) this.video.pause();
+        } else if (this.frame && this.classList.contains('is-playing')) {
+          this.command('pauseVideo');
+        }
         this.setPlaying(false);
       }
 
+      command(func) {
+        this.frame?.contentWindow?.postMessage(JSON.stringify({ event: 'command', func, args: [] }), '*');
+      }
+
       setPlaying(playing) {
-        if (!this.video || !this.button) return;
+        if (!this.button) return;
         this.classList.toggle('is-playing', playing);
         this.button.setAttribute('aria-pressed', String(playing));
-        this.video.controls = playing;
+        if (this.video) this.video.controls = playing;
       }
     }
   );
