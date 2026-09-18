@@ -7,6 +7,7 @@ _Last updated: 2026-09-18. Keep this file current at the end of each work sessio
 - GitHub-connected themes: branch `main` → unpublished theme "zenith-shopify/main". **Live theme is still the old one** — nothing published yet.
 - Homepage (desktop + mobile), header, announcement bar, menu drawer and footer rebuilt to the design exports in `design/homepage/` (2026-09-18 design-accuracy pass). Verified against static renders of the CSS, **not yet eyeballed on the real store** → first job next session.
 - Contact page (`templates/page.contact.json` → new `zenith-contact` section: contact details + FAQ + contact form) built to `design/contact-us/` (2026-09-18). Same verification caveat.
+- About page (`templates/page.about.json`) built to `design/about-us/` (2026-09-18): Brand story ×3 (intro / story / care — new options: heading tag + colour, mobile heading above image, mobile edge-to-edge image + fade + text overlap, wordmark logo), Feature columns as icon cards ("What We Believe": card colours, number badge, icon beside text on mobile), new **Zenith · Store links** (Lazada / Shopee / TikTok Shop cards) and **Zenith · Trust checklist** (checklist + Amare seal card), homepage Hero reused as the closing CTA. Same verification caveat.
 - Brand tokens, colors, fonts, logos: see `.claude/brand.md`.
 
 ## Branch flow (two branches only)
@@ -16,7 +17,7 @@ _Last updated: 2026-09-18. Keep this file current at the end of each work sessio
 - Shopify's GitHub app commits theme-editor saves back to the connected branch (`Update from Shopify for theme…`), so `git pull` before starting, and merge `main` → `staging` after editor sessions on `main`.
 
 ## Design sources
-- `design/homepage/` — desktop + mobile full pages, per-section layer exports, designer notes (`guide*.png`). `design/README.md` maps every file to its section.
+- `design/homepage/`, `design/contact-us/`, `design/about-us/` — desktop + mobile full pages, per-section layer exports, designer notes (`guide*.png`). `design/README.md` maps every file to its section.
 - `.claude/brand.md` = colors, fonts, logo rules, voice, plus design-verified UI rules (buttons, gutters, header).
 
 ## Shared building blocks (added in the design pass)
@@ -47,11 +48,12 @@ _Last updated: 2026-09-18. Keep this file current at the end of each work sessio
 - [ ] Judge.me: install app, then add its widget block inside "Zenith · Reviews". Until then the section is hidden on the live store (shows a preview in the editor).
 - [ ] FAQ answers 2–5 are placeholders (design repeats one answer).
 - [ ] Contact page: admin page "Contact" must use template **contact**; FAQ answers 2–4 are "[Add answer]"; confirm the Manila office address (desktop design shows "2F Revilles Building, Osmena Blvd…" (a Cebu address), mobile shows "1208 Pablo Ocampo… Manila" — using the Manila one); Theme settings → Zenith → Marketplaces: Lazada + Shopee links; contact topics list (my defaults: Order status / Product question / Returns & refunds / Wholesale & partnerships / Other). Form messages go to the store sender email.
+- [ ] About page: admin page "About"/"Our Story" must use template **about**; images for intro (man applying cream), story (team photo), care, closing CTA background; Amare seal PNG in "Trust checklist"; real LTO number (`FDA Notified (LTO-**********)`); Lazada / Shopee (Theme settings → Zenith) + TikTok (Theme settings → Social media) links so the store cards are clickable; confirm the mobile "No-Nonsense" button (design says "Add to Cart", desktop "Shop Our Products" — using the desktop label; *Mobile button label* setting exists).
 - [ ] Decide: featured-product check colour (desktop design orange #EF931C vs mobile #EABE5F — using #EABE5F).
 
 ### 3. Not started
 - [ ] Product page template (design pending) → export to `design/product/`.
-- [ ] Collection, cart, search, 404, about pages. (Contact page done 2026-09-18.)
+- [ ] Collection, cart, search, 404 pages. (Contact + About pages done 2026-09-18.)
 - [ ] Analytics/pixels, SEO metafields, shipping/policy pages.
 - [ ] Performance + a11y pass (Lighthouse on preview), then publish `main` theme.
 
