@@ -18,11 +18,13 @@
         "text": "<p>Everything you need to stay in your prime.</p>",
         "button_label": "Add to Cart",
         "button_link": "",
+        "button_product": "zenith-anti-aging-tallow-cream",
         "button_label_mobile": "Shop Zenith Products",
         "button_link_mobile": "",
         "ribbon_text": "",
         "highlight_title": "",
         "badge_text": "",
+        "countdown_source": "custom",
         "countdown_label": "",
         "countdown_end_date": "",
         "countdown_end_time": "23:59",
@@ -43,15 +45,15 @@
         "overlay_color": "#203940",
         "overlay_opacity": 100,
         "overlay_coverage": 45,
-        "ribbon_color": "#F6233B",
-        "ribbon_text_color": "#FFFFFF",
-        "highlight_color": "#EABE5F",
+        "ribbon_color": "#f6233b",
+        "ribbon_text_color": "#ffffff",
+        "highlight_color": "#eabe5f",
         "badge_color": "#007941",
-        "badge_text_color": "#FFFFFF",
-        "countdown_background_color": "#FFFFFF",
+        "badge_text_color": "#ffffff",
+        "countdown_background_color": "#ffffff",
         "countdown_text_color": "#121212",
         "countdown_box_color": "#010101",
-        "countdown_digit_color": "#FFFFFF",
+        "countdown_digit_color": "#ffffff",
         "heading_tag": "h2",
         "heading_font_size": 56,
         "heading_uppercase": false,
@@ -83,13 +85,7 @@
         "padding_top": 0,
         "padding_bottom": 0,
         "padding_top_mobile": 0,
-        "padding_bottom_mobile": 0,
-        "countdown_source": "custom",
-        "show_confetti": false,
-        "confetti_align": "stretch",
-        "confetti_width": 970,
-        "confetti_opacity": 100,
-        "confetti_width_mobile": 100
+        "padding_bottom_mobile": 0
       }
     },
     "trust_bar": {
@@ -165,6 +161,7 @@
     "promo_top": {
       "type": "zenith-promo-banner",
       "settings": {
+        "content_source": "global",
         "heading": "Exclusive Offers for this Season",
         "text": "<p>Bundles and deals built for value. Here for a moment, then gone.</p>",
         "button_label": "Get This Exclusive Offer",
@@ -195,9 +192,9 @@
         "overlay_opacity": 20,
         "overlay_coverage": 100,
         "countdown_background": "linear-gradient(90deg, rgba(214, 179, 86, 1) 50%, rgba(197, 147, 0, 1) 100%)",
-        "countdown_text_color": "#1A1A1A",
-        "countdown_box_color": "#4E3A05",
-        "countdown_digit_color": "#FFFFFF",
+        "countdown_text_color": "#1a1a1a",
+        "countdown_box_color": "#4e3a05",
+        "countdown_digit_color": "#ffffff",
         "heading_font_size": 56,
         "heading_uppercase": false,
         "subheading_font_size": 18,
@@ -218,13 +215,7 @@
         "padding_top": 32,
         "padding_bottom": 32,
         "padding_top_mobile": 24,
-        "padding_bottom_mobile": 24,
-        "content_source": "global",
-        "show_confetti": true,
-        "confetti_align": "left",
-        "confetti_width": 970,
-        "confetti_opacity": 100,
-        "confetti_width_mobile": 100
+        "padding_bottom_mobile": 24
       }
     },
     "press": {
@@ -280,26 +271,26 @@
       ],
       "settings": {
         "heading": "As seen on",
-        "logo_height": 24,
-        "color_scheme": "scheme-1",
-        "mobile_layout": "marquee",
-        "padding_top": 24,
-        "padding_bottom": 24,
         "layout": "row",
         "logo_align": "bottom",
+        "logo_height": 24,
         "logo_max_width": 160,
         "gap": 40,
         "content_gap": 12,
         "speed": 30,
+        "color_scheme": "scheme-1",
         "logo_style": "white",
         "logo_opacity": 100,
         "heading_opacity": 70,
         "text_font_size": 14,
         "heading_uppercase": false,
+        "mobile_layout": "marquee",
         "logo_height_mobile": 24,
         "gap_mobile": 40,
         "content_gap_mobile": 12,
         "text_font_size_mobile": 14,
+        "padding_top": 24,
+        "padding_bottom": 24,
         "padding_top_mobile": 24,
         "padding_bottom_mobile": 24
       }
@@ -311,6 +302,7 @@
           "type": "result",
           "settings": {
             "caption": "Used Zenith Anti-Aging Tallow Cream",
+            "product": "",
             "row": "1"
           }
         },
@@ -318,6 +310,7 @@
           "type": "result",
           "settings": {
             "caption": "Used Zenith Anti-Aging Tallow Cream",
+            "product": "",
             "row": "1"
           }
         },
@@ -325,6 +318,7 @@
           "type": "result",
           "settings": {
             "caption": "Used Zenith Anti-Aging Tallow Cream",
+            "product": "",
             "row": "1"
           }
         },
@@ -332,6 +326,7 @@
           "type": "result",
           "settings": {
             "caption": "Used Zenith Anti-Aging Tallow Cream",
+            "product": "",
             "row": "1"
           }
         },
@@ -339,6 +334,7 @@
           "type": "result",
           "settings": {
             "caption": "Used Zenith Anti-Aging Tallow Cream",
+            "product": "",
             "row": "2"
           }
         },
@@ -346,6 +342,7 @@
           "type": "result",
           "settings": {
             "caption": "Used Zenith Anti-Aging Tallow Cream",
+            "product": "",
             "row": "2"
           }
         },
@@ -353,6 +350,7 @@
           "type": "result",
           "settings": {
             "caption": "Used Zenith Anti-Aging Tallow Cream",
+            "product": "",
             "row": "2"
           }
         },
@@ -360,6 +358,7 @@
           "type": "result",
           "settings": {
             "caption": "Used Zenith Anti-Aging Tallow Cream",
+            "product": "",
             "row": "2"
           }
         }
@@ -377,7 +376,11 @@
       "settings": {
         "eyebrow": "Used by [customers] Filipino men",
         "heading": "Real Men. Real Results.",
+        "heading_mobile": "Built for Filipino men over 35",
         "subheading": "<p>See the difference a proper regimen makes.</p><p>From clearer skin to thicker hair, every transformation here comes from verified Zenith customers putting in the consistent work.</p>",
+        "disclaimer": "Individual results may vary.*",
+        "before_label": "Before",
+        "after_label": "After",
         "link_label": "",
         "link": "",
         "heading_alignment": "center",
@@ -387,18 +390,6 @@
         "speed": 60,
         "alternate_direction": true,
         "pause_on_hover": true,
-        "color_scheme": "scheme-1",
-        "overlay_style": "bottom",
-        "overlay_color": "#294850",
-        "overlay_opacity": 100,
-        "overlay_coverage": 50,
-        "mobile_card_width": 300,
-        "padding_top": 32,
-        "padding_bottom": 32,
-        "heading_mobile": "Built for Filipino men over 35",
-        "disclaimer": "Individual results may vary.*",
-        "before_label": "Before",
-        "after_label": "After",
         "show_arrow": true,
         "heading_max_width": 760,
         "heading_gap": 8,
@@ -408,9 +399,14 @@
         "thumb_size": 40,
         "arrow_size": 26,
         "disclaimer_spacing": 16,
-        "caption_color": "#FFFFFF",
-        "thumb_bg_color": "#FFFFFF",
-        "disclaimer_color": "#A88946",
+        "color_scheme": "scheme-1",
+        "overlay_style": "bottom",
+        "overlay_color": "#294850",
+        "overlay_opacity": 100,
+        "overlay_coverage": 50,
+        "caption_color": "#ffffff",
+        "thumb_bg_color": "#ffffff",
+        "disclaimer_color": "#a88946",
         "heading_font_size": 48,
         "heading_uppercase": false,
         "subheading_font_size": 18,
@@ -418,6 +414,7 @@
         "text_font_size": 12,
         "disclaimer_font_size": 12,
         "heading_alignment_mobile": "left",
+        "mobile_card_width": 300,
         "heading_font_size_mobile": 36,
         "subheading_font_size_mobile": 16,
         "heading_gap_mobile": 4,
@@ -429,6 +426,8 @@
         "text_font_size_mobile": 12,
         "disclaimer_font_size_mobile": 10,
         "disclaimer_spacing_mobile": 16,
+        "padding_top": 32,
+        "padding_bottom": 32,
         "padding_top_mobile": 20,
         "padding_bottom_mobile": 20
       }
@@ -440,50 +439,50 @@
           "type": "video",
           "settings": {
             "quote": "\"Anti-aging cream is all in one solution. Barrier protection, retinol. Clinically proven anti-aging. It's lightweight.\"",
-            "author": "@miguelchancofitness",
-            "product": "",
             "title": "A Gym Instructor's Secret to Younger-Looking Skin",
-            "link": ""
+            "link": "",
+            "author": "@miguelchancofitness",
+            "product": ""
           }
         },
         "video_2": {
           "type": "video",
           "settings": {
             "quote": "\"It combines deep nourishment and invisible sun protection in one step.\"",
-            "author": "@dr.lyienho",
-            "product": "",
             "title": "Do Men Need Skincare? (Doctor Explains)",
-            "link": ""
+            "link": "",
+            "author": "@dr.lyienho",
+            "product": ""
           }
         },
         "video_3": {
           "type": "video",
           "settings": {
             "quote": "\"If you want to achieve a healthy skin, make sure to add Zenith in your skin care routine.\"",
-            "author": "@johannes_rissler",
-            "product": "",
             "title": "A Celebrity's Go-To Cleanser for Clean Skin",
-            "link": ""
+            "link": "",
+            "author": "@johannes_rissler",
+            "product": ""
           }
         },
         "video_4": {
           "type": "video",
           "settings": {
             "quote": "\"It's literally part of my shower routine. No extra complicated steps.\"",
-            "author": "@_nstrjr",
-            "product": "",
             "title": "The One Spot a Man Never Sees on Himself",
-            "link": ""
+            "link": "",
+            "author": "@_nstrjr",
+            "product": ""
           }
         },
         "video_5": {
           "type": "video",
           "settings": {
             "quote": "Anti-aging cream is all in one solution. Barrier protection, lightweight, and it absorbs fast.",
-            "author": "",
-            "product": "",
             "title": "",
-            "link": ""
+            "link": "",
+            "author": "",
+            "product": ""
           }
         }
       },
@@ -497,24 +496,15 @@
       "settings": {
         "eyebrow": "",
         "heading": "Clinically Proven. The Complete Regimen.",
+        "heading_mobile": "A Complete Routine,\nBuilt for Men.",
         "subheading": "<p>Hear from the men who use Zenith every day.</p>",
+        "play_label": "Play video",
         "heading_alignment": "center",
         "slides_desktop": 4,
         "show_peek": true,
         "show_dots": true,
         "show_arrows": true,
         "autoplay": 0,
-        "color_scheme": "scheme-1",
-        "card_color_scheme": "scheme-6",
-        "overlay_style": "bottom",
-        "overlay_color": "#112328",
-        "overlay_opacity": 100,
-        "overlay_coverage": 30,
-        "mobile_slide_width": 83,
-        "padding_top": 32,
-        "padding_bottom": 32,
-        "heading_mobile": "A Complete Routine,\nBuilt for Men.",
-        "play_label": "Play video",
         "heading_max_width": 760,
         "heading_gap": 4,
         "heading_spacing": 32,
@@ -527,11 +517,17 @@
         "quote_align": "center",
         "body_min_height": 200,
         "thumb_size": 56,
+        "color_scheme": "scheme-1",
+        "card_color_scheme": "scheme-6",
         "card_border_color": "#294850",
-        "title_color": "#D6B356",
+        "title_color": "#d6b356",
+        "overlay_style": "bottom",
+        "overlay_color": "#112328",
+        "overlay_opacity": 100,
+        "overlay_coverage": 30,
         "play_color": "#000000",
         "play_opacity": 50,
-        "play_icon_color": "#FFFFFF",
+        "play_icon_color": "#ffffff",
         "heading_font_size": 48,
         "heading_uppercase": false,
         "subheading_font_size": 18,
@@ -540,6 +536,7 @@
         "title_font_size": 12,
         "handle_font_size": 10,
         "heading_alignment_mobile": "left",
+        "mobile_slide_width": 83,
         "heading_font_size_mobile": 36,
         "subheading_font_size_mobile": 16,
         "heading_gap_mobile": 4,
@@ -552,6 +549,8 @@
         "text_font_size_mobile": 16,
         "title_font_size_mobile": 12,
         "handle_font_size_mobile": 10,
+        "padding_top": 32,
+        "padding_bottom": 32,
         "padding_top_mobile": 20,
         "padding_bottom_mobile": 20
       }
@@ -610,7 +609,7 @@
         "footer_spacing": 32,
         "footer_image_width": 336,
         "color_scheme": "scheme-1",
-        "icon_color": "#EABE5F",
+        "icon_color": "#eabe5f",
         "text_opacity": 70,
         "heading_font_size": 48,
         "heading_uppercase": false,
@@ -840,12 +839,13 @@
         "color_scheme": "scheme-6",
         "panel_background": "#203940",
         "media_color_scheme": "scheme-3",
+        "section_background": "",
         "button_style": "gold",
-        "badge_background": "#EABE5F",
+        "badge_background": "#eabe5f",
         "badge_text_color": "#121212",
-        "price_color": "#EABE5F",
-        "check_color": "#EABE5F",
-        "icon_color": "#EABE5F",
+        "price_color": "#eabe5f",
+        "check_color": "#eabe5f",
+        "icon_color": "#eabe5f",
         "pager_color": "#294850",
         "heading_font_size": 36,
         "heading_uppercase": false,
@@ -916,7 +916,7 @@
         "columns_gap": 32,
         "column_title_spacing": 14,
         "color_scheme": "scheme-1",
-        "column_title_color": "#EABE5F",
+        "column_title_color": "#eabe5f",
         "text_opacity": 70,
         "button_style": "gold",
         "overlay_style": "none",
@@ -978,7 +978,7 @@
         "color_scheme": "scheme-1",
         "button_style": "outline",
         "card_button_style": "gold",
-        "card_image_bg": "#FFFFFF",
+        "card_image_bg": "#ffffff",
         "heading_font_size": 36,
         "heading_uppercase": false,
         "subheading_font_size": 16,
@@ -1053,36 +1053,15 @@
         "subheading": "<p>Men in Manila using the cream. Unedited and verified.</p>",
         "heading_alignment": "center",
         "heading_max_width": 760,
-        "subheading_spacing": 28,
         "heading_spacing": 48,
-        "jdgm_masonry": true,
-        "columns_desktop": 4,
-        "gap": 20,
-        "content_padding": 12,
-        "card_radius": 4,
         "color_scheme": "scheme-1",
-        "button_style": "outline",
-        "card_color": "#202020",
-        "star_color": "#D6B356",
-        "accent_color": "#C59300",
         "heading_font_size": 48,
         "heading_uppercase": false,
         "subheading_font_size": 18,
-        "subheading_opacity": 100,
         "eyebrow_font_size": 14,
-        "text_font_size": 14,
-        "icon_size": 14,
-        "button_font_size": 20,
-        "subheading_mobile": "<p>Real Filipino men using Zenith. Unedited and verified.</p>",
         "heading_font_size_mobile": 36,
         "subheading_font_size_mobile": 16,
-        "subheading_opacity_mobile": 70,
         "heading_spacing_mobile": 24,
-        "columns_mobile": 2,
-        "gap_mobile": 20,
-        "content_padding_mobile": 12,
-        "text_font_size_mobile": 14,
-        "button_font_size_mobile": 20,
         "padding_top": 52,
         "padding_bottom": 48,
         "padding_top_mobile": 20,
@@ -1147,7 +1126,7 @@
         "item_padding": 10,
         "content_gap": 24,
         "color_scheme": "scheme-1",
-        "icon_color": "#EABE5F",
+        "icon_color": "#eabe5f",
         "divider_opacity": 10,
         "answer_opacity": 70,
         "heading_font_size": 48,
@@ -1177,6 +1156,7 @@
     "promo_bottom": {
       "type": "zenith-promo-banner",
       "settings": {
+        "content_source": "global",
         "heading": "Exclusive Offers for this Season",
         "text": "<p>Bundles and deals built for value. Here for a moment, then gone.</p>",
         "button_label": "Get This Exclusive Offer",
@@ -1207,9 +1187,9 @@
         "overlay_opacity": 20,
         "overlay_coverage": 100,
         "countdown_background": "linear-gradient(90deg, rgba(214, 179, 86, 1) 50%, rgba(197, 147, 0, 1) 100%)",
-        "countdown_text_color": "#1A1A1A",
-        "countdown_box_color": "#4E3A05",
-        "countdown_digit_color": "#FFFFFF",
+        "countdown_text_color": "#1a1a1a",
+        "countdown_box_color": "#4e3a05",
+        "countdown_digit_color": "#ffffff",
         "heading_font_size": 56,
         "heading_uppercase": false,
         "subheading_font_size": 18,
@@ -1230,13 +1210,7 @@
         "padding_top": 32,
         "padding_bottom": 32,
         "padding_top_mobile": 24,
-        "padding_bottom_mobile": 24,
-        "content_source": "global",
-        "show_confetti": true,
-        "confetti_align": "left",
-        "confetti_width": 970,
-        "confetti_opacity": 100,
-        "confetti_width_mobile": 100
+        "padding_bottom_mobile": 24
       }
     }
   },
