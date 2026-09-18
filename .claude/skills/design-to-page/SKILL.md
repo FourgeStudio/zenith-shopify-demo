@@ -61,6 +61,7 @@ Then fill `brief-template.md` → `<scratchpad>/BRIEF.md` (placeholders + "Measu
 | Per-instance CSS vars | `snippets/zenith-section-style.liquid` map — add `setting_id:var:unit` for new sizes |
 | Carousel | `<zenith-carousel>` + `snippets/zenith-carousel-controls.liquid` (design dots/arrows) |
 | Countdown (d/h/m/s) | `snippets/zenith-countdown.liquid` + `zenith-countdown.css/js` |
+| Background video (MP4 upload / YouTube incl. Shorts) | `snippets/zenith-bg-video.liquid` inside a `.zenith-media` box above the cover image + load `zenith-bg-video.js` only when a block uses it (pattern: `zenith-category-cards` `media_type`) |
 | Gold confetti | `snippets/zenith-confetti.liquid` + `assets/zenith-confetti.png`; settings `show_confetti`, `confetti_image`, `confetti_align`, `confetti_width[_mobile]`, `confetti_opacity` |
 | Image overlay | `snippets/zenith-overlay.liquid` / `zenith-overlay-vars.liquid` |
 | Icons | `snippets/zenith-icon.liquid` (1.5px line set; add new ones there, not inline) |
