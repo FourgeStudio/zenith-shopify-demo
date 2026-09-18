@@ -48,6 +48,21 @@ Shared art: `design/confetti.png` (969 × 161 transparent gold confetti) → shi
 
 `mobile/sections/Frame 1000005205.png` = phone "MOBILE NAV AREA" chrome, not a section.
 
+## About page map (`design/about-us/`, desktop 1x, mobile full page 2x)
+| Section (templates/page.about.json key) | Desktop (`desktop/sections/`) | Mobile (`mobile/section/`) |
+|---|---|---|
+| Header + announcement (header-group) | `Navbar/10.png` | `Navbar/10.png` |
+| `intro` (Brand story: text left, image right; mobile image full-bleed + fade) | `Layout/201.png` | `Header/6.png` |
+| `story` (Brand story, same as homepage; mobile heading "How Zenith Started") | `Layout/201-1.png` | `Layout/201.png` |
+| `believe` (Feature columns, card style) | `Layout/1.png` | `Layout/1.png` |
+| `care` (Brand story, gold heading + button) | `Layout/201-2.png` | `Layout/201-1.png` |
+| `stores` (Zenith · Store links) | `Ecom Stores.png` | `Ecom Stores.png` |
+| `trust` (Zenith · Trust checklist + seal card) | `CTA/45.png` | `CTA/45.png` |
+| `cta` (Hero, same as homepage hero) | `Header/6.png` | `CTA/6.png` |
+| Footer (footer-group) | `Desktop Footer.png` | `Mobile Footer.png` |
+
+`mobile/section/Frame 1000005205.png` = phone "MOBILE NAV AREA" chrome. Mobile `care` button reads "Add to Cart" while desktop reads "Shop Our Products" — treated as a design slip (optional mobile label setting).
+
 ## Adding a new page
 Drop the exports in, then ask Claude to run the `design-to-page` skill for that page.
 Same layout under `design/<page>/` (`product`, `collection`, `cart`, `about`, `contact`, `global`). Export sections at 1x; full-page export optional.
