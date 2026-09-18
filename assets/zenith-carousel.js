@@ -37,8 +37,15 @@ if (!customElements.get('zenith-carousel')) {
         return second ? second.offsetLeft - first.offsetLeft : first.offsetWidth;
       }
 
+      // Visible content width: bleeding tracks pad their scrollport so the first card sits on the page margin.
+      get viewport() {
+        const style = getComputedStyle(this.track);
+        const pad = (parseFloat(style.scrollPaddingLeft) || 0) + (parseFloat(style.scrollPaddingRight) || 0);
+        return this.track.clientWidth - pad;
+      }
+
       get pageCount() {
-        const perPage = Math.max(1, Math.round(this.track.clientWidth / this.step));
+        const perPage = Math.max(1, Math.round(this.viewport / this.step));
         return Math.max(1, this.slides.length - perPage + 1);
       }
 
