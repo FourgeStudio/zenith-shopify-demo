@@ -123,12 +123,12 @@
     font-size: 4.8rem;
   }
 
-  /* Band: bleeds to the left edge of the page frame; right end is a semicircle centred on the badge */
+  /* Band: bleeds to the left screen edge; right end is a semicircle centred on the badge */
   .zenith-guarantee--band .zenith-guarantee__band {
     min-height: calc(var(--z-gb-bw) + 2 * var(--z-gb-inset, 24px) + 2px);
-    margin-left: calc(-1 * var(--z-gutter, 3rem));
+    margin-left: calc((100% - 100vw) / 2);
     margin-right: calc(-1 * var(--z-gb-over, 16px));
-    padding: var(--z-gb-inset, 24px) var(--z-gb-inset, 24px) var(--z-gb-inset, 24px) var(--z-gutter, 3rem);
+    padding: var(--z-gb-inset, 24px) var(--z-gb-inset, 24px) var(--z-gb-inset, 24px) calc((100vw - 100%) / 2);
     border: 1px solid var(--z-gb-border, #363636);
     border-left: 0;
     border-radius: 0 9999px 9999px 0;
@@ -143,8 +143,8 @@
 
   .zenith-guarantee--band.zenith-guarantee--image-left .zenith-guarantee__band {
     margin-left: calc(-1 * var(--z-gb-over, 16px));
-    margin-right: calc(-1 * var(--z-gutter, 3rem));
-    padding: var(--z-gb-inset, 24px) var(--z-gutter, 3rem) var(--z-gb-inset, 24px) var(--z-gb-inset, 24px);
+    margin-right: calc((100% - 100vw) / 2);
+    padding: var(--z-gb-inset, 24px) calc((100vw - 100%) / 2) var(--z-gb-inset, 24px) var(--z-gb-inset, 24px);
     border-left: 1px solid var(--z-gb-border, #363636);
     border-right: 0;
     border-radius: 9999px 0 0 9999px;

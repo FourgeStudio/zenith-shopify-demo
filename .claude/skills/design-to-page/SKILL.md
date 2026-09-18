@@ -66,7 +66,7 @@ Then fill `brief-template.md` → `<scratchpad>/BRIEF.md` (placeholders + "Measu
 | Icons | `snippets/zenith-icon.liquid` (1.5px line set; add new ones there, not inline) |
 | Store-wide number | `settings.customer_count` via `[customers]` token |
 | Store-wide content, edit once | Theme settings group + per-section source select `global` / `custom` (pattern: `zenith-promo-banner` `content_source`, hero `countdown_source`) |
-| Page width + gutters | Theme settings → Page width = whole frame incl. gutters (1440); gutter = Theme settings → Zenith → Page side margin (30 / 20) → `--z-gutter` on `.page-width` — never pad sections to fake gutters. Bleeds use `calc(-1 * var(--z-gutter))` (stop at the frame edge), never `100vw`. Header icons align via `zenith-header--align-page` |
+| Page width + gutters | Theme settings → Page width = whole frame incl. gutters (1440); gutter = Theme settings → Zenith → Page side margin (30 / 20) → `--z-gutter` on `.page-width` — never pad sections to fake gutters. Header icons align via `zenith-header--align-page` |
 | Desktop/mobile differences | `*_mobile` copy settings, `heading_alignment_mobile`, `hide_on_mobile` / `hide_on_desktop`, per-block "Hide on mobile" |
 
 Global-toggle candidates when a section repeats across pages with the same content: trust bar, money-back guarantee, Zenith Guarantee, press logos, promo. Page-specific sections (hero, story, featured product) stay per section.
@@ -86,6 +86,7 @@ Global-toggle candidates when a section repeats across pages with the same conte
 - PowerShell 5.1 `Start-Process -ArgumentList @(...)` doesn't quote spaces ("Work - Cals") → quote each arg (see `shot.ps1`).
 - `settings_data.json` invalid → Shopify drops all colour schemes. Validate after every edit.
 - Upload-dependent visuals (backgrounds with baked-in confetti, logos with taglines) → note in the handoff what the client must upload and how.
+- **Frame vs screen edge**: anything that touches the edge of the 1440 design frame (carousels running off-screen, bands from the edge, marquees) bleeds to the SCREEN edge on wider screens (`calc((100% - 100vw) / 2)` / `100cqi` formulas + `overflow-x: clip` on the section). Only content that sits inside the margins in the design is capped to the frame. Check every section against the design before changing widths globally.
 - Font size from a PNG: **cap height ≈ 0.70 × font-size** for both Special Gothic Condensed One and Geist (measure a flat letter like H/F/D, not a round one). Cross-check with text width vs a mock at a known size.
 - Dawn `input[type='checkbox'] { width: auto }` beats a class selector → use `input.<class>[type='checkbox']`.
 - Desktop and mobile designs can disagree on CONTENT (e.g. two different addresses, a placeholder answer on one breakpoint). Pick the one that fits the label/brand, and list the conflict in the handoff for the client to confirm.
