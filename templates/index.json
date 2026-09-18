@@ -754,12 +754,57 @@
             "title": "",
             "text": "<p>Pay only when the product is in your hands with our nationwide Cash on Delivery.</p>"
           }
+        },
+        "logo_gogo": {
+          "type": "logo",
+          "settings": {
+            "name": "GOGO Xpress",
+            "link": "",
+            "logo_scale": 100
+          }
+        },
+        "logo_spx": {
+          "type": "logo",
+          "settings": {
+            "name": "SPX Express",
+            "link": "",
+            "logo_scale": 100
+          }
+        },
+        "logo_lbc": {
+          "type": "logo",
+          "settings": {
+            "name": "LBC",
+            "link": "",
+            "logo_scale": 100
+          }
+        },
+        "logo_jnt": {
+          "type": "logo",
+          "settings": {
+            "name": "J&T Express",
+            "link": "",
+            "logo_scale": 100
+          }
+        },
+        "logo_ninjavan": {
+          "type": "logo",
+          "settings": {
+            "name": "Ninja Van",
+            "link": "",
+            "logo_scale": 100
+          }
         }
       },
       "block_order": [
         "column_1",
         "column_2",
-        "column_4"
+        "column_4",
+        "logo_gogo",
+        "logo_spx",
+        "logo_lbc",
+        "logo_jnt",
+        "logo_ninjavan"
       ],
       "settings": {
         "eyebrow": "",

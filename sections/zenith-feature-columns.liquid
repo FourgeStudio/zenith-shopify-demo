@@ -17,6 +17,12 @@
   --z-fmw-m: {{ section.settings.footer_max_width_mobile }}px;
   --z-fsp: {{ section.settings.footer_spacing }}px;
   --z-fsp-m: {{ section.settings.footer_spacing_mobile }}px;
+  --z-flh: {{ section.settings.logo_height }}px;
+  --z-flh-m: {{ section.settings.logo_height_mobile }}px;
+  --z-flmw: {{ section.settings.logo_max_width }}px;
+  --z-flgap: {{ section.settings.logo_gap }}px;
+  --z-flgap-m: {{ section.settings.logo_gap_mobile }}px;
+  --z-flo: {{ section.settings.logo_opacity | divided_by: 100.0 }};
   {%- if section.settings.icon_color != blank %}
   --z-icon-color: {{ section.settings.icon_color }};
   {%- endif %}
@@ -82,6 +88,7 @@
 
     <ul class="zenith-features__grid" role="list">
       {%- for block in section.blocks -%}
+        {%- if block.type != 'column' -%}{%- continue -%}{%- endif -%}
         <li class="zenith-features__item" id="Block-{{ block.id }}" {{ block.shopify_attributes }}>
           {%- if section.settings.show_media -%}
             <div class="zenith-media zenith-features__media">
@@ -115,7 +122,16 @@
       {%- endfor -%}
     </ul>
 
-    {%- if section.settings.show_payment_icons or section.settings.footer_image != blank or section.settings.footer_text != blank -%}
+    {%- liquid
+      assign has_logos = false
+      for block in section.blocks
+        if block.type == 'logo'
+          assign has_logos = true
+          break
+        endif
+      endfor
+    -%}
+    {%- if has_logos or section.settings.show_payment_icons or section.settings.footer_image != blank or section.settings.footer_text != blank -%}
       <div class="zenith-features__footer">
         {%- if section.settings.footer_image != blank -%}
           {%- assign footer_sizes = '(min-width: 750px) ' | append: section.settings.footer_image_width | append: 'px, ' | append: section.settings.footer_image_width_mobile | append: 'px' -%}
@@ -124,6 +140,37 @@
             | image_url: width: 1400
             | image_tag: loading: 'lazy', widths: '350, 700, 1050, 1400', sizes: footer_sizes, class: 'zenith-features__footer-image'
           }}
+        {%- endif -%}
+        {%- if has_logos -%}
+          {%- assign logo_sizes = section.settings.logo_max_width | append: 'px' -%}
+          <ul class="zenith-features__logos zenith-features__logos--{{ section.settings.logo_style }}" role="list">
+            {%- for block in section.blocks -%}
+              {%- if block.type != 'logo' -%}{%- continue -%}{%- endif -%}
+              <li
+                class="zenith-features__logo"
+                style="--z-logo-scale: {{ block.settings.logo_scale | divided_by: 100.0 }};"
+                id="Block-{{ block.id }}"
+                {{ block.shopify_attributes }}
+              >
+                {%- if block.settings.link != blank -%}
+                  <a href="{{ block.settings.link }}" class="zenith-features__logo-link" target="_blank" rel="noopener">
+                {%- endif -%}
+                {%- if block.settings.logo != blank -%}
+                  {%- assign logo_alt = block.settings.logo.alt | default: block.settings.name -%}
+                  {{
+                    block.settings.logo
+                    | image_url: width: 400
+                    | image_tag: loading: 'lazy', widths: '100, 200, 300, 400', sizes: logo_sizes, alt: logo_alt
+                  }}
+                {%- else -%}
+                  <span class="zenith-features__logo-text">{{ block.settings.name | escape }}</span>
+                {%- endif -%}
+                {%- if block.settings.link != blank -%}
+                  </a>
+                {%- endif -%}
+              </li>
+            {%- endfor -%}
+          </ul>
         {%- endif -%}
         {%- if section.settings.show_payment_icons -%}
           <ul class="list-payment zenith-features__payments" role="list">
@@ -145,7 +192,7 @@
   "name": "Zenith · Feature columns",
   "tag": "div",
   "class": "section",
-  "max_blocks": 8,
+  "max_blocks": 20,
   "disabled_on": {
     "groups": [
       "header",
@@ -177,7 +224,7 @@
       "type": "image_picker",
       "id": "footer_image",
       "label": "Footer image",
-      "info": "e.g. courier or payment logos in one image (GOGO, SPX, LBC, J&T, Ninja Van)"
+      "info": "All logos in one image. To upload logos one by one (each with its own size), use Add block → Footer logo."
     },
     {
       "type": "checkbox",
@@ -435,6 +482,37 @@
       "default": 336
     },
     {
+      "type": "range",
+      "id": "logo_height",
+      "label": "Footer logo height",
+      "info": "Tallest logo. Scale individual logos in their block settings.",
+      "min": 12,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "logo_max_width",
+      "label": "Footer logo max width",
+      "min": 40,
+      "max": 300,
+      "step": 10,
+      "unit": "px",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "logo_gap",
+      "label": "Space between footer logos",
+      "min": 0,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    },
+    {
       "type": "header",
       "content": "Colors"
     },
@@ -483,6 +561,40 @@
       "step": 5,
       "unit": "%",
       "default": 70
+    },
+    {
+      "type": "select",
+      "id": "logo_style",
+      "label": "Footer logo color",
+      "default": "original",
+      "options": [
+        {
+          "value": "original",
+          "label": "Original"
+        },
+        {
+          "value": "white",
+          "label": "White"
+        },
+        {
+          "value": "black",
+          "label": "Black"
+        },
+        {
+          "value": "grayscale",
+          "label": "Grayscale"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "logo_opacity",
+      "label": "Footer logo opacity",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
     },
     {
       "type": "header",
@@ -872,6 +984,26 @@
     },
     {
       "type": "range",
+      "id": "logo_height_mobile",
+      "label": "Footer logo height",
+      "min": 12,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "logo_gap_mobile",
+      "label": "Space between footer logos",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
       "id": "footer_text_size_mobile",
       "label": "Footer text size",
       "min": 8,
@@ -1046,6 +1178,49 @@
           "id": "text",
           "label": "Text",
           "default": "<p>Describe this guarantee in one or two plain sentences.</p>"
+        }
+      ]
+    },
+    {
+      "type": "logo",
+      "name": "Footer logo",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Logo",
+          "info": "Courier, payment or partner logo. SVG or transparent PNG, cropped tight to the artwork. Shown in a row above the footer text."
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "info": "Alt text. Shown as text until a logo is uploaded.",
+          "default": "Logo"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "range",
+          "id": "logo_scale",
+          "label": "Logo size",
+          "info": "Percent of the section's footer logo height. Use to balance logos of different shapes.",
+          "min": 30,
+          "max": 100,
+          "step": 5,
+          "unit": "%",
+          "default": 100
         }
       ]
     }

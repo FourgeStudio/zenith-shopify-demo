@@ -125,6 +125,49 @@
   justify-content: center;
 }
 
+/* Footer logos (blocks "Footer logo"): one row, each logo scaled from the section's logo height */
+.zenith-features__logos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--z-space-2) var(--z-flgap-m, 1.2rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.zenith-features__logo {
+  flex-shrink: 0;
+}
+
+.zenith-features__logo-link {
+  display: block;
+}
+
+.zenith-features__logo img {
+  display: block;
+  width: auto;
+  height: calc(var(--z-flh-m, 2rem) * var(--z-logo-scale, 1));
+  max-width: var(--z-flmw, 12rem);
+  object-fit: contain;
+  opacity: var(--z-flo, 1);
+}
+
+.zenith-features__logos--white .zenith-features__logo img { filter: brightness(0) invert(1); }
+.zenith-features__logos--black .zenith-features__logo img { filter: brightness(0); }
+.zenith-features__logos--grayscale .zenith-features__logo img { filter: grayscale(1); }
+
+.zenith-features__logo-text {
+  display: block;
+  font-family: var(--font-heading-family);
+  font-size: calc(var(--z-flh-m, 2rem) * var(--z-logo-scale, 1) * 0.8);
+  line-height: 1;
+  white-space: nowrap;
+  text-transform: uppercase;
+  color: rgba(var(--color-foreground), 0.5);
+}
+
 .zenith-features__footer-text {
   max-width: var(--z-fmw-m, none);
   font-size: var(--z-ffs-m, 1rem);
@@ -252,6 +295,18 @@
 
   .zenith-features__footer-image {
     max-width: var(--z-fiw, 33.6rem);
+  }
+
+  .zenith-features__logos {
+    column-gap: var(--z-flgap, 1.8rem);
+  }
+
+  .zenith-features__logo img {
+    height: calc(var(--z-flh, 2.4rem) * var(--z-logo-scale, 1));
+  }
+
+  .zenith-features__logo-text {
+    font-size: calc(var(--z-flh, 2.4rem) * var(--z-logo-scale, 1) * 0.8);
   }
 
   .zenith-features__footer-text {
