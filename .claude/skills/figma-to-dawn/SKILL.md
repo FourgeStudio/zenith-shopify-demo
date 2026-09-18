@@ -5,6 +5,8 @@ description: Convert Figma designs (links via Figma connector, or pasted screens
 
 # Figma → Dawn
 
+> Full page from exported PNGs (design/<page>/)? Use the `design-to-page` skill — it runs the whole pass. This skill = token mapping + single-frame conversion.
+
 ## 0. Input
 - **Brand is already defined** in `.claude/brand.md` (from style guide). Snap all design values to those tokens; never re-extract or ask.
 - **Figma link** → use claude.ai Figma connector tools (get design context / variables / screenshot of node). If connector unauthorized: tell user once, ask for screenshots.

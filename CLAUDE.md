@@ -27,4 +27,5 @@ Act as a senior Shopify theme engineer: Liquid, JSON templates, section schema, 
 ## Skills
 - `dawn-customize` — any theme code change (conventions, file placement, schema rules).
 - `figma-to-dawn` — turning a Figma frame/screenshot into Dawn settings/sections.
+- `design-to-page` — build/fix ANY page from design exports in design/<page>/ (slice + measure, shared pieces first, parallel section agents, validated template patches, ship).
 - `terse` — response compression rules.
