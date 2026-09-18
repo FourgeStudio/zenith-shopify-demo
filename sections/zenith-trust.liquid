@@ -1,0 +1,593 @@
+{% comment %}
+  Zenith · Trust checklist — heading + icon checklist (blocks) beside a bordered card with a seal image and short text.
+  Desktop: two columns (card right by default, vertically centred). Mobile: stacked, card = seal left + text right.
+{% endcomment %}
+{{ 'zenith-trust.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign s = section.settings
+-%}
+{%- capture extra -%}
+  --z-tr-icon-c: {{ s.icon_color }};
+  --z-tr-item-a: {{ s.item_text_opacity | divided_by: 100.0 }};
+  --z-tr-ispc: {{ s.item_spacing }}px;
+  --z-tr-ispc-m: {{ s.item_spacing_mobile }}px;
+  --z-tr-igap: {{ s.item_gap }}px;
+  --z-tr-igap-m: {{ s.item_gap_mobile }}px;
+  --z-tr-card-bg: {{ s.card_background }};
+  --z-tr-border: {{ s.card_border_color }};
+  --z-tr-text-a: {{ s.text_opacity | divided_by: 100.0 }};
+  --z-tr-cgap: {{ s.card_gap }}px;
+  --z-tr-cgap-m: {{ s.card_gap_mobile }}px;
+  --z-tr-seal: {{ s.seal_width }}px;
+  --z-tr-seal-m: {{ s.seal_width_mobile }}px;
+{%- endcapture -%}
+{%- render 'zenith-section-style', section: section, extra: extra -%}
+
+<section
+  id="Zenith-{{ section.id }}"
+  class="zenith-section zenith-trust color-{{ s.color_scheme }} gradient zenith-trust--card-{{ s.card_position }} zenith-trust--v-{{ s.vertical_alignment }} zenith-trust--cl-{{ s.card_layout }} zenith-trust--ca-{{ s.card_text_alignment }} zenith-trust--m-cl-{{ s.card_layout_mobile }} zenith-trust--m-ca-{{ s.card_text_alignment_mobile }}"
+>
+  <div class="page-width">
+    <div class="zenith-trust__grid">
+      <div class="zenith-trust__content">
+        {%- render 'zenith-section-heading',
+          eyebrow: blank,
+          heading: s.heading,
+          subheading: blank,
+          alignment: s.heading_alignment,
+          class: 'zenith-trust__heading'
+        -%}
+        {%- if section.blocks.size > 0 -%}
+          <ul class="zenith-trust__list" role="list">
+            {%- for block in section.blocks -%}
+              <li class="zenith-trust__item" id="Block-{{ block.id }}" {{ block.shopify_attributes }}>
+                {%- if block.settings.icon != 'none' -%}
+                  {%- render 'zenith-icon', icon: block.settings.icon, class: 'zenith-trust__icon' -%}
+                {%- endif -%}
+                <span class="zenith-trust__item-text">
+                  {{- block.settings.text | replace: '[customers]', settings.customer_count -}}
+                </span>
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      </div>
+
+      {%- if s.seal_image != blank or s.card_text != blank or request.design_mode -%}
+        <div class="zenith-trust__card">
+          {%- if s.seal_image != blank -%}
+            {%- capture seal_sizes -%}(min-width: 750px) {{ s.seal_width }}px, {{ s.seal_width_mobile }}px{%- endcapture -%}
+            <div class="zenith-trust__seal">
+              {{
+                s.seal_image
+                | image_url: width: 600
+                | image_tag:
+                  loading: 'lazy',
+                  widths: '80, 130, 160, 240, 300, 450, 600',
+                  sizes: seal_sizes,
+                  alt: s.seal_image.alt
+              }}
+            </div>
+          {%- elsif request.design_mode -%}
+            <div class="zenith-trust__seal zenith-trust__seal--placeholder" aria-hidden="true">
+              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            </div>
+          {%- endif -%}
+          {%- if s.card_text != blank -%}
+            <div class="zenith-trust__card-text zenith-rte">
+              {{- s.card_text | replace: '[customers]', settings.customer_count -}}
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Zenith · Trust checklist",
+  "tag": "div",
+  "class": "section",
+  "max_blocks": 12,
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Your Trust Matters to Us"
+    },
+    {
+      "type": "paragraph",
+      "content": "Add one Checklist item block per line."
+    },
+    {
+      "type": "image_picker",
+      "id": "seal_image",
+      "label": "Seal image",
+      "info": "Transparent PNG, e.g. the Amare Group Seal of Authenticity. Set its alt text in Content → Files."
+    },
+    {
+      "type": "richtext",
+      "id": "card_text",
+      "label": "Card text",
+      "info": "Bold words show in full white.",
+      "default": "<p><strong>Zenith</strong> is an Amare Group brand. Every product carries the <strong>Amare Group</strong> Seal of Authenticity — a commitment to product integrity, transparent sourcing, and honest marketing.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "card_position",
+      "label": "Card position",
+      "default": "right",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "media_width",
+      "label": "Card column width",
+      "min": 30,
+      "max": 70,
+      "step": 1,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Space between columns",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "select",
+      "id": "vertical_alignment",
+      "label": "Vertical alignment",
+      "default": "center",
+      "options": [
+        { "value": "top", "label": "Top" },
+        { "value": "center", "label": "Middle" },
+        { "value": "bottom", "label": "Bottom" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Heading alignment",
+      "default": "left",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "heading_spacing",
+      "label": "Space below heading",
+      "min": 0,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "item_spacing",
+      "label": "Space between checklist items",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "item_gap",
+      "label": "Space between icon and text",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "select",
+      "id": "card_layout",
+      "label": "Card layout",
+      "default": "stacked",
+      "options": [
+        { "value": "stacked", "label": "Seal above text" },
+        { "value": "side", "label": "Seal beside text" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "card_text_alignment",
+      "label": "Card alignment",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "content_padding",
+      "label": "Card padding",
+      "min": 0,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "card_gap",
+      "label": "Space between seal and text",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "seal_width",
+      "label": "Seal width",
+      "min": 80,
+      "max": 280,
+      "step": 2,
+      "unit": "px",
+      "default": 150
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "label": "Card text max width",
+      "min": 200,
+      "max": 900,
+      "step": 10,
+      "unit": "px",
+      "default": 560
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Section color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Checklist icon color",
+      "info": "The tick cut-out uses the section background.",
+      "default": "#EABE5F"
+    },
+    {
+      "type": "range",
+      "id": "item_text_opacity",
+      "label": "Checklist text opacity",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#202020"
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Card border",
+      "default": "#363636"
+    },
+    {
+      "type": "range",
+      "id": "text_opacity",
+      "label": "Card text opacity",
+      "info": "Bold words stay full white.",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 65
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size",
+      "label": "Heading size",
+      "min": 16,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 41
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Checklist icon size",
+      "min": 12,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "label": "Checklist text size",
+      "min": 10,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "text_font_size",
+      "label": "Card text size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size_mobile",
+      "label": "Heading size",
+      "min": 16,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "heading_spacing_mobile",
+      "label": "Space below heading",
+      "min": 0,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "icon_size_mobile",
+      "label": "Checklist icon size",
+      "min": 12,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "title_font_size_mobile",
+      "label": "Checklist text size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "item_spacing_mobile",
+      "label": "Space between checklist items",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "item_gap_mobile",
+      "label": "Space between icon and text",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "gap_mobile",
+      "label": "Space between checklist and card",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "select",
+      "id": "card_layout_mobile",
+      "label": "Card layout",
+      "default": "side",
+      "options": [
+        { "value": "stacked", "label": "Seal above text" },
+        { "value": "side", "label": "Seal beside text" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "card_text_alignment_mobile",
+      "label": "Card alignment",
+      "default": "left",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "content_padding_mobile",
+      "label": "Card padding",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "card_gap_mobile",
+      "label": "Space between seal and text",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "seal_width_mobile",
+      "label": "Seal width",
+      "min": 40,
+      "max": 140,
+      "step": 1,
+      "unit": "px",
+      "default": 65
+    },
+    {
+      "type": "range",
+      "id": "text_font_size_mobile",
+      "label": "Card text size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Top padding (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Bottom padding (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Checklist item",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "Clinically-Backed Active Ingredients"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "check_filled",
+          "options": [
+            { "value": "check_filled", "label": "Filled check" },
+            { "value": "check_circle", "label": "Check in circle" },
+            { "value": "check", "label": "Check" },
+            { "value": "badge_check", "label": "Badge check" },
+            { "value": "shield", "label": "Shield" },
+            { "value": "certified", "label": "Certified" },
+            { "value": "cash", "label": "Cash" },
+            { "value": "truck", "label": "Truck" },
+            { "value": "refresh", "label": "Returns" },
+            { "value": "lock", "label": "Lock" },
+            { "value": "leaf", "label": "Leaf" },
+            { "value": "none", "label": "None" }
+          ]
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zenith · Trust checklist",
+      "blocks": [
+        { "type": "item", "settings": { "text": "FDA Notified (LTO-**********)" } },
+        { "type": "item", "settings": { "text": "Clinically-Backed Active Ingredients" } },
+        { "type": "item", "settings": { "text": "Zenith Money-Back Guarantee" } },
+        { "type": "item", "settings": { "text": "COD Available Nationwide" } },
+        { "type": "item", "settings": { "text": "Transparent Ingredient Percentages" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

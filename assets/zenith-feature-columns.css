@@ -8,11 +8,18 @@
   gap: var(--z-gap-m, var(--z-space-5));
 }
 
+/* Card look is opt-in: padding defaults to 0, background/border only when set. */
 .zenith-features__item {
   display: flex;
   flex-direction: column;
   gap: var(--z-cgap-m, var(--z-space-4));
   min-width: 0;
+  padding: var(--z-cpy-m, 0) var(--z-cpx-m, 0);
+  background: var(--z-card-bg, transparent);
+}
+
+.zenith-features--bordered .zenith-features__item {
+  border: 1px solid var(--z-card-bd);
 }
 
 .zenith-features--media-left .zenith-features__item {
@@ -59,14 +66,40 @@
 .zenith-features__icon .zenith-icon {
   width: var(--z-icon-m, 3.2rem);
   height: var(--z-icon-m, 3.2rem);
+  stroke-width: var(--z-istroke, 1.5);
+}
+
+/* Number badge (block "Number badge"): circle centred in a box the size of the icon, so titles line up with icon cards. */
+.zenith-features__icon--badge {
+  min-width: var(--z-icon-m, 3.2rem);
+  min-height: var(--z-icon-m, 3.2rem);
+  align-items: center;
+  justify-content: center;
+}
+
+.zenith-features__badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: var(--z-badge-m, 3.2rem);
+  height: var(--z-badge-m, 3.2rem);
+  border-radius: 50%;
+  background: var(--z-badge-bg, #4e3a05);
+  color: var(--z-badge-color, var(--z-dawn-gold));
+  font-family: var(--font-body-family);
+  font-size: var(--z-bfs-m, 2.2rem);
+  font-weight: 400;
+  line-height: 1;
 }
 
 .zenith-features__title {
-  margin: 0 0 var(--z-space-2);
+  margin: 0 0 var(--z-tsp-m, var(--z-space-2));
   font-size: var(--z-ttfs-m, var(--z-h4));
 }
 
 .zenith-features__body {
+  max-width: var(--z-tmw, none);
   font-size: var(--z-tfs-m, 1.4rem);
   line-height: var(--z-tlh-m, 1.3);
   color: rgba(var(--color-foreground), var(--z-text-a, 0.7));
@@ -107,6 +140,44 @@
   .zenith-features--media-left.zenith-features--mv-center .zenith-features__item {
     align-items: center;
   }
+
+  /* Mobile text alignment override ("Same as desktop" adds no class) */
+  .zenith-features--m-left.zenith-features--media-top .zenith-features__item {
+    align-items: stretch;
+  }
+
+  .zenith-features--m-left .zenith-features__text {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .zenith-features--m-center.zenith-features--media-top .zenith-features__item {
+    align-items: center;
+  }
+
+  .zenith-features--m-center .zenith-features__text {
+    align-items: center;
+    text-align: center;
+  }
+
+  /* Icon beside title + text */
+  .zenith-features--micon-left .zenith-features__text {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: var(--z-igap-m, var(--z-space-2));
+    align-items: start;
+  }
+
+  .zenith-features--micon-left .zenith-features__icon {
+    grid-row: 1 / span 2;
+    justify-self: start;
+    margin-bottom: 0;
+  }
+
+  .zenith-features--micon-left .zenith-features__title,
+  .zenith-features--micon-left .zenith-features__body {
+    grid-column: 2;
+  }
 }
 
 @media screen and (min-width: 750px) {
@@ -116,6 +187,7 @@
 
   .zenith-features__item {
     gap: var(--z-cgap, var(--z-space-5));
+    padding: var(--z-cpy, 0) var(--z-cpx, 0);
   }
 
   .zenith-features--media-left.zenith-features--v-center .zenith-features__item {
@@ -135,8 +207,38 @@
     height: var(--z-icon, 3.2rem);
   }
 
+  .zenith-features__icon--badge {
+    min-width: var(--z-icon, 3.2rem);
+    min-height: var(--z-icon, 3.2rem);
+  }
+
+  .zenith-features__badge {
+    width: var(--z-badge, 4.4rem);
+    height: var(--z-badge, 4.4rem);
+    font-size: var(--z-bfs, 3rem);
+  }
+
   .zenith-features__title {
+    margin-bottom: var(--z-tsp, var(--z-space-2));
     font-size: var(--z-ttfs, var(--z-h4));
+  }
+
+  .zenith-features--icon-left .zenith-features__text {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: var(--z-igap, var(--z-space-3));
+    align-items: start;
+  }
+
+  .zenith-features--icon-left .zenith-features__icon {
+    grid-row: 1 / span 2;
+    justify-self: start;
+    margin-bottom: 0;
+  }
+
+  .zenith-features--icon-left .zenith-features__title,
+  .zenith-features--icon-left .zenith-features__body {
+    grid-column: 2;
   }
 
   .zenith-features__body {

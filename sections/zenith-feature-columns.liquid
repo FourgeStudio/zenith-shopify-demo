@@ -20,12 +20,48 @@
   {%- if section.settings.icon_color != blank %}
   --z-icon-color: {{ section.settings.icon_color }};
   {%- endif %}
+  --z-istroke: {{ section.settings.icon_stroke_width | default: '1.5' }};
+  --z-tsp: {{ section.settings.title_spacing }}px;
+  --z-tsp-m: {{ section.settings.title_spacing_mobile }}px;
+  --z-cpy: {{ section.settings.card_padding_y }}px;
+  --z-cpx: {{ section.settings.card_padding_x }}px;
+  --z-cpy-m: {{ section.settings.card_padding_y_mobile }}px;
+  --z-cpx-m: {{ section.settings.card_padding_x_mobile }}px;
+  {%- if section.settings.text_max_width > 0 %}
+  --z-tmw: {{ section.settings.text_max_width }}px;
+  {%- endif %}
+  {%- if section.settings.card_background != blank %}
+  --z-card-bg: {{ section.settings.card_background }};
+  {%- endif %}
+  {%- if section.settings.card_border_color != blank %}
+  --z-card-bd: {{ section.settings.card_border_color }};
+  {%- endif %}
+  --z-badge: {{ section.settings.badge_size }}px;
+  --z-badge-m: {{ section.settings.badge_size_mobile }}px;
+  --z-bfs: {{ section.settings.badge_font_size }}px;
+  --z-bfs-m: {{ section.settings.badge_font_size_mobile }}px;
+  {%- if section.settings.badge_background != blank %}
+  --z-badge-bg: {{ section.settings.badge_background }};
+  {%- endif %}
+  {%- if section.settings.badge_color != blank %}
+  --z-badge-color: {{ section.settings.badge_color }};
+  {%- endif %}
 {%- endcapture -%}
 {%- render 'zenith-section-style', section: section, extra: extra -%}
+{%- liquid
+  # zenith: icon cards (About "What We Believe") — icon position, mobile alignment, card border
+  assign features_mods = 'zenith-features--icon-' | append: section.settings.icon_position | append: ' zenith-features--micon-' | append: section.settings.icon_position_mobile
+  if section.settings.text_alignment_mobile != 'desktop'
+    assign features_mods = features_mods | append: ' zenith-features--m-' | append: section.settings.text_alignment_mobile
+  endif
+  if section.settings.card_border_color != blank
+    assign features_mods = features_mods | append: ' zenith-features--bordered'
+  endif
+-%}
 
 <section
   id="Zenith-{{ section.id }}"
-  class="zenith-section zenith-features color-{{ section.settings.color_scheme }} gradient zenith-features--media-{{ section.settings.media_position }} zenith-features--{{ section.settings.image_ratio }} zenith-features--{{ section.settings.text_alignment }} zenith-features--v-{{ section.settings.vertical_alignment }} zenith-features--mv-{{ section.settings.vertical_alignment_mobile }}"
+  class="zenith-section zenith-features color-{{ section.settings.color_scheme }} gradient zenith-features--media-{{ section.settings.media_position }} zenith-features--{{ section.settings.image_ratio }} zenith-features--{{ section.settings.text_alignment }} zenith-features--v-{{ section.settings.vertical_alignment }} zenith-features--mv-{{ section.settings.vertical_alignment_mobile }} {{ features_mods }}"
 >
   <div class="page-width">
     {%- render 'zenith-section-heading',
@@ -47,19 +83,25 @@
     <ul class="zenith-features__grid" role="list">
       {%- for block in section.blocks -%}
         <li class="zenith-features__item" id="Block-{{ block.id }}" {{ block.shopify_attributes }}>
-          <div class="zenith-media zenith-features__media">
-            {%- if block.settings.image != blank -%}
-              {{
-                block.settings.image
-                | image_url: width: 900
-                | image_tag: loading: 'lazy', widths: '150, 300, 450, 600, 900', sizes: img_sizes
-              }}
-            {%- else -%}
-              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-            {%- endif -%}
-          </div>
+          {%- if section.settings.show_media -%}
+            <div class="zenith-media zenith-features__media">
+              {%- if block.settings.image != blank -%}
+                {{
+                  block.settings.image
+                  | image_url: width: 900
+                  | image_tag: loading: 'lazy', widths: '150, 300, 450, 600, 900', sizes: img_sizes
+                }}
+              {%- else -%}
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+            </div>
+          {%- endif -%}
           <div class="zenith-features__text">
-            {%- if block.settings.icon != 'none' -%}
+            {%- if block.settings.icon_text != blank -%}
+              <span class="zenith-features__icon zenith-features__icon--badge">
+                <span class="zenith-features__badge">{{ block.settings.icon_text | escape }}</span>
+              </span>
+            {%- elsif block.settings.icon != 'none' -%}
               <span class="zenith-features__icon">{%- render 'zenith-icon', icon: block.settings.icon -%}</span>
             {%- endif -%}
             {%- if block.settings.title != blank -%}
@@ -179,6 +221,13 @@
       "default": 3
     },
     {
+      "type": "checkbox",
+      "id": "show_media",
+      "label": "Show column images",
+      "info": "Turn off for icon cards without images",
+      "default": true
+    },
+    {
       "type": "select",
       "id": "media_position",
       "label": "Image position",
@@ -242,6 +291,23 @@
     },
     {
       "type": "select",
+      "id": "icon_position",
+      "label": "Icon position",
+      "info": "Icon or number badge above the title, or beside title and text",
+      "default": "top",
+      "options": [
+        {
+          "value": "top",
+          "label": "Above text"
+        },
+        {
+          "value": "left",
+          "label": "Beside text"
+        }
+      ]
+    },
+    {
+      "type": "select",
       "id": "vertical_alignment",
       "label": "Text position next to image",
       "default": "top",
@@ -299,12 +365,54 @@
     {
       "type": "range",
       "id": "icon_gap",
-      "label": "Space below icon",
+      "label": "Space between icon and text",
       "min": 0,
       "max": 40,
       "step": 2,
       "unit": "px",
       "default": 12
+    },
+    {
+      "type": "range",
+      "id": "title_spacing",
+      "label": "Space below column title",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "card_padding_y",
+      "label": "Card padding (top and bottom)",
+      "info": "Use with a card background or border",
+      "min": 0,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "card_padding_x",
+      "label": "Card padding (sides)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "text_max_width",
+      "label": "Column text max width",
+      "info": "0 = full column width",
+      "min": 0,
+      "max": 1000,
+      "step": 20,
+      "unit": "px",
+      "default": 0
     },
     {
       "type": "range",
@@ -340,6 +448,30 @@
       "type": "color",
       "id": "icon_color",
       "label": "Icon color",
+      "default": "#EABE5F"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "info": "Leave empty for no card"
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Card border",
+      "info": "Leave empty for no border"
+    },
+    {
+      "type": "color",
+      "id": "badge_background",
+      "label": "Number badge background",
+      "default": "#4E3A05"
+    },
+    {
+      "type": "color",
+      "id": "badge_color",
+      "label": "Number badge text",
       "default": "#EABE5F"
     },
     {
@@ -433,6 +565,50 @@
       "default": 32
     },
     {
+      "type": "select",
+      "id": "icon_stroke_width",
+      "label": "Icon line weight",
+      "default": "1.5",
+      "options": [
+        {
+          "value": "1",
+          "label": "Thin"
+        },
+        {
+          "value": "1.25",
+          "label": "Light"
+        },
+        {
+          "value": "1.5",
+          "label": "Regular"
+        },
+        {
+          "value": "2",
+          "label": "Bold"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "badge_size",
+      "label": "Number badge size",
+      "min": 20,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "default": 44
+    },
+    {
+      "type": "range",
+      "id": "badge_font_size",
+      "label": "Number badge text size",
+      "min": 12,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "default": 30
+    },
+    {
       "type": "range",
       "id": "footer_text_size",
       "label": "Footer text size",
@@ -475,6 +651,42 @@
         {
           "value": "center",
           "label": "Middle"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "icon_position_mobile",
+      "label": "Icon position",
+      "default": "top",
+      "options": [
+        {
+          "value": "top",
+          "label": "Above text"
+        },
+        {
+          "value": "left",
+          "label": "Beside text"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "text_alignment_mobile",
+      "label": "Text alignment",
+      "default": "desktop",
+      "options": [
+        {
+          "value": "desktop",
+          "label": "Same as desktop"
+        },
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
         }
       ]
     },
@@ -541,12 +753,42 @@
     {
       "type": "range",
       "id": "icon_gap_mobile",
-      "label": "Space below icon",
+      "label": "Space between icon and text",
       "min": 0,
       "max": 32,
       "step": 2,
       "unit": "px",
       "default": 8
+    },
+    {
+      "type": "range",
+      "id": "title_spacing_mobile",
+      "label": "Space below column title",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "card_padding_y_mobile",
+      "label": "Card padding (top and bottom)",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "card_padding_x_mobile",
+      "label": "Card padding (sides)",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 0
     },
     {
       "type": "range",
@@ -557,6 +799,26 @@
       "step": 2,
       "unit": "px",
       "default": 32
+    },
+    {
+      "type": "range",
+      "id": "badge_size_mobile",
+      "label": "Number badge size",
+      "min": 20,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "badge_font_size_mobile",
+      "label": "Number badge text size",
+      "min": 12,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 22
     },
     {
       "type": "range",
@@ -691,12 +953,20 @@
           "type": "select",
           "id": "icon",
           "label": "Icon",
-          "info": "Shown above the text",
+          "info": "Shown above or beside the text",
           "default": "none",
           "options": [
             {
               "value": "none",
               "label": "None"
+            },
+            {
+              "value": "hand_heart",
+              "label": "Hand with heart"
+            },
+            {
+              "value": "sun_cloud",
+              "label": "Sun and cloud"
             },
             {
               "value": "phone",
@@ -709,6 +979,10 @@
             {
               "value": "badge_check",
               "label": "Badge check"
+            },
+            {
+              "value": "badge_check_round",
+              "label": "Badge check (round)"
             },
             {
               "value": "shield",
@@ -755,6 +1029,12 @@
               "label": "Chat"
             }
           ]
+        },
+        {
+          "type": "text",
+          "id": "icon_text",
+          "label": "Number badge",
+          "info": "e.g. 3 — shown in a circle instead of the icon. Leave empty to show the icon."
         },
         {
           "type": "text",

@@ -1,0 +1,224 @@
+/* Zenith · Trust checklist — per-instance values are CSS vars on #Zenith-{section.id}. Mobile first.
+   Card layouts (--cl-* desktop, --m-cl-* mobile): "stacked" = seal above text · "side" = seal left, text right.
+   Card alignment (--ca-* / --m-ca-*): left or center. */
+
+.zenith-trust__grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--z-gap-m, 20px);
+}
+
+.zenith-trust__content {
+  min-width: 0;
+}
+
+.zenith-trust__heading.zenith-heading {
+  margin-bottom: var(--z-hsp-m, 12px);
+}
+
+.zenith-trust__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--z-tr-ispc-m, 8px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Icon sits centred on the first line of text (also when an item wraps). */
+.zenith-trust__item {
+  --z-tr-icon: var(--z-icon-m, 20px);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--z-tr-igap-m, 8px);
+  font-size: var(--z-ttfs-m, 1.4rem);
+  line-height: 1.5;
+  color: rgba(var(--color-foreground), var(--z-tr-item-a, 1));
+}
+
+.zenith-trust__item .zenith-trust__icon {
+  --z-icon-cut: rgb(var(--color-background));
+  width: var(--z-tr-icon);
+  height: var(--z-tr-icon);
+  margin-top: calc((1.5em - var(--z-tr-icon)) / 2);
+  color: var(--z-tr-icon-c, #eabe5f);
+}
+
+.zenith-trust__item-text {
+  min-width: 0;
+}
+
+.zenith-trust__item-text a {
+  color: inherit;
+  text-underline-offset: 0.3rem;
+}
+
+.zenith-trust__card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--z-tr-cgap-m, 12px);
+  padding: var(--z-cpd-m, 12px);
+  background: var(--z-tr-card-bg, #202020);
+  box-shadow: inset 0 0 0 1px var(--z-tr-border, #363636);
+}
+
+.zenith-trust__seal {
+  flex: 0 0 auto;
+  width: var(--z-tr-seal-m, 65px);
+  max-width: 100%;
+}
+
+.zenith-trust__seal img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.zenith-trust__seal--placeholder {
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  overflow: hidden;
+  background: rgba(var(--color-foreground), 0.08);
+}
+
+.zenith-trust__seal--placeholder svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: rgba(var(--color-foreground), 0.35);
+}
+
+.zenith-trust__card-text {
+  min-width: 0;
+  font-size: var(--z-tfs-m, 1.2rem);
+  line-height: 1.5;
+  color: rgba(var(--color-foreground), var(--z-tr-text-a, 0.65));
+}
+
+.zenith-trust__card-text p {
+  margin: 0;
+}
+
+.zenith-trust__card-text p + p {
+  margin-top: 0.75em;
+}
+
+.zenith-trust__card-text strong,
+.zenith-trust__card-text b {
+  color: rgb(var(--color-foreground));
+  font-weight: 500;
+}
+
+.zenith-trust__card-text a {
+  color: inherit;
+}
+
+/* ---------- Mobile card layout + alignment ---------- */
+@media screen and (max-width: 749px) {
+  .zenith-trust--m-cl-side .zenith-trust__card {
+    flex-direction: row;
+  }
+
+  .zenith-trust--m-ca-left .zenith-trust__card-text {
+    text-align: left;
+  }
+
+  .zenith-trust--m-ca-center .zenith-trust__card-text {
+    text-align: center;
+  }
+
+  .zenith-trust--m-cl-stacked.zenith-trust--m-ca-left .zenith-trust__card {
+    align-items: flex-start;
+  }
+
+  .zenith-trust--m-cl-side.zenith-trust--m-ca-center .zenith-trust__card {
+    justify-content: center;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .zenith-trust__grid {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--z-gap, 14px);
+  }
+
+  .zenith-trust--v-top .zenith-trust__grid {
+    align-items: flex-start;
+  }
+
+  .zenith-trust--v-bottom .zenith-trust__grid {
+    align-items: flex-end;
+  }
+
+  .zenith-trust__content {
+    flex: 1 1 0;
+  }
+
+  .zenith-trust__card {
+    flex: 0 0 calc(var(--z-mw, 50%) - var(--z-gap, 14px) / 2);
+    gap: var(--z-tr-cgap, 12px);
+    padding: var(--z-cpd, 32px);
+  }
+
+  .zenith-trust--card-left .zenith-trust__card {
+    order: -1;
+  }
+
+  .zenith-trust__heading.zenith-heading {
+    margin-bottom: var(--z-hsp, 16px);
+  }
+
+  .zenith-trust__list {
+    gap: var(--z-tr-ispc, 8px);
+  }
+
+  .zenith-trust__item {
+    --z-tr-icon: var(--z-icon, 24px);
+    gap: var(--z-tr-igap, 12px);
+    font-size: var(--z-ttfs, 1.8rem);
+  }
+
+  .zenith-trust__seal {
+    width: var(--z-tr-seal, 150px);
+  }
+
+  .zenith-trust__card-text {
+    max-width: var(--z-cmw, 56rem);
+    font-size: var(--z-tfs, 1.2rem);
+  }
+
+  .zenith-trust--cl-stacked .zenith-trust__card {
+    flex-direction: column;
+  }
+
+  .zenith-trust--cl-side .zenith-trust__card {
+    flex-direction: row;
+  }
+
+  .zenith-trust--ca-center .zenith-trust__card-text {
+    text-align: center;
+  }
+
+  .zenith-trust--ca-left .zenith-trust__card-text {
+    text-align: left;
+  }
+
+  .zenith-trust--cl-stacked.zenith-trust--ca-center .zenith-trust__card {
+    align-items: center;
+  }
+
+  .zenith-trust--cl-stacked.zenith-trust--ca-left .zenith-trust__card {
+    align-items: flex-start;
+  }
+
+  .zenith-trust--cl-side .zenith-trust__card {
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .zenith-trust--cl-side.zenith-trust--ca-center .zenith-trust__card {
+    justify-content: center;
+  }
+}

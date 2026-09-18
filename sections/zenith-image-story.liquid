@@ -9,24 +9,88 @@
   --z-story-colgap-m: {{ section.settings.columns_gap_mobile }}px;
   --z-story-coltsp: {{ section.settings.column_title_spacing }}px;
   --z-story-cols-m: {{ section.settings.columns_mobile }};
+  --z-story-hlh: {{ section.settings.heading_line_height | divided_by: 100.0 }};
+  --z-story-hlh-m: {{ section.settings.heading_line_height_mobile | divided_by: 100.0 }};
+  --z-story-fade-m: {{ section.settings.image_fade_mobile }}%;
+  --z-story-ovl-m: {{ section.settings.content_overlap_mobile }}px;
+  --z-story-cmw-m: {{ section.settings.content_max_width_mobile }}px;
+  {%- if section.settings.heading_color != blank %}
+  --z-story-hc: {{ section.settings.heading_color }};
+  {%- endif %}
 {%- endcapture -%}
 {%- render 'zenith-section-style', section: section, extra: extra -%}
 
+{%- liquid
+  assign heading_tag = section.settings.heading_tag | default: 'h2'
+  assign heading_top = false
+  if section.settings.heading_position_mobile == 'above'
+    if section.settings.heading != blank or section.settings.eyebrow != blank
+      assign heading_top = true
+    endif
+  endif
+
+  assign story_classes = 'zenith-story--' | append: section.settings.image_ratio
+  assign story_classes = story_classes | append: ' zenith-story--m-' | append: section.settings.image_ratio_mobile
+  assign story_classes = story_classes | append: ' zenith-story--align-' | append: section.settings.content_align
+  if section.settings.image_position == 'right'
+    assign story_classes = story_classes | append: ' zenith-story--image-right'
+  endif
+  if section.settings.image_full_bleed_mobile
+    assign story_classes = story_classes | append: ' zenith-story--m-bleed'
+  endif
+  if section.settings.image_fade_mobile > 0
+    assign story_classes = story_classes | append: ' zenith-story--m-fade'
+  endif
+  if section.settings.content_overlap_mobile > 0
+    assign story_classes = story_classes | append: ' zenith-story--m-overlap'
+  endif
+  if section.settings.heading_color != blank
+    assign story_classes = story_classes | append: ' zenith-story--heading-color'
+  endif
+  if section.settings.hide_heading_desktop
+    assign story_classes = story_classes | append: ' zenith-story--heading-hide-d'
+  endif
+
+  assign image_sizes = '(min-width: 990px) calc((100vw - 10rem) / 2), (min-width: 750px) calc(100vw - 10rem), calc(100vw - 3rem)'
+  if section.settings.image_full_bleed_mobile
+    assign image_sizes = '(min-width: 990px) calc((100vw - 10rem) / 2), 100vw'
+  endif
+  assign image_loading = 'lazy'
+  assign image_priority = 'auto'
+  if section.index == 1
+    assign image_loading = 'eager'
+    assign image_priority = 'high'
+  endif
+-%}
+
 <section
   id="Zenith-{{ section.id }}"
-  class="zenith-section zenith-story color-{{ section.settings.color_scheme }} gradient{% if section.settings.image_position == 'right' %} zenith-story--image-right{% endif %} zenith-story--{{ section.settings.image_ratio }} zenith-story--m-{{ section.settings.image_ratio_mobile }} zenith-story--align-{{ section.settings.content_align }}"
+  class="zenith-section zenith-story color-{{ section.settings.color_scheme }} gradient {{ story_classes }}"
 >
   <div class="page-width">
     <div class="zenith-story__grid">
+      {%- if heading_top -%}
+        {%- render 'zenith-section-heading',
+          eyebrow: section.settings.eyebrow,
+          heading: section.settings.heading,
+          subheading: blank,
+          alignment: 'left',
+          tag: heading_tag,
+          uppercase: section.settings.heading_uppercase,
+          class: 'zenith-story__heading zenith-story__heading--top'
+        -%}
+      {%- endif -%}
+
       <div class="zenith-media zenith-story__media">
         {%- if section.settings.image != blank -%}
           {{
             section.settings.image
             | image_url: width: 1600
             | image_tag:
-              loading: 'lazy',
+              loading: image_loading,
+              fetchpriority: image_priority,
               widths: '400, 550, 750, 1100, 1600',
-              sizes: '(min-width: 990px) calc((100vw - 10rem) / 2), (min-width: 750px) calc(100vw - 10rem), calc(100vw - 3rem)'
+              sizes: image_sizes
           }}
         {%- else -%}
           {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
@@ -42,24 +106,44 @@
             | image_tag: loading: 'lazy', widths: '200, 400, 600, 800', sizes: '(min-width: 750px) 240px, 200px', class: 'zenith-story__logo'
           }}
         {%- elsif section.settings.use_brand_logo -%}
-          <img
-            src="{{ 'footer-logo.png' | asset_url }}"
-            alt="{{ shop.name | escape }}"
-            width="204"
-            height="80"
-            loading="lazy"
-            class="zenith-story__logo"
-          >
+          {%- if section.settings.brand_logo_style == 'wordmark' -%}
+            <img
+              src="{{ 'header-logo.png' | asset_url }}"
+              alt="{{ shop.name | escape }}"
+              width="223"
+              height="60"
+              loading="lazy"
+              class="zenith-story__logo"
+            >
+          {%- else -%}
+            <img
+              src="{{ 'footer-logo.png' | asset_url }}"
+              alt="{{ shop.name | escape }}"
+              width="204"
+              height="80"
+              loading="lazy"
+              class="zenith-story__logo"
+            >
+          {%- endif -%}
         {%- endif -%}
 
-        {%- render 'zenith-section-heading',
-          eyebrow: section.settings.eyebrow,
-          heading: section.settings.heading,
-          subheading: blank,
-          alignment: 'left',
-          uppercase: section.settings.heading_uppercase,
-          class: 'zenith-story__heading'
-        -%}
+        {%- unless heading_top and section.settings.hide_heading_desktop -%}
+          {%- liquid
+            assign heading_class = 'zenith-story__heading'
+            if heading_top
+              assign heading_class = 'zenith-story__heading zenith-story__heading--below'
+            endif
+          -%}
+          {%- render 'zenith-section-heading',
+            eyebrow: section.settings.eyebrow,
+            heading: section.settings.heading,
+            subheading: blank,
+            alignment: 'left',
+            tag: heading_tag,
+            uppercase: section.settings.heading_uppercase,
+            class: heading_class
+          -%}
+        {%- endunless -%}
 
         {%- if section.settings.text != blank -%}
           <div class="zenith-story__text zenith-rte">
@@ -88,11 +172,26 @@
 
         {%- if section.settings.button_label != blank -%}
           <div class="zenith-story__actions">
-            {%- render 'zenith-button',
-              label: section.settings.button_label,
-              link: section.settings.button_link,
-              style: section.settings.button_style
-            -%}
+            {%- if section.settings.button_label_mobile != blank -%}
+              {%- render 'zenith-button',
+                label: section.settings.button_label,
+                link: section.settings.button_link,
+                style: section.settings.button_style,
+                class: 'zenith-hide-mobile'
+              -%}
+              {%- render 'zenith-button',
+                label: section.settings.button_label_mobile,
+                link: section.settings.button_link,
+                style: section.settings.button_style,
+                class: 'zenith-hide-desktop'
+              -%}
+            {%- else -%}
+              {%- render 'zenith-button',
+                label: section.settings.button_label,
+                link: section.settings.button_link,
+                style: section.settings.button_style
+              -%}
+            {%- endif -%}
           </div>
         {%- endif -%}
       </div>
@@ -130,6 +229,16 @@
       "id": "use_brand_logo",
       "label": "Use theme logo when no logo is selected",
       "default": true
+    },
+    {
+      "type": "select",
+      "id": "brand_logo_style",
+      "label": "Theme logo version",
+      "default": "tagline",
+      "options": [
+        { "value": "tagline", "label": "Wordmark with tagline" },
+        { "value": "wordmark", "label": "Wordmark only" }
+      ]
     },
     {
       "type": "text",
@@ -237,6 +346,34 @@
     },
     {
       "type": "range",
+      "id": "heading_spacing",
+      "label": "Space below heading",
+      "min": 0,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "label": "Content max width",
+      "info": "Limits the width of the heading, text and button. 1000 = no limit.",
+      "min": 240,
+      "max": 1000,
+      "step": 10,
+      "unit": "px",
+      "default": 1000
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_heading_desktop",
+      "label": "Hide heading on desktop",
+      "info": "Heading shows only when image and text are stacked (mobile and tablet).",
+      "default": false
+    },
+    {
+      "type": "range",
       "id": "logo_width",
       "label": "Logo width",
       "min": 60,
@@ -284,6 +421,12 @@
       "id": "color_scheme",
       "label": "Color scheme",
       "default": "scheme-1"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "info": "Leave empty to use the color scheme text color."
     },
     {
       "type": "color",
@@ -360,6 +503,18 @@
       "content": "Typography"
     },
     {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading tag",
+      "info": "Use H1 only for the first heading of a page (not on the home page).",
+      "default": "h2",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" }
+      ]
+    },
+    {
       "type": "range",
       "id": "heading_font_size",
       "label": "Heading size",
@@ -368,6 +523,16 @@
       "step": 2,
       "unit": "px",
       "default": 44
+    },
+    {
+      "type": "range",
+      "id": "heading_line_height",
+      "label": "Heading line height",
+      "min": 90,
+      "max": 150,
+      "step": 5,
+      "unit": "%",
+      "default": 110
     },
     {
       "type": "checkbox",
@@ -430,8 +595,59 @@
         { "value": "classic", "label": "Landscape 4:3" },
         { "value": "wide", "label": "Wide 16:9" },
         { "value": "square", "label": "Square" },
-        { "value": "portrait", "label": "Portrait 4:5" }
+        { "value": "portrait", "label": "Portrait 4:5" },
+        { "value": "fixed", "label": "Fixed height" }
       ]
+    },
+    {
+      "type": "range",
+      "id": "media_height_mobile",
+      "label": "Image height",
+      "info": "Used when image shape is \"Fixed height\".",
+      "min": 200,
+      "max": 600,
+      "step": 4,
+      "unit": "px",
+      "default": 348
+    },
+    {
+      "type": "checkbox",
+      "id": "image_full_bleed_mobile",
+      "label": "Image edge to edge",
+      "info": "Image runs to the screen edges (no side margins).",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "image_fade_mobile",
+      "label": "Fade image bottom into background",
+      "info": "Share of the image height that fades into the section background. 0 = off.",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "heading_position_mobile",
+      "label": "Heading position",
+      "default": "below",
+      "options": [
+        { "value": "below", "label": "Below image" },
+        { "value": "above", "label": "Above image" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "content_overlap_mobile",
+      "label": "Pull text up over image",
+      "info": "Moves heading and text up over the bottom of the image. 0 = off.",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 0
     },
     {
       "type": "range",
@@ -442,6 +658,16 @@
       "step": 2,
       "unit": "px",
       "default": 32
+    },
+    {
+      "type": "range",
+      "id": "heading_line_height_mobile",
+      "label": "Heading line height",
+      "min": 90,
+      "max": 150,
+      "step": 5,
+      "unit": "%",
+      "default": 110
     },
     {
       "type": "range",
@@ -474,6 +700,12 @@
       "default": 20
     },
     {
+      "type": "text",
+      "id": "button_label_mobile",
+      "label": "Button label",
+      "info": "Leave empty to use the desktop label."
+    },
+    {
       "type": "range",
       "id": "gap_mobile",
       "label": "Space between image and content",
@@ -492,6 +724,27 @@
       "step": 4,
       "unit": "px",
       "default": 20
+    },
+    {
+      "type": "range",
+      "id": "heading_spacing_mobile",
+      "label": "Space below heading",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "content_max_width_mobile",
+      "label": "Content max width",
+      "info": "Limits the width of the heading, text and button. 800 = no limit.",
+      "min": 200,
+      "max": 800,
+      "step": 10,
+      "unit": "px",
+      "default": 800
     },
     {
       "type": "range",

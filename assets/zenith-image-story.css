@@ -13,14 +13,53 @@
   .zenith-story--m-wide .zenith-story__media { aspect-ratio: 16 / 9; }
   .zenith-story--m-square .zenith-story__media { aspect-ratio: 1 / 1; }
   .zenith-story--m-portrait .zenith-story__media { aspect-ratio: 4 / 5; }
+
+  .zenith-story--m-fixed .zenith-story__media {
+    aspect-ratio: auto;
+    height: var(--z-mh-m, 348px);
+  }
+
+  /* Edge-to-edge image: cancel the .page-width gutters */
+  .zenith-story--m-bleed .zenith-story__media {
+    margin-left: calc(-1 * var(--z-gutter));
+    margin-right: calc(-1 * var(--z-gutter));
+  }
+
+  /* Bottom of the image fades into the section background */
+  .zenith-story--m-fade .zenith-story__media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(
+      to top,
+      rgb(var(--color-background)) 0%,
+      rgba(var(--color-background), 0) var(--z-story-fade-m, 30%)
+    );
+  }
+
+  /* Text pulled up over the (faded) bottom of the image */
+  .zenith-story--m-overlap .zenith-story__content {
+    position: relative;
+    z-index: 2;
+    margin-top: calc(-1 * var(--z-story-ovl-m, 0px));
+  }
+
+  /* Heading shown above the image → hide the copy inside the text column */
+  .zenith-story .zenith-story__heading--below { display: none; }
 }
 
+/* Spacing inside the text column = flex gap (hidden items leave no gap);
+   heading and text columns adjust their own distance with margins. */
 .zenith-story__content {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
+  gap: var(--z-cgap-m, 20px);
   min-width: 0;
+  max-width: var(--z-story-cmw-m, none);
 }
 
 .zenith-story__content > * {
@@ -28,12 +67,8 @@
   margin-bottom: 0;
 }
 
-.zenith-story__content > * + * {
-  margin-top: var(--z-cgap-m, 20px);
-}
-
 .zenith-story__content > * + .zenith-story__columns {
-  margin-top: var(--z-story-colsp-m, 16px);
+  margin-top: calc(var(--z-story-colsp-m, 16px) - var(--z-cgap-m, 20px));
 }
 
 .zenith-story__logo {
@@ -47,9 +82,21 @@
   margin-bottom: 0;
 }
 
+.zenith-story__content > .zenith-story__heading.zenith-heading:not(:last-child) {
+  margin-bottom: calc(var(--z-hsp-m, var(--z-cgap-m, 20px)) - var(--z-cgap-m, 20px));
+}
+
 .zenith-story .zenith-heading__title,
 .zenith-story__column-title {
   letter-spacing: 0;
+}
+
+.zenith-story .zenith-heading__title {
+  line-height: var(--z-story-hlh-m, 1.1);
+}
+
+.zenith-story--heading-color .zenith-heading__title {
+  color: var(--z-story-hc);
 }
 
 .zenith-story__text,
@@ -86,12 +133,21 @@
 }
 
 @media screen and (min-width: 750px) {
-  .zenith-story__content > * + * {
-    margin-top: var(--z-cgap, 20px);
+  .zenith-story__content {
+    gap: var(--z-cgap, 20px);
+    max-width: var(--z-cmw, none);
   }
 
   .zenith-story__content > * + .zenith-story__columns {
-    margin-top: var(--z-story-colsp, 40px);
+    margin-top: calc(var(--z-story-colsp, 40px) - var(--z-cgap, 20px));
+  }
+
+  .zenith-story__content > .zenith-story__heading.zenith-heading:not(:last-child) {
+    margin-bottom: calc(var(--z-hsp, var(--z-cgap, 20px)) - var(--z-cgap, 20px));
+  }
+
+  .zenith-story .zenith-heading__title {
+    line-height: var(--z-story-hlh, 1.1);
   }
 
   .zenith-story__text,
@@ -134,4 +190,8 @@
 
   .zenith-story--align-center .zenith-story__content { justify-content: center; }
   .zenith-story--align-bottom .zenith-story__content { justify-content: flex-end; }
+
+  /* Mobile-only heading copies */
+  .zenith-story .zenith-story__heading--top,
+  .zenith-story--heading-hide-d .zenith-story__heading { display: none; }
 }

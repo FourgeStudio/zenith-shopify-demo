@@ -1,0 +1,631 @@
+{% comment %}
+  Zenith · Store links — "Our Official Stores": marketplace cards (glyph · handle · stat).
+  Desktop: cards in one row, content inline + centred. Mobile: 2-column grid, glyph left, handle over stat.
+  A store without its own link falls back to Theme settings → Zenith → Marketplaces (Lazada, Shopee) or Social media (TikTok).
+{% endcomment %}
+{{ 'zenith-store-links.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign s = section.settings
+-%}
+{%- capture extra -%}
+  --z-sl-cols: {{ s.columns_desktop }};
+  --z-sl-cols-m: {{ s.columns_mobile }};
+  --z-sl-h: {{ s.card_min_height }}px;
+  --z-sl-h-m: {{ s.card_min_height_mobile }}px;
+  --z-sl-ggap: {{ s.glyph_gap }}px;
+  --z-sl-ggap-m: {{ s.glyph_gap_mobile }}px;
+  --z-sl-tgap: {{ s.text_gap }}px;
+  --z-sl-tgap-m: {{ s.text_gap_mobile }}px;
+  --z-sl-bg: {{ s.card_background }};
+  --z-sl-border: {{ s.card_border_color }};
+  --z-sl-bw: {{ s.card_border_width }}px;
+  --z-sl-glyph: {{ s.glyph_color }};
+  --z-sl-handle: {{ s.handle_color }};
+  --z-sl-handle-a: {{ s.handle_opacity | divided_by: 100.0 }};
+  --z-sl-stat: {{ s.stat_color }};
+{%- endcapture -%}
+{%- render 'zenith-section-style', section: section, extra: extra -%}
+
+<section
+  id="Zenith-{{ section.id }}"
+  class="zenith-section zenith-store-links color-{{ s.color_scheme }} gradient zenith-store-links--{{ s.card_layout }} zenith-store-links--align-{{ s.card_alignment }} zenith-store-links--m-{{ s.card_layout_mobile }} zenith-store-links--m-align-{{ s.card_alignment_mobile }} zenith-store-links--m-heading-{{ s.heading_alignment_mobile }}"
+>
+  <div class="page-width">
+    {%- render 'zenith-section-heading',
+      eyebrow: blank,
+      heading: s.heading,
+      subheading: blank,
+      alignment: s.heading_alignment,
+      class: 'zenith-store-links__heading'
+    -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <ul class="zenith-store-links__grid" role="list">
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign b = block.settings
+            assign link = b.link
+            assign store_name = b.store_name
+            case b.icon
+              when 'lazada'
+                if link == blank
+                  assign link = settings.social_lazada_link
+                endif
+                assign store_name = store_name | default: 'Lazada'
+              when 'shopee'
+                if link == blank
+                  assign link = settings.social_shopee_link
+                endif
+                assign store_name = store_name | default: 'Shopee'
+              when 'tiktok_shop'
+                if link == blank
+                  assign link = settings.social_tiktok_link
+                endif
+                assign store_name = store_name | default: 'TikTok Shop'
+            endcase
+            if b.icon == 'custom' and b.custom_icon != blank and store_name == blank
+              assign store_name = b.custom_icon.alt
+            endif
+            assign card_tag = 'div'
+            if link != blank
+              assign card_tag = 'a'
+            endif
+          -%}
+          <li class="zenith-store-links__item" id="Block-{{ block.id }}" {{ block.shopify_attributes }}>
+            <{{ card_tag }}
+              class="zenith-store-links__card{% if link != blank %} zenith-store-links__card--link{% endif %}"
+              {% if link != blank %}
+                href="{{ link }}"
+                {% if b.new_tab %}
+                  target="_blank" rel="noopener"
+                {% endif %}
+              {% endif %}
+            >
+            <span class="zenith-store-links__glyph" aria-hidden="true">
+              {%- if b.icon == 'custom' -%}
+                {%- if b.custom_icon != blank -%}
+                  {{
+                    b.custom_icon
+                    | image_url: width: 160
+                    | image_tag: loading: 'lazy', widths: '48, 80, 120, 160', sizes: '48px', alt: ''
+                  }}
+                {%- endif -%}
+              {%- else -%}
+                {%- render 'zenith-icon', icon: b.icon, class: 'zenith-store-links__icon' -%}
+              {%- endif -%}
+            </span>
+            {%- if store_name != blank -%}
+              <span class="visually-hidden">{{ store_name | escape }}</span>
+            {%- endif -%}
+            <span class="zenith-store-links__text">
+              {%- if b.handle != blank -%}
+                <span class="zenith-store-links__handle">{{ b.handle | escape }}</span>
+              {%- endif -%}
+              {%- if b.stat != blank -%}
+                <span class="zenith-store-links__stat">{{ b.stat | escape | replace: '[customers]', settings.customer_count }}</span>
+              {%- endif -%}
+            </span>
+            {%- if link != blank and b.new_tab -%}
+              <span class="visually-hidden">{{ 'accessibility.link_messages.new_window' | t }}</span>
+            {%- endif -%}
+            </{{ card_tag }}>
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Zenith · Store links",
+  "tag": "div",
+  "class": "section",
+  "max_blocks": 8,
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Our Official Stores"
+    },
+    {
+      "type": "paragraph",
+      "content": "Add one Store block per marketplace. A store without its own link uses Theme settings → Zenith → Marketplaces (Lazada, Shopee) or Theme settings → Social media (TikTok)."
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Heading alignment",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Columns",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "select",
+      "id": "card_layout",
+      "label": "Card layout",
+      "default": "inline",
+      "options": [
+        { "value": "inline", "label": "Icon, handle and stat in one row" },
+        { "value": "stacked", "label": "Icon beside handle over stat" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "card_alignment",
+      "label": "Card content alignment",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "card_min_height",
+      "label": "Card height",
+      "min": 40,
+      "max": 160,
+      "step": 2,
+      "unit": "px",
+      "default": 74
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Space between cards",
+      "min": 0,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "item_padding",
+      "label": "Card side padding",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "glyph_gap",
+      "label": "Space after icon",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "text_gap",
+      "label": "Space between handle and stat",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "heading_spacing",
+      "label": "Space below heading",
+      "min": 0,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "default": 25
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Section color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "info": "Also fills the cut-outs of the store icons.",
+      "default": "#202020"
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Card border",
+      "default": "#363636"
+    },
+    {
+      "type": "range",
+      "id": "card_border_width",
+      "label": "Card border width",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "glyph_color",
+      "label": "Icon color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "handle_color",
+      "label": "Handle color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "handle_opacity",
+      "label": "Handle opacity",
+      "min": 30,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 70
+    },
+    {
+      "type": "color",
+      "id": "stat_color",
+      "label": "Stat color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size",
+      "label": "Heading size",
+      "min": 16,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 41
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon size",
+      "min": 16,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "default": 44
+    },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "label": "Handle size",
+      "min": 10,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "text_font_size",
+      "label": "Stat size",
+      "min": 10,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment_mobile",
+      "label": "Heading alignment",
+      "default": "left",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "columns_mobile",
+      "label": "Columns",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "select",
+      "id": "card_layout_mobile",
+      "label": "Card layout",
+      "default": "stacked",
+      "options": [
+        { "value": "inline", "label": "Icon, handle and stat in one row" },
+        { "value": "stacked", "label": "Icon beside handle over stat" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "card_alignment_mobile",
+      "label": "Card content alignment",
+      "default": "left",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "card_min_height_mobile",
+      "label": "Card height",
+      "min": 40,
+      "max": 160,
+      "step": 2,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "gap_mobile",
+      "label": "Space between cards",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "item_padding_mobile",
+      "label": "Card side padding",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "glyph_gap_mobile",
+      "label": "Space after icon",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "text_gap_mobile",
+      "label": "Space between handle and stat",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size_mobile",
+      "label": "Heading size",
+      "min": 16,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "heading_spacing_mobile",
+      "label": "Space below heading",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "icon_size_mobile",
+      "label": "Icon size",
+      "min": 16,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "default": 38
+    },
+    {
+      "type": "range",
+      "id": "title_font_size_mobile",
+      "label": "Handle size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "text_font_size_mobile",
+      "label": "Stat size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Top padding (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Bottom padding (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    }
+  ],
+  "blocks": [
+    {
+      "type": "store",
+      "name": "Store",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Store icon",
+          "default": "lazada",
+          "options": [
+            { "value": "lazada", "label": "Lazada" },
+            { "value": "shopee", "label": "Shopee" },
+            { "value": "tiktok_shop", "label": "TikTok Shop" },
+            { "value": "custom", "label": "Custom image" }
+          ]
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_icon",
+          "label": "Custom icon image",
+          "info": "Used when Store icon is Custom image. Square transparent PNG or SVG."
+        },
+        {
+          "type": "text",
+          "id": "handle",
+          "label": "Handle",
+          "default": "@tryzenithph"
+        },
+        {
+          "type": "text",
+          "id": "stat",
+          "label": "Stat",
+          "default": "99% Seller Rating"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Store link",
+          "info": "Leave blank to use the Lazada / Shopee link from Theme settings → Zenith, or the TikTok link from Theme settings → Social media."
+        },
+        {
+          "type": "checkbox",
+          "id": "new_tab",
+          "label": "Open in a new tab",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "store_name",
+          "label": "Store name for screen readers",
+          "info": "Leave blank to use the icon's store name."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zenith · Store links",
+      "blocks": [
+        {
+          "type": "store",
+          "settings": {
+            "icon": "lazada",
+            "handle": "@tryzenithph",
+            "stat": "99% Seller Rating"
+          }
+        },
+        {
+          "type": "store",
+          "settings": {
+            "icon": "shopee",
+            "handle": "@tryzenithph",
+            "stat": "4.9 (32K+ Rating)"
+          }
+        },
+        {
+          "type": "store",
+          "settings": {
+            "icon": "tiktok_shop",
+            "handle": "@tryzenithph",
+            "stat": "46k+ followers"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
