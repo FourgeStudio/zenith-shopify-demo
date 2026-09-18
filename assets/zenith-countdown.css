@@ -72,50 +72,39 @@
   }
 }
 
-/* Hundredths: 11-digit strip (9 → 0, 9) spinning upward nonstop; phase synced by zenith-countdown.js. */
-.zenith-countdown__strip--spin {
-  transform: none;
-  animation: zenith-countdown-spin 1s linear infinite;
+/* Unit labels beside the numbers: "04 DAYS 22 HOURS 10 MINUTES 09 SECONDS". */
+.zenith-countdown--labels {
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--z-space-1) var(--z-space-3);
 }
 
-.zenith-countdown__strip--spin-2 {
-  animation-duration: 0.1s;
-}
-
-.zenith-countdown.is-expired .zenith-countdown__strip--spin {
-  animation: none;
-  transform: translateY(calc(-100% * 9 / 11));
-}
-
-@keyframes zenith-countdown-spin {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(calc(-100% * 10 / 11));
-  }
+.zenith-countdown--labels .zenith-countdown__unit {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--z-space-1);
 }
 
 .zenith-countdown__label {
-  font-size: 1rem;
-  line-height: 1.2;
+  font-size: var(--z-cdlfs-m, 1.2rem);
+  font-weight: 600;
+  line-height: 1;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  opacity: 0.75;
+  letter-spacing: 0.04em;
 }
 
 @media screen and (min-width: 750px) {
   .zenith-countdown__value {
     font-size: var(--z-cdfs, 1.8rem);
   }
+
+  .zenith-countdown__label {
+    font-size: var(--z-cdlfs, 1.4rem);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .zenith-countdown__strip.is-rolling {
     animation: none;
-  }
-
-  .zenith-countdown__unit--ms {
-    display: none;
   }
 }

@@ -23,7 +23,7 @@
         "end_time": "23:59",
         "timezone": "+08:00",
         "hide_when_expired": true,
-        "countdown_show_labels": false,
+        "countdown_show_labels": true,
         "promo_visibility": "promo_on",
         "layout_style": "split",
         "split_image_width": 50,
@@ -83,7 +83,9 @@
         "padding_top": 32,
         "padding_bottom": 32,
         "padding_top_mobile": 0,
-        "padding_bottom_mobile": 0
+        "padding_bottom_mobile": 0,
+        "countdown_label_font_size": 14,
+        "countdown_label_font_size_mobile": 12
       }
     },
     "hero": {
@@ -1306,7 +1308,7 @@
         "end_time": "23:59",
         "timezone": "+08:00",
         "hide_when_expired": true,
-        "countdown_show_labels": false,
+        "countdown_show_labels": true,
         "promo_visibility": "promo_on",
         "layout_style": "split",
         "split_image_width": 50,
@@ -1366,7 +1368,9 @@
         "padding_top": 32,
         "padding_bottom": 32,
         "padding_top_mobile": 24,
-        "padding_bottom_mobile": 24
+        "padding_bottom_mobile": 24,
+        "countdown_label_font_size": 14,
+        "countdown_label_font_size_mobile": 12
       }
     }
   },

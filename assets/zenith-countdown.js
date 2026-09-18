@@ -1,6 +1,5 @@
 // Slot-machine countdown (snippets/zenith-countdown.liquid).
-// Days/hours/minutes/seconds: each digit is a reel [old, new]; a changed digit rolls up (old out the top, new in from below).
-// Hundredths: CSS reels spin continuously; JS only syncs their phase to the real remaining time.
+// Each digit is a reel [old, new]; a changed digit rolls up (old out the top, new in from below).
 if (!customElements.get('zenith-countdown')) {
   customElements.define(
     'zenith-countdown',
@@ -18,7 +17,6 @@ if (!customElements.get('zenith-countdown')) {
         }));
         this.tick = this.tick.bind(this);
         this.paint(true);
-        this.syncSpin();
         if (this.remaining() > 0) this.schedule();
         else this.expire();
       }
@@ -91,16 +89,6 @@ if (!customElements.get('zenith-countdown')) {
         if (!animate) return;
         void reel.strip.offsetWidth; // restart the animation
         reel.strip.classList.add('is-rolling');
-      }
-
-      // Start each hundredths reel at the phase that matches the real remaining time.
-      syncSpin() {
-        const ms = this.remaining() % 1000;
-        this.querySelectorAll('.zenith-countdown__strip--spin').forEach((strip, i) => {
-          const period = i === 0 ? 1000 : 100;
-          const left = ms % period;
-          strip.style.animationDelay = `-${period - left}ms`;
-        });
       }
 
       expire() {

@@ -90,6 +90,8 @@
   --z-cd-strip-fg: {{ s.countdown_text_color }};
   --z-cd-box: {{ s.countdown_box_color }};
   --z-cd-digit: {{ s.countdown_digit_color }};
+  --z-cdlfs: {{ s.countdown_label_font_size }}px;
+  --z-cdlfs-m: {{ s.countdown_label_font_size_mobile }}px;
   {%- render 'zenith-overlay-vars', settings: s -%}
 {%- endcapture -%}
 {%- render 'zenith-section-style', section: section, extra: extra -%}
@@ -178,8 +180,7 @@
             end_time: p_end_time,
             timezone: p_timezone,
             hide_expired: p_hide_expired,
-            show_labels: s.countdown_show_labels,
-            show_ms: s.countdown_show_ms
+            show_labels: s.countdown_show_labels
           -%}
         </div>
       {%- endif -%}
@@ -302,14 +303,7 @@
     {
       "type": "checkbox",
       "id": "countdown_show_labels",
-      "label": "Show unit labels (Days, Hrs, Min, Sec)",
-      "default": false
-    },
-    {
-      "type": "checkbox",
-      "id": "countdown_show_ms",
-      "label": "Show milliseconds",
-      "info": "Adds a spinning hundredths-of-a-second box. Hidden for visitors who turn off animations.",
+      "label": "Show unit labels (Days, Hours, Minutes, Seconds)",
       "default": true
     },
     {
@@ -685,6 +679,16 @@
       "default": 18
     },
     {
+      "type": "range",
+      "id": "countdown_label_font_size",
+      "label": "Countdown label size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
       "type": "header",
       "content": "Mobile"
     },
@@ -854,6 +858,16 @@
       "step": 2,
       "unit": "px",
       "default": 16
+    },
+    {
+      "type": "range",
+      "id": "countdown_label_font_size_mobile",
+      "label": "Countdown label size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 12
     },
     {
       "type": "range",

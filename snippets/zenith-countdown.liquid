@@ -1,6 +1,6 @@
 {% comment %}
-  Live countdown (days / hours / minutes / seconds [/ hundredths]) — used by zenith-hero and zenith-promo-banner.
-  Slot-machine digits: every digit is a reel that rolls up when it changes; the hundredths reels spin continuously.
+  Live countdown (days / hours / minutes / seconds) — used by zenith-hero and zenith-promo-banner.
+  Slot-machine digits: every digit is a reel that rolls up when it changes.
   Section must load 'zenith-countdown.css' and 'zenith-countdown.js'.
   Colors/sizes via CSS vars on the section root: --z-cdfs / --z-cdfs-m (digit size),
   --z-cd-box (box color), --z-cd-digit (digit color).
@@ -9,8 +9,7 @@
     end_time {String} HH:MM 24h (default 23:59)
     timezone {String} '+08:00' | 'Z' (default +08:00)
     hide_expired {Boolean} hide the closest [data-countdown-wrapper] when it reaches zero
-    show_labels {Boolean} show Days/Hrs/Min/Sec under the boxes (always available to screen readers)
-    show_ms {Boolean} add a spinning hundredths-of-a-second box (hidden for reduced motion)
+    show_labels {Boolean} show DAYS / HOURS / MINUTES / SECONDS beside the numbers (always available to screen readers)
     class {String} optional
 {% endcomment %}
 {%- if end_date != blank -%}
@@ -19,8 +18,7 @@
     assign cd_tz = timezone | default: '+08:00'
     assign cd_iso = end_date | strip | append: 'T' | append: cd_time | append: ':00' | append: cd_tz
     assign cd_units = 'days,hours,minutes,seconds' | split: ','
-    assign cd_labels = 'Days,Hrs,Min,Sec' | split: ','
-    assign spin_digits = '9,8,7,6,5,4,3,2,1,0,9' | split: ','
+    assign cd_labels = 'Days,Hours,Minutes,Seconds' | split: ','
   -%}
   <zenith-countdown
     class="zenith-countdown{% if show_labels %} zenith-countdown--labels{% endif %} {{ class }}"
@@ -37,22 +35,5 @@
         </span>
       </span>
     {%- endfor -%}
-    {%- if show_ms -%}
-      <span class="zenith-countdown__unit zenith-countdown__unit--ms" aria-hidden="true">
-        <span class="zenith-countdown__value" data-ms>
-          {%- for reel in (1..2) -%}
-            <span class="zenith-countdown__reel">
-              {%- comment -%} 9 → 0 then 9 again so the loop is seamless {%- endcomment -%}
-              <span class="zenith-countdown__strip zenith-countdown__strip--spin zenith-countdown__strip--spin-{{ reel }}">
-                {%- for d in spin_digits -%}<span>{{ d }}</span>{%- endfor -%}
-              </span>
-            </span>
-          {%- endfor -%}
-        </span>
-        {%- if show_labels -%}
-          <span class="zenith-countdown__label">Ms</span>
-        {%- endif -%}
-      </span>
-    {%- endif -%}
   </zenith-countdown>
 {%- endif -%}
