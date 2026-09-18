@@ -1,6 +1,12 @@
+/* Zenith · Icon bar (trust bar) — mobile first. */
+
 .zenith-icon-bar--border {
   border-top: 1px solid rgba(var(--color-foreground), 0.12);
   border-bottom: 1px solid rgba(var(--color-foreground), 0.12);
+}
+
+.zenith-icon-bar__track {
+  display: flex;
 }
 
 .zenith-icon-bar__list {
@@ -8,8 +14,14 @@
   margin: 0;
   padding: 0;
   display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
   gap: var(--z-gap-m, var(--z-space-5));
-  font-size: var(--z-tfs-m, var(--z-text-sm));
+  font-size: var(--z-tfs-m, 1.4rem);
+}
+
+.zenith-icon-bar__list--clone {
+  display: none;
 }
 
 .zenith-icon-bar__item,
@@ -22,52 +34,132 @@
   white-space: nowrap;
 }
 
+.zenith-icon-bar__link:hover span {
+  text-decoration: underline;
+  text-underline-offset: 0.3rem;
+}
+
 .zenith-icon-bar__item .zenith-icon {
-  width: var(--z-icon-m, 20px);
-  height: var(--z-icon-m, 20px);
+  width: var(--z-icon-m, 22px);
+  height: var(--z-icon-m, 22px);
+}
+
+.zenith-icon-bar__img {
+  object-fit: contain;
+}
+
+.zenith-icon-bar--icon-dawn_gold .zenith-icon {
+  color: var(--z-dawn-gold);
 }
 
 .zenith-icon-bar--icon-accent .zenith-icon {
   color: var(--z-gold);
 }
 
-
 @media screen and (max-width: 749px) {
-  .zenith-icon-bar__list--m-scroll {
+  /* Swipe row */
+  .zenith-icon-bar--m-scroll .zenith-icon-bar__list {
     overflow-x: auto;
     scrollbar-width: none;
     scroll-snap-type: x proximity;
   }
 
-  .zenith-icon-bar__list--m-scroll::-webkit-scrollbar {
+  .zenith-icon-bar--m-scroll .zenith-icon-bar__list::-webkit-scrollbar {
     display: none;
   }
 
-  .zenith-icon-bar__list--m-scroll .zenith-icon-bar__item {
+  .zenith-icon-bar--m-scroll .zenith-icon-bar__item {
     scroll-snap-align: start;
   }
 
-  .zenith-icon-bar__list--m-grid {
+  /* 2-column grid */
+  .zenith-icon-bar--m-grid .zenith-icon-bar__list {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--z-space-3) var(--z-gap-m, var(--z-space-4));
   }
 
-  .zenith-icon-bar__list--m-grid .zenith-icon-bar__item {
+  .zenith-icon-bar--m-grid .zenith-icon-bar__item,
+  .zenith-icon-bar--m-grid .zenith-icon-bar__link {
     white-space: normal;
+  }
+
+  /* Auto-scrolling marquee (full bleed, duplicated list for a seamless loop) */
+  .zenith-icon-bar--m-marquee .zenith-icon-bar__viewport {
+    overflow: hidden;
+  }
+
+  .zenith-icon-bar--m-marquee .zenith-icon-bar__track {
+    width: max-content;
+    animation: zenith-icon-bar-marquee var(--z-ib-speed, 25s) linear infinite;
+  }
+
+  .zenith-icon-bar--m-marquee .zenith-icon-bar__list {
+    flex: none;
+    padding-right: var(--z-gap-m, var(--z-space-5));
+  }
+
+  .zenith-icon-bar--m-marquee .zenith-icon-bar__list--clone {
+    display: flex;
+  }
+
+  .zenith-icon-bar--m-marquee .zenith-icon-bar__viewport:hover .zenith-icon-bar__track,
+  .zenith-icon-bar--m-marquee .zenith-icon-bar__viewport:focus-within .zenith-icon-bar__track {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes zenith-icon-bar-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Full bleed only while animating (selector outranks the shared .page-width gutter rule). */
+@media screen and (max-width: 749px) and (prefers-reduced-motion: no-preference) {
+  .zenith-icon-bar.zenith-icon-bar--m-marquee .zenith-icon-bar__viewport.page-width {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+/* Reduced motion: static swipe row inside the normal page gutters. */
+@media screen and (max-width: 749px) and (prefers-reduced-motion: reduce) {
+  .zenith-icon-bar--m-marquee .zenith-icon-bar__viewport {
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .zenith-icon-bar--m-marquee .zenith-icon-bar__viewport::-webkit-scrollbar {
+    display: none;
+  }
+
+  .zenith-icon-bar--m-marquee .zenith-icon-bar__track {
+    animation: none;
+  }
+
+  .zenith-icon-bar--m-marquee .zenith-icon-bar__list {
+    padding-right: 0;
+  }
+
+  .zenith-icon-bar--m-marquee .zenith-icon-bar__list--clone {
+    display: none;
   }
 }
 
 @media screen and (min-width: 750px) {
   .zenith-icon-bar__list {
     flex-wrap: wrap;
-    gap: var(--z-space-5) var(--z-gap, var(--z-space-6));
-    font-size: var(--z-tfs, var(--z-text-sm));
+    gap: var(--z-space-4) var(--z-gap, var(--z-space-6));
+    font-size: var(--z-tfs, 1.4rem);
   }
 
   .zenith-icon-bar__item .zenith-icon {
-    width: var(--z-icon, 20px);
-    height: var(--z-icon, 20px);
+    width: var(--z-icon, 22px);
+    height: var(--z-icon, 22px);
   }
 
   .zenith-icon-bar__list--spread {

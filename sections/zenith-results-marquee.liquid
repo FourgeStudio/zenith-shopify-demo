@@ -3,25 +3,55 @@
   --z-card-w: {{ section.settings.card_width }}px;
   --z-card-w-m: {{ section.settings.mobile_card_width }}px;
   --z-speed: {{ section.settings.speed }}s;
+  --z-hgap: {{ section.settings.heading_gap }}px;
+  --z-hgap-m: {{ section.settings.heading_gap_mobile }}px;
+  --z-thumb: {{ section.settings.thumb_size }}px;
+  --z-thumb-m: {{ section.settings.thumb_size_mobile }}px;
+  --z-arrow: {{ section.settings.arrow_size }}px;
+  --z-arrow-m: {{ section.settings.arrow_size_mobile }}px;
+  --z-caption-color: {{ section.settings.caption_color }};
+  --z-thumb-bg: {{ section.settings.thumb_bg_color }};
+  --z-disc-color: {{ section.settings.disclaimer_color }};
+  --z-disc-fs: {{ section.settings.disclaimer_font_size }}px;
+  --z-disc-fs-m: {{ section.settings.disclaimer_font_size_mobile }}px;
+  --z-disc-sp: {{ section.settings.disclaimer_spacing }}px;
+  --z-disc-sp-m: {{ section.settings.disclaimer_spacing_mobile }}px;
   {%- render 'zenith-overlay-vars', settings: section.settings -%}
 {%- endcapture -%}
 {%- render 'zenith-section-style', section: section, extra: extra -%}
 
-{%- assign row_count = section.settings.rows | plus: 0 -%}
+{%- liquid
+  assign row_count = section.settings.rows | plus: 0
+  assign heading = section.settings.heading | escape | replace: '[customers]', settings.customer_count
+  assign heading_mobile = section.settings.heading_mobile | escape | replace: '[customers]', settings.customer_count | newline_to_br
+-%}
 
 <section
   id="Zenith-{{ section.id }}"
   class="zenith-section zenith-results color-{{ section.settings.color_scheme }} gradient zenith-results--{{ section.settings.aspect_ratio }}{% if section.settings.pause_on_hover %} zenith-results--pause{% endif %}"
 >
-  <div class="page-width">
-    {%- render 'zenith-section-heading',
-      eyebrow: section.settings.eyebrow,
-      heading: section.settings.heading,
-      subheading: section.settings.subheading,
-      alignment: section.settings.heading_alignment,
-      uppercase: section.settings.heading_uppercase
-    -%}
-  </div>
+  {%- if section.settings.eyebrow != blank or heading != blank or section.settings.subheading != blank -%}
+    <div class="page-width">
+      <div class="zenith-heading zenith-heading--{{ section.settings.heading_alignment }} zenith-heading--m-{{ section.settings.heading_alignment_mobile }}{% if section.settings.heading_uppercase %} zenith-heading--uppercase{% endif %}">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="zenith-eyebrow">
+            {{- section.settings.eyebrow | escape | replace: '[customers]', settings.customer_count -}}
+          </p>
+        {%- endif -%}
+        {%- if heading_mobile != blank -%}
+          <h2 class="zenith-heading__title zenith-hide-mobile">{{ heading }}</h2>
+          <h2 class="zenith-heading__title zenith-hide-desktop">{{ heading_mobile }}</h2>
+        {%- elsif heading != blank -%}
+          <h2 class="zenith-heading__title">{{ heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.subheading != blank -%}
+          <div class="zenith-subheading">
+            {{- section.settings.subheading | replace: '[customers]', settings.customer_count -}}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endif -%}
 
   <div class="zenith-results__rows">
     {%- for r in (1..row_count) -%}
@@ -41,33 +71,128 @@
       <div class="zenith-results__row{% if reverse %} zenith-results__row--reverse{% endif %}">
         <div class="zenith-results__track">
           {%- for pass in (1..4) -%}
-            <ul class="zenith-results__group" role="list"{% if pass > 1 %} aria-hidden="true"{% endif %}>
+            <ul
+              class="zenith-results__group"
+              role="list"
+              {% if pass > 1 %}
+                aria-hidden="true"
+              {% endif %}
+            >
               {%- if item_count > 0 -%}
                 {%- for block in section.blocks -%}
                   {%- unless row_count == 1 or block.settings.row == row_key -%}{%- continue -%}{%- endunless -%}
-                  <li class="zenith-results__card"{% if pass == 1 %} id="Block-{{ block.id }}" {{ block.shopify_attributes }}{% endif %}>
+                  {%- liquid
+                    assign caption = block.settings.caption | escape | replace: '[customers]', settings.customer_count
+                    assign result_product = block.settings.product
+                    assign thumb = block.settings.thumbnail
+                    if thumb == blank and result_product != blank
+                      assign thumb = result_product.featured_image
+                    endif
+                    assign before = block.settings.before_image
+                    assign after = block.settings.image
+                    assign after_alt = after.alt | default: caption
+                  -%}
+                  <li
+                    class="zenith-results__card"
+                    {% if pass == 1 %}
+                      id="Block-{{ block.id }}" {{ block.shopify_attributes }}
+                    {% endif %}
+                  >
                     <div class="zenith-media zenith-results__media">
-                      {%- if block.settings.image != blank -%}
+                      {%- if before != blank -%}
+                        <div class="zenith-results__split">
+                          <div class="zenith-results__half">
+                            {{
+                              before
+                              | image_url: width: 400
+                              | image_tag:
+                                loading: 'lazy',
+                                widths: '150, 200, 300, 400',
+                                sizes: '(min-width: 750px) 110px, 150px',
+                                alt: section.settings.before_label
+                            }}
+                          </div>
+                          <div class="zenith-results__half">
+                            {%- if after != blank -%}
+                              {{
+                                after
+                                | image_url: width: 400
+                                | image_tag:
+                                  loading: 'lazy',
+                                  widths: '150, 200, 300, 400',
+                                  sizes: '(min-width: 750px) 110px, 150px',
+                                  alt: section.settings.after_label
+                              }}
+                            {%- else -%}
+                              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                            {%- endif -%}
+                          </div>
+                        </div>
+                        {%- if section.settings.show_arrow -%}
+                          <svg class="zenith-results__arrow" viewBox="0 0 26 24" fill="currentColor" aria-hidden="true" focusable="false">
+                            <path d="M0 6h12V0l14 12-14 12v-6H0z"/>
+                          </svg>
+                        {%- endif -%}
+                      {%- elsif after != blank -%}
                         {{
-                          block.settings.image
-                          | image_url: width: 600
-                          | image_tag: loading: 'lazy', widths: '200, 300, 400, 600', sizes: '(min-width: 750px) 240px, 160px'
+                          after
+                          | image_url: width: 720
+                          | image_tag:
+                            loading: 'lazy',
+                            widths: '240, 360, 480, 600, 720',
+                            sizes: '(min-width: 750px) 220px, 300px',
+                            alt: after_alt
                         }}
                       {%- else -%}
                         {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
                       {%- endif -%}
                       {%- render 'zenith-overlay', style: section.settings.overlay_style -%}
+
+                      {%- if caption != blank or thumb != blank -%}
+                        <div class="zenith-results__meta">
+                          {%- if caption != blank -%}
+                            <p class="zenith-results__caption">{{ caption }}</p>
+                          {%- endif -%}
+                          {%- if thumb != blank -%}
+                            {%- if result_product != blank -%}
+                              <a
+                                href="{{ result_product.url }}"
+                                class="zenith-results__thumb"
+                                {% if pass > 1 %}
+                                  tabindex="-1"
+                                {% endif %}
+                              >
+                                {{
+                                  thumb
+                                  | image_url: width: 160
+                                  | image_tag: loading: 'lazy', widths: '80, 120, 160', sizes: '40px', alt: result_product.title
+                                }}
+                              </a>
+                            {%- else -%}
+                              <span class="zenith-results__thumb">
+                                {{
+                                  thumb
+                                  | image_url: width: 160
+                                  | image_tag: loading: 'lazy', widths: '80, 120, 160', sizes: '40px', alt: thumb.alt
+                                }}
+                              </span>
+                            {%- endif -%}
+                          {%- endif -%}
+                        </div>
+                      {%- endif -%}
                     </div>
-                    {%- if block.settings.caption != blank -%}
-                      <p class="zenith-results__caption">{{ block.settings.caption | escape }}</p>
-                    {%- endif -%}
                   </li>
                 {%- endfor -%}
               {%- else -%}
                 {%- for i in (1..8) -%}
                   <li class="zenith-results__card">
-                    <div class="zenith-media zenith-results__media">{{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}{%- render 'zenith-overlay', style: section.settings.overlay_style -%}</div>
-                    <p class="zenith-results__caption">Add a result in the theme editor</p>
+                    <div class="zenith-media zenith-results__media">
+                      {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                      {%- render 'zenith-overlay', style: section.settings.overlay_style -%}
+                      <div class="zenith-results__meta">
+                        <p class="zenith-results__caption">Add a result in the theme editor</p>
+                      </div>
+                    </div>
                   </li>
                 {%- endfor -%}
               {%- endif -%}
@@ -78,14 +203,25 @@
     {%- endfor -%}
   </div>
 
-  {%- if section.settings.link_label != blank -%}
+  {%- if section.settings.disclaimer != blank or section.settings.link_label != blank -%}
     <div class="page-width zenith-results__footer">
-      <a
-        {% if section.settings.link != blank %}href="{{ section.settings.link }}"{% else %}role="link" aria-disabled="true"{% endif %}
-        class="link underlined-link"
-      >
-        {{- section.settings.link_label | escape -}}
-      </a>
+      {%- if section.settings.disclaimer != blank -%}
+        <p class="zenith-results__disclaimer">
+          {{- section.settings.disclaimer | escape | replace: '[customers]', settings.customer_count -}}
+        </p>
+      {%- endif -%}
+      {%- if section.settings.link_label != blank -%}
+        <a
+          {% if section.settings.link != blank %}
+            href="{{ section.settings.link }}"
+          {% else %}
+            role="link" aria-disabled="true"
+          {% endif %}
+          class="link underlined-link zenith-results__link"
+        >
+          {{- section.settings.link_label | escape -}}
+        </a>
+      {%- endif -%}
     </div>
   {%- endif -%}
 </section>
@@ -111,7 +247,8 @@
       "type": "text",
       "id": "eyebrow",
       "label": "Eyebrow",
-      "default": "Verified customer results"
+      "info": "[customers] shows the customer count from Theme settings → Zenith",
+      "default": "Used by [customers] Filipino men"
     },
     {
       "type": "text",
@@ -120,16 +257,43 @@
       "default": "Real Men. Real Results."
     },
     {
+      "type": "textarea",
+      "id": "heading_mobile",
+      "label": "Mobile heading",
+      "info": "Leave blank to use the heading above. Line breaks are kept.",
+      "default": "Built for Filipino men over 35"
+    },
+    {
       "type": "richtext",
       "id": "subheading",
       "label": "Subheading",
-      "default": "<p>See the difference a proper regimen makes. From uneven skin to thinner hair, every transformation here comes from verified Zenith customers putting in the consistent work.</p>"
+      "default": "<p>See the difference a proper regimen makes.</p><p>From clearer skin to thicker hair, every transformation here comes from verified Zenith customers putting in the consistent work.</p>"
+    },
+    {
+      "type": "text",
+      "id": "disclaimer",
+      "label": "Disclaimer",
+      "default": "Individual results may vary.*"
+    },
+    {
+      "type": "text",
+      "id": "before_label",
+      "label": "Before photo label",
+      "info": "Alt text for before photos",
+      "default": "Before"
+    },
+    {
+      "type": "text",
+      "id": "after_label",
+      "label": "After photo label",
+      "info": "Alt text for after photos",
+      "default": "After"
     },
     {
       "type": "text",
       "id": "link_label",
       "label": "Link label",
-      "default": "See more results"
+      "info": "Optional link below the disclaimer"
     },
     {
       "type": "url",
@@ -187,7 +351,7 @@
       "type": "select",
       "id": "aspect_ratio",
       "label": "Card shape",
-      "default": "portrait",
+      "default": "square",
       "options": [
         {
           "value": "portrait",
@@ -227,6 +391,12 @@
       "default": true
     },
     {
+      "type": "checkbox",
+      "id": "show_arrow",
+      "label": "Show arrow between before and after photos",
+      "default": true
+    },
+    {
       "type": "range",
       "id": "heading_max_width",
       "label": "Heading max width",
@@ -235,6 +405,17 @@
       "step": 20,
       "unit": "px",
       "default": 760
+    },
+    {
+      "type": "range",
+      "id": "heading_gap",
+      "label": "Space between heading lines",
+      "info": "Gap between eyebrow, heading and subheading",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 8
     },
     {
       "type": "range",
@@ -250,6 +431,46 @@
       "type": "range",
       "id": "gap",
       "label": "Space between cards",
+      "min": 0,
+      "max": 64,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "content_padding",
+      "label": "Card inner padding",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "thumb_size",
+      "label": "Product thumbnail size",
+      "min": 24,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "arrow_size",
+      "label": "Arrow size",
+      "min": 12,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 26
+    },
+    {
+      "type": "range",
+      "id": "disclaimer_spacing",
+      "label": "Space above disclaimer",
       "min": 0,
       "max": 64,
       "step": 4,
@@ -302,7 +523,7 @@
       "type": "color",
       "id": "overlay_color",
       "label": "Overlay color",
-      "default": "#121212"
+      "default": "#294850"
     },
     {
       "type": "range",
@@ -312,7 +533,7 @@
       "max": 100,
       "step": 5,
       "unit": "%",
-      "default": 75
+      "default": 100
     },
     {
       "type": "range",
@@ -323,7 +544,25 @@
       "max": 100,
       "step": 5,
       "unit": "%",
-      "default": 45
+      "default": 50
+    },
+    {
+      "type": "color",
+      "id": "caption_color",
+      "label": "Caption color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "thumb_bg_color",
+      "label": "Thumbnail background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "disclaimer_color",
+      "label": "Disclaimer color",
+      "default": "#A88946"
     },
     {
       "type": "header",
@@ -337,7 +576,7 @@
       "max": 120,
       "step": 2,
       "unit": "px",
-      "default": 44
+      "default": 48
     },
     {
       "type": "checkbox",
@@ -353,7 +592,7 @@
       "max": 28,
       "step": 1,
       "unit": "px",
-      "default": 16
+      "default": 18
     },
     {
       "type": "range",
@@ -363,7 +602,7 @@
       "max": 20,
       "step": 1,
       "unit": "px",
-      "default": 12
+      "default": 14
     },
     {
       "type": "range",
@@ -376,18 +615,44 @@
       "default": 12
     },
     {
+      "type": "range",
+      "id": "disclaimer_font_size",
+      "label": "Disclaimer size",
+      "min": 8,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
       "type": "header",
       "content": "Mobile"
     },
     {
+      "type": "select",
+      "id": "heading_alignment_mobile",
+      "label": "Heading alignment",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ]
+    },
+    {
       "type": "range",
       "id": "mobile_card_width",
-      "label": "Mobile card width",
+      "label": "Card width",
       "min": 120,
-      "max": 300,
+      "max": 360,
       "step": 10,
       "unit": "px",
-      "default": 160
+      "default": 300
     },
     {
       "type": "range",
@@ -397,7 +662,7 @@
       "max": 80,
       "step": 2,
       "unit": "px",
-      "default": 32
+      "default": 36
     },
     {
       "type": "range",
@@ -407,7 +672,17 @@
       "max": 24,
       "step": 1,
       "unit": "px",
-      "default": 15
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "heading_gap_mobile",
+      "label": "Space between heading lines",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 4
     },
     {
       "type": "range",
@@ -427,7 +702,67 @@
       "max": 48,
       "step": 4,
       "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "content_padding_mobile",
+      "label": "Card inner padding",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
       "default": 12
+    },
+    {
+      "type": "range",
+      "id": "thumb_size_mobile",
+      "label": "Product thumbnail size",
+      "min": 24,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "arrow_size_mobile",
+      "label": "Arrow size",
+      "min": 12,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 34
+    },
+    {
+      "type": "range",
+      "id": "text_font_size_mobile",
+      "label": "Caption size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "disclaimer_font_size_mobile",
+      "label": "Disclaimer size",
+      "min": 8,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "disclaimer_spacing_mobile",
+      "label": "Space above disclaimer",
+      "min": 0,
+      "max": 64,
+      "step": 4,
+      "unit": "px",
+      "default": 16
     },
     {
       "type": "header",
@@ -441,7 +776,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "default": 64
+      "default": 32
     },
     {
       "type": "range",
@@ -451,7 +786,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "default": 64
+      "default": 32
     },
     {
       "type": "range",
@@ -461,7 +796,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "default": 48
+      "default": 20
     },
     {
       "type": "range",
@@ -471,7 +806,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "default": 48
+      "default": 20
     }
   ],
   "blocks": [
@@ -485,15 +820,33 @@
         },
         {
           "type": "image_picker",
+          "id": "before_image",
+          "label": "Before photo",
+          "info": "Shown on the left half with an arrow. Leave blank to use one combined photo below."
+        },
+        {
+          "type": "image_picker",
           "id": "image",
-          "label": "Image",
-          "info": "Before/after photo"
+          "label": "After photo",
+          "info": "Right half, or the full card when no before photo is set"
         },
         {
           "type": "text",
           "id": "caption",
           "label": "Caption",
-          "default": "4 weeks with Zenith Tallow Cream"
+          "default": "Used Zenith Anti-Aging Tallow Cream"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product",
+          "info": "Thumbnail links to this product"
+        },
+        {
+          "type": "image_picker",
+          "id": "thumbnail",
+          "label": "Product thumbnail",
+          "info": "Defaults to the product's image"
         },
         {
           "type": "header",

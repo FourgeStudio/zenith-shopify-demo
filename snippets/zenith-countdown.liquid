@@ -1,0 +1,37 @@
+{% comment %}
+  Live countdown (days / hours / minutes / seconds) — used by zenith-hero and zenith-promo-banner.
+  Section must load 'zenith-countdown.css' and 'zenith-countdown.js'.
+  Colors/sizes via CSS vars on the section root: --z-cdfs / --z-cdfs-m (digit size),
+  --z-cd-box (box color), --z-cd-digit (digit color).
+  Accepts:
+    end_date {String} YYYY-MM-DD (blank → renders nothing)
+    end_time {String} HH:MM 24h (default 23:59)
+    timezone {String} '+08:00' | 'Z' (default +08:00)
+    hide_expired {Boolean} hide the closest [data-countdown-wrapper] when it reaches zero
+    show_labels {Boolean} show Days/Hrs/Min/Sec under the boxes (always available to screen readers)
+    class {String} optional
+{% endcomment %}
+{%- if end_date != blank -%}
+  {%- liquid
+    assign cd_time = end_time | default: '23:59' | strip
+    assign cd_tz = timezone | default: '+08:00'
+    assign cd_iso = end_date | strip | append: 'T' | append: cd_time | append: ':00' | append: cd_tz
+    assign cd_units = 'days,hours,minutes,seconds' | split: ','
+    assign cd_labels = 'Days,Hrs,Min,Sec' | split: ','
+  -%}
+  <zenith-countdown
+    class="zenith-countdown{% if show_labels %} zenith-countdown--labels{% endif %} {{ class }}"
+    data-end="{{ cd_iso | escape }}"
+    data-hide-expired="{{ hide_expired | default: false }}"
+    role="timer"
+  >
+    {%- for unit in cd_units -%}
+      <span class="zenith-countdown__unit">
+        <span class="zenith-countdown__value"><span data-unit="{{ unit }}">00</span></span>
+        <span class="zenith-countdown__label{% unless show_labels %} visually-hidden{% endunless %}">
+          {{- cd_labels[forloop.index0] -}}
+        </span>
+      </span>
+    {%- endfor -%}
+  </zenith-countdown>
+{%- endif -%}

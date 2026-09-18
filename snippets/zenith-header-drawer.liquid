@@ -1,7 +1,8 @@
 {% comment %}
-  Zenith mobile/drawer menu. Keeps Dawn's <header-drawer> markup contract (details/summary,
-  .menu-drawer__submenu, .menu-drawer__close-button) so global.js open/close/submenu logic still works.
-  Settings live in the header section under "Mobile menu".
+  Zenith menu drawer (mobile, and desktop when Desktop menu type = Drawer). Keeps Dawn's <header-drawer>
+  markup contract (details/summary, .menu-drawer__submenu, .menu-drawer__close-button) so global.js
+  open/close/submenu logic still works. Settings live in the header section under "Menu drawer".
+  Per-instance values are CSS vars on the header wrapper (#Zenith-{{ section.id }}), styles in zenith-header-drawer.css.
 
   Accepts: show_country_selector {Boolean}, show_language_selector {Boolean}
 
@@ -28,9 +29,11 @@
       assign cta_url = cta_product.url
     endif
   endif
+  assign cta_icon = s.drawer_button_icon | default: 'chevron_right'
+  assign cta_class = 'zenith-drawer__cta zenith-drawer__cta--' | append: cta_icon
 
   assign year = 'now' | date: '%Y'
-  assign copyright = s.drawer_copyright | replace: '[year]', year
+  assign copyright = s.drawer_copyright | replace: '[year]', year | replace: '[customers]', settings.customer_count
 -%}
 
 <header-drawer data-breakpoint="{% if section.settings.menu_type_desktop == 'drawer' %}desktop{% else %}tablet{% endif %}">
@@ -40,8 +43,9 @@
       aria-label="{{ 'sections.header.menu' | t }}"
     >
       <span>
-        {{- 'icon-hamburger.svg' | inline_asset_content -}}
-        {{- 'icon-close.svg' | inline_asset_content -}}
+        {%- comment -%} Design icons: 22×16 hamburger with 2px bars, 16px close. Keep Dawn's icon-hamburger/icon-close classes (open/close toggle CSS). {%- endcomment -%}
+        <svg class="icon icon-hamburger zenith-header__hamburger" viewBox="0 0 22 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><path d="M.5 1h21M.5 8h21M.5 15h21"/></svg>
+        <svg class="icon icon-close zenith-header__close" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M1.5 1.5l13 13M14.5 1.5l-13 13"/></svg>
       </span>
     </summary>
     <div id="menu-drawer" class="gradient menu-drawer motion-reduce color-{{ section.settings.menu_color_scheme }} {{ drawer_classes }}">
@@ -149,13 +153,14 @@
 
             {%- if s.drawer_button_label != blank -%}
               <div class="zenith-drawer__cta-wrap">
-                <a
-                  {% if cta_url != blank %}href="{{ cta_url }}"{% else %}role="link" aria-disabled="true"{% endif %}
-                  class="zenith-drawer__cta zenith-drawer__cta--{{ s.drawer_button_style }}"
-                >
-                  <span>{{ s.drawer_button_label | escape }}</span>
-                  {%- render 'zenith-icon', icon: 'chevron_right', class: 'zenith-drawer__cta-icon' -%}
-                </a>
+                {%- render 'zenith-button',
+                  label: s.drawer_button_label,
+                  link: cta_url,
+                  style: s.drawer_cta_style,
+                  icon: cta_icon,
+                  full: true,
+                  class: cta_class
+                -%}
               </div>
             {%- endif -%}
           </div>
@@ -198,16 +203,23 @@
 
                 {%- if s.drawer_email != blank -%}
                   <a href="mailto:{{ s.drawer_email | escape }}" class="zenith-drawer__email link">
-                    {%- render 'zenith-icon', icon: 'mail' -%}
+                    <svg class="zenith-drawer__email-icon" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M1.1 6.2 7 1.3l5.9 4.9" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M.5 6.9 7 11.2l6.5-4.3v6.6H.5z" fill="currentColor"/></svg>
                     <span>{{ s.drawer_email | escape }}</span>
                   </a>
                 {%- endif -%}
 
                 {%- if s.drawer_payment_image != blank -%}
+                  {%- assign pay_alt = s.drawer_payment_image.alt | default: 'Accepted payment methods' -%}
+                  {%- capture pay_sizes -%}{{ s.drawer_payment_width }}px{%- endcapture -%}
                   {{
                     s.drawer_payment_image
-                    | image_url: width: 800
-                    | image_tag: loading: 'lazy', widths: '300, 500, 800', sizes: '240px', class: 'zenith-drawer__payments-image', alt: 'Accepted payment methods'
+                    | image_url: width: 960
+                    | image_tag:
+                      loading: 'lazy',
+                      widths: '240, 480, 720, 960',
+                      sizes: pay_sizes,
+                      class: 'zenith-drawer__payments-image',
+                      alt: pay_alt
                   }}
                 {%- elsif s.drawer_show_payment_icons -%}
                   <ul class="zenith-drawer__payments" role="list">
@@ -219,10 +231,11 @@
               </div>
 
               {%- if s.drawer_badge_image != blank -%}
+                {%- capture badge_sizes -%}{{ s.drawer_badge_width }}px{%- endcapture -%}
                 {{
                   s.drawer_badge_image
-                  | image_url: width: 300
-                  | image_tag: loading: 'lazy', widths: '100, 200, 300', sizes: '96px', class: 'zenith-drawer__badge'
+                  | image_url: width: 420
+                  | image_tag: loading: 'lazy', widths: '140, 280, 420', sizes: badge_sizes, class: 'zenith-drawer__badge'
                 }}
               {%- endif -%}
             </div>

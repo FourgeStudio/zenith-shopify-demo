@@ -6,9 +6,20 @@
 {%- capture extra -%}
   --z-cols: {{ section.settings.columns_desktop }};
   {%- render 'zenith-overlay-vars', settings: section.settings -%}
+  --z-ov-solid: {{ section.settings.overlay_solid }}%;
   --z-slide-m: {{ section.settings.mobile_card_width }}%;
+  --z-card-h: {{ section.settings.card_height }}px;
+  --z-card-h-m: {{ section.settings.card_height_mobile }}px;
+  --z-sub-a: {{ section.settings.subheading_opacity | divided_by: 100.0 }};
+  --z-smw-m: {{ section.settings.subheading_max_width_mobile }}px;
 {%- endcapture -%}
 {%- render 'zenith-section-style', section: section, extra: extra -%}
+
+{%- liquid
+  assign heading_class = 'zenith-cats__heading zenith-cats__heading--m-' | append: section.settings.heading_alignment_mobile
+  assign btn_style = section.settings.button_style | default: 'gold'
+  assign btn_icon = section.settings.button_icon | default: 'arrow_right'
+-%}
 
 <section
   id="Zenith-{{ section.id }}"
@@ -20,20 +31,25 @@
       heading: section.settings.heading,
       subheading: section.settings.subheading,
       alignment: section.settings.heading_alignment,
-      uppercase: section.settings.heading_uppercase
+      uppercase: section.settings.heading_uppercase,
+      class: heading_class
     -%}
 
     <zenith-carousel class="zenith-cats__carousel">
       <ul class="zenith-cats__grid zenith-carousel__track" role="list">
         {%- for block in section.blocks -%}
-          <li class="zenith-cats__item zenith-carousel__slide" id="Block-{{ block.id }}" {{ block.shopify_attributes }}>
+          <li
+            class="zenith-cats__item zenith-carousel__slide{% if block.settings.hide_on_mobile %} zenith-hide-mobile{% endif %}"
+            id="Block-{{ block.id }}"
+            {{ block.shopify_attributes }}
+          >
             <div class="zenith-cats__card color-{{ section.settings.card_color_scheme }}">
               <div class="zenith-media zenith-cats__media">
                 {%- if block.settings.image != blank -%}
                   {{
                     block.settings.image
                     | image_url: width: 1000
-                    | image_tag: loading: 'lazy', widths: '375, 550, 750, 1000', sizes: '(min-width: 990px) 25vw, (min-width: 750px) 50vw, 80vw'
+                    | image_tag: loading: 'lazy', widths: '375, 550, 750, 1000', sizes: '(min-width: 990px) 25vw, (min-width: 750px) 50vw, 100vw'
                   }}
                 {%- else -%}
                   {%- assign placeholder = forloop.index0 | modulo: 6 | plus: 1 | prepend: 'collection-' -%}
@@ -43,23 +59,36 @@
               </div>
               <div class="zenith-cats__content">
                 {%- if block.settings.title != blank -%}
-                  <h3 class="zenith-cats__title">{{ block.settings.title | escape }}</h3>
+                  <h3 class="zenith-cats__title">{{ block.settings.title | escape | replace: '[customers]', settings.customer_count }}</h3>
                 {%- endif -%}
-                {%- if block.settings.product != blank and block.settings.link == blank -%}
-                  {%- assign form_id = 'ZenithCat-' | append: block.id -%}
-                  {%- render 'zenith-add-to-cart',
-                    product: block.settings.product,
-                    form_id: form_id,
-                    label: block.settings.button_label,
-                    class: 'zenith-cats__button'
-                  -%}
-                {%- elsif block.settings.button_label != blank -%}
-                  <a
-                    {% if block.settings.link != blank %}href="{{ block.settings.link }}"{% else %}role="link" aria-disabled="true"{% endif %}
-                    class="button zenith-cats__button"
-                  >
-                    {{- block.settings.button_label | escape -}}
-                  </a>
+                {%- liquid
+                  assign use_atc = false
+                  if block.settings.product != blank and block.settings.link == blank
+                    assign use_atc = true
+                  endif
+                -%}
+                {%- if use_atc or block.settings.button_label != blank -%}
+                  <div class="zenith-cats__actions{% if block.settings.button_full_width %} zenith-cats__actions--full{% endif %}">
+                    {%- if use_atc -%}
+                      {%- assign form_id = 'ZenithCat-' | append: block.id -%}
+                      {%- render 'zenith-add-to-cart',
+                        product: block.settings.product,
+                        form_id: form_id,
+                        label: block.settings.button_label,
+                        style: btn_style,
+                        icon: btn_icon,
+                        class: 'zenith-cats__button'
+                      -%}
+                    {%- else -%}
+                      {%- render 'zenith-button',
+                        label: block.settings.button_label,
+                        link: block.settings.link,
+                        style: btn_style,
+                        icon: btn_icon,
+                        class: 'zenith-cats__button'
+                      -%}
+                    {%- endif -%}
+                  </div>
                 {%- endif -%}
               </div>
               {%- if block.settings.link != blank -%}
@@ -105,7 +134,27 @@
       "type": "richtext",
       "id": "subheading",
       "label": "Subheading",
-      "default": "<p>Honest gear for your skin, your hair, and the men wearing it.</p>"
+      "default": "<p>Honest gear for your skin, your hair, and the man wearing it.</p>"
+    },
+    {
+      "type": "select",
+      "id": "button_icon",
+      "label": "Button icon",
+      "default": "arrow_right",
+      "options": [
+        {
+          "value": "arrow_right",
+          "label": "Arrow"
+        },
+        {
+          "value": "cart",
+          "label": "Cart"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ]
     },
     {
       "type": "header",
@@ -140,8 +189,12 @@
       "type": "select",
       "id": "aspect_ratio",
       "label": "Card shape",
-      "default": "portrait",
+      "default": "fixed",
       "options": [
+        {
+          "value": "fixed",
+          "label": "Fixed height"
+        },
         {
           "value": "portrait",
           "label": "Portrait 4:5"
@@ -155,6 +208,17 @@
           "label": "Square"
         }
       ]
+    },
+    {
+      "type": "range",
+      "id": "card_height",
+      "label": "Card height",
+      "info": "Used when Card shape is Fixed height",
+      "min": 240,
+      "max": 800,
+      "step": 8,
+      "unit": "px",
+      "default": 440
     },
     {
       "type": "range",
@@ -197,6 +261,16 @@
       "default": 24
     },
     {
+      "type": "range",
+      "id": "content_gap",
+      "label": "Space between title and button",
+      "min": 0,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
       "type": "header",
       "content": "Colors"
     },
@@ -209,9 +283,47 @@
     {
       "type": "color_scheme",
       "id": "card_color_scheme",
-      "label": "Card text and button scheme",
+      "label": "Card text scheme",
       "info": "Text sits on the image, so pick a scheme with light text",
       "default": "scheme-1"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "default": "gold",
+      "options": [
+        {
+          "value": "gold",
+          "label": "Gold gradient"
+        },
+        {
+          "value": "dark",
+          "label": "Dark"
+        },
+        {
+          "value": "outline",
+          "label": "Outline"
+        },
+        {
+          "value": "light",
+          "label": "Light"
+        },
+        {
+          "value": "scheme",
+          "label": "Color scheme button"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "subheading_opacity",
+      "label": "Subheading opacity",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 80
     },
     {
       "type": "select",
@@ -249,7 +361,7 @@
       "type": "color",
       "id": "overlay_color",
       "label": "Overlay color",
-      "default": "#121212"
+      "default": "#294850"
     },
     {
       "type": "range",
@@ -259,7 +371,7 @@
       "max": 100,
       "step": 5,
       "unit": "%",
-      "default": 80
+      "default": 100
     },
     {
       "type": "range",
@@ -273,6 +385,17 @@
       "default": 60
     },
     {
+      "type": "range",
+      "id": "overlay_solid",
+      "label": "Solid part of gradient",
+      "info": "Area at the gradient's edge that stays fully covered (bottom gradient)",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "%",
+      "default": 15
+    },
+    {
       "type": "header",
       "content": "Typography"
     },
@@ -284,7 +407,7 @@
       "max": 120,
       "step": 2,
       "unit": "px",
-      "default": 44
+      "default": 48
     },
     {
       "type": "checkbox",
@@ -300,7 +423,7 @@
       "max": 28,
       "step": 1,
       "unit": "px",
-      "default": 16
+      "default": 18
     },
     {
       "type": "range",
@@ -310,7 +433,7 @@
       "max": 20,
       "step": 1,
       "unit": "px",
-      "default": 12
+      "default": 14
     },
     {
       "type": "range",
@@ -320,7 +443,17 @@
       "max": 40,
       "step": 1,
       "unit": "px",
-      "default": 16
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "label": "Button text size",
+      "min": 12,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 22
     },
     {
       "type": "header",
@@ -328,9 +461,25 @@
     },
     {
       "type": "select",
+      "id": "heading_alignment_mobile",
+      "label": "Heading alignment",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ]
+    },
+    {
+      "type": "select",
       "id": "mobile_layout",
       "label": "Mobile layout",
-      "default": "carousel",
+      "default": "stack",
       "options": [
         {
           "value": "carousel",
@@ -358,13 +507,24 @@
     },
     {
       "type": "range",
+      "id": "card_height_mobile",
+      "label": "Card height",
+      "info": "Used when Card shape is Fixed height",
+      "min": 200,
+      "max": 720,
+      "step": 8,
+      "unit": "px",
+      "default": 440
+    },
+    {
+      "type": "range",
       "id": "heading_font_size_mobile",
       "label": "Heading size",
       "min": 16,
       "max": 80,
       "step": 2,
       "unit": "px",
-      "default": 32
+      "default": 36
     },
     {
       "type": "range",
@@ -374,7 +534,17 @@
       "max": 24,
       "step": 1,
       "unit": "px",
-      "default": 15
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "subheading_max_width_mobile",
+      "label": "Subheading max width",
+      "min": 160,
+      "max": 400,
+      "step": 8,
+      "unit": "px",
+      "default": 280
     },
     {
       "type": "range",
@@ -394,7 +564,7 @@
       "max": 48,
       "step": 4,
       "unit": "px",
-      "default": 12
+      "default": 20
     },
     {
       "type": "range",
@@ -404,7 +574,17 @@
       "max": 32,
       "step": 1,
       "unit": "px",
-      "default": 15
+      "default": 26
+    },
+    {
+      "type": "range",
+      "id": "button_font_size_mobile",
+      "label": "Button text size",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 22
     },
     {
       "type": "range",
@@ -412,6 +592,16 @@
       "label": "Card text padding",
       "min": 8,
       "max": 48,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "content_gap_mobile",
+      "label": "Space between title and button",
+      "min": 0,
+      "max": 40,
       "step": 4,
       "unit": "px",
       "default": 16
@@ -428,7 +618,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "default": 64
+      "default": 56
     },
     {
       "type": "range",
@@ -438,7 +628,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "default": 64
+      "default": 48
     },
     {
       "type": "range",
@@ -448,7 +638,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "default": 48
+      "default": 24
     },
     {
       "type": "range",
@@ -458,7 +648,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "default": 48
+      "default": 32
     }
   ],
   "blocks": [
@@ -497,6 +687,26 @@
           "id": "product",
           "label": "Add-to-cart product",
           "info": "Used only when Link is empty. The button adds this product to the cart."
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "checkbox",
+          "id": "button_full_width",
+          "label": "Stretch button to card width on desktop",
+          "default": false
+        },
+        {
+          "type": "header",
+          "content": "Mobile"
+        },
+        {
+          "type": "checkbox",
+          "id": "hide_on_mobile",
+          "label": "Hide on mobile",
+          "default": false
         }
       ]
     }
@@ -515,22 +725,27 @@
         {
           "type": "card",
           "settings": {
-            "title": "Thin density sprays built for the dryness on your scalp",
-            "button_label": "Shop Hair Products"
+            "title": "Hair density without the itch or the dryness on your scalp",
+            "button_label": "Shop Hair Products",
+            "button_full_width": true
           }
         },
         {
           "type": "card",
           "settings": {
-            "title": "Full body care for the hard-working man",
-            "button_label": "Add to Cart"
+            "title": "Full-body care for the hard-working man",
+            "button_label": "Add to Cart",
+            "button_full_width": true,
+            "hide_on_mobile": true
           }
         },
         {
           "type": "card",
           "settings": {
             "title": "Personal care to complete your routine",
-            "button_label": "Add to Cart"
+            "button_label": "Add to Cart",
+            "button_full_width": true,
+            "hide_on_mobile": true
           }
         }
       ]

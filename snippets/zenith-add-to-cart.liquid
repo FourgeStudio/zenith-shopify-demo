@@ -1,7 +1,9 @@
 {% comment %}
   AJAX add-to-cart using Dawn's <product-form> (cart drawer / notification aware).
   Section must load product-form.js.
-  Accepts: product {Object}, form_id {String} unique, label {String} optional, class {String} optional
+  Accepts: product {Object}, form_id {String} unique, label {String} optional, class {String} optional,
+           style {String} optional brand style ('gold'|'dark'|'outline'|'light'; blank = Dawn scheme button),
+           icon {String} optional ('arrow_right'|'cart'|'none')
 {% endcomment %}
 {%- assign variant = product.selected_or_first_available_variant -%}
 <product-form data-section-id="{{ section.id }}" data-hide-errors="true" class="zenith-card__form">
@@ -19,7 +21,7 @@
       id="{{ form_id }}-submit"
       type="submit"
       name="add"
-      class="button zenith-atc {{ class }}"
+      class="button zenith-atc{% if style != blank and style != 'scheme' %} zenith-btn zenith-btn--{{ style }}{% endif %} {{ class }}"
       aria-haspopup="dialog"
       {% unless variant.available %}
         disabled
@@ -32,6 +34,9 @@
           {{ 'products.product.sold_out' | t }}
         {%- endif -%}
       </span>
+      {%- if icon != blank and icon != 'none' and variant.available -%}
+        {%- render 'zenith-icon', icon: icon, class: 'zenith-btn__icon' -%}
+      {%- endif -%}
       <span class="sold-out-message hidden">{{ 'products.product.sold_out' | t }}</span>
       {%- render 'loading-spinner' -%}
     </button>

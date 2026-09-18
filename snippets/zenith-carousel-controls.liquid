@@ -10,10 +10,10 @@
     {%- if show_arrows -%}
       <div class="zenith-carousel__arrows">
         <button type="button" class="zenith-carousel__arrow" data-carousel-prev aria-label="Previous {{ label | default: 'slide' }}">
-          {%- render 'zenith-icon', icon: 'arrow_left' -%}
+          {%- render 'zenith-icon', icon: 'chevron_left' -%}
         </button>
         <button type="button" class="zenith-carousel__arrow" data-carousel-next aria-label="Next {{ label | default: 'slide' }}">
-          {%- render 'zenith-icon', icon: 'arrow_right' -%}
+          {%- render 'zenith-icon', icon: 'chevron_right' -%}
         </button>
       </div>
     {%- endif -%}

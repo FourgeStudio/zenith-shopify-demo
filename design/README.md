@@ -1,24 +1,41 @@
 # Design sources
 
-Drop design exports here so any session (any device, any agent) can read them. Images pasted into a chat are **not** saved — only files in this repo survive.
+Design exports live here so any session (any device, any agent) can read them. Images pasted into a chat are **not** saved — only files in this repo survive.
+Shopify's GitHub sync ignores this folder (it only reads theme directories), so nothing here ships to the store.
 
-## Naming
-`<page>-<breakpoint>-<section>.png` — lowercase, kebab-case.
+## Layout
+```
+design/<page>/
+  desktop version/<Full page>.png        full-page export (1440 wide)
+  desktop version/sections/**.png        per-section layer exports, Figma names kept
+  mobile version/<Full page>.png         full-page export (~400 wide)
+  mobile version/section/**.png          per-section layer exports, Figma names kept
+  guide*.png                             designer notes (annotated screenshots)
+```
+Figma layer names can stay as exported — the map below says which file is which section. Full pages are too tall to read in one go; Claude slices them itself.
 
-- `<page>`: `home`, `product`, `collection`, `cart`, `about`, `contact`, `global`
-- `<breakpoint>`: `desktop` (1440px wide export) or `mobile` (390–430px wide export)
-- `<section>`: the section it shows, e.g. `hero`, `trust-bar`, `promo`, `press`, `results`, `videos`, `guarantee`, `categories`, `featured-product`, `story`, `collection-carousel`, `money-back`, `reviews`, `faq`, `footer`, `nav-drawer`
-
-Examples: `home-mobile-hero.png`, `home-desktop-categories.png`, `global-mobile-nav-drawer.png`
-
-## Rules
-- Export at **1x, per section** (2–4 sections per file max). Full-page exports get downscaled and become unreadable.
-- Full-page reference is fine as `home-mobile-full.png`, but always add the per-section crops too.
-- Brand tokens (colors, fonts, logo rules, voice) live in `.claude/brand.md`, not here.
-- Figma links belong in `.claude/brand.md` under "Store"; a link alone is not enough — the connector needs authorizing, so keep the PNGs.
-- Shopify's GitHub sync ignores this folder (it only reads theme directories), so nothing here ships to the store.
-
-## Current contents
-| File | Shows | Status |
+## Homepage map (`design/homepage/`)
+| Section (templates/index.json key) | Desktop (`desktop version/sections/`) | Mobile (`mobile version/section/`) |
 |---|---|---|
-| _(none yet)_ | — | Home desktop + mobile designs were only pasted in chat; re-export needed |
+| Header + announcement (header-group) | `Navbar Desktop/10.png` | `Header.png`, `Banner/10.png` |
+| Menu drawer | — | `../Slide-in Nav.png` (homepage root) |
+| `hero` | `Header/6.png` | `Header/6.png` |
+| `trust_bar` | `Trust Bar.png` | `Container (Shopee…).png` |
+| `promo_top`, `promo_bottom` | `CTA/41.png`, `CTA/41-1.png` | not shown on mobile |
+| `press` | `Logo Credentials.png` | `Logo Credentials.png` |
+| `results` | `Carousel.png` | `Header/78.png` |
+| `videos` | `Testimonial/57.png` | `Testimonial/57.png` |
+| `guarantee` | `Zenith Guarantee.png` | `Layout/251.png` |
+| `categories` | `Layout/363.png` | `Layout/363.png` |
+| `featured_product` | `Header/84.png` | `Header/84.png` |
+| `brand_story` | `Layout/201.png` | `Layout/201.png` |
+| `collection` | `Product/5.png` | `Product/5.png` |
+| `money_back` | `Zenith Money Back Guarantee.png` | `CTA/45.png` |
+| `reviews` (Judge.me) | `Testimonial/18.png` | `Testimonial/18.png` |
+| `faq` | `FAQ/2.png` | `FAQ/2.png` |
+| Footer (footer-group) | `Desktop Footer.png` | `Mobile Footer.png` |
+
+Designer notes: `guide.png` (customer count is a theme setting → `[customers]` token), `guide1.png` (before/after results card), `guide2.png` (mobile sale-hero variant with ribbon, FDA badge and a countdown with seconds).
+
+## Adding a new page
+Same layout under `design/<page>/` (`product`, `collection`, `cart`, `about`, `contact`, `global`). Export sections at 1x; full-page export optional.

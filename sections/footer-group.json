@@ -5,45 +5,90 @@
     "footer": {
       "type": "footer",
       "blocks": {
-        "brand": {
-          "type": "brand_information",
-          "settings": {
-            "show_social": true
-          }
-        },
-        "shop": {
+        "menu_main": {
           "type": "link_list",
           "settings": {
-            "heading": "Shop",
-            "menu": "main-menu"
+            "heading": "",
+            "menu": "footer",
+            "menu_mobile": "footer-mobile",
+            "mobile_full_width": true
           }
         },
-        "help": {
+        "menu_products": {
           "type": "link_list",
           "settings": {
-            "heading": "Help",
-            "menu": "footer"
+            "heading": "",
+            "menu": "footer-products",
+            "menu_mobile": "",
+            "mobile_full_width": false
+          }
+        },
+        "menu_policies": {
+          "type": "link_list",
+          "settings": {
+            "heading": "",
+            "menu": "footer-policies",
+            "menu_mobile": "",
+            "mobile_full_width": false
           }
         }
       },
       "block_order": [
-        "brand",
-        "shop",
-        "help"
+        "menu_main",
+        "menu_products",
+        "menu_policies"
       ],
       "settings": {
-        "color_scheme": "scheme-1",
+        "show_social": true,
+        "email": "hello@tryzenith.ph",
+        "payment_enable": true,
+        "seal_link": "",
+        "bottom_text": "TryZenith PH",
+        "copyright_text": "© [year] Amare Group Inc. All rights reserved.",
+        "show_policy": false,
+        "show_powered_by": false,
         "newsletter_enable": false,
         "newsletter_heading": "Subscribe to our emails",
         "enable_follow_on_shop": false,
-        "show_social": true,
         "enable_country_selector": false,
         "enable_language_selector": false,
-        "payment_enable": true,
-        "show_policy": true,
+        "logo_width": 145,
+        "gap": 42,
+        "link_spacing": 12,
+        "content_gap": 19,
+        "icon_size": 22,
+        "social_gap": 14,
+        "payment_image_height": 20,
+        "seal_width": 85,
+        "seal_style": "muted",
+        "top_line_height": 6,
+        "color_scheme": "scheme-1",
+        "background_color": "#1a1a1a",
+        "top_line_color": "#d6b356",
+        "top_line_gradient": "",
+        "divider_color": "#808080",
+        "text_font_size": 14,
+        "caption_font_size": 12,
+        "logo_width_mobile": 145,
+        "logo_spacing_mobile": 27,
+        "gap_mobile": 42,
+        "menu_row_gap_mobile": 32,
+        "link_spacing_mobile": 12,
+        "content_gap_mobile": 39,
+        "icon_size_mobile": 22,
+        "payment_image_height_mobile": 18,
+        "seal_width_mobile": 83,
+        "seal_style_mobile": "original",
+        "top_line_gradient_mobile": "linear-gradient(90deg, rgba(234, 190, 95, 1), rgba(197, 147, 0, 1) 100%)",
+        "divider_color_mobile": "#3c3c3c",
+        "caption_font_size_mobile": 12,
+        "text_font_size_mobile": 14,
         "margin_top": 0,
-        "padding_top": 48,
-        "padding_bottom": 32
+        "padding_top": 26,
+        "padding_bottom": 20,
+        "padding_top_mobile": 26,
+        "padding_bottom_mobile": 20,
+        "divider_spacing": 15
       }
     }
   },

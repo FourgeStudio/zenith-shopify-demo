@@ -1,3 +1,8 @@
+/* Zenith · Category cards. Per-instance values come from CSS vars on #Zenith-{section.id}. */
+.zenith-cats .zenith-subheading {
+  color: rgba(var(--color-foreground), var(--z-sub-a, 0.8));
+}
+
 .zenith-cats__card {
   position: relative;
   height: 100%;
@@ -13,12 +18,27 @@
 .zenith-cats--tall .zenith-cats__media { aspect-ratio: 3 / 4; }
 .zenith-cats--square .zenith-cats__media { aspect-ratio: 1 / 1; }
 
+.zenith-cats--fixed .zenith-cats__media {
+  aspect-ratio: auto;
+  height: var(--z-card-h-m, 44rem);
+}
+
 .zenith-cats__media img {
   transition: transform 0.6s ease;
 }
 
 .zenith-cats__card:hover .zenith-cats__media img {
   transform: scale(1.04);
+}
+
+/* Bottom gradient with a solid band under the text (design: solid 15%, fades out by 60%). */
+.zenith-cats .zenith-overlay--bottom {
+  background: linear-gradient(
+    to top,
+    rgba(var(--z-ov-rgb), var(--z-ov-a)) 0%,
+    rgba(var(--z-ov-rgb), var(--z-ov-a)) var(--z-ov-solid, 0%),
+    rgba(var(--z-ov-rgb), 0) var(--z-ov-cover)
+  );
 }
 
 .zenith-cats__content {
@@ -30,8 +50,8 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--z-space-4);
-  padding: var(--z-cpd-m, var(--z-space-4));
+  gap: var(--z-cgap-m, var(--z-space-4));
+  padding: var(--z-cpd-m, var(--z-space-5));
   pointer-events: none;
 }
 
@@ -43,17 +63,30 @@
 
 .zenith-cats__title {
   margin: 0;
-  font-family: var(--font-body-family);
-  font-size: var(--z-ttfs-m, 1.5rem);
-  font-weight: 500;
+  font-family: var(--font-heading-family);
+  font-weight: 400;
+  font-size: var(--z-ttfs-m, 2.6rem);
   line-height: 1.35;
+  letter-spacing: 0;
   color: rgb(var(--color-foreground));
 }
 
-.zenith-cats__button,
-.zenith-cats__content .zenith-card__form {
+.zenith-cats__actions {
+  display: flex;
+  max-width: 100%;
+}
+
+.zenith-cats__actions product-form,
+.zenith-cats__actions .zenith-card__form {
+  display: block;
   width: auto;
   margin-top: 0;
+}
+
+.zenith-cats__actions .button.zenith-cats__button {
+  width: auto;
+  max-width: 100%;
+  padding: 0 calc(var(--z-space-4) + var(--z-space-1));
 }
 
 .zenith-cats__overlay-link {
@@ -69,6 +102,24 @@
 }
 
 @media screen and (max-width: 749px) {
+  .zenith-cats .zenith-cats__heading--m-left {
+    align-items: flex-start;
+    text-align: left;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .zenith-cats .zenith-cats__heading--m-center {
+    align-items: center;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .zenith-cats .zenith-subheading {
+    max-width: var(--z-smw-m, none);
+  }
+
   .zenith-cats--m-grid .zenith-cats__grid,
   .zenith-cats--m-stack .zenith-cats__grid {
     display: grid;
@@ -94,12 +145,31 @@
     gap: var(--z-gap, var(--z-space-5));
   }
 
+  .zenith-cats--fixed .zenith-cats__media {
+    height: var(--z-card-h, 44rem);
+  }
+
   .zenith-cats__content {
+    gap: var(--z-cgap, var(--z-space-4));
     padding: var(--z-cpd, var(--z-space-5));
   }
 
   .zenith-cats__title {
-    font-size: var(--z-ttfs, 1.6rem);
+    font-size: var(--z-ttfs, 2rem);
+  }
+
+  .zenith-cats__actions--full {
+    align-self: stretch;
+  }
+
+  .zenith-cats__actions--full product-form,
+  .zenith-cats__actions--full .zenith-card__form,
+  .zenith-cats__actions--full .button.zenith-cats__button {
+    width: 100%;
+  }
+
+  .zenith-cats__actions--full .button.zenith-cats__button {
+    justify-content: flex-start;
   }
 }
 

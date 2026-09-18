@@ -1,21 +1,84 @@
 {{ 'zenith-icon-bar.css' | asset_url | stylesheet_tag }}
-{%- render 'zenith-section-style', section: section -%}
+{%- capture extra -%}
+  --z-ib-speed: {{ section.settings.marquee_speed | default: 25 }}s;
+{%- endcapture -%}
+{%- render 'zenith-section-style', section: section, extra: extra -%}
+
+{%- liquid
+  assign passes = 1
+  if section.settings.mobile_layout == 'marquee'
+    assign passes = 2
+  endif
+-%}
 
 <div
   id="Zenith-{{ section.id }}"
-  class="zenith-section zenith-icon-bar color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_border %} zenith-icon-bar--border{% endif %} zenith-icon-bar--icon-{{ section.settings.icon_color }}"
+  class="zenith-section zenith-icon-bar color-{{ section.settings.color_scheme }} gradient zenith-icon-bar--m-{{ section.settings.mobile_layout }} zenith-icon-bar--icon-{{ section.settings.icon_color }}{% if section.settings.show_border %} zenith-icon-bar--border{% endif %}"
 >
-  <div class="page-width">
-    <ul class="zenith-icon-bar__list zenith-icon-bar__list--{{ section.settings.alignment }} zenith-icon-bar__list--m-{{ section.settings.mobile_layout }}" role="list">
-      {%- for block in section.blocks -%}
-        <li class="zenith-icon-bar__item" id="Block-{{ block.id }}" {{ block.shopify_attributes }}>
-          {%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}" class="zenith-icon-bar__link">{%- endif -%}
-          {%- render 'zenith-icon', icon: block.settings.icon -%}
-          <span>{{ block.settings.text | escape }}</span>
-          {%- if block.settings.link != blank -%}</a>{%- endif -%}
-        </li>
+  <div class="page-width zenith-icon-bar__viewport">
+    <div class="zenith-icon-bar__track">
+      {%- for pass in (1..passes) -%}
+        {%- liquid
+          assign clone = false
+          if pass == 2
+            assign clone = true
+          endif
+        -%}
+        <ul
+          class="zenith-icon-bar__list zenith-icon-bar__list--{{ section.settings.alignment }}{% if clone %} zenith-icon-bar__list--clone{% endif %}"
+          role="list"
+          {% if clone %}
+            aria-hidden="true"
+          {% endif %}
+        >
+          {%- for block in section.blocks -%}
+            <li
+              class="zenith-icon-bar__item"
+              {% unless clone %}
+                id="Block-{{ block.id }}" {{ block.shopify_attributes }}
+              {% endunless %}
+            >
+              {%- if block.settings.link != blank -%}
+                <a
+                  href="{{ block.settings.link }}"
+                  class="zenith-icon-bar__link"
+                  {% if clone %}
+                    tabindex="-1"
+                  {% endif %}
+                >
+              {%- endif -%}
+              {%- if block.settings.icon_image != blank -%}
+                {{
+                  block.settings.icon_image
+                  | image_url: width: 96
+                  | image_tag: class: 'zenith-icon zenith-icon-bar__img', loading: 'lazy', alt: ''
+                }}
+              {%- else -%}
+                {%- case block.settings.icon -%}
+                  {%- when 'thumbs_up', 'certificate', 'farm', 'dropper' -%}
+                    <svg class="zenith-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                      {%- case block.settings.icon -%}
+                        {%- when 'thumbs_up' -%}
+                          <path d="M7.5 10.5v10h-4v-10z"/><path d="M7.5 10.5l3.6-6.9a1.9 1.9 0 0 1 3.4 1.5L13.6 9h5.3a2 2 0 0 1 2 2.4l-1.5 7.4a2 2 0 0 1-2 1.7H7.5"/>
+                        {%- when 'certificate' -%}
+                          <path d="M12.5 18H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v5"/><path d="M7 8.5h7M7 12h4"/><circle cx="17.5" cy="14" r="3"/><path d="M15.8 16.5L15 21l2.5-1.3L20 21l-.8-4.5"/>
+                        {%- when 'farm' -%}
+                          <path d="M7.5 12a4.5 4.5 0 0 1 9 0"/><path d="M12 3.5v2M5.8 6l1.4 1.4M18.2 6l-1.4 1.4M3 12h2.5M18.5 12H21"/><path d="M3 15.5c3-1 6-1 9 0s6 1 9 0M3 19c3-1 6-1 9 0s6 1 9 0"/>
+                        {%- when 'dropper' -%}
+                          <path d="M15 3.8l5.2 5.2-2.3 2.3-5.2-5.2z"/><path d="M13.8 7.2L5.5 15.5 4 20l4.5-1.5 8.3-8.3"/><path d="M8.5 12.5h5"/>
+                      {%- endcase -%}
+                    </svg>
+                  {%- else -%}
+                    {%- render 'zenith-icon', icon: block.settings.icon -%}
+                {%- endcase -%}
+              {%- endif -%}
+              <span>{{ block.settings.text | escape | replace: '[customers]', settings.customer_count }}</span>
+              {%- if block.settings.link != blank -%}</a>{%- endif -%}
+            </li>
+          {%- endfor -%}
+        </ul>
       {%- endfor -%}
-    </ul>
+    </div>
   </div>
 </div>
 
@@ -26,10 +89,7 @@
   "class": "section",
   "max_blocks": 8,
   "disabled_on": {
-    "groups": [
-      "header",
-      "footer"
-    ]
+    "groups": ["header", "footer"]
   },
   "settings": [
     {
@@ -42,21 +102,15 @@
       "label": "Desktop alignment",
       "default": "spread",
       "options": [
-        {
-          "value": "spread",
-          "label": "Spread evenly"
-        },
-        {
-          "value": "center",
-          "label": "Centered"
-        }
+        { "value": "spread", "label": "Spread evenly" },
+        { "value": "center", "label": "Centered" }
       ]
     },
     {
       "type": "checkbox",
       "id": "show_border",
       "label": "Show top and bottom border",
-      "default": true
+      "default": false
     },
     {
       "type": "range",
@@ -66,12 +120,12 @@
       "max": 48,
       "step": 2,
       "unit": "px",
-      "default": 20
+      "default": 22
     },
     {
       "type": "range",
       "id": "gap",
-      "label": "Space between items",
+      "label": "Minimum space between items",
       "min": 8,
       "max": 120,
       "step": 4,
@@ -86,22 +140,17 @@
       "type": "color_scheme",
       "id": "color_scheme",
       "label": "Color scheme",
-      "default": "scheme-1"
+      "default": "scheme-4"
     },
     {
       "type": "select",
       "id": "icon_color",
       "label": "Icon color",
-      "default": "accent",
+      "default": "dawn_gold",
       "options": [
-        {
-          "value": "accent",
-          "label": "Brand gold"
-        },
-        {
-          "value": "text",
-          "label": "Text color"
-        }
+        { "value": "dawn_gold", "label": "Light gold (Dawn Gold)" },
+        { "value": "accent", "label": "Brand gold (Summit Gold)" },
+        { "value": "text", "label": "Text color" }
       ]
     },
     {
@@ -126,17 +175,23 @@
       "type": "select",
       "id": "mobile_layout",
       "label": "Mobile layout",
-      "default": "scroll",
+      "default": "marquee",
       "options": [
-        {
-          "value": "scroll",
-          "label": "Swipe row"
-        },
-        {
-          "value": "grid",
-          "label": "2-column grid"
-        }
+        { "value": "marquee", "label": "Auto-scrolling row" },
+        { "value": "scroll", "label": "Swipe row" },
+        { "value": "grid", "label": "2-column grid" }
       ]
+    },
+    {
+      "type": "range",
+      "id": "marquee_speed",
+      "label": "Auto-scroll speed",
+      "info": "Seconds for one full loop. Higher = slower. Pauses on hover and for visitors who prefer reduced motion.",
+      "min": 10,
+      "max": 60,
+      "step": 1,
+      "unit": "s",
+      "default": 25
     },
     {
       "type": "range",
@@ -146,7 +201,7 @@
       "max": 20,
       "step": 1,
       "unit": "px",
-      "default": 13
+      "default": 14
     },
     {
       "type": "range",
@@ -156,7 +211,7 @@
       "max": 40,
       "step": 2,
       "unit": "px",
-      "default": 18
+      "default": 22
     },
     {
       "type": "range",
@@ -166,7 +221,7 @@
       "max": 64,
       "step": 4,
       "unit": "px",
-      "default": 20
+      "default": 24
     },
     {
       "type": "header",
@@ -178,9 +233,9 @@
       "label": "Top padding",
       "min": 0,
       "max": 100,
-      "step": 4,
+      "step": 2,
       "unit": "px",
-      "default": 16
+      "default": 12
     },
     {
       "type": "range",
@@ -188,9 +243,9 @@
       "label": "Bottom padding",
       "min": 0,
       "max": 100,
-      "step": 4,
+      "step": 2,
       "unit": "px",
-      "default": 16
+      "default": 12
     },
     {
       "type": "range",
@@ -198,9 +253,9 @@
       "label": "Top padding (mobile)",
       "min": 0,
       "max": 100,
-      "step": 4,
+      "step": 2,
       "unit": "px",
-      "default": 12
+      "default": 10
     },
     {
       "type": "range",
@@ -208,9 +263,9 @@
       "label": "Bottom padding (mobile)",
       "min": 0,
       "max": 100,
-      "step": 4,
+      "step": 2,
       "unit": "px",
-      "default": 12
+      "default": 10
     }
   ],
   "blocks": [
@@ -228,77 +283,40 @@
           "label": "Icon",
           "default": "shield",
           "options": [
-            {
-              "value": "shield",
-              "label": "Shield"
-            },
-            {
-              "value": "refresh",
-              "label": "Money back"
-            },
-            {
-              "value": "cash",
-              "label": "Cash"
-            },
-            {
-              "value": "truck",
-              "label": "Delivery"
-            },
-            {
-              "value": "certified",
-              "label": "Certified"
-            },
-            {
-              "value": "leaf",
-              "label": "Natural"
-            },
-            {
-              "value": "flag",
-              "label": "Flag"
-            },
-            {
-              "value": "sun",
-              "label": "Climate"
-            },
-            {
-              "value": "droplet",
-              "label": "Droplet"
-            },
-            {
-              "value": "lock",
-              "label": "Secure"
-            },
-            {
-              "value": "box",
-              "label": "Package"
-            },
-            {
-              "value": "check_circle",
-              "label": "Check"
-            },
-            {
-              "value": "clock",
-              "label": "Clock"
-            },
-            {
-              "value": "gift",
-              "label": "Gift"
-            },
-            {
-              "value": "user",
-              "label": "Person"
-            },
-            {
-              "value": "chat",
-              "label": "Chat"
-            }
+            { "value": "thumbs_up", "label": "Thumbs up" },
+            { "value": "cash", "label": "Cash" },
+            { "value": "certificate", "label": "Certificate" },
+            { "value": "farm", "label": "Farm / sunrise" },
+            { "value": "dropper", "label": "Dropper" },
+            { "value": "shield", "label": "Shield" },
+            { "value": "refresh", "label": "Money back" },
+            { "value": "truck", "label": "Delivery" },
+            { "value": "certified", "label": "Certified" },
+            { "value": "badge_check", "label": "Badge check" },
+            { "value": "leaf", "label": "Natural" },
+            { "value": "flag", "label": "Flag" },
+            { "value": "sun", "label": "Climate" },
+            { "value": "droplet", "label": "Droplet" },
+            { "value": "lock", "label": "Secure" },
+            { "value": "box", "label": "Package" },
+            { "value": "check_circle", "label": "Check" },
+            { "value": "clock", "label": "Clock" },
+            { "value": "gift", "label": "Gift" },
+            { "value": "user", "label": "Person" },
+            { "value": "chat", "label": "Chat" }
           ]
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_image",
+          "label": "Custom icon",
+          "info": "Optional. Replaces the icon above. Square SVG/PNG, shown at icon size."
         },
         {
           "type": "text",
           "id": "text",
           "label": "Text",
-          "default": "30-Day Money-Back Guarantee"
+          "default": "Zenith Money-Back Guarantee"
         },
         {
           "type": "url",
@@ -312,34 +330,11 @@
     {
       "name": "Zenith · Icon bar",
       "blocks": [
-        {
-          "type": "item",
-          "settings": {
-            "icon": "refresh",
-            "text": "30-Day Money-Back Guarantee"
-          }
-        },
-        {
-          "type": "item",
-          "settings": {
-            "icon": "cash",
-            "text": "Cash On Delivery"
-          }
-        },
-        {
-          "type": "item",
-          "settings": {
-            "icon": "certified",
-            "text": "FDA-Notified Products"
-          }
-        },
-        {
-          "type": "item",
-          "settings": {
-            "icon": "leaf",
-            "text": "100% Grass-Fed Beef Tallow"
-          }
-        }
+        { "type": "item", "settings": { "icon": "thumbs_up", "text": "Zenith Money-Back Guarantee" } },
+        { "type": "item", "settings": { "icon": "cash", "text": "Cash On Delivery" } },
+        { "type": "item", "settings": { "icon": "certificate", "text": "FDA-Notified Products" } },
+        { "type": "item", "settings": { "icon": "farm", "text": "100% Grass-Fed Beef Tallow" } },
+        { "type": "item", "settings": { "icon": "dropper", "text": "Formulated For Filipinos" } }
       ]
     }
   ]

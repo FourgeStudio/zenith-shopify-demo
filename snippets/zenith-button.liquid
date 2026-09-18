@@ -1,0 +1,26 @@
+{% comment %}
+  Brand link button (styles in zenith-base.css → "Brand buttons").
+  Accepts:
+    label {String}, link {String} optional (blank → disabled link)
+    style {String} 'gold' | 'dark' | 'outline' | 'light' | 'scheme' (default 'gold')
+    icon {String} 'arrow_right' | 'cart' | 'none' (default 'arrow_right')
+    full {Boolean} full width, class {String} optional
+  Usage: {% render 'zenith-button', label: section.settings.button_label, link: section.settings.button_link, style: section.settings.button_style %}
+{% endcomment %}
+{%- if label != blank -%}
+  {%- assign btn_style = style | default: 'gold' -%}
+  {%- assign btn_icon = icon | default: 'arrow_right' -%}
+  <a
+    {% if link != blank %}
+      href="{{ link }}"
+    {% else %}
+      role="link" aria-disabled="true"
+    {% endif %}
+    class="button zenith-btn zenith-btn--{{ btn_style }}{% if full %} zenith-btn--full{% endif %} {{ class }}"
+  >
+    <span>{{ label | escape }}</span>
+    {%- if btn_icon != 'none' -%}
+      {%- render 'zenith-icon', icon: btn_icon, class: 'zenith-btn__icon' -%}
+    {%- endif -%}
+  </a>
+{%- endif -%}

@@ -1,25 +1,75 @@
 {{ 'zenith-hero.css' | asset_url | stylesheet_tag }}
 
+{%- liquid
+  assign s = section.settings
+
+  assign has_promo = false
+  if s.ribbon_text != blank or s.highlight_title != blank or s.badge_text != blank
+    assign has_promo = true
+  endif
+
+  assign show_countdown = false
+  if s.countdown_end_date != blank
+    assign show_countdown = true
+  endif
+
+  assign btn_style = s.button_style | default: 'gold'
+  assign mobile_label = s.button_label_mobile | default: s.button_label
+  assign mobile_link = s.button_link_mobile | default: s.button_link
+  assign split_buttons = false
+  if s.button_label_mobile != blank or s.button_link_mobile != blank
+    assign split_buttons = true
+  endif
+-%}
+
+{%- if show_countdown -%}
+  {{ 'zenith-countdown.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'zenith-countdown.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+{%- if s.button_product != blank -%}
+  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
 {%- capture extra -%}
-  --z-hero-h: {{ section.settings.height }}px;
-  --z-hero-h-m: {{ section.settings.mobile_height }}px;
-  {%- render 'zenith-overlay-vars', settings: section.settings -%}
+  --z-hero-h: {{ s.height }}px;
+  --z-hero-h-m: {{ s.mobile_height }}px;
+  --z-hero-py: {{ s.vertical_padding }}px;
+  --z-hero-py-m: {{ s.vertical_padding_mobile }}px;
+  --z-hero-eg: {{ s.eyebrow_spacing }}px;
+  --z-hero-tg: {{ s.text_spacing }}px;
+  --z-ov-cover-m: {{ s.mobile_overlay_coverage }}%;
+  --z-hl-fs: {{ s.highlight_font_size }}px;
+  --z-hl-fs-m: {{ s.highlight_font_size_mobile }}px;
+  --z-rib-fs: {{ s.ribbon_font_size }}px;
+  --z-rib-fs-m: {{ s.ribbon_font_size_mobile }}px;
+  --z-badge-fs: {{ s.badge_font_size }}px;
+  --z-badge-fs-m: {{ s.badge_font_size_mobile }}px;
+  --z-rib-bg: {{ s.ribbon_color }};
+  --z-rib-fg: {{ s.ribbon_text_color }};
+  --z-hl-color: {{ s.highlight_color }};
+  --z-badge-bg: {{ s.badge_color }};
+  --z-badge-fg: {{ s.badge_text_color }};
+  --z-cd-strip-bg: {{ s.countdown_background_color }};
+  --z-cd-strip-fg: {{ s.countdown_text_color }};
+  --z-cd-box: {{ s.countdown_box_color }};
+  --z-cd-digit: {{ s.countdown_digit_color }};
+  {%- render 'zenith-overlay-vars', settings: s -%}
 {%- endcapture -%}
 {%- render 'zenith-section-style', section: section, extra: extra -%}
 
 <section
   id="Zenith-{{ section.id }}"
-  class="zenith-section zenith-hero color-{{ section.settings.color_scheme }} gradient zenith-hero--{{ section.settings.content_position }} zenith-hero--v-{{ section.settings.content_vertical }} zenith-hero--m-{{ section.settings.mobile_alignment }}"
+  class="zenith-section zenith-hero color-{{ s.color_scheme }} gradient zenith-hero--{{ s.content_position }} zenith-hero--v-{{ s.content_vertical }} zenith-hero--m-{{ s.mobile_alignment }} zenith-hero--m-text-{{ s.mobile_text_alignment }}{% if s.mobile_button_bottom %} zenith-hero--m-pin{% endif %}{% if s.mobile_button_full %} zenith-hero--m-full{% endif %}"
 >
   <div class="zenith-hero__inner">
     <div class="zenith-media zenith-hero__media">
-      {%- if section.settings.image != blank -%}
+      {%- if s.image != blank -%}
         {%- assign desktop_class = '' -%}
-        {%- if section.settings.mobile_image != blank -%}
+        {%- if s.mobile_image != blank -%}
           {%- assign desktop_class = 'zenith-hide-mobile' -%}
         {%- endif -%}
         {{
-          section.settings.image
+          s.image
           | image_url: width: 2400
           | image_tag:
             widths: '750, 1100, 1500, 1920, 2400',
@@ -28,9 +78,9 @@
             loading: 'eager',
             class: desktop_class
         }}
-        {%- if section.settings.mobile_image != blank -%}
+        {%- if s.mobile_image != blank -%}
           {{
-            section.settings.mobile_image
+            s.mobile_image
             | image_url: width: 1500
             | image_tag:
               widths: '375, 550, 750, 1100, 1500',
@@ -40,38 +90,138 @@
               class: 'zenith-hide-desktop'
           }}
         {%- endif -%}
+      {%- elsif s.mobile_image != blank -%}
+        {{
+          s.mobile_image
+          | image_url: width: 1500
+          | image_tag:
+            widths: '375, 550, 750, 1100, 1500',
+            sizes: '100vw',
+            fetchpriority: 'high',
+            loading: 'eager'
+        }}
       {%- else -%}
         {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
       {%- endif -%}
     </div>
-    {%- render 'zenith-overlay', style: section.settings.overlay_style, mobile_style: section.settings.mobile_overlay_style -%}
+    {%- render 'zenith-overlay', style: s.overlay_style, mobile_style: s.mobile_overlay_style -%}
 
     <div class="page-width zenith-hero__content-wrap">
       <div class="zenith-hero__content">
-        {%- render 'zenith-section-heading',
-          eyebrow: section.settings.eyebrow,
-          heading: section.settings.heading,
-          subheading: section.settings.text,
-          alignment: section.settings.content_position,
-          uppercase: section.settings.heading_uppercase,
-          tag: section.settings.heading_tag,
-          class: 'zenith-hero__heading'
-        -%}
-        {%- if section.settings.button_label != blank -%}
-          <a
-            {% if section.settings.button_link != blank %}
-              href="{{ section.settings.button_link }}"
-            {% else %}
-              role="link" aria-disabled="true"
-            {% endif %}
-            class="button zenith-hero__button"
-          >
-            {{- section.settings.button_label | escape -}}
-          </a>
+        {%- if has_promo -%}
+          <div class="zenith-hero__promo">
+            {%- if s.ribbon_text != blank -%}
+              <p class="zenith-hero__ribbon">
+                {{- s.ribbon_text | escape | replace: '[customers]', settings.customer_count -}}
+              </p>
+            {%- endif -%}
+            {%- if s.highlight_title != blank -%}
+              <p class="zenith-hero__highlight">
+                {{- s.highlight_title | escape | replace: '[customers]', settings.customer_count -}}
+              </p>
+            {%- endif -%}
+            {%- if s.badge_text != blank -%}
+              <p class="zenith-hero__badge">
+                {{- s.badge_text | escape | replace: '[customers]', settings.customer_count -}}
+              </p>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        {%- if s.heading_mobile != blank -%}
+          {%- render 'zenith-section-heading',
+            eyebrow: s.eyebrow,
+            heading: s.heading,
+            subheading: s.text,
+            alignment: s.content_position,
+            uppercase: s.heading_uppercase,
+            tag: s.heading_tag,
+            class: 'zenith-hero__heading zenith-hide-mobile'
+          -%}
+          {%- render 'zenith-section-heading',
+            eyebrow: s.eyebrow,
+            heading: s.heading_mobile,
+            subheading: s.text,
+            alignment: s.content_position,
+            uppercase: s.heading_uppercase,
+            tag: s.heading_tag,
+            class: 'zenith-hero__heading zenith-hide-desktop'
+          -%}
+        {%- else -%}
+          {%- render 'zenith-section-heading',
+            eyebrow: s.eyebrow,
+            heading: s.heading,
+            subheading: s.text,
+            alignment: s.content_position,
+            uppercase: s.heading_uppercase,
+            tag: s.heading_tag,
+            class: 'zenith-hero__heading'
+          -%}
+        {%- endif -%}
+
+        {%- if s.button_label != blank or mobile_label != blank -%}
+          <div class="zenith-hero__actions">
+            {%- liquid
+              assign desktop_hide = ''
+              if split_buttons
+                assign desktop_hide = ' zenith-hide-mobile'
+              endif
+            -%}
+            {%- if s.button_label != blank -%}
+              {%- if s.button_product != blank -%}
+                {%- assign form_id = 'ZenithHeroATC-' | append: section.id -%}
+                <div class="zenith-hero__atc{{ desktop_hide }}">
+                  {%- render 'zenith-add-to-cart',
+                    product: s.button_product,
+                    form_id: form_id,
+                    label: s.button_label,
+                    style: btn_style,
+                    icon: 'arrow_right',
+                    class: 'zenith-hero__button'
+                  -%}
+                </div>
+              {%- else -%}
+                {%- assign btn_class = 'zenith-hero__button' | append: desktop_hide -%}
+                {%- render 'zenith-button',
+                  label: s.button_label,
+                  link: s.button_link,
+                  style: btn_style,
+                  class: btn_class
+                -%}
+              {%- endif -%}
+            {%- endif -%}
+            {%- if split_buttons -%}
+              {%- render 'zenith-button',
+                label: mobile_label,
+                link: mobile_link,
+                style: btn_style,
+                class: 'zenith-hero__button zenith-hide-desktop'
+              -%}
+            {%- endif -%}
+          </div>
         {%- endif -%}
       </div>
     </div>
   </div>
+
+  {%- if show_countdown -%}
+    <div class="zenith-hero__countdown" data-countdown-wrapper>
+      <div class="page-width zenith-hero__countdown-inner">
+        {%- if s.countdown_label != blank -%}
+          <p class="zenith-hero__countdown-label">
+            {{- s.countdown_label | escape | replace: '[customers]', settings.customer_count -}}
+          </p>
+        {%- endif -%}
+        {%- render 'zenith-countdown',
+          end_date: s.countdown_end_date,
+          end_time: s.countdown_end_time,
+          timezone: s.countdown_timezone,
+          hide_expired: s.countdown_hide_expired,
+          show_labels: s.countdown_show_labels
+        -%}
+      </div>
+    </div>
+  {%- endif -%}
 </section>
 
 {% schema %}
@@ -80,10 +230,7 @@
   "tag": "div",
   "class": "section",
   "disabled_on": {
-    "groups": [
-      "header",
-      "footer"
-    ]
+    "groups": ["header", "footer"]
   },
   "settings": [
     {
@@ -94,13 +241,20 @@
       "type": "text",
       "id": "eyebrow",
       "label": "Eyebrow",
-      "default": "Trusted by 100,000+ Filipino men"
+      "default": "Trusted by [customers] Filipino men",
+      "info": "[customers] shows the number set in Theme settings → Zenith → Customer count."
     },
     {
       "type": "text",
       "id": "heading",
       "label": "Heading",
       "default": "The Maintenance System Built for Filipino Men"
+    },
+    {
+      "type": "text",
+      "id": "heading_mobile",
+      "label": "Mobile heading",
+      "info": "Optional. Leave blank to use the heading above."
     },
     {
       "type": "richtext",
@@ -120,16 +274,107 @@
       "label": "Button link"
     },
     {
+      "type": "product",
+      "id": "button_product",
+      "label": "Add product to cart",
+      "info": "Optional. When set, the desktop button adds this product to the cart instead of following the link."
+    },
+    {
+      "type": "text",
+      "id": "button_label_mobile",
+      "label": "Mobile button label",
+      "default": "Shop Zenith Products",
+      "info": "Optional. Leave this and the mobile link blank to use the same button as desktop."
+    },
+    {
+      "type": "url",
+      "id": "button_link_mobile",
+      "label": "Mobile button link",
+      "info": "Optional. Blank = button link above."
+    },
+    {
       "type": "image_picker",
       "id": "image",
       "label": "Desktop image",
-      "info": "Recommended 2880 × 1120px"
+      "info": "Recommended 2880 × 1080px"
     },
     {
       "type": "image_picker",
       "id": "mobile_image",
       "label": "Mobile image",
-      "info": "Optional. Recommended 1125 × 1500px"
+      "info": "Optional. Recommended 1206 × 1620px"
+    },
+    {
+      "type": "header",
+      "content": "Sale extras (optional)"
+    },
+    {
+      "type": "paragraph",
+      "content": "Ribbon, highlight title and badge show above the eyebrow for sale campaigns. Leave blank to hide."
+    },
+    {
+      "type": "text",
+      "id": "ribbon_text",
+      "label": "Ribbon text",
+      "placeholder": "GET UP TO 50% OFF SELECT PRODUCTS"
+    },
+    {
+      "type": "text",
+      "id": "highlight_title",
+      "label": "Highlight title",
+      "placeholder": "9.9 SALE IS HERE"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "placeholder": "Philippine FDA Notified"
+    },
+    {
+      "type": "header",
+      "content": "Countdown strip (optional)"
+    },
+    {
+      "type": "text",
+      "id": "countdown_label",
+      "label": "Countdown text",
+      "placeholder": "Payday Sale for Aug 13–15 Only. End in"
+    },
+    {
+      "type": "text",
+      "id": "countdown_end_date",
+      "label": "End date",
+      "placeholder": "2026-09-15",
+      "info": "Format YYYY-MM-DD. Leave empty to hide the strip."
+    },
+    {
+      "type": "text",
+      "id": "countdown_end_time",
+      "label": "End time",
+      "default": "23:59",
+      "info": "24-hour HH:MM"
+    },
+    {
+      "type": "select",
+      "id": "countdown_timezone",
+      "label": "Timezone",
+      "default": "+08:00",
+      "options": [
+        { "value": "+08:00", "label": "Philippines (UTC+8)" },
+        { "value": "Z", "label": "UTC" }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "countdown_hide_expired",
+      "label": "Hide strip when the countdown ends",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "countdown_show_labels",
+      "label": "Show unit labels (Days, Hrs, Min, Sec)",
+      "default": false
     },
     {
       "type": "header",
@@ -138,48 +383,33 @@
     {
       "type": "select",
       "id": "content_position",
-      "label": "Content alignment",
+      "label": "Desktop content alignment",
       "default": "left",
       "options": [
-        {
-          "value": "left",
-          "label": "Left"
-        },
-        {
-          "value": "center",
-          "label": "Center"
-        }
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
       ]
     },
     {
       "type": "select",
       "id": "content_vertical",
-      "label": "Content vertical position",
+      "label": "Desktop content vertical position",
       "default": "middle",
       "options": [
-        {
-          "value": "top",
-          "label": "Top"
-        },
-        {
-          "value": "middle",
-          "label": "Middle"
-        },
-        {
-          "value": "bottom",
-          "label": "Bottom"
-        }
+        { "value": "top", "label": "Top" },
+        { "value": "middle", "label": "Middle" },
+        { "value": "bottom", "label": "Bottom" }
       ]
     },
     {
       "type": "range",
       "id": "height",
-      "label": "Height",
+      "label": "Desktop height",
       "min": 360,
       "max": 900,
       "step": 20,
       "unit": "px",
-      "default": 560
+      "default": 540
     },
     {
       "type": "range",
@@ -189,17 +419,47 @@
       "max": 1000,
       "step": 20,
       "unit": "px",
-      "default": 560
+      "default": 600
+    },
+    {
+      "type": "range",
+      "id": "vertical_padding",
+      "label": "Content top and bottom padding",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_spacing",
+      "label": "Space below eyebrow",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "text_spacing",
+      "label": "Space between heading and text",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 8
     },
     {
       "type": "range",
       "id": "content_gap",
-      "label": "Space between heading and button",
+      "label": "Space above button",
       "min": 0,
       "max": 80,
       "step": 4,
       "unit": "px",
-      "default": 24
+      "default": 32
     },
     {
       "type": "header",
@@ -213,41 +473,37 @@
     },
     {
       "type": "select",
-      "id": "overlay_style",
-      "label": "Image overlay",
-      "default": "left",
+      "id": "button_style",
+      "label": "Button style",
+      "default": "gold",
       "options": [
-        {
-          "value": "none",
-          "label": "None"
-        },
-        {
-          "value": "solid",
-          "label": "Solid"
-        },
-        {
-          "value": "bottom",
-          "label": "Gradient from bottom"
-        },
-        {
-          "value": "top",
-          "label": "Gradient from top"
-        },
-        {
-          "value": "left",
-          "label": "Gradient from left"
-        },
-        {
-          "value": "right",
-          "label": "Gradient from right"
-        }
+        { "value": "gold", "label": "Gold gradient" },
+        { "value": "dark", "label": "Dark" },
+        { "value": "outline", "label": "Outline" },
+        { "value": "light", "label": "Light" },
+        { "value": "scheme", "label": "Color scheme button" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "overlay_style",
+      "label": "Desktop image overlay",
+      "default": "top_left",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "solid", "label": "Solid" },
+        { "value": "top_left", "label": "Gradient from top-left corner" },
+        { "value": "bottom", "label": "Gradient from bottom" },
+        { "value": "top", "label": "Gradient from top" },
+        { "value": "left", "label": "Gradient from left" },
+        { "value": "right", "label": "Gradient from right" }
       ]
     },
     {
       "type": "color",
       "id": "overlay_color",
       "label": "Overlay color",
-      "default": "#121212"
+      "default": "#203940"
     },
     {
       "type": "range",
@@ -257,18 +513,72 @@
       "max": 100,
       "step": 5,
       "unit": "%",
-      "default": 80
+      "default": 100
     },
     {
       "type": "range",
       "id": "overlay_coverage",
-      "label": "Gradient length",
+      "label": "Desktop gradient length",
       "info": "How far the gradient reaches across the image",
       "min": 20,
       "max": 100,
       "step": 5,
       "unit": "%",
-      "default": 70
+      "default": 45
+    },
+    {
+      "type": "color",
+      "id": "ribbon_color",
+      "label": "Ribbon background",
+      "default": "#F6233B"
+    },
+    {
+      "type": "color",
+      "id": "ribbon_text_color",
+      "label": "Ribbon text",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "highlight_color",
+      "label": "Highlight title",
+      "default": "#EABE5F"
+    },
+    {
+      "type": "color",
+      "id": "badge_color",
+      "label": "Badge background",
+      "default": "#007941"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Badge text",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "countdown_background_color",
+      "label": "Countdown strip background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "countdown_text_color",
+      "label": "Countdown strip text",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "countdown_box_color",
+      "label": "Countdown number boxes",
+      "default": "#010101"
+    },
+    {
+      "type": "color",
+      "id": "countdown_digit_color",
+      "label": "Countdown numbers",
+      "default": "#FFFFFF"
     },
     {
       "type": "header",
@@ -281,14 +591,8 @@
       "default": "h2",
       "info": "The header already uses H1 on the home page",
       "options": [
-        {
-          "value": "h1",
-          "label": "H1"
-        },
-        {
-          "value": "h2",
-          "label": "H2"
-        }
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" }
       ]
     },
     {
@@ -310,12 +614,12 @@
     {
       "type": "range",
       "id": "subheading_font_size",
-      "label": "Subheading size",
+      "label": "Text size",
       "min": 12,
       "max": 28,
       "step": 1,
       "unit": "px",
-      "default": 16
+      "default": 18
     },
     {
       "type": "range",
@@ -325,7 +629,67 @@
       "max": 20,
       "step": 1,
       "unit": "px",
-      "default": 12
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "label": "Button text size",
+      "min": 14,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "highlight_font_size",
+      "label": "Highlight title size",
+      "min": 24,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "ribbon_font_size",
+      "label": "Ribbon text size",
+      "min": 10,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "badge_font_size",
+      "label": "Badge text size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "text_font_size",
+      "label": "Countdown text size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "countdown_font_size",
+      "label": "Countdown number size",
+      "min": 12,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 18
     },
     {
       "type": "header",
@@ -333,35 +697,36 @@
     },
     {
       "type": "select",
-      "id": "mobile_overlay_style",
-      "label": "Mobile image overlay",
-      "default": "bottom",
+      "id": "mobile_text_alignment",
+      "label": "Mobile text alignment",
+      "default": "center",
       "options": [
-        {
-          "value": "none",
-          "label": "None"
-        },
-        {
-          "value": "solid",
-          "label": "Solid"
-        },
-        {
-          "value": "bottom",
-          "label": "Gradient from bottom"
-        },
-        {
-          "value": "top",
-          "label": "Gradient from top"
-        },
-        {
-          "value": "left",
-          "label": "Gradient from left"
-        },
-        {
-          "value": "right",
-          "label": "Gradient from right"
-        }
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
       ]
+    },
+    {
+      "type": "select",
+      "id": "mobile_alignment",
+      "label": "Mobile content position",
+      "default": "top",
+      "options": [
+        { "value": "top", "label": "Top" },
+        { "value": "middle", "label": "Middle" },
+        { "value": "bottom", "label": "Bottom" }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_button_bottom",
+      "label": "Pin button to the bottom",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_button_full",
+      "label": "Full-width button",
+      "default": true
     },
     {
       "type": "range",
@@ -371,27 +736,42 @@
       "max": 800,
       "step": 20,
       "unit": "px",
-      "default": 560
+      "default": 540
     },
     {
       "type": "select",
-      "id": "mobile_alignment",
-      "label": "Mobile content position",
-      "default": "bottom",
+      "id": "mobile_overlay_style",
+      "label": "Mobile image overlay",
+      "default": "top",
       "options": [
-        {
-          "value": "top",
-          "label": "Top"
-        },
-        {
-          "value": "middle",
-          "label": "Middle"
-        },
-        {
-          "value": "bottom",
-          "label": "Bottom"
-        }
+        { "value": "none", "label": "None" },
+        { "value": "solid", "label": "Solid" },
+        { "value": "top_left", "label": "Gradient from top-left corner" },
+        { "value": "bottom", "label": "Gradient from bottom" },
+        { "value": "top", "label": "Gradient from top" },
+        { "value": "left", "label": "Gradient from left" },
+        { "value": "right", "label": "Gradient from right" }
       ]
+    },
+    {
+      "type": "range",
+      "id": "mobile_overlay_coverage",
+      "label": "Mobile gradient length",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 70
+    },
+    {
+      "type": "range",
+      "id": "vertical_padding_mobile",
+      "label": "Content top and bottom padding",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 24
     },
     {
       "type": "range",
@@ -406,22 +786,82 @@
     {
       "type": "range",
       "id": "subheading_font_size_mobile",
-      "label": "Subheading size",
+      "label": "Text size",
       "min": 12,
       "max": 24,
       "step": 1,
       "unit": "px",
-      "default": 15
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "button_font_size_mobile",
+      "label": "Button text size",
+      "min": 14,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "highlight_font_size_mobile",
+      "label": "Highlight title size",
+      "min": 20,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "ribbon_font_size_mobile",
+      "label": "Ribbon text size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "badge_font_size_mobile",
+      "label": "Badge text size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "text_font_size_mobile",
+      "label": "Countdown text size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "countdown_font_size_mobile",
+      "label": "Countdown number size",
+      "min": 10,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 16
     },
     {
       "type": "range",
       "id": "content_gap_mobile",
-      "label": "Space between heading and button",
+      "label": "Minimum space above button",
       "min": 0,
       "max": 64,
       "step": 4,
       "unit": "px",
-      "default": 16
+      "default": 24
     },
     {
       "type": "header",

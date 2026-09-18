@@ -1,0 +1,70 @@
+/* Countdown boxes (snippets/zenith-countdown.liquid). Per-instance vars on the section root:
+   --z-cdfs-m / --z-cdfs digit size, --z-cd-box box color, --z-cd-digit digit color. */
+.zenith-countdown {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: var(--z-space-1);
+}
+
+.zenith-countdown__unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--z-space-1);
+}
+
+.zenith-countdown__value {
+  display: block;
+  overflow: hidden;
+  min-width: 2.2ch;
+  padding: 0 var(--z-space-1);
+  border-radius: 2px;
+  background: var(--z-cd-box, #4e3a05);
+  color: var(--z-cd-digit, #ffffff);
+  font-family: var(--font-heading-family);
+  font-size: var(--z-cdfs-m, 1.6rem);
+  line-height: 1.12;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+.zenith-countdown__value > span {
+  display: block;
+}
+
+/* Short digit roll on change (design shows mid-roll digits). */
+.zenith-countdown__value > span.is-rolling {
+  animation: zenith-countdown-roll 0.3s ease-out;
+}
+
+.zenith-countdown__label {
+  font-size: 1rem;
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.75;
+}
+
+@keyframes zenith-countdown-roll {
+  from {
+    transform: translateY(-50%);
+    opacity: 0.2;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .zenith-countdown__value {
+    font-size: var(--z-cdfs, 1.8rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zenith-countdown__value > span.is-rolling {
+    animation: none;
+  }
+}

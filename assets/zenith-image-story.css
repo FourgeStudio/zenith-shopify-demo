@@ -1,87 +1,137 @@
+/* Zenith · Brand story — per-instance values come from CSS vars on #Zenith-{{ section.id }} */
 .zenith-story__grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--z-gap-m, var(--z-space-6));
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--z-gap-m, var(--z-space-5));
 }
 
-.zenith-story__media {
-  aspect-ratio: 4 / 3;
-}
+/* Mobile + tablet (stacked) image shape; side-by-side layout starts at 990px */
+.zenith-story__media { aspect-ratio: 3 / 2; }
 
-.zenith-story--portrait .zenith-story__media { aspect-ratio: 4 / 5; }
-.zenith-story--square .zenith-story__media { aspect-ratio: 1 / 1; }
+@media screen and (max-width: 989px) {
+  .zenith-story--m-classic .zenith-story__media { aspect-ratio: 4 / 3; }
+  .zenith-story--m-wide .zenith-story__media { aspect-ratio: 16 / 9; }
+  .zenith-story--m-square .zenith-story__media { aspect-ratio: 1 / 1; }
+  .zenith-story--m-portrait .zenith-story__media { aspect-ratio: 4 / 5; }
+}
 
 .zenith-story__content {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: center;
-  gap: var(--z-cgap-m, var(--z-space-4));
+  justify-content: flex-start;
+  min-width: 0;
 }
 
-.zenith-story__logo {
-  width: auto;
-  height: auto;
-  max-width: var(--z-logow, 20rem);
-}
-
-.zenith-story__heading {
+.zenith-story__content > * {
+  margin-top: 0;
   margin-bottom: 0;
 }
 
-.zenith-story__text {
-  font-size: var(--z-tfs-m, var(--z-text-sm));
-  line-height: 1.6;
-  color: rgba(var(--color-foreground), 0.8);
+.zenith-story__content > * + * {
+  margin-top: var(--z-cgap-m, 20px);
+}
+
+.zenith-story__content > * + .zenith-story__columns {
+  margin-top: var(--z-story-colsp-m, 16px);
+}
+
+.zenith-story__logo {
+  display: block;
+  width: var(--z-logow, 200px);
+  max-width: 100%;
+  height: auto;
+}
+
+.zenith-story__heading.zenith-heading {
+  margin-bottom: 0;
+}
+
+.zenith-story .zenith-heading__title,
+.zenith-story__column-title {
+  letter-spacing: 0;
+}
+
+.zenith-story__text,
+.zenith-story__column-text {
+  font-size: var(--z-tfs-m, 1.6rem);
+  line-height: 1.5;
+  color: rgba(var(--color-foreground), var(--z-story-text-a, 0.7));
+}
+
+.zenith-story__text > *,
+.zenith-story__column-text > * {
+  margin: 0;
+}
+
+/* Paragraph spacing = one line, as in the design */
+.zenith-story__text > * + *,
+.zenith-story__column-text > * + * {
+  margin-top: 1.5em;
 }
 
 .zenith-story__columns {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--z-space-5);
+  grid-template-columns: repeat(var(--z-story-cols-m, 1), minmax(0, 1fr));
+  gap: var(--z-story-colgap-m, 16px);
   width: 100%;
-  padding-top: var(--z-space-5);
-  border-top: 1px solid rgba(var(--color-foreground), 0.15);
-}
-
-.zenith-story__column {
-  font-size: var(--z-tfs-m, var(--z-text-sm));
-  line-height: 1.5;
-  color: rgba(var(--color-foreground), 0.8);
 }
 
 .zenith-story__column-title {
-  margin: 0 0 var(--z-space-2);
-  font-size: var(--z-ttfs-m, var(--z-h4));
+  margin: 0 0 var(--z-story-coltsp, 12px);
+  font-size: var(--z-ttfs-m, 3.2rem);
+  line-height: 1.05;
   text-transform: uppercase;
-  color: var(--z-gold);
+  color: var(--z-story-title-color, var(--z-dawn-gold));
 }
 
 @media screen and (min-width: 750px) {
-  .zenith-story__grid {
-    grid-template-columns: 1fr 1fr;
-    gap: var(--z-gap, var(--z-space-8));
+  .zenith-story__content > * + * {
+    margin-top: var(--z-cgap, 20px);
   }
 
-  .zenith-story__content {
-    gap: var(--z-cgap, var(--z-space-5));
+  .zenith-story__content > * + .zenith-story__columns {
+    margin-top: var(--z-story-colsp, 40px);
   }
 
   .zenith-story__text,
-  .zenith-story__column {
-    font-size: var(--z-tfs, var(--z-text-sm));
+  .zenith-story__column-text {
+    font-size: var(--z-tfs, 1.6rem);
+  }
+
+  .zenith-story__columns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--z-story-colgap, 32px);
   }
 
   .zenith-story__column-title {
-    font-size: var(--z-ttfs, var(--z-h4));
+    font-size: var(--z-ttfs, 3.2rem);
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .zenith-story__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--z-gap, var(--z-space-8));
+  }
+
+  .zenith-story--portrait .zenith-story__media { aspect-ratio: 4 / 5; }
+  .zenith-story--square .zenith-story__media { aspect-ratio: 1 / 1; }
+
+  .zenith-story--adapt .zenith-story__media {
+    aspect-ratio: auto;
+    min-height: var(--z-mmh, 720px);
   }
 
   .zenith-story--image-right .zenith-story__media {
     order: 2;
   }
 
-  .zenith-story--adapt .zenith-story__media {
-    aspect-ratio: auto;
-    min-height: var(--z-mmh, 48rem);
+  .zenith-story__content {
+    padding-top: var(--z-cpd, 0);
+    padding-bottom: var(--z-cpd, 0);
   }
+
+  .zenith-story--align-center .zenith-story__content { justify-content: center; }
+  .zenith-story--align-bottom .zenith-story__content { justify-content: flex-end; }
 }

@@ -2,14 +2,76 @@
   "name": "t:sections.header.name",
   "type": "header",
   "sections": {
+    "header": {
+      "type": "header",
+      "settings": {
+        "logo_position": "middle-center",
+        "mobile_logo_position": "center",
+        "menu": "main-menu",
+        "menu_type_desktop": "drawer",
+        "sticky_header_type": "always",
+        "show_line_separator": false,
+        "zenith_show_search": false,
+        "zenith_bar_height": 72,
+        "zenith_padding_x": 91,
+        "zenith_logo_width": 114,
+        "zenith_logo_offset": -3,
+        "zenith_icon_spacing": 36,
+        "zenith_badge_size": 11,
+        "color_scheme": "scheme-1",
+        "zenith_background": "#000000",
+        "zenith_badge_background": "#FFC939",
+        "zenith_badge_text": "#121212",
+        "menu_color_scheme": "scheme-1",
+        "enable_country_selector": false,
+        "enable_language_selector": false,
+        "zenith_bar_height_mobile": 56,
+        "zenith_padding_x_mobile": 11,
+        "zenith_logo_width_mobile": 114,
+        "drawer_button_label": "Add to Cart",
+        "drawer_button_icon": "chevron_right",
+        "drawer_show_social": true,
+        "drawer_email": "hello@tryzenith.ph",
+        "drawer_show_payment_icons": false,
+        "drawer_copyright": "An Amare Group Brand © [year] TryZenith PH",
+        "drawer_show_dividers": true,
+        "drawer_uppercase": true,
+        "drawer_padding_x": 20,
+        "drawer_padding_top": 20,
+        "drawer_item_height": 47,
+        "drawer_payment_width": 230,
+        "drawer_badge_width": 83,
+        "drawer_cta_style": "gold",
+        "drawer_background": "#1A1A1A",
+        "drawer_divider_color": "#303030",
+        "drawer_footer_background": "#202020",
+        "drawer_footer_divider_color": "#808080",
+        "drawer_font_size": 16,
+        "button_font_size": 22,
+        "button_font_size_mobile": 22,
+        "drawer_footer_font_size": 14,
+        "drawer_copyright_font_size": 12,
+        "margin_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
     "announcement-bar": {
       "type": "announcement-bar",
       "settings": {
-        "color_scheme": "scheme-5",
-        "show_line_separator": false,
-        "show_social": false,
         "auto_rotate": false,
         "change_slides_speed": 5,
+        "color_scheme": "scheme-5",
+        "zenith_background_gradient": "linear-gradient(90deg, rgba(234, 190, 95, 1) 0%, rgba(197, 147, 14, 1) 100%)",
+        "show_line_separator": false,
+        "zenith_height": 40,
+        "zenith_font": "body",
+        "zenith_font_weight": "500",
+        "zenith_font_size": 14,
+        "zenith_uppercase": false,
+        "zenith_height_mobile": 33,
+        "zenith_font_size_mobile": 14,
+        "show_social": false,
         "enable_country_selector": false,
         "enable_language_selector": false
       },
@@ -17,9 +79,7 @@
         "announcement-bar-0": {
           "type": "announcement",
           "settings": {
-            "text": "30-Day Money-Back Guarantee · Cash On Delivery Nationwide",
-            "text_alignment": "center",
-            "color_scheme": "scheme-5",
+            "text": "Zenith money-back guarantee.",
             "link": ""
           }
         }
@@ -27,28 +87,10 @@
       "block_order": [
         "announcement-bar-0"
       ]
-    },
-    "header": {
-      "type": "header",
-      "settings": {
-        "color_scheme": "scheme-1",
-        "menu_color_scheme": "scheme-4",
-        "logo_position": "middle-center",
-        "menu": "main-menu",
-        "menu_type_desktop": "drawer",
-        "sticky_header_type": "always",
-        "show_line_separator": false,
-        "enable_country_selector": false,
-        "enable_language_selector": false,
-        "mobile_logo_position": "center",
-        "margin_bottom": 0,
-        "padding_top": 12,
-        "padding_bottom": 12
-      }
     }
   },
   "order": [
-    "announcement-bar",
-    "header"
+    "header",
+    "announcement-bar"
   ]
 }

@@ -1,8 +1,9 @@
 <link rel="stylesheet" href="{{ 'component-list-menu.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-search.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-menu-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
-{%- comment -%} zenith: custom mobile menu drawer (snippets/zenith-header-drawer.liquid) {%- endcomment -%}
+{%- comment -%} zenith: custom menu drawer (snippets/zenith-header-drawer.liquid) + header bar styles (render-blocking: above the fold) {%- endcomment -%}
 <link rel="stylesheet" href="{{ 'zenith-header-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
+{{ 'zenith-header.css' | asset_url | stylesheet_tag }}
 <link
   rel="stylesheet"
   href="{{ 'component-cart-notification.css' | asset_url }}"
@@ -124,6 +125,51 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  {%- comment -%} zenith: per-instance header bar + menu drawer values (static rules: zenith-header.css, zenith-header-drawer.css) {%- endcomment -%}
+  {%- assign zs = section.settings %}
+  #Zenith-{{ section.id }} {
+    --zh-h: {{ zs.zenith_bar_height }}px;
+    --zh-h-m: {{ zs.zenith_bar_height_mobile }}px;
+    --zh-px: {{ zs.zenith_padding_x }}px;
+    --zh-px-m: {{ zs.zenith_padding_x_mobile }}px;
+    --zh-logo: {{ zs.zenith_logo_width }}px;
+    --zh-logo-m: {{ zs.zenith_logo_width_mobile }}px;
+    --zh-logo-y: {{ zs.zenith_logo_offset }}px;
+    --zh-icon-gap: {{ zs.zenith_icon_spacing }}px;
+    --zh-badge: {{ zs.zenith_badge_size }}px;
+    {%- if zs.zenith_background != blank %}
+    --zh-bg: {{ zs.zenith_background }};
+    {%- endif %}
+    {%- if zs.zenith_badge_background != blank %}
+    --zh-badge-bg: {{ zs.zenith_badge_background }};
+    {%- endif %}
+    {%- if zs.zenith_badge_text != blank %}
+    --zh-badge-fg: {{ zs.zenith_badge_text }};
+    {%- endif %}
+    --zd-px: {{ zs.drawer_padding_x }}px;
+    --zd-pt: {{ zs.drawer_padding_top }}px;
+    --zd-item-h: {{ zs.drawer_item_height }}px;
+    --zd-pay-w: {{ zs.drawer_payment_width }}px;
+    --zd-badge-w: {{ zs.drawer_badge_width }}px;
+    --zd-fs: {{ zs.drawer_font_size }}px;
+    --zd-email-fs: {{ zs.drawer_footer_font_size }}px;
+    --zd-copy-fs: {{ zs.drawer_copyright_font_size }}px;
+    --z-btnfs: {{ zs.button_font_size }}px;
+    --z-btnfs-m: {{ zs.button_font_size_mobile }}px;
+    {%- if zs.drawer_background != blank %}
+    --zd-bg: {{ zs.drawer_background }};
+    {%- endif %}
+    {%- if zs.drawer_footer_background != blank %}
+    --zd-footer-bg: {{ zs.drawer_footer_background }};
+    {%- endif %}
+    {%- if zs.drawer_divider_color != blank %}
+    --zd-divider: {{ zs.drawer_divider_color }};
+    {%- endif %}
+    {%- if zs.drawer_footer_divider_color != blank %}
+    --zd-footer-divider: {{ zs.drawer_footer_divider_color }};
+    {%- endif %}
+  }
 {%- endstyle -%}
 
 <script src="{{ 'cart-notification.js' | asset_url }}" defer="defer"></script>
@@ -144,11 +190,13 @@
   endif
 %}
 
+{%- comment -%} zenith: id + class hook for per-instance vars; search icon is optional (zenith_show_search) {%- endcomment -%}
 <{{ header_tag }}
+  id="Zenith-{{ section.id }}"
   {% if header_tag == 'sticky-header' %}
     data-sticky-type="{{ section.settings.sticky_header_type }}"
   {% endif %}
-  class="header-wrapper color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}"
+  class="header-wrapper zenith-header-wrapper color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}"
 >
   {%- liquid
     assign social_links = false
@@ -166,12 +214,16 @@
       assign language_selector = true
     endif
   -%}
-  <header class="header header--{{ section.settings.logo_position }} header--mobile-{{ section.settings.mobile_logo_position }} page-width{% if section.settings.menu_type_desktop == 'drawer' %} drawer-menu{% endif %}{% if section.settings.menu != blank %} header--has-menu{% endif %}{% if has_app_block %} header--has-app{% endif %}{% if social_links %} header--has-social{% endif %}{% if shop.customer_accounts_enabled %} header--has-account{% endif %}{% if country_selector or language_selector %} header--has-localizations{% endif %}">
+  <header class="header header--{{ section.settings.logo_position }} header--mobile-{{ section.settings.mobile_logo_position }} page-width{% if section.settings.menu_type_desktop == 'drawer' %} drawer-menu{% endif %}{% if section.settings.menu != blank %} header--has-menu{% endif %}{% if has_app_block %} header--has-app{% endif %}{% if social_links %} header--has-social{% endif %}{% if shop.customer_accounts_enabled %} header--has-account{% endif %}{% if country_selector or language_selector %} header--has-localizations{% endif %} zenith-header{% unless section.settings.zenith_show_search %} zenith-header--no-search{% endunless %}">
     {%- liquid
       assign render_search_left = false
       if section.settings.logo_position == 'top-center' or section.settings.menu == blank or shop.customer_accounts_enabled
         assign render_search_left = true
       endif
+      # zenith: search icon optional
+      unless section.settings.zenith_show_search
+        assign render_search_left = false
+      endunless
 
       if section.settings.menu != blank
         render 'zenith-header-drawer', show_country_selector: country_selector, show_language_selector: language_selector
@@ -300,14 +352,19 @@
           </localization-form>
         {%- endif -%}
       </div>
-      {% render 'header-search', input_id: 'Search-In-Modal' %}
+      {%- if section.settings.zenith_show_search -%}
+        {% render 'header-search', input_id: 'Search-In-Modal' %}
+      {%- endif -%}
 
       {%- if shop.customer_accounts_enabled -%}
         <shopify-account
           menu="{{ settings.customer_account_menu | default: 'customer-account-main-menu' }}"
           class="header__icon header__icon--account link focus-inset"
         >
-          <span slot="signed-out-avatar" class="svg-wrapper">{{ 'icon-account.svg' | inline_asset_content }}</span>
+          {%- comment -%} zenith: line user icon per design {%- endcomment -%}
+          <span slot="signed-out-avatar" class="svg-wrapper">
+            <svg class="zenith-icon zenith-header__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="12" cy="7.15" r="4.4"/><path d="M4.25 20.5v-1.25a4.5 4.5 0 0 1 4.5-4.5h6.5a4.5 4.5 0 0 1 4.5 4.5v1.25"/></svg>
+          </span>
           <span slot="signed-out-avatar" class="visually-hidden">{{ 'customer.log_in' | t }}</span>
         </shopify-account>
       {%- endif -%}
@@ -320,11 +377,10 @@
       {%- endfor -%}
 
       <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset" id="cart-icon-bubble">
-        {% if cart == empty %}
-          <span class="svg-wrapper">{{ 'icon-cart-empty.svg' | inline_asset_content }}</span>
-        {% else %}
-          <span class="svg-wrapper">{{ 'icon-cart.svg' | inline_asset_content }}</span>
-        {% endif %}
+        {%- comment -%} zenith: line cart icon per design (keep in sync with sections/cart-icon-bubble.liquid) {%- endcomment -%}
+        <span class="svg-wrapper">
+          <svg class="zenith-icon zenith-header__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 2.5h1.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 0 .75.75h14.5a.75.75 0 0 0 .75-.75V7a.75.75 0 0 0-.75-.75H4.5"/><circle cx="8.5" cy="21.25" r="1.4" fill="currentColor" stroke="none"/><circle cx="16.5" cy="21.25" r="1.4" fill="currentColor" stroke="none"/></svg>
+        </span>
         <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
         {%- if cart != empty -%}
           <div class="cart-count-bubble">
@@ -622,6 +678,78 @@
       "label": "t:sections.header.settings.show_line_separator.label"
     },
     {
+      "type": "checkbox",
+      "id": "zenith_show_search",
+      "label": "Show search icon",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "zenith_bar_height",
+      "label": "Bar height",
+      "min": 40,
+      "max": 120,
+      "step": 1,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "zenith_padding_x",
+      "label": "Side padding",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 91
+    },
+    {
+      "type": "range",
+      "id": "zenith_logo_width",
+      "label": "Logo width",
+      "info": "Overrides Theme settings > Logo width inside the header.",
+      "min": 60,
+      "max": 260,
+      "step": 2,
+      "unit": "px",
+      "default": 114
+    },
+    {
+      "type": "range",
+      "id": "zenith_logo_offset",
+      "label": "Logo vertical nudge",
+      "info": "Negative moves the logo up.",
+      "min": -10,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "default": -3
+    },
+    {
+      "type": "range",
+      "id": "zenith_icon_spacing",
+      "label": "Icon spacing (center to center)",
+      "min": 30,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "zenith_badge_size",
+      "label": "Cart count badge size",
+      "min": 8,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 11
+    },
+    {
       "type": "header",
       "content": "t:sections.header.settings.header__1.content"
     },
@@ -630,6 +758,25 @@
       "id": "color_scheme",
       "label": "t:sections.all.colors.label",
       "default": "scheme-1"
+    },
+    {
+      "type": "color",
+      "id": "zenith_background",
+      "label": "Bar background",
+      "info": "Clear to use the color scheme background.",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "zenith_badge_background",
+      "label": "Cart count badge",
+      "default": "#FFC939"
+    },
+    {
+      "type": "color",
+      "id": "zenith_badge_text",
+      "label": "Cart count badge text",
+      "default": "#121212"
     },
     {
       "type": "color_scheme",
@@ -661,23 +808,45 @@
     },
     {
       "type": "header",
-      "content": "Mobile menu"
+      "content": "Mobile"
+    },
+    {
+      "type": "range",
+      "id": "zenith_bar_height_mobile",
+      "label": "Bar height",
+      "min": 40,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "zenith_padding_x_mobile",
+      "label": "Side padding",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 11
+    },
+    {
+      "type": "range",
+      "id": "zenith_logo_width_mobile",
+      "label": "Logo width",
+      "min": 60,
+      "max": 160,
+      "step": 1,
+      "unit": "px",
+      "default": 114
+    },
+    {
+      "type": "header",
+      "content": "Menu drawer · Content"
     },
     {
       "type": "paragraph",
-      "content": "Styles the slide-out menu. Social links come from Theme settings > Social media."
-    },
-    {
-      "type": "checkbox",
-      "id": "drawer_show_dividers",
-      "label": "Show dividers between links",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "drawer_uppercase",
-      "label": "Uppercase links",
-      "default": true
+      "content": "Slide-in menu (opened by the menu icon on mobile and desktop). Links come from the Menu above; social links from Theme settings > Social media."
     },
     {
       "type": "text",
@@ -698,17 +867,25 @@
     },
     {
       "type": "select",
-      "id": "drawer_button_style",
-      "label": "Button style",
-      "default": "gradient",
+      "id": "drawer_button_icon",
+      "label": "Button icon",
+      "default": "chevron_right",
       "options": [
         {
-          "value": "gradient",
-          "label": "Gold gradient"
+          "value": "chevron_right",
+          "label": "Chevron"
         },
         {
-          "value": "solid",
-          "label": "Solid gold"
+          "value": "arrow_right",
+          "label": "Arrow"
+        },
+        {
+          "value": "cart",
+          "label": "Cart"
+        },
+        {
+          "value": "none",
+          "label": "None"
         }
       ]
     },
@@ -728,7 +905,7 @@
       "type": "image_picker",
       "id": "drawer_payment_image",
       "label": "Payment logos image",
-      "info": "e.g. GCash, Maya, Visa, Mastercard, BPI, BDO, UnionBank"
+      "info": "e.g. GCash, Maya, Visa, Mastercard, BPI, BDO, UnionBank (one strip image)"
     },
     {
       "type": "checkbox",
@@ -749,6 +926,183 @@
       "label": "Copyright text",
       "info": "[year] is replaced with the current year",
       "default": "An Amare Group Brand © [year] TryZenith PH"
+    },
+    {
+      "type": "header",
+      "content": "Menu drawer · Layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "drawer_show_dividers",
+      "label": "Show dividers between links",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "drawer_uppercase",
+      "label": "Uppercase links",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "drawer_padding_x",
+      "label": "Side padding",
+      "min": 8,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "drawer_padding_top",
+      "label": "Space above links",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "drawer_item_height",
+      "label": "Link row height",
+      "min": 36,
+      "max": 72,
+      "step": 1,
+      "unit": "px",
+      "default": 47
+    },
+    {
+      "type": "range",
+      "id": "drawer_payment_width",
+      "label": "Payment logos width",
+      "min": 120,
+      "max": 320,
+      "step": 2,
+      "unit": "px",
+      "default": 230
+    },
+    {
+      "type": "range",
+      "id": "drawer_badge_width",
+      "label": "Badge width",
+      "min": 40,
+      "max": 140,
+      "step": 1,
+      "unit": "px",
+      "default": 83
+    },
+    {
+      "type": "header",
+      "content": "Menu drawer · Colors"
+    },
+    {
+      "type": "select",
+      "id": "drawer_cta_style",
+      "label": "Button style",
+      "default": "gold",
+      "options": [
+        {
+          "value": "gold",
+          "label": "Gold gradient"
+        },
+        {
+          "value": "dark",
+          "label": "Dark"
+        },
+        {
+          "value": "outline",
+          "label": "Outline"
+        },
+        {
+          "value": "light",
+          "label": "Light"
+        },
+        {
+          "value": "scheme",
+          "label": "Color scheme button"
+        }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "drawer_background",
+      "label": "Menu background",
+      "info": "Clear to use the menu color scheme background.",
+      "default": "#1A1A1A"
+    },
+    {
+      "type": "color",
+      "id": "drawer_divider_color",
+      "label": "Link dividers",
+      "default": "#303030"
+    },
+    {
+      "type": "color",
+      "id": "drawer_footer_background",
+      "label": "Footer background",
+      "default": "#202020"
+    },
+    {
+      "type": "color",
+      "id": "drawer_footer_divider_color",
+      "label": "Footer divider",
+      "default": "#808080"
+    },
+    {
+      "type": "header",
+      "content": "Menu drawer · Typography"
+    },
+    {
+      "type": "range",
+      "id": "drawer_font_size",
+      "label": "Link size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "label": "Button text size (desktop)",
+      "min": 14,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "button_font_size_mobile",
+      "label": "Button text size (mobile)",
+      "min": 14,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "drawer_footer_font_size",
+      "label": "Email size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "drawer_copyright_font_size",
+      "label": "Copyright size",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 12
     },
     {
       "type": "header",

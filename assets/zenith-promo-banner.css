@@ -1,21 +1,43 @@
+/* Zenith · Promo banner — mobile first. Per-instance values are CSS vars on #Zenith-{section.id}. */
+
+.zenith-promo--inset .zenith-promo__container {
+  padding-left: var(--z-promo-inset-m, var(--z-space-4));
+  padding-right: var(--z-promo-inset-m, var(--z-space-4));
+}
+
 .zenith-promo__card {
   position: relative;
   overflow: hidden;
 }
 
-.zenith-promo__bg {
-  position: absolute;
-  inset: 0;
-  background: transparent;
-}
-
 .zenith-promo__body {
   position: relative;
-  z-index: 2;
   display: flex;
   flex-direction: column;
   gap: var(--z-space-5);
   padding: var(--z-cpd-m, var(--z-space-5));
+}
+
+.zenith-promo__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: transparent;
+}
+
+.zenith-promo__bg > img {
+  object-position: var(--z-promo-bgpos, right center);
+}
+
+/* The overlay div is empty; beat Dawn's `div:empty { display: none }`. */
+.zenith-promo .zenith-overlay {
+  display: block;
+}
+
+.zenith-promo__content,
+.zenith-promo__image {
+  position: relative;
+  z-index: 1;
 }
 
 .zenith-promo__card--m-image-first .zenith-promo__image {
@@ -27,15 +49,24 @@
   flex-direction: column;
   align-items: flex-start;
   gap: var(--z-cgap-m, var(--z-space-4));
-  max-width: var(--z-cmw, 56rem);
+  max-width: var(--z-cmw, 72rem);
 }
 
 .zenith-promo__heading {
+  gap: 0;
   margin-bottom: 0;
 }
 
+.zenith-promo__heading .zenith-heading__title {
+  line-height: 1.1;
+}
+
+.zenith-promo__heading .zenith-subheading {
+  margin-top: var(--z-promo-tg, var(--z-space-1));
+  color: rgb(var(--color-foreground));
+}
+
 .zenith-promo__image {
-  position: relative;
   display: flex;
   justify-content: center;
 }
@@ -54,15 +85,17 @@
   fill: rgba(var(--color-foreground), 0.3);
 }
 
+/* Countdown bar */
 .zenith-promo__countdown {
   position: relative;
   z-index: 2;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
-  gap: var(--z-space-3) var(--z-space-5);
-  padding: var(--z-space-4) var(--z-space-5);
+  gap: var(--z-space-2) var(--z-space-3);
+  padding: var(--z-space-2) var(--z-cpd-m, var(--z-space-5));
+  background: var(--z-cd-strip-bg, linear-gradient(90deg, #d6b356 50%, #c59300 100%));
+  color: var(--z-cd-strip-fg, #1a1a1a);
 }
 
 .zenith-promo__countdown[hidden] {
@@ -70,65 +103,39 @@
 }
 
 .zenith-promo__countdown-label {
-  font-size: var(--z-tfs, var(--z-text-sm));
-  font-weight: 500;
-}
-
-.zenith-countdown {
-  display: flex;
-  gap: var(--z-space-2);
-}
-
-.zenith-countdown__unit {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 48px;
-  padding: var(--z-space-1) var(--z-space-2);
-  border: 1px solid var(--z-gold);
-}
-
-.zenith-countdown__value {
-  font-family: var(--font-heading-family);
-  font-size: var(--z-cdfs-m, 2rem);
-  line-height: 1.1;
-  color: var(--z-gold);
-  font-variant-numeric: tabular-nums;
-}
-
-.zenith-countdown__label {
-  font-size: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  opacity: 0.7;
+  margin: 0;
+  font-size: var(--z-tfs-m, 1.4rem);
+  line-height: 1.5;
 }
 
 @media screen and (min-width: 750px) {
+  .zenith-promo--inset .zenith-promo__container {
+    padding-left: var(--z-promo-inset, var(--z-space-6));
+    padding-right: var(--z-promo-inset, var(--z-space-6));
+  }
+
   .zenith-promo__body {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     gap: var(--z-space-7);
+    min-height: var(--z-promo-mh, 0);
     padding: var(--z-cpd, var(--z-space-8));
   }
 
   .zenith-promo__content {
-    flex: 1 1 50%;
+    flex: 0 1 auto;
     gap: var(--z-cgap, var(--z-space-5));
-  }
-
-  .zenith-promo__image img,
-  .zenith-promo__image .placeholder-svg {
-    max-height: var(--z-imh, 32rem);
-  }
-
-  .zenith-countdown__value {
-    font-size: var(--z-cdfs, 2.4rem);
   }
 
   .zenith-promo__image {
     flex: 1 1 45%;
     order: 0;
+  }
+
+  .zenith-promo__image img,
+  .zenith-promo__image .placeholder-svg {
+    max-height: var(--z-imh, 32rem);
   }
 
   .zenith-promo__card--m-image-first .zenith-promo__image {
@@ -140,8 +147,11 @@
   }
 
   .zenith-promo__countdown {
-    justify-content: flex-start;
     padding-left: var(--z-cpd, var(--z-space-8));
     padding-right: var(--z-cpd, var(--z-space-8));
+  }
+
+  .zenith-promo__countdown-label {
+    font-size: var(--z-tfs, 1.6rem);
   }
 }

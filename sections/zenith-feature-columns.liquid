@@ -3,12 +3,29 @@
 {%- capture extra -%}
   --z-cols: {{ section.settings.columns_desktop }};
   --z-cols-m: {{ section.settings.columns_mobile }};
+  --z-img: {{ section.settings.image_size }}px;
+  --z-img-m: {{ section.settings.image_size_mobile }}px;
+  --z-igap: {{ section.settings.icon_gap }}px;
+  --z-igap-m: {{ section.settings.icon_gap_mobile }}px;
+  --z-tlh: {{ section.settings.text_line_height }}%;
+  --z-tlh-m: {{ section.settings.text_line_height_mobile }}%;
+  --z-text-a: {{ section.settings.text_opacity | divided_by: 100.0 }};
+  --z-ffs: {{ section.settings.footer_text_size }}px;
+  --z-ffs-m: {{ section.settings.footer_text_size_mobile }}px;
+  --z-fiw: {{ section.settings.footer_image_width }}px;
+  --z-fiw-m: {{ section.settings.footer_image_width_mobile }}px;
+  --z-fmw-m: {{ section.settings.footer_max_width_mobile }}px;
+  --z-fsp: {{ section.settings.footer_spacing }}px;
+  --z-fsp-m: {{ section.settings.footer_spacing_mobile }}px;
+  {%- if section.settings.icon_color != blank %}
+  --z-icon-color: {{ section.settings.icon_color }};
+  {%- endif %}
 {%- endcapture -%}
 {%- render 'zenith-section-style', section: section, extra: extra -%}
 
 <section
   id="Zenith-{{ section.id }}"
-  class="zenith-section zenith-features color-{{ section.settings.color_scheme }} gradient zenith-features--media-{{ section.settings.media_position }} zenith-features--{{ section.settings.image_ratio }} zenith-features--{{ section.settings.text_alignment }}"
+  class="zenith-section zenith-features color-{{ section.settings.color_scheme }} gradient zenith-features--media-{{ section.settings.media_position }} zenith-features--{{ section.settings.image_ratio }} zenith-features--{{ section.settings.text_alignment }} zenith-features--v-{{ section.settings.vertical_alignment }} zenith-features--mv-{{ section.settings.vertical_alignment_mobile }}"
 >
   <div class="page-width">
     {%- render 'zenith-section-heading',
@@ -19,28 +36,37 @@
       uppercase: section.settings.heading_uppercase
     -%}
 
+    {%- liquid
+      if section.settings.media_position == 'left'
+        assign img_sizes = '(min-width: 750px) ' | append: section.settings.image_size | append: 'px, ' | append: section.settings.image_size_mobile | append: 'px'
+      else
+        assign img_sizes = '(min-width: 990px) 30vw, (min-width: 750px) 50vw, 100vw'
+      endif
+    -%}
+
     <ul class="zenith-features__grid" role="list">
       {%- for block in section.blocks -%}
         <li class="zenith-features__item" id="Block-{{ block.id }}" {{ block.shopify_attributes }}>
-          {%- if block.settings.image != blank -%}
-            <div class="zenith-media zenith-features__media">
+          <div class="zenith-media zenith-features__media">
+            {%- if block.settings.image != blank -%}
               {{
                 block.settings.image
-                | image_url: width: 600
-                | image_tag: loading: 'lazy', widths: '200, 300, 400, 600', sizes: '(min-width: 750px) 15vw, 40vw'
+                | image_url: width: 900
+                | image_tag: loading: 'lazy', widths: '150, 300, 450, 600, 900', sizes: img_sizes
               }}
-            </div>
-          {%- elsif block.settings.icon != 'none' -%}
-            <div class="zenith-features__icon">{%- render 'zenith-icon', icon: block.settings.icon -%}</div>
-          {%- else -%}
-            <div class="zenith-media zenith-features__media">{{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}</div>
-          {%- endif -%}
+            {%- else -%}
+              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+          </div>
           <div class="zenith-features__text">
+            {%- if block.settings.icon != 'none' -%}
+              <span class="zenith-features__icon">{%- render 'zenith-icon', icon: block.settings.icon -%}</span>
+            {%- endif -%}
             {%- if block.settings.title != blank -%}
-              <h3 class="zenith-features__title">{{ block.settings.title | escape }}</h3>
+              <h3 class="zenith-features__title">{{ block.settings.title | escape | replace: '[customers]', settings.customer_count }}</h3>
             {%- endif -%}
             {%- if block.settings.text != blank -%}
-              <div class="zenith-features__body zenith-rte">{{ block.settings.text }}</div>
+              <div class="zenith-features__body zenith-rte">{{ block.settings.text | replace: '[customers]', settings.customer_count }}</div>
             {%- endif -%}
           </div>
         </li>
@@ -50,10 +76,11 @@
     {%- if section.settings.show_payment_icons or section.settings.footer_image != blank or section.settings.footer_text != blank -%}
       <div class="zenith-features__footer">
         {%- if section.settings.footer_image != blank -%}
+          {%- assign footer_sizes = '(min-width: 750px) ' | append: section.settings.footer_image_width | append: 'px, ' | append: section.settings.footer_image_width_mobile | append: 'px' -%}
           {{
             section.settings.footer_image
-            | image_url: width: 1200
-            | image_tag: loading: 'lazy', widths: '400, 800, 1200', sizes: '(min-width: 750px) 600px, 90vw', class: 'zenith-features__footer-image'
+            | image_url: width: 1400
+            | image_tag: loading: 'lazy', widths: '350, 700, 1050, 1400', sizes: footer_sizes, class: 'zenith-features__footer-image'
           }}
         {%- endif -%}
         {%- if section.settings.show_payment_icons -%}
@@ -64,7 +91,7 @@
           </ul>
         {%- endif -%}
         {%- if section.settings.footer_text != blank -%}
-          <div class="zenith-features__footer-text zenith-rte">{{ section.settings.footer_text }}</div>
+          <div class="zenith-features__footer-text zenith-rte">{{ section.settings.footer_text | replace: '[customers]', settings.customer_count }}</div>
         {%- endif -%}
       </div>
     {%- endif -%}
@@ -108,7 +135,7 @@
       "type": "image_picker",
       "id": "footer_image",
       "label": "Footer image",
-      "info": "e.g. payment and courier logos (GCash, Maya, J&T)"
+      "info": "e.g. courier or payment logos in one image (GOGO, SPX, LBC, J&T, Ninja Van)"
     },
     {
       "type": "checkbox",
@@ -120,7 +147,7 @@
       "type": "richtext",
       "id": "footer_text",
       "label": "Footer text",
-      "default": "<p>Secure checkout. Cash on delivery available nationwide.</p>"
+      "default": "<p>Delivered by LBC, J&T, Gogo Express, Ninja Van, and Amare Group's own rider fleet.</p>"
     },
     {
       "type": "header",
@@ -149,7 +176,7 @@
       "min": 2,
       "max": 4,
       "step": 1,
-      "default": 4
+      "default": 3
     },
     {
       "type": "select",
@@ -171,7 +198,7 @@
       "type": "select",
       "id": "image_ratio",
       "label": "Image shape",
-      "default": "portrait",
+      "default": "square",
       "options": [
         {
           "value": "square",
@@ -188,6 +215,16 @@
       ]
     },
     {
+      "type": "range",
+      "id": "image_size",
+      "label": "Image width (beside text)",
+      "min": 80,
+      "max": 300,
+      "step": 4,
+      "unit": "px",
+      "default": 152
+    },
+    {
       "type": "select",
       "id": "text_alignment",
       "label": "Text alignment",
@@ -200,6 +237,22 @@
         {
           "value": "center",
           "label": "Center"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "vertical_alignment",
+      "label": "Text position next to image",
+      "default": "top",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "center",
+          "label": "Middle"
         }
       ]
     },
@@ -231,17 +284,47 @@
       "max": 120,
       "step": 4,
       "unit": "px",
-      "default": 24
+      "default": 32
     },
     {
       "type": "range",
-      "id": "media_width",
-      "label": "Image width (beside text)",
-      "min": 20,
-      "max": 70,
-      "step": 5,
-      "unit": "%",
-      "default": 40
+      "id": "content_gap",
+      "label": "Space between image and text",
+      "min": 0,
+      "max": 64,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "icon_gap",
+      "label": "Space below icon",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "footer_spacing",
+      "label": "Space above footer",
+      "min": 0,
+      "max": 96,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "footer_image_width",
+      "label": "Footer image width",
+      "min": 120,
+      "max": 720,
+      "step": 8,
+      "unit": "px",
+      "default": 336
     },
     {
       "type": "header",
@@ -252,6 +335,22 @@
       "id": "color_scheme",
       "label": "Color scheme",
       "default": "scheme-1"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon color",
+      "default": "#EABE5F"
+    },
+    {
+      "type": "range",
+      "id": "text_opacity",
+      "label": "Text and footer text opacity",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 70
     },
     {
       "type": "header",
@@ -265,7 +364,7 @@
       "max": 120,
       "step": 2,
       "unit": "px",
-      "default": 44
+      "default": 48
     },
     {
       "type": "checkbox",
@@ -291,7 +390,7 @@
       "max": 20,
       "step": 1,
       "unit": "px",
-      "default": 12
+      "default": 14
     },
     {
       "type": "range",
@@ -311,7 +410,37 @@
       "max": 24,
       "step": 1,
       "unit": "px",
-      "default": 14
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "text_line_height",
+      "label": "Column text line height",
+      "min": 100,
+      "max": 200,
+      "step": 5,
+      "unit": "%",
+      "default": 150
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon size",
+      "min": 16,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "footer_text_size",
+      "label": "Footer text size",
+      "min": 8,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 10
     },
     {
       "type": "header",
@@ -334,6 +463,32 @@
       ]
     },
     {
+      "type": "select",
+      "id": "vertical_alignment_mobile",
+      "label": "Text position next to image",
+      "default": "center",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "center",
+          "label": "Middle"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "image_size_mobile",
+      "label": "Image width (beside text)",
+      "min": 64,
+      "max": 240,
+      "step": 4,
+      "unit": "px",
+      "default": 128
+    },
+    {
       "type": "range",
       "id": "heading_font_size_mobile",
       "label": "Heading size",
@@ -341,7 +496,7 @@
       "max": 80,
       "step": 2,
       "unit": "px",
-      "default": 32
+      "default": 36
     },
     {
       "type": "range",
@@ -361,7 +516,7 @@
       "max": 80,
       "step": 4,
       "unit": "px",
-      "default": 24
+      "default": 32
     },
     {
       "type": "range",
@@ -372,6 +527,36 @@
       "step": 4,
       "unit": "px",
       "default": 20
+    },
+    {
+      "type": "range",
+      "id": "content_gap_mobile",
+      "label": "Space between image and text",
+      "min": 0,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "icon_gap_mobile",
+      "label": "Space below icon",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "icon_size_mobile",
+      "label": "Icon size",
+      "min": 16,
+      "max": 56,
+      "step": 2,
+      "unit": "px",
+      "default": 32
     },
     {
       "type": "range",
@@ -391,17 +576,57 @@
       "max": 20,
       "step": 1,
       "unit": "px",
-      "default": 13
+      "default": 14
     },
     {
       "type": "range",
-      "id": "media_width_mobile",
-      "label": "Image width (beside text)",
-      "min": 20,
-      "max": 60,
+      "id": "text_line_height_mobile",
+      "label": "Column text line height",
+      "min": 100,
+      "max": 200,
       "step": 5,
       "unit": "%",
-      "default": 35
+      "default": 130
+    },
+    {
+      "type": "range",
+      "id": "footer_spacing_mobile",
+      "label": "Space above footer",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "footer_image_width_mobile",
+      "label": "Footer image width",
+      "min": 120,
+      "max": 400,
+      "step": 8,
+      "unit": "px",
+      "default": 336
+    },
+    {
+      "type": "range",
+      "id": "footer_text_size_mobile",
+      "label": "Footer text size",
+      "min": 8,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "footer_max_width_mobile",
+      "label": "Footer text max width",
+      "min": 160,
+      "max": 400,
+      "step": 8,
+      "unit": "px",
+      "default": 256
     },
     {
       "type": "header",
@@ -415,7 +640,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "default": 64
+      "default": 48
     },
     {
       "type": "range",
@@ -425,7 +650,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "default": 64
+      "default": 56
     },
     {
       "type": "range",
@@ -435,7 +660,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "default": 48
+      "default": 20
     },
     {
       "type": "range",
@@ -445,7 +670,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "default": 48
+      "default": 28
     }
   ],
   "blocks": [
@@ -466,12 +691,24 @@
           "type": "select",
           "id": "icon",
           "label": "Icon",
-          "info": "Shown when no image is selected",
+          "info": "Shown above the text",
           "default": "none",
           "options": [
             {
               "value": "none",
               "label": "None"
+            },
+            {
+              "value": "phone",
+              "label": "Phone"
+            },
+            {
+              "value": "qr",
+              "label": "QR code"
+            },
+            {
+              "value": "badge_check",
+              "label": "Badge check"
             },
             {
               "value": "shield",
@@ -540,25 +777,22 @@
         {
           "type": "column",
           "settings": {
-            "text": "<p>Our friendly team will text or call to confirm your order details, ensuring you're ready to go.</p>"
+            "icon": "phone",
+            "text": "<p>Our local team will text or call to verify your details, ensuring your order gets exactly where it needs to go.</p>"
           }
         },
         {
           "type": "column",
           "settings": {
-            "text": "<p>Every box includes a unique serial QR code. Scan it to verify your product is 100% authentic.</p>"
+            "icon": "qr",
+            "text": "<p>Every box features a unique, tamper-proof QR code. Scan it upon arrival to instantly verify your gear is 100% authentic.</p>"
           }
         },
         {
           "type": "column",
           "settings": {
-            "text": "<p>Discreet packaging, delivered straight to your door anywhere in the Philippines.</p>"
-          }
-        },
-        {
-          "type": "column",
-          "settings": {
-            "text": "<p>Pay only when the product is in your hands with Cash on Delivery.</p>"
+            "icon": "badge_check",
+            "text": "<p>Pay only when the product is in your hands with our nationwide Cash on Delivery.</p>"
           }
         }
       ]
