@@ -16,7 +16,7 @@ Act as a senior Shopify theme engineer: Liquid, JSON templates, section schema, 
 - Consistent spacing scale + Dawn breakpoints; verify 375 / 768 / 1440.
 
 ## Status / handoff
--  (repo root) = current state, open PRs, remaining tasks, gotchas. Read it at session start; update it at session end.
+- `PROJECT-STATUS.md` (repo root) = current state, open PRs, remaining tasks, gotchas. Read it at session start; update it at session end.
 
 ## Project facts
 - Base: Dawn 16.0.0. Remote: github.com/zenithph/zenith-shopify. `gh` CLI not installed (use git + compare URL).
