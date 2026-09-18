@@ -251,14 +251,16 @@
         "logo_1": {
           "type": "logo",
           "settings": {
+            "logo": "shopify://shop_images/vector-icons_8.png",
             "name": "Philippine Daily Inquirer",
             "link": "",
-            "logo_scale": 70
+            "logo_scale": 100
           }
         },
         "logo_2": {
           "type": "logo",
           "settings": {
+            "logo": "shopify://shop_images/vector-icons_9.png",
             "name": "GMA",
             "link": "",
             "logo_scale": 100
@@ -267,25 +269,28 @@
         "logo_3": {
           "type": "logo",
           "settings": {
+            "logo": "shopify://shop_images/vector-icons_10.png",
             "name": "The Philippine Star",
             "link": "",
-            "logo_scale": 95
+            "logo_scale": 100
           }
         },
         "logo_4": {
           "type": "logo",
           "settings": {
+            "logo": "shopify://shop_images/vector-icons_11.png",
             "name": "SunStar",
             "link": "",
-            "logo_scale": 65
+            "logo_scale": 100
           }
         },
         "logo_5": {
           "type": "logo",
           "settings": {
+            "logo": "shopify://shop_images/vector-icons_1.png",
             "name": "Manila Standard",
             "link": "",
-            "logo_scale": 70
+            "logo_scale": 100
           }
         }
       },
