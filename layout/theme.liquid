@@ -336,7 +336,8 @@
       tabindex="-1"
       data-template="{{ template.name }}"
     >
-      {{ content_for_layout }}
+      {%- comment -%} zenith: [customers] in any page content → Theme settings → Zenith → Customer count {%- endcomment -%}
+      {{ content_for_layout | replace: '[customers]', settings.customer_count }}
     </main>
 
     {% sections 'footer-group' %}

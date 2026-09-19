@@ -1,3 +1,5 @@
+{%- comment -%} zenith: [customers] anywhere in this section shows Theme settings → Zenith → Customer count {%- endcomment -%}
+{%- capture zenith_body -%}
 {% comment %}
   Zenith · Trust checklist — heading + icon checklist (blocks) beside a bordered card with a seal image and short text.
   Desktop: two columns (card right by default, vertically centred). Mobile: stacked, card = seal left + text right.
@@ -83,6 +85,8 @@
     </div>
   </div>
 </section>
+{%- endcapture -%}
+{{- zenith_body | replace: '[customers]', settings.customer_count -}}
 
 {% schema %}
 {

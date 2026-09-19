@@ -1,3 +1,5 @@
+{%- comment -%} zenith: [customers] anywhere in this section shows Theme settings → Zenith → Customer count {%- endcomment -%}
+{%- capture zenith_body -%}
 {{ 'zenith-results-marquee.css' | asset_url | stylesheet_tag }}
 {%- capture extra -%}
   --z-card-w: {{ section.settings.card_width }}px;
@@ -267,6 +269,8 @@
     </div>
   {%- endif -%}
 </section>
+{%- endcapture -%}
+{{- zenith_body | replace: '[customers]', settings.customer_count -}}
 
 {% schema %}
 {

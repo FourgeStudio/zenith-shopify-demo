@@ -1,3 +1,5 @@
+{%- comment -%} zenith: [customers] anywhere in this section shows Theme settings → Zenith → Customer count {%- endcomment -%}
+{%- capture zenith_body -%}
 {{ 'zenith-icon-bar.css' | asset_url | stylesheet_tag }}
 {%- capture extra -%}
   --z-ib-speed: {{ section.settings.marquee_speed | default: 25 }}s;
@@ -81,6 +83,8 @@
     </div>
   </div>
 </div>
+{%- endcapture -%}
+{{- zenith_body | replace: '[customers]', settings.customer_count -}}
 
 {% schema %}
 {

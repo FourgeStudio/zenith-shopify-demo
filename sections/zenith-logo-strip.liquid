@@ -1,3 +1,5 @@
+{%- comment -%} zenith: [customers] anywhere in this section shows Theme settings → Zenith → Customer count {%- endcomment -%}
+{%- capture zenith_body -%}
 {{ 'zenith-logo-strip.css' | asset_url | stylesheet_tag }}
 {%- capture extra -%}
   --z-logo-h: {{ section.settings.logo_height }}px;
@@ -86,6 +88,8 @@
     </div>
   </div>
 </div>
+{%- endcapture -%}
+{{- zenith_body | replace: '[customers]', settings.customer_count -}}
 
 {% schema %}
 {
