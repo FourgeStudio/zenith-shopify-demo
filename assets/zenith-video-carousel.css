@@ -56,6 +56,24 @@
   margin-top: var(--z-ctrl-sp, var(--z-space-6));
 }
 
+/* "Center the cards when they all fit": auto margins center a short row and fall back to 0 once the
+   track overflows, so a full carousel still starts on the page margin and scrolls normally. */
+.zenith-videos--center .zenith-carousel__slide:first-child {
+  margin-left: auto;
+}
+
+.zenith-videos--center .zenith-carousel__slide:last-child {
+  margin-right: auto;
+}
+
+/* Theme editor only: the product filter matched no videos */
+.zenith-videos__empty {
+  margin: 0;
+  padding: var(--z-space-6) 0;
+  text-align: center;
+  color: rgba(var(--color-foreground), 0.6);
+}
+
 @supports not (width: 1cqi) {
   .zenith-videos .zenith-carousel__slide { flex-basis: 80%; }
   .zenith-videos--bleed .zenith-carousel__track { margin: 0; padding: 0; scroll-padding: 0; }

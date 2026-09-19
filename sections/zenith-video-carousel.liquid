@@ -33,11 +33,119 @@
 {%- liquid
   assign heading = section.settings.heading | escape | replace: '[customers]', settings.customer_count
   assign heading_mobile = section.settings.heading_mobile | escape | replace: '[customers]', settings.customer_count | newline_to_br
+
+  assign card_scheme = section.settings.card_color_scheme
+  assign overlay_style = section.settings.overlay_style
+  assign play_label = section.settings.play_label
+  assign show_play = section.settings.show_play_without_video
+
+  # Product filter: only videos whose featured product is in the list (",handle,handle,")
+  assign filter_on = false
+  assign filter_key = ''
+  case section.settings.product_filter
+    when 'selected'
+      if section.settings.filter_products != blank
+        assign filter_on = true
+        assign filter_key = section.settings.filter_products | map: 'handle' | join: ','
+      endif
+    when 'page'
+      if product != blank
+        assign filter_on = true
+        assign filter_key = product.handle
+      endif
+  endcase
+  assign filter_key = ',' | append: filter_key | append: ','
+  assign card_count = 0
 -%}
 
+{%- capture cards -%}
+  {%- if section.settings.content_source == 'custom' -%}
+    {%- for block in section.blocks -%}
+      {%- liquid
+        if filter_on
+          if block.settings.product == blank
+            continue
+          endif
+          assign needle = ',' | append: block.settings.product.handle | append: ','
+          unless filter_key contains needle
+            continue
+          endunless
+        endif
+        assign card_count = card_count | plus: 1
+      -%}
+      {%- capture attrs %}id="Block-{{ block.id }}" {{ block.shopify_attributes }}{% endcapture -%}
+      {%- render 'zenith-video-card',
+        video: block.settings.video,
+        youtube_url: block.settings.youtube_url,
+        poster: block.settings.poster,
+        quote: block.settings.quote,
+        title: block.settings.title,
+        link: block.settings.link,
+        author: block.settings.author,
+        product: block.settings.product,
+        thumbnail: block.settings.thumbnail,
+        attrs: attrs,
+        card_scheme: card_scheme,
+        overlay_style: overlay_style,
+        play_label: play_label,
+        show_play_without_video: show_play
+      -%}
+    {%- endfor -%}
+  {%- else -%}
+    {%- comment -%} Global: Theme settings → Zenith · Video testimonials, slots 1–20; empty slots are skipped {%- endcomment -%}
+    {%- for i in (1..20) -%}
+      {%- liquid
+        assign p = 'vt' | append: i | append: '_'
+        assign k_video = p | append: 'video'
+        assign k_youtube = p | append: 'youtube'
+        assign k_cover = p | append: 'cover'
+        assign k_quote = p | append: 'quote'
+        assign k_title = p | append: 'title'
+        assign k_link = p | append: 'link'
+        assign k_author = p | append: 'author'
+        assign k_product = p | append: 'product'
+        assign k_thumb = p | append: 'thumb'
+        if settings[k_video] == blank and settings[k_youtube] == blank and settings[k_cover] == blank and settings[k_quote] == blank
+          continue
+        endif
+        if filter_on
+          assign slot_product = settings[k_product]
+          if slot_product == blank
+            continue
+          endif
+          assign needle = ',' | append: slot_product.handle | append: ','
+          unless filter_key contains needle
+            continue
+          endunless
+        endif
+        assign card_count = card_count | plus: 1
+      -%}
+      {%- capture attrs %}id="VideoSlot-{{ i }}-{{ section.id }}"{% endcapture -%}
+      {%- render 'zenith-video-card',
+        video: settings[k_video],
+        youtube_url: settings[k_youtube],
+        poster: settings[k_cover],
+        quote: settings[k_quote],
+        title: settings[k_title],
+        link: settings[k_link],
+        author: settings[k_author],
+        product: settings[k_product],
+        thumbnail: settings[k_thumb],
+        attrs: attrs,
+        card_scheme: card_scheme,
+        overlay_style: overlay_style,
+        play_label: play_label,
+        show_play_without_video: show_play
+      -%}
+    {%- endfor -%}
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- comment -%} No matching videos (e.g. a product page without videos): the section isn't shown; the editor gets a note. {%- endcomment -%}
+{%- if card_count > 0 or request.design_mode -%}
 <section
   id="Zenith-{{ section.id }}"
-  class="zenith-section zenith-videos zenith-videos--{{ section.settings.video_ratio }} zenith-videos--q-{{ section.settings.quote_align }} zenith-videos--qm-{{ section.settings.quote_align_mobile }}{% if section.settings.show_peek %} zenith-videos--bleed{% endif %} color-{{ section.settings.color_scheme }} gradient"
+  class="zenith-section zenith-videos zenith-videos--{{ section.settings.video_ratio }} zenith-videos--q-{{ section.settings.quote_align }} zenith-videos--qm-{{ section.settings.quote_align_mobile }}{% if section.settings.show_peek %} zenith-videos--bleed{% endif %}{% if section.settings.center_when_fits %} zenith-videos--center{% endif %} color-{{ section.settings.color_scheme }} gradient"
 >
   <div class="page-width">
     {%- if section.settings.eyebrow != blank or heading != blank or section.settings.subheading != blank -%}
@@ -61,81 +169,24 @@
       </div>
     {%- endif -%}
 
-    <zenith-carousel data-autoplay="{{ section.settings.autoplay }}" data-slide-label="Video">
-      <ul class="zenith-carousel__track" role="list">
-        {%- liquid
-          assign card_scheme = section.settings.card_color_scheme
-          assign overlay_style = section.settings.overlay_style
-          assign play_label = section.settings.play_label
-          assign show_play = section.settings.show_play_without_video
-        -%}
-        {%- if section.settings.content_source == 'custom' -%}
-          {%- for block in section.blocks -%}
-            {%- capture attrs %}id="Block-{{ block.id }}" {{ block.shopify_attributes }}{% endcapture -%}
-            {%- render 'zenith-video-card',
-              video: block.settings.video,
-              youtube_url: block.settings.youtube_url,
-              poster: block.settings.poster,
-              quote: block.settings.quote,
-              title: block.settings.title,
-              link: block.settings.link,
-              author: block.settings.author,
-              product: block.settings.product,
-              thumbnail: block.settings.thumbnail,
-              attrs: attrs,
-              card_scheme: card_scheme,
-              overlay_style: overlay_style,
-              play_label: play_label,
-              show_play_without_video: show_play
-            -%}
-          {%- endfor -%}
-        {%- else -%}
-          {%- comment -%} Global: Theme settings → Zenith · Video testimonials, slots 1–20; empty slots are skipped {%- endcomment -%}
-          {%- for i in (1..20) -%}
-            {%- liquid
-              assign p = 'vt' | append: i | append: '_'
-              assign k_video = p | append: 'video'
-              assign k_youtube = p | append: 'youtube'
-              assign k_cover = p | append: 'cover'
-              assign k_quote = p | append: 'quote'
-              assign k_title = p | append: 'title'
-              assign k_link = p | append: 'link'
-              assign k_author = p | append: 'author'
-              assign k_product = p | append: 'product'
-              assign k_thumb = p | append: 'thumb'
-              if settings[k_video] == blank and settings[k_youtube] == blank and settings[k_cover] == blank and settings[k_quote] == blank
-                continue
-              endif
-            -%}
-            {%- capture attrs %}id="VideoSlot-{{ i }}-{{ section.id }}"{% endcapture -%}
-            {%- render 'zenith-video-card',
-              video: settings[k_video],
-              youtube_url: settings[k_youtube],
-              poster: settings[k_cover],
-              quote: settings[k_quote],
-              title: settings[k_title],
-              link: settings[k_link],
-              author: settings[k_author],
-              product: settings[k_product],
-              thumbnail: settings[k_thumb],
-              attrs: attrs,
-              card_scheme: card_scheme,
-              overlay_style: overlay_style,
-              play_label: play_label,
-              show_play_without_video: show_play
-            -%}
-          {%- endfor -%}
-        {%- endif -%}
-      </ul>
+    {%- if card_count == 0 -%}
+      <p class="zenith-videos__empty">No videos match this section's product filter, so it's hidden on the live store.</p>
+    {%- else -%}
+      <zenith-carousel data-autoplay="{{ section.settings.autoplay }}" data-slide-label="Video">
+        <ul class="zenith-carousel__track" role="list">
+          {{- cards -}}
+        </ul>
 
-      {%- render 'zenith-carousel-controls',
-        show_dots: section.settings.show_dots,
-        show_arrows: section.settings.show_arrows,
-        label: 'video'
-      -%}
-    </zenith-carousel>
+        {%- render 'zenith-carousel-controls',
+          show_dots: section.settings.show_dots,
+          show_arrows: section.settings.show_arrows,
+          label: 'video'
+        -%}
+      </zenith-carousel>
+    {%- endif -%}
   </div>
 </section>
+{%- endif -%}
 
 {% schema %}
 {
@@ -172,6 +223,34 @@
       ]
     },
     {
+      "type": "select",
+      "id": "product_filter",
+      "label": "Show videos for",
+      "default": "all",
+      "options": [
+        {
+          "value": "all",
+          "label": "All products"
+        },
+        {
+          "value": "selected",
+          "label": "Only the products below"
+        },
+        {
+          "value": "page",
+          "label": "The product on this page"
+        }
+      ],
+      "info": "Uses each video's Featured product. \"The product on this page\" is for product templates; on other pages all videos show. With no matching videos the section is hidden."
+    },
+    {
+      "type": "product_list",
+      "id": "filter_products",
+      "label": "Products",
+      "info": "Used with \"Only the products below\"",
+      "limit": 20
+    },
+    {
       "type": "text",
       "id": "eyebrow",
       "label": "Eyebrow"
@@ -205,6 +284,13 @@
     {
       "type": "header",
       "content": "Layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "center_when_fits",
+      "label": "Center the cards when they all fit",
+      "info": "No arrows or dots then. When they don't fit on the screen (more cards, or a smaller screen), it's a carousel.",
+      "default": true
     },
     {
       "type": "select",

@@ -460,6 +460,11 @@ zenith-carousel {
   justify-content: flex-end;
 }
 
+/* All slides fit on screen (zenith-carousel.js): nothing to scroll, so no arrows or dots */
+zenith-carousel.is-static .zenith-carousel__controls {
+  display: none;
+}
+
 .zenith-carousel__dots {
   display: flex;
   flex-wrap: wrap;

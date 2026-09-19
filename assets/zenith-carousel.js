@@ -78,6 +78,8 @@ if (!customElements.get('zenith-carousel')) {
       }
 
       update() {
+        // All slides fit: .is-static hides the controls (sections can also center the slides)
+        this.classList.toggle('is-static', this.track.scrollWidth <= this.track.clientWidth + 2);
         if (this.dotsWrap) {
           const count = this.pageCount;
           if (this.dotsWrap.children.length !== count) {
