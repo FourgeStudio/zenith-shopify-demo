@@ -3519,6 +3519,149 @@
     ]
   },
   {
+    "name": "Zenith · Policy pages",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Refund, Privacy, Terms and Shipping policies (Settings → Policies) use this layout. Start a policy with a line \"Last updated: …\" to show it under the title; its headings become the Table of Contents."
+      },
+      {
+        "type": "header",
+        "content": "Content"
+      },
+      {
+        "type": "checkbox",
+        "id": "policy_show_toc",
+        "label": "Show Table of Contents",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "policy_toc_heading",
+        "label": "Table of Contents heading",
+        "default": "Table of Contents"
+      },
+      {
+        "type": "header",
+        "content": "Layout"
+      },
+      {
+        "type": "range",
+        "id": "policy_toc_width",
+        "label": "Table of Contents width",
+        "min": 240,
+        "max": 480,
+        "step": 4,
+        "unit": "px",
+        "default": 364
+      },
+      {
+        "type": "range",
+        "id": "policy_gap",
+        "label": "Space between contents and text",
+        "min": 16,
+        "max": 120,
+        "step": 4,
+        "unit": "px",
+        "default": 52
+      },
+      {
+        "type": "range",
+        "id": "policy_text_width",
+        "label": "Text max width",
+        "min": 480,
+        "max": 1000,
+        "step": 8,
+        "unit": "px",
+        "default": 768
+      },
+      {
+        "type": "header",
+        "content": "Colors"
+      },
+      {
+        "type": "color",
+        "id": "policy_heading_color",
+        "label": "Section headings + active contents link",
+        "default": "#EABE5F"
+      },
+      {
+        "type": "color",
+        "id": "policy_top_color",
+        "label": "Top of page fade",
+        "default": "#202020"
+      },
+      {
+        "type": "header",
+        "content": "Typography"
+      },
+      {
+        "type": "range",
+        "id": "policy_title_size",
+        "label": "Title size",
+        "min": 32,
+        "max": 80,
+        "step": 2,
+        "unit": "px",
+        "default": 56
+      },
+      {
+        "type": "range",
+        "id": "policy_heading_size",
+        "label": "Section heading size",
+        "min": 20,
+        "max": 60,
+        "step": 2,
+        "unit": "px",
+        "default": 42
+      },
+      {
+        "type": "range",
+        "id": "policy_text_size",
+        "label": "Text size",
+        "min": 12,
+        "max": 22,
+        "step": 1,
+        "unit": "px",
+        "default": 16
+      },
+      {
+        "type": "header",
+        "content": "Mobile"
+      },
+      {
+        "type": "range",
+        "id": "policy_title_size_mobile",
+        "label": "Title size",
+        "min": 24,
+        "max": 60,
+        "step": 2,
+        "unit": "px",
+        "default": 40
+      },
+      {
+        "type": "range",
+        "id": "policy_heading_size_mobile",
+        "label": "Section heading size",
+        "min": 18,
+        "max": 48,
+        "step": 2,
+        "unit": "px",
+        "default": 32
+      },
+      {
+        "type": "range",
+        "id": "policy_text_size_mobile",
+        "label": "Text size",
+        "min": 12,
+        "max": 20,
+        "step": 1,
+        "unit": "px",
+        "default": 16
+      }
+    ]
+  },
+  {
     "name": "t:settings_schema.logo.name",
     "settings": [
       {

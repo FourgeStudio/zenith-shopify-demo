@@ -1,0 +1,126 @@
+{%- comment -%}
+  Document layout for policies (layout/theme.liquid) and text pages (sections/zenith-main-document.liquid):
+  title + "Last updated" band, optional Table of Contents built from the body's headings, styled body text.
+  Accepts:
+    title {String}, body {String} HTML
+    id {String} unique suffix
+    show_toc {Boolean}, toc_heading {String}
+    class {String} optional extra root classes (zenith-doc--center = centred column, color-scheme-x)
+    vars {String} optional CSS custom properties for the root (--z-doc-*: see assets/zenith-doc.css)
+  Content rules (so the client can paste policy text as is):
+    - a first heading that repeats the title is dropped
+    - a first paragraph starting "Last updated" / "Effective date" moves under the title
+    - the Table of Contents lists the body's top heading level (h1 → h4, whichever appears first); headings get ids
+{%- endcomment -%}
+{%- liquid
+  assign doc_body = body | strip
+
+  # Drop a leading heading that repeats the title
+  assign lead = doc_body | slice: 0, 3 | downcase
+  if lead == '<h1' or lead == '<h2' or lead == '<h3'
+    assign lead_level = doc_body | slice: 2, 1
+    assign lead_close = '</h' | append: lead_level | append: '>'
+    assign lead_heading = doc_body | split: lead_close | first | append: lead_close
+    assign lead_text = lead_heading | strip_html | strip | downcase
+    assign title_text = title | strip_html | strip | downcase
+    if lead_text == title_text
+      assign doc_body = doc_body | remove_first: lead_heading | strip
+    endif
+  endif
+
+  # "Last updated …" as the first paragraph → shown under the title
+  assign updated = ''
+  assign lead = doc_body | slice: 0, 2 | downcase
+  if lead == '<p'
+    assign first_p = doc_body | split: '</p>' | first | append: '</p>'
+    assign first_p_text = first_p | strip_html | strip
+    assign probe = first_p_text | slice: 0, 12 | downcase
+    if probe == 'last updated' or probe == 'effective da'
+      assign updated = first_p_text
+      assign doc_body = doc_body | remove_first: first_p | strip
+    endif
+  endif
+
+  # Table of Contents: ids on the top-level headings + the list, rendered here (no layout shift)
+  assign toc_items = ''
+  if show_toc
+    assign toc_level = ''
+    for n in (1..4)
+      assign probe_tag = '<h' | append: n
+      if doc_body contains probe_tag
+        assign toc_level = n
+        break
+      endif
+    endfor
+    if toc_level != ''
+      assign h_open = '<h' | append: toc_level
+      assign h_close = '</h' | append: toc_level | append: '>'
+      # split keeps the text before the first heading (empty when the body starts with one) as the first part
+      assign parts = doc_body | split: h_open
+      assign rebuilt = parts | first
+      assign used = ','
+      for part in parts
+        if forloop.first or part == blank
+          continue
+        endif
+        assign inner = part | split: h_close | first
+        assign text = h_open | append: inner | append: h_close | strip_html | strip
+        assign slug = text | handleize | default: 'section'
+        assign needle = ',' | append: slug | append: ','
+        if used contains needle
+          assign slug = slug | append: '-' | append: forloop.index
+        endif
+        assign used = used | append: slug | append: ','
+        assign rebuilt = rebuilt | append: h_open | append: ' id="' | append: slug | append: '"' | append: part
+        assign link_class = 'zenith-doc__toc-link'
+        if toc_items == blank
+          assign link_class = 'zenith-doc__toc-link is-active'
+        endif
+        capture toc_item
+          echo '<li><a class="' | append: link_class | append: '" href="#' | append: slug | append: '">' | append: text | append: '</a></li>'
+        endcapture
+        assign toc_items = toc_items | append: toc_item
+      endfor
+      assign doc_body = rebuilt
+    endif
+  endif
+-%}
+{{ 'zenith-doc.css' | asset_url | stylesheet_tag }}
+<div
+  class="zenith-doc{% if toc_items != blank %} zenith-doc--toc{% endif %}{% if class != blank %} {{ class }}{% endif %}"
+  id="ZenithDoc-{{ id }}"
+  {% if vars != blank %}
+    style="{{ vars | strip_newlines }}"
+  {% endif %}
+>
+  <div class="zenith-doc__hero">
+    <div class="page-width">
+      <div class="zenith-doc__frame">
+        <h1 class="zenith-doc__title">{{ title | escape }}</h1>
+        {%- if updated != blank -%}
+          <p class="zenith-doc__updated">{{ updated | escape }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+  <div class="page-width">
+    <div class="zenith-doc__frame zenith-doc__layout">
+      {%- if toc_items != blank -%}
+        <zenith-doc-toc class="zenith-doc__toc">
+          <nav aria-labelledby="ZenithDocToc-{{ id }}">
+            <h2 class="zenith-doc__toc-title" id="ZenithDocToc-{{ id }}">{{ toc_heading | default: 'Table of Contents' | escape }}</h2>
+            <ol class="zenith-doc__toc-list" role="list">
+              {{- toc_items -}}
+            </ol>
+          </nav>
+        </zenith-doc-toc>
+      {%- endif -%}
+      <div class="zenith-doc__body rte">
+        {{- doc_body | replace: '[customers]', settings.customer_count -}}
+      </div>
+    </div>
+  </div>
+</div>
+{%- if toc_items != blank -%}
+  <script src="{{ 'zenith-doc.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}

@@ -1,0 +1,240 @@
+/* Zenith · Document layout (policies + text pages) — snippets/zenith-doc.liquid. Mobile first.
+   Per-instance values: CSS vars on .zenith-doc (theme settings for policies, section settings for pages). */
+
+.zenith-doc {
+  --z-doc-accent: #eabe5f;
+  background: linear-gradient(180deg, var(--z-doc-top, #202020) 0, rgb(var(--color-background)) var(--z-doc-fade, 25rem));
+  padding-bottom: var(--z-doc-pb-m, var(--z-space-7));
+}
+
+.zenith-doc__frame {
+  max-width: var(--z-doc-mw, none);
+}
+
+.zenith-doc--center .zenith-doc__frame {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Title band */
+.zenith-doc__hero {
+  padding-top: var(--z-doc-pt-m, var(--z-space-6));
+}
+
+.zenith-doc__title {
+  margin: 0;
+  font-family: var(--font-heading-family);
+  font-size: var(--z-doc-tfs-m, 4rem);
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+
+.zenith-doc__updated {
+  margin: var(--z-space-2) 0 0;
+  font-size: var(--z-doc-ufs-m, 1.6rem);
+  line-height: 1.5;
+  color: rgba(var(--color-foreground), 0.7);
+}
+
+/* Contents + body */
+.zenith-doc__layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--z-doc-gap-m, 4.4rem);
+  padding-top: var(--z-doc-lt-m, 5.2rem);
+}
+
+.zenith-doc__toc-title {
+  margin: 0;
+  padding: 1.1rem var(--z-space-4);
+  border: 1px solid var(--z-doc-border, #262626);
+  font-family: var(--font-heading-family);
+  font-size: var(--z-doc-tocfs-m, 2.4rem);
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+
+.zenith-doc__toc-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--z-space-2);
+  margin: var(--z-space-2) 0 0;
+  padding: 0 var(--z-space-4);
+  list-style: none;
+}
+
+.zenith-doc__toc-link {
+  display: inline-block;
+  font-size: var(--z-doc-tilfs-m, 1.6rem);
+  line-height: 1.5;
+  color: rgb(var(--color-foreground));
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.zenith-doc__toc-link:hover,
+.zenith-doc__toc-link.is-active {
+  color: var(--z-doc-accent);
+}
+
+/* Body text */
+.zenith-doc__body {
+  min-width: 0;
+  max-width: var(--z-doc-bmw, 76.8rem);
+  font-size: var(--z-doc-bfs-m, 1.6rem);
+  line-height: var(--z-doc-blh, 1.5);
+  color: rgba(var(--color-foreground), var(--z-doc-text-o, 0.9));
+}
+
+.zenith-doc__body > :first-child {
+  margin-top: 0;
+}
+
+.zenith-doc__body > :last-child {
+  margin-bottom: 0;
+}
+
+.zenith-doc__body p,
+.zenith-doc__body ul,
+.zenith-doc__body ol {
+  margin: 0 0 var(--z-doc-psp, 2.4rem);
+}
+
+.zenith-doc__body ul,
+.zenith-doc__body ol {
+  padding-left: 2.4rem;
+}
+
+.zenith-doc__body li + li {
+  margin-top: 0;
+}
+
+.zenith-doc__body ul li::marker {
+  font-size: 0.8em;
+}
+
+.zenith-doc__body :is(h1, h2, h3, h4, h5, h6) {
+  margin: 0.8rem 0;
+  font-family: var(--font-heading-family);
+  line-height: 1.2;
+  letter-spacing: 0;
+  color: var(--z-doc-accent);
+  scroll-margin-top: calc(var(--header-height, 7.2rem) + var(--z-space-5));
+}
+
+.zenith-doc__body :is(h1, h2) {
+  font-size: var(--z-doc-hfs-m, 3.2rem);
+}
+
+.zenith-doc__body h3 {
+  font-size: calc(var(--z-doc-hfs-m, 3.2rem) * 0.75);
+}
+
+.zenith-doc__body :is(h4, h5, h6) {
+  font-size: calc(var(--z-doc-hfs-m, 3.2rem) * 0.6);
+  color: rgb(var(--color-foreground));
+}
+
+.zenith-doc__body a {
+  color: rgb(var(--color-foreground));
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+
+.zenith-doc__body a:hover {
+  color: var(--z-doc-accent);
+}
+
+.zenith-doc__body strong {
+  color: rgb(var(--color-foreground));
+}
+
+.zenith-doc__body img {
+  max-width: 100%;
+  height: auto;
+}
+
+.zenith-doc__body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 var(--z-doc-psp, 2.4rem);
+}
+
+.zenith-doc__body :is(th, td) {
+  padding: var(--z-space-2) var(--z-space-3);
+  border: 1px solid var(--z-doc-border, #262626);
+  text-align: left;
+}
+
+@media screen and (min-width: 750px) {
+  .zenith-doc {
+    padding-bottom: var(--z-doc-pb, var(--z-space-8));
+  }
+
+  .zenith-doc__hero {
+    padding-top: var(--z-doc-pt, 6.4rem);
+  }
+
+  .zenith-doc__title {
+    font-size: var(--z-doc-tfs, 5.6rem);
+  }
+
+  .zenith-doc__updated {
+    margin-top: var(--z-space-3);
+    font-size: var(--z-doc-ufs, 1.8rem);
+  }
+
+  .zenith-doc__layout {
+    gap: var(--z-doc-gap, 5.2rem);
+    padding-top: var(--z-doc-lt, 11.2rem);
+  }
+
+  .zenith-doc__toc-title {
+    padding: 1.3rem var(--z-space-4);
+    font-size: var(--z-doc-tocfs, 2.8rem);
+  }
+
+  .zenith-doc__toc-link {
+    font-size: var(--z-doc-tilfs, 1.8rem);
+  }
+
+  .zenith-doc__body {
+    font-size: var(--z-doc-bfs, 1.6rem);
+  }
+
+  .zenith-doc__body :is(h1, h2) {
+    font-size: var(--z-doc-hfs, 4.2rem);
+  }
+
+  .zenith-doc__body h3 {
+    font-size: calc(var(--z-doc-hfs, 4.2rem) * 0.75);
+  }
+
+  .zenith-doc__body :is(h4, h5, h6) {
+    font-size: calc(var(--z-doc-hfs, 4.2rem) * 0.6);
+  }
+}
+
+/* Contents beside the text from tablet landscape up; stays in view while reading */
+@media screen and (min-width: 990px) {
+  .zenith-doc--toc .zenith-doc__layout {
+    display: grid;
+    grid-template-columns: var(--z-doc-toc-w, 36.4rem) minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .zenith-doc__toc {
+    position: sticky;
+    top: calc(var(--header-height, 7.2rem) + var(--z-space-5));
+    max-height: calc(100vh - var(--header-height, 7.2rem) - var(--z-space-7));
+    overflow-y: auto;
+    scrollbar-width: thin;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:has(.zenith-doc--toc) {
+    scroll-behavior: smooth;
+  }
+}

@@ -1,0 +1,353 @@
+{%- comment -%}
+  zenith: text page in the policy look (Disclaimer). Title = page title, text = page content (Online Store → Pages).
+  Start the content with "Last updated: …" to show it under the title. Same layout as policy pages (snippets/zenith-doc.liquid).
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign doc_class = 'color-' | append: s.color_scheme
+  if s.alignment == 'center'
+    assign doc_class = doc_class | append: ' zenith-doc--center'
+  endif
+-%}
+{%- capture doc_vars -%}
+  --z-doc-accent: {{ s.heading_color }};
+  --z-doc-top: {{ s.top_color }};
+  --z-doc-mw: {{ s.content_max_width }}px;
+  --z-doc-bmw: {{ s.text_max_width }}px;
+  --z-doc-toc-w: {{ s.toc_width }}px;
+  --z-doc-gap: {{ s.gap }}px;
+  --z-doc-gap-m: {{ s.gap_mobile }}px;
+  --z-doc-text-o: {{ s.text_opacity | divided_by: 100.0 }};
+  --z-doc-tfs: {{ s.title_font_size }}px;
+  --z-doc-tfs-m: {{ s.title_font_size_mobile }}px;
+  --z-doc-ufs: {{ s.updated_font_size }}px;
+  --z-doc-ufs-m: {{ s.updated_font_size_mobile }}px;
+  --z-doc-hfs: {{ s.heading_font_size }}px;
+  --z-doc-hfs-m: {{ s.heading_font_size_mobile }}px;
+  --z-doc-bfs: {{ s.text_font_size }}px;
+  --z-doc-bfs-m: {{ s.text_font_size_mobile }}px;
+  --z-doc-blh: {{ s.line_height | divided_by: 100.0 }};
+  --z-doc-psp: {{ s.paragraph_spacing }}px;
+  --z-doc-pt: {{ s.padding_top }}px;
+  --z-doc-pt-m: {{ s.padding_top_mobile }}px;
+  --z-doc-lt: {{ s.content_top }}px;
+  --z-doc-lt-m: {{ s.content_top_mobile }}px;
+  --z-doc-pb: {{ s.padding_bottom }}px;
+  --z-doc-pb-m: {{ s.padding_bottom_mobile }}px;
+{%- endcapture -%}
+{%- render 'zenith-doc',
+  title: page.title,
+  body: page.content,
+  id: section.id,
+  show_toc: s.show_toc,
+  toc_heading: s.toc_heading,
+  class: doc_class,
+  vars: doc_vars
+-%}
+
+{% schema %}
+{
+  "name": "Zenith · Document page",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "paragraph",
+      "content": "Title and text come from the page (Online Store → Pages). Start the text with \"Last updated: …\" to show it under the title."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_toc",
+      "label": "Show Table of Contents",
+      "info": "Lists the page's headings beside the text.",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "toc_heading",
+      "label": "Table of Contents heading",
+      "default": "Table of Contents"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Position",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Left (page margin)" },
+        { "value": "center", "label": "Centered column" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "label": "Column width",
+      "min": 480,
+      "max": 1400,
+      "step": 10,
+      "unit": "px",
+      "default": 780
+    },
+    {
+      "type": "range",
+      "id": "text_max_width",
+      "label": "Text max width",
+      "min": 480,
+      "max": 1000,
+      "step": 10,
+      "unit": "px",
+      "default": 780
+    },
+    {
+      "type": "range",
+      "id": "toc_width",
+      "label": "Table of Contents width",
+      "min": 240,
+      "max": 480,
+      "step": 4,
+      "unit": "px",
+      "default": 364
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Space between contents and text",
+      "min": 16,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 52
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Section headings + active contents link",
+      "default": "#EABE5F"
+    },
+    {
+      "type": "color",
+      "id": "top_color",
+      "label": "Top of page fade",
+      "default": "#202020"
+    },
+    {
+      "type": "range",
+      "id": "text_opacity",
+      "label": "Text opacity",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 90
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "label": "Title size",
+      "min": 32,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "updated_font_size",
+      "label": "\"Last updated\" size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size",
+      "label": "Section heading size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 42
+    },
+    {
+      "type": "range",
+      "id": "text_font_size",
+      "label": "Text size",
+      "min": 12,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "line_height",
+      "label": "Text line height",
+      "min": 120,
+      "max": 200,
+      "step": 5,
+      "unit": "%",
+      "default": 150
+    },
+    {
+      "type": "range",
+      "id": "paragraph_spacing",
+      "label": "Space between paragraphs",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 26
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "type": "range",
+      "id": "title_font_size_mobile",
+      "label": "Title size",
+      "min": 24,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "updated_font_size_mobile",
+      "label": "\"Last updated\" size",
+      "min": 12,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size_mobile",
+      "label": "Section heading size",
+      "min": 18,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "text_font_size_mobile",
+      "label": "Text size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "gap_mobile",
+      "label": "Space between contents and text",
+      "min": 16,
+      "max": 96,
+      "step": 4,
+      "unit": "px",
+      "default": 44
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Space above title",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "content_top",
+      "label": "Space above text",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Space below text",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Space above title (mobile)",
+      "min": 0,
+      "max": 96,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "content_top_mobile",
+      "label": "Space above text (mobile)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Space below text (mobile)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zenith · Document page"
+    }
+  ]
+}
+{% endschema %}

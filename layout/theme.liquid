@@ -336,8 +336,49 @@
       tabindex="-1"
       data-template="{{ template.name }}"
     >
-      {%- comment -%} zenith: [customers] in any page content → Theme settings → Zenith → Customer count {%- endcomment -%}
-      {{ content_for_layout | replace: '[customers]', settings.customer_count }}
+      {%- comment -%}
+        zenith: policy pages (Settings → Policies) have no sections — render them in the Zenith document layout
+        (title, "Last updated", Table of Contents) with Theme settings → Zenith · Policy pages. Unmatched → Shopify's default output.
+      {%- endcomment -%}
+      {%- liquid
+        assign zenith_policy = nil
+        if request.page_type == 'policy'
+          assign zenith_policy_handle = request.path | split: '/' | last
+          for policy in shop.policies
+            assign policy_handle = policy.url | split: '/' | last
+            if policy_handle == zenith_policy_handle and policy.body != blank
+              assign zenith_policy = policy
+              break
+            endif
+          endfor
+        endif
+      -%}
+      {%- if zenith_policy != nil -%}
+        {%- capture zenith_policy_vars -%}
+          --z-doc-accent: {{ settings.policy_heading_color }};
+          --z-doc-top: {{ settings.policy_top_color }};
+          --z-doc-toc-w: {{ settings.policy_toc_width }}px;
+          --z-doc-gap: {{ settings.policy_gap }}px;
+          --z-doc-bmw: {{ settings.policy_text_width }}px;
+          --z-doc-tfs: {{ settings.policy_title_size }}px;
+          --z-doc-tfs-m: {{ settings.policy_title_size_mobile }}px;
+          --z-doc-hfs: {{ settings.policy_heading_size }}px;
+          --z-doc-hfs-m: {{ settings.policy_heading_size_mobile }}px;
+          --z-doc-bfs: {{ settings.policy_text_size }}px;
+          --z-doc-bfs-m: {{ settings.policy_text_size_mobile }}px;
+        {%- endcapture -%}
+        {%- render 'zenith-doc',
+          title: zenith_policy.title,
+          body: zenith_policy.body,
+          id: zenith_policy_handle,
+          show_toc: settings.policy_show_toc,
+          toc_heading: settings.policy_toc_heading,
+          vars: zenith_policy_vars
+        -%}
+      {%- else -%}
+        {%- comment -%} zenith: [customers] in any page content → Theme settings → Zenith → Customer count {%- endcomment -%}
+        {{ content_for_layout | replace: '[customers]', settings.customer_count }}
+      {%- endif -%}
     </main>
 
     {% sections 'footer-group' %}
