@@ -1,0 +1,166 @@
+{%- comment -%}
+  One video testimonial card (<li> slide) for zenith-video-carousel. Styles: assets/zenith-video-carousel.css, player: assets/zenith-video.js.
+  Content comes from a block ("This section's cards") or a Theme settings slot (Zenith · Video testimonials).
+  Accepts:
+    video {video}, youtube_url {String}, poster {image} (cover image or GIF), quote {String}, title {String}, link {String},
+    author {String}, product {product}, thumbnail {image}
+    attrs {String} extra <li> attributes (id + block.shopify_attributes)
+    card_scheme {String}, overlay_style {String}, play_label {String}, show_play_without_video {Boolean}
+{%- endcomment -%}
+{%- liquid
+  assign thumb = thumbnail
+  if thumb == blank and product != blank
+    assign thumb = product.featured_image
+  endif
+  assign title_link = link
+  if title_link == blank and product != blank
+    assign title_link = product.url
+  endif
+  assign handle = author | escape
+
+  # YouTube link (incl. Shorts): used when no video file is picked; the player loads on tap
+  assign yt_id = ''
+  assign yt_src = ''
+  if video == blank and youtube_url != blank
+    capture yt
+      render 'zenith-youtube-id', url: youtube_url
+    endcapture
+    assign yt_id = yt | split: ':' | first
+    if yt_id != blank
+      assign yt_src = 'https://www.youtube-nocookie.com/embed/' | append: yt_id | append: '?autoplay=1&playsinline=1&rel=0&modestbranding=1&enablejsapi=1'
+      if yt contains ':short'
+        assign yt_thumb = 'oar2'
+      else
+        assign yt_thumb = 'hqdefault'
+      endif
+    endif
+  endif
+  assign has_player = false
+  if video != blank or yt_src != blank
+    assign has_player = true
+  endif
+-%}
+<li class="zenith-carousel__slide" {{ attrs }}>
+  <article class="zenith-video-card color-{{ card_scheme }}">
+    <zenith-video
+      class="zenith-media zenith-video-card__media"
+      {% if yt_src != blank %}
+        data-youtube-src="{{ yt_src }}" data-title="{{ title | default: author | escape }}"
+      {% endif %}
+    >
+      {%- if yt_src != blank -%}
+        {%- if poster != blank -%}
+          {{
+            poster
+            | image_url: width: 720
+            | image_tag:
+              loading: 'lazy',
+              widths: '360, 540, 720',
+              sizes: '(min-width: 750px) 25vw, 85vw',
+              class: 'zenith-video-card__poster',
+              alt: ''
+          }}
+        {%- else -%}
+          <img
+            src="https://i.ytimg.com/vi/{{ yt_id }}/{{ yt_thumb }}.jpg"
+            class="zenith-video-card__poster"
+            alt=""
+            {% if yt_thumb == 'oar2' %}
+              width="1080" height="1920"
+            {% else %}
+              width="480" height="360"
+            {% endif %}
+            loading="lazy"
+          >
+        {%- endif -%}
+      {%- elsif video != blank -%}
+        {{
+          video
+          | video_tag:
+            image_size: '720x',
+            preload: 'none',
+            playsinline: true,
+            class: 'zenith-video-card__video'
+        }}
+        {%- if poster != blank -%}
+          {{
+            poster
+            | image_url: width: 720
+            | image_tag:
+              loading: 'lazy',
+              widths: '360, 540, 720',
+              sizes: '(min-width: 750px) 25vw, 85vw',
+              class: 'zenith-video-card__poster',
+              alt: ''
+          }}
+        {%- endif -%}
+      {%- elsif poster != blank -%}
+        {{
+          poster
+          | image_url: width: 720
+          | image_tag: loading: 'lazy', widths: '360, 540, 720', sizes: '(min-width: 750px) 25vw, 85vw'
+        }}
+      {%- else -%}
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+      {%- render 'zenith-overlay', style: overlay_style -%}
+      {%- if has_player -%}
+        <button
+          type="button"
+          class="zenith-video-card__play"
+          data-video-toggle
+          aria-pressed="false"
+          aria-label="{{ play_label | escape }}{% if handle != blank %} – {{ handle }}{% endif %}"
+        >
+          <svg viewBox="0 0 24 32" fill="currentColor" aria-hidden="true" focusable="false">
+            <path d="M0 0v32l24-16z"/>
+          </svg>
+        </button>
+      {%- elsif show_play_without_video -%}
+        <span class="zenith-video-card__play" aria-hidden="true">
+          <svg viewBox="0 0 24 32" fill="currentColor" aria-hidden="true" focusable="false">
+            <path d="M0 0v32l24-16z"/>
+          </svg>
+        </span>
+      {%- endif -%}
+    </zenith-video>
+
+    <div class="zenith-video-card__body">
+      <div class="zenith-video-card__quote-wrap">
+        {%- if quote != blank -%}
+          <blockquote class="zenith-video-card__quote">
+            {{- quote | escape | replace: '[customers]', settings.customer_count | newline_to_br -}}
+          </blockquote>
+        {%- endif -%}
+      </div>
+
+      {%- if thumb != blank or title != blank or handle != blank -%}
+        <div class="zenith-video-card__meta">
+          {%- if thumb != blank -%}
+            <span class="zenith-video-card__thumb">
+              {{
+                thumb
+                | image_url: width: 160
+                | image_tag: loading: 'lazy', widths: '80, 120, 160', sizes: '56px', alt: ''
+              }}
+            </span>
+          {%- endif -%}
+          <div class="zenith-video-card__info">
+            {%- if title != blank -%}
+              {%- if title_link != blank -%}
+                <a href="{{ title_link }}" class="zenith-video-card__title">
+                  {{- title | escape -}}
+                </a>
+              {%- else -%}
+                <p class="zenith-video-card__title">{{ title | escape }}</p>
+              {%- endif -%}
+            {%- endif -%}
+            {%- if handle != blank -%}
+              <p class="zenith-video-card__handle">{{ handle }}</p>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+  </article>
+</li>

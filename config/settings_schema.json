@@ -171,6 +171,1075 @@
     ]
   },
   {
+    "name": "Zenith · Video testimonials",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Shared by every \"Zenith · Video carousel\" section set to Videos = Global. Fill slots in the order they should appear; empty slots are skipped. Each video: a YouTube link (Shorts work) or an uploaded video file, plus the text under it."
+      },
+      {
+        "type": "header",
+        "content": "Video 1"
+      },
+      {
+        "type": "text",
+        "id": "vt1_youtube",
+        "label": "YouTube link",
+        "info": "Shorts, watch or youtu.be link. Used when no video file is picked."
+      },
+      {
+        "type": "video",
+        "id": "vt1_video",
+        "label": "Video file (MP4, MOV or WebM)"
+      },
+      {
+        "type": "image_picker",
+        "id": "vt1_cover",
+        "label": "Cover image or GIF",
+        "info": "Optional. Defaults to the YouTube thumbnail / the video cover."
+      },
+      {
+        "type": "textarea",
+        "id": "vt1_quote",
+        "label": "Quote"
+      },
+      {
+        "type": "text",
+        "id": "vt1_title",
+        "label": "Video title"
+      },
+      {
+        "type": "url",
+        "id": "vt1_link",
+        "label": "Video title link",
+        "info": "Defaults to the product page"
+      },
+      {
+        "type": "text",
+        "id": "vt1_author",
+        "label": "Creator handle"
+      },
+      {
+        "type": "product",
+        "id": "vt1_product",
+        "label": "Featured product"
+      },
+      {
+        "type": "image_picker",
+        "id": "vt1_thumb",
+        "label": "Thumbnail",
+        "info": "Defaults to the featured product's image"
+      },
+      {
+        "type": "header",
+        "content": "Video 2"
+      },
+      {
+        "type": "text",
+        "id": "vt2_youtube",
+        "label": "YouTube link",
+        "info": "Shorts, watch or youtu.be link. Used when no video file is picked."
+      },
+      {
+        "type": "video",
+        "id": "vt2_video",
+        "label": "Video file (MP4, MOV or WebM)"
+      },
+      {
+        "type": "image_picker",
+        "id": "vt2_cover",
+        "label": "Cover image or GIF",
+        "info": "Optional. Defaults to the YouTube thumbnail / the video cover."
+      },
+      {
+        "type": "textarea",
+        "id": "vt2_quote",
+        "label": "Quote"
+      },
+      {
+        "type": "text",
+        "id": "vt2_title",
+        "label": "Video title"
+      },
+      {
+        "type": "url",
+        "id": "vt2_link",
+        "label": "Video title link",
+        "info": "Defaults to the product page"
+      },
+      {
+        "type": "text",
+        "id": "vt2_author",
+        "label": "Creator handle"
+      },
+      {
+        "type": "product",
+        "id": "vt2_product",
+        "label": "Featured product"
+      },
+      {
+        "type": "image_picker",
+        "id": "vt2_thumb",
+        "label": "Thumbnail",
+        "info": "Defaults to the featured product's image"
+      },
+      {
+        "type": "header",
+        "content": "Video 3"
+      },
+      {
+        "type": "text",
+        "id": "vt3_youtube",
+        "label": "YouTube link",
+        "info": "Shorts, watch or youtu.be link. Used when no video file is picked."
+      },
+      {
+        "type": "video",
+        "id": "vt3_video",
+        "label": "Video file (MP4, MOV or WebM)"
+      },
+      {
+        "type": "image_picker",
+        "id": "vt3_cover",
+        "label": "Cover image or GIF",
+        "info": "Optional. Defaults to the YouTube thumbnail / the video cover."
+      },
+      {
+        "type": "textarea",
+        "id": "vt3_quote",
+        "label": "Quote"
+      },
+      {
+        "type": "text",
+        "id": "vt3_title",
+        "label": "Video title"
+      },
+      {
+        "type": "url",
+        "id": "vt3_link",
+        "label": "Video title link",
+        "info": "Defaults to the product page"
+      },
+      {
+        "type": "text",
+        "id": "vt3_author",
+        "label": "Creator handle"
+      },
+      {
+        "type": "product",
+        "id": "vt3_product",
+        "label": "Featured product"
+      },
+      {
+        "type": "image_picker",
+        "id": "vt3_thumb",
+        "label": "Thumbnail",
+        "info": "Defaults to the featured product's image"
+      },
+      {
+        "type": "header",
+        "content": "Video 4"
+      },
+      {
+        "type": "text",
+        "id": "vt4_youtube",
+        "label": "YouTube link",
+        "info": "Shorts, watch or youtu.be link. Used when no video file is picked."
+      },
+      {
+        "type": "video",
+        "id": "vt4_video",
+        "label": "Video file (MP4, MOV or WebM)"
+      },
+      {
+        "type": "image_picker",
+        "id": "vt4_cover",
+        "label": "Cover image or GIF",
+        "info": "Optional. Defaults to the YouTube thumbnail / the video cover."
+      },
+      {
+        "type": "textarea",
+        "id": "vt4_quote",
+        "label": "Quote"
+      },
+      {
+        "type": "text",
+        "id": "vt4_title",
+        "label": "Video title"
+      },
+      {
+        "type": "url",
+        "id": "vt4_link",
+        "label": "Video title link",
+        "info": "Defaults to the product page"
+      },
+      {
+        "type": "text",
+        "id": "vt4_author",
+        "label": "Creator handle"
+      },
+      {
+        "type": "product",
+        "id": "vt4_product",
+        "label": "Featured product"
+      },
+      {
+        "type": "image_picker",
+        "id": "vt4_thumb",
+        "label": "Thumbnail",
+        "info": "Defaults to the featured product's image"
+      },
+      {
+        "type": "header",
+        "content": "Video 5"
+      },
+      {
+        "type": "text",
+        "id": "vt5_youtube",
+        "label": "YouTube link",
+        "info": "Shorts, watch or youtu.be link. Used when no video file is picked."
+      },
+      {
+        "type": "video",
+        "id": "vt5_video",
+        "label": "Video file (MP4, MOV or WebM)"
+      },
+      {
+        "type": "image_picker",
+        "id": "vt5_cover",
+        "label": "Cover image or GIF",
+        "info": "Optional. Defaults to the YouTube thumbnail / the video cover."
+      },
+      {
+        "type": "textarea",
+        "id": "vt5_quote",
+        "label": "Quote"
+      },
+      {
+        "type": "text",
+        "id": "vt5_title",
+        "label": "Video title"
+      },
+      {
+        "type": "url",
+        "id": "vt5_link",
+        "label": "Video title link",
+        "info": "Defaults to the product page"
+      },
+      {
+        "type": "text",
+        "id": "vt5_author",
+        "label": "Creator handle"
+      },
+      {
+        "type": "product",
+        "id": "vt5_product",
+        "label": "Featured product"
+      },
+      {
+        "type": "image_picker",
+        "id": "vt5_thumb",
+        "label": "Thumbnail",
+        "info": "Defaults to the featured product's image"
+      },
+      {
+        "type": "header",
+        "content": "Video 6"
+      },
+      {
+        "type": "text",
+        "id": "vt6_youtube",
+        "label": "YouTube link",
+        "info": "Shorts, watch or youtu.be link. Used when no video file is picked."
+      },
+      {
+        "type": "video",
+        "id": "vt6_video",
+        "label": "Video file (MP4, MOV or WebM)"
+      },
+      {
+        "type": "image_picker",
+        "id": "vt6_cover",
+        "label": "Cover image or GIF",
+        "info": "Optional. Defaults to the YouTube thumbnail / the video cover."
+      },
+      {
+        "type": "textarea",
+        "id": "vt6_quote",
+        "label": "Quote"
+      },
+      {
+        "type": "text",
+        "id": "vt6_title",
+        "label": "Video title"
+      },
+      {
+        "type": "url",
+        "id": "vt6_link",
+        "label": "Video title link",
+        "info": "Defaults to the product page"
+      },
+      {
+        "type": "text",
+        "id": "vt6_author",
+        "label": "Creator handle"
+      },
+      {
+        "type": "product",
+        "id": "vt6_product",
+        "label": "Featured product"
+      },
+      {
+        "type": "image_picker",
+        "id": "vt6_thumb",
+        "label": "Thumbnail",
+        "info": "Defaults to the featured product's image"
+      },
+      {
+        "type": "header",
+        "content": "Video 7"
+      },
+      {
+        "type": "text",
+        "id": "vt7_youtube",
+        "label": "YouTube link",
+        "info": "Shorts, watch or youtu.be link. Used when no video file is picked."
+      },
+      {
+        "type": "video",
+        "id": "vt7_video",
+        "label": "Video file (MP4, MOV or WebM)"
+      },
+      {
+        "type": "image_picker",
+        "id": "vt7_cover",
+        "label": "Cover image or GIF",
+        "info": "Optional. Defaults to the YouTube thumbnail / the video cover."
+      },
+      {
+        "type": "textarea",
+        "id": "vt7_quote",
+        "label": "Quote"
+      },
+      {
+        "type": "text",
+        "id": "vt7_title",
+        "label": "Video title"
+      },
+      {
+        "type": "url",
+        "id": "vt7_link",
+        "label": "Video title link",
+        "info": "Defaults to the product page"
+      },
+      {
+        "type": "text",
+        "id": "vt7_author",
+        "label": "Creator handle"
+      },
+      {
+        "type": "product",
+        "id": "vt7_product",
+        "label": "Featured product"
+      },
+      {
+        "type": "image_picker",
+        "id": "vt7_thumb",
+        "label": "Thumbnail",
+        "info": "Defaults to the featured product's image"
+      },
+      {
+        "type": "header",
+        "content": "Video 8"
+      },
+      {
+        "type": "text",
+        "id": "vt8_youtube",
+        "label": "YouTube link",
+        "info": "Shorts, watch or youtu.be link. Used when no video file is picked."
+      },
+      {
+        "type": "video",
+        "id": "vt8_video",
+        "label": "Video file (MP4, MOV or WebM)"
+      },
+      {
+        "type": "image_picker",
+        "id": "vt8_cover",
+        "label": "Cover image or GIF",
+        "info": "Optional. Defaults to the YouTube thumbnail / the video cover."
+      },
+      {
+        "type": "textarea",
+        "id": "vt8_quote",
+        "label": "Quote"
+      },
+      {
+        "type": "text",
+        "id": "vt8_title",
+        "label": "Video title"
+      },
+      {
+        "type": "url",
+        "id": "vt8_link",
+        "label": "Video title link",
+        "info": "Defaults to the product page"
+      },
+      {
+        "type": "text",
+        "id": "vt8_author",
+        "label": "Creator handle"
+      },
+      {
+        "type": "product",
+        "id": "vt8_product",
+        "label": "Featured product"
+      },
+      {
+        "type": "image_picker",
+        "id": "vt8_thumb",
+        "label": "Thumbnail",
+        "info": "Defaults to the featured product's image"
+      },
+      {
+        "type": "header",
+        "content": "Video 9"
+      },
+      {
+        "type": "text",
+        "id": "vt9_youtube",
+        "label": "YouTube link",
+        "info": "Shorts, watch or youtu.be link. Used when no video file is picked."
+      },
+      {
+        "type": "video",
+        "id": "vt9_video",
+        "label": "Video file (MP4, MOV or WebM)"
+      },
+      {
+        "type": "image_picker",
+        "id": "vt9_cover",
+        "label": "Cover image or GIF",
+        "info": "Optional. Defaults to the YouTube thumbnail / the video cover."
+      },
+      {
+        "type": "textarea",
+        "id": "vt9_quote",
+        "label": "Quote"
+      },
+      {
+        "type": "text",
+        "id": "vt9_title",
+        "label": "Video title"
+      },
+      {
+        "type": "url",
+        "id": "vt9_link",
+        "label": "Video title link",
+        "info": "Defaults to the product page"
+      },
+      {
+        "type": "text",
+        "id": "vt9_author",
+        "label": "Creator handle"
+      },
+      {
+        "type": "product",
+        "id": "vt9_product",
+        "label": "Featured product"
+      },
+      {
+        "type": "image_picker",
+        "id": "vt9_thumb",
+        "label": "Thumbnail",
+        "info": "Defaults to the featured product's image"
+      },
+      {
+        "type": "header",
+        "content": "Video 10"
+      },
+      {
+        "type": "text",
+        "id": "vt10_youtube",
+        "label": "YouTube link",
+        "info": "Shorts, watch or youtu.be link. Used when no video file is picked."
+      },
+      {
+        "type": "video",
+        "id": "vt10_video",
+        "label": "Video file (MP4, MOV or WebM)"
+      },
+      {
+        "type": "image_picker",
+        "id": "vt10_cover",
+        "label": "Cover image or GIF",
+        "info": "Optional. Defaults to the YouTube thumbnail / the video cover."
+      },
+      {
+        "type": "textarea",
+        "id": "vt10_quote",
+        "label": "Quote"
+      },
+      {
+        "type": "text",
+        "id": "vt10_title",
+        "label": "Video title"
+      },
+      {
+        "type": "url",
+        "id": "vt10_link",
+        "label": "Video title link",
+        "info": "Defaults to the product page"
+      },
+      {
+        "type": "text",
+        "id": "vt10_author",
+        "label": "Creator handle"
+      },
+      {
+        "type": "product",
+        "id": "vt10_product",
+        "label": "Featured product"
+      },
+      {
+        "type": "image_picker",
+        "id": "vt10_thumb",
+        "label": "Thumbnail",
+        "info": "Defaults to the featured product's image"
+      },
+      {
+        "type": "header",
+        "content": "Video 11"
+      },
+      {
+        "type": "text",
+        "id": "vt11_youtube",
+        "label": "YouTube link",
+        "info": "Shorts, watch or youtu.be link. Used when no video file is picked."
+      },
+      {
+        "type": "video",
+        "id": "vt11_video",
+        "label": "Video file (MP4, MOV or WebM)"
+      },
+      {
+        "type": "image_picker",
+        "id": "vt11_cover",
+        "label": "Cover image or GIF",
+        "info": "Optional. Defaults to the YouTube thumbnail / the video cover."
+      },
+      {
+        "type": "textarea",
+        "id": "vt11_quote",
+        "label": "Quote"
+      },
+      {
+        "type": "text",
+        "id": "vt11_title",
+        "label": "Video title"
+      },
+      {
+        "type": "url",
+        "id": "vt11_link",
+        "label": "Video title link",
+        "info": "Defaults to the product page"
+      },
+      {
+        "type": "text",
+        "id": "vt11_author",
+        "label": "Creator handle"
+      },
+      {
+        "type": "product",
+        "id": "vt11_product",
+        "label": "Featured product"
+      },
+      {
+        "type": "image_picker",
+        "id": "vt11_thumb",
+        "label": "Thumbnail",
+        "info": "Defaults to the featured product's image"
+      },
+      {
+        "type": "header",
+        "content": "Video 12"
+      },
+      {
+        "type": "text",
+        "id": "vt12_youtube",
+        "label": "YouTube link",
+        "info": "Shorts, watch or youtu.be link. Used when no video file is picked."
+      },
+      {
+        "type": "video",
+        "id": "vt12_video",
+        "label": "Video file (MP4, MOV or WebM)"
+      },
+      {
+        "type": "image_picker",
+        "id": "vt12_cover",
+        "label": "Cover image or GIF",
+        "info": "Optional. Defaults to the YouTube thumbnail / the video cover."
+      },
+      {
+        "type": "textarea",
+        "id": "vt12_quote",
+        "label": "Quote"
+      },
+      {
+        "type": "text",
+        "id": "vt12_title",
+        "label": "Video title"
+      },
+      {
+        "type": "url",
+        "id": "vt12_link",
+        "label": "Video title link",
+        "info": "Defaults to the product page"
+      },
+      {
+        "type": "text",
+        "id": "vt12_author",
+        "label": "Creator handle"
+      },
+      {
+        "type": "product",
+        "id": "vt12_product",
+        "label": "Featured product"
+      },
+      {
+        "type": "image_picker",
+        "id": "vt12_thumb",
+        "label": "Thumbnail",
+        "info": "Defaults to the featured product's image"
+      },
+      {
+        "type": "header",
+        "content": "Video 13"
+      },
+      {
+        "type": "text",
+        "id": "vt13_youtube",
+        "label": "YouTube link",
+        "info": "Shorts, watch or youtu.be link. Used when no video file is picked."
+      },
+      {
+        "type": "video",
+        "id": "vt13_video",
+        "label": "Video file (MP4, MOV or WebM)"
+      },
+      {
+        "type": "image_picker",
+        "id": "vt13_cover",
+        "label": "Cover image or GIF",
+        "info": "Optional. Defaults to the YouTube thumbnail / the video cover."
+      },
+      {
+        "type": "textarea",
+        "id": "vt13_quote",
+        "label": "Quote"
+      },
+      {
+        "type": "text",
+        "id": "vt13_title",
+        "label": "Video title"
+      },
+      {
+        "type": "url",
+        "id": "vt13_link",
+        "label": "Video title link",
+        "info": "Defaults to the product page"
+      },
+      {
+        "type": "text",
+        "id": "vt13_author",
+        "label": "Creator handle"
+      },
+      {
+        "type": "product",
+        "id": "vt13_product",
+        "label": "Featured product"
+      },
+      {
+        "type": "image_picker",
+        "id": "vt13_thumb",
+        "label": "Thumbnail",
+        "info": "Defaults to the featured product's image"
+      },
+      {
+        "type": "header",
+        "content": "Video 14"
+      },
+      {
+        "type": "text",
+        "id": "vt14_youtube",
+        "label": "YouTube link",
+        "info": "Shorts, watch or youtu.be link. Used when no video file is picked."
+      },
+      {
+        "type": "video",
+        "id": "vt14_video",
+        "label": "Video file (MP4, MOV or WebM)"
+      },
+      {
+        "type": "image_picker",
+        "id": "vt14_cover",
+        "label": "Cover image or GIF",
+        "info": "Optional. Defaults to the YouTube thumbnail / the video cover."
+      },
+      {
+        "type": "textarea",
+        "id": "vt14_quote",
+        "label": "Quote"
+      },
+      {
+        "type": "text",
+        "id": "vt14_title",
+        "label": "Video title"
+      },
+      {
+        "type": "url",
+        "id": "vt14_link",
+        "label": "Video title link",
+        "info": "Defaults to the product page"
+      },
+      {
+        "type": "text",
+        "id": "vt14_author",
+        "label": "Creator handle"
+      },
+      {
+        "type": "product",
+        "id": "vt14_product",
+        "label": "Featured product"
+      },
+      {
+        "type": "image_picker",
+        "id": "vt14_thumb",
+        "label": "Thumbnail",
+        "info": "Defaults to the featured product's image"
+      },
+      {
+        "type": "header",
+        "content": "Video 15"
+      },
+      {
+        "type": "text",
+        "id": "vt15_youtube",
+        "label": "YouTube link",
+        "info": "Shorts, watch or youtu.be link. Used when no video file is picked."
+      },
+      {
+        "type": "video",
+        "id": "vt15_video",
+        "label": "Video file (MP4, MOV or WebM)"
+      },
+      {
+        "type": "image_picker",
+        "id": "vt15_cover",
+        "label": "Cover image or GIF",
+        "info": "Optional. Defaults to the YouTube thumbnail / the video cover."
+      },
+      {
+        "type": "textarea",
+        "id": "vt15_quote",
+        "label": "Quote"
+      },
+      {
+        "type": "text",
+        "id": "vt15_title",
+        "label": "Video title"
+      },
+      {
+        "type": "url",
+        "id": "vt15_link",
+        "label": "Video title link",
+        "info": "Defaults to the product page"
+      },
+      {
+        "type": "text",
+        "id": "vt15_author",
+        "label": "Creator handle"
+      },
+      {
+        "type": "product",
+        "id": "vt15_product",
+        "label": "Featured product"
+      },
+      {
+        "type": "image_picker",
+        "id": "vt15_thumb",
+        "label": "Thumbnail",
+        "info": "Defaults to the featured product's image"
+      },
+      {
+        "type": "header",
+        "content": "Video 16"
+      },
+      {
+        "type": "text",
+        "id": "vt16_youtube",
+        "label": "YouTube link",
+        "info": "Shorts, watch or youtu.be link. Used when no video file is picked."
+      },
+      {
+        "type": "video",
+        "id": "vt16_video",
+        "label": "Video file (MP4, MOV or WebM)"
+      },
+      {
+        "type": "image_picker",
+        "id": "vt16_cover",
+        "label": "Cover image or GIF",
+        "info": "Optional. Defaults to the YouTube thumbnail / the video cover."
+      },
+      {
+        "type": "textarea",
+        "id": "vt16_quote",
+        "label": "Quote"
+      },
+      {
+        "type": "text",
+        "id": "vt16_title",
+        "label": "Video title"
+      },
+      {
+        "type": "url",
+        "id": "vt16_link",
+        "label": "Video title link",
+        "info": "Defaults to the product page"
+      },
+      {
+        "type": "text",
+        "id": "vt16_author",
+        "label": "Creator handle"
+      },
+      {
+        "type": "product",
+        "id": "vt16_product",
+        "label": "Featured product"
+      },
+      {
+        "type": "image_picker",
+        "id": "vt16_thumb",
+        "label": "Thumbnail",
+        "info": "Defaults to the featured product's image"
+      },
+      {
+        "type": "header",
+        "content": "Video 17"
+      },
+      {
+        "type": "text",
+        "id": "vt17_youtube",
+        "label": "YouTube link",
+        "info": "Shorts, watch or youtu.be link. Used when no video file is picked."
+      },
+      {
+        "type": "video",
+        "id": "vt17_video",
+        "label": "Video file (MP4, MOV or WebM)"
+      },
+      {
+        "type": "image_picker",
+        "id": "vt17_cover",
+        "label": "Cover image or GIF",
+        "info": "Optional. Defaults to the YouTube thumbnail / the video cover."
+      },
+      {
+        "type": "textarea",
+        "id": "vt17_quote",
+        "label": "Quote"
+      },
+      {
+        "type": "text",
+        "id": "vt17_title",
+        "label": "Video title"
+      },
+      {
+        "type": "url",
+        "id": "vt17_link",
+        "label": "Video title link",
+        "info": "Defaults to the product page"
+      },
+      {
+        "type": "text",
+        "id": "vt17_author",
+        "label": "Creator handle"
+      },
+      {
+        "type": "product",
+        "id": "vt17_product",
+        "label": "Featured product"
+      },
+      {
+        "type": "image_picker",
+        "id": "vt17_thumb",
+        "label": "Thumbnail",
+        "info": "Defaults to the featured product's image"
+      },
+      {
+        "type": "header",
+        "content": "Video 18"
+      },
+      {
+        "type": "text",
+        "id": "vt18_youtube",
+        "label": "YouTube link",
+        "info": "Shorts, watch or youtu.be link. Used when no video file is picked."
+      },
+      {
+        "type": "video",
+        "id": "vt18_video",
+        "label": "Video file (MP4, MOV or WebM)"
+      },
+      {
+        "type": "image_picker",
+        "id": "vt18_cover",
+        "label": "Cover image or GIF",
+        "info": "Optional. Defaults to the YouTube thumbnail / the video cover."
+      },
+      {
+        "type": "textarea",
+        "id": "vt18_quote",
+        "label": "Quote"
+      },
+      {
+        "type": "text",
+        "id": "vt18_title",
+        "label": "Video title"
+      },
+      {
+        "type": "url",
+        "id": "vt18_link",
+        "label": "Video title link",
+        "info": "Defaults to the product page"
+      },
+      {
+        "type": "text",
+        "id": "vt18_author",
+        "label": "Creator handle"
+      },
+      {
+        "type": "product",
+        "id": "vt18_product",
+        "label": "Featured product"
+      },
+      {
+        "type": "image_picker",
+        "id": "vt18_thumb",
+        "label": "Thumbnail",
+        "info": "Defaults to the featured product's image"
+      },
+      {
+        "type": "header",
+        "content": "Video 19"
+      },
+      {
+        "type": "text",
+        "id": "vt19_youtube",
+        "label": "YouTube link",
+        "info": "Shorts, watch or youtu.be link. Used when no video file is picked."
+      },
+      {
+        "type": "video",
+        "id": "vt19_video",
+        "label": "Video file (MP4, MOV or WebM)"
+      },
+      {
+        "type": "image_picker",
+        "id": "vt19_cover",
+        "label": "Cover image or GIF",
+        "info": "Optional. Defaults to the YouTube thumbnail / the video cover."
+      },
+      {
+        "type": "textarea",
+        "id": "vt19_quote",
+        "label": "Quote"
+      },
+      {
+        "type": "text",
+        "id": "vt19_title",
+        "label": "Video title"
+      },
+      {
+        "type": "url",
+        "id": "vt19_link",
+        "label": "Video title link",
+        "info": "Defaults to the product page"
+      },
+      {
+        "type": "text",
+        "id": "vt19_author",
+        "label": "Creator handle"
+      },
+      {
+        "type": "product",
+        "id": "vt19_product",
+        "label": "Featured product"
+      },
+      {
+        "type": "image_picker",
+        "id": "vt19_thumb",
+        "label": "Thumbnail",
+        "info": "Defaults to the featured product's image"
+      },
+      {
+        "type": "header",
+        "content": "Video 20"
+      },
+      {
+        "type": "text",
+        "id": "vt20_youtube",
+        "label": "YouTube link",
+        "info": "Shorts, watch or youtu.be link. Used when no video file is picked."
+      },
+      {
+        "type": "video",
+        "id": "vt20_video",
+        "label": "Video file (MP4, MOV or WebM)"
+      },
+      {
+        "type": "image_picker",
+        "id": "vt20_cover",
+        "label": "Cover image or GIF",
+        "info": "Optional. Defaults to the YouTube thumbnail / the video cover."
+      },
+      {
+        "type": "textarea",
+        "id": "vt20_quote",
+        "label": "Quote"
+      },
+      {
+        "type": "text",
+        "id": "vt20_title",
+        "label": "Video title"
+      },
+      {
+        "type": "url",
+        "id": "vt20_link",
+        "label": "Video title link",
+        "info": "Defaults to the product page"
+      },
+      {
+        "type": "text",
+        "id": "vt20_author",
+        "label": "Creator handle"
+      },
+      {
+        "type": "product",
+        "id": "vt20_product",
+        "label": "Featured product"
+      },
+      {
+        "type": "image_picker",
+        "id": "vt20_thumb",
+        "label": "Thumbnail",
+        "info": "Defaults to the featured product's image"
+      }
+    ]
+  },
+  {
     "name": "t:settings_schema.logo.name",
     "settings": [
       {
