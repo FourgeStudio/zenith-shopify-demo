@@ -790,6 +790,7 @@
         "column_1": {
           "type": "column",
           "settings": {
+            "image": "shopify://shop_images/Image.jpg",
             "icon": "phone",
             "icon_text": "",
             "title": "",
@@ -799,6 +800,7 @@
         "column_2": {
           "type": "column",
           "settings": {
+            "image": "shopify://shop_images/Image_1.jpg",
             "icon": "qr",
             "icon_text": "",
             "title": "",
@@ -808,6 +810,7 @@
         "column_4": {
           "type": "column",
           "settings": {
+            "image": "shopify://shop_images/Image_2.jpg",
             "icon": "badge_check",
             "icon_text": "",
             "title": "",
