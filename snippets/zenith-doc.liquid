@@ -10,8 +10,8 @@
     vars {String} optional CSS custom properties for the root (--z-doc-*: see assets/zenith-doc.css)
   Content rules (so the client can paste policy text as is):
     - a first heading that repeats the title (or contains it, e.g. "Zenith Philippines Privacy Policy") is dropped
-    - a first paragraph starting "Last updated" / "Effective date" moves under the title
-    - the Table of Contents lists the body's top heading level (h1 → h4, whichever appears first); headings get ids
+    - a first paragraph/heading starting "Last updated" / "Effective date" moves under the title (split at a line break)
+    - the Table of Contents lists the heading type (h1–h4) with the most non-empty headings; empty headings are skipped
 {%- endcomment -%}
 {%- liquid
   assign doc_body = body | strip
@@ -49,28 +49,71 @@
     assign doc_title = doc_title | strip
   endif
 
-  # "Last updated …" as the first paragraph → shown under the title
+  # "Last updated …" as the first paragraph or heading → shown under the title.
+  # Also handles it sharing a heading with the next title: <h3>Last updated: …<br><br>Introduction</h3>
   assign updated = ''
+  assign first_close = ''
   assign lead = doc_body | slice: 0, 2 | downcase
   if lead == '<p'
-    assign first_p = doc_body | split: '</p>' | first | append: '</p>'
-    assign first_p_text = first_p | strip_html | strip
-    assign probe = first_p_text | slice: 0, 12 | downcase
+    assign first_close = '</p>'
+  elsif lead == '<h'
+    assign lead_level = doc_body | slice: 2, 1
+    if '123456' contains lead_level
+      assign first_close = '</h' | append: lead_level | append: '>'
+    endif
+  endif
+  if first_close != ''
+    assign first_el = doc_body | split: first_close | first | append: first_close
+    assign first_text = first_el | strip_html | strip
+    assign probe = first_text | slice: 0, 12 | downcase
     if probe == 'last updated' or probe == 'effective da'
-      assign updated = first_p_text
-      assign doc_body = doc_body | remove_first: first_p | strip
+      if first_el contains '<br'
+        assign br_parts = first_el | split: '<br'
+        assign updated = br_parts | first | strip_html | strip
+        assign tail = br_parts | last
+        assign tail_pre = tail | split: '>' | first
+        assign tail = tail | remove_first: tail_pre | remove_first: '>'
+        assign open_tag = first_el | split: '>' | first | append: '>'
+        assign new_el = open_tag | append: tail
+        assign new_text = new_el | strip_html | strip
+        if new_text == blank
+          assign new_el = ''
+        endif
+        assign doc_body = doc_body | replace_first: first_el, new_el | strip
+      else
+        assign updated = first_text
+        assign doc_body = doc_body | remove_first: first_el | strip
+      endif
     endif
   endif
 
-  # Table of Contents: ids on the top-level headings + the list, rendered here (no layout shift)
+  # Table of Contents: ids on the headings + the list, rendered here (no layout shift).
+  # Level = the heading type (h1–h4) with the most non-empty headings, so a stray empty <h1> doesn't win.
   assign toc_items = ''
   if show_toc
     assign toc_level = ''
+    assign toc_best = 0
     for n in (1..4)
-      assign probe_tag = '<h' | append: n
-      if doc_body contains probe_tag
+      assign h_open = '<h' | append: n
+      assign h_close = '</h' | append: n | append: '>'
+      unless doc_body contains h_open
+        continue
+      endunless
+      assign level_count = 0
+      assign parts = doc_body | split: h_open
+      for part in parts
+        if forloop.first
+          continue
+        endif
+        assign inner = part | split: h_close | first
+        assign text = h_open | append: inner | append: h_close | strip_html | strip
+        if text != blank
+          assign level_count = level_count | plus: 1
+        endif
+      endfor
+      if level_count > toc_best
+        assign toc_best = level_count
         assign toc_level = n
-        break
       endif
     endfor
     if toc_level != ''
@@ -86,6 +129,10 @@
         endif
         assign inner = part | split: h_close | first
         assign text = h_open | append: inner | append: h_close | strip_html | strip
+        if text == blank
+          assign rebuilt = rebuilt | append: h_open | append: part
+          continue
+        endif
         assign slug = text | handleize | default: 'section'
         assign needle = ',' | append: slug | append: ','
         if used contains needle
