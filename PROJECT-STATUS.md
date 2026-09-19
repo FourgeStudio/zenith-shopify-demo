@@ -92,7 +92,7 @@ _Last updated: 2026-09-20. Keep this file current at the end of each work sessio
 - [ ] Decide: featured-product check colour (desktop design orange #EF931C vs mobile #EABE5F — using #EABE5F).
 
 ### 3. Not started
-- [ ] Product page template (design pending) → export to `design/product/`.
+- [ ] **Product page = next task.** Design in `design/Product Page/tallow-cream/`; on hold until the user clarifies details with the client (2026-09-20). Run `design-to-page` once confirmed.
 - [ ] Default collection template (other collections), cart, search pages (404 done 2026-09-20). (Contact + About done 2026-09-18, Shop All 2026-09-19, Skin + Hair + Verify + Certificates + Blog/Article + Thank-you pages 2026-09-20.)
 - [ ] Analytics/pixels, SEO metafields, shipping/policy pages.
 - [ ] Performance + a11y pass (Lighthouse on preview), then publish `main` theme.
