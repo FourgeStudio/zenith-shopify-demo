@@ -80,10 +80,43 @@
 }
 
 .zenith-faq__answer {
+  box-sizing: border-box; /* the JS fallback animates height including the bottom padding */
   padding: 0 0 var(--z-cgap-m, var(--z-space-5));
   font-size: var(--z-tfs-m, 1.6rem);
   line-height: 1.5;
   color: rgba(var(--color-foreground), var(--z-faq-ans, 0.7));
+}
+
+/* Smooth open/close. Native where supported (Chrome/Edge): the details content animates 0 → auto.
+   Other browsers (Safari/Firefox): assets/zenith-faq.js animates the answer's height instead. */
+@supports (interpolate-size: allow-keywords) and selector(::details-content) {
+  .zenith-faq__item {
+    interpolate-size: allow-keywords;
+  }
+
+  .zenith-faq__item::details-content {
+    block-size: 0;
+    overflow-y: clip;
+    opacity: 0;
+    transition: block-size 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.35s ease,
+      content-visibility 0.35s allow-discrete;
+  }
+
+  .zenith-faq__item[open]::details-content {
+    block-size: auto;
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .zenith-faq__item::details-content {
+      transition: none;
+    }
+  }
+}
+
+/* JS fallback: the icon turns back as soon as closing starts */
+.zenith-faq__item.is-closing .zenith-faq__icon {
+  transform: none;
 }
 
 /* Optional: questions in the body font on mobile (wrapper class zenith-faq-q-body-m; contact page design). */

@@ -9,6 +9,7 @@
     section_id {String} section.id — keeps element ids unique when two sections share block ids
   [customers] in questions/answers is replaced by Theme settings → Zenith → Customer count.
 {% endcomment %}
+<script src="{{ 'zenith-faq.js' | asset_url }}" defer="defer"></script>
 {%- assign faq_count = 0 -%}
 {%- for block in blocks -%}
   {%- if type != blank and block.type != type -%}
