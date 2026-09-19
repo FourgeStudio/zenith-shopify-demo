@@ -33,7 +33,7 @@
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
-  max-width: var(--z-cmw, 60rem);
+  max-width: var(--z-hero-cmw-m, var(--z-cmw, 60rem));
 }
 
 /* Eyebrow / heading / text */
@@ -51,8 +51,47 @@
 }
 
 .zenith-hero__heading .zenith-subheading {
+  max-width: var(--z-hero-tmw, none);
   margin-top: var(--z-hero-tg, var(--z-space-2));
-  color: rgb(var(--color-foreground));
+  color: rgba(var(--color-foreground), var(--z-hero-text-o, 1));
+}
+
+.zenith-hero__heading .zenith-subheading p + p {
+  margin-top: var(--z-hero-pg, 0);
+}
+
+/* Icon above the heading (thank-you pages) */
+.zenith-hero__icon {
+  display: flex;
+  margin-bottom: var(--z-hero-icon-sp-m, var(--z-space-5));
+  color: var(--z-hero-icon-color, #d6b356);
+}
+
+.zenith-hero__icon .zenith-icon,
+.zenith-hero__icon img {
+  display: block;
+  width: var(--z-icon-m, 8rem);
+  height: auto;
+}
+
+/* Thin line at large sizes: the icon set is drawn at 1.5 on a 24px grid */
+.zenith-hero__icon .zenith-icon {
+  stroke-width: 1.1;
+}
+
+@media screen and (min-width: 750px) {
+  .zenith-hero__icon {
+    margin-bottom: var(--z-hero-icon-sp, var(--z-space-6));
+  }
+
+  .zenith-hero__icon .zenith-icon {
+    stroke-width: 0.7;
+  }
+
+  .zenith-hero__icon .zenith-icon,
+  .zenith-hero__icon img {
+    width: var(--z-icon, 10.4rem);
+  }
 }
 
 /* Sale extras */
@@ -192,6 +231,10 @@
 @media screen and (min-width: 750px) {
   .zenith-hero__inner {
     min-height: var(--z-hero-h);
+  }
+
+  .zenith-hero__content {
+    max-width: var(--z-cmw, 60rem);
   }
 
   .zenith-hero__content-wrap {
