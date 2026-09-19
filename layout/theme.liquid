@@ -353,6 +353,13 @@
           endfor
         endif
       -%}
+      {%- if request.design_mode and request.path contains '/policies/' -%}
+        {%- comment -%} zenith: TEMP diagnostic for the policy layout (theme editor only) — remove once confirmed {%- endcomment -%}
+        <p style="margin:0;padding:6px 12px;background:#294850;color:#fff;font:12px/1.4 monospace;">
+          zenith-policy v2 · page_type={{ request.page_type }} · path={{ request.path }} · policies={{ shop.policies.size }}
+          {%- for p in shop.policies %} [{{ p.title }} → {{ p.url }}]{% endfor %} · matched={{ zenith_policy.title | default: 'NO' }}
+        </p>
+      {%- endif -%}
       {%- if zenith_policy != nil -%}
         {%- capture zenith_policy_vars -%}
           --z-doc-accent: {{ settings.policy_heading_color }};
