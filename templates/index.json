@@ -725,9 +725,7 @@
       "settings": {
         "content_source": "global",
         "product_filter": "all",
-        "filter_products": [
-          "zenith-advanced-hair-density-shampoo"
-        ],
+        "filter_products": [],
         "eyebrow": "",
         "heading": "Clinically Proven. The Complete Regimen.",
         "heading_mobile": "A Complete Routine,\nBuilt for Men.",
