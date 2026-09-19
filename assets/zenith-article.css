@@ -1,0 +1,481 @@
+/* Zenith · Article (sections/zenith-main-article.liquid). Blocks stack in one centred column; each block's values are
+   CSS vars on #Block-<id> (space above: --z-bsp / --z-bsp-m). Mobile first; desktop from 750px. */
+
+.zenith-article__column {
+  max-width: var(--z-cmw, 720px);
+  margin: 0 auto;
+}
+
+.zenith-article__block {
+  margin-top: var(--z-bsp-m, 0);
+  margin-bottom: 0;
+}
+
+/* ---------- Title + date ---------- */
+.zenith-article__title {
+  font-size: var(--z-ar-tfs-m, 35px);
+  line-height: 1.15;
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
+}
+
+.zenith-article__date {
+  font-size: var(--z-ar-dfs-m, 14px);
+  line-height: 1.5;
+  color: rgba(var(--color-foreground), var(--z-ar-do, 1));
+}
+
+/* ---------- Featured image ---------- */
+.zenith-article__hero {
+  aspect-ratio: 100 / var(--z-ar-ih-m, 66);
+}
+
+.zenith-article__hero--adapt {
+  aspect-ratio: var(--z-ar-ratio, 1.5);
+}
+
+/* ---------- Article text ---------- */
+.zenith-article__content {
+  font-size: var(--z-ar-cfs-m, 16px);
+  line-height: 1.5;
+  color: rgb(var(--color-foreground));
+  overflow-wrap: break-word;
+}
+
+.zenith-article__content > :first-child {
+  margin-top: 0;
+}
+
+.zenith-article__content > :last-child {
+  margin-bottom: 0;
+}
+
+.zenith-article__content p,
+.zenith-article__content ul,
+.zenith-article__content ol,
+.zenith-article__content table {
+  margin: 0 0 var(--z-space-4);
+}
+
+.zenith-article__content ul,
+.zenith-article__content ol {
+  padding-left: 1.25em;
+}
+
+.zenith-article__content li + li {
+  margin-top: var(--z-space-2);
+}
+
+.zenith-article__content h2,
+.zenith-article__content h3,
+.zenith-article__content h4,
+.zenith-article__content h5,
+.zenith-article__content h6 {
+  font-family: var(--font-heading-family);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: rgb(var(--color-foreground));
+  margin: 1.1em 0 var(--z-space-5);
+}
+
+.zenith-article__content h2 {
+  font-size: var(--z-ar-h2-m, 35px);
+  line-height: 1.1;
+}
+
+.zenith-article__content h3 {
+  font-size: var(--z-ar-h3-m, 26px);
+  line-height: 1.2;
+  margin-bottom: var(--z-space-4);
+}
+
+.zenith-article__content h4,
+.zenith-article__content h5,
+.zenith-article__content h6 {
+  font-size: var(--z-ar-lfs-m, 20px);
+  line-height: 1.4;
+  margin-bottom: var(--z-space-4);
+}
+
+/* Lead paragraph = a paragraph that is all bold (Liquid adds .zenith-lead) */
+.zenith-article__content .zenith-lead {
+  font-family: var(--font-heading-family);
+  font-size: var(--z-ar-lfs-m, 20px);
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+}
+
+.zenith-article__content .zenith-lead > strong,
+.zenith-article__content .zenith-lead > b {
+  font-weight: 400;
+}
+
+.zenith-article__content strong,
+.zenith-article__content b {
+  font-weight: 600;
+}
+
+.zenith-article__content a {
+  color: var(--z-ar-link, #eabe5f);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  text-decoration-thickness: 1px;
+}
+
+.zenith-article__content a:hover {
+  text-decoration-thickness: 2px;
+}
+
+.zenith-article__content blockquote {
+  margin: var(--z-space-6) 0;
+  padding-left: var(--z-space-4);
+  border-left: 2px solid var(--z-ar-link, #eabe5f);
+  font-family: var(--font-heading-family);
+  font-size: var(--z-ar-lfs-m, 20px);
+  line-height: 1.4;
+}
+
+/* Images: full column width, design spacing above/below (margins collapse through the wrapping paragraph) */
+.zenith-article__content img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  margin: var(--z-ar-imt, 56px) 0 var(--z-ar-imb, 60px);
+}
+
+.zenith-article__content figure {
+  margin: var(--z-ar-imt, 56px) 0 var(--z-ar-imb, 60px);
+}
+
+.zenith-article__content figure img {
+  margin: 0;
+}
+
+.zenith-article__content iframe[src*='youtube'],
+.zenith-article__content iframe[src*='vimeo'] {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  margin: var(--z-ar-imt, 56px) 0 var(--z-ar-imb, 60px);
+  border: 0;
+}
+
+/* "| Image caption goes here" — figcaption, or an all-italic paragraph after an image (.zenith-caption).
+   The paragraph version pulls itself up to 8px under the image (negative margin collapses with the image's). */
+.zenith-article__content figcaption,
+.zenith-article__content .zenith-caption {
+  margin: var(--z-space-2) 0 0;
+  padding-left: 10px;
+  border-left: 2px solid var(--z-ar-bar, #262626);
+  font-family: var(--font-body-family);
+  font-size: var(--z-ar-capfs-m, 14px);
+  line-height: 1.5;
+  color: rgb(var(--color-foreground));
+}
+
+.zenith-article__content .zenith-caption {
+  margin: calc(var(--z-space-2) - var(--z-ar-imb, 60px)) 0 var(--z-ar-imb, 60px);
+}
+
+.zenith-article__content .zenith-caption em,
+.zenith-article__content .zenith-caption i {
+  font-style: normal;
+}
+
+.zenith-article__content table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.zenith-article__content th,
+.zenith-article__content td {
+  padding: var(--z-space-2) var(--z-space-3);
+  border: 1px solid rgba(var(--color-foreground), 0.15);
+  text-align: left;
+}
+
+/* ---------- Divider ---------- */
+.zenith-article__divider {
+  height: var(--z-ar-divh, 1px);
+  border: 0;
+  background: var(--z-ar-div, #262626);
+}
+
+/* ---------- Share ---------- */
+.zenith-article__share {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--z-space-3) var(--z-ar-sgap, 18px);
+}
+
+.zenith-article__share-label {
+  margin: 0;
+  font-size: var(--z-ar-sfs-m, 16px);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.zenith-article__share-list {
+  display: flex;
+  align-items: center;
+  gap: var(--z-space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.zenith-article__share--m-spread .zenith-article__share-list {
+  margin-left: auto;
+}
+
+.zenith-article__share-btn {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: var(--z-ar-sbs, 32px);
+  height: var(--z-ar-sbs, 32px);
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  color: var(--z-ar-sfg, #fff);
+  background: var(--z-ar-sbg, #202020);
+  cursor: pointer;
+  transition: filter var(--duration-short, 0.1s) ease;
+}
+
+/* 44px tap area around the 32px circle */
+.zenith-article__share-btn::after {
+  content: '';
+  position: absolute;
+  inset: min(0px, calc((var(--z-ar-sbs, 32px) - 44px) / 2));
+  border-radius: 50%;
+}
+
+.zenith-article__share-btn:hover {
+  filter: brightness(1.4);
+}
+
+.zenith-article__share-btn:focus-visible {
+  outline: 2px solid var(--z-dawn-gold);
+  outline-offset: 2px;
+}
+
+.zenith-article__share-btn .zenith-article__share-icon {
+  width: var(--z-ar-sis, 24px);
+  height: var(--z-ar-sis, 24px);
+}
+
+/* Link icon: the line set draws it diagonally; the design shows it level */
+.zenith-article__share-btn .zenith-article__share-icon--line {
+  stroke-width: 2.2;
+  transform: rotate(45deg) scale(0.85);
+}
+
+zenith-copy-link {
+  position: relative;
+  display: block;
+}
+
+.zenith-article__copied {
+  position: absolute;
+  bottom: calc(100% + var(--z-space-2));
+  left: 50%;
+  transform: translateX(-50%);
+  padding: var(--z-space-1) var(--z-space-2);
+  font-size: 1.2rem;
+  line-height: 1.4;
+  white-space: nowrap;
+  color: var(--z-obsidian);
+  background: var(--z-dawn-gold);
+  pointer-events: none;
+}
+
+.zenith-article__copied:empty {
+  display: none;
+}
+
+/* ---------- Comments (only when the blog allows comments) ---------- */
+.zenith-article__comments {
+  margin-top: var(--z-space-8);
+  padding-top: var(--z-space-7);
+  border-top: 1px solid rgba(var(--color-foreground), 0.12);
+}
+
+.zenith-article__comments-title {
+  margin: 0 0 var(--z-space-5);
+  font-size: var(--z-h3);
+}
+
+.zenith-article__comment-list {
+  display: grid;
+  gap: var(--z-space-4);
+  margin-bottom: var(--z-space-7);
+}
+
+.zenith-article__comment {
+  padding: var(--z-space-4) var(--z-space-5);
+  font-size: 1.5rem;
+  line-height: 1.5;
+  background: var(--z-basalt);
+}
+
+.zenith-article__comment p {
+  margin: 0 0 var(--z-space-2);
+}
+
+.zenith-article__comment-meta {
+  font-size: 1.3rem;
+  color: rgba(var(--color-foreground), 0.65);
+}
+
+.zenith-article__comment-fields {
+  display: grid;
+  gap: var(--z-space-4);
+}
+
+.zenith-article__field {
+  display: grid;
+  gap: var(--z-space-1);
+}
+
+.zenith-article__field label {
+  font-size: 1.4rem;
+  color: rgba(var(--color-foreground), 0.8);
+}
+
+.zenith-article__input {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 44px;
+  margin: 0;
+  padding: var(--z-space-2) var(--z-space-3);
+  font-family: var(--font-body-family);
+  font-size: 1.6rem;
+  line-height: 1.4;
+  color: rgb(var(--color-foreground));
+  background: rgba(var(--color-foreground), 0.08);
+  border: 1px solid rgba(var(--color-foreground), 0.15);
+  border-radius: 0;
+  appearance: none;
+}
+
+.zenith-article__input:focus,
+.zenith-article__input:focus-visible {
+  outline: none;
+  border-color: var(--z-dawn-gold);
+  box-shadow: 0 0 0 1px var(--z-dawn-gold);
+}
+
+.zenith-article__input[aria-invalid='true'] {
+  border-color: #f3213a;
+}
+
+.zenith-article__textarea {
+  min-height: 12rem;
+  resize: vertical;
+}
+
+.zenith-article__comment-note {
+  margin: var(--z-space-3) 0 0;
+  font-size: 1.3rem;
+  color: rgba(var(--color-foreground), 0.7);
+}
+
+.zenith-article__comment-submit {
+  margin-top: var(--z-space-5);
+}
+
+.zenith-article__form-status {
+  margin: 0 0 var(--z-space-4);
+  font-size: 1.4rem;
+}
+
+.zenith-article__form-status--success {
+  color: var(--z-dawn-gold);
+}
+
+.zenith-article__form-status--error {
+  color: #ff8a8a;
+}
+
+.zenith-article__form-status--error ul {
+  margin: var(--z-space-2) 0 0;
+  padding-left: 1.25em;
+}
+
+.zenith-article__form-status--error a {
+  color: inherit;
+}
+
+@media screen and (min-width: 750px) {
+  .zenith-article__block {
+    margin-top: var(--z-bsp, 0);
+  }
+
+  .zenith-article__title {
+    font-size: var(--z-ar-tfs, 48px);
+    line-height: 1.23;
+    letter-spacing: 0.01em;
+  }
+
+  .zenith-article__date {
+    font-size: var(--z-ar-dfs, 14px);
+  }
+
+  .zenith-article__hero {
+    aspect-ratio: 100 / var(--z-ar-ih, 44);
+  }
+
+  .zenith-article__hero--adapt {
+    aspect-ratio: var(--z-ar-ratio, 1.5);
+  }
+
+  .zenith-article__content {
+    font-size: var(--z-ar-cfs, 16px);
+  }
+
+  .zenith-article__content h2 {
+    font-size: var(--z-ar-h2, 40px);
+  }
+
+  .zenith-article__content h3 {
+    font-size: var(--z-ar-h3, 30px);
+  }
+
+  .zenith-article__content h4,
+  .zenith-article__content h5,
+  .zenith-article__content h6,
+  .zenith-article__content .zenith-lead,
+  .zenith-article__content blockquote {
+    font-size: var(--z-ar-lfs, 20px);
+  }
+
+  .zenith-article__content figcaption,
+  .zenith-article__content .zenith-caption {
+    font-size: var(--z-ar-capfs, 14px);
+  }
+
+  .zenith-article__share-label {
+    font-size: var(--z-ar-sfs, 16px);
+  }
+
+  .zenith-article__share--m-spread .zenith-article__share-list {
+    margin-left: 0;
+  }
+
+  .zenith-article__share--d-spread .zenith-article__share-list {
+    margin-left: auto;
+  }
+
+  .zenith-article__comment-fields {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .zenith-article__field--full {
+    grid-column: 1 / -1;
+  }
+}

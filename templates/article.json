@@ -1,40 +1,208 @@
 {
   "sections": {
     "main": {
-      "type": "main-article",
+      "type": "zenith-main-article",
+      "settings": {
+        "content_max_width": 720,
+        "color_scheme": "scheme-1",
+        "padding_top": 64,
+        "padding_bottom": 96,
+        "padding_top_mobile": 32,
+        "padding_bottom_mobile": 44
+      },
       "blocks": {
-        "featured_image": {
-          "type": "featured_image",
-          "settings": {
-            "image_height": "adapt"
-          }
-        },
         "title": {
           "type": "title",
           "settings": {
-            "blog_show_date": true,
-            "blog_show_author": false
+            "title_font_size": 48,
+            "title_font_size_mobile": 35,
+            "spacing_top": 0,
+            "spacing_top_mobile": 0
+          }
+        },
+        "date": {
+          "type": "date",
+          "settings": {
+            "prefix": "Published on",
+            "date_format": "%-d %b %Y",
+            "show_author": false,
+            "author_prefix": "by",
+            "text_opacity": 100,
+            "text_font_size": 14,
+            "text_font_size_mobile": 14,
+            "spacing_top": 10,
+            "spacing_top_mobile": 12
+          }
+        },
+        "featured_image": {
+          "type": "featured_image",
+          "settings": {
+            "image_height": 44,
+            "image_adapt": false,
+            "image_height_mobile": 66,
+            "spacing_top": 24,
+            "spacing_top_mobile": 24
+          }
+        },
+        "content": {
+          "type": "content",
+          "settings": {
+            "image_spacing_top": 56,
+            "image_spacing_bottom": 60,
+            "link_color": "#EABE5F",
+            "caption_bar_color": "#262626",
+            "text_font_size": 16,
+            "lead_font_size": 20,
+            "h2_font_size": 40,
+            "h3_font_size": 30,
+            "caption_font_size": 14,
+            "text_font_size_mobile": 16,
+            "lead_font_size_mobile": 20,
+            "h2_font_size_mobile": 35,
+            "h3_font_size_mobile": 26,
+            "caption_font_size_mobile": 14,
+            "spacing_top": 56,
+            "spacing_top_mobile": 56
+          }
+        },
+        "divider_top": {
+          "type": "divider",
+          "settings": {
+            "color": "#262626",
+            "thickness": 1,
+            "spacing_top": 46,
+            "spacing_top_mobile": 48
+          }
+        },
+        "newsletter": {
+          "type": "newsletter",
+          "settings": {
+            "heading": "Join The Zenith Tribe",
+            "heading_tag": "h2",
+            "text": "<p>Get high-performance grooming protocols, exclusive early access to product drops, and unadvertised VIP offers delivered straight to your inbox.</p>",
+            "placeholder": "Enter your email",
+            "button_label": "Subscribe",
+            "legal": "<p>By clicking Subscribe Now, you agree to our <a href=\"/policies/terms-of-service\" title=\"Terms and Conditions\">Terms and Conditions</a> and <a href=\"/policies/privacy-policy\" title=\"Privacy Policy\">Privacy Policy</a>.</p>",
+            "success_message": "Thanks for subscribing. Welcome to the tribe.",
+            "content_max_width": 720,
+            "form_width": 320,
+            "text_max_width": 480,
+            "gap": 40,
+            "content_padding": 32,
+            "heading_spacing": 10,
+            "field_height": 42,
+            "field_gap": 10,
+            "button_height": 38,
+            "legal_spacing": 16,
+            "legal_max_width": 260,
+            "box_color": "#203940",
+            "border_color": "#364C53",
+            "text_color": "#FFFFFF",
+            "text_opacity": 80,
+            "button_style": "gold",
+            "heading_font_size": 40,
+            "text_font_size": 14,
+            "input_font_size": 16,
+            "button_font_size": 22,
+            "legal_font_size": 10,
+            "heading_font_size_mobile": 35,
+            "text_font_size_mobile": 14,
+            "content_padding_mobile": 15,
+            "form_spacing_mobile": 24,
+            "button_height_mobile": 46,
+            "button_font_size_mobile": 22,
+            "spacing_top": 24,
+            "spacing_top_mobile": 24
+          }
+        },
+        "divider_bottom": {
+          "type": "divider",
+          "settings": {
+            "color": "#262626",
+            "thickness": 1,
+            "spacing_top": 24,
+            "spacing_top_mobile": 24
           }
         },
         "share": {
           "type": "share",
           "settings": {
-            "share_label": "Share"
+            "label": "Share",
+            "show_copy": true,
+            "show_linkedin": true,
+            "show_x": true,
+            "show_facebook": true,
+            "copied_message": "Link copied",
+            "alignment": "spread",
+            "button_size": 32,
+            "icon_size": 24,
+            "label_gap": 18,
+            "button_color": "#202020",
+            "icon_color": "#FFFFFF",
+            "label_font_size": 16,
+            "alignment_mobile": "left",
+            "label_font_size_mobile": 16,
+            "spacing_top": 24,
+            "spacing_top_mobile": 24
           }
-        },
-        "content": {
-          "type": "content"
         }
       },
       "block_order": [
-        "featured_image",
         "title",
-        "share",
-        "content"
+        "date",
+        "featured_image",
+        "content",
+        "divider_top",
+        "newsletter",
+        "divider_bottom",
+        "share"
       ]
+    },
+    "more": {
+      "type": "zenith-article-cards",
+      "settings": {
+        "heading": "More Articles",
+        "heading_tag": "h2",
+        "count": 3,
+        "link_label": "Read More",
+        "show_excerpt": false,
+        "excerpt_words": 24,
+        "show_date": false,
+        "date_format": "%-d %b %Y",
+        "heading_alignment": "left",
+        "heading_spacing": 32,
+        "columns": 3,
+        "gap": 24,
+        "row_gap": 48,
+        "card_image_height": 56,
+        "title_spacing": 24,
+        "link_spacing": 18,
+        "color_scheme": "scheme-1",
+        "link_color": "#EABE5F",
+        "excerpt_opacity": 80,
+        "heading_font_size": 40,
+        "card_heading_tag": "h3",
+        "title_font_size": 26,
+        "text_font_size": 16,
+        "link_font_size": 22,
+        "heading_font_size_mobile": 40,
+        "heading_spacing_mobile": 32,
+        "gap_mobile": 32,
+        "card_image_height_mobile": 56,
+        "title_spacing_mobile": 24,
+        "title_font_size_mobile": 26,
+        "text_font_size_mobile": 16,
+        "link_font_size_mobile": 22,
+        "hide_on_mobile": false,
+        "padding_top": 80,
+        "padding_bottom": 64,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "more"
   ]
 }

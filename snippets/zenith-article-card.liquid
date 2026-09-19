@@ -1,0 +1,78 @@
+{% comment %}
+  Blog article card: photo, title, optional date + excerpt, gold "Read More ›" link.
+  Styles: assets/zenith-blog.css (sizes/spacing come from the section's CSS vars).
+  Accepts:
+    article {Object}
+    class {String} optional ('zenith-acard--featured' = large lead card, 'zenith-acard--row' = photo beside text on desktop)
+    heading_tag {String} optional (default 'h3')
+    sizes {String} optional image sizes attribute
+    priority {Boolean} optional — eager + fetchpriority high (the page's main image only)
+    link_label {String}, link_label_mobile {String} optional (blank = same as desktop)
+    show_excerpt {Boolean}, excerpt_words {Number}
+    show_date {Boolean}, date_format {String} strftime format
+{% endcomment %}
+{%- liquid
+  assign tag = heading_tag | default: 'h3'
+  assign img_sizes = sizes | default: '(min-width: 750px) 33vw, 100vw'
+  assign words = excerpt_words | default: 40
+-%}
+<article class="zenith-acard {{ class }}">
+  <a href="{{ article.url }}" class="zenith-acard__media zenith-media" tabindex="-1" aria-hidden="true">
+    {%- if article.image -%}
+      {%- if priority -%}
+        {{
+          article.image
+          | image_url: width: 1500
+          | image_tag:
+            loading: 'eager',
+            fetchpriority: 'high',
+            widths: '375, 550, 750, 1100, 1500',
+            sizes: img_sizes,
+            alt: ''
+        }}
+      {%- else -%}
+        {{
+          article.image
+          | image_url: width: 1500
+          | image_tag: loading: 'lazy', widths: '375, 550, 750, 1100, 1500', sizes: img_sizes, alt: ''
+        }}
+      {%- endif -%}
+    {%- elsif request.design_mode -%}
+      {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+  </a>
+
+  <div class="zenith-acard__body">
+    <{{ tag }} class="zenith-acard__title">
+      <a href="{{ article.url }}">{{ article.title | escape }}</a>
+    </{{ tag }}>
+
+    {%- if show_date -%}
+      <p class="zenith-acard__date">
+        <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">
+          {{- article.published_at | date: date_format -}}
+        </time>
+      </p>
+    {%- endif -%}
+
+    {%- if show_excerpt -%}
+      {%- assign excerpt = article.excerpt_or_content | strip_html | truncatewords: words -%}
+      {%- if excerpt != blank -%}
+        <p class="zenith-acard__excerpt">{{ excerpt }}</p>
+      {%- endif -%}
+    {%- endif -%}
+
+    {%- if link_label != blank -%}
+      <a href="{{ article.url }}" class="zenith-acard__link">
+        {%- if link_label_mobile != blank and link_label_mobile != link_label -%}
+          <span class="zenith-hide-mobile">{{ link_label | escape }}</span>
+          <span class="zenith-hide-desktop">{{ link_label_mobile | escape }}</span>
+        {%- else -%}
+          <span>{{ link_label | escape }}</span>
+        {%- endif -%}
+        <span class="visually-hidden">: {{ article.title | escape }}</span>
+        {%- render 'zenith-icon', icon: 'chevron_right', class: 'zenith-acard__chevron' -%}
+      </a>
+    {%- endif -%}
+  </div>
+</article>

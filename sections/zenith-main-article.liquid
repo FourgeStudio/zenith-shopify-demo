@@ -1,0 +1,1553 @@
+{%- comment -%} zenith: [customers] anywhere in this section shows Theme settings → Zenith → Customer count {%- endcomment -%}
+{%- capture zenith_body -%}
+{{ 'zenith-article.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign s = section.settings
+  assign has_newsletter = false
+  assign has_copy = false
+  for block in section.blocks
+    if block.type == 'newsletter'
+      assign has_newsletter = true
+    endif
+    if block.type == 'share' and block.settings.show_copy
+      assign has_copy = true
+    endif
+  endfor
+
+  assign first_screen = false
+  if section.index <= 2
+    assign first_screen = true
+  endif
+  assign hero_sizes = '(min-width: 750px) ' | append: s.content_max_width | append: 'px, 100vw'
+
+  # Article body: a paragraph that is all bold → lead paragraph (heading font);
+  # an all-italic paragraph right after an image → image caption.
+  assign content = article.content
+  if content contains '<p><strong>' or content contains '<p><b>' or content contains '<p><em>' or content contains '<p><i>'
+    assign chunks = content | split: '<p>'
+    assign content = ''
+    assign prev_img = false
+    for chunk in chunks
+      if forloop.first
+        assign content = content | append: chunk
+        if chunk contains '<img'
+          assign prev_img = true
+        endif
+        continue
+      endif
+      assign para = chunk | split: '</p>' | first
+      assign p_class = ''
+      assign head8 = para | slice: 0, 8
+      assign tail9 = para | slice: -9, 9
+      assign head3 = para | slice: 0, 3
+      assign tail4 = para | slice: -4, 4
+      assign head4 = para | slice: 0, 4
+      assign tail5 = para | slice: -5, 5
+      if head8 == '<strong>' and tail9 == '</strong>'
+        assign rest = para | remove_first: '<strong>'
+        unless rest contains '<strong>'
+          assign p_class = 'zenith-lead'
+        endunless
+      elsif head3 == '<b>' and tail4 == '</b>'
+        assign rest = para | remove_first: '<b>'
+        unless rest contains '<b>'
+          assign p_class = 'zenith-lead'
+        endunless
+      elsif prev_img and head4 == '<em>' and tail5 == '</em>'
+        assign p_class = 'zenith-caption'
+      elsif prev_img and head3 == '<i>' and tail4 == '</i>'
+        assign p_class = 'zenith-caption'
+      endif
+      if p_class != blank
+        assign content = content | append: '<p class="' | append: p_class | append: '">' | append: chunk
+      else
+        assign content = content | append: '<p>' | append: chunk
+      endif
+      assign prev_img = false
+      if chunk contains '<img'
+        assign prev_img = true
+      endif
+    endfor
+  endif
+-%}
+
+{%- if has_newsletter -%}
+  {{ 'zenith-newsletter.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
+
+{%- render 'zenith-section-style', section: section -%}
+{%- style -%}
+  {%- for block in section.blocks -%}
+    {%- assign b = block.settings %}
+    #Block-{{ block.id }} {
+      --z-bsp: {{ b.spacing_top | default: 0 }}px;
+      --z-bsp-m: {{ b.spacing_top_mobile | default: 0 }}px;
+      {%- case block.type -%}
+        {%- when 'title' %}
+      --z-ar-tfs: {{ b.title_font_size }}px;
+      --z-ar-tfs-m: {{ b.title_font_size_mobile }}px;
+        {%- when 'date' %}
+      --z-ar-dfs: {{ b.text_font_size }}px;
+      --z-ar-dfs-m: {{ b.text_font_size_mobile }}px;
+      --z-ar-do: {{ b.text_opacity | divided_by: 100.0 }};
+        {%- when 'featured_image' %}
+      --z-ar-ih: {{ b.image_height }};
+      --z-ar-ih-m: {{ b.image_height_mobile }};
+        {%- when 'content' %}
+      --z-ar-cfs: {{ b.text_font_size }}px;
+      --z-ar-cfs-m: {{ b.text_font_size_mobile }}px;
+      --z-ar-lfs: {{ b.lead_font_size }}px;
+      --z-ar-lfs-m: {{ b.lead_font_size_mobile }}px;
+      --z-ar-h2: {{ b.h2_font_size }}px;
+      --z-ar-h2-m: {{ b.h2_font_size_mobile }}px;
+      --z-ar-h3: {{ b.h3_font_size }}px;
+      --z-ar-h3-m: {{ b.h3_font_size_mobile }}px;
+      --z-ar-capfs: {{ b.caption_font_size }}px;
+      --z-ar-capfs-m: {{ b.caption_font_size_mobile }}px;
+      --z-ar-imt: {{ b.image_spacing_top }}px;
+      --z-ar-imb: {{ b.image_spacing_bottom }}px;
+      --z-ar-link: {{ b.link_color }};
+      --z-ar-bar: {{ b.caption_bar_color }};
+        {%- when 'divider' %}
+      --z-ar-div: {{ b.color }};
+      --z-ar-divh: {{ b.thickness }}px;
+        {%- when 'share' %}
+      --z-ar-sfs: {{ b.label_font_size }}px;
+      --z-ar-sfs-m: {{ b.label_font_size_mobile }}px;
+      --z-ar-sbs: {{ b.button_size }}px;
+      --z-ar-sis: {{ b.icon_size }}px;
+      --z-ar-sbg: {{ b.button_color }};
+      --z-ar-sfg: {{ b.icon_color }};
+      --z-ar-sgap: {{ b.label_gap }}px;
+      {%- endcase %}
+    }
+  {%- endfor -%}
+{%- endstyle -%}
+
+<article
+  id="Zenith-{{ section.id }}"
+  class="zenith-section zenith-article color-{{ s.color_scheme }} gradient"
+>
+  <div class="page-width">
+    <div class="zenith-article__column">
+      {%- for block in section.blocks -%}
+        {%- assign b = block.settings -%}
+        {%- case block.type -%}
+          {%- when '@app' -%}
+            <div id="Block-{{ block.id }}" class="zenith-article__block" {{ block.shopify_attributes }}>
+              {% render block %}
+            </div>
+
+          {%- when 'title' -%}
+            <h1 id="Block-{{ block.id }}" class="zenith-article__block zenith-article__title" {{ block.shopify_attributes }}>
+              {{- article.title | escape -}}
+            </h1>
+
+          {%- when 'date' -%}
+            <p id="Block-{{ block.id }}" class="zenith-article__block zenith-article__date" {{ block.shopify_attributes }}>
+              {%- if b.prefix != blank -%}
+                {{ b.prefix | escape }}
+              {% endif -%}
+              <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">
+                {{- article.published_at | date: b.date_format -}}
+              </time>
+              {%- if b.show_author and article.author != blank -%}
+                <span class="zenith-article__author">
+                  {%- if b.author_prefix != blank %} {{ b.author_prefix | escape }}{% endif %}
+                  {{ article.author | escape -}}
+                </span>
+              {%- endif -%}
+            </p>
+
+          {%- when 'featured_image' -%}
+            {%- if article.image -%}
+              <div
+                id="Block-{{ block.id }}"
+                class="zenith-article__block zenith-article__hero zenith-media{% if b.image_adapt %} zenith-article__hero--adapt{% endif %}"
+                {% if b.image_adapt %}
+                  style="--z-ar-ratio: {{ article.image.aspect_ratio }};"
+                {% endif %}
+                {{ block.shopify_attributes }}
+              >
+                {%- if first_screen -%}
+                  {{
+                    article.image
+                    | image_url: width: 1500
+                    | image_tag:
+                      loading: 'eager',
+                      fetchpriority: 'high',
+                      widths: '375, 550, 750, 1100, 1500',
+                      sizes: hero_sizes
+                  }}
+                {%- else -%}
+                  {{
+                    article.image
+                    | image_url: width: 1500
+                    | image_tag: loading: 'lazy', widths: '375, 550, 750, 1100, 1500', sizes: hero_sizes
+                  }}
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+
+          {%- when 'content' -%}
+            <div id="Block-{{ block.id }}" class="zenith-article__block zenith-article__content" {{ block.shopify_attributes }}>
+              {{- content -}}
+            </div>
+
+          {%- when 'newsletter' -%}
+            <div id="Block-{{ block.id }}" class="zenith-article__block zenith-article__newsletter" {{ block.shopify_attributes }}>
+              {%- render 'zenith-newsletter-form', s: b, id: block.id -%}
+            </div>
+
+          {%- when 'divider' -%}
+            <hr id="Block-{{ block.id }}" class="zenith-article__block zenith-article__divider" {{ block.shopify_attributes }}>
+
+          {%- when 'share' -%}
+            {%- liquid
+              assign share_url = request.origin | append: article.url
+              assign share_url_enc = share_url | url_encode
+              assign share_title_enc = article.title | url_encode
+              assign new_window = 'accessibility.link_messages.new_window' | t
+            -%}
+            <div
+              id="Block-{{ block.id }}"
+              class="zenith-article__block zenith-article__share zenith-article__share--d-{{ b.alignment }} zenith-article__share--m-{{ b.alignment_mobile }}"
+              {{ block.shopify_attributes }}
+            >
+              {%- if b.label != blank -%}
+                <p class="zenith-article__share-label">{{ b.label | escape }}</p>
+              {%- endif -%}
+              <ul class="zenith-article__share-list" role="list">
+                {%- if b.show_copy -%}
+                  <li>
+                    <zenith-copy-link class="zenith-article__copy" data-url="{{ share_url | escape }}" data-message="{{ b.copied_message | escape }}">
+                      <button type="button" class="zenith-article__share-btn" aria-label="{{ 'general.share.copy_to_clipboard' | t | escape }}">
+                        {%- render 'zenith-icon', icon: 'link', class: 'zenith-article__share-icon zenith-article__share-icon--line' -%}
+                      </button>
+                      <span class="zenith-article__copied" role="status" aria-live="polite"></span>
+                    </zenith-copy-link>
+                  </li>
+                {%- endif -%}
+                {%- if b.show_linkedin -%}
+                  <li>
+                    <a
+                      href="https://www.linkedin.com/sharing/share-offsite/?url={{ share_url_enc }}"
+                      class="zenith-article__share-btn"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="{{ b.label | escape }} LinkedIn. {{ new_window | escape }}"
+                    >
+                      {%- render 'zenith-icon', icon: 'linkedin', class: 'zenith-article__share-icon' -%}
+                    </a>
+                  </li>
+                {%- endif -%}
+                {%- if b.show_x -%}
+                  <li>
+                    <a
+                      href="https://x.com/intent/tweet?url={{ share_url_enc }}&text={{ share_title_enc }}"
+                      class="zenith-article__share-btn"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="{{ b.label | escape }} X. {{ new_window | escape }}"
+                    >
+                      {%- render 'zenith-icon', icon: 'x', class: 'zenith-article__share-icon' -%}
+                    </a>
+                  </li>
+                {%- endif -%}
+                {%- if b.show_facebook -%}
+                  <li>
+                    <a
+                      href="https://www.facebook.com/sharer/sharer.php?u={{ share_url_enc }}"
+                      class="zenith-article__share-btn"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="{{ b.label | escape }} Facebook. {{ new_window | escape }}"
+                    >
+                      {%- render 'zenith-icon', icon: 'facebook', class: 'zenith-article__share-icon' -%}
+                    </a>
+                  </li>
+                {%- endif -%}
+              </ul>
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+
+      {%- if blog.comments_enabled? -%}
+        <div id="comments" class="zenith-article__comments">
+          {%- if article.comments_count > 0 -%}
+            {%- assign anchor_id = '#Comments-' | append: article.id -%}
+            <h2 id="Comments-{{ article.id }}" class="zenith-article__comments-title" tabindex="-1">
+              {{ 'blogs.article.comments' | t: count: article.comments_count }}
+            </h2>
+            {%- paginate article.comments by 5 -%}
+              <div class="zenith-article__comment-list">
+                {%- if comment.status == 'pending' and comment.content -%}
+                  <article id="{{ comment.id }}" class="zenith-article__comment">
+                    {{ comment.content }}
+                    <footer class="zenith-article__comment-meta">{{ comment.author | escape }}</footer>
+                  </article>
+                {%- endif -%}
+                {%- for comment in article.comments -%}
+                  <article id="{{ comment.id }}" class="zenith-article__comment">
+                    {{ comment.content }}
+                    <footer class="zenith-article__comment-meta">
+                      {{ comment.author | escape }} ·
+                      {{ comment.created_at | time_tag: format: 'date' }}
+                    </footer>
+                  </article>
+                {%- endfor -%}
+              </div>
+              {%- render 'pagination', paginate: paginate, anchor: anchor_id -%}
+            {%- endpaginate -%}
+          {%- endif -%}
+
+          {%- form 'new_comment', article, class: 'zenith-article__comment-form' -%}
+            {%- liquid
+              assign post_message = 'blogs.article.success'
+              if blog.moderated? and comment.status == 'unapproved'
+                assign post_message = 'blogs.article.success_moderated'
+              endif
+            -%}
+            <h2 class="zenith-article__comments-title">{{ 'blogs.article.comment_form_title' | t }}</h2>
+            {%- if form.errors -%}
+              <div class="zenith-article__form-status zenith-article__form-status--error" role="alert">
+                <p>{{ 'templates.contact.form.error_heading' | t }}</p>
+                <ul>
+                  {%- for field in form.errors -%}
+                    <li>
+                      <a href="#CommentForm-{{ field }}">
+                        {%- if form.errors.translated_fields[field] contains 'author' -%}
+                          {{ 'blogs.article.name' | t }}
+                        {%- elsif form.errors.translated_fields[field] contains 'body' -%}
+                          {{ 'blogs.article.message' | t }}
+                        {%- else -%}
+                          {{ form.errors.translated_fields[field] }}
+                        {%- endif %}
+                        {{ form.errors.messages[field] -}}
+                      </a>
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              </div>
+            {%- elsif form.posted_successfully? -%}
+              <p class="zenith-article__form-status zenith-article__form-status--success" role="status">
+                {{ post_message | t }}
+              </p>
+            {%- endif -%}
+
+            <div class="zenith-article__comment-fields">
+              <div class="zenith-article__field">
+                <label for="CommentForm-author">{{ 'blogs.article.name' | t }} <span aria-hidden="true">*</span></label>
+                <input
+                  type="text"
+                  name="comment[author]"
+                  id="CommentForm-author"
+                  class="zenith-article__input"
+                  autocomplete="name"
+                  value="{{ form.author }}"
+                  aria-required="true"
+                  required
+                  {% if form.errors contains 'author' %}
+                    aria-invalid="true"
+                  {% endif %}
+                >
+              </div>
+              <div class="zenith-article__field">
+                <label for="CommentForm-email">{{ 'blogs.article.email' | t }} <span aria-hidden="true">*</span></label>
+                <input
+                  type="email"
+                  name="comment[email]"
+                  id="CommentForm-email"
+                  class="zenith-article__input"
+                  autocomplete="email"
+                  autocorrect="off"
+                  autocapitalize="off"
+                  value="{{ form.email }}"
+                  aria-required="true"
+                  required
+                  {% if form.errors contains 'email' %}
+                    aria-invalid="true"
+                  {% endif %}
+                >
+              </div>
+              <div class="zenith-article__field zenith-article__field--full">
+                <label for="CommentForm-body">{{ 'blogs.article.message' | t }} <span aria-hidden="true">*</span></label>
+                <textarea
+                  rows="5"
+                  name="comment[body]"
+                  id="CommentForm-body"
+                  class="zenith-article__input zenith-article__textarea"
+                  aria-required="true"
+                  required
+                  {% if form.errors contains 'body' %}
+                    aria-invalid="true"
+                  {% endif %}
+                >{{ form.body }}</textarea>
+              </div>
+            </div>
+            {%- if blog.moderated? -%}
+              <p class="zenith-article__comment-note">{{ 'blogs.article.moderated' | t }}</p>
+            {%- endif -%}
+            <button type="submit" class="button zenith-btn zenith-btn--gold zenith-article__comment-submit">
+              <span>{{ 'blogs.article.post' | t }}</span>
+            </button>
+          {%- endform -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</article>
+
+{%- if has_copy -%}
+  <script>
+    if (!customElements.get('zenith-copy-link')) {
+      customElements.define(
+        'zenith-copy-link',
+        class extends HTMLElement {
+          connectedCallback() {
+            const button = this.querySelector('button');
+            const status = this.querySelector('[role="status"]');
+            if (!button || !status) return;
+            button.addEventListener('click', async () => {
+              const url = this.dataset.url;
+              try {
+                await navigator.clipboard.writeText(url);
+              } catch (error) {
+                const field = document.createElement('textarea');
+                field.value = url;
+                field.setAttribute('readonly', '');
+                field.style.cssText = 'position:fixed;top:0;left:-9999px;opacity:0';
+                document.body.appendChild(field);
+                field.select();
+                document.execCommand('copy');
+                field.remove();
+              }
+              status.textContent = this.dataset.message;
+              clearTimeout(this.timer);
+              this.timer = setTimeout(() => {
+                status.textContent = '';
+              }, 2500);
+            });
+          }
+        }
+      );
+    }
+  </script>
+{%- endif -%}
+
+<script type="application/ld+json">
+  {{ article | structured_data }}
+</script>
+{%- endcapture -%}
+{{- zenith_body | replace: '[customers]', settings.customer_count -}}
+
+{% schema %}
+{
+  "name": "Zenith · Article",
+  "tag": "section",
+  "class": "section",
+  "enabled_on": {
+    "templates": ["article"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "label": "Column width",
+      "min": 480,
+      "max": 1200,
+      "step": 8,
+      "unit": "px",
+      "default": 720
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Top padding (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Bottom padding (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 44
+    }
+  ],
+  "blocks": [
+    { "type": "@app" },
+    {
+      "type": "title",
+      "name": "Title",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Typography"
+        },
+        {
+          "type": "range",
+          "id": "title_font_size",
+          "label": "Title size",
+          "min": 24,
+          "max": 96,
+          "step": 1,
+          "unit": "px",
+          "default": 48
+        },
+        {
+          "type": "header",
+          "content": "Mobile"
+        },
+        {
+          "type": "range",
+          "id": "title_font_size_mobile",
+          "label": "Title size",
+          "min": 20,
+          "max": 64,
+          "step": 1,
+          "unit": "px",
+          "default": 35
+        },
+        {
+          "type": "header",
+          "content": "Spacing"
+        },
+        {
+          "type": "range",
+          "id": "spacing_top",
+          "label": "Space above",
+          "min": 0,
+          "max": 120,
+          "step": 2,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "spacing_top_mobile",
+          "label": "Space above (mobile)",
+          "min": 0,
+          "max": 120,
+          "step": 2,
+          "unit": "px",
+          "default": 0
+        }
+      ]
+    },
+    {
+      "type": "date",
+      "name": "Date",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "text",
+          "id": "prefix",
+          "label": "Text before the date",
+          "default": "Published on"
+        },
+        {
+          "type": "select",
+          "id": "date_format",
+          "label": "Date format",
+          "default": "%-d %b %Y",
+          "options": [
+            { "value": "%-d %b %Y", "label": "11 Jan 2022" },
+            { "value": "%-d %B %Y", "label": "11 January 2022" },
+            { "value": "%b %-d, %Y", "label": "Jan 11, 2022" },
+            { "value": "%B %-d, %Y", "label": "January 11, 2022" },
+            { "value": "%d/%m/%Y", "label": "11/01/2022" },
+            { "value": "%m/%d/%Y", "label": "01/11/2022" }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "show_author",
+          "label": "Show author",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "author_prefix",
+          "label": "Text before the author",
+          "default": "by"
+        },
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "range",
+          "id": "text_opacity",
+          "label": "Text opacity",
+          "min": 40,
+          "max": 100,
+          "step": 5,
+          "unit": "%",
+          "default": 100
+        },
+        {
+          "type": "header",
+          "content": "Typography"
+        },
+        {
+          "type": "range",
+          "id": "text_font_size",
+          "label": "Text size",
+          "min": 10,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "default": 14
+        },
+        {
+          "type": "header",
+          "content": "Mobile"
+        },
+        {
+          "type": "range",
+          "id": "text_font_size_mobile",
+          "label": "Text size",
+          "min": 10,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "default": 14
+        },
+        {
+          "type": "header",
+          "content": "Spacing"
+        },
+        {
+          "type": "range",
+          "id": "spacing_top",
+          "label": "Space above",
+          "min": 0,
+          "max": 120,
+          "step": 2,
+          "unit": "px",
+          "default": 10
+        },
+        {
+          "type": "range",
+          "id": "spacing_top_mobile",
+          "label": "Space above (mobile)",
+          "min": 0,
+          "max": 120,
+          "step": 2,
+          "unit": "px",
+          "default": 12
+        }
+      ]
+    },
+    {
+      "type": "featured_image",
+      "name": "Featured image",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Shows the article's featured image (Admin → Blog posts → the article → Image)."
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "range",
+          "id": "image_height",
+          "label": "Image height",
+          "info": "Percent of the image width. The photo is cropped to fit.",
+          "min": 20,
+          "max": 120,
+          "step": 1,
+          "unit": "%",
+          "default": 44
+        },
+        {
+          "type": "checkbox",
+          "id": "image_adapt",
+          "label": "Show the whole image (no crop)",
+          "default": false
+        },
+        {
+          "type": "header",
+          "content": "Mobile"
+        },
+        {
+          "type": "range",
+          "id": "image_height_mobile",
+          "label": "Image height",
+          "min": 20,
+          "max": 120,
+          "step": 1,
+          "unit": "%",
+          "default": 66
+        },
+        {
+          "type": "header",
+          "content": "Spacing"
+        },
+        {
+          "type": "range",
+          "id": "spacing_top",
+          "label": "Space above",
+          "min": 0,
+          "max": 120,
+          "step": 2,
+          "unit": "px",
+          "default": 24
+        },
+        {
+          "type": "range",
+          "id": "spacing_top_mobile",
+          "label": "Space above (mobile)",
+          "min": 0,
+          "max": 120,
+          "step": 2,
+          "unit": "px",
+          "default": 24
+        }
+      ]
+    },
+    {
+      "type": "content",
+      "name": "Article text",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Lead paragraph: make a whole paragraph bold in the article editor. Image caption: write the caption in italics as the paragraph right after the image (or use figure + figcaption tags in the HTML view)."
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "range",
+          "id": "image_spacing_top",
+          "label": "Space above images",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "default": 56
+        },
+        {
+          "type": "range",
+          "id": "image_spacing_bottom",
+          "label": "Space below images",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "default": 60
+        },
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "color",
+          "id": "link_color",
+          "label": "Links",
+          "default": "#EABE5F"
+        },
+        {
+          "type": "color",
+          "id": "caption_bar_color",
+          "label": "Caption line",
+          "default": "#262626"
+        },
+        {
+          "type": "header",
+          "content": "Typography"
+        },
+        {
+          "type": "range",
+          "id": "text_font_size",
+          "label": "Text size",
+          "min": 12,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "lead_font_size",
+          "label": "Lead paragraph size",
+          "min": 14,
+          "max": 40,
+          "step": 1,
+          "unit": "px",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "h2_font_size",
+          "label": "Heading 2 size",
+          "min": 20,
+          "max": 72,
+          "step": 1,
+          "unit": "px",
+          "default": 40
+        },
+        {
+          "type": "range",
+          "id": "h3_font_size",
+          "label": "Heading 3 size",
+          "min": 16,
+          "max": 56,
+          "step": 1,
+          "unit": "px",
+          "default": 30
+        },
+        {
+          "type": "range",
+          "id": "caption_font_size",
+          "label": "Caption size",
+          "min": 10,
+          "max": 20,
+          "step": 1,
+          "unit": "px",
+          "default": 14
+        },
+        {
+          "type": "header",
+          "content": "Mobile"
+        },
+        {
+          "type": "range",
+          "id": "text_font_size_mobile",
+          "label": "Text size",
+          "min": 12,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "lead_font_size_mobile",
+          "label": "Lead paragraph size",
+          "min": 14,
+          "max": 40,
+          "step": 1,
+          "unit": "px",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "h2_font_size_mobile",
+          "label": "Heading 2 size",
+          "min": 20,
+          "max": 64,
+          "step": 1,
+          "unit": "px",
+          "default": 35
+        },
+        {
+          "type": "range",
+          "id": "h3_font_size_mobile",
+          "label": "Heading 3 size",
+          "min": 16,
+          "max": 48,
+          "step": 1,
+          "unit": "px",
+          "default": 26
+        },
+        {
+          "type": "range",
+          "id": "caption_font_size_mobile",
+          "label": "Caption size",
+          "min": 10,
+          "max": 20,
+          "step": 1,
+          "unit": "px",
+          "default": 14
+        },
+        {
+          "type": "header",
+          "content": "Spacing"
+        },
+        {
+          "type": "range",
+          "id": "spacing_top",
+          "label": "Space above",
+          "min": 0,
+          "max": 120,
+          "step": 2,
+          "unit": "px",
+          "default": 56
+        },
+        {
+          "type": "range",
+          "id": "spacing_top_mobile",
+          "label": "Space above (mobile)",
+          "min": 0,
+          "max": 120,
+          "step": 2,
+          "unit": "px",
+          "default": 56
+        }
+      ]
+    },
+    {
+      "type": "newsletter",
+      "name": "Newsletter",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Join The Zenith Tribe"
+        },
+        {
+          "type": "select",
+          "id": "heading_tag",
+          "label": "Heading tag",
+          "info": "For search engines.",
+          "default": "h2",
+          "options": [
+            { "value": "h2", "label": "H2" },
+            { "value": "h3", "label": "H3" },
+            { "value": "p", "label": "Paragraph" }
+          ]
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Get high-performance grooming protocols, exclusive early access to product drops, and unadvertised VIP offers delivered straight to your inbox.</p>"
+        },
+        {
+          "type": "text",
+          "id": "placeholder",
+          "label": "Email field placeholder",
+          "default": "Enter your email"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Subscribe"
+        },
+        {
+          "type": "richtext",
+          "id": "legal",
+          "label": "Small print",
+          "default": "<p>By clicking Subscribe Now, you agree to our <a href=\"/policies/terms-of-service\" title=\"Terms and Conditions\">Terms and Conditions</a> and <a href=\"/policies/privacy-policy\" title=\"Privacy Policy\">Privacy Policy</a>.</p>"
+        },
+        {
+          "type": "text",
+          "id": "success_message",
+          "label": "Message after signing up",
+          "default": "Thanks for subscribing. Welcome to the tribe."
+        },
+        {
+          "type": "url",
+          "id": "redirect_url",
+          "label": "Page to open after signing up",
+          "info": "Optional, e.g. a \"Thanks for subscribing\" page. Empty = stay here and show the message above."
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "range",
+          "id": "content_max_width",
+          "label": "Box max width",
+          "min": 400,
+          "max": 1440,
+          "step": 16,
+          "unit": "px",
+          "default": 720
+        },
+        {
+          "type": "range",
+          "id": "form_width",
+          "label": "Form width",
+          "min": 240,
+          "max": 600,
+          "step": 4,
+          "unit": "px",
+          "default": 320
+        },
+        {
+          "type": "range",
+          "id": "text_max_width",
+          "label": "Text max width",
+          "min": 200,
+          "max": 800,
+          "step": 10,
+          "unit": "px",
+          "default": 480
+        },
+        {
+          "type": "range",
+          "id": "gap",
+          "label": "Space between text and form",
+          "min": 0,
+          "max": 120,
+          "step": 4,
+          "unit": "px",
+          "default": 40
+        },
+        {
+          "type": "range",
+          "id": "content_padding",
+          "label": "Box padding",
+          "min": 0,
+          "max": 80,
+          "step": 2,
+          "unit": "px",
+          "default": 32
+        },
+        {
+          "type": "range",
+          "id": "heading_spacing",
+          "label": "Space between heading and text",
+          "min": 0,
+          "max": 40,
+          "step": 1,
+          "unit": "px",
+          "default": 10
+        },
+        {
+          "type": "range",
+          "id": "field_height",
+          "label": "Email field height",
+          "min": 32,
+          "max": 64,
+          "step": 1,
+          "unit": "px",
+          "default": 42
+        },
+        {
+          "type": "range",
+          "id": "field_gap",
+          "label": "Space between field and button",
+          "min": 0,
+          "max": 32,
+          "step": 1,
+          "unit": "px",
+          "default": 10
+        },
+        {
+          "type": "range",
+          "id": "button_height",
+          "label": "Button height",
+          "min": 32,
+          "max": 64,
+          "step": 1,
+          "unit": "px",
+          "default": 38
+        },
+        {
+          "type": "range",
+          "id": "legal_spacing",
+          "label": "Space above small print",
+          "min": 0,
+          "max": 40,
+          "step": 1,
+          "unit": "px",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "legal_max_width",
+          "label": "Small print max width",
+          "min": 160,
+          "max": 600,
+          "step": 10,
+          "unit": "px",
+          "default": 260
+        },
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "color",
+          "id": "box_color",
+          "label": "Box background",
+          "default": "#203940"
+        },
+        {
+          "type": "color",
+          "id": "border_color",
+          "label": "Box border",
+          "default": "#364C53"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Box text",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "range",
+          "id": "text_opacity",
+          "label": "Text and small print opacity",
+          "min": 40,
+          "max": 100,
+          "step": 5,
+          "unit": "%",
+          "default": 80
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "Button style",
+          "default": "gold",
+          "options": [
+            { "value": "gold", "label": "Gold" },
+            { "value": "light", "label": "White" },
+            { "value": "dark", "label": "Dark blue" },
+            { "value": "outline", "label": "Outline" },
+            { "value": "scheme", "label": "Color scheme button" }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "Typography"
+        },
+        {
+          "type": "range",
+          "id": "heading_font_size",
+          "label": "Heading size",
+          "min": 16,
+          "max": 80,
+          "step": 1,
+          "unit": "px",
+          "default": 40
+        },
+        {
+          "type": "range",
+          "id": "text_font_size",
+          "label": "Text size",
+          "min": 10,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "default": 14
+        },
+        {
+          "type": "range",
+          "id": "input_font_size",
+          "label": "Email field text size",
+          "info": "16px or more stops iPhones zooming in on tap.",
+          "min": 12,
+          "max": 20,
+          "step": 1,
+          "unit": "px",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "button_font_size",
+          "label": "Button text size",
+          "min": 14,
+          "max": 32,
+          "step": 1,
+          "unit": "px",
+          "default": 22
+        },
+        {
+          "type": "range",
+          "id": "legal_font_size",
+          "label": "Small print size",
+          "min": 8,
+          "max": 16,
+          "step": 1,
+          "unit": "px",
+          "default": 10
+        },
+        {
+          "type": "header",
+          "content": "Mobile"
+        },
+        {
+          "type": "range",
+          "id": "heading_font_size_mobile",
+          "label": "Heading size",
+          "min": 16,
+          "max": 64,
+          "step": 1,
+          "unit": "px",
+          "default": 35
+        },
+        {
+          "type": "range",
+          "id": "text_font_size_mobile",
+          "label": "Text size",
+          "min": 10,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "default": 14
+        },
+        {
+          "type": "range",
+          "id": "content_padding_mobile",
+          "label": "Box padding",
+          "min": 0,
+          "max": 40,
+          "step": 1,
+          "unit": "px",
+          "default": 15
+        },
+        {
+          "type": "range",
+          "id": "form_spacing_mobile",
+          "label": "Space above the email field",
+          "min": 0,
+          "max": 60,
+          "step": 2,
+          "unit": "px",
+          "default": 24
+        },
+        {
+          "type": "range",
+          "id": "button_height_mobile",
+          "label": "Button height",
+          "min": 32,
+          "max": 64,
+          "step": 1,
+          "unit": "px",
+          "default": 46
+        },
+        {
+          "type": "range",
+          "id": "button_font_size_mobile",
+          "label": "Button text size",
+          "min": 14,
+          "max": 32,
+          "step": 1,
+          "unit": "px",
+          "default": 22
+        },
+        {
+          "type": "header",
+          "content": "Spacing"
+        },
+        {
+          "type": "range",
+          "id": "spacing_top",
+          "label": "Space above",
+          "min": 0,
+          "max": 120,
+          "step": 2,
+          "unit": "px",
+          "default": 24
+        },
+        {
+          "type": "range",
+          "id": "spacing_top_mobile",
+          "label": "Space above (mobile)",
+          "min": 0,
+          "max": 120,
+          "step": 2,
+          "unit": "px",
+          "default": 24
+        }
+      ]
+    },
+    {
+      "type": "divider",
+      "name": "Divider",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "color",
+          "id": "color",
+          "label": "Line",
+          "default": "#262626"
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "range",
+          "id": "thickness",
+          "label": "Thickness",
+          "min": 1,
+          "max": 4,
+          "step": 1,
+          "unit": "px",
+          "default": 1
+        },
+        {
+          "type": "header",
+          "content": "Spacing"
+        },
+        {
+          "type": "range",
+          "id": "spacing_top",
+          "label": "Space above",
+          "min": 0,
+          "max": 120,
+          "step": 2,
+          "unit": "px",
+          "default": 24
+        },
+        {
+          "type": "range",
+          "id": "spacing_top_mobile",
+          "label": "Space above (mobile)",
+          "min": 0,
+          "max": 120,
+          "step": 2,
+          "unit": "px",
+          "default": 24
+        }
+      ]
+    },
+    {
+      "type": "share",
+      "name": "Share buttons",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Share"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_copy",
+          "label": "Copy link",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_linkedin",
+          "label": "LinkedIn",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_x",
+          "label": "X (Twitter)",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_facebook",
+          "label": "Facebook",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "copied_message",
+          "label": "Message after copying the link",
+          "default": "Link copied"
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "select",
+          "id": "alignment",
+          "label": "Buttons",
+          "default": "spread",
+          "options": [
+            { "value": "spread", "label": "Right edge" },
+            { "value": "left", "label": "Next to the label" }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "button_size",
+          "label": "Button size",
+          "min": 24,
+          "max": 56,
+          "step": 2,
+          "unit": "px",
+          "default": 32
+        },
+        {
+          "type": "range",
+          "id": "icon_size",
+          "label": "Icon size",
+          "min": 12,
+          "max": 32,
+          "step": 1,
+          "unit": "px",
+          "default": 24
+        },
+        {
+          "type": "range",
+          "id": "label_gap",
+          "label": "Space between label and buttons",
+          "min": 0,
+          "max": 48,
+          "step": 1,
+          "unit": "px",
+          "default": 18
+        },
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "color",
+          "id": "button_color",
+          "label": "Button background",
+          "default": "#202020"
+        },
+        {
+          "type": "color",
+          "id": "icon_color",
+          "label": "Icon",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "header",
+          "content": "Typography"
+        },
+        {
+          "type": "range",
+          "id": "label_font_size",
+          "label": "Label size",
+          "min": 12,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "default": 16
+        },
+        {
+          "type": "header",
+          "content": "Mobile"
+        },
+        {
+          "type": "select",
+          "id": "alignment_mobile",
+          "label": "Buttons",
+          "default": "left",
+          "options": [
+            { "value": "spread", "label": "Right edge" },
+            { "value": "left", "label": "Next to the label" }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "label_font_size_mobile",
+          "label": "Label size",
+          "min": 12,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "default": 16
+        },
+        {
+          "type": "header",
+          "content": "Spacing"
+        },
+        {
+          "type": "range",
+          "id": "spacing_top",
+          "label": "Space above",
+          "min": 0,
+          "max": 120,
+          "step": 2,
+          "unit": "px",
+          "default": 24
+        },
+        {
+          "type": "range",
+          "id": "spacing_top_mobile",
+          "label": "Space above (mobile)",
+          "min": 0,
+          "max": 120,
+          "step": 2,
+          "unit": "px",
+          "default": 24
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zenith · Article",
+      "blocks": [
+        { "type": "title" },
+        { "type": "date" },
+        { "type": "featured_image" },
+        { "type": "content" },
+        { "type": "divider", "settings": { "spacing_top": 46, "spacing_top_mobile": 48 } },
+        { "type": "newsletter" },
+        { "type": "divider" },
+        { "type": "share" }
+      ]
+    }
+  ]
+}
+{% endschema %}

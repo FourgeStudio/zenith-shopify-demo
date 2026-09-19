@@ -1,0 +1,143 @@
+{% comment %}
+  Newsletter box ("Join The Zenith Tribe"): heading + text beside (desktop) / above (mobile) an email field,
+  Subscribe button and legal text. Shopify customer form tagged "newsletter".
+  Styles: assets/zenith-newsletter.css (load it in the section that renders this snippet).
+  Accepts:
+    s {Object} settings holder — section.settings or block.settings with the ids below
+    id {String} unique id (section.id or block.id)
+    class {String} optional extra classes
+  Setting ids read: heading, heading_tag, text, placeholder, button_label, button_style, legal, success_message,
+    redirect_url, content_max_width, form_width, text_max_width, gap, content_padding(_mobile), heading_spacing,
+    field_height, field_gap, button_height(_mobile), legal_spacing, legal_max_width, form_spacing_mobile, box_color, border_color,
+    text_color, text_opacity, heading_font_size(_mobile), text_font_size(_mobile), input_font_size,
+    button_font_size(_mobile), legal_font_size
+  Redirect: redirect_url set → hidden return_to input + a client-side redirect after a successful signup
+  (skipped in the theme editor).
+{% endcomment %}
+{%- liquid
+  assign nl_id = 'ZenithNewsletter-' | append: id
+  assign form_id = 'ZenithNewsletterForm-' | append: id
+  assign heading_tag = s.heading_tag | default: 'h2'
+  assign btn_style = s.button_style | default: 'gold'
+  assign placeholder = s.placeholder
+  if placeholder == blank
+    assign placeholder = 'newsletter.label' | t
+  endif
+  assign button_label = s.button_label
+  if button_label == blank
+    assign button_label = 'newsletter.button_label' | t
+  endif
+  assign success_message = s.success_message
+  if success_message == blank
+    assign success_message = 'newsletter.success' | t
+  endif
+  assign text_alpha = s.text_opacity | divided_by: 100.0
+  assign fg = s.text_color
+  if fg == blank
+    assign fg = '#ffffff'
+  endif
+-%}
+{%- style -%}
+  #{{ nl_id }} {
+    --z-nl-mw: {{ s.content_max_width }}px;
+    --z-nl-fw: {{ s.form_width }}px;
+    --z-nl-tmw: {{ s.text_max_width }}px;
+    --z-nl-gap: {{ s.gap }}px;
+    --z-nl-pd: {{ s.content_padding }}px;
+    --z-nl-pd-m: {{ s.content_padding_mobile }}px;
+    --z-nl-hsp: {{ s.heading_spacing }}px;
+    --z-nl-fh: {{ s.field_height }}px;
+    --z-nl-fgap: {{ s.field_gap }}px;
+    --z-nl-bh: {{ s.button_height }}px;
+    --z-nl-bh-m: {{ s.button_height_mobile }}px;
+    --z-nl-lsp: {{ s.legal_spacing }}px;
+    --z-nl-lmw: {{ s.legal_max_width }}px;
+    --z-nl-fsp-m: {{ s.form_spacing_mobile }}px;
+    --z-nl-bg: {{ s.box_color }};
+    --z-nl-border: {{ s.border_color }};
+    --z-nl-fg: {{ fg | color_extract: 'red' }}, {{ fg | color_extract: 'green' }}, {{ fg | color_extract: 'blue' }};
+    --z-nl-to: {{ text_alpha }};
+    --z-nl-hfs: {{ s.heading_font_size }}px;
+    --z-nl-hfs-m: {{ s.heading_font_size_mobile }}px;
+    --z-nl-tfs: {{ s.text_font_size }}px;
+    --z-nl-tfs-m: {{ s.text_font_size_mobile }}px;
+    --z-nl-ifs: {{ s.input_font_size }}px;
+    --z-nl-lfs: {{ s.legal_font_size }}px;
+    --z-btnfs: {{ s.button_font_size }}px;
+    --z-btnfs-m: {{ s.button_font_size_mobile }}px;
+  }
+{%- endstyle -%}
+
+<div id="{{ nl_id }}" class="zenith-nl {{ class }}">
+  {%- if s.heading != blank or s.text != blank -%}
+    <div class="zenith-nl__content">
+      {%- if s.heading != blank -%}
+        <{{ heading_tag }} class="zenith-nl__heading">{{ s.heading | escape }}</{{ heading_tag }}>
+      {%- endif -%}
+      {%- if s.text != blank -%}
+        <div class="zenith-nl__text zenith-rte">{{ s.text }}</div>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  <div class="zenith-nl__form-wrap">
+    {%- form 'customer', id: form_id, class: 'zenith-nl__form' -%}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      {%- if s.redirect_url != blank -%}
+        <input type="hidden" name="return_to" value="{{ s.redirect_url }}">
+      {%- endif -%}
+
+      <label class="visually-hidden" for="{{ nl_id }}-email">{{ placeholder | escape }}</label>
+      <input
+        id="{{ nl_id }}-email"
+        class="zenith-nl__input"
+        type="email"
+        name="contact[email]"
+        value="{{ form.email }}"
+        placeholder="{{ placeholder | escape }}"
+        autocomplete="email"
+        autocorrect="off"
+        autocapitalize="off"
+        spellcheck="false"
+        aria-required="true"
+        required
+        {% if form.errors %}
+          aria-invalid="true"
+          aria-describedby="{{ nl_id }}-error"
+        {% elsif form.posted_successfully? %}
+          aria-describedby="{{ nl_id }}-success"
+        {% endif %}
+      >
+      <button type="submit" name="commit" class="button zenith-btn zenith-btn--{{ btn_style }} zenith-nl__button">
+        <span>{{ button_label | escape }}</span>
+      </button>
+
+      {%- if form.errors -%}
+        <p id="{{ nl_id }}-error" class="zenith-nl__status zenith-nl__status--error" role="alert">
+          {%- for field in form.errors -%}
+            {%- if field == 'form' -%}
+              {{ form.errors.messages[field] }}
+            {%- else -%}
+              {{ form.errors.translated_fields[field] | capitalize }}
+              {{ form.errors.messages[field] }}
+            {%- endif -%}
+            {%- unless forloop.last %} {% endunless -%}
+          {%- endfor -%}
+        </p>
+      {%- elsif form.posted_successfully? -%}
+        <p id="{{ nl_id }}-success" class="zenith-nl__status zenith-nl__status--success" role="status" tabindex="-1">
+          {{- success_message | escape -}}
+        </p>
+        {%- if s.redirect_url != blank and request.design_mode == false -%}
+          <script>
+            window.location.replace({{ s.redirect_url | json }});
+          </script>
+        {%- endif -%}
+      {%- endif -%}
+    {%- endform -%}
+
+    {%- if s.legal != blank -%}
+      <div class="zenith-nl__legal zenith-rte">{{ s.legal }}</div>
+    {%- endif -%}
+  </div>
+</div>

@@ -1,0 +1,791 @@
+{%- comment -%} zenith: [customers] anywhere in this section shows Theme settings → Zenith → Customer count {%- endcomment -%}
+{%- capture zenith_body -%}
+{{ 'zenith-blog.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign s = section.settings
+  assign heading = s.heading | default: blog.title
+  assign side_count = s.side_count
+  assign first_screen = false
+  if section.index <= 2
+    assign first_screen = true
+  endif
+
+  # Image sizes (approximate share of the viewport on desktop)
+  assign side_share = 100 | minus: s.featured_width | times: s.side_image_width | divided_by: 100
+  assign featured_sizes = '(min-width: 750px) ' | append: s.featured_width | append: 'vw, 100vw'
+  assign side_sizes = '(min-width: 750px) ' | append: side_share | append: 'vw, 100vw'
+  assign grid_share = 100 | divided_by: s.grid_columns
+  assign grid_sizes = '(min-width: 990px) ' | append: grid_share | append: 'vw, (min-width: 750px) 50vw, 100vw'
+-%}
+
+{%- capture extra -%}
+  --z-bl-fw: {{ s.featured_width }}%;
+  --z-bl-siw: {{ s.side_image_width }}%;
+  --z-bl-stg: {{ s.side_text_gap }}px;
+  --z-bl-sgap: {{ s.side_gap }}px;
+  --z-bl-fih: {{ s.featured_image_height }};
+  --z-bl-fih-m: {{ s.featured_image_height_mobile }};
+  --z-bl-ftfs: {{ s.featured_title_size }}px;
+  --z-bl-ftfs-m: {{ s.featured_title_size_mobile }}px;
+  --z-bl-ftsp: {{ s.featured_title_spacing }}px;
+  --z-bl-ftsp-m: {{ s.featured_title_spacing_mobile }}px;
+  --z-bl-esp: {{ s.excerpt_spacing }}px;
+  --z-bl-exmw: {{ s.excerpt_max_width }}px;
+  --z-bl-flsp: {{ s.featured_link_spacing }}px;
+  --z-bl-clamp-m: {{ s.excerpt_lines_mobile }};
+  --z-bl-mhfs: {{ s.more_heading_size }}px;
+  --z-bl-mhfs-m: {{ s.more_heading_size_mobile }}px;
+  --z-bl-mhsp: {{ s.more_heading_spacing }}px;
+  --z-bl-mhsp-m: {{ s.more_heading_spacing_mobile }}px;
+  --z-bl-msp-m: {{ s.more_spacing_mobile }}px;
+  --z-bl-cols: {{ s.grid_columns }};
+  --z-bl-ggap: {{ s.grid_gap }}px;
+  --z-bl-grgap: {{ s.grid_row_gap }}px;
+  --z-bl-gsp: {{ s.grid_spacing }}px;
+  --z-ac-ih: {{ s.card_image_height }};
+  --z-ac-ih-m: {{ s.card_image_height_mobile }};
+  --z-ac-tsp: {{ s.title_spacing }}px;
+  --z-ac-tsp-m: {{ s.title_spacing_mobile }}px;
+  --z-ac-lsp: {{ s.link_spacing }}px;
+  --z-ac-lfs: {{ s.link_font_size }}px;
+  --z-ac-lfs-m: {{ s.link_font_size_mobile }}px;
+  --z-ac-link: {{ s.link_color }};
+  --z-ac-exo: {{ s.excerpt_opacity | divided_by: 100.0 }};
+{%- endcapture -%}
+{%- render 'zenith-section-style', section: section, extra: extra -%}
+
+{%- paginate blog.articles by s.articles_per_page -%}
+  {%- liquid
+    assign show_featured = false
+    if s.show_featured and paginate.current_page == 1 and blog.articles.size > 0
+      assign show_featured = true
+    endif
+
+    assign grid_offset = 0
+    assign side_shown = 0
+    if show_featured
+      assign side_shown = blog.articles.size | minus: 1 | at_most: side_count
+      assign grid_offset = side_shown | plus: 1
+    endif
+    assign grid_count = blog.articles.size | minus: grid_offset
+
+    # "More Articles" heading: phones show it once, above the first article after the featured one;
+    # desktop shows it above the lower grid when that setting is on.
+    assign more_in_side = false
+    if show_featured and side_shown > 0 and s.more_heading != blank
+      assign more_in_side = true
+    endif
+    assign more_grid_mobile = false
+    if show_featured and side_shown == 0 and s.more_heading != blank
+      assign more_grid_mobile = true
+    endif
+    assign more_grid_desktop = false
+    if show_featured and s.show_more_heading_desktop and s.more_heading != blank
+      assign more_grid_desktop = true
+    endif
+  -%}
+
+  <section
+    id="Zenith-{{ section.id }}"
+    class="zenith-section zenith-blog color-{{ s.color_scheme }} gradient{% if s.excerpt_lines_mobile > 0 %} zenith-blog--clamp{% endif %}"
+  >
+    <div class="page-width">
+      <div class="zenith-blog__inner">
+        {%- if heading != blank -%}
+          <h1 class="zenith-blog__heading">{{ heading | escape }}</h1>
+        {%- endif -%}
+
+        {%- if show_featured -%}
+          <div class="zenith-blog__top">
+            {%- for article in blog.articles limit: 1 -%}
+              {%- render 'zenith-article-card',
+                article: article,
+                class: 'zenith-acard--featured',
+                heading_tag: 'h2',
+                sizes: featured_sizes,
+                priority: first_screen,
+                link_label: s.featured_link_label,
+                link_label_mobile: s.featured_link_label_mobile,
+                show_excerpt: s.show_excerpt,
+                excerpt_words: s.excerpt_words,
+                show_date: s.show_date,
+                date_format: s.date_format
+              -%}
+            {%- endfor -%}
+
+            {%- if side_shown > 0 -%}
+              <div class="zenith-blog__side">
+                {%- if more_in_side -%}
+                  <h2 class="zenith-blog__more-heading zenith-hide-desktop">{{ s.more_heading | escape }}</h2>
+                {%- endif -%}
+                <ul class="zenith-blog__list" role="list">
+                  {%- for article in blog.articles offset: 1 limit: side_shown -%}
+                    <li>
+                      {%- render 'zenith-article-card',
+                        article: article,
+                        class: 'zenith-acard--row',
+                        sizes: side_sizes,
+                        link_label: s.link_label,
+                        show_date: s.show_date,
+                        date_format: s.date_format
+                      -%}
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        {%- if grid_count > 0 -%}
+          <div class="zenith-blog__more{% if show_featured == false %} zenith-blog__more--first{% elsif side_shown > 0 %} zenith-blog__more--after{% endif %}">
+            {%- if more_grid_mobile or more_grid_desktop -%}
+              <h2 class="zenith-blog__more-heading{% unless more_grid_mobile %} zenith-hide-mobile{% endunless %}{% unless more_grid_desktop %} zenith-hide-desktop{% endunless %}">
+                {{- s.more_heading | escape -}}
+              </h2>
+            {%- endif -%}
+            <ul class="zenith-blog__grid" role="list">
+              {%- for article in blog.articles offset: grid_offset -%}
+                <li>
+                  {%- render 'zenith-article-card',
+                    article: article,
+                    sizes: grid_sizes,
+                    link_label: s.link_label,
+                    show_date: s.show_date,
+                    date_format: s.date_format
+                  -%}
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+
+        {%- if paginate.pages > 1 -%}
+          <div class="zenith-blog__pagination">
+            {%- render 'pagination', paginate: paginate -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+{%- endpaginate -%}
+{%- endcapture -%}
+{{- zenith_body | replace: '[customers]', settings.customer_count -}}
+
+{% schema %}
+{
+  "name": "Zenith · Blog posts",
+  "tag": "div",
+  "class": "section",
+  "enabled_on": {
+    "templates": ["blog"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "info": "Leave empty to use the blog's title.",
+      "default": "Blog Posts"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_featured",
+      "label": "Show the latest article large",
+      "info": "First page only. The next articles are listed beside it on desktop.",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "featured_link_label",
+      "label": "Latest article link",
+      "default": "Read Article"
+    },
+    {
+      "type": "text",
+      "id": "featured_link_label_mobile",
+      "label": "Latest article link on mobile",
+      "info": "Leave empty to use the desktop text.",
+      "default": "Read More"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_excerpt",
+      "label": "Show the latest article's excerpt",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "excerpt_words",
+      "label": "Excerpt length",
+      "min": 10,
+      "max": 60,
+      "step": 2,
+      "unit": "wds",
+      "default": 40
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Article link",
+      "default": "Read More"
+    },
+    {
+      "type": "text",
+      "id": "more_heading",
+      "label": "\"More articles\" heading",
+      "info": "Shown on mobile above the articles after the latest one.",
+      "default": "More Articles"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_more_heading_desktop",
+      "label": "Show that heading on desktop above older articles",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_date",
+      "label": "Show dates",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "date_format",
+      "label": "Date format",
+      "default": "%-d %b %Y",
+      "options": [
+        { "value": "%-d %b %Y", "label": "11 Jan 2022" },
+        { "value": "%-d %B %Y", "label": "11 January 2022" },
+        { "value": "%b %-d, %Y", "label": "Jan 11, 2022" },
+        { "value": "%B %-d, %Y", "label": "January 11, 2022" },
+        { "value": "%d/%m/%Y", "label": "11/01/2022" },
+        { "value": "%m/%d/%Y", "label": "01/11/2022" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "articles_per_page",
+      "label": "Articles per page",
+      "min": 4,
+      "max": 24,
+      "step": 1,
+      "default": 10
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "label": "Content max width",
+      "info": "1280 = the design with 80px side margins.",
+      "min": 800,
+      "max": 1600,
+      "step": 20,
+      "unit": "px",
+      "default": 1600
+    },
+    {
+      "type": "range",
+      "id": "side_count",
+      "label": "Articles beside the latest one",
+      "min": 0,
+      "max": 6,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "featured_width",
+      "label": "Latest article column width",
+      "min": 30,
+      "max": 70,
+      "step": 1,
+      "unit": "%",
+      "default": 47
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Space between the columns",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "heading_spacing",
+      "label": "Space below the heading",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "featured_image_height",
+      "label": "Latest article photo height",
+      "info": "Percent of the photo's width.",
+      "min": 30,
+      "max": 120,
+      "step": 1,
+      "unit": "%",
+      "default": 66
+    },
+    {
+      "type": "range",
+      "id": "featured_title_spacing",
+      "label": "Latest article: space above title",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "excerpt_spacing",
+      "label": "Latest article: space above excerpt",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "excerpt_max_width",
+      "label": "Latest article: excerpt max width",
+      "min": 200,
+      "max": 800,
+      "step": 10,
+      "unit": "px",
+      "default": 500
+    },
+    {
+      "type": "range",
+      "id": "featured_link_spacing",
+      "label": "Latest article: space above link",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 26
+    },
+    {
+      "type": "range",
+      "id": "side_image_width",
+      "label": "Side list: photo width",
+      "info": "Percent of the side column.",
+      "min": 30,
+      "max": 70,
+      "step": 1,
+      "unit": "%",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "side_text_gap",
+      "label": "Side list: space between photo and text",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "side_gap",
+      "label": "Side list: space between articles",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "card_image_height",
+      "label": "Article photo height",
+      "info": "Percent of the photo's width (side list and grid).",
+      "min": 30,
+      "max": 120,
+      "step": 1,
+      "unit": "%",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "title_spacing",
+      "label": "Grid: space between photo and title",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "link_spacing",
+      "label": "Space above article link",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "grid_columns",
+      "label": "Older articles: columns",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "label": "Older articles: space between columns",
+      "min": 0,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "grid_row_gap",
+      "label": "Older articles: space between rows",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "grid_spacing",
+      "label": "Older articles: space above",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "more_heading_spacing",
+      "label": "Space below \"More articles\" heading",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Article links",
+      "default": "#EABE5F"
+    },
+    {
+      "type": "range",
+      "id": "excerpt_opacity",
+      "label": "Excerpt opacity",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size",
+      "label": "Heading size",
+      "min": 24,
+      "max": 96,
+      "step": 1,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "featured_title_size",
+      "label": "Latest article title size",
+      "min": 20,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "text_font_size",
+      "label": "Excerpt size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "label": "Article title size",
+      "min": 14,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 26
+    },
+    {
+      "type": "range",
+      "id": "link_font_size",
+      "label": "Article link size",
+      "min": 14,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "more_heading_size",
+      "label": "\"More articles\" heading size",
+      "min": 20,
+      "max": 64,
+      "step": 1,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size_mobile",
+      "label": "Heading size",
+      "min": 20,
+      "max": 64,
+      "step": 1,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "heading_spacing_mobile",
+      "label": "Space below the heading",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "featured_image_height_mobile",
+      "label": "Latest article photo height",
+      "min": 30,
+      "max": 120,
+      "step": 1,
+      "unit": "%",
+      "default": 66
+    },
+    {
+      "type": "range",
+      "id": "featured_title_size_mobile",
+      "label": "Latest article title size",
+      "min": 18,
+      "max": 56,
+      "step": 1,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "featured_title_spacing_mobile",
+      "label": "Latest article: space above title",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 26
+    },
+    {
+      "type": "range",
+      "id": "text_font_size_mobile",
+      "label": "Excerpt size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "excerpt_lines_mobile",
+      "label": "Excerpt lines",
+      "info": "Longer excerpts end with \"…\". 0 = show all.",
+      "min": 0,
+      "max": 8,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "more_spacing_mobile",
+      "label": "Space above \"More articles\"",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 76
+    },
+    {
+      "type": "range",
+      "id": "more_heading_size_mobile",
+      "label": "\"More articles\" heading size",
+      "min": 20,
+      "max": 64,
+      "step": 1,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "more_heading_spacing_mobile",
+      "label": "Space below \"More articles\" heading",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "card_image_height_mobile",
+      "label": "Article photo height",
+      "min": 30,
+      "max": 120,
+      "step": 1,
+      "unit": "%",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "title_spacing_mobile",
+      "label": "Space between photo and title",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "title_font_size_mobile",
+      "label": "Article title size",
+      "min": 14,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 26
+    },
+    {
+      "type": "range",
+      "id": "link_font_size_mobile",
+      "label": "Article link size",
+      "min": 14,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "gap_mobile",
+      "label": "Space between articles",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 68
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Top padding (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Bottom padding (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zenith · Blog posts"
+    }
+  ]
+}
+{% endschema %}
