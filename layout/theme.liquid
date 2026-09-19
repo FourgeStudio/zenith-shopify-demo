@@ -354,7 +354,7 @@
         endif
       -%}
       {%- liquid
-        # Shopify rejects a layout whose {{ content_for_layout }} sits inside an if/else ("Missing content_for_layout"),
+        # Shopify rejects a layout whose content_for_layout output sits inside an if/else ("Missing content_for_layout"),
         # so it is always output below; on a Zenith-rendered policy page it is sliced to nothing instead.
         assign zenith_layout_length = 100000000
         if zenith_policy != nil
