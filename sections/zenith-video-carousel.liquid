@@ -147,7 +147,7 @@
 {%- if card_count > 0 or request.design_mode -%}
 <section
   id="Zenith-{{ section.id }}"
-  class="zenith-section zenith-videos zenith-videos--{{ section.settings.video_ratio }} zenith-videos--q-{{ section.settings.quote_align }} zenith-videos--qm-{{ section.settings.quote_align_mobile }}{% if section.settings.show_peek %} zenith-videos--bleed{% endif %}{% if section.settings.center_when_fits %} zenith-videos--center{% endif %} color-{{ section.settings.color_scheme }} gradient"
+  class="zenith-section zenith-videos zenith-videos--{{ section.settings.video_ratio }} zenith-videos--q-{{ section.settings.quote_align }} zenith-videos--qm-{{ section.settings.quote_align_mobile }}{% if section.settings.show_peek %} zenith-videos--bleed{% endif %}{% if section.settings.center_when_fits %} zenith-videos--center{% endif %} color-{{ section.settings.color_scheme }} gradient{% if section.index > 2 %} zenith-defer{% endif %}"
 >
   <div class="page-width">
     {%- if section.settings.eyebrow != blank or heading != blank or section.settings.subheading != blank -%}

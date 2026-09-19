@@ -1,6 +1,16 @@
 /* Zenith video card player: an uploaded <video>, or a YouTube embed (data-youtube-src) created on the first tap.
    One video plays at a time; playback pauses when the card leaves the screen. */
 if (!customElements.get('zenith-video')) {
+  let youTubeWarm = false;
+  const warmYouTube = () => {
+    if (youTubeWarm) return;
+    youTubeWarm = true;
+    const link = document.createElement('link');
+    link.rel = 'preconnect';
+    link.href = 'https://www.youtube-nocookie.com';
+    document.head.append(link);
+  };
+
   customElements.define(
     'zenith-video',
     class ZenithVideo extends HTMLElement {
@@ -14,6 +24,13 @@ if (!customElements.get('zenith-video')) {
         this.onPause = () => this.setPlaying(false);
         this.onPlay = () => this.setPlaying(true);
         this.button.addEventListener('click', this.onToggle);
+        if (this.youtubeSrc) {
+          // Open the connection to YouTube when a tap is likely (hover / touch / keyboard focus), not at page load
+          this.onWarm = () => warmYouTube();
+          this.addEventListener('pointerenter', this.onWarm, { once: true });
+          this.addEventListener('touchstart', this.onWarm, { once: true, passive: true });
+          this.button.addEventListener('focus', this.onWarm, { once: true });
+        }
         if (this.video) {
           this.video.addEventListener('pause', this.onPause);
           this.video.addEventListener('play', this.onPlay);
@@ -34,6 +51,11 @@ if (!customElements.get('zenith-video')) {
       disconnectedCallback() {
         this.observer?.disconnect();
         this.button?.removeEventListener('click', this.onToggle);
+        if (this.onWarm) {
+          this.removeEventListener('pointerenter', this.onWarm);
+          this.removeEventListener('touchstart', this.onWarm);
+          this.button?.removeEventListener('focus', this.onWarm);
+        }
         this.video?.removeEventListener('pause', this.onPause);
         this.video?.removeEventListener('play', this.onPlay);
       }

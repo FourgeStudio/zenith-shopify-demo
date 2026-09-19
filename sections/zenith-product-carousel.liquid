@@ -37,7 +37,7 @@
 
 <section
   id="Zenith-{{ section.id }}"
-  class="zenith-section zenith-pc zenith-pc--{{ section.settings.image_ratio }}{% if section.settings.bleed_right %} zenith-pc--bleed{% endif %} color-{{ section.settings.color_scheme }} gradient"
+  class="zenith-section zenith-pc zenith-pc--{{ section.settings.image_ratio }}{% if section.settings.bleed_right %} zenith-pc--bleed{% endif %} color-{{ section.settings.color_scheme }} gradient{% if section.index > 2 %} zenith-defer{% endif %}"
 >
   <div class="page-width">
     <div class="zenith-pc__header">

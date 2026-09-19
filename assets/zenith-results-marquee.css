@@ -291,7 +291,7 @@ a.zenith-results__meta:focus-visible {
 
 @keyframes zenith-marquee {
   from { transform: translateX(0); }
-  to { transform: translateX(-25%); }
+  to { transform: translateX(var(--z-shift, -25%)); }
 }
 
 @media screen and (min-width: 750px) {

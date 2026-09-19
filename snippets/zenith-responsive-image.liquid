@@ -1,0 +1,98 @@
+{%- comment -%}
+  An image that can be different on mobile. Only the one the device shows is downloaded (<picture> art direction).
+  Use this instead of two <img> with zenith-hide-mobile / zenith-hide-desktop: a hidden eager image still downloads.
+  Inside .zenith-media the <img> is cover-fitted (zenith-base.css styles `> img` and `> picture > img`).
+
+  Accepts:
+    image {image} desktop image (also used on mobile when mobile_image is blank)
+    mobile_image {image} optional, shown below 750px (used everywhere when image is blank)
+    widths {String} desktop srcset widths, default '750, 1100, 1500, 1920, 2400'
+    mobile_widths {String} default '375, 550, 750, 1100, 1500'
+    sizes {String} desktop sizes, default '100vw'
+    mobile_sizes {String} default '100vw'
+    loading {String} 'lazy' (default) | 'eager' — eager only for the first visible section (LCP)
+    fetchpriority {String} 'auto' (default) | 'high' — high only for the LCP image
+    class {String} optional <img> class
+    alt {String} optional, defaults to the image's alt text
+{%- endcomment -%}
+{%- liquid
+  assign d_widths = widths | default: '750, 1100, 1500, 1920, 2400'
+  assign m_widths = mobile_widths | default: '375, 550, 750, 1100, 1500'
+  assign d_sizes = sizes | default: '100vw'
+  assign m_sizes = mobile_sizes | default: '100vw'
+  assign img_loading = loading | default: 'lazy'
+  assign img_priority = fetchpriority | default: 'auto'
+  assign img_class = class | default: ''
+
+  if image != blank and mobile_image != blank
+    assign art_direction = true
+    assign img = mobile_image
+    assign img_widths = m_widths
+    assign img_sizes = m_sizes
+  elsif image != blank
+    assign art_direction = false
+    assign img = image
+    assign img_widths = d_widths
+    assign img_sizes = d_sizes
+  else
+    assign art_direction = false
+    assign img = mobile_image
+    assign img_widths = m_widths
+    assign img_sizes = m_sizes
+  endif
+  assign img_max = img_widths | split: ',' | last | strip | plus: 0
+  # image_tag escapes the alt itself
+  assign img_alt = alt | default: img.alt | default: image.alt
+-%}
+{%- if img != blank -%}
+  {%- if art_direction -%}
+    {%- liquid
+      assign d_list = d_widths | split: ','
+      assign d_srcset = ''
+      for w in d_list
+        assign wn = w | strip | plus: 0
+        if wn <= image.width
+          assign d_url = image | image_url: width: wn
+          assign d_srcset = d_srcset | append: d_url | append: ' ' | append: wn | append: 'w, '
+        endif
+      endfor
+      if d_srcset == ''
+        assign d_url = image | image_url: width: image.width
+        assign d_srcset = d_url | append: ' ' | append: image.width | append: 'w, '
+      endif
+      assign d_srcset = d_srcset | remove_last: ', '
+    -%}
+    <picture>
+      <source
+        media="(min-width: 750px)"
+        srcset="{{ d_srcset }}"
+        sizes="{{ d_sizes }}"
+        width="{{ image.width }}"
+        height="{{ image.height }}"
+      >
+      {{
+        img
+        | image_url: width: img_max
+        | image_tag:
+          widths: img_widths,
+          sizes: img_sizes,
+          loading: img_loading,
+          fetchpriority: img_priority,
+          class: img_class,
+          alt: img_alt
+      }}
+    </picture>
+  {%- else -%}
+    {{
+      img
+      | image_url: width: img_max
+      | image_tag:
+        widths: img_widths,
+        sizes: img_sizes,
+        loading: img_loading,
+        fetchpriority: img_priority,
+        class: img_class,
+        alt: img_alt
+    }}
+  {%- endif -%}
+{%- endif -%}

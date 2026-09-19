@@ -99,43 +99,14 @@
 >
   <div class="zenith-hero__inner">
     <div class="zenith-media zenith-hero__media">
-      {%- if s.image != blank -%}
-        {%- assign desktop_class = '' -%}
-        {%- if s.mobile_image != blank -%}
-          {%- assign desktop_class = 'zenith-hide-mobile' -%}
-        {%- endif -%}
-        {{
-          s.image
-          | image_url: width: 2400
-          | image_tag:
-            widths: '750, 1100, 1500, 1920, 2400',
-            sizes: '100vw',
-            fetchpriority: img_priority,
-            loading: img_loading,
-            class: desktop_class
-        }}
-        {%- if s.mobile_image != blank -%}
-          {{
-            s.mobile_image
-            | image_url: width: 1500
-            | image_tag:
-              widths: '375, 550, 750, 1100, 1500',
-              sizes: '100vw',
-              fetchpriority: img_priority,
-              loading: img_loading,
-              class: 'zenith-hide-desktop'
-          }}
-        {%- endif -%}
-      {%- elsif s.mobile_image != blank -%}
-        {{
-          s.mobile_image
-          | image_url: width: 1500
-          | image_tag:
-            widths: '375, 550, 750, 1100, 1500',
-            sizes: '100vw',
-            fetchpriority: img_priority,
-            loading: img_loading
-        }}
+      {%- if s.image != blank or s.mobile_image != blank -%}
+        {%- comment -%} Desktop + mobile image: the device downloads only the one it shows {%- endcomment -%}
+        {%- render 'zenith-responsive-image',
+          image: s.image,
+          mobile_image: s.mobile_image,
+          loading: img_loading,
+          fetchpriority: img_priority
+        -%}
       {%- else -%}
         {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
       {%- endif -%}

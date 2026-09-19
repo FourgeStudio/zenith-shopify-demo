@@ -296,6 +296,15 @@ h1, h2, h3, h4, h5, .h0, .h1, .h2, .h3, .h4, .h5 {
   }
 }
 
+/* ---------- Deferred rendering ----------
+   Heavy sections further down the page get .zenith-defer (Liquid: section.index > 2). The browser skips their
+   layout, paint and marquee animations until they come near the screen. The reserved height keeps the scrollbar
+   steady (auto = remembers the real height once rendered). Browsers without support ignore it. */
+.zenith-defer {
+  content-visibility: auto;
+  contain-intrinsic-size: auto none auto var(--z-defer-h, 640px);
+}
+
 /* ---------- Media ---------- */
 .zenith-media {
   position: relative;
@@ -304,6 +313,7 @@ h1, h2, h3, h4, h5, .h0, .h1, .h2, .h3, .h4, .h5 {
 }
 
 .zenith-media > img,
+.zenith-media > picture > img,
 .zenith-media > video,
 .zenith-media > .placeholder-svg,
 .zenith-media > svg {

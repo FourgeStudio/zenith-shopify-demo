@@ -80,7 +80,7 @@
 {%- if total_count > 0 or request.design_mode -%}
 <section
   id="Zenith-{{ section.id }}"
-  class="zenith-section zenith-results color-{{ section.settings.color_scheme }} gradient{% if section.settings.pause_on_hover %} zenith-results--pause{% endif %}"
+  class="zenith-section zenith-results color-{{ section.settings.color_scheme }} gradient{% if section.settings.pause_on_hover %} zenith-results--pause{% endif %}{% if section.index > 2 %} zenith-defer{% endif %}"
 >
   {%- if section.settings.eyebrow != blank or heading != blank or section.settings.subheading != blank -%}
     <div class="page-width">
@@ -209,10 +209,20 @@
         if r == 2 and section.settings.alternate_direction
           assign reverse = true
         endif
+        # The loop needs copies wider than the widest screen: 4 for short rows, 2 once a row has 8+ reviews (half the DOM)
+        assign passes = 4
+        if item_count >= 8
+          assign passes = 2
+        endif
       -%}
       <div class="zenith-results__row{% if reverse %} zenith-results__row--reverse{% endif %}">
-        <div class="zenith-results__track">
-          {%- for pass in (1..4) -%}
+        <div
+          class="zenith-results__track"
+          {% if passes == 2 %}
+            style="--z-shift: -50%;"
+          {% endif %}
+        >
+          {%- for pass in (1..passes) -%}
             <ul
               class="zenith-results__group"
               role="list"

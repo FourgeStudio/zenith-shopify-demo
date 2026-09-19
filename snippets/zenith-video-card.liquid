@@ -74,17 +74,19 @@
           >
         {%- endif -%}
       {%- elsif video != blank -%}
+        {%- comment -%}
+          No poster attribute: a video poster downloads at page load for every card, even off screen.
+          The cover is a lazy <img> instead (custom cover, else the video's own preview image).
+        {%- endcomment -%}
         {{
           video
-          | video_tag:
-            image_size: '720x',
-            preload: 'none',
-            playsinline: true,
-            class: 'zenith-video-card__video'
+          | video_tag: preload: 'none', playsinline: true, class: 'zenith-video-card__video'
+          | replace: ' poster="', ' data-poster="'
         }}
-        {%- if poster != blank -%}
+        {%- assign cover = poster | default: video.preview_image -%}
+        {%- if cover != blank -%}
           {{
-            poster
+            cover
             | image_url: width: 720
             | image_tag:
               loading: 'lazy',
