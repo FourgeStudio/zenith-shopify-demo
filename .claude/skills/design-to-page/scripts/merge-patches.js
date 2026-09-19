@@ -41,7 +41,7 @@ function checkSettings(where, defs, values, errs) {
 }
 
 const errs = [];
-const patches = fs.readdirSync(patchDir).filter((f) => f.endsWith('.json'));
+const patches = fs.readdirSync(patchDir).filter((f) => f.endsWith('.json') && !f.startsWith('_')); // _order.json etc. are not patches
 for (const f of patches) {
   const key = f.replace(/\.json$/, '');
   const p = JSON.parse(fs.readFileSync(path.join(patchDir, f), 'utf8'));

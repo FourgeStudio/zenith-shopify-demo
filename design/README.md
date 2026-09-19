@@ -104,6 +104,32 @@ Product card: stars + score above the title, badge top-left on the image ("Selli
 
 Design slips handled: Hair product grid reuses the Skin copy ("Face & Skin Products / The Complete Executive Skin System") → "Hair Products / The Complete Hair Density System"; Hair closing hero "System Build" → "Built". `mobile/sections/Frame 1000005205.png` = phone chrome.
 
+## Verify page map (`design/verify-zenith-products/`, sections 1x, full pages desktop 1x / mobile 2x)
+| Section (templates/page.verify.json key) | Desktop (`desktop/sections/`) | Mobile (`mobile/sections/`) |
+|---|---|---|
+| `verify` (Zenith · Verify product: video left, steps + seal card + couriers right) | `Layout/4.png` | `Layout/4.png` + `Layout/251.png` (right column, stacked) |
+| `trust_bar`, `press` (hidden on mobile) | `Trust Bar.png`, `Logo Credentials.png` | — |
+| `videos` ("Is Zenith Legit?" on mobile) | `Testimonial/57.png` | `Testimonial/57.png` |
+| `locations` (Feature columns: photo beside text) | `Layout/57.png` | `Layout/57.png` |
+| `trust` | `CTA/45.png` | `CTA/45.png` |
+| `stores`, `pages` (Store links: marketplaces, Facebook pages) | `Ecom Stores.png`, `Ecom Stores-1.png` | `Ecom Stores.png`, `Socials.png` |
+| `fda` (Brand story + FDA logo) | `CTA/45-1.png` | `CTA/45-1.png` |
+| `faq`, `reviews` | `FAQ/2.png`, `Testimonial/18.png` | same |
+
+## Certificates page map (`design/certificates/`, full pages 2x, sections 1x)
+| Section (templates/page.certificates.json key) | Desktop | Mobile |
+|---|---|---|
+| `business` (Zenith · Certificates, caption below) | `Contact/4.png` | `Contact/4.png` |
+| `fda_products` (Zenith · Certificates, details beside; last 4 "Pending") | `Contact/4-1.png` | `Contact/4-1.png` |
+| `stores` | `Ecom Stores.png` | `Ecom Stores.png` |
+| `notice` (Zenith · Callout box) | `Layout/57.png` | `Layout/57.png` |
+| `faq`, `reviews` | `FAQ/2.png`, `Testimonial/18.png` | same |
+
+## Other pages (`design/other-pages/`, full pages only)
+- `Blog Index • Desktop.png` + `Blog Post Page • Mobile.png` (= mobile blog index) → `templates/blog.json` (Zenith · Blog + Zenith · Newsletter).
+- `Blog Post • Desktop.png` + `Blog Post Page • Mobile (1).png` (= mobile article) → `templates/article.json` (Zenith · Article + Zenith · More articles). Mobile "More Articles" cards say "Add to Cart" — design slip, "Read More" used.
+- `Thank You • Desktop/Mobile.png` → `templates/page.thank-you.json`; `Thank You Newsletter • Desktop/Mobile.png` → `templates/page.thank-you-newsletter.json` (both = Zenith · Hero: no image, confetti, icon option).
+
 ## Adding a new page
 Drop the exports in, then ask Claude to run the `design-to-page` skill for that page.
 Same layout under `design/<page>/` (`product`, `collection`, `cart`, `about`, `contact`, `global`). Export sections at 1x; full-page export optional.

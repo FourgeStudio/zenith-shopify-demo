@@ -74,6 +74,12 @@ Then fill `brief-template.md` → `<scratchpad>/BRIEF.md` (placeholders + "Measu
 | Store-wide content, edit once | Theme settings group + per-section source select `global` / `custom` (pattern: `zenith-promo-banner` `content_source`, hero `countdown_source`). Repeatable items = numbered slots read with `settings[key]` (`vt1_…` videos, `rv1_…` reviews, `zg_…` guarantee); one loop sets local vars from either a slot or `section.blocks[forloop.index0]`, then shared markup/snippet. A generic section reused for other content (feature columns) defaults to `custom` + a preset with `global` |
 | Page width + gutters | Theme settings → Page width = whole frame incl. gutters (1440); gutter = Theme settings → Zenith → Page side margin (30 / 20) → `--z-gutter` on `.page-width` — never pad sections to fake gutters. Header icons align via `zenith-header--align-page` |
 | Desktop/mobile differences | `*_mobile` copy settings, `heading_alignment_mobile`, `hide_on_mobile` / `hide_on_desktop`, per-block "Hide on mobile" |
+| Newsletter signup box | `snippets/zenith-newsletter-form.liquid` (`s`: settings with heading/text/button/legal/redirect_url, `id`) — standalone `zenith-newsletter` section or a block (see `zenith-main-article`) |
+| Framed documents / certificates | `zenith-certificates` (`card_layout` below / beside, *Pending* items) |
+| Simple message page (thank-you, confirmation) | `zenith-hero` with *Show background image* off + confetti + *Icon above heading* (see `page.thank-you*.json`) |
+| Notice / callout box | `zenith-callout` (logo or wordmark, text, box colour) |
+| Photo beside text columns (locations) | `zenith-feature-columns` (media left, `title_color`) |
+| Blog / article cards | `snippets/zenith-article-card.liquid` + `assets/zenith-blog.css` |
 
 Global-toggle candidates when a section repeats across pages with the same content: trust bar, money-back guarantee, Zenith Guarantee, press logos, promo. Page-specific sections (hero, story, featured product) stay per section.
 
