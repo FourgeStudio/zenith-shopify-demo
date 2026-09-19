@@ -72,7 +72,7 @@ Gradients:
 - Header: pure black #000, hamburger (desktop too), centered logo, account + cart right; announcement bar BELOW it, gold gradient.
 - Page width: max 1440px frame incl. side margins (Theme settings → Page width = 1440). Side margins = Theme settings → Zenith → Page side margin: 30px desktop / 20px mobile (client request; design showed 80). Header icons align to the same margin.
 - Customer count: Theme settings → Zenith → Customer count; write `[customers]` in section copy.
-- Product card: light/rock background, product on neutral, black full-width "Add to cart".
+- Product card (design-verified, Shop All 2026-09-19): white image square, stars #EABE5F 13px + score "4.7" (16px, 85% white) above the title, title Geist 600 22px / 1.55 (mobile 17px / 1.15), price 18px 70% white, full-width gold "Add to Cart" + cart icon 46px (mobile 44px). Badge top-left on the image, 28px tall (mobile 22px), 14px text: "Selling Fast" #294850 + gold truck; sale "On Sale" gradient #A90619 → #F3213A, white text. Grid gap 32 desktop / 16 mobile.
 - Page width: design frame 1440 · section spacing varies per section (set per section from the design).
 - Shadows: none.
 

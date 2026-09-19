@@ -59,6 +59,7 @@ Then fill `brief-template.md` → `<scratchpad>/BRIEF.md` (placeholders + "Measu
 | Contact form + details | `sections/zenith-contact.liquid` (Shopify `form 'contact'`, office/line/FAQ blocks) |
 | Marketplace links | `settings.social_lazada_link`, `settings.social_shopee_link` (Theme settings → Zenith); icons `lazada`, `shopee` |
 | Per-instance CSS vars | `snippets/zenith-section-style.liquid` map — add `setting_id:var:unit` for new sizes |
+| Product grid (collection products, badges, stars + score) | `sections/zenith-product-grid.liquid` — *Collection* empty = the collection being viewed; card = `snippets/zenith-product-card.liquid` (`rating_style`, `badge`, `badge_style: sale`); product tag `badge:Text` = per-product badge |
 | Carousel | `<zenith-carousel>` + `snippets/zenith-carousel-controls.liquid` (design dots/arrows) |
 | Desktop/mobile image | `snippets/zenith-responsive-image.liquid` (`<picture>`: only the device's image downloads; pass `loading`/`fetchpriority` from the section's first-screen check) |
 | Heavy section low on the page | root class `{% if section.index > 2 %} zenith-defer{% endif %}` (content-visibility; rules in `dawn-customize` §8) |
@@ -76,7 +77,7 @@ Global-toggle candidates when a section repeats across pages with the same conte
 
 ## Page notes
 - **Product**: Dawn `main-product` (extend with `zenith:` edits/blocks) + zenith sections below it in `templates/product.json`; one template serves all products — alternate templates (`product.<name>.json`) only for different layouts. Reviews = Judge.me block.
-- **Collection / search**: Dawn `main-collection-product-grid` / facets; restyle cards via shared card CSS rather than new sections.
+- **Collection / search**: landing-style collection pages (Shop All, Skin, Hair) = `templates/collection.<name>.json` with homepage sections + `zenith-product-grid` (built for Shop All 2026-09-19). A plain filterable listing would use Dawn `main-collection-product-grid` / facets; restyle cards via shared card CSS rather than new sections.
 - **Pages (about, contact)**: `templates/page.<name>.json`; reuse `zenith-image-story`, `zenith-feature-columns`, `zenith-faq`. Contact = `zenith-contact` in `templates/page.contact.json` (Dawn `main-page` kept but disabled). The admin page must use that template.
 
 ## Gotchas (all hit on the homepage)

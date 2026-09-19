@@ -65,6 +65,27 @@ Shared art: `design/confetti.png` (969 × 161 transparent gold confetti) → shi
 
 `mobile/section/Frame 1000005205.png` = phone "MOBILE NAV AREA" chrome. Mobile `care` button reads "Add to Cart" while desktop reads "Shop Our Products" — treated as a design slip (optional mobile label setting).
 
+## Shop All map (`design/shop-all/`, full pages 2x, sections 1x)
+| Section (templates/collection.shop-all.json key) | Desktop (`desktop/sections/`) | Mobile (`mobile/sections/`) |
+|---|---|---|
+| Header + announcement (header-group) | `Navbar Desktop/10.png` | `Navbar/10.png` |
+| `promo_hero` (Promo banner, only while the promotion runs — not in the design, same switch as the homepage) | — | — |
+| `hero` (Hero, only when no promotion runs; no button on mobile) | `Header/6.png` / `6-1.png` (top + closing) | `Header/6.png` |
+| `trust_bar` | `Trust Bar.png` | `Container (Shopee…).png` |
+| `new_arrivals`, `skin`, `hair`, `hygiene` (Zenith · Product grid) | `Product/12.png`, `12-1.png`, `12-2.png`, `12-3.png` | `Product/12.png`, `12-1.png`, `12-2.png`, `12-3.png` |
+| `featured_product` | `Header/84.png` | `Header/84.png` |
+| `results` (global reviews) | `Carousel.png` | `Header/78.png` (still the old before/after mock) |
+| `guarantee` | `Zenith Guarantee.png` | `Layout/251.png` |
+| `money_back` | `Zenith Money Back Guarantee.png` | `CTA/45.png` |
+| `reviews` (Judge.me) | `Testimonial/18.png` | `Testimonial/18.png` |
+| `faq` | `FAQ/2.png` | `FAQ/2.png` |
+| `cta` (Hero, closing) | see `hero` | `CTA/6.png` |
+| Footer (footer-group) | `Desktop Footer.png` | `Mobile Footer.png` |
+
+Product card: stars + score above the title, badge top-left on the image ("Selling Fast" #294850 + gold truck; mobile shows "Most Purchased" = product tag badge). `design/on-promo-badge.png` = the red "On Sale" sale badge (gradient #A90619 → #F3213A, 28px tall) — a product sale badge, not tied to the promotion switch.
+
+Skin (`design/skin-collection-category-page/`) and Hair (`design/hair-collection-collection-page/`): same frame (hero without button, trust bar, one product grid of the collection) plus a before/after "The difference" section — not built yet; map them when building.
+
 ## Adding a new page
 Drop the exports in, then ask Claude to run the `design-to-page` skill for that page.
 Same layout under `design/<page>/` (`product`, `collection`, `cart`, `about`, `contact`, `global`). Export sections at 1x; full-page export optional.
