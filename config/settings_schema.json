@@ -17,9 +17,13 @@
       {
         "type": "text",
         "id": "customer_count",
-        "label": "Customer count",
+        "label": "Customer count (trusted counter)",
         "default": "100,000+",
-        "info": "Shown wherever a Zenith section text contains [customers], e.g. \"Trusted by [customers] Filipino men\"."
+        "info": "Change it here once and every page updates."
+      },
+      {
+        "type": "paragraph",
+        "content": "How to use it: copy [customers] (with the square brackets) into any heading, eyebrow, text, button, review, FAQ or announcement, on any page or in the header/footer. It shows the number above. Example: \"Trusted by [customers] Filipino men\" → \"Trusted by 100,000+ Filipino men\"."
       },
       {
         "type": "header",

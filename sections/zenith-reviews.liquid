@@ -1,3 +1,5 @@
+{%- comment -%} zenith: [customers] anywhere in this section shows Theme settings → Zenith → Customer count {%- endcomment -%}
+{%- capture zenith_body -%}
 {%- comment -%}
   Hosts the Judge.me app block. Storefront: renders nothing until an app block is added.
   Theme editor: shows a styled preview so the empty section looks intentional.
@@ -105,6 +107,8 @@
   </div>
 </section>
 {%- endif -%}
+{%- endcapture -%}
+{{- zenith_body | replace: '[customers]', settings.customer_count -}}
 
 {% schema %}
 {

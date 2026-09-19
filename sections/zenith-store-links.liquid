@@ -1,3 +1,5 @@
+{%- comment -%} zenith: [customers] anywhere in this section shows Theme settings → Zenith → Customer count {%- endcomment -%}
+{%- capture zenith_body -%}
 {% comment %}
   Zenith · Store links — "Our Official Stores": marketplace cards (glyph · handle · stat).
   Desktop: cards in one row, content inline + centred. Mobile: 2-column grid, glyph left, handle over stat.
@@ -115,6 +117,8 @@
     {%- endif -%}
   </div>
 </section>
+{%- endcapture -%}
+{{- zenith_body | replace: '[customers]', settings.customer_count -}}
 
 {% schema %}
 {

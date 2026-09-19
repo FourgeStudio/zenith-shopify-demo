@@ -1,3 +1,5 @@
+{%- comment -%} zenith: [customers] anywhere in this section shows Theme settings → Zenith → Customer count {%- endcomment -%}
+{%- capture zenith_body -%}
 {{ 'zenith-image-story.css' | asset_url | stylesheet_tag }}
 {%- capture extra -%}
   {%- render 'zenith-overlay-vars', settings: section.settings -%}
@@ -198,6 +200,8 @@
     </div>
   </div>
 </section>
+{%- endcapture -%}
+{{- zenith_body | replace: '[customers]', settings.customer_count -}}
 
 {% schema %}
 {
