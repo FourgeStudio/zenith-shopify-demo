@@ -353,11 +353,11 @@
           endfor
         endif
       -%}
-      {%- if request.design_mode and request.path contains '/policies/' -%}
-        {%- comment -%} zenith: TEMP diagnostic for the policy layout (theme editor only) — remove once confirmed {%- endcomment -%}
-        <p style="margin:0;padding:6px 12px;background:#294850;color:#fff;font:12px/1.4 monospace;">
-          zenith-policy v2 · page_type={{ request.page_type }} · path={{ request.path }} · policies={{ shop.policies.size }}
-          {%- for p in shop.policies %} [{{ p.title }} → {{ p.url }}]{% endfor %} · matched={{ zenith_policy.title | default: 'NO' }}
+      {%- if request.path contains '/policies/' or request.page_type == 'policy' -%}
+        {%- comment -%} zenith: TEMP diagnostic for the policy layout (draft theme) — REMOVE before publishing {%- endcomment -%}
+        <p style="margin:0;padding:6px 12px;background:#294850;color:#fff;font:12px/1.4 monospace;word-break:break-all;">
+          zenith-policy v3 · page_type={{ request.page_type }} · path={{ request.path }} · handle={{ zenith_policy_handle }} · policies={{ shop.policies.size }}
+          {%- for p in shop.policies %} [{{ p.title }} → {{ p.url }} · body {{ p.body | size }}]{% endfor %} · matched={{ zenith_policy.title | default: 'NO' }} · template={{ template.name }}
         </p>
       {%- endif -%}
       {%- if zenith_policy != nil -%}
