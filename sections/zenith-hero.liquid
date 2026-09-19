@@ -31,8 +31,13 @@
   endif
 
   assign btn_style = s.button_style | default: 'gold'
+  # Empty link on a collection page → that collection (e.g. "Shop Skin Care Products" on the Skin page)
+  assign btn_link = s.button_link
+  if btn_link == blank and collection != blank
+    assign btn_link = collection.url
+  endif
   assign mobile_label = s.button_label_mobile | default: s.button_label
-  assign mobile_link = s.button_link_mobile | default: s.button_link
+  assign mobile_link = s.button_link_mobile | default: btn_link
   assign split_buttons = false
   if s.button_label_mobile != blank or s.button_link_mobile != blank
     assign split_buttons = true
@@ -192,7 +197,7 @@
                 {%- assign btn_class = 'zenith-hero__button' | append: desktop_hide -%}
                 {%- render 'zenith-button',
                   label: s.button_label,
-                  link: s.button_link,
+                  link: btn_link,
                   style: btn_style,
                   class: btn_class
                 -%}
@@ -281,7 +286,8 @@
     {
       "type": "url",
       "id": "button_link",
-      "label": "Button link"
+      "label": "Button link",
+      "info": "Empty on a collection page = that collection."
     },
     {
       "type": "product",

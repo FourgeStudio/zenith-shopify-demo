@@ -51,9 +51,13 @@
         assign filter_key = section.settings.filter_products | map: 'handle' | join: ','
       endif
     when 'page'
+      # Product page: that product. Collection page: the products of the collection being viewed.
       if product != blank
         assign filter_on = true
         assign filter_key = product.handle
+      elsif collection != blank
+        assign filter_on = true
+        assign filter_key = collection.products | map: 'handle' | join: ','
       endif
   endcase
   assign filter_key = ',' | append: filter_key | append: ','
@@ -242,10 +246,10 @@
         },
         {
           "value": "page",
-          "label": "The product on this page"
+          "label": "The product or collection on this page"
         }
       ],
-      "info": "Uses each video's Featured product. \"The product on this page\" is for product templates; on other pages all videos show. With no matching videos the section is hidden."
+      "info": "Uses each video's Featured product. \"The product or collection on this page\": on a product page that product, on a collection page the products in that collection; elsewhere all videos show. With no matching videos the section is hidden."
     },
     {
       "type": "product_list",

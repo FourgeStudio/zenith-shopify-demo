@@ -1,0 +1,619 @@
+{%- comment -%} zenith: [customers] anywhere in this section shows Theme settings → Zenith → Customer count {%- endcomment -%}
+{%- capture zenith_body -%}
+{{ 'zenith-routine.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign s = section.settings
+  assign step_count = section.blocks.size | at_least: 1
+  assign step_sizes = '(min-width: 750px) calc(' | append: s.content_max_width | append: 'px / ' | append: step_count | append: '), ' | append: s.image_width_mobile | append: 'px'
+
+  # "Used …" line: own text, or "Used " + the product names
+  assign used_text = s.used_text
+  if used_text == blank and s.products != blank
+    assign used_names = s.products | map: 'title' | join: ' and '
+    assign used_text = 'Used ' | append: used_names
+  endif
+-%}
+
+{%- capture extra -%}
+  --z-rt-ratio: {{ s.image_ratio }};
+  --z-rt-tsp: {{ s.step_title_spacing }}px;
+  --z-rt-title: {{ s.title_color }};
+  --z-rt-text-o: {{ s.text_opacity | divided_by: 100.0 }};
+  --z-rt-imgw-m: {{ s.image_width_mobile }}px;
+  --z-rt-usp: {{ s.used_spacing }}px;
+  --z-rt-usp-m: {{ s.used_spacing_mobile }}px;
+  --z-rt-uw: {{ s.used_width }}px;
+  --z-rt-ufs: {{ s.used_font_size }}px;
+  --z-rt-ufs-m: {{ s.used_font_size_mobile }}px;
+  --z-rt-bar: {{ s.bar_color }};
+  --z-rt-bar-fg: {{ s.bar_text_color }};
+  --z-rt-thumb: {{ s.thumb_size }}px;
+  --z-rt-thumb-m: {{ s.thumb_size_mobile }}px;
+  --z-rt-thumb-bg: {{ s.thumb_background }};
+  --z-rt-dsp: {{ s.divider_spacing }}px;
+  --z-rt-dsp-m: {{ s.divider_spacing_mobile }}px;
+  --z-rt-divider: {{ s.divider_color }};
+{%- endcapture -%}
+{%- render 'zenith-section-style', section: section, extra: extra -%}
+
+<section
+  id="Zenith-{{ section.id }}"
+  class="zenith-section zenith-rt zenith-rt--m-{{ s.heading_alignment_mobile }} color-{{ s.color_scheme }} gradient{% if section.index > 2 %} zenith-defer{% endif %}"
+>
+  <div class="page-width">
+    {%- render 'zenith-section-heading',
+      eyebrow: s.eyebrow,
+      heading: s.heading,
+      subheading: s.subheading,
+      alignment: s.heading_alignment,
+      uppercase: s.heading_uppercase,
+      class: 'zenith-rt__heading'
+    -%}
+
+    <ol class="zenith-rt__steps" role="list">
+      {%- for block in section.blocks -%}
+        <li class="zenith-rt__step" {{ block.shopify_attributes }}>
+          <div class="zenith-media zenith-rt__image">
+            {%- if block.settings.image != blank -%}
+              {%- assign step_alt = block.settings.image.alt | default: block.settings.title -%}
+              {{
+                block.settings.image
+                | image_url: width: 900
+                | image_tag: loading: 'lazy', widths: '200, 300, 450, 600, 900', sizes: step_sizes, alt: step_alt
+              }}
+            {%- else -%}
+              {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+          </div>
+          <div class="zenith-rt__body">
+            {%- if block.settings.title != blank -%}
+              <h3 class="zenith-rt__title">{{ block.settings.title | escape }}</h3>
+            {%- endif -%}
+            {%- if block.settings.text != blank -%}
+              <p class="zenith-rt__text">{{ block.settings.text | escape | newline_to_br }}</p>
+            {%- endif -%}
+          </div>
+        </li>
+      {%- endfor -%}
+    </ol>
+
+    {%- if used_text != blank or s.products != blank -%}
+      <div class="zenith-rt__used">
+        {%- if used_text != blank -%}
+          <p class="zenith-rt__used-text">{{ used_text | escape }}</p>
+        {%- endif -%}
+        {%- if s.products != blank -%}
+          <ul class="zenith-rt__used-products" role="list">
+            {%- for p in s.products -%}
+              <li>
+                <a href="{{ p.url }}" class="zenith-rt__thumb" title="{{ p.title | escape }}">
+                  {%- if p.featured_media -%}
+                    {{
+                      p.featured_media
+                      | image_url: width: 240
+                      | image_tag: loading: 'lazy', widths: '120, 240', sizes: '80px', alt: p.title
+                    }}
+                  {%- else -%}
+                    <span class="visually-hidden">{{ p.title | escape }}</span>
+                  {%- endif -%}
+                </a>
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- elsif request.design_mode -%}
+          <ul class="zenith-rt__used-products" role="list">
+            <li><span class="zenith-rt__thumb">{{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}</span></li>
+            <li><span class="zenith-rt__thumb">{{ 'product-2' | placeholder_svg_tag: 'placeholder-svg' }}</span></li>
+          </ul>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if s.show_divider -%}
+      <hr class="zenith-rt__divider">
+    {%- endif -%}
+  </div>
+</section>
+{%- endcapture -%}
+{{- zenith_body | replace: '[customers]', settings.customer_count -}}
+
+{% schema %}
+{
+  "name": "Zenith · Routine steps",
+  "tag": "div",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Day Routine"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Matte & Protected"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "<p>Get Complete Protection + Anti-Aging + Brightening In 3 Steps</p>"
+    },
+    {
+      "type": "product_list",
+      "id": "products",
+      "label": "Products used",
+      "info": "Shown as linked thumbnails in the bar under the steps.",
+      "limit": 4
+    },
+    {
+      "type": "text",
+      "id": "used_text",
+      "label": "Products used text",
+      "info": "Leave empty for \"Used\" + the product names.",
+      "default": "Used Zenith Anti-Aging Tallow Cleanser and Day Cream"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_divider",
+      "label": "Show divider line below",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Heading alignment",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "heading_max_width",
+      "label": "Heading max width",
+      "min": 300,
+      "max": 1400,
+      "step": 20,
+      "unit": "px",
+      "default": 760
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "label": "Steps width",
+      "min": 600,
+      "max": 1400,
+      "step": 20,
+      "unit": "px",
+      "default": 1020
+    },
+    {
+      "type": "range",
+      "id": "heading_spacing",
+      "label": "Space above steps",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Space between steps",
+      "min": 0,
+      "max": 64,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Photo shape",
+      "default": "0.75",
+      "options": [
+        { "value": "1", "label": "Square" },
+        { "value": "0.8", "label": "Portrait 4:5" },
+        { "value": "0.75", "label": "Portrait 3:4" },
+        { "value": "0.667", "label": "Portrait 2:3" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "step_title_spacing",
+      "label": "Space between photo and title",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "used_spacing",
+      "label": "Space above products used",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "used_width",
+      "label": "Products used bar width",
+      "min": 320,
+      "max": 1000,
+      "step": 20,
+      "unit": "px",
+      "default": 520
+    },
+    {
+      "type": "range",
+      "id": "divider_spacing",
+      "label": "Space above divider",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Step title",
+      "default": "#D6B356"
+    },
+    {
+      "type": "range",
+      "id": "text_opacity",
+      "label": "Step text opacity",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 70
+    },
+    {
+      "type": "color",
+      "id": "bar_color",
+      "label": "Products used bar",
+      "default": "#202020"
+    },
+    {
+      "type": "color",
+      "id": "bar_text_color",
+      "label": "Products used text",
+      "default": "#D6B356"
+    },
+    {
+      "type": "color",
+      "id": "thumb_background",
+      "label": "Product thumbnail background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "Divider",
+      "default": "#3E3E3E"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size",
+      "label": "Heading size",
+      "min": 16,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "checkbox",
+      "id": "heading_uppercase",
+      "label": "Uppercase heading",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_font_size",
+      "label": "Eyebrow size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "subheading_font_size",
+      "label": "Subheading size",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "label": "Step title size",
+      "min": 12,
+      "max": 36,
+      "step": 1,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "text_font_size",
+      "label": "Step text size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "used_font_size",
+      "label": "Products used text size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "thumb_size",
+      "label": "Product thumbnail size",
+      "min": 40,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment_mobile",
+      "label": "Heading alignment",
+      "default": "left",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size_mobile",
+      "label": "Heading size",
+      "min": 16,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "subheading_font_size_mobile",
+      "label": "Subheading size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "heading_spacing_mobile",
+      "label": "Space above steps",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "image_width_mobile",
+      "label": "Photo width",
+      "info": "Steps show the photo beside the text on phones.",
+      "min": 60,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "gap_mobile",
+      "label": "Space between steps",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "title_font_size_mobile",
+      "label": "Step title size",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "text_font_size_mobile",
+      "label": "Step text size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "used_font_size_mobile",
+      "label": "Products used text size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "thumb_size_mobile",
+      "label": "Product thumbnail size",
+      "min": 32,
+      "max": 96,
+      "step": 4,
+      "unit": "px",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "used_spacing_mobile",
+      "label": "Space above products used",
+      "min": 0,
+      "max": 64,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "divider_spacing_mobile",
+      "label": "Space above divider",
+      "min": 0,
+      "max": 64,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Top padding (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Bottom padding (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Photo"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Cleanse"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Describe this step in one or two sentences."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zenith · Routine steps",
+      "blocks": [
+        { "type": "step", "settings": { "title": "Cleanse" } },
+        { "type": "step", "settings": { "title": "Apply" } },
+        { "type": "step", "settings": { "title": "Protect" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

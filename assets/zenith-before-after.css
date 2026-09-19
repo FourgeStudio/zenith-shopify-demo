@@ -1,0 +1,149 @@
+/* Zenith · Before & after — per-instance values come from CSS vars on #Zenith-{{ section.id }}. */
+
+/* ---------- Heading + text ---------- */
+/* Design rhythm: 4px between eyebrow, heading and subheading on phones, 8px on desktop */
+.zenith-ba__heading.zenith-heading {
+  gap: var(--z-space-1);
+  margin-bottom: 0;
+}
+
+.zenith-ba__heading .zenith-heading__title {
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+
+.zenith-ba__text {
+  max-width: var(--z-cmw, 60rem);
+  margin-top: var(--z-ba-tsp, 24px);
+  font-size: var(--z-tfs-m, 1.5rem);
+  line-height: 1.7;
+  color: rgba(var(--color-foreground), 0.7);
+}
+
+.zenith-ba__text p {
+  margin: 0;
+}
+
+.zenith-ba__text--center {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+/* Mobile alignment (design: left on phones, centered on desktop) */
+@media screen and (max-width: 749px) {
+  .zenith-ba--m-left .zenith-heading,
+  .zenith-ba--m-left .zenith-ba__text {
+    align-items: flex-start;
+    text-align: left;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .zenith-ba--m-center .zenith-heading,
+  .zenith-ba--m-center .zenith-ba__text {
+    align-items: center;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* ---------- Cards ---------- */
+.zenith-ba__grid {
+  display: grid;
+  grid-template-columns: repeat(var(--z-ba-cols-m, 1), minmax(0, 1fr));
+  gap: var(--z-gap-m, 16px);
+  margin: var(--z-hsp-m, 24px) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.zenith-ba__card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: var(--z-ba-inset, 4px);
+  background: var(--z-ba-card, #202020);
+}
+
+.zenith-ba__pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--z-ba-inset, 4px);
+}
+
+.zenith-ba__photo {
+  margin: 0;
+  aspect-ratio: var(--z-ba-ratio-m, 1);
+}
+
+.zenith-ba__label {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.85em;
+  z-index: 2;
+  padding: 0 var(--z-space-2);
+  font-size: var(--z-ba-lfs-m, 1.2rem);
+  line-height: 1.3;
+  text-align: center;
+  color: var(--z-ba-label, #fff);
+}
+
+.zenith-ba__caption {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: var(--z-ba-capw, 26rem);
+  margin: 0 auto;
+  text-wrap: balance;
+  padding: var(--z-space-1) var(--z-space-4);
+  font-size: var(--z-ba-cfs-m, 1.4rem);
+  line-height: 1.5;
+  text-align: center;
+  color: rgba(var(--color-foreground), var(--z-ba-cap-o, 0.7));
+}
+
+.zenith-ba__footnote {
+  margin: var(--z-ba-fsp, 22px) 0 0;
+  font-size: var(--z-ba-ffs, 1.4rem);
+  line-height: 1.4;
+  text-align: center;
+  color: var(--z-ba-fcolor, #d6b356);
+}
+
+@media screen and (min-width: 750px) {
+  .zenith-ba__heading.zenith-heading {
+    gap: var(--z-space-2);
+  }
+
+  .zenith-ba__text {
+    font-size: var(--z-tfs, 1.6rem);
+  }
+
+  .zenith-ba__grid {
+    grid-template-columns: repeat(var(--z-ba-cols-t, 2), minmax(0, 1fr));
+    gap: var(--z-gap, 20px);
+    margin-top: var(--z-hsp, 32px);
+  }
+
+  .zenith-ba__photo {
+    aspect-ratio: var(--z-ba-ratio, 0.9);
+  }
+
+  .zenith-ba__label {
+    font-size: var(--z-ba-lfs, 1.2rem);
+  }
+
+  .zenith-ba__caption {
+    font-size: var(--z-ba-cfs, 1.4rem);
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .zenith-ba__grid {
+    grid-template-columns: repeat(var(--z-ba-cols, 3), minmax(0, 1fr));
+  }
+}
