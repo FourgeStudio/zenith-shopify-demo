@@ -60,6 +60,8 @@ Then fill `brief-template.md` → `<scratchpad>/BRIEF.md` (placeholders + "Measu
 | Marketplace links | `settings.social_lazada_link`, `settings.social_shopee_link` (Theme settings → Zenith); icons `lazada`, `shopee` |
 | Per-instance CSS vars | `snippets/zenith-section-style.liquid` map — add `setting_id:var:unit` for new sizes |
 | Product grid (collection products, badges, stars + score) | `sections/zenith-product-grid.liquid` — *Collection* empty = the collection being viewed; card = `snippets/zenith-product-card.liquid` (`rating_style`, `badge`, `badge_style: sale`); product tag `badge:Text` = per-product badge |
+| Before / after photo pairs | `sections/zenith-before-after.liquid` (blocks: before + after photo, labels, caption) |
+| Step-by-step routine + products used | `sections/zenith-routine.liquid` (blocks: photo, title, text; product list → linked thumbnails) |
 | Carousel | `<zenith-carousel>` + `snippets/zenith-carousel-controls.liquid` (design dots/arrows) |
 | Desktop/mobile image | `snippets/zenith-responsive-image.liquid` (`<picture>`: only the device's image downloads; pass `loading`/`fetchpriority` from the section's first-screen check) |
 | Heavy section low on the page | root class `{% if section.index > 2 %} zenith-defer{% endif %}` (content-visibility; rules in `dawn-customize` §8) |

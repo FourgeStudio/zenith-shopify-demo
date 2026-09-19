@@ -1,0 +1,617 @@
+{%- comment -%} zenith: [customers] anywhere in this section shows Theme settings → Zenith → Customer count {%- endcomment -%}
+{%- capture zenith_body -%}
+{{ 'zenith-before-after.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign s = section.settings
+  assign cols = s.columns_desktop
+  assign cols_t = cols | at_most: 2
+  assign cols_m = s.columns_mobile
+  assign pair_sizes = '(min-width: 990px) calc((100vw - 10rem) / ' | append: cols | append: ' / 2), (min-width: 750px) calc((100vw - 10rem) / ' | append: cols_t | append: ' / 2), calc((100vw - 5rem) / ' | append: cols_m | append: ' / 2)'
+-%}
+
+{%- capture extra -%}
+  --z-ba-cols: {{ cols }};
+  --z-ba-cols-t: {{ cols_t }};
+  --z-ba-cols-m: {{ cols_m }};
+  --z-ba-ratio: {{ s.image_ratio }};
+  --z-ba-ratio-m: {{ s.image_ratio_mobile }};
+  --z-ba-inset: {{ s.card_inset }}px;
+  --z-ba-card: {{ s.card_color }};
+  --z-ba-label: {{ s.label_color }};
+  --z-ba-lfs: {{ s.label_font_size }}px;
+  --z-ba-lfs-m: {{ s.label_font_size_mobile }}px;
+  --z-ba-cfs: {{ s.caption_font_size }}px;
+  --z-ba-cfs-m: {{ s.caption_font_size_mobile }}px;
+  --z-ba-cap-o: {{ s.caption_opacity | divided_by: 100.0 }};
+  --z-ba-ffs: {{ s.footnote_font_size }}px;
+  --z-ba-fcolor: {{ s.footnote_color }};
+  --z-ba-fsp: {{ s.footnote_spacing }}px;
+  --z-ba-tsp: {{ s.text_spacing }}px;
+  --z-ba-capw: {{ s.caption_max_width }}px;
+  {%- render 'zenith-overlay-vars', settings: s -%}
+{%- endcapture -%}
+{%- render 'zenith-section-style', section: section, extra: extra -%}
+
+<section
+  id="Zenith-{{ section.id }}"
+  class="zenith-section zenith-ba zenith-ba--m-{{ s.heading_alignment_mobile }} color-{{ s.color_scheme }} gradient{% if section.index > 2 %} zenith-defer{% endif %}"
+>
+  <div class="page-width">
+    {%- render 'zenith-section-heading',
+      eyebrow: s.eyebrow,
+      heading: s.heading,
+      subheading: s.subheading,
+      alignment: s.heading_alignment,
+      uppercase: s.heading_uppercase,
+      class: 'zenith-ba__heading'
+    -%}
+    {%- if s.text != blank -%}
+      <div class="zenith-ba__text zenith-ba__text--{{ s.heading_alignment }}">{{ s.text }}</div>
+    {%- endif -%}
+
+    <ul class="zenith-ba__grid" role="list">
+      {%- for block in section.blocks -%}
+        <li class="zenith-ba__card" {{ block.shopify_attributes }}>
+          <div class="zenith-ba__pair">
+            {%- for side in (1..2) -%}
+              {%- liquid
+                if side == 1
+                  assign side_image = block.settings.before_image
+                  assign side_label = block.settings.before_label
+                else
+                  assign side_image = block.settings.after_image
+                  assign side_label = block.settings.after_label
+                endif
+                assign side_alt = side_image.alt | default: side_label
+              -%}
+              <figure class="zenith-media zenith-ba__photo">
+                {%- if side_image != blank -%}
+                  {{
+                    side_image
+                    | image_url: width: 800
+                    | image_tag: loading: 'lazy', widths: '240, 360, 480, 640, 800', sizes: pair_sizes, alt: side_alt
+                  }}
+                {%- else -%}
+                  {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                {%- endif -%}
+                {%- render 'zenith-overlay', style: s.overlay_style -%}
+                {%- if side_label != blank -%}
+                  <figcaption class="zenith-ba__label">{{ side_label | escape }}</figcaption>
+                {%- endif -%}
+              </figure>
+            {%- endfor -%}
+          </div>
+          {%- if block.settings.caption != blank -%}
+            <p class="zenith-ba__caption">{{ block.settings.caption | escape | newline_to_br }}</p>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+
+    {%- if s.footnote != blank -%}
+      <p class="zenith-ba__footnote">{{ s.footnote | escape }}</p>
+    {%- endif -%}
+  </div>
+</section>
+{%- endcapture -%}
+{{- zenith_body | replace: '[customers]', settings.customer_count -}}
+
+{% schema %}
+{
+  "name": "Zenith · Before & after",
+  "tag": "div",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Join [customers] Filipino men"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The difference"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "<p>See the difference a proper regimen makes.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>From clearer skin to thicker hair, every transformation here comes from verified Zenith customers putting in the consistent work.</p>"
+    },
+    {
+      "type": "text",
+      "id": "footnote",
+      "label": "Footnote",
+      "default": "Individual results may vary.*"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Heading alignment",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Cards per row on desktop",
+      "info": "Tablet shows 2.",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "heading_max_width",
+      "label": "Heading max width",
+      "min": 300,
+      "max": 1400,
+      "step": 20,
+      "unit": "px",
+      "default": 760
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "label": "Text max width",
+      "min": 300,
+      "max": 1200,
+      "step": 20,
+      "unit": "px",
+      "default": 560
+    },
+    {
+      "type": "range",
+      "id": "text_spacing",
+      "label": "Space above text",
+      "min": 0,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "heading_spacing",
+      "label": "Space above cards",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Space between cards",
+      "min": 0,
+      "max": 64,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Photo shape",
+      "default": "0.9",
+      "options": [
+        { "value": "1", "label": "Square" },
+        { "value": "0.9", "label": "Slightly tall 9:10" },
+        { "value": "0.8", "label": "Portrait 4:5" },
+        { "value": "0.75", "label": "Portrait 3:4" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "caption_max_width",
+      "label": "Caption max width",
+      "min": 160,
+      "max": 600,
+      "step": 10,
+      "unit": "px",
+      "default": 300
+    },
+    {
+      "type": "range",
+      "id": "card_inset",
+      "label": "Space around the photos",
+      "min": 0,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "footnote_spacing",
+      "label": "Space above footnote",
+      "min": 0,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color",
+      "id": "card_color",
+      "label": "Card background",
+      "default": "#202020"
+    },
+    {
+      "type": "range",
+      "id": "caption_opacity",
+      "label": "Caption text opacity",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 70
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Before / after label",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "footnote_color",
+      "label": "Footnote",
+      "default": "#D6B356"
+    },
+    {
+      "type": "select",
+      "id": "overlay_style",
+      "label": "Photo shading",
+      "default": "bottom",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "bottom", "label": "Fade from the bottom" },
+        { "value": "solid", "label": "Solid" }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Shading color",
+      "default": "#294850"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Shading opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "overlay_coverage",
+      "label": "Shading height",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size",
+      "label": "Heading size",
+      "min": 16,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "checkbox",
+      "id": "heading_uppercase",
+      "label": "Uppercase heading",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_font_size",
+      "label": "Eyebrow size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "subheading_font_size",
+      "label": "Subheading size",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "text_font_size",
+      "label": "Text size",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "label_font_size",
+      "label": "Before / after label size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "caption_font_size",
+      "label": "Caption size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "footnote_font_size",
+      "label": "Footnote size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment_mobile",
+      "label": "Heading alignment",
+      "default": "left",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Cards per row",
+      "default": "1",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "image_ratio_mobile",
+      "label": "Photo shape",
+      "default": "1",
+      "options": [
+        { "value": "1", "label": "Square" },
+        { "value": "0.9", "label": "Slightly tall 9:10" },
+        { "value": "0.8", "label": "Portrait 4:5" },
+        { "value": "0.75", "label": "Portrait 3:4" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size_mobile",
+      "label": "Heading size",
+      "min": 16,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "subheading_font_size_mobile",
+      "label": "Subheading size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "text_font_size_mobile",
+      "label": "Text size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "label_font_size_mobile",
+      "label": "Before / after label size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "caption_font_size_mobile",
+      "label": "Caption size",
+      "min": 12,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "heading_spacing_mobile",
+      "label": "Space above cards",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "gap_mobile",
+      "label": "Space between cards",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Top padding (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Bottom padding (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 44
+    }
+  ],
+  "blocks": [
+    {
+      "type": "comparison",
+      "name": "Before & after",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "image_picker",
+          "id": "before_image",
+          "label": "Before photo"
+        },
+        {
+          "type": "text",
+          "id": "before_label",
+          "label": "Before label",
+          "default": "Before"
+        },
+        {
+          "type": "image_picker",
+          "id": "after_image",
+          "label": "After photo"
+        },
+        {
+          "type": "text",
+          "id": "after_label",
+          "label": "After label",
+          "default": "After 4 Weeks"
+        },
+        {
+          "type": "textarea",
+          "id": "caption",
+          "label": "Caption",
+          "default": "Visible improvement after 4 weeks of daily use."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zenith · Before & after",
+      "blocks": [
+        { "type": "comparison" },
+        { "type": "comparison" },
+        { "type": "comparison" }
+      ]
+    }
+  ]
+}
+{% endschema %}
