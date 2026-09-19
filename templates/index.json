@@ -616,6 +616,94 @@
             "author": "",
             "product": "zenith-advanced-hair-density-spray"
           }
+        },
+        "video_zyQVM4": {
+          "type": "video",
+          "settings": {
+            "youtube_url": "https://www.youtube.com/shorts/RVWc0WoOPxI",
+            "quote": "Anti-aging cream is all in one solution. Barrier protection, lightweight, and it absorbs fast.",
+            "title": "",
+            "link": "",
+            "author": "",
+            "product": "zenith-advanced-hair-density-shampoo"
+          }
+        },
+        "video_7tJ8A4": {
+          "type": "video",
+          "settings": {
+            "youtube_url": "https://www.youtube.com/shorts/pLuN_PcAwO0",
+            "quote": "Anti-aging cream is all in one solution. Barrier protection, lightweight, and it absorbs fast.",
+            "title": "",
+            "link": "",
+            "author": "",
+            "product": "zenith-advanced-hair-density-shampoo"
+          }
+        },
+        "video_QMkyyt": {
+          "type": "video",
+          "settings": {
+            "youtube_url": "https://www.youtube.com/shorts/2C2RuAlr3Bc?feature=share",
+            "quote": "Anti-aging cream is all in one solution. Barrier protection, lightweight, and it absorbs fast.",
+            "title": "",
+            "link": "",
+            "author": "",
+            "product": "zenith-anti-aging-tallow-cleanser"
+          }
+        },
+        "video_rnfqqT": {
+          "type": "video",
+          "settings": {
+            "youtube_url": "https://www.youtube.com/shorts/X1M3onIG3bM",
+            "quote": "Anti-aging cream is all in one solution. Barrier protection, lightweight, and it absorbs fast.",
+            "title": "",
+            "link": "",
+            "author": "",
+            "product": "zenith-anti-aging-tallow-cleanser"
+          }
+        },
+        "video_f6wNJ9": {
+          "type": "video",
+          "settings": {
+            "youtube_url": "https://www.youtube.com/shorts/bh4wRbiyEo0?feature=share",
+            "quote": "Anti-aging cream is all in one solution. Barrier protection, lightweight, and it absorbs fast.",
+            "title": "",
+            "link": "",
+            "author": "",
+            "product": "zenith-anti-aging-tallow-cleanser"
+          }
+        },
+        "video_mbxWna": {
+          "type": "video",
+          "settings": {
+            "youtube_url": "https://www.youtube.com/shorts/aYs8b7fmU_U?feature=share",
+            "quote": "Anti-aging cream is all in one solution. Barrier protection, lightweight, and it absorbs fast.",
+            "title": "",
+            "link": "",
+            "author": "",
+            "product": "zenith-anti-aging-tallow-day-cream-spf30"
+          }
+        },
+        "video_fxxKkG": {
+          "type": "video",
+          "settings": {
+            "youtube_url": "https://www.youtube.com/shorts/TLBO7XM4nIo?feature=share",
+            "quote": "Anti-aging cream is all in one solution. Barrier protection, lightweight, and it absorbs fast.",
+            "title": "",
+            "link": "",
+            "author": "",
+            "product": "zenith-anti-aging-tallow-day-cream-spf30"
+          }
+        },
+        "video_Fa6WRV": {
+          "type": "video",
+          "settings": {
+            "youtube_url": "https://www.youtube.com/shorts/Iqw_r07x27E?feature=share",
+            "quote": "Anti-aging cream is all in one solution. Barrier protection, lightweight, and it absorbs fast.",
+            "title": "",
+            "link": "",
+            "author": "",
+            "product": "zenith-anti-aging-tallow-day-cream-spf30"
+          }
         }
       },
       "block_order": [
@@ -624,7 +712,15 @@
         "video_3",
         "video_gBwH3B",
         "video_4",
-        "video_5"
+        "video_5",
+        "video_zyQVM4",
+        "video_7tJ8A4",
+        "video_QMkyyt",
+        "video_rnfqqT",
+        "video_f6wNJ9",
+        "video_mbxWna",
+        "video_fxxKkG",
+        "video_Fa6WRV"
       ],
       "settings": {
         "eyebrow": "",
