@@ -353,13 +353,14 @@
           endfor
         endif
       -%}
-      {%- if request.path contains '/policies/' or request.page_type == 'policy' -%}
-        {%- comment -%} zenith: TEMP diagnostic for the policy layout (draft theme) — REMOVE before publishing {%- endcomment -%}
-        <p style="margin:0;padding:6px 12px;background:#294850;color:#fff;font:12px/1.4 monospace;word-break:break-all;">
-          zenith-policy v3 · page_type={{ request.page_type }} · path={{ request.path }} · handle={{ zenith_policy_handle }} · policies={{ shop.policies.size }}
-          {%- for p in shop.policies %} [{{ p.title }} → {{ p.url }} · body {{ p.body | size }}]{% endfor %} · matched={{ zenith_policy.title | default: 'NO' }} · template={{ template.name }}
-        </p>
-      {%- endif -%}
+      {%- liquid
+        # Shopify rejects a layout whose {{ content_for_layout }} sits inside an if/else ("Missing content_for_layout"),
+        # so it is always output below; on a Zenith-rendered policy page it is sliced to nothing instead.
+        assign zenith_layout_length = 100000000
+        if zenith_policy != nil
+          assign zenith_layout_length = 0
+        endif
+      -%}
       {%- if zenith_policy != nil -%}
         {%- capture zenith_policy_vars -%}
           --z-doc-accent: {{ settings.policy_heading_color }};
@@ -383,10 +384,9 @@
           toc_heading: settings.policy_toc_heading,
           vars: zenith_policy_vars
         -%}
-      {%- else -%}
-        {%- comment -%} zenith: [customers] in any page content → Theme settings → Zenith → Customer count {%- endcomment -%}
-        {{ content_for_layout | replace: '[customers]', settings.customer_count }}
       {%- endif -%}
+      {%- comment -%} zenith: [customers] in any page content → Theme settings → Zenith → Customer count {%- endcomment -%}
+      {{ content_for_layout | slice: 0, zenith_layout_length | replace: '[customers]', settings.customer_count }}
     </main>
 
     {% sections 'footer-group' %}
