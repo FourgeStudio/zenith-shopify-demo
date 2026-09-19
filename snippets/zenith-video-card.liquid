@@ -61,15 +61,20 @@
               alt: ''
           }}
         {%- else -%}
+          {%- liquid
+            assign yt_w = 480
+            assign yt_h = 360
+            if yt_thumb == 'oar2'
+              assign yt_w = 1080
+              assign yt_h = 1920
+            endif
+          -%}
           <img
             src="https://i.ytimg.com/vi/{{ yt_id }}/{{ yt_thumb }}.jpg"
             class="zenith-video-card__poster"
             alt=""
-            {% if yt_thumb == 'oar2' %}
-              width="1080" height="1920"
-            {% else %}
-              width="480" height="360"
-            {% endif %}
+            width="{{ yt_w }}"
+            height="{{ yt_h }}"
             loading="lazy"
           >
         {%- endif -%}
