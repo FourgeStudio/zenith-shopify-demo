@@ -60,6 +60,8 @@ Then fill `brief-template.md` → `<scratchpad>/BRIEF.md` (placeholders + "Measu
 | Marketplace links | `settings.social_lazada_link`, `settings.social_shopee_link` (Theme settings → Zenith); icons `lazada`, `shopee` |
 | Per-instance CSS vars | `snippets/zenith-section-style.liquid` map — add `setting_id:var:unit` for new sizes |
 | Carousel | `<zenith-carousel>` + `snippets/zenith-carousel-controls.liquid` (design dots/arrows) |
+| Desktop/mobile image | `snippets/zenith-responsive-image.liquid` (`<picture>`: only the device's image downloads; pass `loading`/`fetchpriority` from the section's first-screen check) |
+| Heavy section low on the page | root class `{% if section.index > 2 %} zenith-defer{% endif %}` (content-visibility; rules in `dawn-customize` §8) |
 | Countdown (d/h/m/s) | `snippets/zenith-countdown.liquid` + `zenith-countdown.css/js` |
 | Background video (MP4 upload / YouTube incl. Shorts) | `snippets/zenith-bg-video.liquid` inside a `.zenith-media` box above the cover image + load `zenith-bg-video.js` only when a block uses it (pattern: `zenith-category-cards` `media_type`) |
 | Gold confetti | `snippets/zenith-confetti.liquid` + `assets/zenith-confetti.png`; settings `show_confetti`, `confetti_image`, `confetti_align`, `confetti_width[_mobile]`, `confetti_opacity` |

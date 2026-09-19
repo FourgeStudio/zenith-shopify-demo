@@ -94,10 +94,15 @@ Rules:
 - Never bulk-edit `base.css`. Mark Dawn-file edits with `zenith: <reason>` comment.
 
 ## 8. Liquid / perf / a11y
-- Images: `image_url: width:` + `image_tag` with `widths`, `sizes`, `loading: 'lazy'`; first hero → `fetchpriority: 'high'`, no lazy.
+- Images: `image_url: width:` + `image_tag` with `widths`, `sizes`, `loading: 'lazy'`. Only a section that can be the first thing on screen (`section.index <= 2`, and not hidden by the promo switch) gets `loading: 'eager'` + `fetchpriority: 'high'` — see zenith-hero `img_loading` / `img_priority`. Never `high` on more than the one main image.
+- Desktop + mobile image pair → `snippets/zenith-responsive-image.liquid` (`<picture>`, the device downloads only its image). Never two eager `<img>` hidden with `zenith-hide-mobile` / `-desktop` (a hidden eager image still downloads; a hidden *lazy* one doesn't).
+- Video: never load a player at page load. Uploaded video in a card → `video_tag` with `preload: 'none'`, `poster` attribute stripped, lazy `<img>` cover (see `zenith-video-card`). YouTube in a card → thumbnail + play button, iframe created on tap (`zenith-video.js`). Looping background → `snippets/zenith-bg-video.liquid` (mounts near the viewport, pauses off screen, off with reduced motion). Prefer uploaded MP4 over YouTube for background loops (a YouTube player is ~1 MB of script per card).
+- Heavy sections lower on the page (marquees, carousels, long grids) → add `{% if section.index > 2 %} zenith-defer{% endif %}` to the root class (`content-visibility: auto` in zenith-base.css; optional `--z-defer-h` height estimate).
+- Marquees: repeat only as many copies as needed to fill a wide screen (see results marquee `passes`); pause on hover/focus; stop with `prefers-reduced-motion`.
+- JS: vanilla custom element per feature, `defer`, `customElements.get` guard, work only when visible (IntersectionObserver), no libraries/jQuery. Third-party origins: connect on intent (hover/touch), not at load.
 - Reuse Dawn snippets: `card-product`, `price`, `loading-spinner`, `icon-*`.
 - One `h1` per page (heading tag setting), `visually-hidden` labels, visible focus, `prefers-reduced-motion`.
-- Fonts: `font-display: swap`, preload only the heading woff2.
+- Fonts: `font-display: swap`, self-hosted woff2, preload only the heading woff2.
 
 ## 9. Done checklist
 - On `staging`, pulled before starting (§1).
