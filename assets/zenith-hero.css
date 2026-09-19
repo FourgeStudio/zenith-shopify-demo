@@ -94,6 +94,29 @@
   }
 }
 
+/* Big display text above the heading (404). The gradient spans the digits:
+   the line box is trimmed to the figure height so background-clip paints top → bottom of the glyphs. */
+.zenith-hero__display {
+  margin: 0 0 var(--z-hero-dsp-m, var(--z-space-3));
+  padding: 0.04em 0;
+  font-family: var(--font-heading-family);
+  font-size: var(--z-hero-dfs-m, 15.6rem);
+  line-height: 0.72;
+  letter-spacing: 0;
+  color: var(--z-hero-d1, #e8bc5b);
+  background: linear-gradient(180deg, var(--z-hero-d1, #e8bc5b), var(--z-hero-d2, #c6950f));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@media screen and (min-width: 750px) {
+  .zenith-hero__display {
+    margin-bottom: var(--z-hero-dsp, var(--z-space-4));
+    font-size: var(--z-hero-dfs, 28.8rem);
+  }
+}
+
 /* Sale extras */
 .zenith-hero__promo {
   display: flex;

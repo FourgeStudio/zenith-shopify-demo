@@ -128,6 +128,7 @@ Design slips handled: Hair product grid reuses the Skin copy ("Face & Skin Produ
 ## Other pages (`design/other-pages/`, full pages only)
 - `Blog Index • Desktop.png` + `Blog Post Page • Mobile.png` (= mobile blog index) → `templates/blog.json` (Zenith · Blog + Zenith · Newsletter).
 - `Blog Post • Desktop.png` + `Blog Post Page • Mobile (1).png` (= mobile article) → `templates/article.json` (Zenith · Article + Zenith · More articles). Mobile "More Articles" cards say "Add to Cart" — design slip, "Read More" used.
+- `404 • Desktop/Mobile.png` → `templates/404.json` (Zenith · Hero: no image, *Big display text* "404" with gold gradient).
 - `Thank You • Desktop/Mobile.png` → `templates/page.thank-you.json`; `Thank You Newsletter • Desktop/Mobile.png` → `templates/page.thank-you-newsletter.json` (both = Zenith · Hero: no image, confetti, icon option).
 
 ## Adding a new page

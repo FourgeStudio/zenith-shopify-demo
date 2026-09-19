@@ -102,6 +102,14 @@
   --z-hero-icon-sp: {{ s.icon_spacing }}px;
   --z-hero-icon-sp-m: {{ s.icon_spacing_mobile }}px;
   --z-hero-icon-color: {{ s.icon_color }};
+  {%- if s.display_text != blank -%}
+    --z-hero-dfs: {{ s.display_font_size }}px;
+    --z-hero-dfs-m: {{ s.display_font_size_mobile }}px;
+    --z-hero-dsp: {{ s.display_spacing }}px;
+    --z-hero-dsp-m: {{ s.display_spacing_mobile }}px;
+    --z-hero-d1: {{ s.display_color }};
+    --z-hero-d2: {{ s.display_color_2 }};
+  {%- endif -%}
   {%- render 'zenith-overlay-vars', settings: s -%}
 {%- endcapture -%}
 {%- render 'zenith-section-style', section: section, extra: extra -%}
@@ -138,6 +146,9 @@
           </div>
         {%- elsif s.icon != blank and s.icon != 'none' -%}
           <div class="zenith-hero__icon">{%- render 'zenith-icon', icon: s.icon -%}</div>
+        {%- endif -%}
+        {%- if s.display_text != blank -%}
+          <p class="zenith-hero__display">{{ s.display_text | escape }}</p>
         {%- endif -%}
         {%- if has_promo -%}
           <div class="zenith-hero__promo">
@@ -367,6 +378,12 @@
       "info": "Replaces the icon above."
     },
     {
+      "type": "text",
+      "id": "display_text",
+      "label": "Big display text",
+      "info": "Large gold number or word above the heading, e.g. 404."
+    },
+    {
       "type": "checkbox",
       "id": "show_confetti",
       "label": "Show gold confetti",
@@ -582,6 +599,16 @@
     },
     {
       "type": "range",
+      "id": "display_spacing",
+      "label": "Space below big display text",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
       "id": "content_gap",
       "label": "Space above button",
       "min": 0,
@@ -770,6 +797,19 @@
       "default": "#D6B356"
     },
     {
+      "type": "color",
+      "id": "display_color",
+      "label": "Big display text (top)",
+      "default": "#E8BC5B"
+    },
+    {
+      "type": "color",
+      "id": "display_color_2",
+      "label": "Big display text (bottom)",
+      "info": "Same as top = solid colour.",
+      "default": "#C6950F"
+    },
+    {
       "type": "header",
       "content": "Typography"
     },
@@ -782,6 +822,16 @@
       "step": 4,
       "unit": "px",
       "default": 104
+    },
+    {
+      "type": "range",
+      "id": "display_font_size",
+      "label": "Big display text size",
+      "min": 60,
+      "max": 400,
+      "step": 4,
+      "unit": "px",
+      "default": 288
     },
     {
       "type": "select",
@@ -1118,6 +1168,26 @@
       "step": 4,
       "unit": "px",
       "default": 80
+    },
+    {
+      "type": "range",
+      "id": "display_font_size_mobile",
+      "label": "Big display text size",
+      "min": 40,
+      "max": 240,
+      "step": 4,
+      "unit": "px",
+      "default": 156
+    },
+    {
+      "type": "range",
+      "id": "display_spacing_mobile",
+      "label": "Space below big display text",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 12
     },
     {
       "type": "range",

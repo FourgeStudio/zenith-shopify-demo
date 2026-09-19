@@ -65,6 +65,7 @@ _Last updated: 2026-09-20. Keep this file current at the end of each work sessio
 - **Blog** (`templates/blog.json`): **Zenith · Blog** (`zenith-main-blog`: latest article large + next 3 listed, older ones in a 3-col grid, pagination; mobile stacked with "More Articles") + **Zenith · Newsletter** (`zenith-newsletter` + shared `snippets/zenith-newsletter-form.liquid`: customer form tagged `newsletter`, optional *Page to open after signing up*).
 - **Article** (`templates/article.json`): **Zenith · Article** (`zenith-main-article`, blocks: title, date, image, content, divider, newsletter, share (copy link / LinkedIn / X / Facebook), comments when enabled) + **Zenith · More articles** (`zenith-article-cards`, excludes the current one). Card markup `snippets/zenith-article-card.liquid`. In article text: a fully bold paragraph = lead paragraph (heading font); an italic paragraph right after an image = caption.
 - **Thank-you pages**: `templates/page.thank-you.json` (order: "Welcome To The Zenith Tribe") and `page.thank-you-newsletter.json` ("Thanks For Subscribing" + envelope icon) = Zenith · Hero with new options: *Show background image* off, *Icon above heading* (or custom icon image), *Text max width*, *Space between text paragraphs*, *Text opacity*, mobile *Content max width*. Checkout's own thank-you page can't use theme templates (Shopify checkout) — the order page is for a COD form app redirect / manual link.
+- **404** (`templates/404.json`, replaces Dawn main-404): same hero, new *Big display text* ("404", gold gradient top → bottom colour, own desktop/mobile size + spacing). Works automatically for every missing URL — nothing to assign.
 - FAQ answers 2–5 on home, Shop All, Skin, Hair now use the real copy from the new mobile designs (were placeholders). Certificates' FAQ answer 3 differs slightly (its design's copy).
 - Client:
   - Create pages → assign templates (on publish day, like About): "Verify Zenith Products" → **verify**, "Certificates" → **certificates**, "Thank You" → **thank-you**, "Thanks for Subscribing" → **thank-you-newsletter**. Then set the newsletter sections' *Page to open after signing up* (blog Newsletter section + article Newsletter block) to the thanks page, and point the COD/order form app's success redirect to the Thank You page.
@@ -92,7 +93,7 @@ _Last updated: 2026-09-20. Keep this file current at the end of each work sessio
 
 ### 3. Not started
 - [ ] Product page template (design pending) → export to `design/product/`.
-- [ ] Default collection template (other collections), cart, search, 404 pages. (Contact + About done 2026-09-18, Shop All 2026-09-19, Skin + Hair + Verify + Certificates + Blog/Article + Thank-you pages 2026-09-20.)
+- [ ] Default collection template (other collections), cart, search pages (404 done 2026-09-20). (Contact + About done 2026-09-18, Shop All 2026-09-19, Skin + Hair + Verify + Certificates + Blog/Article + Thank-you pages 2026-09-20.)
 - [ ] Analytics/pixels, SEO metafields, shipping/policy pages.
 - [ ] Performance + a11y pass (Lighthouse on preview), then publish `main` theme.
 
