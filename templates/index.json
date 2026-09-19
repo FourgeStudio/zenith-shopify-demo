@@ -723,11 +723,17 @@
         "video_Fa6WRV"
       ],
       "settings": {
+        "content_source": "global",
+        "product_filter": "all",
+        "filter_products": [
+          "zenith-advanced-hair-density-shampoo"
+        ],
         "eyebrow": "",
         "heading": "Clinically Proven. The Complete Regimen.",
         "heading_mobile": "A Complete Routine,\nBuilt for Men.",
         "subheading": "<p>Hear from the men who use Zenith every day.</p>",
         "play_label": "Play video",
+        "center_when_fits": true,
         "heading_alignment": "center",
         "slides_desktop": 4,
         "show_peek": true,
@@ -781,8 +787,7 @@
         "padding_top": 32,
         "padding_bottom": 32,
         "padding_top_mobile": 20,
-        "padding_bottom_mobile": 20,
-        "content_source": "global"
+        "padding_bottom_mobile": 20
       }
     },
     "guarantee": {
