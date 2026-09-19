@@ -961,7 +961,7 @@
         "card_1": {
           "type": "card",
           "settings": {
-            "collection": "",
+            "collection": "skin",
             "media_type": "featured",
             "youtube_url": "",
             "title": "The tallow cream that repairs and restores your skin",
@@ -975,7 +975,7 @@
         "card_2": {
           "type": "card",
           "settings": {
-            "collection": "",
+            "collection": "hair",
             "media_type": "featured",
             "youtube_url": "",
             "title": "Hair density without the itch or the dryness on your scalp",
@@ -995,7 +995,7 @@
             "title": "Full-body care for the hard-working man",
             "button_label": "Add to Cart",
             "link": "",
-            "product": "",
+            "product": "zenith-anti-aging-tallow-day-cream-spf30",
             "button_full_width": true,
             "hide_on_mobile": true
           }
@@ -1009,7 +1009,7 @@
             "title": "Personal care to complete your routine",
             "button_label": "Add to Cart",
             "link": "",
-            "product": "",
+            "product": "zenith-advanced-hair-density-shampoo",
             "button_full_width": true,
             "hide_on_mobile": true
           }
