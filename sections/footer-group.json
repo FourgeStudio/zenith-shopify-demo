@@ -19,7 +19,7 @@
           "settings": {
             "heading": "",
             "menu": "footer",
-            "menu_mobile": "footer-mobile",
+            "menu_mobile": "",
             "mobile_full_width": true
           }
         },
@@ -27,7 +27,7 @@
           "type": "link_list",
           "settings": {
             "heading": "",
-            "menu": "footer-products",
+            "menu": "",
             "menu_mobile": "",
             "mobile_full_width": false
           }
@@ -36,7 +36,7 @@
           "type": "link_list",
           "settings": {
             "heading": "",
-            "menu": "footer-policies",
+            "menu": "",
             "menu_mobile": "",
             "mobile_full_width": false
           }
@@ -54,7 +54,7 @@
         "seal_link": "",
         "bottom_text": "TryZenith PH",
         "copyright_text": "© [year] Amare Group Inc. All rights reserved.",
-        "show_policy": false,
+        "show_policy": true,
         "show_powered_by": false,
         "newsletter_enable": false,
         "newsletter_heading": "Subscribe to our emails",
@@ -90,8 +90,8 @@
         "seal_style_mobile": "original",
         "top_line_gradient_mobile": "linear-gradient(90deg, rgba(234, 190, 95, 1), rgba(197, 147, 0, 1) 100%)",
         "divider_color_mobile": "#3c3c3c",
-        "caption_font_size_mobile": 12,
         "text_font_size_mobile": 14,
+        "caption_font_size_mobile": 12,
         "margin_top": 0,
         "padding_top": 26,
         "padding_bottom": 20,
