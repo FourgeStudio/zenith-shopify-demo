@@ -152,3 +152,209 @@
     font-size: var(--zab-fs, 1.4rem);
   }
 }
+
+/* ---------- Announcement messages: one row / marquee (zenith-announcements.js) ----------
+   Row: all messages side by side with separators. When the row doesn't fit (.is-overflowing):
+   --fit-rotate = one message at a time (fade), --fit-marquee = scroll, --fit-wrap = more lines (CSS only). */
+.zenith-ann {
+  display: block;
+  grid-area: announcements;
+  min-width: 0;
+  font-family: var(--zab-font, var(--font-body-family));
+  font-weight: var(--zab-weight, 500);
+  font-size: var(--zab-fs-m, 1.4rem);
+  line-height: 1.2;
+  letter-spacing: 0;
+  text-transform: var(--zab-transform, none);
+  color: rgb(var(--color-foreground));
+  --zab-g: var(--zab-gap-m, 1.6rem);
+}
+
+.zenith-ann__viewport {
+  display: flex;
+  align-items: center;
+  min-height: var(--zab-h-m, 3.3rem);
+  padding: var(--z-space-1) 0;
+  overflow: hidden;
+  container-type: inline-size;
+}
+
+.zenith-ann__track {
+  width: 100%;
+}
+
+.zenith-ann__list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--zab-g);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.zenith-ann__list--copy {
+  display: none;
+}
+
+.zenith-ann__item {
+  display: flex;
+  align-items: center;
+  gap: var(--zab-g);
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.zenith-ann__link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.zenith-ann__link:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.zenith-ann__link:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+/* Separators sit before every message but the first (marquee: before every message, so the loop joins up) */
+.zenith-ann--sep-dot .zenith-ann__item + .zenith-ann__item::before {
+  content: '•';
+  opacity: 0.6;
+}
+
+.zenith-ann--sep-line .zenith-ann__item + .zenith-ann__item::before {
+  content: '';
+  width: 1px;
+  height: 1em;
+  background: currentColor;
+  opacity: 0.5;
+}
+
+/* Wrap: one message per line, no separators */
+.zenith-ann--fit-wrap.is-overflowing .zenith-ann__list {
+  flex-direction: column;
+  gap: var(--z-space-1);
+}
+
+.zenith-ann--fit-wrap.is-overflowing .zenith-ann__item {
+  flex-shrink: 1;
+  white-space: normal;
+  text-align: center;
+}
+
+.zenith-ann--fit-wrap.is-overflowing .zenith-ann__item::before {
+  display: none;
+}
+
+/* One at a time: messages stacked, the active one fades in */
+.zenith-ann--fit-rotate.is-overflowing .zenith-ann__list {
+  display: grid;
+}
+
+.zenith-ann--fit-rotate.is-overflowing .zenith-ann__item {
+  grid-area: 1 / 1;
+  justify-content: center;
+  white-space: normal;
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s;
+}
+
+.zenith-ann--fit-rotate.is-overflowing .zenith-ann__item.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.zenith-ann--fit-rotate.is-overflowing .zenith-ann__item::before {
+  display: none;
+}
+
+/* Marquee (always, or when the row doesn't fit): copies of the list scroll left by one list width.
+   The script adds copies until the bar is full and sets --zab-shift / --zab-duration (px/s speed);
+   without it, two copies scroll by -50%. */
+.zenith-ann--marquee .zenith-ann__track,
+.zenith-ann--fit-marquee.is-overflowing .zenith-ann__track {
+  display: flex;
+  width: max-content;
+  animation: zenith-ann-marquee var(--zab-duration, 30s) linear infinite;
+}
+
+.zenith-ann--marquee .zenith-ann__list,
+.zenith-ann--fit-marquee.is-overflowing .zenith-ann__list {
+  display: flex;
+  flex-shrink: 0;
+  justify-content: flex-start;
+  padding-right: var(--zab-g);
+}
+
+.zenith-ann--marquee.zenith-ann--sep-dot .zenith-ann__item::before,
+.zenith-ann--fit-marquee.is-overflowing.zenith-ann--sep-dot .zenith-ann__item::before {
+  content: '•';
+  opacity: 0.6;
+}
+
+.zenith-ann--marquee.zenith-ann--sep-line .zenith-ann__item::before,
+.zenith-ann--fit-marquee.is-overflowing.zenith-ann--sep-line .zenith-ann__item::before {
+  content: '';
+  width: 1px;
+  height: 1em;
+  background: currentColor;
+  opacity: 0.5;
+}
+
+.zenith-ann:hover .zenith-ann__track,
+.zenith-ann:focus-within .zenith-ann__track {
+  animation-play-state: paused;
+}
+
+/* A scrolling bar runs edge to edge (past the bar's side padding) when it's the only thing in the bar */
+.zenith-ann--bleed.zenith-ann--marquee .zenith-ann__viewport,
+.zenith-ann--bleed.zenith-ann--fit-marquee.is-overflowing .zenith-ann__viewport {
+  margin: 0 -3rem;
+}
+
+@keyframes zenith-ann-marquee {
+  to {
+    transform: translateX(var(--zab-shift, -50%));
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .zenith-ann {
+    font-size: var(--zab-fs, 1.4rem);
+    --zab-g: var(--zab-gap, 2.4rem);
+  }
+
+  .zenith-ann__viewport {
+    min-height: var(--zab-h, 4rem);
+  }
+
+  .zenith-ann--bleed.zenith-ann--marquee .zenith-ann__viewport,
+  .zenith-ann--bleed.zenith-ann--fit-marquee.is-overflowing .zenith-ann__viewport {
+    margin: 0 -3.2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zenith-ann .zenith-ann__track {
+    animation: none;
+  }
+
+  .zenith-ann .zenith-ann__list--copy {
+    display: none;
+  }
+
+  .zenith-ann--marquee .zenith-ann__viewport,
+  .zenith-ann--fit-marquee.is-overflowing .zenith-ann__viewport {
+    overflow-x: auto;
+  }
+
+  .zenith-ann--fit-rotate.is-overflowing .zenith-ann__item {
+    transition: none;
+  }
+}

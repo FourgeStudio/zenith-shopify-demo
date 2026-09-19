@@ -32,6 +32,8 @@
     --zab-weight: {{ section.settings.zenith_font_weight }};
     --zab-font: var(--font-{{ section.settings.zenith_font }}-family);
     --zab-transform: {% if section.settings.zenith_uppercase %}uppercase{% else %}none{% endif %};
+    --zab-gap: {{ section.settings.zenith_gap | default: 24 }}px;
+    --zab-gap-m: {{ section.settings.zenith_gap_mobile | default: 16 }}px;
   }
 {%- endstyle -%}
 
@@ -43,7 +45,70 @@
     {%- if section.settings.show_social and social_icons -%}
       {%- render 'social-icons' -%}
     {%- endif -%}
-    {%- if section.blocks.size == 1 -%}
+    {%- liquid
+      # zenith: messages in one row with separators, or a scrolling marquee (slideshow = Dawn's own behaviour below)
+      assign ann_mode = section.settings.zenith_display | default: 'row'
+      assign ann_overflow = section.settings.zenith_overflow | default: 'rotate'
+      assign ann_passes = 1
+      if ann_mode == 'marquee' or ann_overflow == 'marquee'
+        assign ann_passes = 2
+      endif
+      assign ann_bleed = true
+      if language_country_selector or section.settings.show_social and social_icons
+        assign ann_bleed = false
+      endif
+    -%}
+    {%- if section.blocks.size > 0 and ann_mode != 'slideshow' -%}
+      <script src="{{ 'zenith-announcements.js' | asset_url }}" defer="defer"></script>
+      <zenith-announcements
+        class="zenith-ann zenith-ann--{{ ann_mode }} zenith-ann--sep-{{ section.settings.zenith_separator }} zenith-ann--fit-{{ ann_overflow }}{% if ann_bleed %} zenith-ann--bleed{% endif %}"
+        data-mode="{{ ann_mode }}"
+        data-overflow="{{ ann_overflow }}"
+        data-speed="{{ section.settings.change_slides_speed }}"
+        data-marquee-speed="{{ section.settings.zenith_marquee_speed | default: 40 }}"
+        role="region"
+        aria-label="{{ 'sections.header.announcement' | t }}"
+      >
+        <div class="zenith-ann__viewport">
+          <div class="zenith-ann__track">
+            {%- for pass in (1..ann_passes) -%}
+              <ul
+                class="zenith-ann__list{% if pass > 1 %} zenith-ann__list--copy{% endif %}"
+                role="list"
+                {% if pass > 1 %}
+                  aria-hidden="true"
+                {% endif %}
+              >
+                {%- for block in section.blocks -%}
+                  {%- if block.settings.text == blank -%}{%- continue -%}{%- endif -%}
+                  {%- assign ann_text = block.settings.text | replace: '[customers]', settings.customer_count | escape -%}
+                  <li
+                    class="zenith-ann__item"
+                    {% if pass == 1 %}
+                      {{ block.shopify_attributes }}
+                    {% endif %}
+                  >
+                    {%- if block.settings.link != blank -%}
+                      <a
+                        href="{{ block.settings.link }}"
+                        class="zenith-ann__link"
+                        {% if pass > 1 %}
+                          tabindex="-1"
+                        {% endif %}
+                      >
+                        {{- ann_text -}}
+                      </a>
+                    {%- else -%}
+                      <span>{{ ann_text }}</span>
+                    {%- endif -%}
+                  </li>
+                {%- endfor -%}
+              </ul>
+            {%- endfor -%}
+          </div>
+        </div>
+      </zenith-announcements>
+    {%- elsif section.blocks.size == 1 -%}
       <div
         class="announcement-bar{% if section.settings.show_social %} announcement-bar--one-announcement{% endif %}"
         role="region"
@@ -239,6 +304,88 @@
       "default": 40
     },
     {
+      "type": "select",
+      "id": "zenith_display",
+      "label": "Messages",
+      "info": "Add a block per message.",
+      "default": "row",
+      "options": [
+        {
+          "value": "row",
+          "label": "All in one row"
+        },
+        {
+          "value": "marquee",
+          "label": "Scrolling marquee"
+        },
+        {
+          "value": "slideshow",
+          "label": "One at a time with arrows"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "zenith_separator",
+      "label": "Separator between messages",
+      "default": "dot",
+      "options": [
+        {
+          "value": "dot",
+          "label": "Dot •"
+        },
+        {
+          "value": "line",
+          "label": "Line |"
+        },
+        {
+          "value": "none",
+          "label": "Space only"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "zenith_gap",
+      "label": "Space between messages",
+      "min": 8,
+      "max": 64,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "select",
+      "id": "zenith_overflow",
+      "label": "When the row doesn't fit",
+      "info": "\"All in one row\" on narrow screens (e.g. phones). One at a time uses \"Change slides every\".",
+      "default": "rotate",
+      "options": [
+        {
+          "value": "rotate",
+          "label": "Show one at a time"
+        },
+        {
+          "value": "marquee",
+          "label": "Scroll as a marquee"
+        },
+        {
+          "value": "wrap",
+          "label": "Wrap onto more lines"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "zenith_marquee_speed",
+      "label": "Marquee speed",
+      "info": "Pixels per second. Higher is faster.",
+      "min": 10,
+      "max": 150,
+      "step": 5,
+      "default": 40
+    },
+    {
       "type": "header",
       "content": "Typography"
     },
@@ -321,6 +468,16 @@
       "step": 1,
       "unit": "px",
       "default": 14
+    },
+    {
+      "type": "range",
+      "id": "zenith_gap_mobile",
+      "label": "Space between messages",
+      "min": 8,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "default": 16
     },
     {
       "type": "header",
