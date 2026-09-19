@@ -1,22 +1,33 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "main-page",
+      "disabled": true,
       "settings": {
         "padding_top": 36,
         "padding_bottom": 36
-      },
-      "disabled": true
+      }
     },
     "intro": {
       "type": "zenith-image-story",
-      "blocks": {},
-      "block_order": [],
       "settings": {
+        "image": "shopify://shop_images/zenith-advanced-hair-density-shampoo_4.jpg",
         "use_brand_logo": false,
         "brand_logo_style": "tagline",
+        "eyebrow": "",
         "heading": "Nobody Made This for Filipino Men. So We Did.",
         "text": "<p>For a long time, taking care of yourself wasn't something Filipino men were supposed to do. So most of us didn't. One bar of soap handled the face, the hair, and the rest.</p><p>Zenith started two years ago to change that, one simple step at a time. Nothing you don't need, honest labels, built for our weather. More than [customers] Filipino men have picked it up since.</p>",
+        "button_label": "",
+        "button_link": "",
         "image_position": "right",
         "image_ratio": "adapt",
         "media_min_height": 720,
@@ -32,7 +43,8 @@
         "columns_gap": 32,
         "column_title_spacing": 14,
         "color_scheme": "scheme-1",
-        "column_title_color": "#EABE5F",
+        "heading_color": "",
+        "column_title_color": "#eabe5f",
         "text_opacity": 70,
         "button_style": "gold",
         "overlay_style": "none",
@@ -58,6 +70,7 @@
         "text_font_size_mobile": 16,
         "title_font_size_mobile": 32,
         "button_font_size_mobile": 20,
+        "button_label_mobile": "",
         "gap_mobile": 20,
         "content_gap_mobile": 20,
         "heading_spacing_mobile": 10,
@@ -94,6 +107,7 @@
         "column_2"
       ],
       "settings": {
+        "image": "shopify://shop_images/Team_Photo.jpg",
         "use_brand_logo": true,
         "brand_logo_style": "wordmark",
         "eyebrow": "",
@@ -116,6 +130,7 @@
         "columns_gap": 32,
         "column_title_spacing": 14,
         "color_scheme": "scheme-1",
+        "heading_color": "",
         "column_title_color": "#eabe5f",
         "text_opacity": 70,
         "button_style": "gold",
@@ -142,6 +157,7 @@
         "text_font_size_mobile": 16,
         "title_font_size_mobile": 32,
         "button_font_size_mobile": 20,
+        "button_label_mobile": "",
         "gap_mobile": 20,
         "content_gap_mobile": 20,
         "heading_spacing_mobile": 20,
@@ -162,6 +178,7 @@
           "type": "column",
           "settings": {
             "icon": "hand_heart",
+            "icon_text": "",
             "title": "Comfort First",
             "text": "<p>Formulated specifically for Philippine heat and humidity. Our products absorb instantly, providing deep nourishment and matte protection with zero greasiness, stickiness, or white cast.</p>"
           }
@@ -170,6 +187,7 @@
           "type": "column",
           "settings": {
             "icon": "badge_check_round",
+            "icon_text": "",
             "title": "Proof Over Hype",
             "text": "<p>We use therapeutic doses of clinically-backed ingredients like 0.2% Retinol, Niacinamide, and our 4-active CABROXIL matrix so you get visible results without pharmaceutical side effects or lifelong dependency.</p>"
           }
@@ -178,6 +196,7 @@
           "type": "column",
           "settings": {
             "icon": "sun_cloud",
+            "icon_text": "",
             "title": "Made for Our Climate",
             "text": "<p>Traditional heavy creams and generic imported shampoos fail in tropical weather. Our lightweight, sulfate-free, and sweat-resistant formulations are engineered to work with your environment, not against it.</p>"
           }
@@ -224,12 +243,18 @@
         "text_max_width": 540,
         "footer_spacing": 32,
         "footer_image_width": 336,
+        "logo_height": 24,
+        "logo_max_width": 120,
+        "logo_gap": 18,
         "color_scheme": "scheme-1",
         "icon_color": "#eabe5f",
         "card_background": "#202020",
+        "card_border_color": "",
         "badge_background": "#4e3a05",
         "badge_color": "#eabe5f",
         "text_opacity": 80,
+        "logo_style": "original",
+        "logo_opacity": 100,
         "heading_font_size": 48,
         "heading_uppercase": false,
         "subheading_font_size": 16,
@@ -264,6 +289,8 @@
         "text_line_height_mobile": 150,
         "footer_spacing_mobile": 32,
         "footer_image_width_mobile": 336,
+        "logo_height_mobile": 20,
+        "logo_gap_mobile": 12,
         "footer_text_size_mobile": 10,
         "footer_max_width_mobile": 256,
         "padding_top": 32,
@@ -274,11 +301,11 @@
     },
     "care": {
       "type": "zenith-image-story",
-      "blocks": {},
-      "block_order": [],
       "settings": {
+        "image": "shopify://shop_images/Team_Photo.jpg",
         "use_brand_logo": false,
         "brand_logo_style": "tagline",
+        "eyebrow": "",
         "heading": "No-Nonsense Men's Care",
         "text": "<p>Stop guessing with random products that clash. We engineered the Zenith lineup as a unified ecosystem of high-performance gear.</p><p>Every formulation works in head-to-toe grooming arsenal built specifically for the Philippine climate.</p>",
         "button_label": "Shop Our Products",
@@ -299,7 +326,7 @@
         "column_title_spacing": 14,
         "color_scheme": "scheme-1",
         "heading_color": "#eabe5f",
-        "column_title_color": "#EABE5F",
+        "column_title_color": "#eabe5f",
         "text_opacity": 70,
         "button_style": "gold",
         "overlay_style": "none",
@@ -325,6 +352,7 @@
         "text_font_size_mobile": 16,
         "title_font_size_mobile": 32,
         "button_font_size_mobile": 22,
+        "button_label_mobile": "",
         "gap_mobile": 20,
         "content_gap_mobile": 20,
         "heading_spacing_mobile": 10,
@@ -396,10 +424,10 @@
         "card_background": "#202020",
         "card_border_color": "#363636",
         "card_border_width": 1,
-        "glyph_color": "#FFFFFF",
-        "handle_color": "#FFFFFF",
+        "glyph_color": "#ffffff",
+        "handle_color": "#ffffff",
         "handle_opacity": 70,
-        "stat_color": "#FFFFFF",
+        "stat_color": "#ffffff",
         "heading_font_size": 41,
         "icon_size": 44,
         "title_font_size": 16,
@@ -488,7 +516,7 @@
         "seal_width": 150,
         "content_max_width": 560,
         "color_scheme": "scheme-1",
-        "icon_color": "#EABE5F",
+        "icon_color": "#eabe5f",
         "item_text_opacity": 100,
         "card_background": "#202020",
         "card_border_color": "#363636",
@@ -525,6 +553,7 @@
         "text": "<p>Everything you need to stay in your prime.</p>",
         "button_label": "Shop All Zenith Products",
         "button_link": "shopify://collections/all",
+        "button_product": "",
         "button_label_mobile": "",
         "button_link_mobile": "",
         "show_confetti": false,
@@ -538,6 +567,7 @@
         "countdown_timezone": "+08:00",
         "countdown_hide_expired": true,
         "countdown_show_labels": false,
+        "promo_visibility": "always",
         "content_position": "left",
         "content_vertical": "middle",
         "height": 540,
@@ -575,6 +605,7 @@
         "badge_font_size": 14,
         "text_font_size": 16,
         "countdown_font_size": 18,
+        "countdown_label_font_size": 14,
         "mobile_text_alignment": "center",
         "mobile_alignment": "top",
         "mobile_button_bottom": true,
@@ -591,6 +622,7 @@
         "badge_font_size_mobile": 14,
         "text_font_size_mobile": 14,
         "countdown_font_size_mobile": 16,
+        "countdown_label_font_size_mobile": 12,
         "content_gap_mobile": 24,
         "confetti_width_mobile": 100,
         "padding_top": 0,
