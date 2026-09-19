@@ -1,15 +1,52 @@
 {% comment %}
-  Zenith product card (used by zenith-product-carousel). Renders a placeholder card when product is blank.
+  Zenith product card (used by zenith-product-carousel and zenith-product-grid). Renders a placeholder card when product is blank.
   Accepts: product {Object}, show_rating {Boolean}, button_label {String},
            button_style {String} 'gold'|'dark'|'outline'|'light'|'scheme', button_icon {String} 'arrow_right'|'cart'|'none',
            image_sizes {String} optional `sizes` attribute, index {Number} for placeholders
+           rating_style {String} optional 'count' (default: stars + review count under the title) | 'score' (stars + "4.7" above the title)
+           badge {String} optional label on the image (e.g. "Selling Fast", "On Sale")
+           badge_style {String} optional 'default' | 'sale' (red gradient); badge_icon {String} optional icon name
   Rating reads the standard `reviews.rating` / `reviews.rating_count` metafields (set by review apps).
 {% endcomment %}
 {%- liquid
   assign card_btn_style = button_style | default: 'gold'
   assign card_btn_icon = button_icon | default: 'arrow_right'
   assign card_sizes = image_sizes | default: '(min-width: 990px) 25vw, (min-width: 750px) 33vw, 85vw'
+  assign card_rating_style = rating_style | default: 'count'
 -%}
+{%- capture card_badge -%}
+  {%- if badge != blank -%}
+    <span class="zenith-card__badge{% if badge_style == 'sale' %} zenith-card__badge--sale{% endif %}">
+      {%- if badge_icon != blank and badge_icon != 'none' -%}
+        {%- render 'zenith-icon', icon: badge_icon, class: 'zenith-card__badge-icon' -%}
+      {%- endif -%}
+      <span>{{ badge | escape }}</span>
+    </span>
+  {%- endif -%}
+{%- endcapture -%}
+{%- capture card_rating -%}
+  {%- if show_rating -%}
+    {%- liquid
+      if product != blank
+        assign card_rating_value = product.metafields.reviews.rating.value.rating
+        assign card_rating_count = product.metafields.reviews.rating_count
+      else
+        assign card_rating_value = 4.7
+        assign card_rating_count = 120
+      endif
+    -%}
+    {%- if card_rating_value != blank -%}
+      {%- if card_rating_style == 'score' -%}
+        <div class="zenith-card__rating">
+          {%- render 'zenith-stars', rating: card_rating_value -%}
+          <span class="zenith-card__rating-score" aria-hidden="true">{{ card_rating_value | round: 1 }}</span>
+        </div>
+      {%- else -%}
+        {%- render 'zenith-stars', rating: card_rating_value, count: card_rating_count -%}
+      {%- endif -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endcapture -%}
 <div class="zenith-card">
   {%- if product != blank -%}
     <a href="{{ product.url }}" class="zenith-media zenith-card__media" tabindex="-1" aria-hidden="true">
@@ -26,17 +63,14 @@
       {%- else -%}
         {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
       {%- endif -%}
+      {{ card_badge }}
     </a>
     <div class="zenith-card__info">
+      {%- if card_rating_style == 'score' -%}{{ card_rating }}{%- endif -%}
       <h3 class="zenith-card__title">
         <a href="{{ product.url }}">{{ product.title | escape }}</a>
       </h3>
-      {%- if show_rating and product.metafields.reviews.rating.value != blank -%}
-        {%- render 'zenith-stars',
-          rating: product.metafields.reviews.rating.value.rating,
-          count: product.metafields.reviews.rating_count
-        -%}
-      {%- endif -%}
+      {%- if card_rating_style != 'score' -%}{{ card_rating }}{%- endif -%}
       <div class="zenith-card__price">
         {%- if product.compare_at_price > product.price -%}
           <span class="visually-hidden">{{ 'products.product.price.sale_price' | t }}</span>
@@ -61,12 +95,12 @@
     <div class="zenith-media zenith-card__media">
       {%- assign placeholder = index | modulo: 6 | plus: 1 | prepend: 'product-' -%}
       {{ placeholder | placeholder_svg_tag: 'placeholder-svg' }}
+      {{ card_badge }}
     </div>
     <div class="zenith-card__info">
+      {%- if card_rating_style == 'score' -%}{{ card_rating }}{%- endif -%}
       <h3 class="zenith-card__title">Product name</h3>
-      {%- if show_rating -%}
-        {%- render 'zenith-stars', rating: 5, count: 120 -%}
-      {%- endif -%}
+      {%- if card_rating_style != 'score' -%}{{ card_rating }}{%- endif -%}
       <div class="zenith-card__price">
         <span class="zenith-card__price-current">{{ 179800 | money }}</span>
         <s class="zenith-card__price-compare">{{ 239800 | money }}</s>

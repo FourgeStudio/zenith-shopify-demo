@@ -590,6 +590,62 @@ zenith-carousel.is-static .zenith-carousel__controls {
   margin-top: auto;
 }
 
+/* Badge on the card image ("Selling Fast", tag badges, red "On Sale"). Sizes come from the section (--z-pg-*). */
+.zenith-card__badge {
+  position: absolute;
+  top: var(--z-card-badge-top-m, 8px);
+  left: 0;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  min-height: var(--z-card-badge-h-m, 22px);
+  padding: 0 0.85em;
+  font-size: var(--z-card-badge-fs-m, 1.3rem);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0;
+  color: var(--z-card-badge-fg, #fff);
+  background: var(--z-card-badge-bg, #294850);
+}
+
+.zenith-card__badge-icon {
+  flex-shrink: 0;
+  width: 1.2em;
+  height: 1.2em;
+  color: var(--z-card-badge-icon, var(--z-gold));
+}
+
+.zenith-card__badge--sale {
+  color: var(--z-card-sale-fg, #fff);
+  background: linear-gradient(90deg, var(--z-card-sale-1, #a90619), var(--z-card-sale-2, #f3213a));
+}
+
+/* Stars + score ("★★★★★ 4.7") above the title */
+.zenith-card__rating {
+  display: flex;
+  align-items: center;
+  gap: var(--z-space-2);
+  line-height: 1;
+}
+
+.zenith-card__rating-score {
+  font-size: var(--z-card-rfs-m, 1.4rem);
+  color: rgba(var(--color-foreground), 0.85);
+}
+
+@media screen and (min-width: 750px) {
+  .zenith-card__badge {
+    top: var(--z-card-badge-top, 11px);
+    min-height: var(--z-card-badge-h, 28px);
+    font-size: var(--z-card-badge-fs, 1.6rem);
+  }
+
+  .zenith-card__rating-score {
+    font-size: var(--z-card-rfs, 1.6rem);
+  }
+}
+
 @media screen and (min-width: 750px) {
   .zenith-card__title {
     font-size: var(--z-ttfs, 1.5rem);

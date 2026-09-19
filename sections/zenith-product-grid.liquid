@@ -1,0 +1,855 @@
+{%- comment -%} zenith: [customers] anywhere in this section shows Theme settings → Zenith → Customer count {%- endcomment -%}
+{%- capture zenith_body -%}
+{{ 'zenith-product-grid.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign s = section.settings
+
+  # Products: the chosen collection, or — left empty on a collection page — the collection being viewed.
+  assign pg_collection = s.collection
+  if pg_collection == blank and collection != blank
+    assign pg_collection = collection
+  endif
+  assign pg_count = 0
+  if pg_collection != blank
+    assign pg_count = pg_collection.products_count | at_most: s.products_to_show
+  endif
+
+  assign cols = s.columns_desktop
+  assign cols_t = cols | minus: 1 | at_least: 2
+  assign cols_m = s.columns_mobile
+  assign card_sizes = '(min-width: 990px) calc((100vw - 10rem) / ' | append: cols | append: '), (min-width: 750px) calc((100vw - 10rem) / ' | append: cols_t | append: '), calc((100vw - 5rem) / ' | append: cols_m | append: ')'
+
+  # Reserve roughly the real height for off-screen rendering (content-visibility).
+  assign defer_rows = pg_count | at_least: cols | divided_by: cols | plus: 1
+  assign defer_h = defer_rows | times: 520 | plus: 160
+-%}
+
+{%- capture extra -%}
+  --z-pg-cols: {{ cols }};
+  --z-pg-cols-t: {{ cols_t }};
+  --z-pg-cols-m: {{ cols_m }};
+  --z-pg-rgap: {{ s.row_gap }}px;
+  --z-pg-rgap-m: {{ s.row_gap_mobile }}px;
+  --z-pg-ebsp: {{ s.eyebrow_spacing }}px;
+  --z-pg-txtsp: {{ s.card_text_spacing }}px;
+  --z-pg-txtsp-m: {{ s.card_text_spacing_mobile }}px;
+  --z-pg-ttsp: {{ s.card_title_spacing }}px;
+  --z-pg-btnsp: {{ s.card_button_spacing }}px;
+  --z-pg-btnsp-m: {{ s.card_button_spacing_mobile }}px;
+  --z-pg-btnh: {{ s.card_button_height }}px;
+  --z-pg-btnh-m: {{ s.card_button_height_mobile }}px;
+  --z-pg-atcfs: {{ s.card_button_font_size }}px;
+  --z-pg-atcfs-m: {{ s.card_button_font_size_mobile }}px;
+  --z-pg-tlh: {{ s.title_line_height | divided_by: 100.0 }};
+  --z-pg-tlh-m: {{ s.title_line_height_mobile | divided_by: 100.0 }};
+  --z-card-rfs: {{ s.rating_font_size }}px;
+  --z-card-rfs-m: {{ s.rating_font_size_mobile }}px;
+  --z-pg-star: {{ s.star_size }}px;
+  --z-pg-star-c: {{ s.star_color }};
+  --z-pg-psp: {{ s.card_price_spacing }}px;
+  --z-pg-star-m: {{ s.star_size_mobile }}px;
+  --z-card-badge-fs: {{ s.badge_font_size }}px;
+  --z-card-badge-fs-m: {{ s.badge_font_size_mobile }}px;
+  --z-card-badge-h: {{ s.badge_height }}px;
+  --z-card-badge-h-m: {{ s.badge_height_mobile }}px;
+  --z-pg-img-bg: {{ s.card_image_bg }};
+  --z-pg-fit: {{ s.image_fit }};
+  --z-pg-price-o: {{ s.price_opacity | divided_by: 100.0 }};
+  --z-card-badge-bg: {{ s.badge_color }};
+  --z-card-badge-fg: {{ s.badge_text_color }};
+  --z-card-badge-icon: {{ s.badge_icon_color }};
+  --z-card-sale-1: {{ s.sale_badge_color_1 }};
+  --z-card-sale-2: {{ s.sale_badge_color_2 }};
+  --z-card-sale-fg: {{ s.sale_badge_text_color }};
+  --z-defer-h: {{ defer_h }}px;
+{%- endcapture -%}
+{%- render 'zenith-section-style', section: section, extra: extra -%}
+
+{%- if pg_count > 0 or request.design_mode -%}
+  <section
+    id="Zenith-{{ section.id }}"
+    class="zenith-section zenith-pg zenith-pg--{{ s.image_ratio }} color-{{ s.color_scheme }} gradient{% if section.index > 2 %} zenith-defer{% endif %}"
+  >
+    <div class="page-width">
+      {%- render 'zenith-section-heading',
+        eyebrow: s.eyebrow,
+        heading: s.heading,
+        subheading: s.subheading,
+        alignment: s.heading_alignment,
+        uppercase: s.heading_uppercase,
+        class: 'zenith-pg__heading'
+      -%}
+
+      <ul class="zenith-pg__grid" role="list">
+        {%- if pg_count > 0 -%}
+          {%- for product in pg_collection.products limit: s.products_to_show -%}
+            {%- liquid
+              # One badge per card: sale badge (on sale, or every product when set) → product tag "badge:Your text"
+              # → the section's first-product badge.
+              assign card_badge = ''
+              assign card_badge_style = 'default'
+              assign card_badge_icon = s.badge_icon
+              if s.sale_badge != blank
+                if s.sale_badge_scope == 'all' or product.compare_at_price > product.price
+                  assign card_badge = s.sale_badge
+                  assign card_badge_style = 'sale'
+                  assign card_badge_icon = 'none'
+                endif
+              endif
+              if card_badge == ''
+                for tag in product.tags
+                  assign tag_start = tag | slice: 0, 6 | downcase
+                  if tag_start == 'badge:'
+                    assign card_badge = tag | slice: 6, 100 | strip
+                    break
+                  endif
+                endfor
+              endif
+              if card_badge == '' and forloop.first
+                assign card_badge = s.first_badge
+              endif
+            -%}
+            <li class="zenith-pg__item">
+              {%- render 'zenith-product-card',
+                product: product,
+                show_rating: s.show_rating,
+                rating_style: 'score',
+                button_label: s.button_label,
+                button_style: s.card_button_style,
+                button_icon: s.card_button_icon,
+                image_sizes: card_sizes,
+                badge: card_badge,
+                badge_style: card_badge_style,
+                badge_icon: card_badge_icon
+              -%}
+            </li>
+          {%- endfor -%}
+        {%- else -%}
+          {%- comment -%} Theme editor preview until a collection with products is chosen {%- endcomment -%}
+          {%- for i in (1..cols) -%}
+            {%- liquid
+              # Preview: first card = first-product badge, second = sale badge (placeholders show a compare-at price)
+              assign card_badge = ''
+              assign card_badge_style = 'default'
+              assign card_badge_icon = s.badge_icon
+              if forloop.first
+                assign card_badge = s.first_badge
+              elsif s.sale_badge != blank and forloop.index == 2
+                assign card_badge = s.sale_badge
+                assign card_badge_style = 'sale'
+                assign card_badge_icon = 'none'
+              endif
+            -%}
+            <li class="zenith-pg__item">
+              {%- render 'zenith-product-card',
+                product: blank,
+                show_rating: s.show_rating,
+                rating_style: 'score',
+                button_label: s.button_label,
+                button_style: s.card_button_style,
+                button_icon: s.card_button_icon,
+                badge: card_badge,
+                badge_style: card_badge_style,
+                badge_icon: card_badge_icon,
+                index: forloop.index0
+              -%}
+            </li>
+          {%- endfor -%}
+        {%- endif -%}
+      </ul>
+    </div>
+  </section>
+{%- endif -%}
+{%- endcapture -%}
+{{- zenith_body | replace: '[customers]', settings.customer_count -}}
+
+{% schema %}
+{
+  "name": "Zenith · Product grid",
+  "tag": "div",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Face & Skin Products"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Everything you need for a healthy looking skin"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection",
+      "info": "Leave empty on a collection page to show the products of the collection being viewed. With no products the section is hidden on the store."
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Maximum products",
+      "min": 1,
+      "max": 50,
+      "step": 1,
+      "default": 12
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "label": "Show star rating",
+      "info": "Stars + score from your reviews app (Judge.me). Products without reviews show no stars.",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "first_badge",
+      "label": "Badge on the first product",
+      "default": "Selling Fast",
+      "info": "Leave empty for none. Any product can have its own badge on every grid: add the tag badge:Your text (e.g. badge:Most Purchased) in Admin → Products."
+    },
+    {
+      "type": "select",
+      "id": "badge_icon",
+      "label": "Badge icon",
+      "default": "truck",
+      "options": [
+        { "value": "truck", "label": "Delivery truck" },
+        { "value": "none", "label": "None" }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "sale_badge",
+      "label": "Sale badge",
+      "default": "On Sale",
+      "info": "Red badge. Leave empty for none. Takes the place of the other badges on that card."
+    },
+    {
+      "type": "select",
+      "id": "sale_badge_scope",
+      "label": "Show the sale badge on",
+      "default": "sale",
+      "options": [
+        { "value": "sale", "label": "Products on sale (compare-at price set)" },
+        { "value": "all", "label": "Every product in this section" }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Card button label",
+      "default": "Add to Cart"
+    },
+    {
+      "type": "select",
+      "id": "card_button_icon",
+      "label": "Card button icon",
+      "default": "cart",
+      "options": [
+        { "value": "cart", "label": "Cart" },
+        { "value": "arrow_right", "label": "Arrow" },
+        { "value": "none", "label": "None" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Heading alignment",
+      "default": "left",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Products per row on desktop",
+      "info": "Tablet shows one less.",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "heading_max_width",
+      "label": "Heading max width",
+      "min": 300,
+      "max": 1400,
+      "step": 20,
+      "unit": "px",
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_spacing",
+      "label": "Space below eyebrow",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "heading_spacing",
+      "label": "Space below heading",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Space between cards",
+      "min": 0,
+      "max": 64,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "row_gap",
+      "label": "Space between rows",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Product image shape",
+      "default": "square",
+      "options": [
+        { "value": "square", "label": "Square" },
+        { "value": "portrait", "label": "Portrait 4:5" },
+        { "value": "landscape", "label": "Landscape 4:3" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "image_fit",
+      "label": "Product image fit",
+      "default": "cover",
+      "options": [
+        { "value": "cover", "label": "Fill (crop)" },
+        { "value": "contain", "label": "Fit (no crop)" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "image_padding",
+      "label": "Product image padding",
+      "min": 0,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "card_text_spacing",
+      "label": "Space between image and rating",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "card_title_spacing",
+      "label": "Space between rating and title",
+      "min": 0,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "card_price_spacing",
+      "label": "Space between title and price",
+      "info": "Mobile: the price sits at the bottom of the text so prices line up per row.",
+      "min": 0,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "card_button_spacing",
+      "label": "Minimum space above card button",
+      "info": "Buttons line up across each row; shorter cards get more space.",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "card_button_height",
+      "label": "Card button height",
+      "min": 32,
+      "max": 64,
+      "step": 1,
+      "unit": "px",
+      "default": 46
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "select",
+      "id": "card_button_style",
+      "label": "Card button style",
+      "default": "gold",
+      "options": [
+        { "value": "gold", "label": "Gold gradient" },
+        { "value": "dark", "label": "Dark" },
+        { "value": "outline", "label": "Outline" },
+        { "value": "light", "label": "Light" },
+        { "value": "scheme", "label": "Color scheme button" }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "card_image_bg",
+      "label": "Product image background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "price_opacity",
+      "label": "Price text opacity",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 70
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Stars",
+      "default": "#EABE5F"
+    },
+    {
+      "type": "color",
+      "id": "badge_color",
+      "label": "Badge background",
+      "default": "#294850"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Badge text",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "badge_icon_color",
+      "label": "Badge icon",
+      "default": "#D6B356"
+    },
+    {
+      "type": "color",
+      "id": "sale_badge_color_1",
+      "label": "Sale badge gradient start",
+      "default": "#A90619"
+    },
+    {
+      "type": "color",
+      "id": "sale_badge_color_2",
+      "label": "Sale badge gradient end",
+      "default": "#F3213A"
+    },
+    {
+      "type": "color",
+      "id": "sale_badge_text_color",
+      "label": "Sale badge text",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size",
+      "label": "Heading size",
+      "min": 16,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "checkbox",
+      "id": "heading_uppercase",
+      "label": "Uppercase heading",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "subheading_font_size",
+      "label": "Subheading size",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_font_size",
+      "label": "Eyebrow size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "label": "Product title size",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "title_line_height",
+      "label": "Product title line height",
+      "min": 100,
+      "max": 180,
+      "step": 5,
+      "unit": "%",
+      "default": 155
+    },
+    {
+      "type": "range",
+      "id": "price_font_size",
+      "label": "Price size",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "rating_font_size",
+      "label": "Rating score size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "star_size",
+      "label": "Star size",
+      "min": 8,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "badge_font_size",
+      "label": "Badge text size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "badge_height",
+      "label": "Badge height",
+      "min": 16,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "card_button_font_size",
+      "label": "Card button text size",
+      "min": 14,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Products per row",
+      "default": "2",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size_mobile",
+      "label": "Heading size",
+      "min": 16,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "subheading_font_size_mobile",
+      "label": "Subheading size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "heading_spacing_mobile",
+      "label": "Space below heading",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "gap_mobile",
+      "label": "Space between cards",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "row_gap_mobile",
+      "label": "Space between rows",
+      "min": 0,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "card_text_spacing_mobile",
+      "label": "Space between image and rating",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "card_button_spacing_mobile",
+      "label": "Minimum space above card button",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "title_font_size_mobile",
+      "label": "Product title size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 17
+    },
+    {
+      "type": "range",
+      "id": "title_line_height_mobile",
+      "label": "Product title line height",
+      "min": 100,
+      "max": 180,
+      "step": 5,
+      "unit": "%",
+      "default": 115
+    },
+    {
+      "type": "range",
+      "id": "price_font_size_mobile",
+      "label": "Price size",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "rating_font_size_mobile",
+      "label": "Rating score size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "star_size_mobile",
+      "label": "Star size",
+      "min": 8,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 11
+    },
+    {
+      "type": "range",
+      "id": "badge_font_size_mobile",
+      "label": "Badge text size",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "badge_height_mobile",
+      "label": "Badge height",
+      "min": 16,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "card_button_font_size_mobile",
+      "label": "Card button text size",
+      "min": 14,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "card_button_height_mobile",
+      "label": "Card button height",
+      "info": "44px or more keeps the button easy to tap.",
+      "min": 32,
+      "max": 64,
+      "step": 1,
+      "unit": "px",
+      "default": 44
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Top padding (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Bottom padding (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zenith · Product grid"
+    }
+  ]
+}
+{% endschema %}

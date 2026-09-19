@@ -168,7 +168,7 @@
         {%- endif -%}
 
         {%- if s.button_label != blank or mobile_label != blank -%}
-          <div class="zenith-hero__actions">
+          <div class="zenith-hero__actions{% if s.mobile_hide_button %} zenith-hide-mobile{% endif %}">
             {%- liquid
               assign desktop_hide = ''
               if split_buttons
@@ -828,6 +828,12 @@
       "id": "mobile_button_full",
       "label": "Full-width button",
       "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_hide_button",
+      "label": "Hide button on mobile",
+      "default": false
     },
     {
       "type": "range",
