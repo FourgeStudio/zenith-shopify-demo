@@ -1,7 +1,27 @@
 {%- comment -%} zenith: [customers] anywhere in this section shows Theme settings → Zenith → Customer count {%- endcomment -%}
 {%- capture zenith_body -%}
 {{ 'zenith-feature-columns.css' | asset_url | stylesheet_tag }}
-{%- if section.settings.show_payment_icons -%}{{ 'component-list-payment.css' | asset_url | stylesheet_tag }}{%- endif -%}
+{%- liquid
+  # Global: columns, logos and footer from Theme settings → Zenith · Guarantee (zg_*; empty slots skipped). Custom: this section's blocks.
+  assign use_global = false
+  if section.settings.content_source == 'global'
+    assign use_global = true
+  endif
+  if use_global
+    assign col_max = 4
+    assign logo_max = 8
+    assign footer_image = settings.zg_footer_image
+    assign show_payments = settings.zg_payment_icons
+    assign footer_text = settings.zg_footer_text
+  else
+    assign col_max = section.blocks.size
+    assign logo_max = section.blocks.size
+    assign footer_image = section.settings.footer_image
+    assign show_payments = section.settings.show_payment_icons
+    assign footer_text = section.settings.footer_text
+  endif
+-%}
+{%- if show_payments -%}{{ 'component-list-payment.css' | asset_url | stylesheet_tag }}{%- endif -%}
 {%- capture extra -%}
   --z-cols: {{ section.settings.columns_desktop }};
   --z-cols-m: {{ section.settings.columns_mobile }};
@@ -89,14 +109,43 @@
     -%}
 
     <ul class="zenith-features__grid" role="list">
-      {%- for block in section.blocks -%}
-        {%- if block.type != 'column' -%}{%- continue -%}{%- endif -%}
-        <li class="zenith-features__item" id="Block-{{ block.id }}" {{ block.shopify_attributes }}>
+      {%- for n in (1..col_max) -%}
+        {%- liquid
+          if use_global
+            assign p = 'zg_col' | append: n | append: '_'
+            assign k = p | append: 'image'
+            assign col_image = settings[k]
+            assign k = p | append: 'title'
+            assign col_title = settings[k]
+            assign k = p | append: 'text'
+            assign col_text = settings[k]
+            if col_image == blank and col_title == blank and col_text == blank
+              continue
+            endif
+            assign k = p | append: 'icon'
+            assign col_icon = settings[k]
+            assign k = p | append: 'badge'
+            assign col_badge = settings[k]
+            assign col_attrs = ''
+          else
+            assign block = section.blocks[forloop.index0]
+            if block.type != 'column'
+              continue
+            endif
+            assign col_image = block.settings.image
+            assign col_title = block.settings.title
+            assign col_text = block.settings.text
+            assign col_icon = block.settings.icon
+            assign col_badge = block.settings.icon_text
+            assign col_attrs = 'id="Block-' | append: block.id | append: '" ' | append: block.shopify_attributes
+          endif
+        -%}
+        <li class="zenith-features__item" {{ col_attrs }}>
           {%- if section.settings.show_media -%}
             <div class="zenith-media zenith-features__media">
-              {%- if block.settings.image != blank -%}
+              {%- if col_image != blank -%}
                 {{
-                  block.settings.image
+                  col_image
                   | image_url: width: 900
                   | image_tag: loading: 'lazy', widths: '150, 300, 450, 600, 900', sizes: img_sizes
                 }}
@@ -106,18 +155,18 @@
             </div>
           {%- endif -%}
           <div class="zenith-features__text">
-            {%- if block.settings.icon_text != blank -%}
+            {%- if col_badge != blank -%}
               <span class="zenith-features__icon zenith-features__icon--badge">
-                <span class="zenith-features__badge">{{ block.settings.icon_text | escape }}</span>
+                <span class="zenith-features__badge">{{ col_badge | escape }}</span>
               </span>
-            {%- elsif block.settings.icon != 'none' -%}
-              <span class="zenith-features__icon">{%- render 'zenith-icon', icon: block.settings.icon -%}</span>
+            {%- elsif col_icon != blank and col_icon != 'none' -%}
+              <span class="zenith-features__icon">{%- render 'zenith-icon', icon: col_icon -%}</span>
             {%- endif -%}
-            {%- if block.settings.title != blank -%}
-              <h3 class="zenith-features__title">{{ block.settings.title | escape | replace: '[customers]', settings.customer_count }}</h3>
+            {%- if col_title != blank -%}
+              <h3 class="zenith-features__title">{{ col_title | escape | replace: '[customers]', settings.customer_count }}</h3>
             {%- endif -%}
-            {%- if block.settings.text != blank -%}
-              <div class="zenith-features__body zenith-rte">{{ block.settings.text | replace: '[customers]', settings.customer_count }}</div>
+            {%- if col_text != blank -%}
+              <div class="zenith-features__body zenith-rte">{{ col_text | replace: '[customers]', settings.customer_count }}</div>
             {%- endif -%}
           </div>
         </li>
@@ -126,19 +175,31 @@
 
     {%- liquid
       assign has_logos = false
-      for block in section.blocks
-        if block.type == 'logo'
-          assign has_logos = true
-          break
-        endif
-      endfor
+      if use_global
+        for n in (1..logo_max)
+          assign p = 'zg_logo' | append: n | append: '_'
+          assign k_image = p | append: 'image'
+          assign k_name = p | append: 'name'
+          if settings[k_image] != blank or settings[k_name] != blank
+            assign has_logos = true
+            break
+          endif
+        endfor
+      else
+        for block in section.blocks
+          if block.type == 'logo'
+            assign has_logos = true
+            break
+          endif
+        endfor
+      endif
     -%}
-    {%- if has_logos or section.settings.show_payment_icons or section.settings.footer_image != blank or section.settings.footer_text != blank -%}
+    {%- if has_logos or show_payments or footer_image != blank or footer_text != blank -%}
       <div class="zenith-features__footer">
-        {%- if section.settings.footer_image != blank -%}
+        {%- if footer_image != blank -%}
           {%- assign footer_sizes = '(min-width: 750px) ' | append: section.settings.footer_image_width | append: 'px, ' | append: section.settings.footer_image_width_mobile | append: 'px' -%}
           {{
-            section.settings.footer_image
+            footer_image
             | image_url: width: 1400
             | image_tag: loading: 'lazy', widths: '350, 700, 1050, 1400', sizes: footer_sizes, class: 'zenith-features__footer-image'
           }}
@@ -146,43 +207,68 @@
         {%- if has_logos -%}
           {%- assign logo_sizes = section.settings.logo_max_width | append: 'px' -%}
           <ul class="zenith-features__logos zenith-features__logos--{{ section.settings.logo_style }}" role="list">
-            {%- for block in section.blocks -%}
-              {%- if block.type != 'logo' -%}{%- continue -%}{%- endif -%}
+            {%- for n in (1..logo_max) -%}
+              {%- liquid
+                if use_global
+                  assign p = 'zg_logo' | append: n | append: '_'
+                  assign k = p | append: 'image'
+                  assign logo_image = settings[k]
+                  assign k = p | append: 'name'
+                  assign logo_name = settings[k]
+                  if logo_image == blank and logo_name == blank
+                    continue
+                  endif
+                  assign k = p | append: 'link'
+                  assign logo_link = settings[k]
+                  assign k = p | append: 'scale'
+                  assign logo_scale = settings[k]
+                  assign logo_attrs = ''
+                else
+                  assign block = section.blocks[forloop.index0]
+                  if block.type != 'logo'
+                    continue
+                  endif
+                  assign logo_image = block.settings.logo
+                  assign logo_name = block.settings.name
+                  assign logo_link = block.settings.link
+                  assign logo_scale = block.settings.logo_scale
+                  assign logo_attrs = 'id="Block-' | append: block.id | append: '" ' | append: block.shopify_attributes
+                endif
+              -%}
               <li
                 class="zenith-features__logo"
-                style="--z-logo-scale: {{ block.settings.logo_scale | divided_by: 100.0 }};"
-                id="Block-{{ block.id }}"
-                {{ block.shopify_attributes }}
+                style="--z-logo-scale: {{ logo_scale | default: 100 | divided_by: 100.0 }};"
+                {{ logo_attrs }}
               >
-                {%- if block.settings.link != blank -%}
-                  <a href="{{ block.settings.link }}" class="zenith-features__logo-link" target="_blank" rel="noopener">
+                {%- if logo_link != blank -%}
+                  <a href="{{ logo_link }}" class="zenith-features__logo-link" target="_blank" rel="noopener">
                 {%- endif -%}
-                {%- if block.settings.logo != blank -%}
-                  {%- assign logo_alt = block.settings.logo.alt | default: block.settings.name -%}
+                {%- if logo_image != blank -%}
+                  {%- assign logo_alt = logo_image.alt | default: logo_name -%}
                   {{
-                    block.settings.logo
+                    logo_image
                     | image_url: width: 400
                     | image_tag: loading: 'lazy', widths: '100, 200, 300, 400', sizes: logo_sizes, alt: logo_alt
                   }}
                 {%- else -%}
-                  <span class="zenith-features__logo-text">{{ block.settings.name | escape }}</span>
+                  <span class="zenith-features__logo-text">{{ logo_name | escape }}</span>
                 {%- endif -%}
-                {%- if block.settings.link != blank -%}
+                {%- if logo_link != blank -%}
                   </a>
                 {%- endif -%}
               </li>
             {%- endfor -%}
           </ul>
         {%- endif -%}
-        {%- if section.settings.show_payment_icons -%}
+        {%- if show_payments -%}
           <ul class="list-payment zenith-features__payments" role="list">
             {%- for type in shop.enabled_payment_types -%}
               <li class="list-payment__item">{{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}</li>
             {%- endfor -%}
           </ul>
         {%- endif -%}
-        {%- if section.settings.footer_text != blank -%}
-          <div class="zenith-features__footer-text zenith-rte">{{ section.settings.footer_text | replace: '[customers]', settings.customer_count }}</div>
+        {%- if footer_text != blank -%}
+          <div class="zenith-features__footer-text zenith-rte">{{ footer_text | replace: '[customers]', settings.customer_count }}</div>
         {%- endif -%}
       </div>
     {%- endif -%}
@@ -207,6 +293,23 @@
     {
       "type": "header",
       "content": "Content"
+    },
+    {
+      "type": "select",
+      "id": "content_source",
+      "label": "Columns and logos",
+      "info": "Zenith Guarantee = the columns, logos and footer text in Theme settings → Zenith · Guarantee (edit once, same on every page). This section's columns = the blocks and footer settings below.",
+      "default": "custom",
+      "options": [
+        {
+          "value": "custom",
+          "label": "This section's columns"
+        },
+        {
+          "value": "global",
+          "label": "Zenith Guarantee (Theme settings)"
+        }
+      ]
     },
     {
       "type": "text",
@@ -1230,6 +1333,13 @@
     }
   ],
   "presets": [
+    {
+      "name": "Zenith · Guarantee",
+      "settings": {
+        "content_source": "global",
+        "heading": "The Zenith Guarantee"
+      }
+    },
     {
       "name": "Zenith · Feature columns",
       "blocks": [

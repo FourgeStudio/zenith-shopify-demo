@@ -470,6 +470,7 @@
         "result_9KPqQJ"
       ],
       "settings": {
+        "content_source": "global",
         "eyebrow": "Used by [customers] Filipino men",
         "heading": "Real Men. Real Results.",
         "heading_mobile": "Built for Filipino men over 35",
@@ -878,6 +879,7 @@
         "logo_ninjavan"
       ],
       "settings": {
+        "content_source": "global",
         "eyebrow": "",
         "heading": "The Zenith Guarantee",
         "subheading": "",

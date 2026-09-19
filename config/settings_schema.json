@@ -1244,6 +1244,2281 @@
     ]
   },
   {
+    "name": "Zenith · Results reviews",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Shared by every \"Zenith · Results marquee\" section set to Reviews = Global. Fill slots in the order they should appear; a slot with no photo, review or name is skipped. Heading, sizes and colors stay in each section."
+      },
+      {
+        "type": "header",
+        "content": "Review 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "rv1_image",
+        "label": "Photo",
+        "info": "Customer or lifestyle photo on the left of the card"
+      },
+      {
+        "type": "product",
+        "id": "rv1_product",
+        "label": "Product used",
+        "info": "Shows \"Used\" + the product name on the photo. Leave empty to hide."
+      },
+      {
+        "type": "image_picker",
+        "id": "rv1_thumb",
+        "label": "Product thumbnail",
+        "info": "Defaults to the product's image"
+      },
+      {
+        "type": "range",
+        "id": "rv1_rating",
+        "label": "Star rating",
+        "info": "0 hides the stars",
+        "min": 0,
+        "max": 5,
+        "step": 1,
+        "default": 5
+      },
+      {
+        "type": "textarea",
+        "id": "rv1_quote",
+        "label": "Review",
+        "info": "Quotation marks are added automatically"
+      },
+      {
+        "type": "text",
+        "id": "rv1_author",
+        "label": "Reviewer name"
+      },
+      {
+        "type": "checkbox",
+        "id": "rv1_verified",
+        "label": "Show verified badge",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "rv1_avatar",
+        "label": "Reviewer photo",
+        "info": "Small round photo. Leave empty to use the photo above."
+      },
+      {
+        "type": "text",
+        "id": "rv1_detail",
+        "label": "Text under the name",
+        "info": "Leave empty to show the product's name"
+      },
+      {
+        "type": "select",
+        "id": "rv1_row",
+        "label": "Row",
+        "info": "Used when the section shows 2 rows",
+        "default": "1",
+        "options": [
+          {
+            "value": "1",
+            "label": "Row 1"
+          },
+          {
+            "value": "2",
+            "label": "Row 2"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Review 2"
+      },
+      {
+        "type": "image_picker",
+        "id": "rv2_image",
+        "label": "Photo",
+        "info": "Customer or lifestyle photo on the left of the card"
+      },
+      {
+        "type": "product",
+        "id": "rv2_product",
+        "label": "Product used",
+        "info": "Shows \"Used\" + the product name on the photo. Leave empty to hide."
+      },
+      {
+        "type": "image_picker",
+        "id": "rv2_thumb",
+        "label": "Product thumbnail",
+        "info": "Defaults to the product's image"
+      },
+      {
+        "type": "range",
+        "id": "rv2_rating",
+        "label": "Star rating",
+        "info": "0 hides the stars",
+        "min": 0,
+        "max": 5,
+        "step": 1,
+        "default": 5
+      },
+      {
+        "type": "textarea",
+        "id": "rv2_quote",
+        "label": "Review",
+        "info": "Quotation marks are added automatically"
+      },
+      {
+        "type": "text",
+        "id": "rv2_author",
+        "label": "Reviewer name"
+      },
+      {
+        "type": "checkbox",
+        "id": "rv2_verified",
+        "label": "Show verified badge",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "rv2_avatar",
+        "label": "Reviewer photo",
+        "info": "Small round photo. Leave empty to use the photo above."
+      },
+      {
+        "type": "text",
+        "id": "rv2_detail",
+        "label": "Text under the name",
+        "info": "Leave empty to show the product's name"
+      },
+      {
+        "type": "select",
+        "id": "rv2_row",
+        "label": "Row",
+        "info": "Used when the section shows 2 rows",
+        "default": "1",
+        "options": [
+          {
+            "value": "1",
+            "label": "Row 1"
+          },
+          {
+            "value": "2",
+            "label": "Row 2"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Review 3"
+      },
+      {
+        "type": "image_picker",
+        "id": "rv3_image",
+        "label": "Photo",
+        "info": "Customer or lifestyle photo on the left of the card"
+      },
+      {
+        "type": "product",
+        "id": "rv3_product",
+        "label": "Product used",
+        "info": "Shows \"Used\" + the product name on the photo. Leave empty to hide."
+      },
+      {
+        "type": "image_picker",
+        "id": "rv3_thumb",
+        "label": "Product thumbnail",
+        "info": "Defaults to the product's image"
+      },
+      {
+        "type": "range",
+        "id": "rv3_rating",
+        "label": "Star rating",
+        "info": "0 hides the stars",
+        "min": 0,
+        "max": 5,
+        "step": 1,
+        "default": 5
+      },
+      {
+        "type": "textarea",
+        "id": "rv3_quote",
+        "label": "Review",
+        "info": "Quotation marks are added automatically"
+      },
+      {
+        "type": "text",
+        "id": "rv3_author",
+        "label": "Reviewer name"
+      },
+      {
+        "type": "checkbox",
+        "id": "rv3_verified",
+        "label": "Show verified badge",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "rv3_avatar",
+        "label": "Reviewer photo",
+        "info": "Small round photo. Leave empty to use the photo above."
+      },
+      {
+        "type": "text",
+        "id": "rv3_detail",
+        "label": "Text under the name",
+        "info": "Leave empty to show the product's name"
+      },
+      {
+        "type": "select",
+        "id": "rv3_row",
+        "label": "Row",
+        "info": "Used when the section shows 2 rows",
+        "default": "1",
+        "options": [
+          {
+            "value": "1",
+            "label": "Row 1"
+          },
+          {
+            "value": "2",
+            "label": "Row 2"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Review 4"
+      },
+      {
+        "type": "image_picker",
+        "id": "rv4_image",
+        "label": "Photo",
+        "info": "Customer or lifestyle photo on the left of the card"
+      },
+      {
+        "type": "product",
+        "id": "rv4_product",
+        "label": "Product used",
+        "info": "Shows \"Used\" + the product name on the photo. Leave empty to hide."
+      },
+      {
+        "type": "image_picker",
+        "id": "rv4_thumb",
+        "label": "Product thumbnail",
+        "info": "Defaults to the product's image"
+      },
+      {
+        "type": "range",
+        "id": "rv4_rating",
+        "label": "Star rating",
+        "info": "0 hides the stars",
+        "min": 0,
+        "max": 5,
+        "step": 1,
+        "default": 5
+      },
+      {
+        "type": "textarea",
+        "id": "rv4_quote",
+        "label": "Review",
+        "info": "Quotation marks are added automatically"
+      },
+      {
+        "type": "text",
+        "id": "rv4_author",
+        "label": "Reviewer name"
+      },
+      {
+        "type": "checkbox",
+        "id": "rv4_verified",
+        "label": "Show verified badge",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "rv4_avatar",
+        "label": "Reviewer photo",
+        "info": "Small round photo. Leave empty to use the photo above."
+      },
+      {
+        "type": "text",
+        "id": "rv4_detail",
+        "label": "Text under the name",
+        "info": "Leave empty to show the product's name"
+      },
+      {
+        "type": "select",
+        "id": "rv4_row",
+        "label": "Row",
+        "info": "Used when the section shows 2 rows",
+        "default": "1",
+        "options": [
+          {
+            "value": "1",
+            "label": "Row 1"
+          },
+          {
+            "value": "2",
+            "label": "Row 2"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Review 5"
+      },
+      {
+        "type": "image_picker",
+        "id": "rv5_image",
+        "label": "Photo",
+        "info": "Customer or lifestyle photo on the left of the card"
+      },
+      {
+        "type": "product",
+        "id": "rv5_product",
+        "label": "Product used",
+        "info": "Shows \"Used\" + the product name on the photo. Leave empty to hide."
+      },
+      {
+        "type": "image_picker",
+        "id": "rv5_thumb",
+        "label": "Product thumbnail",
+        "info": "Defaults to the product's image"
+      },
+      {
+        "type": "range",
+        "id": "rv5_rating",
+        "label": "Star rating",
+        "info": "0 hides the stars",
+        "min": 0,
+        "max": 5,
+        "step": 1,
+        "default": 5
+      },
+      {
+        "type": "textarea",
+        "id": "rv5_quote",
+        "label": "Review",
+        "info": "Quotation marks are added automatically"
+      },
+      {
+        "type": "text",
+        "id": "rv5_author",
+        "label": "Reviewer name"
+      },
+      {
+        "type": "checkbox",
+        "id": "rv5_verified",
+        "label": "Show verified badge",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "rv5_avatar",
+        "label": "Reviewer photo",
+        "info": "Small round photo. Leave empty to use the photo above."
+      },
+      {
+        "type": "text",
+        "id": "rv5_detail",
+        "label": "Text under the name",
+        "info": "Leave empty to show the product's name"
+      },
+      {
+        "type": "select",
+        "id": "rv5_row",
+        "label": "Row",
+        "info": "Used when the section shows 2 rows",
+        "default": "1",
+        "options": [
+          {
+            "value": "1",
+            "label": "Row 1"
+          },
+          {
+            "value": "2",
+            "label": "Row 2"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Review 6"
+      },
+      {
+        "type": "image_picker",
+        "id": "rv6_image",
+        "label": "Photo",
+        "info": "Customer or lifestyle photo on the left of the card"
+      },
+      {
+        "type": "product",
+        "id": "rv6_product",
+        "label": "Product used",
+        "info": "Shows \"Used\" + the product name on the photo. Leave empty to hide."
+      },
+      {
+        "type": "image_picker",
+        "id": "rv6_thumb",
+        "label": "Product thumbnail",
+        "info": "Defaults to the product's image"
+      },
+      {
+        "type": "range",
+        "id": "rv6_rating",
+        "label": "Star rating",
+        "info": "0 hides the stars",
+        "min": 0,
+        "max": 5,
+        "step": 1,
+        "default": 5
+      },
+      {
+        "type": "textarea",
+        "id": "rv6_quote",
+        "label": "Review",
+        "info": "Quotation marks are added automatically"
+      },
+      {
+        "type": "text",
+        "id": "rv6_author",
+        "label": "Reviewer name"
+      },
+      {
+        "type": "checkbox",
+        "id": "rv6_verified",
+        "label": "Show verified badge",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "rv6_avatar",
+        "label": "Reviewer photo",
+        "info": "Small round photo. Leave empty to use the photo above."
+      },
+      {
+        "type": "text",
+        "id": "rv6_detail",
+        "label": "Text under the name",
+        "info": "Leave empty to show the product's name"
+      },
+      {
+        "type": "select",
+        "id": "rv6_row",
+        "label": "Row",
+        "info": "Used when the section shows 2 rows",
+        "default": "1",
+        "options": [
+          {
+            "value": "1",
+            "label": "Row 1"
+          },
+          {
+            "value": "2",
+            "label": "Row 2"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Review 7"
+      },
+      {
+        "type": "image_picker",
+        "id": "rv7_image",
+        "label": "Photo",
+        "info": "Customer or lifestyle photo on the left of the card"
+      },
+      {
+        "type": "product",
+        "id": "rv7_product",
+        "label": "Product used",
+        "info": "Shows \"Used\" + the product name on the photo. Leave empty to hide."
+      },
+      {
+        "type": "image_picker",
+        "id": "rv7_thumb",
+        "label": "Product thumbnail",
+        "info": "Defaults to the product's image"
+      },
+      {
+        "type": "range",
+        "id": "rv7_rating",
+        "label": "Star rating",
+        "info": "0 hides the stars",
+        "min": 0,
+        "max": 5,
+        "step": 1,
+        "default": 5
+      },
+      {
+        "type": "textarea",
+        "id": "rv7_quote",
+        "label": "Review",
+        "info": "Quotation marks are added automatically"
+      },
+      {
+        "type": "text",
+        "id": "rv7_author",
+        "label": "Reviewer name"
+      },
+      {
+        "type": "checkbox",
+        "id": "rv7_verified",
+        "label": "Show verified badge",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "rv7_avatar",
+        "label": "Reviewer photo",
+        "info": "Small round photo. Leave empty to use the photo above."
+      },
+      {
+        "type": "text",
+        "id": "rv7_detail",
+        "label": "Text under the name",
+        "info": "Leave empty to show the product's name"
+      },
+      {
+        "type": "select",
+        "id": "rv7_row",
+        "label": "Row",
+        "info": "Used when the section shows 2 rows",
+        "default": "1",
+        "options": [
+          {
+            "value": "1",
+            "label": "Row 1"
+          },
+          {
+            "value": "2",
+            "label": "Row 2"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Review 8"
+      },
+      {
+        "type": "image_picker",
+        "id": "rv8_image",
+        "label": "Photo",
+        "info": "Customer or lifestyle photo on the left of the card"
+      },
+      {
+        "type": "product",
+        "id": "rv8_product",
+        "label": "Product used",
+        "info": "Shows \"Used\" + the product name on the photo. Leave empty to hide."
+      },
+      {
+        "type": "image_picker",
+        "id": "rv8_thumb",
+        "label": "Product thumbnail",
+        "info": "Defaults to the product's image"
+      },
+      {
+        "type": "range",
+        "id": "rv8_rating",
+        "label": "Star rating",
+        "info": "0 hides the stars",
+        "min": 0,
+        "max": 5,
+        "step": 1,
+        "default": 5
+      },
+      {
+        "type": "textarea",
+        "id": "rv8_quote",
+        "label": "Review",
+        "info": "Quotation marks are added automatically"
+      },
+      {
+        "type": "text",
+        "id": "rv8_author",
+        "label": "Reviewer name"
+      },
+      {
+        "type": "checkbox",
+        "id": "rv8_verified",
+        "label": "Show verified badge",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "rv8_avatar",
+        "label": "Reviewer photo",
+        "info": "Small round photo. Leave empty to use the photo above."
+      },
+      {
+        "type": "text",
+        "id": "rv8_detail",
+        "label": "Text under the name",
+        "info": "Leave empty to show the product's name"
+      },
+      {
+        "type": "select",
+        "id": "rv8_row",
+        "label": "Row",
+        "info": "Used when the section shows 2 rows",
+        "default": "1",
+        "options": [
+          {
+            "value": "1",
+            "label": "Row 1"
+          },
+          {
+            "value": "2",
+            "label": "Row 2"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Review 9"
+      },
+      {
+        "type": "image_picker",
+        "id": "rv9_image",
+        "label": "Photo",
+        "info": "Customer or lifestyle photo on the left of the card"
+      },
+      {
+        "type": "product",
+        "id": "rv9_product",
+        "label": "Product used",
+        "info": "Shows \"Used\" + the product name on the photo. Leave empty to hide."
+      },
+      {
+        "type": "image_picker",
+        "id": "rv9_thumb",
+        "label": "Product thumbnail",
+        "info": "Defaults to the product's image"
+      },
+      {
+        "type": "range",
+        "id": "rv9_rating",
+        "label": "Star rating",
+        "info": "0 hides the stars",
+        "min": 0,
+        "max": 5,
+        "step": 1,
+        "default": 5
+      },
+      {
+        "type": "textarea",
+        "id": "rv9_quote",
+        "label": "Review",
+        "info": "Quotation marks are added automatically"
+      },
+      {
+        "type": "text",
+        "id": "rv9_author",
+        "label": "Reviewer name"
+      },
+      {
+        "type": "checkbox",
+        "id": "rv9_verified",
+        "label": "Show verified badge",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "rv9_avatar",
+        "label": "Reviewer photo",
+        "info": "Small round photo. Leave empty to use the photo above."
+      },
+      {
+        "type": "text",
+        "id": "rv9_detail",
+        "label": "Text under the name",
+        "info": "Leave empty to show the product's name"
+      },
+      {
+        "type": "select",
+        "id": "rv9_row",
+        "label": "Row",
+        "info": "Used when the section shows 2 rows",
+        "default": "1",
+        "options": [
+          {
+            "value": "1",
+            "label": "Row 1"
+          },
+          {
+            "value": "2",
+            "label": "Row 2"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Review 10"
+      },
+      {
+        "type": "image_picker",
+        "id": "rv10_image",
+        "label": "Photo",
+        "info": "Customer or lifestyle photo on the left of the card"
+      },
+      {
+        "type": "product",
+        "id": "rv10_product",
+        "label": "Product used",
+        "info": "Shows \"Used\" + the product name on the photo. Leave empty to hide."
+      },
+      {
+        "type": "image_picker",
+        "id": "rv10_thumb",
+        "label": "Product thumbnail",
+        "info": "Defaults to the product's image"
+      },
+      {
+        "type": "range",
+        "id": "rv10_rating",
+        "label": "Star rating",
+        "info": "0 hides the stars",
+        "min": 0,
+        "max": 5,
+        "step": 1,
+        "default": 5
+      },
+      {
+        "type": "textarea",
+        "id": "rv10_quote",
+        "label": "Review",
+        "info": "Quotation marks are added automatically"
+      },
+      {
+        "type": "text",
+        "id": "rv10_author",
+        "label": "Reviewer name"
+      },
+      {
+        "type": "checkbox",
+        "id": "rv10_verified",
+        "label": "Show verified badge",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "rv10_avatar",
+        "label": "Reviewer photo",
+        "info": "Small round photo. Leave empty to use the photo above."
+      },
+      {
+        "type": "text",
+        "id": "rv10_detail",
+        "label": "Text under the name",
+        "info": "Leave empty to show the product's name"
+      },
+      {
+        "type": "select",
+        "id": "rv10_row",
+        "label": "Row",
+        "info": "Used when the section shows 2 rows",
+        "default": "1",
+        "options": [
+          {
+            "value": "1",
+            "label": "Row 1"
+          },
+          {
+            "value": "2",
+            "label": "Row 2"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Review 11"
+      },
+      {
+        "type": "image_picker",
+        "id": "rv11_image",
+        "label": "Photo",
+        "info": "Customer or lifestyle photo on the left of the card"
+      },
+      {
+        "type": "product",
+        "id": "rv11_product",
+        "label": "Product used",
+        "info": "Shows \"Used\" + the product name on the photo. Leave empty to hide."
+      },
+      {
+        "type": "image_picker",
+        "id": "rv11_thumb",
+        "label": "Product thumbnail",
+        "info": "Defaults to the product's image"
+      },
+      {
+        "type": "range",
+        "id": "rv11_rating",
+        "label": "Star rating",
+        "info": "0 hides the stars",
+        "min": 0,
+        "max": 5,
+        "step": 1,
+        "default": 5
+      },
+      {
+        "type": "textarea",
+        "id": "rv11_quote",
+        "label": "Review",
+        "info": "Quotation marks are added automatically"
+      },
+      {
+        "type": "text",
+        "id": "rv11_author",
+        "label": "Reviewer name"
+      },
+      {
+        "type": "checkbox",
+        "id": "rv11_verified",
+        "label": "Show verified badge",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "rv11_avatar",
+        "label": "Reviewer photo",
+        "info": "Small round photo. Leave empty to use the photo above."
+      },
+      {
+        "type": "text",
+        "id": "rv11_detail",
+        "label": "Text under the name",
+        "info": "Leave empty to show the product's name"
+      },
+      {
+        "type": "select",
+        "id": "rv11_row",
+        "label": "Row",
+        "info": "Used when the section shows 2 rows",
+        "default": "2",
+        "options": [
+          {
+            "value": "1",
+            "label": "Row 1"
+          },
+          {
+            "value": "2",
+            "label": "Row 2"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Review 12"
+      },
+      {
+        "type": "image_picker",
+        "id": "rv12_image",
+        "label": "Photo",
+        "info": "Customer or lifestyle photo on the left of the card"
+      },
+      {
+        "type": "product",
+        "id": "rv12_product",
+        "label": "Product used",
+        "info": "Shows \"Used\" + the product name on the photo. Leave empty to hide."
+      },
+      {
+        "type": "image_picker",
+        "id": "rv12_thumb",
+        "label": "Product thumbnail",
+        "info": "Defaults to the product's image"
+      },
+      {
+        "type": "range",
+        "id": "rv12_rating",
+        "label": "Star rating",
+        "info": "0 hides the stars",
+        "min": 0,
+        "max": 5,
+        "step": 1,
+        "default": 5
+      },
+      {
+        "type": "textarea",
+        "id": "rv12_quote",
+        "label": "Review",
+        "info": "Quotation marks are added automatically"
+      },
+      {
+        "type": "text",
+        "id": "rv12_author",
+        "label": "Reviewer name"
+      },
+      {
+        "type": "checkbox",
+        "id": "rv12_verified",
+        "label": "Show verified badge",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "rv12_avatar",
+        "label": "Reviewer photo",
+        "info": "Small round photo. Leave empty to use the photo above."
+      },
+      {
+        "type": "text",
+        "id": "rv12_detail",
+        "label": "Text under the name",
+        "info": "Leave empty to show the product's name"
+      },
+      {
+        "type": "select",
+        "id": "rv12_row",
+        "label": "Row",
+        "info": "Used when the section shows 2 rows",
+        "default": "2",
+        "options": [
+          {
+            "value": "1",
+            "label": "Row 1"
+          },
+          {
+            "value": "2",
+            "label": "Row 2"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Review 13"
+      },
+      {
+        "type": "image_picker",
+        "id": "rv13_image",
+        "label": "Photo",
+        "info": "Customer or lifestyle photo on the left of the card"
+      },
+      {
+        "type": "product",
+        "id": "rv13_product",
+        "label": "Product used",
+        "info": "Shows \"Used\" + the product name on the photo. Leave empty to hide."
+      },
+      {
+        "type": "image_picker",
+        "id": "rv13_thumb",
+        "label": "Product thumbnail",
+        "info": "Defaults to the product's image"
+      },
+      {
+        "type": "range",
+        "id": "rv13_rating",
+        "label": "Star rating",
+        "info": "0 hides the stars",
+        "min": 0,
+        "max": 5,
+        "step": 1,
+        "default": 5
+      },
+      {
+        "type": "textarea",
+        "id": "rv13_quote",
+        "label": "Review",
+        "info": "Quotation marks are added automatically"
+      },
+      {
+        "type": "text",
+        "id": "rv13_author",
+        "label": "Reviewer name"
+      },
+      {
+        "type": "checkbox",
+        "id": "rv13_verified",
+        "label": "Show verified badge",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "rv13_avatar",
+        "label": "Reviewer photo",
+        "info": "Small round photo. Leave empty to use the photo above."
+      },
+      {
+        "type": "text",
+        "id": "rv13_detail",
+        "label": "Text under the name",
+        "info": "Leave empty to show the product's name"
+      },
+      {
+        "type": "select",
+        "id": "rv13_row",
+        "label": "Row",
+        "info": "Used when the section shows 2 rows",
+        "default": "2",
+        "options": [
+          {
+            "value": "1",
+            "label": "Row 1"
+          },
+          {
+            "value": "2",
+            "label": "Row 2"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Review 14"
+      },
+      {
+        "type": "image_picker",
+        "id": "rv14_image",
+        "label": "Photo",
+        "info": "Customer or lifestyle photo on the left of the card"
+      },
+      {
+        "type": "product",
+        "id": "rv14_product",
+        "label": "Product used",
+        "info": "Shows \"Used\" + the product name on the photo. Leave empty to hide."
+      },
+      {
+        "type": "image_picker",
+        "id": "rv14_thumb",
+        "label": "Product thumbnail",
+        "info": "Defaults to the product's image"
+      },
+      {
+        "type": "range",
+        "id": "rv14_rating",
+        "label": "Star rating",
+        "info": "0 hides the stars",
+        "min": 0,
+        "max": 5,
+        "step": 1,
+        "default": 5
+      },
+      {
+        "type": "textarea",
+        "id": "rv14_quote",
+        "label": "Review",
+        "info": "Quotation marks are added automatically"
+      },
+      {
+        "type": "text",
+        "id": "rv14_author",
+        "label": "Reviewer name"
+      },
+      {
+        "type": "checkbox",
+        "id": "rv14_verified",
+        "label": "Show verified badge",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "rv14_avatar",
+        "label": "Reviewer photo",
+        "info": "Small round photo. Leave empty to use the photo above."
+      },
+      {
+        "type": "text",
+        "id": "rv14_detail",
+        "label": "Text under the name",
+        "info": "Leave empty to show the product's name"
+      },
+      {
+        "type": "select",
+        "id": "rv14_row",
+        "label": "Row",
+        "info": "Used when the section shows 2 rows",
+        "default": "2",
+        "options": [
+          {
+            "value": "1",
+            "label": "Row 1"
+          },
+          {
+            "value": "2",
+            "label": "Row 2"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Review 15"
+      },
+      {
+        "type": "image_picker",
+        "id": "rv15_image",
+        "label": "Photo",
+        "info": "Customer or lifestyle photo on the left of the card"
+      },
+      {
+        "type": "product",
+        "id": "rv15_product",
+        "label": "Product used",
+        "info": "Shows \"Used\" + the product name on the photo. Leave empty to hide."
+      },
+      {
+        "type": "image_picker",
+        "id": "rv15_thumb",
+        "label": "Product thumbnail",
+        "info": "Defaults to the product's image"
+      },
+      {
+        "type": "range",
+        "id": "rv15_rating",
+        "label": "Star rating",
+        "info": "0 hides the stars",
+        "min": 0,
+        "max": 5,
+        "step": 1,
+        "default": 5
+      },
+      {
+        "type": "textarea",
+        "id": "rv15_quote",
+        "label": "Review",
+        "info": "Quotation marks are added automatically"
+      },
+      {
+        "type": "text",
+        "id": "rv15_author",
+        "label": "Reviewer name"
+      },
+      {
+        "type": "checkbox",
+        "id": "rv15_verified",
+        "label": "Show verified badge",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "rv15_avatar",
+        "label": "Reviewer photo",
+        "info": "Small round photo. Leave empty to use the photo above."
+      },
+      {
+        "type": "text",
+        "id": "rv15_detail",
+        "label": "Text under the name",
+        "info": "Leave empty to show the product's name"
+      },
+      {
+        "type": "select",
+        "id": "rv15_row",
+        "label": "Row",
+        "info": "Used when the section shows 2 rows",
+        "default": "2",
+        "options": [
+          {
+            "value": "1",
+            "label": "Row 1"
+          },
+          {
+            "value": "2",
+            "label": "Row 2"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Review 16"
+      },
+      {
+        "type": "image_picker",
+        "id": "rv16_image",
+        "label": "Photo",
+        "info": "Customer or lifestyle photo on the left of the card"
+      },
+      {
+        "type": "product",
+        "id": "rv16_product",
+        "label": "Product used",
+        "info": "Shows \"Used\" + the product name on the photo. Leave empty to hide."
+      },
+      {
+        "type": "image_picker",
+        "id": "rv16_thumb",
+        "label": "Product thumbnail",
+        "info": "Defaults to the product's image"
+      },
+      {
+        "type": "range",
+        "id": "rv16_rating",
+        "label": "Star rating",
+        "info": "0 hides the stars",
+        "min": 0,
+        "max": 5,
+        "step": 1,
+        "default": 5
+      },
+      {
+        "type": "textarea",
+        "id": "rv16_quote",
+        "label": "Review",
+        "info": "Quotation marks are added automatically"
+      },
+      {
+        "type": "text",
+        "id": "rv16_author",
+        "label": "Reviewer name"
+      },
+      {
+        "type": "checkbox",
+        "id": "rv16_verified",
+        "label": "Show verified badge",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "rv16_avatar",
+        "label": "Reviewer photo",
+        "info": "Small round photo. Leave empty to use the photo above."
+      },
+      {
+        "type": "text",
+        "id": "rv16_detail",
+        "label": "Text under the name",
+        "info": "Leave empty to show the product's name"
+      },
+      {
+        "type": "select",
+        "id": "rv16_row",
+        "label": "Row",
+        "info": "Used when the section shows 2 rows",
+        "default": "2",
+        "options": [
+          {
+            "value": "1",
+            "label": "Row 1"
+          },
+          {
+            "value": "2",
+            "label": "Row 2"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Review 17"
+      },
+      {
+        "type": "image_picker",
+        "id": "rv17_image",
+        "label": "Photo",
+        "info": "Customer or lifestyle photo on the left of the card"
+      },
+      {
+        "type": "product",
+        "id": "rv17_product",
+        "label": "Product used",
+        "info": "Shows \"Used\" + the product name on the photo. Leave empty to hide."
+      },
+      {
+        "type": "image_picker",
+        "id": "rv17_thumb",
+        "label": "Product thumbnail",
+        "info": "Defaults to the product's image"
+      },
+      {
+        "type": "range",
+        "id": "rv17_rating",
+        "label": "Star rating",
+        "info": "0 hides the stars",
+        "min": 0,
+        "max": 5,
+        "step": 1,
+        "default": 5
+      },
+      {
+        "type": "textarea",
+        "id": "rv17_quote",
+        "label": "Review",
+        "info": "Quotation marks are added automatically"
+      },
+      {
+        "type": "text",
+        "id": "rv17_author",
+        "label": "Reviewer name"
+      },
+      {
+        "type": "checkbox",
+        "id": "rv17_verified",
+        "label": "Show verified badge",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "rv17_avatar",
+        "label": "Reviewer photo",
+        "info": "Small round photo. Leave empty to use the photo above."
+      },
+      {
+        "type": "text",
+        "id": "rv17_detail",
+        "label": "Text under the name",
+        "info": "Leave empty to show the product's name"
+      },
+      {
+        "type": "select",
+        "id": "rv17_row",
+        "label": "Row",
+        "info": "Used when the section shows 2 rows",
+        "default": "2",
+        "options": [
+          {
+            "value": "1",
+            "label": "Row 1"
+          },
+          {
+            "value": "2",
+            "label": "Row 2"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Review 18"
+      },
+      {
+        "type": "image_picker",
+        "id": "rv18_image",
+        "label": "Photo",
+        "info": "Customer or lifestyle photo on the left of the card"
+      },
+      {
+        "type": "product",
+        "id": "rv18_product",
+        "label": "Product used",
+        "info": "Shows \"Used\" + the product name on the photo. Leave empty to hide."
+      },
+      {
+        "type": "image_picker",
+        "id": "rv18_thumb",
+        "label": "Product thumbnail",
+        "info": "Defaults to the product's image"
+      },
+      {
+        "type": "range",
+        "id": "rv18_rating",
+        "label": "Star rating",
+        "info": "0 hides the stars",
+        "min": 0,
+        "max": 5,
+        "step": 1,
+        "default": 5
+      },
+      {
+        "type": "textarea",
+        "id": "rv18_quote",
+        "label": "Review",
+        "info": "Quotation marks are added automatically"
+      },
+      {
+        "type": "text",
+        "id": "rv18_author",
+        "label": "Reviewer name"
+      },
+      {
+        "type": "checkbox",
+        "id": "rv18_verified",
+        "label": "Show verified badge",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "rv18_avatar",
+        "label": "Reviewer photo",
+        "info": "Small round photo. Leave empty to use the photo above."
+      },
+      {
+        "type": "text",
+        "id": "rv18_detail",
+        "label": "Text under the name",
+        "info": "Leave empty to show the product's name"
+      },
+      {
+        "type": "select",
+        "id": "rv18_row",
+        "label": "Row",
+        "info": "Used when the section shows 2 rows",
+        "default": "2",
+        "options": [
+          {
+            "value": "1",
+            "label": "Row 1"
+          },
+          {
+            "value": "2",
+            "label": "Row 2"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Review 19"
+      },
+      {
+        "type": "image_picker",
+        "id": "rv19_image",
+        "label": "Photo",
+        "info": "Customer or lifestyle photo on the left of the card"
+      },
+      {
+        "type": "product",
+        "id": "rv19_product",
+        "label": "Product used",
+        "info": "Shows \"Used\" + the product name on the photo. Leave empty to hide."
+      },
+      {
+        "type": "image_picker",
+        "id": "rv19_thumb",
+        "label": "Product thumbnail",
+        "info": "Defaults to the product's image"
+      },
+      {
+        "type": "range",
+        "id": "rv19_rating",
+        "label": "Star rating",
+        "info": "0 hides the stars",
+        "min": 0,
+        "max": 5,
+        "step": 1,
+        "default": 5
+      },
+      {
+        "type": "textarea",
+        "id": "rv19_quote",
+        "label": "Review",
+        "info": "Quotation marks are added automatically"
+      },
+      {
+        "type": "text",
+        "id": "rv19_author",
+        "label": "Reviewer name"
+      },
+      {
+        "type": "checkbox",
+        "id": "rv19_verified",
+        "label": "Show verified badge",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "rv19_avatar",
+        "label": "Reviewer photo",
+        "info": "Small round photo. Leave empty to use the photo above."
+      },
+      {
+        "type": "text",
+        "id": "rv19_detail",
+        "label": "Text under the name",
+        "info": "Leave empty to show the product's name"
+      },
+      {
+        "type": "select",
+        "id": "rv19_row",
+        "label": "Row",
+        "info": "Used when the section shows 2 rows",
+        "default": "2",
+        "options": [
+          {
+            "value": "1",
+            "label": "Row 1"
+          },
+          {
+            "value": "2",
+            "label": "Row 2"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Review 20"
+      },
+      {
+        "type": "image_picker",
+        "id": "rv20_image",
+        "label": "Photo",
+        "info": "Customer or lifestyle photo on the left of the card"
+      },
+      {
+        "type": "product",
+        "id": "rv20_product",
+        "label": "Product used",
+        "info": "Shows \"Used\" + the product name on the photo. Leave empty to hide."
+      },
+      {
+        "type": "image_picker",
+        "id": "rv20_thumb",
+        "label": "Product thumbnail",
+        "info": "Defaults to the product's image"
+      },
+      {
+        "type": "range",
+        "id": "rv20_rating",
+        "label": "Star rating",
+        "info": "0 hides the stars",
+        "min": 0,
+        "max": 5,
+        "step": 1,
+        "default": 5
+      },
+      {
+        "type": "textarea",
+        "id": "rv20_quote",
+        "label": "Review",
+        "info": "Quotation marks are added automatically"
+      },
+      {
+        "type": "text",
+        "id": "rv20_author",
+        "label": "Reviewer name"
+      },
+      {
+        "type": "checkbox",
+        "id": "rv20_verified",
+        "label": "Show verified badge",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "rv20_avatar",
+        "label": "Reviewer photo",
+        "info": "Small round photo. Leave empty to use the photo above."
+      },
+      {
+        "type": "text",
+        "id": "rv20_detail",
+        "label": "Text under the name",
+        "info": "Leave empty to show the product's name"
+      },
+      {
+        "type": "select",
+        "id": "rv20_row",
+        "label": "Row",
+        "info": "Used when the section shows 2 rows",
+        "default": "2",
+        "options": [
+          {
+            "value": "1",
+            "label": "Row 1"
+          },
+          {
+            "value": "2",
+            "label": "Row 2"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Zenith · Guarantee",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Shared by every \"Zenith · Feature columns\" section set to Columns and logos = Zenith Guarantee (add one with Add section → Zenith · Guarantee). Empty columns and logos are skipped. Heading, sizes and colors stay in each section."
+      },
+      {
+        "type": "header",
+        "content": "Column 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "zg_col1_image",
+        "label": "Image"
+      },
+      {
+        "type": "select",
+        "id": "zg_col1_icon",
+        "label": "Icon",
+        "default": "none",
+        "options": [
+          {
+            "value": "none",
+            "label": "None"
+          },
+          {
+            "value": "hand_heart",
+            "label": "Hand with heart"
+          },
+          {
+            "value": "sun_cloud",
+            "label": "Sun and cloud"
+          },
+          {
+            "value": "phone",
+            "label": "Phone"
+          },
+          {
+            "value": "qr",
+            "label": "QR code"
+          },
+          {
+            "value": "badge_check",
+            "label": "Badge check"
+          },
+          {
+            "value": "badge_check_round",
+            "label": "Badge check (round)"
+          },
+          {
+            "value": "shield",
+            "label": "Shield"
+          },
+          {
+            "value": "refresh",
+            "label": "Money back"
+          },
+          {
+            "value": "cash",
+            "label": "Cash"
+          },
+          {
+            "value": "truck",
+            "label": "Delivery"
+          },
+          {
+            "value": "certified",
+            "label": "Certified"
+          },
+          {
+            "value": "leaf",
+            "label": "Natural"
+          },
+          {
+            "value": "sun",
+            "label": "Climate"
+          },
+          {
+            "value": "droplet",
+            "label": "Droplet"
+          },
+          {
+            "value": "lock",
+            "label": "Secure"
+          },
+          {
+            "value": "box",
+            "label": "Package"
+          },
+          {
+            "value": "chat",
+            "label": "Chat"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "zg_col1_badge",
+        "label": "Number badge",
+        "info": "e.g. 3 — shown in a circle instead of the icon"
+      },
+      {
+        "type": "text",
+        "id": "zg_col1_title",
+        "label": "Title"
+      },
+      {
+        "type": "richtext",
+        "id": "zg_col1_text",
+        "label": "Text"
+      },
+      {
+        "type": "header",
+        "content": "Column 2"
+      },
+      {
+        "type": "image_picker",
+        "id": "zg_col2_image",
+        "label": "Image"
+      },
+      {
+        "type": "select",
+        "id": "zg_col2_icon",
+        "label": "Icon",
+        "default": "none",
+        "options": [
+          {
+            "value": "none",
+            "label": "None"
+          },
+          {
+            "value": "hand_heart",
+            "label": "Hand with heart"
+          },
+          {
+            "value": "sun_cloud",
+            "label": "Sun and cloud"
+          },
+          {
+            "value": "phone",
+            "label": "Phone"
+          },
+          {
+            "value": "qr",
+            "label": "QR code"
+          },
+          {
+            "value": "badge_check",
+            "label": "Badge check"
+          },
+          {
+            "value": "badge_check_round",
+            "label": "Badge check (round)"
+          },
+          {
+            "value": "shield",
+            "label": "Shield"
+          },
+          {
+            "value": "refresh",
+            "label": "Money back"
+          },
+          {
+            "value": "cash",
+            "label": "Cash"
+          },
+          {
+            "value": "truck",
+            "label": "Delivery"
+          },
+          {
+            "value": "certified",
+            "label": "Certified"
+          },
+          {
+            "value": "leaf",
+            "label": "Natural"
+          },
+          {
+            "value": "sun",
+            "label": "Climate"
+          },
+          {
+            "value": "droplet",
+            "label": "Droplet"
+          },
+          {
+            "value": "lock",
+            "label": "Secure"
+          },
+          {
+            "value": "box",
+            "label": "Package"
+          },
+          {
+            "value": "chat",
+            "label": "Chat"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "zg_col2_badge",
+        "label": "Number badge",
+        "info": "e.g. 3 — shown in a circle instead of the icon"
+      },
+      {
+        "type": "text",
+        "id": "zg_col2_title",
+        "label": "Title"
+      },
+      {
+        "type": "richtext",
+        "id": "zg_col2_text",
+        "label": "Text"
+      },
+      {
+        "type": "header",
+        "content": "Column 3"
+      },
+      {
+        "type": "image_picker",
+        "id": "zg_col3_image",
+        "label": "Image"
+      },
+      {
+        "type": "select",
+        "id": "zg_col3_icon",
+        "label": "Icon",
+        "default": "none",
+        "options": [
+          {
+            "value": "none",
+            "label": "None"
+          },
+          {
+            "value": "hand_heart",
+            "label": "Hand with heart"
+          },
+          {
+            "value": "sun_cloud",
+            "label": "Sun and cloud"
+          },
+          {
+            "value": "phone",
+            "label": "Phone"
+          },
+          {
+            "value": "qr",
+            "label": "QR code"
+          },
+          {
+            "value": "badge_check",
+            "label": "Badge check"
+          },
+          {
+            "value": "badge_check_round",
+            "label": "Badge check (round)"
+          },
+          {
+            "value": "shield",
+            "label": "Shield"
+          },
+          {
+            "value": "refresh",
+            "label": "Money back"
+          },
+          {
+            "value": "cash",
+            "label": "Cash"
+          },
+          {
+            "value": "truck",
+            "label": "Delivery"
+          },
+          {
+            "value": "certified",
+            "label": "Certified"
+          },
+          {
+            "value": "leaf",
+            "label": "Natural"
+          },
+          {
+            "value": "sun",
+            "label": "Climate"
+          },
+          {
+            "value": "droplet",
+            "label": "Droplet"
+          },
+          {
+            "value": "lock",
+            "label": "Secure"
+          },
+          {
+            "value": "box",
+            "label": "Package"
+          },
+          {
+            "value": "chat",
+            "label": "Chat"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "zg_col3_badge",
+        "label": "Number badge",
+        "info": "e.g. 3 — shown in a circle instead of the icon"
+      },
+      {
+        "type": "text",
+        "id": "zg_col3_title",
+        "label": "Title"
+      },
+      {
+        "type": "richtext",
+        "id": "zg_col3_text",
+        "label": "Text"
+      },
+      {
+        "type": "header",
+        "content": "Column 4"
+      },
+      {
+        "type": "image_picker",
+        "id": "zg_col4_image",
+        "label": "Image"
+      },
+      {
+        "type": "select",
+        "id": "zg_col4_icon",
+        "label": "Icon",
+        "default": "none",
+        "options": [
+          {
+            "value": "none",
+            "label": "None"
+          },
+          {
+            "value": "hand_heart",
+            "label": "Hand with heart"
+          },
+          {
+            "value": "sun_cloud",
+            "label": "Sun and cloud"
+          },
+          {
+            "value": "phone",
+            "label": "Phone"
+          },
+          {
+            "value": "qr",
+            "label": "QR code"
+          },
+          {
+            "value": "badge_check",
+            "label": "Badge check"
+          },
+          {
+            "value": "badge_check_round",
+            "label": "Badge check (round)"
+          },
+          {
+            "value": "shield",
+            "label": "Shield"
+          },
+          {
+            "value": "refresh",
+            "label": "Money back"
+          },
+          {
+            "value": "cash",
+            "label": "Cash"
+          },
+          {
+            "value": "truck",
+            "label": "Delivery"
+          },
+          {
+            "value": "certified",
+            "label": "Certified"
+          },
+          {
+            "value": "leaf",
+            "label": "Natural"
+          },
+          {
+            "value": "sun",
+            "label": "Climate"
+          },
+          {
+            "value": "droplet",
+            "label": "Droplet"
+          },
+          {
+            "value": "lock",
+            "label": "Secure"
+          },
+          {
+            "value": "box",
+            "label": "Package"
+          },
+          {
+            "value": "chat",
+            "label": "Chat"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "zg_col4_badge",
+        "label": "Number badge",
+        "info": "e.g. 3 — shown in a circle instead of the icon"
+      },
+      {
+        "type": "text",
+        "id": "zg_col4_title",
+        "label": "Title"
+      },
+      {
+        "type": "richtext",
+        "id": "zg_col4_text",
+        "label": "Text"
+      },
+      {
+        "type": "header",
+        "content": "Footer"
+      },
+      {
+        "type": "image_picker",
+        "id": "zg_footer_image",
+        "label": "Footer image",
+        "info": "All logos in one image. To upload logos one by one (each with its own size), use the Logo slots below."
+      },
+      {
+        "type": "checkbox",
+        "id": "zg_payment_icons",
+        "label": "Show store payment icons",
+        "default": false
+      },
+      {
+        "type": "richtext",
+        "id": "zg_footer_text",
+        "label": "Footer text"
+      },
+      {
+        "type": "header",
+        "content": "Logo 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "zg_logo1_image",
+        "label": "Logo",
+        "info": "Courier, payment or partner logo. SVG or transparent PNG, cropped tight to the artwork."
+      },
+      {
+        "type": "text",
+        "id": "zg_logo1_name",
+        "label": "Name",
+        "info": "Alt text. Shown as text until a logo is uploaded."
+      },
+      {
+        "type": "url",
+        "id": "zg_logo1_link",
+        "label": "Link"
+      },
+      {
+        "type": "range",
+        "id": "zg_logo1_scale",
+        "label": "Logo size",
+        "info": "Percent of the section's footer logo height",
+        "min": 30,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "default": 100
+      },
+      {
+        "type": "header",
+        "content": "Logo 2"
+      },
+      {
+        "type": "image_picker",
+        "id": "zg_logo2_image",
+        "label": "Logo",
+        "info": "Courier, payment or partner logo. SVG or transparent PNG, cropped tight to the artwork."
+      },
+      {
+        "type": "text",
+        "id": "zg_logo2_name",
+        "label": "Name",
+        "info": "Alt text. Shown as text until a logo is uploaded."
+      },
+      {
+        "type": "url",
+        "id": "zg_logo2_link",
+        "label": "Link"
+      },
+      {
+        "type": "range",
+        "id": "zg_logo2_scale",
+        "label": "Logo size",
+        "info": "Percent of the section's footer logo height",
+        "min": 30,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "default": 100
+      },
+      {
+        "type": "header",
+        "content": "Logo 3"
+      },
+      {
+        "type": "image_picker",
+        "id": "zg_logo3_image",
+        "label": "Logo",
+        "info": "Courier, payment or partner logo. SVG or transparent PNG, cropped tight to the artwork."
+      },
+      {
+        "type": "text",
+        "id": "zg_logo3_name",
+        "label": "Name",
+        "info": "Alt text. Shown as text until a logo is uploaded."
+      },
+      {
+        "type": "url",
+        "id": "zg_logo3_link",
+        "label": "Link"
+      },
+      {
+        "type": "range",
+        "id": "zg_logo3_scale",
+        "label": "Logo size",
+        "info": "Percent of the section's footer logo height",
+        "min": 30,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "default": 100
+      },
+      {
+        "type": "header",
+        "content": "Logo 4"
+      },
+      {
+        "type": "image_picker",
+        "id": "zg_logo4_image",
+        "label": "Logo",
+        "info": "Courier, payment or partner logo. SVG or transparent PNG, cropped tight to the artwork."
+      },
+      {
+        "type": "text",
+        "id": "zg_logo4_name",
+        "label": "Name",
+        "info": "Alt text. Shown as text until a logo is uploaded."
+      },
+      {
+        "type": "url",
+        "id": "zg_logo4_link",
+        "label": "Link"
+      },
+      {
+        "type": "range",
+        "id": "zg_logo4_scale",
+        "label": "Logo size",
+        "info": "Percent of the section's footer logo height",
+        "min": 30,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "default": 100
+      },
+      {
+        "type": "header",
+        "content": "Logo 5"
+      },
+      {
+        "type": "image_picker",
+        "id": "zg_logo5_image",
+        "label": "Logo",
+        "info": "Courier, payment or partner logo. SVG or transparent PNG, cropped tight to the artwork."
+      },
+      {
+        "type": "text",
+        "id": "zg_logo5_name",
+        "label": "Name",
+        "info": "Alt text. Shown as text until a logo is uploaded."
+      },
+      {
+        "type": "url",
+        "id": "zg_logo5_link",
+        "label": "Link"
+      },
+      {
+        "type": "range",
+        "id": "zg_logo5_scale",
+        "label": "Logo size",
+        "info": "Percent of the section's footer logo height",
+        "min": 30,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "default": 100
+      },
+      {
+        "type": "header",
+        "content": "Logo 6"
+      },
+      {
+        "type": "image_picker",
+        "id": "zg_logo6_image",
+        "label": "Logo",
+        "info": "Courier, payment or partner logo. SVG or transparent PNG, cropped tight to the artwork."
+      },
+      {
+        "type": "text",
+        "id": "zg_logo6_name",
+        "label": "Name",
+        "info": "Alt text. Shown as text until a logo is uploaded."
+      },
+      {
+        "type": "url",
+        "id": "zg_logo6_link",
+        "label": "Link"
+      },
+      {
+        "type": "range",
+        "id": "zg_logo6_scale",
+        "label": "Logo size",
+        "info": "Percent of the section's footer logo height",
+        "min": 30,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "default": 100
+      },
+      {
+        "type": "header",
+        "content": "Logo 7"
+      },
+      {
+        "type": "image_picker",
+        "id": "zg_logo7_image",
+        "label": "Logo",
+        "info": "Courier, payment or partner logo. SVG or transparent PNG, cropped tight to the artwork."
+      },
+      {
+        "type": "text",
+        "id": "zg_logo7_name",
+        "label": "Name",
+        "info": "Alt text. Shown as text until a logo is uploaded."
+      },
+      {
+        "type": "url",
+        "id": "zg_logo7_link",
+        "label": "Link"
+      },
+      {
+        "type": "range",
+        "id": "zg_logo7_scale",
+        "label": "Logo size",
+        "info": "Percent of the section's footer logo height",
+        "min": 30,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "default": 100
+      },
+      {
+        "type": "header",
+        "content": "Logo 8"
+      },
+      {
+        "type": "image_picker",
+        "id": "zg_logo8_image",
+        "label": "Logo",
+        "info": "Courier, payment or partner logo. SVG or transparent PNG, cropped tight to the artwork."
+      },
+      {
+        "type": "text",
+        "id": "zg_logo8_name",
+        "label": "Name",
+        "info": "Alt text. Shown as text until a logo is uploaded."
+      },
+      {
+        "type": "url",
+        "id": "zg_logo8_link",
+        "label": "Link"
+      },
+      {
+        "type": "range",
+        "id": "zg_logo8_scale",
+        "label": "Logo size",
+        "info": "Percent of the section's footer logo height",
+        "min": 30,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "default": 100
+      }
+    ]
+  },
+  {
     "name": "t:settings_schema.logo.name",
     "settings": [
       {

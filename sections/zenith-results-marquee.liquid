@@ -51,8 +51,33 @@
   assign photo_w = section.settings.card_width | times: section.settings.media_width | divided_by: 100
   assign photo_w_m = section.settings.mobile_card_width | times: section.settings.media_width_mobile | divided_by: 100
   assign photo_sizes = '(min-width: 750px) ' | append: photo_w | append: 'px, ' | append: photo_w_m | append: 'px'
+
+  # Global: Theme settings → Zenith · Results reviews, slots rv1–rv20 (empty slots skipped). Custom: this section's blocks.
+  assign use_global = false
+  if section.settings.content_source == 'global'
+    assign use_global = true
+  endif
+  assign total_count = 0
+  if use_global
+    assign item_max = 20
+    assign empty_note = 'Add reviews in Theme settings → Zenith · Results reviews'
+    for n in (1..item_max)
+      assign p = 'rv' | append: n | append: '_'
+      assign k_image = p | append: 'image'
+      assign k_quote = p | append: 'quote'
+      assign k_author = p | append: 'author'
+      if settings[k_image] != blank or settings[k_quote] != blank or settings[k_author] != blank
+        assign total_count = total_count | plus: 1
+      endif
+    endfor
+  else
+    assign item_max = section.blocks.size
+    assign total_count = item_max
+    assign empty_note = 'Add a review in the theme editor'
+  endif
 -%}
 
+{%- if total_count > 0 or request.design_mode -%}
 <section
   id="Zenith-{{ section.id }}"
   class="zenith-section zenith-results color-{{ section.settings.color_scheme }} gradient{% if section.settings.pause_on_hover %} zenith-results--pause{% endif %}"
@@ -85,11 +110,101 @@
       {%- liquid
         assign row_key = r | append: ''
         assign item_count = 0
-        for block in section.blocks
-          if row_count == 1 or block.settings.row == row_key
-            assign item_count = item_count | plus: 1
+        assign row_cards = ''
+        assign row_clones = ''
+      -%}
+      {%- for n in (1..item_max) -%}
+        {%- liquid
+          if use_global
+            assign p = 'rv' | append: n | append: '_'
+            assign k = p | append: 'image'
+            assign c_photo = settings[k]
+            assign k = p | append: 'quote'
+            assign c_quote = settings[k]
+            assign k = p | append: 'author'
+            assign c_author = settings[k]
+            if c_photo == blank and c_quote == blank and c_author == blank
+              continue
+            endif
+            assign k = p | append: 'row'
+            assign c_row = settings[k]
+            assign k = p | append: 'product'
+            assign c_product = settings[k]
+            assign k = p | append: 'thumb'
+            assign c_thumb = settings[k]
+            assign k = p | append: 'rating'
+            assign c_rating = settings[k]
+            assign k = p | append: 'verified'
+            assign c_verified = settings[k]
+            assign k = p | append: 'avatar'
+            assign c_avatar = settings[k]
+            assign k = p | append: 'detail'
+            assign c_detail = settings[k]
+            assign c_attrs = ''
+          else
+            assign block = section.blocks[forloop.index0]
+            assign c_photo = block.settings.image
+            assign c_quote = block.settings.quote
+            assign c_author = block.settings.author
+            assign c_row = block.settings.row
+            assign c_product = block.settings.product
+            assign c_thumb = block.settings.thumbnail
+            assign c_rating = block.settings.rating
+            assign c_verified = block.settings.verified
+            assign c_avatar = block.settings.avatar
+            assign c_detail = block.settings.author_detail
+            assign c_attrs = 'id="Block-' | append: block.id | append: '" ' | append: block.shopify_attributes
           endif
-        endfor
+          unless row_count == 1 or c_row == row_key
+            continue
+          endunless
+          assign item_count = item_count | plus: 1
+        -%}
+        {%- capture row_cards -%}
+          {{- row_cards -}}
+          {%- render 'zenith-results-card',
+            photo: c_photo,
+            review_product: c_product,
+            thumbnail: c_thumb,
+            rating: c_rating,
+            quote: c_quote,
+            author: c_author,
+            verified: c_verified,
+            avatar: c_avatar,
+            author_detail: c_detail,
+            attrs: c_attrs,
+            clone: false,
+            prefix: prefix,
+            verified_label: verified_label,
+            photo_sizes: photo_sizes,
+            overlay_style: section.settings.overlay_style
+          -%}
+        {%- endcapture -%}
+        {%- capture row_clones -%}
+          {{- row_clones -}}
+          {%- render 'zenith-results-card',
+            photo: c_photo,
+            review_product: c_product,
+            thumbnail: c_thumb,
+            rating: c_rating,
+            quote: c_quote,
+            author: c_author,
+            verified: c_verified,
+            avatar: c_avatar,
+            author_detail: c_detail,
+            attrs: '',
+            clone: true,
+            prefix: prefix,
+            verified_label: verified_label,
+            photo_sizes: photo_sizes,
+            overlay_style: section.settings.overlay_style
+          -%}
+        {%- endcapture -%}
+      {%- endfor -%}
+      {%- liquid
+        if item_count == 0 and request.design_mode == false
+          continue
+        endif
         assign reverse = false
         if r == 2 and section.settings.alternate_direction
           assign reverse = true
@@ -106,125 +221,7 @@
               {% endif %}
             >
               {%- if item_count > 0 -%}
-                {%- for block in section.blocks -%}
-                  {%- unless row_count == 1 or block.settings.row == row_key -%}{%- continue -%}{%- endunless -%}
-                  {%- liquid
-                    assign photo = block.settings.image
-                    assign result_product = block.settings.product
-                    assign thumb = block.settings.thumbnail
-                    if thumb == blank and result_product != blank
-                      assign thumb = result_product.featured_image
-                    endif
-                    assign author = block.settings.author | escape
-                    assign photo_alt = photo.alt | default: block.settings.author | escape
-                    assign rating = block.settings.rating | plus: 0
-                    assign detail = block.settings.author_detail | default: result_product.title | escape
-                    assign avatar = block.settings.avatar | default: photo
-
-                    assign quote = block.settings.quote | strip
-                    assign quote_text = quote | escape | newline_to_br
-                    assign q_first = quote | slice: 0
-                    if quote != blank and q_first != '"' and q_first != '“'
-                      assign quote_text = '“' | append: quote_text | append: '”'
-                    endif
-                  -%}
-                  <li
-                    class="zenith-results__card"
-                    {% if pass == 1 %}
-                      id="Block-{{ block.id }}" {{ block.shopify_attributes }}
-                    {% endif %}
-                  >
-                    <div class="zenith-media zenith-results__media">
-                      {%- if photo != blank -%}
-                        {{
-                          photo
-                          | image_url: width: 720
-                          | image_tag:
-                            loading: 'lazy',
-                            widths: '180, 240, 360, 480, 720',
-                            sizes: photo_sizes,
-                            alt: photo_alt
-                        }}
-                      {%- else -%}
-                        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-                      {%- endif -%}
-                      {%- render 'zenith-overlay', style: section.settings.overlay_style -%}
-                      {%- if result_product != blank -%}
-                        <a
-                          href="{{ result_product.url }}"
-                          class="zenith-results__meta"
-                          {% if pass > 1 %}
-                            tabindex="-1"
-                          {% endif %}
-                        >
-                          {%- if thumb != blank -%}
-                            <span class="zenith-results__thumb">
-                              {{
-                                thumb
-                                | image_url: width: 160
-                                | image_tag: loading: 'lazy', widths: '80, 120, 160', sizes: '40px', alt: ''
-                              }}
-                            </span>
-                          {%- endif -%}
-                          <span class="zenith-results__used">
-                            {%- if prefix != blank -%}
-                              <span>{{ prefix }}</span>
-                            {%- endif -%}
-                            <span class="zenith-results__product">{{ result_product.title | escape }}</span>
-                          </span>
-                        </a>
-                      {%- endif -%}
-                    </div>
-
-                    <figure class="zenith-results__review">
-                      <div class="zenith-results__body">
-                        {%- if rating > 0 -%}
-                          <div class="zenith-results__stars" role="img" aria-label="{{ rating }} out of 5 stars">
-                            {%- for i in (1..5) -%}
-                              <span class="zenith-results__star{% if i > rating %} zenith-results__star--off{% endif %}">
-                                {%- render 'zenith-icon', icon: 'star' -%}
-                              </span>
-                            {%- endfor -%}
-                          </div>
-                        {%- endif -%}
-                        {%- if quote != blank -%}
-                          <blockquote class="zenith-results__quote">{{ quote_text }}</blockquote>
-                        {%- endif -%}
-                      </div>
-                      {%- if author != blank or detail != blank -%}
-                        <figcaption class="zenith-results__author">
-                          {%- if avatar != blank -%}
-                            <span class="zenith-results__avatar">
-                              {{
-                                avatar
-                                | image_url: width: 128
-                                | image_tag: loading: 'lazy', widths: '48, 64, 96, 128', sizes: '40px', alt: ''
-                              }}
-                            </span>
-                          {%- elsif author != blank -%}
-                            <span class="zenith-results__avatar zenith-results__avatar--initial" aria-hidden="true">
-                              {{- author | slice: 0 | upcase -}}
-                            </span>
-                          {%- endif -%}
-                          {%- if author != blank -%}
-                            <span class="zenith-results__name">
-                              <span>{{ author }}</span>
-                              {%- if block.settings.verified -%}
-                                <span class="zenith-results__badge" title="{{ verified_label }}">
-                                  {%- render 'zenith-icon', icon: 'verified_seal' -%}
-                                  <span class="visually-hidden">{{ verified_label }}</span>
-                                </span>
-                              {%- endif -%}
-                            </span>
-                          {%- endif -%}
-                          {%- if detail != blank -%}
-                            <span class="zenith-results__detail">{{ detail }}</span>
-                          {%- endif -%}
-                        </figcaption>
-                      {%- endif -%}
-                    </figure>
-                  </li>
-                {%- endfor -%}
+                {%- if pass == 1 -%}{{ row_cards }}{%- else -%}{{ row_clones }}{%- endif -%}
               {%- else -%}
                 {%- for i in (1..4) -%}
                   <li class="zenith-results__card">
@@ -234,7 +231,7 @@
                     </div>
                     <figure class="zenith-results__review">
                       <div class="zenith-results__body">
-                        <blockquote class="zenith-results__quote">Add a review in the theme editor</blockquote>
+                        <blockquote class="zenith-results__quote">{{ empty_note }}</blockquote>
                       </div>
                     </figure>
                   </li>
@@ -269,6 +266,7 @@
     </div>
   {%- endif -%}
 </section>
+{%- endif -%}
 {%- endcapture -%}
 {{- zenith_body | replace: '[customers]', settings.customer_count -}}
 
@@ -288,6 +286,23 @@
     {
       "type": "header",
       "content": "Content"
+    },
+    {
+      "type": "select",
+      "id": "content_source",
+      "label": "Reviews",
+      "info": "Global = the reviews in Theme settings → Zenith · Results reviews (edit once, same on every page). This section's reviews = the Review blocks below.",
+      "default": "global",
+      "options": [
+        {
+          "value": "global",
+          "label": "Global (Theme settings)"
+        },
+        {
+          "value": "custom",
+          "label": "This section's reviews"
+        }
+      ]
     },
     {
       "type": "text",

@@ -1,0 +1,107 @@
+{%- comment -%}
+  Results marquee card: photo (with "Used" + product caption) and review.
+  Used by zenith-results-marquee for its own blocks and for Theme settings → Zenith · Results reviews.
+
+  Params:
+  - photo, review_product, thumbnail, rating, quote, author, verified, avatar, author_detail: card content
+  - attrs: id + editor attributes (first copy only)
+  - clone: true for the looping copies (links out of tab order)
+  - prefix, verified_label, photo_sizes, overlay_style: section settings
+{%- endcomment -%}
+{%- liquid
+  assign thumb = thumbnail
+  if thumb == blank and review_product != blank
+    assign thumb = review_product.featured_image
+  endif
+  assign author_text = author | escape
+  assign photo_alt = photo.alt | default: author | escape
+  assign stars = rating | plus: 0
+  assign detail = author_detail | default: review_product.title | escape
+  assign avatar_img = avatar | default: photo
+
+  assign quote_raw = quote | strip
+  assign quote_text = quote_raw | escape | newline_to_br
+  assign q_first = quote_raw | slice: 0
+  if quote_raw != blank and q_first != '"' and q_first != '“'
+    assign quote_text = '“' | append: quote_text | append: '”'
+  endif
+-%}
+<li class="zenith-results__card" {{ attrs }}>
+  <div class="zenith-media zenith-results__media">
+    {%- if photo != blank -%}
+      {{
+        photo
+        | image_url: width: 720
+        | image_tag: loading: 'lazy', widths: '180, 240, 360, 480, 720', sizes: photo_sizes, alt: photo_alt
+      }}
+    {%- else -%}
+      {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+    {%- render 'zenith-overlay', style: overlay_style -%}
+    {%- if review_product != blank -%}
+      <a
+        href="{{ review_product.url }}"
+        class="zenith-results__meta"
+        {% if clone %}
+          tabindex="-1"
+        {% endif %}
+      >
+        {%- if thumb != blank -%}
+          <span class="zenith-results__thumb">
+            {{ thumb | image_url: width: 160 | image_tag: loading: 'lazy', widths: '80, 120, 160', sizes: '40px', alt: '' }}
+          </span>
+        {%- endif -%}
+        <span class="zenith-results__used">
+          {%- if prefix != blank -%}
+            <span>{{ prefix }}</span>
+          {%- endif -%}
+          <span class="zenith-results__product">{{ review_product.title | escape }}</span>
+        </span>
+      </a>
+    {%- endif -%}
+  </div>
+
+  <figure class="zenith-results__review">
+    <div class="zenith-results__body">
+      {%- if stars > 0 -%}
+        <div class="zenith-results__stars" role="img" aria-label="{{ stars }} out of 5 stars">
+          {%- for i in (1..5) -%}
+            <span class="zenith-results__star{% if i > stars %} zenith-results__star--off{% endif %}">
+              {%- render 'zenith-icon', icon: 'star' -%}
+            </span>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+      {%- if quote_raw != blank -%}
+        <blockquote class="zenith-results__quote">{{ quote_text }}</blockquote>
+      {%- endif -%}
+    </div>
+    {%- if author_text != blank or detail != blank -%}
+      <figcaption class="zenith-results__author">
+        {%- if avatar_img != blank -%}
+          <span class="zenith-results__avatar">
+            {{ avatar_img | image_url: width: 128 | image_tag: loading: 'lazy', widths: '48, 64, 96, 128', sizes: '40px', alt: '' }}
+          </span>
+        {%- elsif author_text != blank -%}
+          <span class="zenith-results__avatar zenith-results__avatar--initial" aria-hidden="true">
+            {{- author_text | slice: 0 | upcase -}}
+          </span>
+        {%- endif -%}
+        {%- if author_text != blank -%}
+          <span class="zenith-results__name">
+            <span>{{ author_text }}</span>
+            {%- if verified -%}
+              <span class="zenith-results__badge" title="{{ verified_label }}">
+                {%- render 'zenith-icon', icon: 'verified_seal' -%}
+                <span class="visually-hidden">{{ verified_label }}</span>
+              </span>
+            {%- endif -%}
+          </span>
+        {%- endif -%}
+        {%- if detail != blank -%}
+          <span class="zenith-results__detail">{{ detail }}</span>
+        {%- endif -%}
+      </figcaption>
+    {%- endif -%}
+  </figure>
+</li>
