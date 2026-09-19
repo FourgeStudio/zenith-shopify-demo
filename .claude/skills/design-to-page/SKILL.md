@@ -66,7 +66,7 @@ Then fill `brief-template.md` → `<scratchpad>/BRIEF.md` (placeholders + "Measu
 | Image overlay | `snippets/zenith-overlay.liquid` / `zenith-overlay-vars.liquid` |
 | Icons | `snippets/zenith-icon.liquid` (1.5px line set; add new ones there, not inline) |
 | Store-wide number | `settings.customer_count` via `[customers]` token — every new section wraps its markup: `{%- capture zenith_body -%}` … `{%- endcapture -%}{{- zenith_body \| replace: '[customers]', settings.customer_count -}}` before `{% schema %}` (see any `zenith-*` section) |
-| Store-wide content, edit once | Theme settings group + per-section source select `global` / `custom` (pattern: `zenith-promo-banner` `content_source`, hero `countdown_source`) |
+| Store-wide content, edit once | Theme settings group + per-section source select `global` / `custom` (pattern: `zenith-promo-banner` `content_source`, hero `countdown_source`). Repeatable items = numbered slots read with `settings[key]` (`vt1_…` videos, `rv1_…` reviews, `zg_…` guarantee); one loop sets local vars from either a slot or `section.blocks[forloop.index0]`, then shared markup/snippet. A generic section reused for other content (feature columns) defaults to `custom` + a preset with `global` |
 | Page width + gutters | Theme settings → Page width = whole frame incl. gutters (1440); gutter = Theme settings → Zenith → Page side margin (30 / 20) → `--z-gutter` on `.page-width` — never pad sections to fake gutters. Header icons align via `zenith-header--align-page` |
 | Desktop/mobile differences | `*_mobile` copy settings, `heading_alignment_mobile`, `hide_on_mobile` / `hide_on_desktop`, per-block "Hide on mobile" |
 
