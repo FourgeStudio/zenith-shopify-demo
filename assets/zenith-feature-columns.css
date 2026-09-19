@@ -96,6 +96,11 @@
 .zenith-features__title {
   margin: 0 0 var(--z-tsp-m, var(--z-space-2));
   font-size: var(--z-ttfs-m, var(--z-h4));
+  line-height: var(--z-ftlh-m, 1.1);
+}
+
+.zenith-features--title-color .zenith-features__title {
+  color: var(--z-ft-color);
 }
 
 .zenith-features__body {
@@ -264,6 +269,7 @@
   .zenith-features__title {
     margin-bottom: var(--z-tsp, var(--z-space-2));
     font-size: var(--z-ttfs, var(--z-h4));
+    line-height: var(--z-ftlh, 1.1);
   }
 
   .zenith-features--icon-left .zenith-features__text {

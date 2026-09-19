@@ -1,0 +1,1125 @@
+{%- comment -%} zenith: [customers] anywhere in this section shows Theme settings → Zenith → Customer count {%- endcomment -%}
+{%- capture zenith_body -%}
+{{ 'zenith-certificates.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign s = section.settings
+  assign layout = s.card_layout
+  assign cols = s.columns_desktop
+  assign cols_m = s.columns_mobile
+  # Tablet (750–989px): at most 2 columns; the details-beside layout needs a full row per item.
+  assign cols_t = cols | at_most: 2
+  if s.card_layout == 'beside'
+    assign cols_t = 1
+  endif
+  if layout == 'beside'
+    assign doc_sizes = '(min-width: 750px) ' | append: s.frame_width | append: 'px, ' | append: s.frame_width_mobile | append: 'px'
+  else
+    assign doc_w = s.content_max_width | divided_by: cols
+    assign doc_w_m = 100 | divided_by: cols_m
+    assign doc_sizes = '(min-width: 750px) ' | append: doc_w | append: 'px, ' | append: doc_w_m | append: 'vw'
+  endif
+
+  # First section on the page: logos + the first row of documents load eagerly, the very first document with high
+  # priority. (Only index 1 — a second certificates section right below must not compete for the LCP slot.)
+  assign first_screen = false
+  if section.index == 1
+    assign first_screen = true
+  endif
+
+  assign has_logos = false
+  for block in section.blocks
+    if block.type == 'logo'
+      assign has_logos = true
+      break
+    endif
+  endfor
+
+  assign new_window = 'accessibility.link_messages.new_window' | t
+-%}
+
+{%- capture extra -%}
+  --z-cert-cols: {{ cols }};
+  --z-cert-cols-t: {{ cols_t }};
+  --z-cert-cols-m: {{ cols_m }};
+  --z-cert-rgap: {{ s.row_gap }}px;
+  --z-cert-rgap-m: {{ s.row_gap_mobile }}px;
+  --z-cert-ratio: {{ s.frame_ratio | divided_by: 100.0 }};
+  --z-cert-pad: {{ s.frame_padding }}px;
+  --z-cert-pad-m: {{ s.frame_padding_mobile }}px;
+  --z-cert-screw: {{ s.screw_size }}px;
+  --z-cert-screw-m: {{ s.screw_size_mobile }}px;
+  --z-cert-fw: {{ s.frame_width }}px;
+  --z-cert-fw-m: {{ s.frame_width_mobile }}px;
+  --z-cert-dgap: {{ s.details_gap }}px;
+  --z-cert-dgap-m: {{ s.details_gap_mobile }}px;
+  --z-cert-csp: {{ s.caption_spacing }}px;
+  --z-cert-ssp: {{ s.subheading_spacing }}px;
+  --z-cert-bar-h: {{ s.bar_height }}px;
+  --z-cert-bar-h-m: {{ s.bar_height_mobile }}px;
+  --z-cert-thumb: {{ s.thumb_size }}px;
+  --z-cert-thumb-m: {{ s.thumb_size_mobile }}px;
+  --z-cert-thumb-r: {{ s.thumb_radius }}px;
+  --z-cert-logo-h: {{ s.logo_height }}px;
+  --z-cert-logo-h-m: {{ s.logo_height_mobile }}px;
+  --z-cert-logo-gap: {{ s.logo_gap }}px;
+  --z-cert-logo-gap-m: {{ s.logo_gap_mobile }}px;
+  --z-cert-logo-sp: {{ s.logo_spacing }}px;
+  --z-cert-logo-sp-m: {{ s.logo_spacing_mobile }}px;
+  --z-cert-lfs: {{ s.label_font_size }}px;
+  --z-cert-lfs-m: {{ s.label_font_size_mobile }}px;
+  --z-cert-sub-o: {{ s.subheading_opacity | divided_by: 100.0 }};
+  --z-cert-pending-o: {{ s.pending_opacity | divided_by: 100.0 }};
+  {%- if s.frame_color != blank %}--z-cert-frame: {{ s.frame_color }};{% endif %}
+  {%- if s.frame_border_color != blank %}--z-cert-frame-b: {{ s.frame_border_color }};{% endif %}
+  {%- if s.screw_color != blank %}--z-cert-screw-c: {{ s.screw_color }};{% endif %}
+  {%- if s.placeholder_color != blank %}--z-cert-ph: {{ s.placeholder_color }};{% endif %}
+  {%- if s.title_bar_color != blank %}--z-cert-tbar: {{ s.title_bar_color }};{% endif %}
+  {%- if s.title_bar_text_color != blank %}--z-cert-tbar-fg: {{ s.title_bar_text_color }};{% endif %}
+  {%- if s.number_bar_color != blank %}--z-cert-nbar: {{ s.number_bar_color }};{% endif %}
+  {%- if s.number_bar_text_color != blank %}--z-cert-nbar-fg: {{ s.number_bar_text_color }};{% endif %}
+  {%- if s.number_bar_border_color != blank %}--z-cert-nbar-b: {{ s.number_bar_border_color }};{% endif %}
+  {%- if s.label_color != blank %}--z-cert-label: {{ s.label_color }};{% endif %}
+  {%- if s.value_color != blank %}--z-cert-value: {{ s.value_color }};{% endif %}
+  {%- if s.thumb_background != blank %}--z-cert-thumb-bg: {{ s.thumb_background }};{% endif %}
+  {%- if s.background_fade and s.background_top != blank and s.background_bottom != blank %}
+  --z-cert-bg: linear-gradient(180deg, {{ s.background_top }} 0%, {{ s.background_bottom }} 100%);
+  {%- endif %}
+{%- endcapture -%}
+{%- render 'zenith-section-style', section: section, extra: extra -%}
+
+<section
+  id="Zenith-{{ section.id }}"
+  class="zenith-section zenith-cert zenith-cert--{{ layout }} zenith-cert--m-{{ s.heading_alignment_mobile }} color-{{ s.color_scheme }} gradient{% if s.background_fade and s.background_top != blank and s.background_bottom != blank %} zenith-cert--bg{% endif %}{% if s.label_uppercase %} zenith-cert--label-caps{% endif %}{% if section.index > 2 %} zenith-defer{% endif %}"
+>
+  <div class="page-width">
+    {%- render 'zenith-section-heading',
+      heading: s.heading,
+      subheading: s.subheading,
+      alignment: s.heading_alignment,
+      tag: s.heading_tag,
+      class: 'zenith-cert__heading'
+    -%}
+
+    {%- if has_logos -%}
+      <ul class="zenith-cert__logos zenith-cert__logos--{{ s.heading_alignment }}" role="list">
+        {%- for block in section.blocks -%}
+          {%- if block.type != 'logo' -%}{%- continue -%}{%- endif -%}
+          {%- liquid
+            assign logo_alt = block.settings.image.alt | default: block.settings.name
+            if first_screen
+              assign logo_loading = 'eager'
+            else
+              assign logo_loading = 'lazy'
+            endif
+          -%}
+          <li class="zenith-cert__logo" style="--z-cert-logo-s: {{ block.settings.size | divided_by: 100.0 }};" {{ block.shopify_attributes }}>
+            {%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}" class="zenith-cert__logo-link">{%- endif -%}
+            {%- if block.settings.image != blank -%}
+              {{
+                block.settings.image
+                | image_url: height: 240
+                | image_tag: loading: logo_loading, widths: '120, 240, 360', sizes: '160px', alt: logo_alt
+              }}
+            {%- else -%}
+              <span class="zenith-cert__logo-ph">{{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}</span>
+              {%- if block.settings.name != blank -%}<span class="visually-hidden">{{ block.settings.name | escape }}</span>{%- endif -%}
+            {%- endif -%}
+            {%- if block.settings.link != blank -%}</a>{%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+
+    <ul class="zenith-cert__grid" role="list">
+      {%- assign cert_index = 0 -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type != 'certificate' -%}{%- continue -%}{%- endif -%}
+        {%- liquid
+          assign b = block.settings
+          assign cert_index = cert_index | plus: 1
+          assign product = b.product
+
+          assign title = b.title
+          if title == blank and product != blank
+            assign title = product.title
+          endif
+
+          assign doc_alt = b.image.alt
+          if doc_alt == blank
+            assign doc_alt = title | append: ' ' | append: b.number | strip
+          endif
+
+          assign full_link = b.link
+          if full_link == blank and b.image != blank
+            assign full_link = b.image | image_url: width: 3000
+          endif
+
+          assign doc_loading = 'lazy'
+          assign doc_priority = 'auto'
+          if first_screen and cert_index <= cols
+            assign doc_loading = 'eager'
+            if cert_index == 1
+              assign doc_priority = 'high'
+            endif
+          endif
+
+          assign title_label = b.title_label | default: s.title_label
+          assign number_label = b.number_label | default: s.number_label
+
+          assign thumb = b.product_image
+          if thumb == blank and product != blank
+            assign thumb = product.featured_media.preview_image
+          endif
+        -%}
+        <li
+          id="Block-{{ block.id }}"
+          class="zenith-cert__item{% if b.pending %} is-pending{% endif %}"
+          {{ block.shopify_attributes }}
+        >
+          {%- if full_link != blank -%}
+            <a href="{{ full_link }}" class="zenith-cert__frame" target="_blank" rel="noopener">
+          {%- else -%}
+            <div class="zenith-cert__frame">
+          {%- endif -%}
+              <span class="zenith-cert__doc{% if b.image == blank %} zenith-cert__doc--empty{% endif %}">
+                {%- if b.image != blank -%}
+                  {{
+                    b.image
+                    | image_url: width: 1200
+                    | image_tag: loading: doc_loading, fetchpriority: doc_priority, widths: '200, 300, 400, 600, 800, 1000, 1200', sizes: doc_sizes, alt: doc_alt
+                  }}
+                {%- else -%}
+                  {{ 'image' | placeholder_svg_tag: 'zenith-cert__ph-icon' }}
+                {%- endif -%}
+              </span>
+              {%- if s.show_screws -%}
+                <span class="zenith-cert__screw zenith-cert__screw--tl" aria-hidden="true"></span>
+                <span class="zenith-cert__screw zenith-cert__screw--tr" aria-hidden="true"></span>
+                <span class="zenith-cert__screw zenith-cert__screw--bl" aria-hidden="true"></span>
+                <span class="zenith-cert__screw zenith-cert__screw--br" aria-hidden="true"></span>
+              {%- endif -%}
+          {%- if full_link != blank -%}
+              <span class="visually-hidden">{% if b.image == blank %}{{ doc_alt | escape }}. {% endif %}{{ new_window }}</span>
+            </a>
+          {%- else -%}
+            </div>
+          {%- endif -%}
+
+          {%- if layout == 'beside' -%}
+            <div class="zenith-cert__details">
+              <div class="zenith-cert__thumb{% if thumb == blank %} zenith-cert__thumb--empty{% endif %}">
+                {%- if thumb != blank -%}
+                  {{
+                    thumb
+                    | image_url: width: 400
+                    | image_tag: loading: 'lazy', widths: '100, 200, 300, 400', sizes: '100px', alt: ''
+                  }}
+                {%- else -%}
+                  {{ 'image' | placeholder_svg_tag: 'zenith-cert__ph-icon' }}
+                {%- endif -%}
+              </div>
+              <dl class="zenith-cert__facts">
+                {%- if title != blank -%}
+                  <div class="zenith-cert__fact">
+                    {%- if title_label != blank -%}<dt class="zenith-cert__label">{{ title_label | escape }}</dt>{%- endif -%}
+                    <dd class="zenith-cert__name">
+                      {%- if product != blank -%}
+                        <a href="{{ product.url }}" class="zenith-cert__name-link">{{ title | escape }}</a>
+                      {%- else -%}
+                        {{ title | escape }}
+                      {%- endif -%}
+                      {%- if b.pending and s.pending_label != blank -%}<span class="visually-hidden"> ({{ s.pending_label | escape }})</span>{%- endif -%}
+                    </dd>
+                  </div>
+                {%- endif -%}
+                {%- if b.number != blank -%}
+                  <div class="zenith-cert__fact">
+                    {%- if number_label != blank -%}<dt class="zenith-cert__label">{{ number_label | escape }}</dt>{%- endif -%}
+                    <dd class="zenith-cert__value">{{ b.number | escape }}</dd>
+                  </div>
+                {%- endif -%}
+              </dl>
+            </div>
+          {%- elsif title != blank or b.number != blank -%}
+            <div class="zenith-cert__caption">
+              {%- if title != blank -%}
+                <h3 class="zenith-cert__title">
+                  {{- title | escape -}}
+                  {%- if b.pending and s.pending_label != blank -%}<span class="visually-hidden"> ({{ s.pending_label | escape }})</span>{%- endif -%}
+                </h3>
+              {%- endif -%}
+              {%- if b.number != blank -%}
+                <p class="zenith-cert__number">{{ b.number | escape }}</p>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+{%- endcapture -%}
+{{- zenith_body | replace: '[customers]', settings.customer_count -}}
+
+{% schema %}
+{
+  "name": "Zenith · Certificates",
+  "tag": "div",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "max_blocks": 40,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Business Certificates"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "<p>Zenith (under Amare Group Inc.) is fully SEC registered with complete BIR certification and business permits.</p>"
+    },
+    {
+      "type": "text",
+      "id": "title_label",
+      "label": "Name label",
+      "info": "Shown above each name in the \"details beside the frame\" layout. Blocks can override it.",
+      "default": "Product name"
+    },
+    {
+      "type": "text",
+      "id": "number_label",
+      "label": "Number label",
+      "info": "Shown above each number in the \"details beside the frame\" layout. Blocks can override it.",
+      "default": "Notification number"
+    },
+    {
+      "type": "text",
+      "id": "pending_label",
+      "label": "Pending note for screen readers",
+      "info": "Read out after the name of items marked Pending.",
+      "default": "pending"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "card_layout",
+      "label": "Card layout",
+      "default": "below",
+      "options": [
+        { "value": "below", "label": "Title bars below the frame" },
+        { "value": "beside", "label": "Details beside the frame (thumbnail + labels)" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Heading alignment",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading tag",
+      "info": "Use H1 only for the first heading on the page.",
+      "default": "h1",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "heading_max_width",
+      "label": "Heading max width",
+      "min": 300,
+      "max": 1300,
+      "step": 20,
+      "unit": "px",
+      "default": 460
+    },
+    {
+      "type": "range",
+      "id": "subheading_spacing",
+      "label": "Space between heading and subheading",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "heading_spacing",
+      "label": "Space below heading",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "logo_height",
+      "label": "Logo height",
+      "min": 24,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "logo_gap",
+      "label": "Space between logos",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "logo_spacing",
+      "label": "Space below logos",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "label": "Grid width",
+      "min": 600,
+      "max": 1400,
+      "step": 8,
+      "unit": "px",
+      "default": 1024
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Columns",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Space between columns",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "row_gap",
+      "label": "Space between rows",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "frame_ratio",
+      "label": "Frame height",
+      "info": "Height as % of the frame width. 136% fits A4 documents.",
+      "min": 60,
+      "max": 180,
+      "step": 2,
+      "unit": "%",
+      "default": 136
+    },
+    {
+      "type": "range",
+      "id": "frame_padding",
+      "label": "Frame border (space around the document)",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "frame_width",
+      "label": "Frame width (details beside layout)",
+      "min": 110,
+      "max": 470,
+      "step": 4,
+      "unit": "px",
+      "default": 230
+    },
+    {
+      "type": "range",
+      "id": "details_gap",
+      "label": "Space between frame and details (details beside layout)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "caption_spacing",
+      "label": "Space between frame and title bars",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "checkbox",
+      "id": "show_screws",
+      "label": "Show corner screws",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "screw_size",
+      "label": "Screw size",
+      "min": 4,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 7
+    },
+    {
+      "type": "range",
+      "id": "thumb_size",
+      "label": "Product thumbnail size",
+      "min": 40,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 94
+    },
+    {
+      "type": "range",
+      "id": "thumb_radius",
+      "label": "Product thumbnail corner radius",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 2
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "checkbox",
+      "id": "background_fade",
+      "label": "Fade the background top to bottom",
+      "info": "Replaces the scheme background with the two colors below.",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "background_top",
+      "label": "Background fade: top",
+      "default": "#1A1A1A"
+    },
+    {
+      "type": "color",
+      "id": "background_bottom",
+      "label": "Background fade: bottom",
+      "default": "#0E0E0E"
+    },
+    {
+      "type": "range",
+      "id": "subheading_opacity",
+      "label": "Subheading opacity",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 85
+    },
+    {
+      "type": "color",
+      "id": "frame_color",
+      "label": "Frame",
+      "default": "#454545"
+    },
+    {
+      "type": "color",
+      "id": "frame_border_color",
+      "label": "Frame edge",
+      "default": "#6A6A6A"
+    },
+    {
+      "type": "color",
+      "id": "screw_color",
+      "label": "Screws",
+      "default": "#ECECEC"
+    },
+    {
+      "type": "color",
+      "id": "placeholder_color",
+      "label": "Empty document / thumbnail",
+      "default": "#DBDBDB"
+    },
+    {
+      "type": "color",
+      "id": "title_bar_color",
+      "label": "Title bar",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "title_bar_text_color",
+      "label": "Title bar text",
+      "default": "#131313"
+    },
+    {
+      "type": "color",
+      "id": "number_bar_color",
+      "label": "Number bar",
+      "default": "#131313"
+    },
+    {
+      "type": "color",
+      "id": "number_bar_text_color",
+      "label": "Number bar text",
+      "default": "#E7E7E7"
+    },
+    {
+      "type": "color",
+      "id": "number_bar_border_color",
+      "label": "Number bar border",
+      "default": "#4E4E4E"
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Labels (details beside layout)",
+      "default": "#777777"
+    },
+    {
+      "type": "color",
+      "id": "value_color",
+      "label": "Name and number (details beside layout)",
+      "default": "#E7E7E7"
+    },
+    {
+      "type": "color",
+      "id": "thumb_background",
+      "label": "Product thumbnail background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "pending_opacity",
+      "label": "Pending items opacity",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size",
+      "label": "Heading size",
+      "min": 16,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "subheading_font_size",
+      "label": "Subheading size",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "label": "Title / name size",
+      "min": 8,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "text_font_size",
+      "label": "Number size",
+      "min": 8,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "label_font_size",
+      "label": "Label size",
+      "min": 8,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "checkbox",
+      "id": "label_uppercase",
+      "label": "Uppercase labels",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "bar_height",
+      "label": "Title / number bar height",
+      "min": 16,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment_mobile",
+      "label": "Heading alignment",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size_mobile",
+      "label": "Heading size",
+      "min": 16,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "subheading_font_size_mobile",
+      "label": "Subheading size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "heading_spacing_mobile",
+      "label": "Space below heading",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "logo_height_mobile",
+      "label": "Logo height",
+      "min": 20,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "logo_gap_mobile",
+      "label": "Space between logos",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "logo_spacing_mobile",
+      "label": "Space below logos",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "columns_mobile",
+      "label": "Columns",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "gap_mobile",
+      "label": "Space between columns",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "row_gap_mobile",
+      "label": "Space between rows",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "frame_padding_mobile",
+      "label": "Frame border (space around the document)",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "frame_width_mobile",
+      "label": "Frame width (details beside layout)",
+      "min": 80,
+      "max": 280,
+      "step": 2,
+      "unit": "px",
+      "default": 180
+    },
+    {
+      "type": "range",
+      "id": "details_gap_mobile",
+      "label": "Space between frame and details (details beside layout)",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "screw_size_mobile",
+      "label": "Screw size",
+      "min": 4,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 7
+    },
+    {
+      "type": "range",
+      "id": "thumb_size_mobile",
+      "label": "Product thumbnail size",
+      "min": 40,
+      "max": 160,
+      "step": 2,
+      "unit": "px",
+      "default": 94
+    },
+    {
+      "type": "range",
+      "id": "title_font_size_mobile",
+      "label": "Title / name size",
+      "min": 8,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "text_font_size_mobile",
+      "label": "Number size",
+      "min": 8,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "label_font_size_mobile",
+      "label": "Label size",
+      "min": 8,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "bar_height_mobile",
+      "label": "Title / number bar height",
+      "min": 16,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 84
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Top padding (mobile)",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Bottom padding (mobile)",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    }
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Logo",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Logo",
+          "info": "Transparent PNG or SVG, cropped close to the artwork. Shown above the certificates."
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "info": "Read by screen readers when the image has no alt text.",
+          "default": "Agency"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "range",
+          "id": "size",
+          "label": "Size",
+          "info": "% of the section's logo height — shrink wide logos to balance the row.",
+          "min": 40,
+          "max": 100,
+          "step": 5,
+          "unit": "%",
+          "default": 100
+        }
+      ]
+    },
+    {
+      "type": "certificate",
+      "name": "Certificate",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Document image",
+          "info": "Portrait scan of the certificate. Tapping the frame opens it full size in a new tab."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title / product name",
+          "default": "Certificate of Incorporation"
+        },
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "2025030193474-03"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Full-size link",
+          "info": "Optional PDF or page opened instead of the image. Upload PDFs in Content → Files and paste the link."
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product",
+          "info": "Optional. Links the name and fills an empty thumbnail or name (details beside layout)."
+        },
+        {
+          "type": "image_picker",
+          "id": "product_image",
+          "label": "Product thumbnail",
+          "info": "Details beside layout only."
+        },
+        {
+          "type": "text",
+          "id": "title_label",
+          "label": "Name label",
+          "info": "Leave empty to use the section's label."
+        },
+        {
+          "type": "text",
+          "id": "number_label",
+          "label": "Number label",
+          "info": "Leave empty to use the section's label."
+        },
+        {
+          "type": "checkbox",
+          "id": "pending",
+          "label": "Pending (shown dimmed)",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zenith · Certificates",
+      "blocks": [
+        { "type": "logo", "settings": { "name": "DTI" } },
+        { "type": "logo", "settings": { "name": "SEC" } },
+        { "type": "logo", "settings": { "name": "BIR" } },
+        { "type": "logo", "settings": { "name": "FDA" } },
+        { "type": "certificate", "settings": { "title": "Certificate of Incorporation", "number": "2025030193474-03" } },
+        { "type": "certificate", "settings": { "title": "Certificate of Registration", "number": "2025030193474-03" } },
+        { "type": "certificate", "settings": { "title": "FDA License To Operate", "number": "LTO-3000014773834" } },
+        { "type": "certificate", "settings": { "title": "DTI Trustmark", "number": "250917-09570611" } }
+      ]
+    },
+    {
+      "name": "Zenith · FDA notified products",
+      "settings": {
+        "heading": "FDA Notified Products",
+        "subheading": "<p>All Zenith products are FDA-notified and proudly manufactured in a US FDA-certified facility following the highest international quality standards.</p>",
+        "card_layout": "beside",
+        "heading_tag": "h2",
+        "heading_max_width": 640,
+        "heading_spacing": 52,
+        "gap": 40,
+        "row_gap": 40,
+        "frame_padding": 17,
+        "screw_size": 10,
+        "background_fade": false,
+        "heading_font_size": 48,
+        "title_font_size": 12,
+        "text_font_size": 12,
+        "heading_font_size_mobile": 32,
+        "columns_mobile": 1,
+        "row_gap_mobile": 40,
+        "frame_padding_mobile": 17,
+        "screw_size_mobile": 8,
+        "title_font_size_mobile": 12,
+        "heading_spacing_mobile": 30,
+        "padding_top": 52,
+        "padding_bottom": 48,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20,
+        "text_font_size_mobile": 12
+      },
+      "blocks": [
+        { "type": "certificate", "settings": { "title": "Zenith Anti-Aging Tallow Cream", "number": "NN-1000015008540" } },
+        { "type": "certificate", "settings": { "title": "Anti-Aging Day Cream SPF30", "number": "NN-1000015050772" } },
+        { "type": "certificate", "settings": { "title": "Anti-Aging Tallow Cleanser", "number": "NN-1000015038905" } },
+        { "type": "certificate", "settings": { "title": "Advanced Hair Density Spray", "number": "NN-1000015050639" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

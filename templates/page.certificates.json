@@ -1,0 +1,623 @@
+{
+  "sections": {
+    "business": {
+      "type": "zenith-certificates",
+      "blocks": {
+        "logo_dti": {
+          "type": "logo",
+          "settings": {
+            "name": "DTI Philippines",
+            "link": "",
+            "size": 100
+          }
+        },
+        "logo_sec": {
+          "type": "logo",
+          "settings": {
+            "name": "Securities and Exchange Commission",
+            "link": "",
+            "size": 100
+          }
+        },
+        "logo_bir": {
+          "type": "logo",
+          "settings": {
+            "name": "Bureau of Internal Revenue",
+            "link": "",
+            "size": 100
+          }
+        },
+        "logo_fda": {
+          "type": "logo",
+          "settings": {
+            "name": "Food and Drug Administration Philippines",
+            "link": "",
+            "size": 100
+          }
+        },
+        "cert_incorporation": {
+          "type": "certificate",
+          "settings": {
+            "title": "Certificate of Incorporation",
+            "number": "2025030193474-03",
+            "link": "",
+            "pending": false
+          }
+        },
+        "cert_registration": {
+          "type": "certificate",
+          "settings": {
+            "title": "Certificate of Registration",
+            "number": "2025030193474-03",
+            "link": "",
+            "pending": false
+          }
+        },
+        "cert_lto": {
+          "type": "certificate",
+          "settings": {
+            "title": "FDA License To Operate",
+            "number": "LTO-3000014773834",
+            "link": "",
+            "pending": false
+          }
+        },
+        "cert_trustmark": {
+          "type": "certificate",
+          "settings": {
+            "title": "DTI Trustmark",
+            "number": "250917-09570611",
+            "link": "",
+            "pending": false
+          }
+        }
+      },
+      "block_order": [
+        "logo_dti",
+        "logo_sec",
+        "logo_bir",
+        "logo_fda",
+        "cert_incorporation",
+        "cert_registration",
+        "cert_lto",
+        "cert_trustmark"
+      ],
+      "settings": {
+        "heading_alignment": "center",
+        "heading_max_width": 460,
+        "subheading_spacing": 10,
+        "logo_height": 64,
+        "logo_gap": 20,
+        "logo_spacing": 80,
+        "content_max_width": 1024,
+        "columns_desktop": 2,
+        "frame_ratio": 136,
+        "frame_width": 230,
+        "details_gap": 32,
+        "caption_spacing": 8,
+        "show_screws": true,
+        "thumb_size": 94,
+        "thumb_radius": 2,
+        "color_scheme": "scheme-1",
+        "background_top": "#1a1a1a",
+        "background_bottom": "#0e0e0e",
+        "subheading_opacity": 85,
+        "frame_color": "#454545",
+        "frame_border_color": "#6a6a6a",
+        "screw_color": "#ececec",
+        "placeholder_color": "#dbdbdb",
+        "title_bar_color": "#ffffff",
+        "title_bar_text_color": "#131313",
+        "number_bar_color": "#131313",
+        "number_bar_text_color": "#e7e7e7",
+        "number_bar_border_color": "#4e4e4e",
+        "label_color": "#777777",
+        "value_color": "#e7e7e7",
+        "thumb_background": "#ffffff",
+        "pending_opacity": 50,
+        "subheading_font_size": 18,
+        "label_font_size": 10,
+        "label_uppercase": true,
+        "bar_height": 24,
+        "heading_alignment_mobile": "center",
+        "subheading_font_size_mobile": 16,
+        "logo_height_mobile": 52,
+        "logo_gap_mobile": 20,
+        "logo_spacing_mobile": 20,
+        "gap_mobile": 20,
+        "frame_width_mobile": 180,
+        "details_gap_mobile": 20,
+        "thumb_size_mobile": 94,
+        "label_font_size_mobile": 10,
+        "bar_height_mobile": 24,
+        "title_label": "Product name",
+        "number_label": "Notification number",
+        "pending_label": "pending",
+        "heading": "Business Certificates",
+        "subheading": "<p>Zenith (under Amare Group Inc.) is fully SEC registered with complete BIR certification and business permits.</p>",
+        "card_layout": "below",
+        "heading_tag": "h1",
+        "heading_spacing": 32,
+        "gap": 20,
+        "row_gap": 20,
+        "frame_padding": 10,
+        "screw_size": 7,
+        "background_fade": true,
+        "heading_font_size": 56,
+        "title_font_size": 10,
+        "text_font_size": 10,
+        "heading_font_size_mobile": 40,
+        "heading_spacing_mobile": 18,
+        "columns_mobile": 2,
+        "row_gap_mobile": 20,
+        "frame_padding_mobile": 10,
+        "screw_size_mobile": 7,
+        "title_font_size_mobile": 10,
+        "text_font_size_mobile": 10,
+        "padding_top": 84,
+        "padding_bottom": 80,
+        "padding_top_mobile": 32,
+        "padding_bottom_mobile": 32
+      }
+    },
+    "fda_products": {
+      "type": "zenith-certificates",
+      "blocks": {
+        "nn_tallow_cream": {
+          "type": "certificate",
+          "settings": {
+            "title": "Zenith Anti-Aging Tallow Cream",
+            "number": "NN-1000015008540",
+            "link": "",
+            "title_label": "",
+            "number_label": "",
+            "pending": false
+          }
+        },
+        "nn_day_cream": {
+          "type": "certificate",
+          "settings": {
+            "title": "Anti-Aging Day Cream SPF30",
+            "number": "NN-1000015050772",
+            "link": "",
+            "title_label": "",
+            "number_label": "",
+            "pending": false
+          }
+        },
+        "nn_cleanser": {
+          "type": "certificate",
+          "settings": {
+            "title": "Anti-Aging Tallow Cleanser",
+            "number": "NN-1000015038905",
+            "link": "",
+            "title_label": "",
+            "number_label": "",
+            "pending": false
+          }
+        },
+        "nn_hair_spray": {
+          "type": "certificate",
+          "settings": {
+            "title": "Advanced Hair Density Spray",
+            "number": "NN-1000015050639",
+            "link": "",
+            "title_label": "",
+            "number_label": "",
+            "pending": false
+          }
+        },
+        "nn_hair_shampoo": {
+          "type": "certificate",
+          "settings": {
+            "title": "Advanced Hair Density Shampoo",
+            "number": "NN-1000015997846",
+            "link": "",
+            "title_label": "",
+            "number_label": "",
+            "pending": false
+          }
+        },
+        "nn_teeth_whitening": {
+          "type": "certificate",
+          "settings": {
+            "title": "Teeth Whitening",
+            "number": "NN-00000000000",
+            "link": "",
+            "title_label": "",
+            "number_label": "",
+            "pending": true
+          }
+        },
+        "nn_body_wash": {
+          "type": "certificate",
+          "settings": {
+            "title": "Body Wash",
+            "number": "NN-00000000000",
+            "link": "",
+            "title_label": "",
+            "number_label": "",
+            "pending": true
+          }
+        },
+        "nn_body_lotion": {
+          "type": "certificate",
+          "settings": {
+            "title": "Body Lotion",
+            "number": "NN-00000000000",
+            "link": "",
+            "title_label": "",
+            "number_label": "",
+            "pending": true
+          }
+        },
+        "nn_deodorant": {
+          "type": "certificate",
+          "settings": {
+            "title": "Deodorant",
+            "number": "NN-00000000000",
+            "link": "",
+            "title_label": "",
+            "number_label": "",
+            "pending": true
+          }
+        }
+      },
+      "block_order": [
+        "nn_tallow_cream",
+        "nn_day_cream",
+        "nn_cleanser",
+        "nn_hair_spray",
+        "nn_hair_shampoo",
+        "nn_teeth_whitening",
+        "nn_body_wash",
+        "nn_body_lotion",
+        "nn_deodorant"
+      ],
+      "settings": {
+        "heading_alignment": "center",
+        "heading_max_width": 640,
+        "subheading_spacing": 10,
+        "logo_height": 64,
+        "logo_gap": 20,
+        "logo_spacing": 80,
+        "content_max_width": 1024,
+        "columns_desktop": 2,
+        "frame_ratio": 136,
+        "frame_width": 230,
+        "details_gap": 32,
+        "caption_spacing": 8,
+        "show_screws": true,
+        "thumb_size": 94,
+        "thumb_radius": 2,
+        "color_scheme": "scheme-1",
+        "background_top": "#1a1a1a",
+        "background_bottom": "#0e0e0e",
+        "subheading_opacity": 85,
+        "frame_color": "#454545",
+        "frame_border_color": "#6a6a6a",
+        "screw_color": "#ececec",
+        "placeholder_color": "#dbdbdb",
+        "title_bar_color": "#ffffff",
+        "title_bar_text_color": "#131313",
+        "number_bar_color": "#131313",
+        "number_bar_text_color": "#e7e7e7",
+        "number_bar_border_color": "#4e4e4e",
+        "label_color": "#777777",
+        "value_color": "#e7e7e7",
+        "thumb_background": "#ffffff",
+        "pending_opacity": 50,
+        "subheading_font_size": 18,
+        "label_font_size": 10,
+        "label_uppercase": true,
+        "bar_height": 24,
+        "heading_alignment_mobile": "center",
+        "subheading_font_size_mobile": 16,
+        "logo_height_mobile": 52,
+        "logo_gap_mobile": 20,
+        "logo_spacing_mobile": 20,
+        "gap_mobile": 20,
+        "frame_width_mobile": 180,
+        "details_gap_mobile": 20,
+        "thumb_size_mobile": 94,
+        "label_font_size_mobile": 10,
+        "bar_height_mobile": 24,
+        "title_label": "Product name",
+        "number_label": "Notification number",
+        "pending_label": "pending",
+        "heading": "FDA Notified Products",
+        "subheading": "<p>All Zenith products are FDA-notified and proudly manufactured in a US FDA-certified facility following the highest international quality standards.</p>",
+        "card_layout": "beside",
+        "heading_tag": "h2",
+        "heading_spacing": 52,
+        "gap": 40,
+        "row_gap": 40,
+        "frame_padding": 17,
+        "screw_size": 10,
+        "background_fade": false,
+        "heading_font_size": 48,
+        "title_font_size": 12,
+        "text_font_size": 12,
+        "heading_font_size_mobile": 32,
+        "heading_spacing_mobile": 30,
+        "columns_mobile": 1,
+        "row_gap_mobile": 40,
+        "frame_padding_mobile": 17,
+        "screw_size_mobile": 8,
+        "title_font_size_mobile": 12,
+        "text_font_size_mobile": 12,
+        "padding_top": 52,
+        "padding_bottom": 48,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20
+      }
+    },
+    "stores": {
+      "type": "zenith-store-links",
+      "blocks": {
+        "store_lazada": {
+          "type": "store",
+          "settings": {
+            "icon": "lazada",
+            "handle": "@tryzenithph",
+            "stat": "99% Seller Rating",
+            "link": "",
+            "new_tab": true,
+            "store_name": ""
+          }
+        },
+        "store_shopee": {
+          "type": "store",
+          "settings": {
+            "icon": "shopee",
+            "handle": "@tryzenithph",
+            "stat": "4.9 (32K+ Rating)",
+            "link": "",
+            "new_tab": true,
+            "store_name": ""
+          }
+        },
+        "store_tiktok": {
+          "type": "store",
+          "settings": {
+            "icon": "tiktok_shop",
+            "handle": "@tryzenithph",
+            "stat": "46k+ followers",
+            "link": "",
+            "new_tab": true,
+            "store_name": ""
+          }
+        }
+      },
+      "block_order": [
+        "store_lazada",
+        "store_shopee",
+        "store_tiktok"
+      ],
+      "settings": {
+        "heading": "Our Official Stores",
+        "heading_alignment": "center",
+        "columns_desktop": 3,
+        "card_layout": "inline",
+        "card_alignment": "center",
+        "card_min_height": 74,
+        "gap": 24,
+        "item_padding": 16,
+        "glyph_gap": 10,
+        "text_gap": 14,
+        "heading_spacing": 25,
+        "color_scheme": "scheme-1",
+        "card_background": "#202020",
+        "card_border_color": "#363636",
+        "card_border_width": 1,
+        "glyph_color": "#ffffff",
+        "handle_color": "#ffffff",
+        "handle_opacity": 70,
+        "stat_color": "#ffffff",
+        "heading_font_size": 41,
+        "icon_size": 44,
+        "title_font_size": 16,
+        "text_font_size": 14,
+        "heading_alignment_mobile": "left",
+        "columns_mobile": 2,
+        "card_layout_mobile": "stacked",
+        "card_alignment_mobile": "left",
+        "card_min_height_mobile": 60,
+        "gap_mobile": 20,
+        "item_padding_mobile": 8,
+        "glyph_gap_mobile": 6,
+        "text_gap_mobile": 0,
+        "heading_font_size_mobile": 36,
+        "heading_spacing_mobile": 24,
+        "icon_size_mobile": 38,
+        "title_font_size_mobile": 12,
+        "text_font_size_mobile": 12,
+        "padding_top": 32,
+        "padding_bottom": 40,
+        "padding_top_mobile": 24,
+        "padding_bottom_mobile": 20
+      }
+    },
+    "notice": {
+      "type": "zenith-callout",
+      "settings": {
+        "use_brand_logo": true,
+        "text": "<p>For your protection, buy only from our official website, our Facebook page, or our official Shopee, Lazada and TikTok Shop stores.</p>",
+        "small_text": "<p>We maintain full transparency with our valued customers to build lasting trust.</p>",
+        "text_alignment": "center",
+        "content_max_width": 1024,
+        "text_max_width": 740,
+        "content_padding": 32,
+        "box_padding_x": 48,
+        "content_gap": 24,
+        "small_text_spacing": 20,
+        "box_radius": 0,
+        "color_scheme": "scheme-1",
+        "box_color": "#203940",
+        "border_color": "#294850",
+        "border_width": 1,
+        "text_color": "#ffffff",
+        "text_opacity": 80,
+        "small_text_opacity": 80,
+        "logo_width": 210,
+        "heading_tag": "h2",
+        "heading_font_size": 32,
+        "text_font_size": 18,
+        "small_font_size": 16,
+        "text_alignment_mobile": "center",
+        "logo_width_mobile": 164,
+        "heading_font_size_mobile": 26,
+        "text_font_size_mobile": 16,
+        "small_font_size_mobile": 14,
+        "content_padding_mobile": 32,
+        "box_padding_x_mobile": 30,
+        "content_gap_mobile": 20,
+        "small_text_spacing_mobile": 10,
+        "hide_on_mobile": false,
+        "hide_on_desktop": false,
+        "padding_top": 48,
+        "padding_bottom": 48,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20
+      }
+    },
+    "faq": {
+      "type": "zenith-faq",
+      "blocks": {
+        "question_1": {
+          "type": "question",
+          "settings": {
+            "question": "Different from drugstore brands?",
+            "answer": "<p>Drugstore products are built for mass appeal and the lowest possible cost. Zenith formulas are built specifically for the Philippine climate and the realities of men over 35. We use higher-grade ingredients with absolutely zero unnecessary fillers.</p>"
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "Safe for sensitive skin?",
+            "answer": "<p>Yes. Every product is tested in tropical humidity and designed to be gentle. We avoid harsh sulfates and synthetic fragrances that cause irritation. If your skin reacts, the Zenith Money-Back Guarantee has you covered.</p>"
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "How to layer with skincare?",
+            "answer": "<p>Keep it simple. Cleanse first with the facial cleanser, then apply your tallow cream or serum. The hygiene line clears the canvas so your skincare can do its real work.</p>"
+          }
+        },
+        "question_4": {
+          "type": "question",
+          "settings": {
+            "question": "What is coming next?",
+            "answer": "<p>We are developing a full body wash, a deodorant that respects your skin, and a shave cream that reduces razor burn. The toothpaste is in final testing. Sign up for notifications on the product page to know the moment they launch.</p>"
+          }
+        },
+        "question_5": {
+          "type": "question",
+          "settings": {
+            "question": "Why no antiperspirant yet?",
+            "answer": "<p>We are taking our time to get it right. A deodorant that performs in this heat without staining shirts or clogging pores requires real testing. It is coming when it is ready, not a moment sooner.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_1",
+        "question_2",
+        "question_3",
+        "question_4",
+        "question_5"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "Frequently Asked Questions",
+        "subheading": "<p>No-nonsense answers about your daily essentials.</p>",
+        "enable_schema": true,
+        "heading_alignment": "center",
+        "max_width": 720,
+        "open_first": true,
+        "heading_spacing": 32,
+        "item_padding": 10,
+        "content_gap": 24,
+        "color_scheme": "scheme-1",
+        "icon_color": "#eabe5f",
+        "divider_opacity": 10,
+        "answer_opacity": 70,
+        "heading_font_size": 48,
+        "heading_uppercase": false,
+        "subheading_font_size": 18,
+        "subheading_opacity": 100,
+        "eyebrow_font_size": 14,
+        "title_font_size": 24,
+        "text_font_size": 16,
+        "icon_size": 20,
+        "heading_alignment_mobile": "left",
+        "heading_font_size_mobile": 36,
+        "subheading_font_size_mobile": 18,
+        "subheading_opacity_mobile": 100,
+        "heading_spacing_mobile": 32,
+        "title_font_size_mobile": 24,
+        "text_font_size_mobile": 16,
+        "item_padding_mobile": 10,
+        "content_gap_mobile": 24,
+        "icon_size_mobile": 20,
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20
+      }
+    },
+    "reviews": {
+      "type": "zenith-reviews",
+      "settings": {
+        "eyebrow": "",
+        "heading": "[customers] Filipino Men Trust Zenith Products",
+        "subheading": "<p>Men in Manila using the cream. Unedited and verified.</p>",
+        "heading_alignment": "center",
+        "heading_max_width": 760,
+        "subheading_spacing": 28,
+        "heading_spacing": 48,
+        "jdgm_masonry": true,
+        "columns_desktop": 4,
+        "gap": 20,
+        "content_padding": 12,
+        "card_radius": 4,
+        "color_scheme": "scheme-1",
+        "card_color": "#202020",
+        "card_border_color": "",
+        "button_style": "outline",
+        "star_color": "#d6b356",
+        "accent_color": "#c59300",
+        "heading_font_size": 48,
+        "heading_uppercase": false,
+        "subheading_font_size": 18,
+        "subheading_opacity": 100,
+        "eyebrow_font_size": 14,
+        "text_font_size": 14,
+        "icon_size": 14,
+        "button_font_size": 20,
+        "subheading_mobile": "<p>Real Filipino men using Zenith. Unedited and verified.</p>",
+        "heading_font_size_mobile": 36,
+        "subheading_font_size_mobile": 16,
+        "subheading_opacity_mobile": 70,
+        "heading_spacing_mobile": 24,
+        "columns_mobile": 2,
+        "gap_mobile": 20,
+        "content_padding_mobile": 12,
+        "text_font_size_mobile": 14,
+        "button_font_size_mobile": 20,
+        "padding_top": 52,
+        "padding_bottom": 48,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 8
+      }
+    }
+  },
+  "order": [
+    "business",
+    "fda_products",
+    "stores",
+    "notice",
+    "faq",
+    "reviews"
+  ]
+}

@@ -78,7 +78,7 @@
   align-items: flex-start;
   gap: var(--z-sl-tgap-m, 0);
   min-width: 0;
-  line-height: 1.3;
+  line-height: var(--z-sl-lh-m, 1.3);
 }
 
 .zenith-store-links__handle {
@@ -122,6 +122,21 @@
     gap: var(--z-gap, 24px);
   }
 
+  /* Setting "Card width" > 0: fixed-width cards, at most "Columns" per row, row centred (or left like the heading).
+     Narrow screens wrap the extra cards onto the next row instead of squeezing them. */
+  .zenith-store-links--fixed .zenith-store-links__grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: var(--z-sl-justify, center);
+    max-width: calc(var(--z-sl-cols, 3) * var(--z-sl-cw) + (var(--z-sl-cols, 3) - 1) * var(--z-gap, 24px));
+    margin-left: var(--z-sl-ml, auto);
+    margin-right: auto;
+  }
+
+  .zenith-store-links--fixed .zenith-store-links__item {
+    flex: 0 1 var(--z-sl-cw);
+  }
+
   .zenith-store-links__card {
     gap: var(--z-sl-ggap, 10px);
     min-height: var(--z-sl-h, 74px);
@@ -135,6 +150,7 @@
 
   .zenith-store-links__text {
     gap: var(--z-sl-tgap, 14px);
+    line-height: var(--z-sl-lh, 1.3);
   }
 
   /* Narrow cards (tablet): handle and stat wrap onto two lines without the horizontal gap between them */

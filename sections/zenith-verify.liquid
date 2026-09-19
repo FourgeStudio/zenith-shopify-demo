@@ -1,0 +1,1359 @@
+{%- comment -%} zenith: [customers] anywhere in this section shows Theme settings → Zenith → Customer count {%- endcomment -%}
+{%- capture zenith_body -%}
+{{ 'zenith-verify.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign s = section.settings
+
+  # First thing on screen → the cover image is the LCP candidate (dawn-customize §8)
+  assign img_loading = 'lazy'
+  assign img_priority = 'auto'
+  if section.index <= 2
+    assign img_loading = 'eager'
+    assign img_priority = 'high'
+  endif
+
+  # Player: uploaded video first, else the YouTube / Vimeo link. Nothing loads until the play button is tapped (zenith-video.js).
+  assign embed_src = ''
+  assign embed_thumb = ''
+  if s.video == blank and s.video_url != blank
+    if s.video_url.type == 'youtube'
+      assign embed_src = 'https://www.youtube-nocookie.com/embed/' | append: s.video_url.id | append: '?autoplay=1&playsinline=1&rel=0&modestbranding=1&enablejsapi=1'
+      assign embed_thumb = 'https://i.ytimg.com/vi/' | append: s.video_url.id | append: '/hqdefault.jpg'
+    elsif s.video_url.type == 'vimeo'
+      assign embed_src = 'https://player.vimeo.com/video/' | append: s.video_url.id | append: '?autoplay=1&playsinline=1&dnt=1'
+    endif
+  endif
+  assign has_player = false
+  if s.video != blank or embed_src != blank
+    assign has_player = true
+  endif
+  assign cover = s.cover_image
+  if cover == blank and s.video != blank
+    assign cover = s.video.preview_image
+  endif
+  assign cover_alt = cover.alt | default: s.heading
+  assign cover_sizes = '(min-width: 750px) ' | append: s.video_width | append: 'px, ' | append: s.video_width_mobile | append: 'px'
+
+  # Heading levels: the left heading is the page's h1 by default; the steps heading sits one level below it.
+  assign side_tag = s.heading_tag
+  if side_tag == 'h1'
+    assign side_tag = 'h2'
+  endif
+  if side_tag == 'h2'
+    assign item_tag = 'h3'
+  else
+    assign item_tag = 'h4'
+  endif
+
+  assign step_sizes = '(min-width: 750px) ' | append: s.step_image_size | append: 'px, ' | append: s.step_image_size_mobile | append: 'px'
+  assign seal_sizes = s.seal_image_size | append: 'px'
+-%}
+
+{%- capture extra -%}
+  --zv-ratio: {{ s.video_ratio }};
+  --zv-vw: {{ s.video_width }}px;
+  --zv-vw-m: {{ s.video_width_mobile }}px;
+  --zv-bw: {{ s.border_width }}px;
+  --zv-border: {{ s.border_color }};
+  --zv-play: {{ s.play_size }}px;
+  --zv-play-bg: {{ s.play_color }};
+  --zv-play-fg: {{ s.play_icon_color }};
+  --zv-hgap: {{ s.heading_gap }}px;
+  --zv-hgap-m: {{ s.heading_gap_mobile }}px;
+  --zv-isp: {{ s.intro_spacing }}px;
+  --zv-isp-m: {{ s.intro_spacing_mobile }}px;
+  --zv-smw: {{ s.subheading_max_width }}px;
+  --zv-smw-m: {{ s.subheading_max_width_mobile }}px;
+  --zv-io: {{ s.intro_text_opacity | divided_by: 100.0 }};
+  --zv-io-m: {{ s.intro_text_opacity_mobile | divided_by: 100.0 }};
+  --zv-h2fs: {{ s.steps_heading_font_size }}px;
+  --zv-h2fs-m: {{ s.steps_heading_font_size_mobile }}px;
+  --zv-s2fs: {{ s.steps_subheading_font_size }}px;
+  --zv-s2fs-m: {{ s.steps_subheading_font_size_mobile }}px;
+  --zv-s2mw: {{ s.steps_subheading_max_width }}px;
+  --zv-s2mw-m: {{ s.steps_subheading_max_width_mobile }}px;
+  --zv-h2gap: {{ s.steps_heading_gap }}px;
+  --zv-h2gap-m: {{ s.steps_heading_gap_mobile }}px;
+  --zv-ssp: {{ s.steps_spacing }}px;
+  --zv-ssp-m: {{ s.steps_spacing_mobile }}px;
+  --zv-sgap: {{ s.step_gap }}px;
+  --zv-sgap-m: {{ s.step_gap_mobile }}px;
+  --zv-simg: {{ s.step_image_size }}px;
+  --zv-simg-m: {{ s.step_image_size_mobile }}px;
+  --zv-sig: {{ s.step_image_gap }}px;
+  --zv-sig-m: {{ s.step_image_gap_mobile }}px;
+  --zv-stmw: {{ s.step_text_max_width }}px;
+  --zv-stmw-m: {{ s.step_text_max_width_mobile }}px;
+  --zv-lfs: {{ s.label_font_size }}px;
+  --zv-lfs-m: {{ s.label_font_size_mobile }}px;
+  --zv-label: {{ s.label_color }};
+  --zv-tto: {{ s.title_opacity | divided_by: 100.0 }};
+  --zv-to: {{ s.text_opacity | divided_by: 100.0 }};
+  --zv-seal-sp: {{ s.seal_spacing }}px;
+  --zv-seal-sp-m: {{ s.seal_spacing_mobile }}px;
+  --zv-seal-img: {{ s.seal_image_size }}px;
+  --zv-seal-pad: {{ s.seal_padding }}px;
+  --zv-card: {{ s.card_color }};
+  --zv-stfs: {{ s.seal_title_font_size }}px;
+  --zv-stfs-m: {{ s.seal_title_font_size_mobile }}px;
+  --zv-sxfs: {{ s.seal_text_font_size }}px;
+  --zv-sxfs-m: {{ s.seal_text_font_size_mobile }}px;
+  --zv-logos-sp: {{ s.logos_spacing }}px;
+  --zv-logos-sp-m: {{ s.logos_spacing_mobile }}px;
+  --zv-capsp: {{ s.caption_spacing }}px;
+  --zv-capsp-m: {{ s.caption_spacing_mobile }}px;
+  --zv-cfs: {{ s.caption_font_size }}px;
+  --zv-cfs-m: {{ s.caption_font_size_mobile }}px;
+{%- endcapture -%}
+{%- render 'zenith-section-style', section: section, extra: extra -%}
+
+{%- style -%}
+  {%- for block in section.blocks -%}
+    {%- if block.type == 'logos' %}
+  #Block-{{ block.id }} {
+    --zv-lw: {{ block.settings.logo_width }}px;
+    --zv-lw-m: {{ block.settings.logo_width_mobile }}px;
+    --zv-cmw: {{ block.settings.caption_max_width }}px;
+    --zv-cmw-m: {{ block.settings.caption_max_width_mobile }}px;
+  }
+    {%- endif -%}
+  {%- endfor %}
+{%- endstyle -%}
+
+{%- if has_player -%}
+  <script src="{{ 'zenith-video.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+<section
+  id="Zenith-{{ section.id }}"
+  class="zenith-section zenith-verify zenith-verify--play-{{ s.play_icon_style }} color-{{ s.color_scheme }} gradient{% if section.index > 2 %} zenith-defer{% endif %}"
+>
+  <div class="page-width">
+    <div class="zenith-verify__grid">
+      {%- comment -%} Left: heading, intro text, video {%- endcomment -%}
+      <div class="zenith-verify__intro zenith-verify__intro--{{ s.heading_alignment }} zenith-verify__intro--m-{{ s.heading_alignment_mobile }}">
+        {%- render 'zenith-section-heading',
+          heading: s.heading,
+          subheading: s.subheading,
+          alignment: s.heading_alignment,
+          tag: s.heading_tag,
+          class: 'zenith-verify__heading'
+        -%}
+
+        {%- if has_player -%}
+          <zenith-video
+            class="zenith-media zenith-verify__media"
+            {% if embed_src != blank %}
+              data-youtube-src="{{ embed_src }}" data-title="{{ s.heading | escape }}"
+            {% endif %}
+          >
+            {%- if s.video != blank -%}
+              {%- comment -%} No poster attribute: the cover is a separate <img> so nothing of the video downloads before a tap. {%- endcomment -%}
+              {{
+                s.video
+                | video_tag: preload: 'none', playsinline: true, class: 'zenith-verify__video'
+                | replace: ' poster="', ' data-poster="'
+              }}
+            {%- endif -%}
+            {%- if cover != blank -%}
+              {{
+                cover
+                | image_url: width: 1080
+                | image_tag:
+                  loading: img_loading,
+                  fetchpriority: img_priority,
+                  widths: '300, 400, 540, 720, 900, 1080',
+                  sizes: cover_sizes,
+                  class: 'zenith-verify__poster',
+                  alt: cover_alt
+              }}
+            {%- elsif embed_thumb != blank -%}
+              <img
+                src="{{ embed_thumb }}"
+                class="zenith-verify__poster"
+                alt="{{ cover_alt | escape }}"
+                width="480"
+                height="360"
+                loading="{{ img_loading }}"
+              >
+            {%- else -%}
+              {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg zenith-verify__poster' }}
+            {%- endif -%}
+            <button
+              type="button"
+              class="zenith-verify__play"
+              data-video-toggle
+              aria-pressed="false"
+              aria-label="{{ s.play_label | escape }}"
+            >
+              {%- comment -%} Disc with a see-through rounded triangle (design); "Solid" style fills the triangle with the icon colour {%- endcomment -%}
+              <svg viewBox="0 0 82 82" aria-hidden="true" focusable="false">
+                <path class="zenith-verify__play-disc" fill-rule="evenodd" d="M41 0A41 41 0 1 1 41 82A41 41 0 1 1 41 0ZM28 25.5L28 56.5Q28 60.5 31.44 58.47L57.56 43.03Q61 41 57.56 38.97L31.44 23.53Q28 21.5 28 25.5Z"/>
+                <path class="zenith-verify__play-icon" d="M28 25.5L28 56.5Q28 60.5 31.44 58.47L57.56 43.03Q61 41 57.56 38.97L31.44 23.53Q28 21.5 28 25.5Z"/>
+              </svg>
+            </button>
+          </zenith-video>
+        {%- else -%}
+          <div class="zenith-media zenith-verify__media">
+            {%- if cover != blank -%}
+              {{
+                cover
+                | image_url: width: 1080
+                | image_tag:
+                  loading: img_loading,
+                  fetchpriority: img_priority,
+                  widths: '300, 400, 540, 720, 900, 1080',
+                  sizes: cover_sizes,
+                  alt: cover_alt
+              }}
+            {%- else -%}
+              {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} Right: heading, steps, seal card, delivery logos (blocks, in editor order) {%- endcomment -%}
+      <div class="zenith-verify__side zenith-verify__side--m-{{ s.steps_heading_alignment_mobile }}">
+        {%- render 'zenith-section-heading',
+          heading: s.steps_heading,
+          subheading: s.steps_subheading,
+          alignment: s.steps_heading_alignment,
+          tag: side_tag,
+          class: 'zenith-verify__side-heading'
+        -%}
+
+        <div class="zenith-verify__blocks">
+          {%- comment -%} Consecutive steps share one ordered list; steps_html collects them until another block type (or the end) {%- endcomment -%}
+          {%- assign step_n = 0 -%}
+          {%- assign steps_html = '' -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'step' -%}
+              {%- liquid
+                assign step_n = step_n | plus: 1
+                assign step_label = block.settings.label
+                if step_label == blank
+                  assign step_label = s.step_label | append: ' ' | append: step_n
+                endif
+                assign step_alt = block.settings.image.alt | default: block.settings.title
+              -%}
+              {%- capture step_html -%}
+              <li id="Block-{{ block.id }}" class="zenith-verify__step" {{ block.shopify_attributes }}>
+                <div class="zenith-media zenith-verify__step-image">
+                  {%- if block.settings.image != blank -%}
+                    {{
+                      block.settings.image
+                      | image_url: width: 400
+                      | image_tag: loading: 'lazy', widths: '128, 200, 256, 400', sizes: step_sizes, alt: step_alt
+                    }}
+                  {%- else -%}
+                    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {%- endif -%}
+                </div>
+                <div class="zenith-verify__step-body">
+                  {%- if step_label != blank -%}
+                    <p class="zenith-verify__label">{{ step_label | escape }}</p>
+                  {%- endif -%}
+                  {%- if block.settings.title != blank -%}
+                    <{{ item_tag }} class="zenith-verify__step-title">{{ block.settings.title | escape }}</{{ item_tag }}>
+                  {%- endif -%}
+                  {%- if block.settings.text != blank -%}
+                    <p class="zenith-verify__step-text">{{ block.settings.text | escape | newline_to_br }}</p>
+                  {%- endif -%}
+                </div>
+              </li>
+              {%- endcapture -%}
+              {%- assign steps_html = steps_html | append: step_html -%}
+            {%- else -%}
+              {%- if steps_html != blank -%}
+                <ol class="zenith-verify__steps" role="list">{{ steps_html }}</ol>
+                {%- assign steps_html = '' -%}
+              {%- endif -%}
+
+              {%- case block.type -%}
+                {%- when 'seal' -%}
+                  <div id="Block-{{ block.id }}" class="zenith-verify__seal" {{ block.shopify_attributes }}>
+                    {%- if block.settings.image != blank -%}
+                      <div class="zenith-verify__seal-image">
+                        {%- assign seal_alt = block.settings.image.alt | default: block.settings.title -%}
+                        {{
+                          block.settings.image
+                          | image_url: width: 300
+                          | image_tag: loading: 'lazy', widths: '100, 200, 300', sizes: seal_sizes, alt: seal_alt
+                        }}
+                      </div>
+                    {%- elsif request.design_mode -%}
+                      <div class="zenith-verify__seal-image">
+                        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                      </div>
+                    {%- endif -%}
+                    <div class="zenith-verify__seal-body">
+                      {%- if block.settings.title != blank -%}
+                        <{{ item_tag }} class="zenith-verify__seal-title">{{ block.settings.title | escape }}</{{ item_tag }}>
+                      {%- endif -%}
+                      {%- if block.settings.text != blank -%}
+                        <p class="zenith-verify__seal-text">{{ block.settings.text | escape | newline_to_br }}</p>
+                      {%- endif -%}
+                    </div>
+                  </div>
+
+                {%- when 'logos' -%}
+                  <div id="Block-{{ block.id }}" class="zenith-verify__logos" {{ block.shopify_attributes }}>
+                    {%- if block.settings.image != blank -%}
+                      {%- liquid
+                        assign logos_alt = block.settings.image.alt | default: block.settings.caption
+                        assign logos_sizes = '(min-width: 750px) ' | append: block.settings.logo_width | append: 'px, ' | append: block.settings.logo_width_mobile | append: 'px'
+                      -%}
+                      {{
+                        block.settings.image
+                        | image_url: width: 1200
+                        | image_tag:
+                          loading: 'lazy',
+                          widths: '300, 400, 600, 800, 1200',
+                          sizes: logos_sizes,
+                          class: 'zenith-verify__logos-image',
+                          alt: logos_alt
+                      }}
+                    {%- elsif request.design_mode -%}
+                      <div class="zenith-media zenith-verify__logos-image zenith-verify__logos-image--empty">
+                        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                      </div>
+                    {%- endif -%}
+                    {%- if block.settings.caption != blank -%}
+                      <p class="zenith-verify__caption">{{ block.settings.caption | escape | newline_to_br }}</p>
+                    {%- endif -%}
+                  </div>
+              {%- endcase -%}
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if steps_html != blank -%}
+            <ol class="zenith-verify__steps" role="list">{{ steps_html }}</ol>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{%- endcapture -%}
+{{- zenith_body | replace: '[customers]', settings.customer_count -}}
+
+{% schema %}
+{
+  "name": "Zenith · Verify product",
+  "tag": "div",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "max_blocks": 10,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Verify Your Zenith Product"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Text",
+      "default": "<p>Every Zenith box carries a tamper-proof QR code. Scan it to confirm yours is genuine.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "cover_image",
+      "label": "Cover image",
+      "info": "Shown until the video plays, or on its own when no video is set. Portrait 9:16, at least 720 × 1280 px."
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Video (upload)",
+      "info": "Loads only when the play button is tapped."
+    },
+    {
+      "type": "video_url",
+      "id": "video_url",
+      "label": "Or YouTube / Vimeo link",
+      "accept": ["youtube", "vimeo"],
+      "placeholder": "https://www.youtube.com/watch?v=…",
+      "info": "Used when no video is uploaded. For a YouTube Short, paste it as youtube.com/watch?v=<id>. Add a cover image for Vimeo."
+    },
+    {
+      "type": "text",
+      "id": "play_label",
+      "label": "Play button label",
+      "info": "Read by screen readers.",
+      "default": "Play video"
+    },
+    {
+      "type": "text",
+      "id": "steps_heading",
+      "label": "Steps heading",
+      "default": "How To Check Yours Is Real"
+    },
+    {
+      "type": "richtext",
+      "id": "steps_subheading",
+      "label": "Steps text",
+      "default": "<p>Three steps to check, plus the Amare Seal of Authenticity.</p>"
+    },
+    {
+      "type": "text",
+      "id": "step_label",
+      "label": "Step label",
+      "info": "Steps with an empty label show this word + their number (Step 1, Step 2…).",
+      "default": "Step"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "label": "Content width",
+      "info": "Both columns together, inside the page margins.",
+      "min": 800,
+      "max": 1600,
+      "step": 8,
+      "unit": "px",
+      "default": 1312
+    },
+    {
+      "type": "range",
+      "id": "media_width",
+      "label": "Left column width",
+      "min": 30,
+      "max": 70,
+      "step": 1,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Space between columns",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Left heading alignment",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "subheading_max_width",
+      "label": "Left text max width",
+      "min": 200,
+      "max": 800,
+      "step": 10,
+      "unit": "px",
+      "default": 420
+    },
+    {
+      "type": "range",
+      "id": "heading_gap",
+      "label": "Space between left heading and text",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "intro_spacing",
+      "label": "Space above video",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "video_width",
+      "label": "Video width",
+      "min": 200,
+      "max": 600,
+      "step": 4,
+      "unit": "px",
+      "default": 348
+    },
+    {
+      "type": "select",
+      "id": "video_ratio",
+      "label": "Video shape",
+      "default": "0.5625",
+      "options": [
+        { "value": "0.5625", "label": "Portrait 9:16" },
+        { "value": "0.75", "label": "Portrait 3:4" },
+        { "value": "0.8", "label": "Portrait 4:5" },
+        { "value": "1", "label": "Square" },
+        { "value": "1.7778", "label": "Landscape 16:9" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "label": "Video border",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "play_size",
+      "label": "Play button size",
+      "min": 40,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 82
+    },
+    {
+      "type": "select",
+      "id": "steps_heading_alignment",
+      "label": "Steps heading alignment",
+      "default": "left",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "steps_subheading_max_width",
+      "label": "Steps text max width",
+      "min": 200,
+      "max": 800,
+      "step": 10,
+      "unit": "px",
+      "default": 600
+    },
+    {
+      "type": "range",
+      "id": "steps_heading_gap",
+      "label": "Space between steps heading and text",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 9
+    },
+    {
+      "type": "range",
+      "id": "steps_spacing",
+      "label": "Space above first step",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "step_gap",
+      "label": "Space between steps",
+      "min": 0,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "step_image_size",
+      "label": "Step photo size",
+      "min": 64,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 128
+    },
+    {
+      "type": "range",
+      "id": "step_image_gap",
+      "label": "Space between step photo and text",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "step_text_max_width",
+      "label": "Step text max width",
+      "min": 160,
+      "max": 600,
+      "step": 10,
+      "unit": "px",
+      "default": 340
+    },
+    {
+      "type": "range",
+      "id": "seal_spacing",
+      "label": "Space above seal card",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "seal_image_size",
+      "label": "Seal image size",
+      "min": 40,
+      "max": 160,
+      "step": 2,
+      "unit": "px",
+      "default": 94
+    },
+    {
+      "type": "range",
+      "id": "seal_padding",
+      "label": "Seal card padding",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "logos_spacing",
+      "label": "Space above delivery logos",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "caption_spacing",
+      "label": "Space between logos and caption",
+      "min": 0,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "intro_text_opacity",
+      "label": "Left text opacity",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 70
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Step label",
+      "default": "#EABE5F"
+    },
+    {
+      "type": "range",
+      "id": "title_opacity",
+      "label": "Step title opacity",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 70
+    },
+    {
+      "type": "range",
+      "id": "text_opacity",
+      "label": "Step, card and caption text opacity",
+      "info": "Also the steps text under the heading.",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 70
+    },
+    {
+      "type": "color",
+      "id": "card_color",
+      "label": "Seal card",
+      "default": "#202020"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Video border",
+      "default": "#454545"
+    },
+    {
+      "type": "color",
+      "id": "play_color",
+      "label": "Play button",
+      "default": "#F9F4E6"
+    },
+    {
+      "type": "select",
+      "id": "play_icon_style",
+      "label": "Play icon style",
+      "default": "cutout",
+      "options": [
+        { "value": "cutout", "label": "See-through (shows the video cover)" },
+        { "value": "solid", "label": "Solid (play icon colour)" }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "play_icon_color",
+      "label": "Play icon",
+      "info": "Used by the Solid play icon style.",
+      "default": "#0E0E0E"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Left heading tag",
+      "info": "Keep H1 when this is the first section of the page (one H1 per page). The steps heading uses the next level.",
+      "default": "h1",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size",
+      "label": "Left heading size",
+      "min": 16,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 57
+    },
+    {
+      "type": "range",
+      "id": "subheading_font_size",
+      "label": "Left text size",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "steps_heading_font_size",
+      "label": "Steps heading size",
+      "min": 16,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 41
+    },
+    {
+      "type": "range",
+      "id": "steps_subheading_font_size",
+      "label": "Steps text size",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "label_font_size",
+      "label": "Step label size",
+      "min": 10,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "label": "Step title size",
+      "min": 12,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "text_font_size",
+      "label": "Step text size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "seal_title_font_size",
+      "label": "Seal card title size",
+      "min": 10,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "seal_text_font_size",
+      "label": "Seal card text size",
+      "min": 10,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "caption_font_size",
+      "label": "Logos caption size",
+      "min": 8,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment_mobile",
+      "label": "Left heading alignment",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "steps_heading_alignment_mobile",
+      "label": "Steps heading alignment",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size_mobile",
+      "label": "Left heading size",
+      "min": 16,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "subheading_font_size_mobile",
+      "label": "Left text size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "subheading_max_width_mobile",
+      "label": "Left text max width",
+      "min": 200,
+      "max": 400,
+      "step": 5,
+      "unit": "px",
+      "default": 340
+    },
+    {
+      "type": "range",
+      "id": "intro_text_opacity_mobile",
+      "label": "Left text opacity",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "heading_gap_mobile",
+      "label": "Space between left heading and text",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 9
+    },
+    {
+      "type": "range",
+      "id": "intro_spacing_mobile",
+      "label": "Space above video",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 31
+    },
+    {
+      "type": "range",
+      "id": "video_width_mobile",
+      "label": "Video width",
+      "min": 200,
+      "max": 400,
+      "step": 2,
+      "unit": "px",
+      "default": 292
+    },
+    {
+      "type": "range",
+      "id": "gap_mobile",
+      "label": "Space between video and steps heading",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 53
+    },
+    {
+      "type": "range",
+      "id": "steps_heading_font_size_mobile",
+      "label": "Steps heading size",
+      "min": 16,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "steps_subheading_font_size_mobile",
+      "label": "Steps text size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "steps_subheading_max_width_mobile",
+      "label": "Steps text max width",
+      "min": 200,
+      "max": 400,
+      "step": 5,
+      "unit": "px",
+      "default": 290
+    },
+    {
+      "type": "range",
+      "id": "steps_heading_gap_mobile",
+      "label": "Space between steps heading and text",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "steps_spacing_mobile",
+      "label": "Space above first step",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 31
+    },
+    {
+      "type": "range",
+      "id": "step_gap_mobile",
+      "label": "Space between steps",
+      "min": 0,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "step_image_size_mobile",
+      "label": "Step photo size",
+      "min": 64,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 128
+    },
+    {
+      "type": "range",
+      "id": "step_image_gap_mobile",
+      "label": "Space between step photo and text",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "step_text_max_width_mobile",
+      "label": "Step text max width",
+      "min": 120,
+      "max": 400,
+      "step": 4,
+      "unit": "px",
+      "default": 204
+    },
+    {
+      "type": "range",
+      "id": "label_font_size_mobile",
+      "label": "Step label size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "title_font_size_mobile",
+      "label": "Step title size",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "text_font_size_mobile",
+      "label": "Step text size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "seal_spacing_mobile",
+      "label": "Space above seal card",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "seal_title_font_size_mobile",
+      "label": "Seal card title size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "seal_text_font_size_mobile",
+      "label": "Seal card text size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "logos_spacing_mobile",
+      "label": "Space above delivery logos",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "caption_spacing_mobile",
+      "label": "Space between logos and caption",
+      "min": 0,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "caption_font_size_mobile",
+      "label": "Logos caption size",
+      "min": 8,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Top padding (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Bottom padding (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Photo",
+          "info": "Square, at least 256 × 256 px."
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "info": "Leave empty for the automatic \"Step 1\", \"Step 2\"… (Section → Step label)."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Step title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Describe this step in one sentence."
+        }
+      ]
+    },
+    {
+      "type": "seal",
+      "name": "Seal card",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Seal image",
+          "info": "Round seal on a transparent background, at least 200 × 200 px."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Amare Seal of Authenticity"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "The parent group's mark, on every Zenith product."
+        }
+      ]
+    },
+    {
+      "type": "logos",
+      "name": "Delivery logos",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Logos image",
+          "info": "One image with all courier logos in a row, transparent background (about 1000 × 64 px)."
+        },
+        {
+          "type": "textarea",
+          "id": "caption",
+          "label": "Caption",
+          "default": "Delivered by LBC, J&T, Gogo Express, Ninja Van, and Amare Group's own rider fleet."
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "range",
+          "id": "logo_width",
+          "label": "Logos width",
+          "min": 120,
+          "max": 520,
+          "step": 4,
+          "unit": "px",
+          "default": 336
+        },
+        {
+          "type": "range",
+          "id": "caption_max_width",
+          "label": "Caption max width",
+          "min": 200,
+          "max": 1000,
+          "step": 10,
+          "unit": "px",
+          "default": 600
+        },
+        {
+          "type": "header",
+          "content": "Mobile"
+        },
+        {
+          "type": "range",
+          "id": "logo_width_mobile",
+          "label": "Logos width",
+          "min": 100,
+          "max": 400,
+          "step": 4,
+          "unit": "px",
+          "default": 336
+        },
+        {
+          "type": "range",
+          "id": "caption_max_width_mobile",
+          "label": "Caption max width",
+          "min": 160,
+          "max": 400,
+          "step": 5,
+          "unit": "px",
+          "default": 250
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zenith · Verify product",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "title": "Locate Tamper-proof QR Code",
+            "text": "Each box is equipped with a unique, tamper-proof QR code."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Scan with Camera/QR Scanner",
+            "text": "Use your camera or QR scanner app to verify."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Confirm Verification",
+            "text": "The page shows the unique serial number and the product it belongs to."
+          }
+        },
+        {
+          "type": "seal"
+        },
+        {
+          "type": "logos"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

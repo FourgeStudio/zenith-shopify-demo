@@ -1,0 +1,107 @@
+/* Zenith · Callout box — a coloured, bordered box with a logo, text and a smaller note
+   (e.g. the "buy only from official stores" notice). Per-instance values come from CSS vars on #Zenith-{{ section.id }}. */
+
+.zenith-co__box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: var(--z-cmw, 1024px);
+  margin: 0 auto;
+  padding: var(--z-cpd-m, 32px) var(--z-co-px-m, 24px);
+  border: var(--z-co-bw, 1px) solid var(--z-co-border, transparent);
+  border-radius: var(--z-co-radius, 0);
+  background: var(--z-co-box, #203940);
+  text-align: center;
+}
+
+.zenith-co--m-left .zenith-co__box {
+  align-items: flex-start;
+  text-align: left;
+}
+
+.zenith-co__logo {
+  display: block;
+  width: var(--z-co-logo-w-m, 166px);
+  max-width: 100%;
+  height: auto;
+  margin: 0 0 var(--z-cgap-m, 20px);
+}
+
+.zenith-co__heading {
+  margin: 0 0 var(--z-cgap-m, 20px);
+  font-size: var(--z-hfs-m, 2.6rem);
+  line-height: 1.1;
+  color: rgb(var(--z-co-text, var(--color-foreground)));
+}
+
+.zenith-co__text,
+.zenith-co__small {
+  max-width: var(--z-co-tmw, 740px);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.zenith-co__text {
+  font-size: var(--z-tfs-m, 1.6rem);
+  color: rgba(var(--z-co-text, var(--color-foreground)), var(--z-co-text-a, 0.8));
+}
+
+.zenith-co__small {
+  margin-top: var(--z-co-small-sp-m, 16px);
+  font-size: var(--z-co-sfs-m, 1.4rem);
+  line-height: 1.45;
+  color: rgba(var(--z-co-text, var(--color-foreground)), var(--z-co-small-a, 0.8));
+}
+
+.zenith-co__text p,
+.zenith-co__small p {
+  margin: 0;
+}
+
+.zenith-co__text p + p,
+.zenith-co__small p + p {
+  margin-top: 0.5em;
+}
+
+.zenith-co__text a,
+.zenith-co__small a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+@media screen and (min-width: 750px) {
+  .zenith-co__box {
+    padding: var(--z-cpd, 32px) var(--z-co-px, 48px);
+  }
+
+  .zenith-co--center .zenith-co__box {
+    align-items: center;
+    text-align: center;
+  }
+
+  .zenith-co--left .zenith-co__box {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .zenith-co__logo {
+    width: var(--z-co-logo-w, 212px);
+    margin-bottom: var(--z-cgap, 26px);
+  }
+
+  .zenith-co__heading {
+    margin-bottom: var(--z-cgap, 26px);
+    font-size: var(--z-hfs, 3.2rem);
+  }
+
+  .zenith-co__text {
+    font-size: var(--z-tfs, 1.8rem);
+  }
+
+  .zenith-co__small {
+    margin-top: var(--z-co-small-sp, 20px);
+    font-size: var(--z-co-sfs, 1.6rem);
+    line-height: 1.3;
+  }
+}

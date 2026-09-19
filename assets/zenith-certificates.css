@@ -1,0 +1,417 @@
+/* Zenith · Certificates — per-instance values come from CSS vars on #Zenith-{{ section.id }}.
+   Documents sit in a dark "acrylic" frame with four screws. Layout "below": title + number bars under the frame
+   (Business Certificates). Layout "beside": thumbnail + labelled name/number next to the frame (FDA products). */
+
+.zenith-cert--bg {
+  background: var(--z-cert-bg);
+  background-attachment: scroll;
+}
+
+/* ---------- Heading ---------- */
+.zenith-cert__heading.zenith-heading {
+  gap: var(--z-cert-ssp, var(--z-space-3));
+}
+
+.zenith-cert .zenith-subheading {
+  line-height: 1.5;
+  color: rgba(var(--color-foreground), var(--z-cert-sub-o, 0.85));
+}
+
+@media screen and (max-width: 749px) {
+  .zenith-cert--m-left .zenith-heading {
+    align-items: flex-start;
+    text-align: left;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .zenith-cert--m-center .zenith-heading {
+    align-items: center;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .zenith-cert--m-left .zenith-cert__logos {
+    justify-content: flex-start;
+  }
+
+  .zenith-cert--m-center .zenith-cert__logos {
+    justify-content: center;
+  }
+}
+
+/* ---------- Agency logos ---------- */
+.zenith-cert__logos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--z-space-3) var(--z-cert-logo-gap-m, 20px);
+  margin: 0 0 var(--z-cert-logo-sp-m, 22px);
+  padding: 0;
+  list-style: none;
+}
+
+.zenith-cert__logos--left {
+  justify-content: flex-start;
+}
+
+.zenith-cert__logo {
+  display: flex;
+  align-items: center;
+}
+
+.zenith-cert__logo img {
+  display: block;
+  width: auto;
+  height: calc(var(--z-cert-logo-h-m, 52px) * var(--z-cert-logo-s, 1));
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.zenith-cert__logo-link {
+  display: block;
+}
+
+.zenith-cert__logo-link:focus-visible {
+  outline: 2px solid rgb(var(--color-foreground));
+  outline-offset: 4px;
+}
+
+.zenith-cert__logo-ph {
+  display: block;
+  width: calc(var(--z-cert-logo-h-m, 52px) * var(--z-cert-logo-s, 1));
+  height: calc(var(--z-cert-logo-h-m, 52px) * var(--z-cert-logo-s, 1));
+  background: rgba(var(--color-foreground), 0.08);
+}
+
+.zenith-cert__logo-ph svg {
+  width: 100%;
+  height: 100%;
+  fill: rgba(var(--color-foreground), 0.35);
+}
+
+/* ---------- Grid ---------- */
+.zenith-cert__grid {
+  display: grid;
+  grid-template-columns: repeat(var(--z-cert-cols-m, 2), minmax(0, 1fr));
+  column-gap: var(--z-gap-m, 20px);
+  row-gap: var(--z-cert-rgap-m, 20px);
+  max-width: var(--z-cmw, 1024px);
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.zenith-cert__item {
+  min-width: 0;
+}
+
+.zenith-cert__item.is-pending {
+  opacity: var(--z-cert-pending-o, 0.5);
+}
+
+/* ---------- Frame (acrylic plate + screws) ---------- */
+.zenith-cert__frame {
+  --z-cert-p: var(--z-cert-pad-m, 10px);
+  --z-cert-s: var(--z-cert-screw-m, 7px);
+  position: relative;
+  display: block;
+  aspect-ratio: 1 / var(--z-cert-ratio, 1.36);
+  background: var(--z-cert-frame, #454545);
+  box-shadow: inset 0 0 0 1px var(--z-cert-frame-b, #6a6a6a);
+  color: inherit;
+  text-decoration: none;
+}
+
+a.zenith-cert__frame {
+  cursor: zoom-in;
+}
+
+a.zenith-cert__frame:focus-visible {
+  outline: 2px solid rgb(var(--color-foreground));
+  outline-offset: 3px;
+}
+
+.zenith-cert__doc {
+  position: absolute;
+  inset: var(--z-cert-p);
+  display: block;
+  overflow: hidden;
+}
+
+.zenith-cert__doc > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform var(--duration-default, 0.2s) ease;
+}
+
+a.zenith-cert__frame:hover .zenith-cert__doc > img {
+  transform: scale(1.015);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zenith-cert__doc > img {
+    transition: none;
+  }
+
+  a.zenith-cert__frame:hover .zenith-cert__doc > img {
+    transform: none;
+  }
+}
+
+/* Empty document / thumbnail: flat grey with an image icon */
+.zenith-cert__doc--empty,
+.zenith-cert__thumb--empty {
+  display: grid;
+  place-items: center;
+  background: var(--z-cert-ph, #dbdbdb);
+}
+
+.zenith-cert__ph-icon {
+  width: 38%;
+  height: auto;
+  max-height: 60%;
+  fill: rgba(0, 0, 0, 0.18);
+}
+
+/* Screws sit on the corners of the document area */
+.zenith-cert__screw {
+  position: absolute;
+  z-index: 1;
+  width: var(--z-cert-s);
+  height: var(--z-cert-s);
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse 34% 24% at 50% 38%, #1c1d1f 0 85%, transparent 100%),
+    radial-gradient(circle at 50% 62%, #ffffff 0 30%, var(--z-cert-screw-c, #ececec) 55%, #8c8c8c 100%);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+}
+
+.zenith-cert__screw--tl,
+.zenith-cert__screw--tr {
+  top: calc(var(--z-cert-p) - var(--z-cert-s) / 2);
+}
+
+.zenith-cert__screw--bl,
+.zenith-cert__screw--br {
+  bottom: calc(var(--z-cert-p) - var(--z-cert-s) / 2);
+}
+
+.zenith-cert__screw--tl,
+.zenith-cert__screw--bl {
+  left: calc(var(--z-cert-p) - var(--z-cert-s) / 2);
+}
+
+.zenith-cert__screw--tr,
+.zenith-cert__screw--br {
+  right: calc(var(--z-cert-p) - var(--z-cert-s) / 2);
+}
+
+/* ---------- Layout "below": title bar + number bar ---------- */
+.zenith-cert__caption {
+  margin-top: var(--z-cert-csp, 8px);
+  text-align: center;
+}
+
+.zenith-cert__title,
+.zenith-cert__number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--z-cert-bar-h-m, 24px);
+  margin: 0;
+  padding: var(--z-space-1) var(--z-space-2);
+  font-family: var(--font-body-family);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
+}
+
+.zenith-cert__title {
+  font-size: var(--z-ttfs-m, 1rem);
+  color: var(--z-cert-tbar-fg, #131313);
+  background: var(--z-cert-tbar, #fff);
+}
+
+.zenith-cert__number {
+  font-size: var(--z-tfs-m, 1rem);
+  color: var(--z-cert-nbar-fg, #e7e7e7);
+  background: var(--z-cert-nbar, #131313);
+  border: 1px solid var(--z-cert-nbar-b, #4e4e4e);
+  border-top: 0;
+}
+
+/* ---------- Layout "beside": frame | thumbnail + labelled facts ---------- */
+.zenith-cert--beside .zenith-cert__item {
+  display: flex;
+  align-items: center;
+  gap: var(--z-cert-dgap-m, 20px);
+}
+
+.zenith-cert--beside .zenith-cert__frame {
+  flex: 0 0 var(--z-cert-fw-m, 180px);
+  width: var(--z-cert-fw-m, 180px);
+}
+
+.zenith-cert__details {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.zenith-cert__thumb {
+  position: relative;
+  width: var(--z-cert-thumb-m, 94px);
+  height: var(--z-cert-thumb-m, 94px);
+  overflow: hidden;
+  border-radius: var(--z-cert-thumb-r, 2px);
+  background: var(--z-cert-thumb-bg, #fff);
+}
+
+.zenith-cert__thumb > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.zenith-cert__thumb--empty .zenith-cert__ph-icon {
+  width: 40%;
+}
+
+.zenith-cert__facts {
+  display: grid;
+  gap: var(--z-space-2);
+  margin: var(--z-space-3) 0 0;
+}
+
+.zenith-cert__fact {
+  display: grid;
+}
+
+.zenith-cert__label,
+.zenith-cert__name,
+.zenith-cert__value {
+  margin: 0;
+  font-family: var(--font-body-family);
+  font-weight: 400;
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
+}
+
+.zenith-cert__label {
+  font-size: var(--z-cert-lfs-m, 1rem);
+  line-height: 1.4;
+  color: var(--z-cert-label, #777);
+}
+
+.zenith-cert--label-caps .zenith-cert__label {
+  text-transform: uppercase;
+}
+
+.zenith-cert__name,
+.zenith-cert__value {
+  line-height: 1.5;
+  color: var(--z-cert-value, #e7e7e7);
+}
+
+.zenith-cert__name {
+  font-size: var(--z-ttfs-m, 1.3rem);
+}
+
+.zenith-cert__value {
+  font-size: var(--z-tfs-m, 1.3rem);
+}
+
+.zenith-cert__name-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.zenith-cert__name-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.zenith-cert__name-link:focus-visible {
+  outline: 2px solid rgb(var(--color-foreground));
+  outline-offset: 2px;
+}
+
+/* ---------- Desktop ---------- */
+@media screen and (min-width: 750px) {
+  .zenith-cert__logos {
+    column-gap: var(--z-cert-logo-gap, 20px);
+    margin-bottom: var(--z-cert-logo-sp, 80px);
+  }
+
+  .zenith-cert__logo img {
+    height: calc(var(--z-cert-logo-h, 64px) * var(--z-cert-logo-s, 1));
+  }
+
+  .zenith-cert__logo-ph {
+    width: calc(var(--z-cert-logo-h, 64px) * var(--z-cert-logo-s, 1));
+    height: calc(var(--z-cert-logo-h, 64px) * var(--z-cert-logo-s, 1));
+  }
+
+  .zenith-cert__grid {
+    grid-template-columns: repeat(var(--z-cert-cols-t, 2), minmax(0, 1fr));
+    column-gap: var(--z-gap, 20px);
+    row-gap: var(--z-cert-rgap, 20px);
+  }
+
+  .zenith-cert__frame {
+    --z-cert-p: var(--z-cert-pad, 10px);
+    --z-cert-s: var(--z-cert-screw, 7px);
+  }
+
+  .zenith-cert__title,
+  .zenith-cert__number {
+    min-height: var(--z-cert-bar-h, 24px);
+  }
+
+  .zenith-cert__title {
+    font-size: var(--z-ttfs, 1rem);
+  }
+
+  .zenith-cert__number {
+    font-size: var(--z-tfs, 1rem);
+  }
+
+  .zenith-cert--beside .zenith-cert__item {
+    gap: var(--z-cert-dgap, 32px);
+  }
+
+  .zenith-cert--beside .zenith-cert__frame {
+    flex-basis: var(--z-cert-fw, 230px);
+    width: var(--z-cert-fw, 230px);
+  }
+
+  .zenith-cert__thumb {
+    width: var(--z-cert-thumb, 94px);
+    height: var(--z-cert-thumb, 94px);
+  }
+
+  .zenith-cert__label {
+    font-size: var(--z-cert-lfs, 1rem);
+  }
+
+  .zenith-cert__name {
+    font-size: var(--z-ttfs, 1.3rem);
+  }
+
+  .zenith-cert__value {
+    font-size: var(--z-tfs, 1.3rem);
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .zenith-cert__grid {
+    grid-template-columns: repeat(var(--z-cert-cols, 2), minmax(0, 1fr));
+  }
+}

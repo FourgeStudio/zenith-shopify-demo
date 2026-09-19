@@ -1,0 +1,471 @@
+{%- comment -%} zenith: [customers] anywhere in this section shows Theme settings → Zenith → Customer count {%- endcomment -%}
+{%- capture zenith_body -%}
+{{ 'zenith-callout.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign s = section.settings
+  assign logo_loading = 'lazy'
+  if section.index <= 2
+    assign logo_loading = 'eager'
+  endif
+-%}
+
+{%- capture extra -%}
+  --z-co-box: {{ s.box_color }};
+  --z-co-border: {{ s.border_color | default: 'transparent' }};
+  --z-co-bw: {{ s.border_width }}px;
+  --z-co-radius: {{ s.box_radius }}px;
+  --z-co-px: {{ s.box_padding_x }}px;
+  --z-co-px-m: {{ s.box_padding_x_mobile }}px;
+  --z-co-logo-w: {{ s.logo_width }}px;
+  --z-co-logo-w-m: {{ s.logo_width_mobile }}px;
+  --z-co-tmw: {{ s.text_max_width }}px;
+  --z-co-small-sp: {{ s.small_text_spacing }}px;
+  --z-co-small-sp-m: {{ s.small_text_spacing_mobile }}px;
+  --z-co-sfs: {{ s.small_font_size }}px;
+  --z-co-sfs-m: {{ s.small_font_size_mobile }}px;
+  --z-co-text-a: {{ s.text_opacity | divided_by: 100.0 }};
+  --z-co-small-a: {{ s.small_text_opacity | divided_by: 100.0 }};
+  {%- if s.text_color != blank %}--z-co-text: {{ s.text_color.red }}, {{ s.text_color.green }}, {{ s.text_color.blue }};{% endif %}
+{%- endcapture -%}
+{%- render 'zenith-section-style', section: section, extra: extra -%}
+
+<section
+  id="Zenith-{{ section.id }}"
+  class="zenith-section zenith-co zenith-co--{{ s.text_alignment }} zenith-co--m-{{ s.text_alignment_mobile }} color-{{ s.color_scheme }} gradient{% if s.hide_on_mobile %} zenith-hide-mobile{% endif %}{% if s.hide_on_desktop %} zenith-hide-desktop{% endif %}"
+>
+  <div class="page-width">
+    <div class="zenith-co__box">
+      {%- if s.logo != blank -%}
+        {%- assign logo_alt = s.logo.alt | default: shop.name -%}
+        {{
+          s.logo
+          | image_url: width: 800
+          | image_tag: loading: logo_loading, widths: '200, 300, 400, 600, 800', sizes: '(min-width: 750px) 240px, 200px', alt: logo_alt, class: 'zenith-co__logo'
+        }}
+      {%- elsif s.use_brand_logo -%}
+        <img
+          src="{{ 'header-logo.png' | asset_url }}"
+          alt="{{ shop.name | escape }}"
+          width="223"
+          height="60"
+          loading="{{ logo_loading }}"
+          class="zenith-co__logo"
+        >
+      {%- endif -%}
+
+      {%- if s.heading != blank -%}
+        <{{ s.heading_tag }} class="zenith-co__heading">{{ s.heading | escape }}</{{ s.heading_tag }}>
+      {%- endif -%}
+
+      {%- if s.text != blank -%}
+        <div class="zenith-co__text zenith-rte">{{ s.text }}</div>
+      {%- endif -%}
+
+      {%- if s.small_text != blank -%}
+        <div class="zenith-co__small zenith-rte">{{ s.small_text }}</div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+{%- endcapture -%}
+{{- zenith_body | replace: '[customers]', settings.customer_count -}}
+
+{% schema %}
+{
+  "name": "Zenith · Callout box",
+  "tag": "div",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo",
+      "info": "Leave empty to use the Zenith wordmark (light version, for dark boxes)."
+    },
+    {
+      "type": "checkbox",
+      "id": "use_brand_logo",
+      "label": "Show the Zenith wordmark when no logo is selected",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>For your protection, buy only from our official website, our Facebook page, or our official Shopee, Lazada and TikTok Shop stores.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "small_text",
+      "label": "Small text",
+      "default": "<p>We maintain full transparency with our valued customers to build lasting trust.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Alignment",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "label": "Box max width",
+      "min": 624,
+      "max": 1424,
+      "step": 8,
+      "unit": "px",
+      "default": 1024
+    },
+    {
+      "type": "range",
+      "id": "text_max_width",
+      "label": "Text max width",
+      "min": 240,
+      "max": 1200,
+      "step": 10,
+      "unit": "px",
+      "default": 740
+    },
+    {
+      "type": "range",
+      "id": "content_padding",
+      "label": "Box top/bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "box_padding_x",
+      "label": "Box left/right padding",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "content_gap",
+      "label": "Space below logo and heading",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "small_text_spacing",
+      "label": "Space above small text",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "box_radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Section color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color",
+      "id": "box_color",
+      "label": "Box",
+      "default": "#203940"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Box border",
+      "default": "#294850"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "label": "Box border width",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "info": "Leave empty to use the color scheme's text color.",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "text_opacity",
+      "label": "Text opacity",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "small_text_opacity",
+      "label": "Small text opacity",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "Logo width",
+      "min": 100,
+      "max": 300,
+      "step": 2,
+      "unit": "px",
+      "default": 210
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading tag",
+      "default": "h2",
+      "options": [
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "p", "label": "Paragraph" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size",
+      "label": "Heading size",
+      "min": 16,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "text_font_size",
+      "label": "Text size",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "small_font_size",
+      "label": "Small text size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment_mobile",
+      "label": "Alignment",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "logo_width_mobile",
+      "label": "Logo width",
+      "min": 100,
+      "max": 300,
+      "step": 2,
+      "unit": "px",
+      "default": 164
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size_mobile",
+      "label": "Heading size",
+      "min": 16,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 26
+    },
+    {
+      "type": "range",
+      "id": "text_font_size_mobile",
+      "label": "Text size",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "small_font_size_mobile",
+      "label": "Small text size",
+      "min": 10,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "content_padding_mobile",
+      "label": "Box top/bottom padding",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "box_padding_x_mobile",
+      "label": "Box left/right padding",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "content_gap_mobile",
+      "label": "Space below logo and heading",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "small_text_spacing_mobile",
+      "label": "Space above small text",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_mobile",
+      "label": "Hide on mobile",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_desktop",
+      "label": "Hide on desktop",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Top padding (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Bottom padding (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zenith · Callout box"
+    }
+  ]
+}
+{% endschema %}

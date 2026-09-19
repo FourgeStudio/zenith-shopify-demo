@@ -168,7 +168,7 @@
           <h2 class="zenith-heading__title">{{ heading }}</h2>
         {%- endif -%}
         {%- if section.settings.subheading != blank -%}
-          <div class="zenith-subheading">
+          <div class="zenith-subheading{% if section.settings.subheading_mobile_only %} zenith-hide-desktop{% endif %}">
             {{- section.settings.subheading | replace: '[customers]', settings.customer_count -}}
           </div>
         {%- endif -%}
@@ -281,6 +281,12 @@
       "id": "subheading",
       "label": "Subheading",
       "default": "<p>Hear from the men who use Zenith every day.</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "subheading_mobile_only",
+      "label": "Show subheading on mobile only",
+      "default": false
     },
     {
       "type": "text",

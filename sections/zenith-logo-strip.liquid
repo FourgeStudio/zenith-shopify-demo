@@ -27,7 +27,7 @@
 
 <div
   id="Zenith-{{ section.id }}"
-  class="zenith-section zenith-logos color-{{ section.settings.color_scheme }} gradient zenith-logos--{{ section.settings.logo_style }} zenith-logos--d-{{ section.settings.layout }} zenith-logos--m-{{ section.settings.mobile_layout }} zenith-logos--align-{{ section.settings.logo_align }}{% if section.settings.heading_uppercase %} zenith-logos--upper{% endif %}"
+  class="zenith-section zenith-logos color-{{ section.settings.color_scheme }} gradient zenith-logos--{{ section.settings.logo_style }} zenith-logos--d-{{ section.settings.layout }} zenith-logos--m-{{ section.settings.mobile_layout }} zenith-logos--align-{{ section.settings.logo_align }}{% if section.settings.heading_uppercase %} zenith-logos--upper{% endif %}{% if section.settings.hide_on_mobile %} zenith-hide-mobile{% endif %}"
 >
   {%- if section.settings.heading != blank -%}
     <div class="page-width">
@@ -279,6 +279,12 @@
     {
       "type": "header",
       "content": "Mobile"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_mobile",
+      "label": "Hide on mobile",
+      "default": false
     },
     {
       "type": "select",

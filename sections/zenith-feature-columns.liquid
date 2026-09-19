@@ -51,6 +51,11 @@
   --z-istroke: {{ section.settings.icon_stroke_width | default: '1.5' }};
   --z-tsp: {{ section.settings.title_spacing }}px;
   --z-tsp-m: {{ section.settings.title_spacing_mobile }}px;
+  --z-ftlh: {{ section.settings.title_line_height | default: 110 | divided_by: 100.0 }};
+  --z-ftlh-m: {{ section.settings.title_line_height_mobile | default: 110 | divided_by: 100.0 }};
+  {%- if section.settings.title_color != blank %}
+  --z-ft-color: {{ section.settings.title_color }};
+  {%- endif %}
   --z-cpy: {{ section.settings.card_padding_y }}px;
   --z-cpx: {{ section.settings.card_padding_x }}px;
   --z-cpy-m: {{ section.settings.card_padding_y_mobile }}px;
@@ -84,6 +89,10 @@
   endif
   if section.settings.card_border_color != blank
     assign features_mods = features_mods | append: ' zenith-features--bordered'
+  endif
+  # zenith: column title colour (Verify "Where We Are Located"); empty = text colour of the scheme
+  if section.settings.title_color != blank
+    assign features_mods = features_mods | append: ' zenith-features--title-color'
   endif
 -%}
 
@@ -637,6 +646,12 @@
     },
     {
       "type": "color",
+      "id": "title_color",
+      "label": "Column title color",
+      "info": "Leave empty to use the color scheme's text color"
+    },
+    {
+      "type": "color",
       "id": "card_background",
       "label": "Card background",
       "info": "Leave empty for no card"
@@ -752,6 +767,16 @@
       "step": 2,
       "unit": "px",
       "default": 24
+    },
+    {
+      "type": "range",
+      "id": "title_line_height",
+      "label": "Column title line height",
+      "min": 90,
+      "max": 160,
+      "step": 5,
+      "unit": "%",
+      "default": 110
     },
     {
       "type": "range",
@@ -1051,6 +1076,16 @@
     },
     {
       "type": "range",
+      "id": "title_line_height_mobile",
+      "label": "Column title line height",
+      "min": 90,
+      "max": 160,
+      "step": 5,
+      "unit": "%",
+      "default": 110
+    },
+    {
+      "type": "range",
       "id": "text_font_size_mobile",
       "label": "Column text size",
       "min": 12,
@@ -1262,6 +1297,10 @@
             {
               "value": "box",
               "label": "Package"
+            },
+            {
+              "value": "pin",
+              "label": "Map pin"
             },
             {
               "value": "chat",

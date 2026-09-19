@@ -1,0 +1,1136 @@
+{
+  "sections": {
+    "verify": {
+      "type": "zenith-verify",
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "title": "Locate Tamper-proof QR Code",
+            "text": "Each box is equipped with a unique, tamper-proof QR code."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "title": "Scan with Camera/QR Scanner",
+            "text": "Use your camera or QR scanner app to verify."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "title": "Confirm Verification",
+            "text": "The page shows the unique serial number and the product it belongs to."
+          }
+        },
+        "seal": {
+          "type": "seal",
+          "settings": {
+            "title": "Amare Seal of Authenticity",
+            "text": "The parent group's mark, on every Zenith product."
+          }
+        },
+        "logos": {
+          "type": "logos",
+          "settings": {
+            "caption": "Delivered by LBC, J&T, Gogo Express, Ninja Van, and Amare Group's own rider fleet.",
+            "logo_width": 336,
+            "caption_max_width": 600,
+            "logo_width_mobile": 336,
+            "caption_max_width_mobile": 250
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3",
+        "seal",
+        "logos"
+      ],
+      "settings": {
+        "heading": "Verify Your Zenith Product",
+        "subheading": "<p>Every Zenith box carries a tamper-proof QR code. Scan it to confirm yours is genuine.</p>",
+        "play_label": "Play video",
+        "steps_heading": "How To Check Yours Is Real",
+        "steps_subheading": "<p>Three steps to check, plus the Amare Seal of Authenticity.</p>",
+        "step_label": "Step",
+        "content_max_width": 1312,
+        "media_width": 50,
+        "gap": 32,
+        "heading_alignment": "center",
+        "subheading_max_width": 420,
+        "heading_gap": 22,
+        "intro_spacing": 20,
+        "video_width": 348,
+        "video_ratio": "0.5625",
+        "border_width": 1,
+        "play_size": 82,
+        "steps_heading_alignment": "left",
+        "steps_subheading_max_width": 600,
+        "steps_heading_gap": 9,
+        "steps_spacing": 32,
+        "step_gap": 24,
+        "step_image_size": 128,
+        "step_image_gap": 20,
+        "step_text_max_width": 340,
+        "seal_spacing": 32,
+        "seal_image_size": 94,
+        "seal_padding": 12,
+        "logos_spacing": 32,
+        "caption_spacing": 8,
+        "color_scheme": "scheme-1",
+        "intro_text_opacity": 70,
+        "label_color": "#EABE5F",
+        "title_opacity": 70,
+        "text_opacity": 70,
+        "card_color": "#202020",
+        "border_color": "#454545",
+        "play_color": "#F9F4E6",
+        "play_icon_style": "cutout",
+        "play_icon_color": "#0E0E0E",
+        "heading_tag": "h1",
+        "heading_font_size": 57,
+        "subheading_font_size": 18,
+        "steps_heading_font_size": 41,
+        "steps_subheading_font_size": 18,
+        "label_font_size": 16,
+        "title_font_size": 20,
+        "text_font_size": 16,
+        "seal_title_font_size": 16,
+        "seal_text_font_size": 16,
+        "caption_font_size": 10,
+        "heading_alignment_mobile": "center",
+        "steps_heading_alignment_mobile": "center",
+        "heading_font_size_mobile": 40,
+        "subheading_font_size_mobile": 16,
+        "subheading_max_width_mobile": 340,
+        "intro_text_opacity_mobile": 100,
+        "heading_gap_mobile": 9,
+        "intro_spacing_mobile": 31,
+        "video_width_mobile": 292,
+        "gap_mobile": 53,
+        "steps_heading_font_size_mobile": 36,
+        "steps_subheading_font_size_mobile": 16,
+        "steps_subheading_max_width_mobile": 290,
+        "steps_heading_gap_mobile": 5,
+        "steps_spacing_mobile": 31,
+        "step_gap_mobile": 20,
+        "step_image_size_mobile": 128,
+        "step_image_gap_mobile": 20,
+        "step_text_max_width_mobile": 204,
+        "label_font_size_mobile": 16,
+        "title_font_size_mobile": 20,
+        "text_font_size_mobile": 14,
+        "seal_spacing_mobile": 20,
+        "seal_title_font_size_mobile": 16,
+        "seal_text_font_size_mobile": 16,
+        "logos_spacing_mobile": 32,
+        "caption_spacing_mobile": 8,
+        "caption_font_size_mobile": 10,
+        "padding_top": 50,
+        "padding_bottom": 48,
+        "padding_top_mobile": 32,
+        "padding_bottom_mobile": 20
+      }
+    },
+    "trust_bar": {
+      "type": "zenith-icon-bar",
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "icon": "thumbs_up",
+            "text": "Zenith Money-Back Guarantee",
+            "link": ""
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "icon": "cash",
+            "text": "Cash On Delivery",
+            "link": ""
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "icon": "certificate",
+            "text": "FDA-Notified Products",
+            "link": ""
+          }
+        },
+        "item_4": {
+          "type": "item",
+          "settings": {
+            "icon": "farm",
+            "text": "100% Grass-Fed Beef Tallow",
+            "link": ""
+          }
+        },
+        "item_5": {
+          "type": "item",
+          "settings": {
+            "icon": "dropper",
+            "text": "Formulated For Filipinos",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4",
+        "item_5"
+      ],
+      "settings": {
+        "alignment": "spread",
+        "show_border": false,
+        "icon_size": 22,
+        "gap": 32,
+        "color_scheme": "scheme-4",
+        "icon_color": "dawn_gold",
+        "text_font_size": 14,
+        "mobile_layout": "marquee",
+        "marquee_speed": 25,
+        "text_font_size_mobile": 14,
+        "icon_size_mobile": 22,
+        "gap_mobile": 24,
+        "padding_top": 12,
+        "padding_bottom": 12,
+        "padding_top_mobile": 10,
+        "padding_bottom_mobile": 10,
+        "hide_on_mobile": true
+      }
+    },
+    "press": {
+      "type": "zenith-logo-strip",
+      "blocks": {
+        "logo_1": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/vector-icons_8.png",
+            "name": "Philippine Daily Inquirer",
+            "link": "",
+            "logo_scale": 100
+          }
+        },
+        "logo_2": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/vector-icons_9.png",
+            "name": "GMA",
+            "link": "",
+            "logo_scale": 100
+          }
+        },
+        "logo_3": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/vector-icons_10.png",
+            "name": "The Philippine Star",
+            "link": "",
+            "logo_scale": 100
+          }
+        },
+        "logo_4": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/vector-icons_11.png",
+            "name": "SunStar",
+            "link": "",
+            "logo_scale": 100
+          }
+        },
+        "logo_5": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/vector-icons_1.png",
+            "name": "Manila Standard",
+            "link": "",
+            "logo_scale": 100
+          }
+        }
+      },
+      "block_order": [
+        "logo_1",
+        "logo_2",
+        "logo_3",
+        "logo_4",
+        "logo_5"
+      ],
+      "settings": {
+        "heading": "As seen on",
+        "layout": "row",
+        "logo_align": "bottom",
+        "logo_height": 24,
+        "logo_max_width": 160,
+        "gap": 40,
+        "content_gap": 12,
+        "speed": 30,
+        "color_scheme": "scheme-1",
+        "logo_style": "white",
+        "logo_opacity": 100,
+        "heading_opacity": 70,
+        "text_font_size": 14,
+        "heading_uppercase": false,
+        "mobile_layout": "marquee",
+        "logo_height_mobile": 24,
+        "gap_mobile": 40,
+        "content_gap_mobile": 12,
+        "text_font_size_mobile": 14,
+        "padding_top": 24,
+        "padding_bottom": 24,
+        "padding_top_mobile": 24,
+        "padding_bottom_mobile": 24,
+        "hide_on_mobile": true
+      }
+    },
+    "videos": {
+      "type": "zenith-video-carousel",
+      "blocks": {
+        "video_1": {
+          "type": "video",
+          "settings": {
+            "youtube_url": "https://www.youtube.com/shorts/wThWrZqfsh4",
+            "quote": "\"Anti-aging cream is all in one solution. Barrier protection, retinol. Clinically proven anti-aging. It's lightweight.\"",
+            "title": "A Gym Instructor's Secret to Younger-Looking Skin",
+            "link": "",
+            "author": "@miguelchancofitness",
+            "product": "zenith-anti-aging-tallow-cream"
+          }
+        },
+        "video_2": {
+          "type": "video",
+          "settings": {
+            "youtube_url": "https://www.youtube.com/shorts/QkaxWmIFCMY",
+            "quote": "\"My skin looks really smooth. Sobrang bright lang niya, less dark spots.\"",
+            "title": "Can Women Use Beef Tallow Skincare? Here's the Answer",
+            "link": "",
+            "author": "@dr.lyienho",
+            "product": "zenith-anti-aging-tallow-cream"
+          }
+        },
+        "video_3": {
+          "type": "video",
+          "settings": {
+            "youtube_url": "https://www.youtube.com/shorts/_bd0xPEVXmE",
+            "quote": "\"100% safe sa skin para sa mga poging katulad ko. Hindi siya malagkit pag ginamit.\"",
+            "title": "The Skincare a Streamer (HOLYFATHER) Swears By After Puyat Nights",
+            "link": "",
+            "author": "@johannes_rissler",
+            "product": "zenith-anti-aging-tallow-cream"
+          }
+        },
+        "video_gBwH3B": {
+          "type": "video",
+          "settings": {
+            "youtube_url": "https://www.youtube.com/shorts/AvemGE7KnB4",
+            "quote": "\"Hindi siya drastic. Hindi siya yung parang kailangan mong mag-adjust ng lifestyle or mag-worry about side effects.\"",
+            "title": "Angelica & Jarom of Explore Manila Shares The #1 Solution for Hair Thinning",
+            "link": "",
+            "author": "@creator",
+            "product": "zenith-advanced-hair-density-spray"
+          }
+        },
+        "video_4": {
+          "type": "video",
+          "settings": {
+            "youtube_url": "https://www.youtube.com/shorts/PyadtvAp5uY",
+            "quote": "\"Over time, hair doesn't just look cleaner. It can look fuller, thicker, and less flat.\"",
+            "title": "A Sister's Quiet Way of Looking Out for Her Brother",
+            "link": "",
+            "author": "@_nstrjr",
+            "product": "zenith-advanced-hair-density-spray"
+          }
+        },
+        "video_5": {
+          "type": "video",
+          "settings": {
+            "youtube_url": "https://www.youtube.com/shorts/KVwL1edll9A?feature=share",
+            "quote": "\"Good for strengthening hair and scalp. I've been using it daily before work.\"",
+            "title": "You Don't Notice Hair Thinning Until It's Obvious",
+            "link": "",
+            "author": "",
+            "product": "zenith-advanced-hair-density-spray"
+          }
+        },
+        "video_zyQVM4": {
+          "type": "video",
+          "settings": {
+            "youtube_url": "https://www.youtube.com/shorts/RVWc0WoOPxI",
+            "quote": "\"I won't lie to you, but I noticed there's less hair on the pillow. And that's enough for me.\"",
+            "title": "How a Wife Quietly Solved Her Husband's Hair Loss",
+            "link": "",
+            "author": "",
+            "product": "zenith-advanced-hair-density-shampoo"
+          }
+        },
+        "video_7tJ8A4": {
+          "type": "video",
+          "settings": {
+            "youtube_url": "https://www.youtube.com/shorts/pLuN_PcAwO0",
+            "quote": "\"It's literally part of my shower routine. No extra complicated steps.\"",
+            "title": "The One Spot a Man Never Sees on Himself",
+            "link": "",
+            "author": "",
+            "product": "zenith-advanced-hair-density-shampoo"
+          }
+        },
+        "video_QMkyyt": {
+          "type": "video",
+          "settings": {
+            "youtube_url": "https://www.youtube.com/shorts/2C2RuAlr3Bc?feature=share",
+            "quote": "“But after using it for a week now, pansin ko yung skin ko nag-brighter tapos yung ibang dark spots medyo nawala.”",
+            "title": "A Longtime Creator's Go-To Cleanser",
+            "link": "",
+            "author": "",
+            "product": "zenith-anti-aging-tallow-cleanser"
+          }
+        },
+        "video_rnfqqT": {
+          "type": "video",
+          "settings": {
+            "youtube_url": "https://www.youtube.com/shorts/X1M3onIG3bM",
+            "quote": "\"If you want to achieve a healthy skin, make sure to add Zenith in your skin care routine.\"",
+            "title": "A Celebrity's Go-To Cleanser for Clean Skin",
+            "link": "",
+            "author": "",
+            "product": "zenith-anti-aging-tallow-cleanser"
+          }
+        },
+        "video_f6wNJ9": {
+          "type": "video",
+          "settings": {
+            "youtube_url": "https://www.youtube.com/shorts/bh4wRbiyEo0?feature=share",
+            "quote": "\"My skin felt clean but still hydrated, soft, smooth, and naturally glowing.\"",
+            "title": "Why This Creator Swears by Beef Tallow Cleanser",
+            "link": "",
+            "author": "",
+            "product": "zenith-anti-aging-tallow-cleanser"
+          }
+        },
+        "video_mbxWna": {
+          "type": "video",
+          "settings": {
+            "youtube_url": "https://www.youtube.com/shorts/aYs8b7fmU_U?feature=share",
+            "quote": "“It really helps with fine lines. Ingredients meant for anti-aging so it slows down the aging process.”",
+            "title": "I Thought Skincare Was Just Washing Your Face",
+            "link": "",
+            "author": "",
+            "product": "zenith-anti-aging-tallow-day-cream-spf30"
+          }
+        },
+        "video_fxxKkG": {
+          "type": "video",
+          "settings": {
+            "youtube_url": "https://www.youtube.com/shorts/TLBO7XM4nIo?feature=share",
+            "quote": "\"It combines deep nourishment and invisible sun protection in one step.\"",
+            "title": "Do Men Need Skincare? (Doctor Explains)",
+            "link": "",
+            "author": "",
+            "product": "zenith-anti-aging-tallow-day-cream-spf30"
+          }
+        },
+        "video_Fa6WRV": {
+          "type": "video",
+          "settings": {
+            "youtube_url": "https://www.youtube.com/shorts/Iqw_r07x27E?feature=share",
+            "quote": "\"Once i-apply mo siya, ramdam mo agad na nakaka-hydrate, nakaka-moisturize siya ng balat.\"",
+            "title": "A Skincare Enthusiast Reviews This Day Cream",
+            "link": "",
+            "author": "",
+            "product": "zenith-anti-aging-tallow-day-cream-spf30"
+          }
+        }
+      },
+      "block_order": [
+        "video_1",
+        "video_2",
+        "video_3",
+        "video_gBwH3B",
+        "video_4",
+        "video_5",
+        "video_zyQVM4",
+        "video_7tJ8A4",
+        "video_QMkyyt",
+        "video_rnfqqT",
+        "video_f6wNJ9",
+        "video_mbxWna",
+        "video_fxxKkG",
+        "video_Fa6WRV"
+      ],
+      "settings": {
+        "content_source": "global",
+        "product_filter": "all",
+        "filter_products": [],
+        "eyebrow": "",
+        "heading": "Clinically Proven. The Complete Regimen.",
+        "heading_mobile": "Is Zenith Legit?",
+        "subheading": "<p>Hear from the men who use Zenith every day.</p>",
+        "play_label": "Play video",
+        "center_when_fits": true,
+        "heading_alignment": "center",
+        "slides_desktop": 4,
+        "show_peek": true,
+        "show_dots": true,
+        "show_arrows": true,
+        "autoplay": 0,
+        "heading_max_width": 760,
+        "heading_gap": 4,
+        "heading_spacing": 32,
+        "gap": 24,
+        "controls_spacing": 32,
+        "video_ratio": "13-18",
+        "play_size": 80,
+        "play_position": 53,
+        "show_play_without_video": true,
+        "quote_align": "center",
+        "body_min_height": 200,
+        "thumb_size": 56,
+        "color_scheme": "scheme-1",
+        "card_color_scheme": "scheme-6",
+        "card_border_color": "#294850",
+        "title_color": "#d6b356",
+        "overlay_style": "bottom",
+        "overlay_color": "#112328",
+        "overlay_opacity": 100,
+        "overlay_coverage": 30,
+        "play_color": "#000000",
+        "play_opacity": 50,
+        "play_icon_color": "#ffffff",
+        "heading_font_size": 48,
+        "heading_uppercase": false,
+        "subheading_font_size": 18,
+        "eyebrow_font_size": 14,
+        "text_font_size": 16,
+        "title_font_size": 12,
+        "handle_font_size": 10,
+        "heading_alignment_mobile": "left",
+        "mobile_slide_width": 83,
+        "heading_font_size_mobile": 36,
+        "subheading_font_size_mobile": 16,
+        "heading_gap_mobile": 4,
+        "heading_spacing_mobile": 24,
+        "gap_mobile": 24,
+        "play_position_mobile": 57,
+        "quote_align_mobile": "top",
+        "body_min_height_mobile": 232,
+        "thumb_size_mobile": 56,
+        "text_font_size_mobile": 16,
+        "title_font_size_mobile": 12,
+        "handle_font_size_mobile": 10,
+        "padding_top": 32,
+        "padding_bottom": 32,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20,
+        "subheading_mobile_only": true
+      }
+    },
+    "locations": {
+      "type": "zenith-feature-columns",
+      "blocks": {
+        "location_manila": {
+          "type": "column",
+          "settings": {
+            "icon": "box",
+            "icon_text": "",
+            "title": "Fulfillment Center & Manila Office",
+            "text": "<p>1208 Pablo Ocampo, Cor. Alfonso St. Vito Cruz, Brgy 757, Manila, Metro Manila 1017 Philippines</p>"
+          }
+        },
+        "location_cebu": {
+          "type": "column",
+          "settings": {
+            "icon": "pin",
+            "icon_text": "",
+            "title": "Corporate Head Office",
+            "text": "<p>MIT Bldg 2 Unit #3B-3, 117 Gorordo Ave., Cor. Sanjercasville Rd. Lahug, Cebu City, Cebu 6000 Philippines</p>"
+          }
+        }
+      },
+      "block_order": [
+        "location_manila",
+        "location_cebu"
+      ],
+      "settings": {
+        "content_source": "custom",
+        "eyebrow": "",
+        "heading": "Where We Are Located",
+        "subheading": "",
+        "show_payment_icons": false,
+        "footer_text": "",
+        "heading_alignment": "left",
+        "columns_desktop": 2,
+        "show_media": true,
+        "media_position": "left",
+        "image_ratio": "square",
+        "image_size": 300,
+        "text_alignment": "left",
+        "icon_position": "top",
+        "vertical_alignment": "center",
+        "heading_max_width": 760,
+        "heading_spacing": 52,
+        "gap": 52,
+        "content_gap": 32,
+        "icon_gap": 16,
+        "title_spacing": 4,
+        "card_padding_y": 0,
+        "card_padding_x": 0,
+        "text_max_width": 300,
+        "footer_spacing": 32,
+        "footer_image_width": 336,
+        "logo_height": 24,
+        "logo_max_width": 120,
+        "logo_gap": 18,
+        "color_scheme": "scheme-1",
+        "icon_color": "#eabe5f",
+        "title_color": "#b6b6b6",
+        "card_background": "",
+        "card_border_color": "",
+        "badge_background": "#4e3a05",
+        "badge_color": "#eabe5f",
+        "text_opacity": 70,
+        "logo_style": "original",
+        "logo_opacity": 100,
+        "heading_font_size": 48,
+        "heading_uppercase": false,
+        "subheading_font_size": 16,
+        "eyebrow_font_size": 14,
+        "title_font_size": 32,
+        "title_line_height": 140,
+        "text_font_size": 14,
+        "text_line_height": 150,
+        "icon_size": 34,
+        "icon_stroke_width": "1.5",
+        "badge_size": 44,
+        "badge_font_size": 30,
+        "footer_text_size": 10,
+        "columns_mobile": "1",
+        "vertical_alignment_mobile": "center",
+        "icon_position_mobile": "top",
+        "text_alignment_mobile": "desktop",
+        "image_size_mobile": 120,
+        "heading_font_size_mobile": 36,
+        "subheading_font_size_mobile": 15,
+        "heading_spacing_mobile": 24,
+        "gap_mobile": 20,
+        "content_gap_mobile": 20,
+        "icon_gap_mobile": 10,
+        "title_spacing_mobile": 6,
+        "card_padding_y_mobile": 0,
+        "card_padding_x_mobile": 0,
+        "icon_size_mobile": 26,
+        "badge_size_mobile": 32,
+        "badge_font_size_mobile": 22,
+        "title_font_size_mobile": 20,
+        "title_line_height_mobile": 110,
+        "text_font_size_mobile": 12,
+        "text_line_height_mobile": 135,
+        "footer_spacing_mobile": 32,
+        "footer_image_width_mobile": 336,
+        "logo_height_mobile": 20,
+        "logo_gap_mobile": 12,
+        "footer_text_size_mobile": 10,
+        "footer_max_width_mobile": 256,
+        "padding_top": 24,
+        "padding_bottom": 20,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20
+      }
+    },
+    "trust": {
+      "type": "zenith-trust",
+      "blocks": {
+        "item_fda": {
+          "type": "item",
+          "settings": {
+            "text": "FDA Notified (LTO-**********)",
+            "icon": "check_filled"
+          }
+        },
+        "item_clinical": {
+          "type": "item",
+          "settings": {
+            "text": "Clinically-Backed Active Ingredients",
+            "icon": "check_filled"
+          }
+        },
+        "item_guarantee": {
+          "type": "item",
+          "settings": {
+            "text": "Zenith Money-Back Guarantee",
+            "icon": "check_filled"
+          }
+        },
+        "item_cod": {
+          "type": "item",
+          "settings": {
+            "text": "COD Available Nationwide",
+            "icon": "check_filled"
+          }
+        },
+        "item_transparent": {
+          "type": "item",
+          "settings": {
+            "text": "Transparent Ingredient Percentages",
+            "icon": "check_filled"
+          }
+        }
+      },
+      "block_order": [
+        "item_fda",
+        "item_clinical",
+        "item_guarantee",
+        "item_cod",
+        "item_transparent"
+      ],
+      "settings": {
+        "heading": "Your Trust Matters to Us",
+        "card_text": "<p><strong>Zenith</strong> is an Amare Group brand. Every product carries the <strong>Amare Group</strong> Seal of Authenticity — a commitment to product integrity, transparent sourcing, and honest marketing.</p>",
+        "card_position": "right",
+        "media_width": 50,
+        "gap": 14,
+        "vertical_alignment": "center",
+        "heading_alignment": "left",
+        "heading_spacing": 16,
+        "item_spacing": 8,
+        "item_gap": 12,
+        "card_layout": "stacked",
+        "card_text_alignment": "center",
+        "content_padding": 32,
+        "card_gap": 10,
+        "seal_width": 150,
+        "content_max_width": 560,
+        "color_scheme": "scheme-1",
+        "icon_color": "#eabe5f",
+        "item_text_opacity": 100,
+        "card_background": "#202020",
+        "card_border_color": "#363636",
+        "text_opacity": 65,
+        "heading_font_size": 41,
+        "icon_size": 24,
+        "title_font_size": 18,
+        "text_font_size": 12,
+        "heading_font_size_mobile": 36,
+        "heading_spacing_mobile": 12,
+        "icon_size_mobile": 20,
+        "title_font_size_mobile": 14,
+        "item_spacing_mobile": 8,
+        "item_gap_mobile": 8,
+        "gap_mobile": 20,
+        "card_layout_mobile": "side",
+        "card_text_alignment_mobile": "left",
+        "content_padding_mobile": 12,
+        "card_gap_mobile": 12,
+        "seal_width_mobile": 65,
+        "text_font_size_mobile": 12,
+        "padding_top": 40,
+        "padding_bottom": 48,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20
+      }
+    },
+    "stores": {
+      "type": "zenith-store-links",
+      "blocks": {
+        "store_lazada": {
+          "type": "store",
+          "settings": {
+            "icon": "lazada",
+            "handle": "@tryzenithph",
+            "stat": "99% Seller Rating",
+            "link": "",
+            "new_tab": true,
+            "store_name": ""
+          }
+        },
+        "store_shopee": {
+          "type": "store",
+          "settings": {
+            "icon": "shopee",
+            "handle": "@tryzenithph",
+            "stat": "4.9 (32K+ Rating)",
+            "link": "",
+            "new_tab": true,
+            "store_name": ""
+          }
+        },
+        "store_tiktok": {
+          "type": "store",
+          "settings": {
+            "icon": "tiktok_shop",
+            "handle": "@tryzenithph",
+            "stat": "46k+ followers",
+            "link": "",
+            "new_tab": true,
+            "store_name": ""
+          }
+        }
+      },
+      "block_order": [
+        "store_lazada",
+        "store_shopee",
+        "store_tiktok"
+      ],
+      "settings": {
+        "heading": "Our Official Stores",
+        "heading_alignment": "center",
+        "columns_desktop": 3,
+        "card_layout": "stacked",
+        "card_alignment": "left",
+        "card_min_height": 74,
+        "gap": 24,
+        "item_padding": 14,
+        "glyph_gap": 6,
+        "text_gap": 2,
+        "heading_spacing": 25,
+        "color_scheme": "scheme-1",
+        "card_background": "#202020",
+        "card_border_color": "#363636",
+        "card_border_width": 1,
+        "glyph_color": "#ffffff",
+        "handle_color": "#ffffff",
+        "handle_opacity": 70,
+        "stat_color": "#ffffff",
+        "heading_font_size": 41,
+        "icon_size": 44,
+        "title_font_size": 16,
+        "text_font_size": 14,
+        "heading_alignment_mobile": "left",
+        "columns_mobile": 2,
+        "card_layout_mobile": "stacked",
+        "card_alignment_mobile": "left",
+        "card_min_height_mobile": 60,
+        "gap_mobile": 20,
+        "item_padding_mobile": 8,
+        "glyph_gap_mobile": 6,
+        "text_gap_mobile": 0,
+        "heading_font_size_mobile": 36,
+        "heading_spacing_mobile": 24,
+        "icon_size_mobile": 38,
+        "title_font_size_mobile": 12,
+        "text_font_size_mobile": 12,
+        "padding_top": 32,
+        "padding_bottom": 40,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20,
+        "card_width": 204,
+        "line_height": 130,
+        "line_height_mobile": 130
+      }
+    },
+    "pages": {
+      "type": "zenith-store-links",
+      "blocks": {
+        "page_zenith_ph": {
+          "type": "store",
+          "settings": {
+            "icon": "facebook",
+            "handle": "Zenith PH",
+            "stat": "",
+            "link": "",
+            "new_tab": true,
+            "store_name": "Facebook"
+          }
+        },
+        "page_high_performance": {
+          "type": "store",
+          "settings": {
+            "icon": "facebook",
+            "handle": "High Performance",
+            "stat": "Skincare For Men",
+            "link": "",
+            "new_tab": true,
+            "store_name": "Facebook"
+          }
+        },
+        "page_facial_care": {
+          "type": "store",
+          "settings": {
+            "icon": "facebook",
+            "handle": "Facial Care",
+            "stat": "For Men",
+            "link": "",
+            "new_tab": true,
+            "store_name": "Facebook"
+          }
+        },
+        "page_self_care": {
+          "type": "store",
+          "settings": {
+            "icon": "facebook",
+            "handle": "For Filipino Men's",
+            "stat": "Self Care",
+            "link": "",
+            "new_tab": true,
+            "store_name": "Facebook"
+          }
+        }
+      },
+      "block_order": [
+        "page_zenith_ph",
+        "page_high_performance",
+        "page_facial_care",
+        "page_self_care"
+      ],
+      "settings": {
+        "heading": "Our Official Pages",
+        "heading_alignment": "center",
+        "columns_desktop": 4,
+        "card_layout": "stacked",
+        "card_alignment": "left",
+        "card_min_height": 74,
+        "gap": 22,
+        "item_padding": 12,
+        "glyph_gap": 8,
+        "text_gap": 0,
+        "heading_spacing": 25,
+        "color_scheme": "scheme-1",
+        "card_background": "#202020",
+        "card_border_color": "#363636",
+        "card_border_width": 1,
+        "glyph_color": "#ffffff",
+        "handle_color": "#ffffff",
+        "handle_opacity": 70,
+        "stat_color": "#bcbcbc",
+        "heading_font_size": 41,
+        "icon_size": 48,
+        "title_font_size": 16,
+        "text_font_size": 16,
+        "heading_alignment_mobile": "left",
+        "columns_mobile": 2,
+        "card_layout_mobile": "stacked",
+        "card_alignment_mobile": "left",
+        "card_min_height_mobile": 60,
+        "gap_mobile": 20,
+        "item_padding_mobile": 8,
+        "glyph_gap_mobile": 5,
+        "text_gap_mobile": 0,
+        "heading_font_size_mobile": 36,
+        "heading_spacing_mobile": 24,
+        "icon_size_mobile": 42,
+        "title_font_size_mobile": 12,
+        "text_font_size_mobile": 12,
+        "padding_top": 32,
+        "padding_bottom": 40,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20,
+        "card_width": 216,
+        "line_height": 150,
+        "line_height_mobile": 135
+      }
+    },
+    "fda": {
+      "type": "zenith-image-story",
+      "settings": {
+        "use_brand_logo": false,
+        "brand_logo_style": "tagline",
+        "eyebrow": "",
+        "heading": "Zenith Products are Philippine FDA Notified",
+        "text": "<p>All Zenith products are FDA-notified and proudly manufactured in a US FDA-certified facility following the highest international quality standards.</p><p>For your protection, buy only from our official website, our Facebook page, or our official Shopee, Lazada and TikTok Shop stores.</p>",
+        "button_label": "",
+        "image_position": "left",
+        "image_ratio": "square",
+        "media_min_height": 720,
+        "content_align": "center",
+        "content_padding": 0,
+        "gap": 80,
+        "content_gap": 8,
+        "heading_spacing": 8,
+        "content_max_width": 420,
+        "hide_heading_desktop": false,
+        "logo_width": 110,
+        "columns_spacing": 40,
+        "columns_gap": 32,
+        "column_title_spacing": 14,
+        "color_scheme": "scheme-1",
+        "heading_color": "",
+        "column_title_color": "#eabe5f",
+        "text_opacity": 70,
+        "button_style": "gold",
+        "overlay_style": "none",
+        "overlay_color": "#121212",
+        "overlay_opacity": 30,
+        "overlay_coverage": 60,
+        "heading_tag": "h2",
+        "heading_font_size": 48,
+        "heading_line_height": 125,
+        "heading_uppercase": false,
+        "eyebrow_font_size": 14,
+        "text_font_size": 18,
+        "title_font_size": 32,
+        "button_font_size": 22,
+        "image_ratio_mobile": "square",
+        "media_height_mobile": 348,
+        "image_full_bleed_mobile": false,
+        "image_fade_mobile": 0,
+        "heading_position_mobile": "below",
+        "content_overlap_mobile": 0,
+        "heading_font_size_mobile": 32,
+        "heading_line_height_mobile": 110,
+        "text_font_size_mobile": 16,
+        "title_font_size_mobile": 32,
+        "button_font_size_mobile": 20,
+        "button_label_mobile": "",
+        "gap_mobile": 32,
+        "content_gap_mobile": 8,
+        "heading_spacing_mobile": 10,
+        "content_max_width_mobile": 800,
+        "columns_spacing_mobile": 16,
+        "columns_mobile": "1",
+        "columns_gap_mobile": 16,
+        "padding_top": 48,
+        "padding_bottom": 48,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 48
+      }
+    },
+    "faq": {
+      "type": "zenith-faq",
+      "blocks": {
+        "question_1": {
+          "type": "question",
+          "settings": {
+            "question": "Different from drugstore brands?",
+            "answer": "<p>Drugstore products are built for mass appeal and the lowest possible cost. Zenith formulas are built specifically for the Philippine climate and the realities of men over 35. We use higher-grade ingredients with absolutely zero unnecessary fillers.</p>"
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "Safe for sensitive skin?",
+            "answer": "<p>Yes. Every product is tested in tropical humidity and designed to be gentle. We avoid harsh sulfates and synthetic fragrances that cause irritation. If your skin reacts, stop use and message us right away with photos. Covered by the Zenith Money-Back Guarantee.</p>"
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "How to layer with skincare?",
+            "answer": "<p>Keep it simple. Cleanse first with the Tallow Cleanser, then Tallow Day Cream SPF 30 in the morning and Anti-Aging Tallow Cream at night. Three steps, that's it.</p>"
+          }
+        },
+        "question_4": {
+          "type": "question",
+          "settings": {
+            "question": "What is coming next?",
+            "answer": "<p>We are developing a full body wash, a deodorant that respects your skin, and a shave cream that reduces razor burn. The toothpaste is in development. Sign up for notifications on the product page to know the moment they launch.</p>"
+          }
+        },
+        "question_5": {
+          "type": "question",
+          "settings": {
+            "question": "Why no antiperspirant yet?",
+            "answer": "<p>We are taking our time to get it right. A deodorant that performs in this heat without staining shirts or clogging pores requires real testing. It is coming when it is ready, not a moment sooner.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_1",
+        "question_2",
+        "question_3",
+        "question_4",
+        "question_5"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "Frequently Asked Questions",
+        "subheading": "<p>No-nonsense answers about your daily essentials.</p>",
+        "enable_schema": true,
+        "heading_alignment": "center",
+        "max_width": 720,
+        "open_first": true,
+        "heading_spacing": 32,
+        "item_padding": 10,
+        "content_gap": 24,
+        "color_scheme": "scheme-1",
+        "icon_color": "#eabe5f",
+        "divider_opacity": 10,
+        "answer_opacity": 70,
+        "heading_font_size": 48,
+        "heading_uppercase": false,
+        "subheading_font_size": 18,
+        "subheading_opacity": 100,
+        "eyebrow_font_size": 14,
+        "title_font_size": 24,
+        "text_font_size": 16,
+        "icon_size": 20,
+        "heading_alignment_mobile": "left",
+        "heading_font_size_mobile": 36,
+        "subheading_font_size_mobile": 18,
+        "subheading_opacity_mobile": 100,
+        "heading_spacing_mobile": 32,
+        "title_font_size_mobile": 24,
+        "text_font_size_mobile": 16,
+        "item_padding_mobile": 10,
+        "content_gap_mobile": 24,
+        "icon_size_mobile": 20,
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20
+      }
+    },
+    "reviews": {
+      "type": "zenith-reviews",
+      "settings": {
+        "eyebrow": "",
+        "heading": "[customers] Filipino Men Trust Zenith Products",
+        "subheading": "<p>Men in Manila using the cream. Unedited and verified.</p>",
+        "heading_alignment": "center",
+        "heading_max_width": 760,
+        "subheading_spacing": 28,
+        "heading_spacing": 48,
+        "jdgm_masonry": true,
+        "columns_desktop": 4,
+        "gap": 20,
+        "content_padding": 12,
+        "card_radius": 4,
+        "color_scheme": "scheme-1",
+        "card_color": "#202020",
+        "card_border_color": "",
+        "button_style": "outline",
+        "star_color": "#d6b356",
+        "accent_color": "#c59300",
+        "heading_font_size": 48,
+        "heading_uppercase": false,
+        "subheading_font_size": 18,
+        "subheading_opacity": 100,
+        "eyebrow_font_size": 14,
+        "text_font_size": 14,
+        "icon_size": 14,
+        "button_font_size": 20,
+        "subheading_mobile": "<p>Real Filipino men using Zenith. Unedited and verified.</p>",
+        "heading_font_size_mobile": 36,
+        "subheading_font_size_mobile": 16,
+        "subheading_opacity_mobile": 70,
+        "heading_spacing_mobile": 24,
+        "columns_mobile": 2,
+        "gap_mobile": 20,
+        "content_padding_mobile": 12,
+        "text_font_size_mobile": 14,
+        "button_font_size_mobile": 20,
+        "padding_top": 52,
+        "padding_bottom": 48,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 8
+      }
+    }
+  },
+  "order": [
+    "verify",
+    "trust_bar",
+    "press",
+    "videos",
+    "locations",
+    "trust",
+    "stores",
+    "pages",
+    "fda",
+    "faq",
+    "reviews"
+  ]
+}
