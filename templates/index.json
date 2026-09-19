@@ -565,62 +565,29 @@
         "video_2": {
           "type": "video",
           "settings": {
-            "youtube_url": "",
+            "youtube_url": "https://www.youtube.com/shorts/QkaxWmIFCMY",
             "quote": "\"It combines deep nourishment and invisible sun protection in one step.\"",
             "title": "Do Men Need Skincare? (Doctor Explains)",
             "link": "",
             "author": "@dr.lyienho",
-            "product": "zenith-advanced-hair-density-spray"
+            "product": "zenith-anti-aging-tallow-cream"
           }
         },
         "video_3": {
           "type": "video",
           "settings": {
-            "youtube_url": "",
+            "youtube_url": "https://www.youtube.com/shorts/_bd0xPEVXmE",
             "quote": "\"If you want to achieve a healthy skin, make sure to add Zenith in your skin care routine.\"",
             "title": "A Celebrity's Go-To Cleanser for Clean Skin",
             "link": "",
             "author": "@johannes_rissler",
-            "product": "zenith-anti-aging-tallow-cleanser"
-          }
-        },
-        "video_4": {
-          "type": "video",
-          "settings": {
-            "youtube_url": "",
-            "quote": "\"It's literally part of my shower routine. No extra complicated steps.\"",
-            "title": "The One Spot a Man Never Sees on Himself",
-            "link": "",
-            "author": "@_nstrjr",
             "product": "zenith-anti-aging-tallow-cream"
           }
         },
         "video_gBwH3B": {
           "type": "video",
           "settings": {
-            "youtube_url": "",
-            "quote": "\"Anti-aging cream is all in one solution. Barrier protection, retinol. Clinically proven anti-aging. It's lightweight.\"",
-            "title": "A Gym Instructor's Secret to Younger-Looking Skin",
-            "link": "",
-            "author": "@creator",
-            "product": "zenith-anti-aging-tallow-day-cream-spf30"
-          }
-        },
-        "video_EFcBCe": {
-          "type": "video",
-          "settings": {
-            "youtube_url": "",
-            "quote": "\"Anti-aging cream is all in one solution. Barrier protection, retinol. Clinically proven anti-aging. It's lightweight.\"",
-            "title": "A Gym Instructor's Secret to Younger-Looking Skin",
-            "link": "",
-            "author": "@creator",
-            "product": "zenith-advanced-hair-density-shampoo"
-          }
-        },
-        "video_g3Q4A9": {
-          "type": "video",
-          "settings": {
-            "youtube_url": "",
+            "youtube_url": "https://www.youtube.com/shorts/AvemGE7KnB4",
             "quote": "\"Anti-aging cream is all in one solution. Barrier protection, retinol. Clinically proven anti-aging. It's lightweight.\"",
             "title": "A Gym Instructor's Secret to Younger-Looking Skin",
             "link": "",
@@ -628,37 +595,26 @@
             "product": "zenith-advanced-hair-density-spray"
           }
         },
-        "video_y4FpEf": {
+        "video_4": {
           "type": "video",
           "settings": {
-            "youtube_url": "",
-            "quote": "\"Anti-aging cream is all in one solution. Barrier protection, retinol. Clinically proven anti-aging. It's lightweight.\"",
-            "title": "A Gym Instructor's Secret to Younger-Looking Skin",
+            "youtube_url": "https://www.youtube.com/shorts/PyadtvAp5uY",
+            "quote": "\"It's literally part of my shower routine. No extra complicated steps.\"",
+            "title": "The One Spot a Man Never Sees on Himself",
             "link": "",
-            "author": "@creator",
-            "product": "zenith-anti-aging-tallow-cleanser"
-          }
-        },
-        "video_4VztWm": {
-          "type": "video",
-          "settings": {
-            "youtube_url": "",
-            "quote": "\"Anti-aging cream is all in one solution. Barrier protection, retinol. Clinically proven anti-aging. It's lightweight.\"",
-            "title": "A Gym Instructor's Secret to Younger-Looking Skin",
-            "link": "",
-            "author": "@creator",
-            "product": "zenith-anti-aging-tallow-cream"
+            "author": "@_nstrjr",
+            "product": "zenith-advanced-hair-density-spray"
           }
         },
         "video_5": {
           "type": "video",
           "settings": {
-            "youtube_url": "",
+            "youtube_url": "https://www.youtube.com/shorts/KVwL1edll9A?feature=share",
             "quote": "Anti-aging cream is all in one solution. Barrier protection, lightweight, and it absorbs fast.",
             "title": "",
             "link": "",
             "author": "",
-            "product": "zenith-anti-aging-tallow-day-cream-spf30"
+            "product": "zenith-advanced-hair-density-spray"
           }
         }
       },
@@ -666,12 +622,8 @@
         "video_1",
         "video_2",
         "video_3",
-        "video_4",
         "video_gBwH3B",
-        "video_EFcBCe",
-        "video_g3Q4A9",
-        "video_y4FpEf",
-        "video_4VztWm",
+        "video_4",
         "video_5"
       ],
       "settings": {
