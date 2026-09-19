@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "promo_hero": {
@@ -146,6 +155,7 @@
         "mobile_alignment": "top",
         "mobile_button_bottom": true,
         "mobile_button_full": true,
+        "mobile_hide_button": true,
         "mobile_height": 440,
         "mobile_overlay_style": "top",
         "mobile_overlay_coverage": 70,
@@ -164,8 +174,7 @@
         "padding_top": 0,
         "padding_bottom": 0,
         "padding_top_mobile": 0,
-        "padding_bottom_mobile": 0,
-        "mobile_hide_button": true
+        "padding_bottom_mobile": 0
       }
     },
     "trust_bar": {
@@ -450,7 +459,7 @@
         "eyebrow": "Face & Skin Products",
         "heading": "Everything you need for a healthy looking skin",
         "subheading": "",
-        "collection": "",
+        "collection": "skin",
         "products_to_show": 12,
         "show_rating": true,
         "first_badge": "Selling Fast",
@@ -526,7 +535,7 @@
         "eyebrow": "Hair Products",
         "heading": "Everything you need for a healthy looking hair",
         "subheading": "",
-        "collection": "",
+        "collection": "hair",
         "products_to_show": 12,
         "show_rating": true,
         "first_badge": "Selling Fast",
@@ -1304,6 +1313,7 @@
         "mobile_alignment": "top",
         "mobile_button_bottom": true,
         "mobile_button_full": true,
+        "mobile_hide_button": false,
         "mobile_height": 540,
         "mobile_overlay_style": "top",
         "mobile_overlay_coverage": 70,
