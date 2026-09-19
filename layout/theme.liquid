@@ -342,7 +342,7 @@
       {%- endcomment -%}
       {%- liquid
         assign zenith_policy = nil
-        if request.page_type == 'policy'
+        if request.page_type == 'policy' or request.path contains '/policies/'
           assign zenith_policy_handle = request.path | split: '/' | last
           for policy in shop.policies
             assign policy_handle = policy.url | split: '/' | last
@@ -371,6 +371,7 @@
           title: zenith_policy.title,
           body: zenith_policy.body,
           id: zenith_policy_handle,
+          titlecase: true,
           show_toc: settings.policy_show_toc,
           toc_heading: settings.policy_toc_heading,
           vars: zenith_policy_vars

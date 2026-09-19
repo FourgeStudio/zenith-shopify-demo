@@ -5,10 +5,11 @@
     title {String}, body {String} HTML
     id {String} unique suffix
     show_toc {Boolean}, toc_heading {String}
+    titlecase {Boolean} optional: "Privacy policy" → "Privacy Policy" (Shopify's policy titles)
     class {String} optional extra root classes (zenith-doc--center = centred column, color-scheme-x)
     vars {String} optional CSS custom properties for the root (--z-doc-*: see assets/zenith-doc.css)
   Content rules (so the client can paste policy text as is):
-    - a first heading that repeats the title is dropped
+    - a first heading that repeats the title (or contains it, e.g. "Zenith Philippines Privacy Policy") is dropped
     - a first paragraph starting "Last updated" / "Effective date" moves under the title
     - the Table of Contents lists the body's top heading level (h1 → h4, whichever appears first); headings get ids
 {%- endcomment -%}
@@ -23,9 +24,29 @@
     assign lead_heading = doc_body | split: lead_close | first | append: lead_close
     assign lead_text = lead_heading | strip_html | strip | downcase
     assign title_text = title | strip_html | strip | downcase
-    if lead_text == title_text
+    # "Terms of Service" = "Terms of service"; "Zenith Philippines Privacy Policy" contains "privacy policy"
+    if lead_text contains title_text or title_text contains lead_text
       assign doc_body = doc_body | remove_first: lead_heading | strip
     endif
+  endif
+
+  # Shopify names policies in sentence case ("Privacy policy") → "Privacy Policy" (small words stay lower case)
+  assign doc_title = title | strip
+  if titlecase
+    assign small_words = ' a an and as at by for in of on or the to with '
+    assign doc_title = ''
+    assign title_words = title | strip | split: ' '
+    for word in title_words
+      assign probe_word = ' ' | append: word | downcase | append: ' '
+      if forloop.first == false and small_words contains probe_word
+        assign doc_title = doc_title | append: ' ' | append: word
+      else
+        assign first_letter = word | slice: 0 | upcase
+        assign rest_letters = word | slice: 1, 200
+        assign doc_title = doc_title | append: ' ' | append: first_letter | append: rest_letters
+      endif
+    endfor
+    assign doc_title = doc_title | strip
   endif
 
   # "Last updated …" as the first paragraph → shown under the title
@@ -96,7 +117,7 @@
   <div class="zenith-doc__hero">
     <div class="page-width">
       <div class="zenith-doc__frame">
-        <h1 class="zenith-doc__title">{{ title | escape }}</h1>
+        <h1 class="zenith-doc__title">{{ doc_title | escape }}</h1>
         {%- if updated != blank -%}
           <p class="zenith-doc__updated">{{ updated | escape }}</p>
         {%- endif -%}
