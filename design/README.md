@@ -84,7 +84,25 @@ Shared art: `design/confetti.png` (969 × 161 transparent gold confetti) → shi
 
 Product card: stars + score above the title, badge top-left on the image ("Selling Fast" #294850 + gold truck; mobile shows "Most Purchased" = product tag badge). `design/on-promo-badge.png` = the red "On Sale" sale badge (gradient #A90619 → #F3213A, 28px tall) — a product sale badge, not tied to the promotion switch.
 
-Skin (`design/skin-collection-category-page/`) and Hair (`design/hair-collection-collection-page/`): same frame (hero without button, trust bar, one product grid of the collection) plus a before/after "The difference" section — not built yet; map them when building.
+## Skin + Hair map (`design/skin-collection-category-page/`, `design/hair-collection-collection-page/`; full pages 2x, sections 1x)
+| Section (templates/collection.skin.json / collection.hair.json key) | Desktop (`desktop/sections/`) | Mobile (`mobile/sections/`) |
+|---|---|---|
+| Header + announcement (header-group) | `Navbar Desktop/10.png` | `Navbar/10.png` |
+| `promo_hero` (only while the promotion runs) | — | — |
+| `hero` (no button) | `Header/6.png` | `Header/6.png` |
+| `trust_bar` | `Trust Bar.png` | `Container (Shopee…).png` |
+| `products` (Product grid, *Collection* empty = the collection viewed) | `Product/12.png` | `Product/12.png` |
+| `difference` (Zenith · Before & after) | `Header/78.png` | `Header/78.png` |
+| `routine_1`, `routine_2` (Zenith · Routine steps: Day/Night skin, Washing/Grooming hair) | `Header/78-1.png`, `78-2.png` | `Header/78-1.png`, `78-2.png` |
+| `videos` (Video carousel, filter = products of this collection) | `Testimonial/57.png` | `Testimonial/57.png` |
+| `guarantee` | `Zenith Guarantee.png` | `Layout/251.png` |
+| `money_back` | `Zenith Money Back Guarantee.png` | `CTA/45.png` |
+| `reviews` (Judge.me) | `Testimonial/18.png` | `Testimonial/18.png` |
+| `faq` | `FAQ/2.png` | `FAQ/2.png` |
+| `cta` (Hero, closing; button → this collection) | `Header/6-1.png` | `CTA/6.png` |
+| Footer (footer-group) | `Desktop Footer.png` | `Mobile Footer.png` |
+
+Design slips handled: Hair product grid reuses the Skin copy ("Face & Skin Products / The Complete Executive Skin System") → "Hair Products / The Complete Hair Density System"; Hair closing hero "System Build" → "Built". `mobile/sections/Frame 1000005205.png` = phone chrome.
 
 ## Adding a new page
 Drop the exports in, then ask Claude to run the `design-to-page` skill for that page.
