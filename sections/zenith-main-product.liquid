@@ -60,6 +60,7 @@
   --z-mp-top: {{ s.top_color }};
   --z-mp-fade: {{ s.fade_height }}px;
   --z-mp-vcmin: {{ s.variant_card_min }}px;
+  --z-mp-vcmin-m: {{ s.variant_card_min_mobile }}px;
   --z-mp-media-bg: {{ s.media_background }};
   --z-mp-ratio: {{ s.gallery_ratio }};
   --z-mp-ratio-m: {{ s.gallery_ratio_mobile }};
@@ -773,8 +774,8 @@
       "type": "text",
       "id": "variant_card_badge",
       "label": "Discount badge",
-      "info": "[percent] is worked out from the compare-at price. Blank hides it.",
-      "default": "[percent] OFF"
+      "info": "[percent] becomes the number only, so write the % yourself. Worked out from the compare-at price. Blank hides the badge.",
+      "default": "[percent]% OFF"
     },
     {
       "type": "text",
@@ -938,6 +939,7 @@
     { "type": "checkbox", "id": "subtitle_mobile", "label": "Show short description on mobile", "default": true },
     { "type": "range", "id": "gap_mobile", "label": "Space between gallery and buy box", "min": 0, "max": 60, "step": 2, "unit": "px", "default": 18 },
     { "type": "range", "id": "content_gap_mobile", "label": "Space between buy box items", "min": 4, "max": 40, "step": 2, "unit": "px", "default": 12 },
+    { "type": "range", "id": "variant_card_min_mobile", "label": "Bundle card min width", "info": "Lower it if three bundles do not fit across a phone.", "min": 70, "max": 180, "step": 2, "unit": "px", "default": 88 },
     { "type": "range", "id": "gallery_ratio_mobile", "label": "Image height", "min": 60, "max": 160, "step": 2, "unit": "%", "default": 100 },
     { "type": "range", "id": "slide_width_mobile", "label": "Slide width", "min": 50, "max": 100, "step": 1, "unit": "%", "default": 70 },
     { "type": "range", "id": "slide_gap_mobile", "label": "Space between slides", "min": 0, "max": 48, "step": 2, "unit": "px", "default": 30 },
