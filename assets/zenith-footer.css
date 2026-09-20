@@ -208,15 +208,12 @@ footer.footer.zenith-footer {
 }
 
 /* ---------- Bottom bar ---------- */
-/* Mobile: the two texts only just fit side by side at 375 and collide below it, so they stack
-   centred. Desktop puts them back on one row, one at each end. */
 .zenith-footer__bottom {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: column;
   align-items: center;
-  text-align: center;
-  gap: var(--z-space-2);
+  justify-content: space-between;
+  gap: var(--z-space-2) var(--z-space-5);
   margin-top: var(--z-div-sp, 15px);
   padding-top: var(--z-div-sp, 15px);
   border-top: 1px solid var(--z-div-c-m, rgba(var(--color-foreground), 0.15));
@@ -361,11 +358,6 @@ footer.footer.zenith-footer {
   }
 
   .zenith-footer__bottom {
-    text-align: left;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--z-space-2) var(--z-space-5);
     border-top-color: var(--z-div-c, rgba(var(--color-foreground), 0.15));
     font-size: var(--z-cfs, 1.2rem);
   }
@@ -374,5 +366,25 @@ footer.footer.zenith-footer {
 @media (prefers-reduced-motion: reduce) {
   .zenith-footer__social .list-social__link:hover .icon {
     transform: none;
+  }
+}
+
+/* Small phones only. "TryZenith PH" and the copyright clear 375 by about 8px and collide below it,
+   so there they stack centred. .zenith-footer__legal carries its own flex-end + margin-left: auto +
+   text-align: right for the desktop row, which would leave the copyright hanging right while the
+   line above it centred — so it is reset here too. Above 375 the row is untouched.
+   Deliberately not a Dawn breakpoint: this is about these two strings, not a layout change. */
+@media screen and (max-width: 375px) {
+  .zenith-footer__bottom {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--z-space-2);
+    text-align: center;
+  }
+
+  .zenith-footer__legal {
+    justify-content: center;
+    margin-left: 0;
+    text-align: center;
   }
 }
