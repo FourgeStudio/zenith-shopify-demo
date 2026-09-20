@@ -45,9 +45,10 @@
     -%}
 
     {%- capture zenith_head_cell -%}
-      {%- if section.settings.zenith_logo != blank -%}
+      {%- assign cmp_logo = section.settings.zenith_logo | default: settings.logo -%}
+      {%- if cmp_logo != blank -%}
         {{
-          section.settings.zenith_logo
+          cmp_logo
           | image_url: width: 480
           | image_tag:
             loading: 'lazy',
@@ -203,7 +204,8 @@
     {
       "type": "image_picker",
       "id": "zenith_logo",
-      "label": "Zenith column logo"
+      "label": "Zenith column logo",
+      "info": "Blank = Theme settings → Logo, then the bundled Zenith wordmark."
     },
     {
       "type": "text",
