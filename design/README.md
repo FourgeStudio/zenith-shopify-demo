@@ -133,6 +133,25 @@ Design slips handled: Hair product grid reuses the Skin copy ("Face & Skin Produ
 - `404 • Desktop/Mobile.png` → `templates/404.json` (Zenith · Hero: no image, *Big display text* "404" with gold gradient).
 - `Thank You • Desktop/Mobile.png` → `templates/page.thank-you.json`; `Thank You Newsletter • Desktop/Mobile.png` → `templates/page.thank-you-newsletter.json` (both = Zenith · Hero: no image, confetti, icon option).
 
+## Product page — Tallow Cream (`design/Product Page/tallow-cream/`, desktop 1x, mobile full page 2x, mobile sections 1x)
+Every product gets its own design in this store, so this is an ALTERNATE template: `templates/product.tallow-cream.json` (assign it to the product in Admin → Products → Theme template). Folder names in the exports are Figma frame names and do not describe the content.
+
+| Section (template key) | Desktop (`desktop/sections/`) | Mobile |
+|---|---|---|
+| `main` (Zenith · Product page: gallery + thumbnails + review strip, buy box, accordion) | `Header/6.png` | full page `m-00`, `m-01` slices |
+| `videos` (Video carousel, this product's videos) | full page y≈1200 | full page; mobile heading differs |
+| `ingredients` (Zenith · Ingredients "Why it works differently") | `Layout/1.png` | full page y≈4800–7000 (2x) |
+| `difference` (Before & after, 4 cards) | `Header/78.png` | full page |
+| `routine` (Routine steps "Two minutes at night", numbered, photo beside text) | `Header/78-1.png` | full page |
+| `compare` (Zenith · Comparison table "Why guys switch to Zenith") | `Header/78-2.png` / full page y≈4150 | stacked tables per brand |
+| `reviews` (Judge.me) | `Testimonial/18.png` | `Testimonial/18.png` |
+| `guarantee` | `Zenith Guarantee.png` | full page |
+| `money_back` | `Zenith Money Back Guarantee.png` | full page |
+| `faq` | `FAQ/2.png` | `FAQ/2-1.png` |
+| `cta` (Hero + trust items, Add to cart) | `CTA/6.png` | `Product Header/2-2.png` |
+
+Desktop/mobile differences: the buy box reorders on phones (quantity + Add to cart move above the FDA bar and the checklist) and shows a short description the desktop hides; the video carousel heading is "Clinically Proven. The Complete Regimen." on desktop and "A Complete Routine, Built for Men." on phones; the accordion rows differ (desktop = 4 product questions, mobile = Description / How to use / What's inside / Zenith guarantee / FAQs — both are in the template, each hidden on the other breakpoint); the ingredient list has 4 items on desktop and 3 longer-titled ones on mobile (desktop copy used, `title_mobile` per item). `mobile/sections/Frame 1000005205.png` is blank.
+
 ## Adding a new page
 Drop the exports in, then ask Claude to run the `design-to-page` skill for that page.
 Same layout under `design/<page>/` (`product`, `collection`, `cart`, `about`, `contact`, `global`). Export sections at 1x; full-page export optional.

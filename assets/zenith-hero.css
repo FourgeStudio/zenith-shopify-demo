@@ -352,3 +352,48 @@
     height: var(--z-hero-tr-icon, 16px);
   }
 }
+
+/* ---------- Desktop split: photo beside the text, panel inside the page frame
+   (product page closing CTA). Phones keep the full-bleed image + overlay. ---------- */
+@media screen and (min-width: 750px) {
+  .zenith-hero--framed {
+    background: transparent;
+  }
+
+  .zenith-hero--framed .zenith-hero__inner {
+    max-width: calc(var(--page-width) - var(--z-gutter) * 2);
+    margin: 0 auto;
+    background: var(--gradient-background);
+  }
+
+  .zenith-hero--split .zenith-hero__media {
+    left: auto;
+    width: var(--z-mw, 50%);
+  }
+
+  .zenith-hero--split .zenith-overlay {
+    right: var(--z-mw, 50%);
+  }
+
+  /* beat Dawn .page-width padding (same :not() chain, higher specificity) */
+  .zenith-hero--split .zenith-hero__content-wrap:not(.header):not(.utility-bar__grid):not(.page-width--narrow) {
+    padding-right: var(--z-mw, 50%);
+  }
+
+  .zenith-hero--split.zenith-hero--framed .zenith-hero__content-wrap:not(.header):not(.utility-bar__grid):not(.page-width--narrow) {
+    padding-left: var(--z-space-6);
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .zenith-hero--btn-full .zenith-hero__actions {
+    align-self: stretch;
+    align-items: stretch;
+  }
+
+  .zenith-hero--btn-full .zenith-hero__button,
+  .zenith-hero--btn-full .zenith-hero__atc,
+  .zenith-hero--btn-full .zenith-hero__atc .zenith-atc {
+    width: 100%;
+  }
+}
