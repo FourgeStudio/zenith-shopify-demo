@@ -56,23 +56,7 @@
                   | image_tag: class: 'zenith-icon zenith-icon-bar__img', loading: 'lazy', alt: ''
                 }}
               {%- else -%}
-                {%- case block.settings.icon -%}
-                  {%- when 'thumbs_up', 'certificate', 'farm', 'dropper' -%}
-                    <svg class="zenith-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-                      {%- case block.settings.icon -%}
-                        {%- when 'thumbs_up' -%}
-                          <path d="M7.5 10.5v10h-4v-10z"/><path d="M7.5 10.5l3.6-6.9a1.9 1.9 0 0 1 3.4 1.5L13.6 9h5.3a2 2 0 0 1 2 2.4l-1.5 7.4a2 2 0 0 1-2 1.7H7.5"/>
-                        {%- when 'certificate' -%}
-                          <path d="M12.5 18H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v5"/><path d="M7 8.5h7M7 12h4"/><circle cx="17.5" cy="14" r="3"/><path d="M15.8 16.5L15 21l2.5-1.3L20 21l-.8-4.5"/>
-                        {%- when 'farm' -%}
-                          <path d="M7.5 12a4.5 4.5 0 0 1 9 0"/><path d="M12 3.5v2M5.8 6l1.4 1.4M18.2 6l-1.4 1.4M3 12h2.5M18.5 12H21"/><path d="M3 15.5c3-1 6-1 9 0s6 1 9 0M3 19c3-1 6-1 9 0s6 1 9 0"/>
-                        {%- when 'dropper' -%}
-                          <path d="M15 3.8l5.2 5.2-2.3 2.3-5.2-5.2z"/><path d="M13.8 7.2L5.5 15.5 4 20l4.5-1.5 8.3-8.3"/><path d="M8.5 12.5h5"/>
-                      {%- endcase -%}
-                    </svg>
-                  {%- else -%}
-                    {%- render 'zenith-icon', icon: block.settings.icon -%}
-                {%- endcase -%}
+                {%- render 'zenith-icon', icon: block.settings.icon -%}
               {%- endif -%}
               <span>{{ block.settings.text | escape | replace: '[customers]', settings.customer_count }}</span>
               {%- if block.settings.link != blank -%}</a>{%- endif -%}

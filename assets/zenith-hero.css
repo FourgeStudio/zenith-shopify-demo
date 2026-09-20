@@ -312,3 +312,43 @@
     font-size: var(--z-tfs, 1.6rem);
   }
 }
+
+/* ---------- Trust items under the button (blocks type "trust") ---------- */
+.zenith-hero__trust {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--z-space-2) var(--z-space-5);
+  width: 100%;
+  max-width: var(--z-hero-trw, 420px);
+  margin: var(--z-hero-tsp, 24px) auto 0;
+  padding: 0;
+  list-style: none;
+}
+
+.zenith-hero__trust li {
+  display: flex;
+  align-items: center;
+  gap: var(--z-space-2);
+  font-size: var(--z-hero-tr-fs-m, 1.3rem);
+  line-height: 1.4;
+}
+
+.zenith-hero__trust .zenith-icon {
+  flex: 0 0 auto;
+  width: var(--z-hero-tr-icon-m, 16px);
+  height: var(--z-hero-tr-icon-m, 16px);
+  color: var(--z-hero-tr-color, #eabe5f);
+}
+
+@media screen and (min-width: 750px) {
+  .zenith-hero__trust li {
+    font-size: var(--z-hero-tr-fs, 1.4rem);
+  }
+
+  .zenith-hero__trust .zenith-icon {
+    width: var(--z-hero-tr-icon, 16px);
+    height: var(--z-hero-tr-icon, 16px);
+  }
+}

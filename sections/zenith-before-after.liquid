@@ -27,6 +27,7 @@
   --z-ba-ffs: {{ s.footnote_font_size }}px;
   --z-ba-fcolor: {{ s.footnote_color }};
   --z-ba-fsp: {{ s.footnote_spacing }}px;
+  --z-ba-nsp: {{ s.note_spacing }}px;
   --z-ba-tsp: {{ s.text_spacing }}px;
   --z-ba-capw: {{ s.caption_max_width }}px;
   {%- render 'zenith-overlay-vars', settings: s -%}
@@ -89,6 +90,10 @@
       {%- endfor -%}
     </ul>
 
+    {%- if s.note != blank -%}
+      <p class="zenith-ba__note">{{ s.note | escape | replace: '[customers]', settings.customer_count }}</p>
+    {%- endif -%}
+
     {%- if s.footnote != blank -%}
       <p class="zenith-ba__footnote">{{ s.footnote | escape }}</p>
     {%- endif -%}
@@ -135,7 +140,13 @@
       "label": "Text",
       "default": "<p>From clearer skin to thicker hair, every transformation here comes from verified Zenith customers putting in the consistent work.</p>"
     },
-    {
+        {
+      "type": "text",
+      "id": "note",
+      "label": "Note below the cards",
+      "info": "Optional line above the footnote."
+    },
+{
       "type": "text",
       "id": "footnote",
       "label": "Footnote",
@@ -256,6 +267,16 @@
       "step": 2,
       "unit": "px",
       "default": 22
+    },
+    {
+      "type": "range",
+      "id": "note_spacing",
+      "label": "Space above the note",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 32
     },
     {
       "type": "header",

@@ -21,6 +21,13 @@
   --z-rt-title: {{ s.title_color }};
   --z-rt-text-o: {{ s.text_opacity | divided_by: 100.0 }};
   --z-rt-imgw-m: {{ s.image_width_mobile }}px;
+  --z-rt-imgw: {{ s.image_width }}px;
+  --z-rt-num-bg: {{ s.number_background }};
+  --z-rt-num-fg: {{ s.number_color }};
+  --z-rt-num: {{ s.number_size }}px;
+  --z-rt-num-m: {{ s.number_size_mobile }}px;
+  --z-rt-numfs: {{ s.number_font_size }}px;
+  --z-rt-numfs-m: {{ s.number_font_size_mobile }}px;
   --z-rt-usp: {{ s.used_spacing }}px;
   --z-rt-usp-m: {{ s.used_spacing_mobile }}px;
   --z-rt-uw: {{ s.used_width }}px;
@@ -39,7 +46,7 @@
 
 <section
   id="Zenith-{{ section.id }}"
-  class="zenith-section zenith-rt zenith-rt--m-{{ s.heading_alignment_mobile }} color-{{ s.color_scheme }} gradient{% if section.index > 2 %} zenith-defer{% endif %}"
+  class="zenith-section zenith-rt zenith-rt--m-{{ s.heading_alignment_mobile }} zenith-rt--d-{{ s.step_layout | default: 'stacked' }} color-{{ s.color_scheme }} gradient{% if section.index > 2 %} zenith-defer{% endif %}"
 >
   <div class="page-width">
     {%- render 'zenith-section-heading',
@@ -67,6 +74,9 @@
             {%- endif -%}
           </div>
           <div class="zenith-rt__body">
+            {%- if s.show_number -%}
+              <span class="zenith-rt__num" aria-hidden="true">{{ forloop.index }}</span>
+            {%- endif -%}
             {%- if block.settings.title != blank -%}
               <h3 class="zenith-rt__title">{{ block.settings.title | escape }}</h3>
             {%- endif -%}
@@ -166,6 +176,13 @@
     },
     {
       "type": "checkbox",
+      "id": "show_number",
+      "label": "Number the steps",
+      "info": "Gold circle with 1, 2, 3 … above the step text.",
+      "default": false
+    },
+    {
+      "type": "checkbox",
       "id": "show_divider",
       "label": "Show divider line below",
       "default": true
@@ -173,6 +190,27 @@
     {
       "type": "header",
       "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "step_layout",
+      "label": "Step layout (desktop)",
+      "info": "Phones always put the photo beside the text.",
+      "default": "stacked",
+      "options": [
+        { "value": "stacked", "label": "Photo above the text" },
+        { "value": "beside", "label": "Photo beside the text" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "image_width",
+      "label": "Photo width (photo beside the text)",
+      "min": 80,
+      "max": 320,
+      "step": 4,
+      "unit": "px",
+      "default": 152
     },
     {
       "type": "select",
@@ -293,6 +331,18 @@
       "default": "#D6B356"
     },
     {
+      "type": "color",
+      "id": "number_background",
+      "label": "Step number circle",
+      "default": "#C59300"
+    },
+    {
+      "type": "color",
+      "id": "number_color",
+      "label": "Step number text",
+      "default": "#121212"
+    },
+    {
       "type": "range",
       "id": "text_opacity",
       "label": "Step text opacity",
@@ -378,6 +428,26 @@
     },
     {
       "type": "range",
+      "id": "number_size",
+      "label": "Step number circle size",
+      "min": 16,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "number_font_size",
+      "label": "Step number size",
+      "min": 10,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
       "id": "text_font_size",
       "label": "Step text size",
       "min": 12,
@@ -460,6 +530,26 @@
       "step": 4,
       "unit": "px",
       "default": 100
+    },
+    {
+      "type": "range",
+      "id": "number_size_mobile",
+      "label": "Step number circle size",
+      "min": 16,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "number_font_size_mobile",
+      "label": "Step number size",
+      "min": 10,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 14
     },
     {
       "type": "range",

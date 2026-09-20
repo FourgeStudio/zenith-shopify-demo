@@ -147,3 +147,15 @@
     grid-template-columns: repeat(var(--z-ba-cols, 3), minmax(0, 1fr));
   }
 }
+
+.zenith-ba__note {
+  margin: var(--z-ba-nsp, 32px) 0 0;
+  font-size: var(--z-ba-cfs-m, 1.4rem);
+  line-height: 1.5;
+  text-align: center;
+  color: rgba(var(--color-foreground), var(--z-ba-cap-o, 0.7));
+}
+
+.zenith-ba__note + .zenith-ba__footnote {
+  margin-top: var(--z-space-2);
+}

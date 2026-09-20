@@ -171,3 +171,40 @@
     margin-top: var(--z-rt-dsp, 40px);
   }
 }
+
+/* ---------- Numbered steps (show_number) ---------- */
+.zenith-rt__num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--z-rt-num-m, 28px);
+  height: var(--z-rt-num-m, 28px);
+  border-radius: 50%;
+  background: var(--z-rt-num-bg, #c59300);
+  color: var(--z-rt-num-fg, #121212);
+  font-family: var(--font-body-family);
+  font-size: var(--z-rt-numfs-m, 1.4rem);
+  font-weight: 500;
+  line-height: 1;
+}
+
+.zenith-rt__num + .zenith-rt__title,
+.zenith-rt__num + .zenith-rt__text {
+  margin-top: var(--z-space-3);
+}
+
+@media screen and (min-width: 750px) {
+  .zenith-rt__num {
+    width: var(--z-rt-num, 28px);
+    height: var(--z-rt-num, 28px);
+    font-size: var(--z-rt-numfs, 1.4rem);
+  }
+
+  /* Photo beside the text on desktop too (product page "Two minutes at night") */
+  .zenith-rt--d-beside .zenith-rt__step {
+    grid-template-columns: var(--z-rt-imgw, 152px) minmax(0, 1fr);
+    align-items: center;
+    column-gap: var(--z-rt-tsp, 20px);
+    text-align: left;
+  }
+}
