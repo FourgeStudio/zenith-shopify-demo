@@ -703,10 +703,10 @@ html.js menu-drawer > details > summary::before {
 /* ---------- Cart drawer: reassurance under Checkout (snippets/zenith-cart-trust.liquid) ---------- */
 .zenith-cart-trust {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--z-space-2, 8px) var(--z-space-4, 16px);
-  margin: var(--z-space-3, 12px) 0 0;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--z-space-2, 8px);
+  margin: var(--z-space-4, 16px) 0 0;
   padding: 0;
 }
 
