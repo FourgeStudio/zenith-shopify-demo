@@ -229,7 +229,8 @@
         {%- endif -%}
 
         {%- if review_total > 0 -%}
-          <ul class="zenith-mp__reviews zenith-mp__bleed" role="list">
+          <zenith-carousel class="zenith-mp__reviews-carousel"{% if s.review_autoplay > 0 %} data-autoplay="{{ s.review_autoplay }}"{% endif %}>
+            <ul class="zenith-mp__reviews zenith-mp__bleed zenith-carousel__track" role="list">
             {%- for n in (1..20) -%}
               {%- liquid
                 if s.reviews_source == 'global'
@@ -285,7 +286,8 @@
                 </div>
               </li>
             {%- endfor -%}
-          </ul>
+            </ul>
+          </zenith-carousel>
         {%- endif -%}
       </div>
 
@@ -703,6 +705,7 @@
     { "type": "range", "id": "thumb_spacing", "label": "Space above thumbnails", "min": 0, "max": 40, "step": 1, "unit": "px", "default": 8 },
     { "type": "range", "id": "review_card_width", "label": "Review card width", "min": 140, "max": 320, "step": 4, "unit": "px", "default": 220 },
     { "type": "range", "id": "review_gap", "label": "Space between review cards", "min": 0, "max": 32, "step": 2, "unit": "px", "default": 12 },
+    { "type": "range", "id": "review_autoplay", "label": "Review strip autoplay", "info": "Seconds between cards. 0 = off. Pauses on hover and with reduced motion.", "min": 0, "max": 12, "step": 1, "unit": "s", "default": 4 },
     { "type": "range", "id": "review_spacing", "label": "Space above review strip", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 38 },
     { "type": "range", "id": "review_photo_size", "label": "Review photo size", "min": 24, "max": 80, "step": 2, "unit": "px", "default": 48 },
     { "type": "range", "id": "check_size", "label": "Checklist icon size", "min": 12, "max": 32, "step": 1, "unit": "px", "default": 20 },

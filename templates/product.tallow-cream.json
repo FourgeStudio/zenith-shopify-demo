@@ -1264,7 +1264,8 @@
         "padding_bottom_mobile": 32,
         "badge_font_size_mobile": 12,
         "badge_padding_mobile": 8,
-        "badge_align": "right"
+        "badge_align": "right",
+        "review_autoplay": 4
       },
       "blocks": {
         "benefit_1": {
