@@ -367,6 +367,149 @@
   outline-offset: 2px;
 }
 
+/* ---------- Bundle cards (Style = Cards) ----------
+   Same radio inputs as the pills, so the picker JS is untouched — only the label changes.
+   Auto-fit keeps three across on a wide column and drops to two, then one, as it narrows. */
+.zenith-mp__variants--cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--z-mp-vcmin, 150px), 1fr));
+  gap: 10px;
+}
+
+.zenith-mp__vcard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  border: 1px solid rgba(var(--color-foreground), 0.18);
+  border-radius: 10px;
+  background: var(--z-mp-bar-bg, #202020);
+  cursor: pointer;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.zenith-mp__vcard:hover {
+  border-color: rgba(var(--z-gold-rgb, 197, 147, 0), 0.6);
+}
+
+.zenith-mp__variant-input:checked + .zenith-mp__vcard {
+  border-color: var(--z-gold, #c59300);
+  box-shadow: inset 0 0 0 1px var(--z-gold, #c59300);
+}
+
+.zenith-mp__variant-input:focus-visible + .zenith-mp__vcard {
+  outline: 2px solid rgb(var(--color-foreground));
+  outline-offset: 2px;
+}
+
+/* Shipping ribbon */
+.zenith-mp__vcard-ship {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: 6px 8px;
+  background: rgba(var(--z-gold-rgb, 197, 147, 0), 0.16);
+  color: var(--z-dawn-gold, #eabe5f);
+  font-size: 1.1rem;
+  line-height: 1.2;
+  text-align: center;
+  letter-spacing: 0.04em;
+}
+
+.zenith-mp__vcard-ship-icon {
+  width: 1.4rem;
+  height: 1.4rem;
+  flex: 0 0 auto;
+}
+
+/* Selected tick, top-right over the ribbon */
+.zenith-mp__vcard-check {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 1.7rem;
+  height: 1.7rem;
+  color: var(--z-gold, #c59300);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.zenith-mp__variant-input:checked + .zenith-mp__vcard .zenith-mp__vcard-check {
+  opacity: 1;
+}
+
+.zenith-mp__vcard-media {
+  position: relative;
+  display: block;
+  width: calc(100% - 16px);
+  margin: 8px 8px 0;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 6px;
+  background: var(--z-mp-media-bg, #fff);
+}
+
+.zenith-mp__vcard-media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.zenith-mp__vcard-title {
+  padding: 8px 8px 0;
+  font-size: 1.3rem;
+  line-height: 1.25;
+  font-weight: 600;
+  text-align: center;
+}
+
+.zenith-mp__vcard-prices {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 6px;
+  padding: 4px 8px 0;
+}
+
+.zenith-mp__vcard-price {
+  font-size: 1.7rem;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.zenith-mp__vcard-was {
+  color: rgba(var(--color-foreground), 0.55);
+  font-size: 1.2rem;
+}
+
+.zenith-mp__vcard-badge {
+  margin: 6px 0 10px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: rgba(var(--z-gold-rgb, 197, 147, 0), 0.22);
+  color: var(--z-dawn-gold, #eabe5f);
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+.zenith-mp__vcard-badge:last-child {
+  margin-bottom: 10px;
+}
+
+.zenith-mp__vcard-prices:last-child {
+  padding-bottom: 10px;
+}
+
+.zenith-mp__vcard--sold-out {
+  opacity: 0.5;
+}
+
 /* Checklist */
 .zenith-mp__checks {
   display: flex;

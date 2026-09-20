@@ -59,6 +59,7 @@
 {%- capture extra -%}
   --z-mp-top: {{ s.top_color }};
   --z-mp-fade: {{ s.fade_height }}px;
+  --z-mp-vcmin: {{ s.variant_card_min }}px;
   --z-mp-media-bg: {{ s.media_background }};
   --z-mp-ratio: {{ s.gallery_ratio }};
   --z-mp-ratio-m: {{ s.gallery_ratio_mobile }};
@@ -337,7 +338,17 @@
         </div>
 
         {%- if has_variants -%}
-          <fieldset class="zenith-mp__variants" data-variants>
+          {%- liquid
+            assign v_style = s.variant_style | default: 'cards'
+            assign v_ship_goal = settings.cart_free_shipping_threshold | times: 100
+            capture v_ship_fee_text
+              capture v_ship_fee_money
+                echo s.variant_card_ship_fee_amount | times: 100 | money_without_trailing_zeros
+              endcapture
+              echo s.variant_card_ship_fee | escape | replace: '[amount]', v_ship_fee_money
+            endcapture
+          -%}
+          <fieldset class="zenith-mp__variants zenith-mp__variants--{{ v_style }}" data-variants>
             <legend class="visually-hidden">{{ 'products.product.product_variants' | t }}</legend>
             {%- for variant in mp_product.variants -%}
               <input
@@ -353,9 +364,58 @@
                   checked
                 {% endif %}
               >
-              <label class="zenith-mp__variant" for="Variant-{{ section.id }}-{{ variant.id }}">
-                {{- variant.title -}}
-              </label>
+              {%- if v_style == 'cards' -%}
+                {%- liquid
+                  assign v_img = variant.image | default: mp_product.featured_image
+                  assign v_off = 0
+                  if variant.compare_at_price > variant.price
+                    assign v_off = variant.compare_at_price | minus: variant.price | times: 100.0 | divided_by: variant.compare_at_price | round
+                  endif
+                -%}
+                <label
+                  class="zenith-mp__vcard{% unless variant.available %} zenith-mp__vcard--sold-out{% endunless %}"
+                  for="Variant-{{ section.id }}-{{ variant.id }}"
+                >
+                  {%- if s.variant_card_ship_free != blank or s.variant_card_ship_fee != blank -%}
+                    <span class="zenith-mp__vcard-ship">
+                      {%- render 'zenith-icon', icon: 'truck', class: 'zenith-mp__vcard-ship-icon' -%}
+                      {%- if variant.price >= v_ship_goal and v_ship_goal > 0 -%}
+                        {{- s.variant_card_ship_free | escape -}}
+                      {%- else -%}
+                        {{- v_ship_fee_text -}}
+                      {%- endif -%}
+                    </span>
+                  {%- endif -%}
+                  {%- render 'zenith-icon', icon: 'check_filled', class: 'zenith-mp__vcard-check' -%}
+                  <span class="zenith-mp__vcard-media">
+                    {%- if v_img != blank -%}
+                      {{
+                        v_img
+                        | image_url: width: 400
+                        | image_tag: loading: 'lazy', widths: '150, 300, 400', sizes: '160px', alt: variant.title
+                      }}
+                    {%- endif -%}
+                  </span>
+                  <span class="zenith-mp__vcard-title">{{ variant.title | escape }}</span>
+                  <span class="zenith-mp__vcard-prices">
+                    <span class="zenith-mp__vcard-price">{{ variant.price | money_without_trailing_zeros }}</span>
+                    {%- if variant.compare_at_price > variant.price -%}
+                      <s class="zenith-mp__vcard-was">
+                        {{- variant.compare_at_price | money_without_trailing_zeros -}}
+                      </s>
+                    {%- endif -%}
+                  </span>
+                  {%- if v_off > 0 and s.variant_card_badge != blank -%}
+                    <span class="zenith-mp__vcard-badge">
+                      {{- s.variant_card_badge | escape | replace: '[percent]', v_off -}}
+                    </span>
+                  {%- endif -%}
+                </label>
+              {%- else -%}
+                <label class="zenith-mp__variant" for="Variant-{{ section.id }}-{{ variant.id }}">
+                  {{- variant.title -}}
+                </label>
+              {%- endif -%}
             {%- endfor -%}
           </fieldset>
         {%- endif -%}
@@ -694,6 +754,44 @@
       ]
     },
 
+    { "type": "header", "content": "Bundle picker" },
+    {
+      "type": "paragraph",
+      "content": "How the product's variants are shown. Cards read the variant image, price and compare-at price straight from the product."
+    },
+    {
+      "type": "select",
+      "id": "variant_style",
+      "label": "Style",
+      "default": "cards",
+      "options": [
+        { "value": "cards", "label": "Cards" },
+        { "value": "pills", "label": "Pills" }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "variant_card_badge",
+      "label": "Discount badge",
+      "info": "[percent] is worked out from the compare-at price. Blank hides it.",
+      "default": "[percent] OFF"
+    },
+    {
+      "type": "text",
+      "id": "variant_card_ship_free",
+      "label": "Free shipping ribbon",
+      "info": "Shown on a variant priced at or above Theme settings → Zenith · Cart → Free shipping over.",
+      "default": "FREE SHIPPING"
+    },
+    {
+      "type": "text",
+      "id": "variant_card_ship_fee",
+      "label": "Paid shipping ribbon",
+      "info": "Shown below that threshold. [amount] is the fee below.",
+      "default": "+[amount] Shipping"
+    },
+    { "type": "number", "id": "variant_card_ship_fee_amount", "label": "Shipping fee", "info": "In pesos, no symbol.", "default": 100 },
+
     { "type": "header", "content": "Layout" },
     {
       "type": "range",
@@ -716,6 +814,7 @@
     { "type": "range", "id": "thumb_gap", "label": "Space between thumbnails", "min": 0, "max": 24, "step": 1, "unit": "px", "default": 8 },
     { "type": "range", "id": "thumb_spacing", "label": "Space above thumbnails", "min": 0, "max": 40, "step": 1, "unit": "px", "default": 8 },
     { "type": "range", "id": "review_card_width", "label": "Review card width", "min": 140, "max": 320, "step": 4, "unit": "px", "default": 220 },
+    { "type": "range", "id": "variant_card_min", "label": "Bundle card min width", "min": 100, "max": 240, "step": 5, "unit": "px", "default": 150 },
     { "type": "range", "id": "review_gap", "label": "Space between review cards", "min": 0, "max": 32, "step": 2, "unit": "px", "default": 12 },
     { "type": "range", "id": "review_autoplay", "label": "Review strip autoplay", "info": "Seconds between cards. 0 = off. Pauses on hover and with reduced motion.", "min": 0, "max": 12, "step": 1, "unit": "s", "default": 4 },
     { "type": "range", "id": "review_spacing", "label": "Space above review strip", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 38 },
