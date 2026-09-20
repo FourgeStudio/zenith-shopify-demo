@@ -545,7 +545,7 @@
   flex-wrap: wrap;
   gap: 11px;
   min-height: var(--z-mp-fda-h, 30px);
-  border-radius: var(--z-mp-fda-r, 8px);
+  border-radius: var(--z-mp-fda-r, 4px);
   padding: 0 12px;
   background: var(--z-mp-bar-bg, #202020);
   font-size: var(--z-mp-fda-fs-m, 13px);
@@ -705,14 +705,15 @@
   color: rgba(var(--color-foreground), 0.8);
 }
 
-/* Trust items — two centred columns */
+/* Design is a centred wrapping row, not a column grid: when the labels fit two to a line the second
+   line is narrower and centres under the first. A grid would force both lines to share column edges.
+   Container top-aligns so a label that wraps on a narrow column keeps its neighbour level. */
 .zenith-mp__trust {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, max-content));
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  justify-items: center;
-  column-gap: var(--z-mp-trust-gap, 10px);
-  row-gap: var(--z-mp-trust-rgap, 8px);
+  align-items: flex-start;
+  gap: var(--z-mp-trust-rgap, 8px) var(--z-mp-trust-gap, 10px);
   margin: 0;
   padding: 0;
   list-style: none;
