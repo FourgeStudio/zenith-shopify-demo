@@ -67,6 +67,33 @@
     ]
   },
   {
+    "name": "Zenith · Cart",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Content"
+      },
+      {
+        "type": "paragraph",
+        "content": "Shown on every line in the cart drawer."
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_show_compare_price",
+        "label": "Show the original price",
+        "default": true,
+        "info": "Strikes through the product's compare-at price so the discount stays visible while they check out."
+      },
+      {
+        "type": "text",
+        "id": "cart_savings_label",
+        "label": "Savings label",
+        "default": "Save [amount]",
+        "info": "[amount] is replaced by what that line saves. Leave blank to hide it."
+      }
+    ]
+  },
+  {
     "name": "Zenith · Promo",
     "settings": [
       {

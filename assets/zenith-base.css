@@ -684,6 +684,22 @@ html.js menu-drawer > details > summary::before {
   background-color: rgba(var(--color-shadow, 0, 0, 0), 0.6);
 }
 
+/* ---------- Cart drawer savings (snippets/cart-drawer.liquid, Theme settings → Zenith · Cart) ----------
+   Dawn prints one price per line. The strikethrough is Dawn's own .cart-item__old-price; this is the
+   "Save ₱x" line under it. Gold reads on the drawer's dark scheme. */
+.zenith-cart__saved {
+  display: block;
+  margin-top: var(--z-space-1, 4px);
+  color: var(--z-dawn-gold, #eabe5f);
+  font-size: 1.2rem;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+}
+
+.cart-item__discounted-prices .cart-item__old-price {
+  opacity: 0.65;
+}
+
 /* Store-wide promotion switch (snippets/zenith-promo-state.liquid): hidden, but kept in the HTML for crawlers. */
 .zenith-promo-hidden { display: none !important; }
 

@@ -246,13 +246,27 @@
                         <td class="cart-item__totals right" role="cell" headers="CartDrawer-ColumnTotal">
                           {%- render 'loading-spinner' -%}
                           <div class="cart-item__price-wrapper">
-                            {%- if item.original_line_price != item.final_line_price -%}
+                            {%- comment -%}
+                              zenith: the drawer only ever showed what is charged. Anchor each line against the
+                              compare-at price (or the cart discount, whichever is higher) and name the saving.
+                            {%- endcomment -%}
+                            {%- liquid
+                              assign z_was = item.original_line_price
+                              if settings.cart_show_compare_price and item.variant.compare_at_price > item.variant.price
+                                assign z_compare = item.variant.compare_at_price | times: item.quantity
+                                if z_compare > z_was
+                                  assign z_was = z_compare
+                                endif
+                              endif
+                              assign z_saved = z_was | minus: item.final_line_price
+                            -%}
+                            {%- if z_saved > 0 -%}
                               <div class="cart-item__discounted-prices">
                                 <span class="visually-hidden">
                                   {{ 'products.product.price.regular_price' | t }}
                                 </span>
                                 <s class="cart-item__old-price price price--end">
-                                  {{ item.original_line_price | money }}
+                                  {{ z_was | money }}
                                 </s>
                                 <span class="visually-hidden">
                                   {{ 'products.product.price.sale_price' | t }}
@@ -261,9 +275,14 @@
                                   {{ item.final_line_price | money }}
                                 </span>
                               </div>
+                              {%- if settings.cart_savings_label != blank -%}
+                                {%- capture z_saved_money -%}{{ z_saved | money }}{%- endcapture -%}
+                                {%- assign z_saved_text = settings.cart_savings_label | escape | replace: '[amount]', z_saved_money -%}
+                                <span class="zenith-cart__saved">{{ z_saved_text }}</span>
+                              {%- endif -%}
                             {%- else -%}
                               <span class="price price--end">
-                                {{ item.original_line_price | money }}
+                                {{ item.final_line_price | money }}
                               </span>
                             {%- endif -%}
 
