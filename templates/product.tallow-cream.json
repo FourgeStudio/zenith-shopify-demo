@@ -337,7 +337,7 @@
         "padding_top": 56,
         "padding_bottom": 56,
         "padding_top_mobile": 32,
-        "padding_bottom_mobile": 44,
+        "padding_bottom_mobile": 20,
         "note": "Short Description",
         "note_spacing": 32
       }
@@ -419,7 +419,7 @@
         "thumb_size_mobile": 52,
         "used_spacing_mobile": 20,
         "divider_spacing_mobile": 20,
-        "padding_top": 48,
+        "padding_top": 52,
         "padding_bottom": 48,
         "padding_top_mobile": 32,
         "padding_bottom_mobile": 0,
@@ -427,7 +427,8 @@
         "step_layout": "beside",
         "image_width": 152,
         "number_size_mobile": 32,
-        "number_font_size_mobile": 16
+        "number_font_size_mobile": 16,
+        "divider_breakpoint": "mobile"
       }
     },
     "reviews": {
@@ -472,7 +473,7 @@
         "padding_top": 52,
         "padding_bottom": 48,
         "padding_top_mobile": 20,
-        "padding_bottom_mobile": 8
+        "padding_bottom_mobile": 48
       }
     },
     "guarantee": {
@@ -641,10 +642,10 @@
         "logo_gap_mobile": 12,
         "footer_text_size_mobile": 10,
         "footer_max_width_mobile": 256,
-        "padding_top": 48,
+        "padding_top": 56,
         "padding_bottom": 56,
         "padding_top_mobile": 20,
-        "padding_bottom_mobile": 28
+        "padding_bottom_mobile": 20
       }
     },
     "money_back": {
@@ -683,7 +684,7 @@
         "badge_spacing_mobile": 12,
         "content_gap_mobile": 24,
         "content_padding_mobile": 20,
-        "padding_top": 48,
+        "padding_top": 40,
         "padding_bottom": 48,
         "padding_top_mobile": 20,
         "padding_bottom_mobile": 20
@@ -768,10 +769,10 @@
         "item_padding_mobile": 10,
         "content_gap_mobile": 24,
         "icon_size_mobile": 20,
-        "padding_top": 64,
-        "padding_bottom": 64,
-        "padding_top_mobile": 20,
-        "padding_bottom_mobile": 20
+        "padding_top": 72,
+        "padding_bottom": 124,
+        "padding_top_mobile": 28,
+        "padding_bottom_mobile": 44
       }
     },
     "cta": {
@@ -909,12 +910,227 @@
         "trust_3",
         "trust_4"
       ]
+    },
+    "compare": {
+      "type": "zenith-compare",
+      "blocks": {
+        "row-1": {
+          "type": "row",
+          "settings": {
+            "label": "Clinical Anti-Aging",
+            "zenith_value": "0.2% Retinol",
+            "value_1": "None",
+            "value_2": "Trace amounts",
+            "value_3": "Yes"
+          }
+        },
+        "row-2": {
+          "type": "row",
+          "settings": {
+            "label": "Barrier Support",
+            "zenith_value": "5% Tallow",
+            "value_1": "Minimal",
+            "value_2": "Synthetic",
+            "value_3": "Yes"
+          }
+        },
+        "row-3": {
+          "type": "row",
+          "settings": {
+            "label": "Built for PH humidity",
+            "zenith_value": "Yes",
+            "value_1": "No",
+            "value_2": "No",
+            "value_3": "No"
+          }
+        },
+        "row-4": {
+          "type": "row",
+          "settings": {
+            "label": "Sticky / Heavy Finish",
+            "zenith_value": "No",
+            "value_1": "Yes",
+            "value_2": "Yes (from layering)",
+            "value_3": "Often too thick"
+          }
+        }
+      },
+      "block_order": [
+        "row-1",
+        "row-2",
+        "row-3",
+        "row-4"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "Why guys switch to Zenith",
+        "subheading": "<p>Built specifically for the Filipino climate and lifestyle.</p>",
+        "zenith_label": "Zenith",
+        "column_1_title": "Mass-Market Creams",
+        "column_1_note": "(Nivea Men, Master, Ponds)",
+        "column_2_title": "Multi-Step / K-Beauty Sets",
+        "column_2_note": "(Various Korean Brands)",
+        "column_3_title": "Premium Western Imports",
+        "column_3_note": "(Kiehl's, Clinique for Men)",
+        "heading_alignment": "center",
+        "heading_spacing": 52,
+        "label_column_width": 20,
+        "header_height": 69,
+        "row_height": 49,
+        "cell_padding": 12,
+        "logo_width": 104,
+        "color_scheme": "scheme-1",
+        "zenith_header_background": "#203940",
+        "zenith_column_background": "#203940",
+        "row_background": "#202020",
+        "row_background_alt": "#202020",
+        "divider_color": "#0e0e0e",
+        "note_opacity": 70,
+        "subheading_opacity": 70,
+        "heading_font_size": 40,
+        "heading_uppercase": false,
+        "subheading_font_size": 18,
+        "eyebrow_font_size": 14,
+        "title_font_size": 16,
+        "note_font_size": 14,
+        "text_font_size": 16,
+        "heading_alignment_mobile": "left",
+        "divider_color_mobile": "#363636",
+        "heading_font_size_mobile": 24,
+        "subheading_font_size_mobile": 14,
+        "subheading_opacity_mobile": 70,
+        "heading_spacing_mobile": 12,
+        "label_column_width_mobile": 63,
+        "header_height_mobile": 32,
+        "row_height_mobile": 38,
+        "cell_padding_mobile": 8,
+        "logo_width_mobile": 60,
+        "table_gap_mobile": 24,
+        "group_title_gap_mobile": 8,
+        "title_font_size_mobile": 20,
+        "note_font_size_mobile": 14,
+        "text_font_size_mobile": 14,
+        "padding_top": 56,
+        "padding_bottom": 56,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 24
+      }
+    },
+    "ingredients": {
+      "type": "zenith-ingredients",
+      "blocks": {
+        "ingredient-1": {
+          "type": "ingredient",
+          "settings": {
+            "title": "Premium Tallow",
+            "text": "<p>Our formula combines time-tested tallow with proven active ingredients, delivering real anti-aging results through nature's closest molecular match to human skin.</p>",
+            "title_mobile": "Premium beef tallow rebuilds the barrier"
+          }
+        },
+        "ingredient-2": {
+          "type": "ingredient",
+          "settings": {
+            "title": "Stephania Root Extract",
+            "text": "<p>A calming botanical used to steady skin that reacts to heat and pollution, so the actives can do their work without the sting.</p>",
+            "title_mobile": ""
+          }
+        },
+        "ingredient-3": {
+          "type": "ingredient",
+          "settings": {
+            "title": "Retinol (Vitamin A)",
+            "text": "<p>The heavy lifter for anti-aging. It smooths out rough texture, evens your skin tone, and reduces the appearance of fine lines over time. Real, visible results without the complicated routine.</p>",
+            "title_mobile": "Retinol 0.2% for lines, tone and texture"
+          }
+        },
+        "ingredient-4": {
+          "type": "ingredient",
+          "settings": {
+            "title": "Hyaluronate + Ectoin Shield",
+            "text": "<p>Your daily defense against the elements. Hyaluronate pulls in moisture to keep your skin hydrated, while Ectoin acts like an invisible shield against heat, dust, and pollution.</p>",
+            "title_mobile": "Ectoin and Stephania keep skin calm"
+          }
+        }
+      },
+      "block_order": [
+        "ingredient-1",
+        "ingredient-2",
+        "ingredient-3",
+        "ingredient-4"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "Why it works differently",
+        "subheading": "<p>Our unique formula combines time-tested tallow used for centuries with clinically proven retinol, delivering powerful anti-aging results through nature's perfect molecular match to human skin.</p>",
+        "open_first": true,
+        "show_list": true,
+        "list_title": "View Full Ingredient List",
+        "list_text": "<p>Water, Glycerin, Adeps Bovis (Tallow), Simmondsia Chinensis (Jojoba) Seed Oil, Butyrospermum Parkii (Shea Butter), Cyclopentasiloxane, Dimethicone, Butylene Glycol, Cetyl Ethylhexanoate, Ceteth-20 Phosphate, Cetearyl Alcohol, Ceteth-20, Glyceryl Stearate, PEG-100 Stearate, Hydroxyacetophenone, 1,2-Hexanediol, Stephania Tetrandra Extract, Taraxacum Officinale (Dandelion) Leaf Extract, Saururus Chinensis Leaf/Root Extract, Allantoin, Tocopherol (Vitamin E), Carbomer, Arginine, Sodium Hyaluronate, Retinol, Ectoin.</p>",
+        "heading_alignment": "center",
+        "image_position": "right",
+        "heading_max_width": 800,
+        "media_width": 48,
+        "media_min_height": 600,
+        "gap": 52,
+        "card_gap": 20,
+        "content_padding": 20,
+        "item_padding": 20,
+        "thumb_size": 52,
+        "thumb_gap": 16,
+        "answer_spacing": 12,
+        "content_gap": 20,
+        "list_padding": 12,
+        "list_content_gap": 32,
+        "color_scheme": "scheme-1",
+        "card_background": "#202020",
+        "icon_color": "#eabe5f",
+        "divider_opacity": 10,
+        "text_opacity": 70,
+        "subheading_opacity": 70,
+        "heading_font_size": 48,
+        "heading_uppercase": false,
+        "subheading_font_size": 18,
+        "eyebrow_font_size": 14,
+        "heading_spacing": 80,
+        "title_font_size": 22,
+        "text_font_size": 16,
+        "list_title_font_size": 18,
+        "list_text_font_size": 14,
+        "icon_size": 24,
+        "heading_alignment_mobile": "center",
+        "image_first_mobile": true,
+        "media_ratio_mobile": "square",
+        "heading_font_size_mobile": 32,
+        "subheading_font_size_mobile": 14,
+        "subheading_opacity_mobile": 70,
+        "heading_spacing_mobile": 20,
+        "gap_mobile": 20,
+        "card_gap_mobile": 20,
+        "content_padding_mobile": 12,
+        "item_padding_mobile": 12,
+        "thumb_size_mobile": 52,
+        "answer_spacing_mobile": 12,
+        "content_gap_mobile": 12,
+        "list_padding_mobile": 12,
+        "list_content_gap_mobile": 12,
+        "title_font_size_mobile": 18,
+        "text_font_size_mobile": 14,
+        "list_title_font_size_mobile": 18,
+        "list_text_font_size_mobile": 14,
+        "icon_size_mobile": 24,
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "padding_top_mobile": 24,
+        "padding_bottom_mobile": 12
+      }
     }
   },
   "order": [
     "videos",
+    "ingredients",
     "difference",
     "routine",
+    "compare",
     "reviews",
     "guarantee",
     "money_back",

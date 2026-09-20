@@ -46,7 +46,7 @@
 
 <section
   id="Zenith-{{ section.id }}"
-  class="zenith-section zenith-rt zenith-rt--m-{{ s.heading_alignment_mobile }} zenith-rt--d-{{ s.step_layout | default: 'stacked' }} color-{{ s.color_scheme }} gradient{% if section.index > 2 %} zenith-defer{% endif %}"
+  class="zenith-section zenith-rt zenith-rt--m-{{ s.heading_alignment_mobile }} zenith-rt--d-{{ s.step_layout | default: 'stacked' }} zenith-rt--div-{{ s.divider_breakpoint | default: 'all' }} color-{{ s.color_scheme }} gradient{% if section.index > 2 %} zenith-defer{% endif %}"
 >
   <div class="page-width">
     {%- render 'zenith-section-heading',
@@ -190,6 +190,17 @@
     {
       "type": "header",
       "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "divider_breakpoint",
+      "label": "Show the divider on",
+      "default": "all",
+      "options": [
+        { "value": "all", "label": "Desktop and phones" },
+        { "value": "mobile", "label": "Phones only" },
+        { "value": "desktop", "label": "Desktop only" }
+      ]
     },
     {
       "type": "select",

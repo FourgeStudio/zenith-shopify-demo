@@ -1,0 +1,229 @@
+/* Zenith · Comparison table — highlighted Zenith column on desktop, one stacked table per competitor on mobile.
+   Per-instance values are CSS vars on #Zenith-{section.id} (snippets/zenith-section-style.liquid + the section's `extra`).
+   Mobile first. */
+
+/* Mobile heading alignment (setting heading_alignment_mobile) overrides the desktop one below 750px. */
+.zenith-compare--m-left .zenith-heading {
+  align-items: flex-start;
+  text-align: left;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.zenith-compare--m-center .zenith-heading {
+  align-items: center;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.zenith-compare .zenith-subheading {
+  color: rgba(var(--color-foreground), var(--z-cmp-sub-m, 0.7));
+}
+
+/* ---------- Logo cell ---------- */
+.zenith-compare__logo {
+  display: block;
+  width: var(--z-cmp-logow-m, 60px);
+  height: auto;
+  margin: 0 auto;
+}
+
+.zenith-compare__logo-text {
+  display: block;
+  font-family: var(--font-heading-family);
+  font-weight: var(--font-heading-weight, 400);
+  font-size: var(--z-ttfs-m, 2rem);
+  letter-spacing: 0.08em;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+/* ---------- Mobile tables ---------- */
+.zenith-compare__table-m {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+.zenith-compare__table-m .zenith-compare__corner {
+  width: var(--z-cmp-lw-m, 63%);
+  height: var(--z-cmp-hh-m, 32px);
+  padding: 0;
+  background: transparent;
+  border: 0;
+}
+
+.zenith-compare__table-m .zenith-compare__head {
+  height: var(--z-cmp-hh-m, 32px);
+  padding: var(--z-space-1) var(--z-cmp-cpad-m, 8px);
+  background: var(--z-cmp-zenhead, #203940);
+  border: 0;
+  vertical-align: middle;
+}
+
+.zenith-compare__table-m thead tr {
+  border-bottom: 1px solid var(--z-cmp-div-m, #363636);
+}
+
+.zenith-compare__table-m tbody tr {
+  border-bottom: 1px solid var(--z-cmp-div-m, #363636);
+}
+
+.zenith-compare__table-m tbody th,
+.zenith-compare__table-m tbody td {
+  height: var(--z-cmp-rh-m, 38px);
+  padding: var(--z-space-1) var(--z-cmp-cpad-m, 8px);
+  background: var(--z-cmp-row, #202020);
+  font-family: var(--font-body-family);
+  font-weight: 400;
+  font-size: var(--z-tfs-m, 1.4rem);
+  line-height: 1.4;
+  color: rgb(var(--color-foreground));
+  text-align: center;
+  vertical-align: middle;
+}
+
+.zenith-compare__table-m tbody tr:nth-child(even) th,
+.zenith-compare__table-m tbody tr:nth-child(even) td {
+  background: var(--z-cmp-row-alt, #202020);
+}
+
+.zenith-compare__table-m tbody th:first-child {
+  width: var(--z-cmp-lw-m, 63%);
+  text-align: left;
+}
+
+.zenith-compare__table-m--zenith tbody td,
+.zenith-compare__table-m--zenith tbody tr:nth-child(even) td {
+  background: var(--z-cmp-zen, #203940);
+}
+
+.zenith-compare__group {
+  margin-top: var(--z-cmp-gap-m, 24px);
+}
+
+.zenith-compare__group-title {
+  margin: 0 0 var(--z-cmp-tgap-m, 8px);
+  padding: 0 var(--z-cmp-cpad-m, 8px);
+  font-size: var(--z-ttfs-m, 2rem);
+  line-height: 1.1;
+}
+
+.zenith-compare__group-note {
+  display: block;
+  margin-top: var(--z-space-1);
+  font-family: var(--font-body-family);
+  font-weight: 400;
+  font-size: var(--z-cmp-note-m, 1.4rem);
+  line-height: 1.4;
+  letter-spacing: 0;
+  color: rgba(var(--color-foreground), var(--z-cmp-nopa, 0.7));
+}
+
+/* ---------- Desktop table ---------- */
+.zenith-compare__table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+.zenith-compare__table .zenith-compare__corner {
+  width: var(--z-cmp-lw, 20%);
+  padding: 0;
+  background: transparent;
+  border: 0;
+}
+
+.zenith-compare__head {
+  height: var(--z-cmp-hh, 68px);
+  padding: var(--z-space-2) var(--z-cmp-cpad, 12px);
+  font-family: var(--font-body-family);
+  font-weight: 400;
+  font-size: var(--z-ttfs, 1.6rem);
+  line-height: 1.2;
+  color: rgb(var(--color-foreground));
+  text-align: center;
+  vertical-align: middle;
+  border-left: 1px solid var(--z-cmp-div, #0e0e0e);
+}
+
+.zenith-compare__table .zenith-compare__head--zenith {
+  background: var(--z-cmp-zenhead, #203940);
+}
+
+.zenith-compare__head-title {
+  display: block;
+}
+
+.zenith-compare__head-note {
+  display: block;
+  margin-top: 2px;
+  font-size: var(--z-cmp-note, 1.4rem);
+  line-height: 1.4;
+  color: rgba(var(--color-foreground), var(--z-cmp-nopa, 0.7));
+}
+
+.zenith-compare__table tbody tr {
+  border-top: 1px solid var(--z-cmp-div, #0e0e0e);
+}
+
+.zenith-compare__table tbody th,
+.zenith-compare__table tbody td {
+  height: var(--z-cmp-rh, 48px);
+  padding: var(--z-space-2) var(--z-cmp-cpad, 12px);
+  background: var(--z-cmp-row, #202020);
+  font-family: var(--font-body-family);
+  font-weight: 400;
+  font-size: var(--z-tfs, 1.6rem);
+  line-height: 1.4;
+  color: rgb(var(--color-foreground));
+  text-align: center;
+  vertical-align: middle;
+  border-left: 1px solid var(--z-cmp-div, #0e0e0e);
+}
+
+.zenith-compare__table tbody tr:nth-child(even) th,
+.zenith-compare__table tbody tr:nth-child(even) td {
+  background: var(--z-cmp-row-alt, #202020);
+}
+
+.zenith-compare__table tbody tr th:first-child {
+  text-align: left;
+  border-left: 0;
+}
+
+/* The Zenith column keeps its tint all the way down — no extra markup, just the column position. */
+.zenith-compare__table tbody tr th:nth-child(2),
+.zenith-compare__table tbody tr td:nth-child(2) {
+  background: var(--z-cmp-zen, #203940);
+}
+
+@media screen and (min-width: 750px) {
+  .zenith-compare .zenith-subheading {
+    color: rgba(var(--color-foreground), var(--z-cmp-sub, 0.7));
+  }
+
+  /* Restore the desktop alignment chosen in heading_alignment. */
+  .zenith-compare--m-left .zenith-heading--center {
+    align-items: center;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .zenith-compare--m-center .zenith-heading--left {
+    align-items: flex-start;
+    text-align: left;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .zenith-compare__logo {
+    width: var(--z-logow, 104px);
+  }
+
+  .zenith-compare__logo-text {
+    font-size: var(--z-ttfs, 1.6rem);
+  }
+}

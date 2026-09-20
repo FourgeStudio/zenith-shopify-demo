@@ -1,0 +1,206 @@
+/* Zenith · Ingredients — accordion cards beside the product photo.
+   Per-instance values are CSS vars on #Zenith-{section.id} (snippets/zenith-section-style.liquid + the section's `extra`).
+   Shares the accordion behaviour of assets/zenith-faq.css + assets/zenith-faq.js. Mobile first. */
+
+/* Mobile heading alignment (setting heading_alignment_mobile) overrides the desktop one below 750px. */
+.zenith-ingredients--m-left .zenith-heading {
+  align-items: flex-start;
+  text-align: left;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.zenith-ingredients--m-center .zenith-heading {
+  align-items: center;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.zenith-ingredients .zenith-subheading {
+  color: rgba(var(--color-foreground), var(--z-ing-sub-m, 0.7));
+}
+
+.zenith-ingredients__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--z-gap-m, 20px);
+}
+
+.zenith-ingredients__col {
+  min-width: 0;
+}
+
+/* Photo first on mobile (setting image_first_mobile). */
+@media screen and (max-width: 749px) {
+  .zenith-ingredients--m-media-first .zenith-ingredients__col--media {
+    order: -1;
+  }
+}
+
+.zenith-ingredients__media {
+  display: block;
+  width: 100%;
+  aspect-ratio: var(--z-ing-ar-m, 1 / 1);
+}
+
+/* ---------- Cards ---------- */
+.zenith-ingredients__card {
+  background: var(--z-ing-card, #202020);
+}
+
+.zenith-ingredients__card + .zenith-ingredients__card {
+  margin-top: var(--z-ing-cardgap-m, 20px);
+}
+
+/* Dividers sit on the item so they run the full width of the card. */
+.zenith-ingredients__item {
+  padding-left: var(--z-cpd-m, 12px);
+  padding-right: var(--z-cpd-m, 12px);
+}
+
+.zenith-ingredients__item:first-child {
+  border-top: 0;
+}
+
+.zenith-ingredients__item--list {
+  padding-left: var(--z-ing-lpad-m, 12px);
+  padding-right: var(--z-ing-lpad-m, 12px);
+}
+
+/* ---------- Summary row ---------- */
+.zenith-ingredients .zenith-ingredients__summary {
+  font-family: var(--font-body-family);
+  font-weight: 400;
+  align-items: center;
+  gap: var(--z-ing-thumb-gap, 16px);
+}
+
+.zenith-ingredients__summary--list {
+  padding-top: var(--z-ing-lpad-m, 12px);
+  padding-bottom: var(--z-ing-lpad-m, 12px);
+  font-size: var(--z-ing-ltfs-m, 1.8rem);
+}
+
+/* Open: the gap to the text replaces the summary's bottom padding (matches the design's auto-layout). */
+.zenith-ingredients__item[open] > .zenith-ingredients__summary {
+  padding-bottom: var(--z-ing-atop-m, 12px);
+}
+
+.zenith-ingredients__lead {
+  display: flex;
+  align-items: center;
+  gap: var(--z-ing-thumb-gap, 16px);
+  min-width: 0;
+}
+
+.zenith-ingredients__thumb {
+  display: block;
+  flex: 0 0 auto;
+  width: var(--z-ing-thumb-m, 52px);
+  height: var(--z-ing-thumb-m, 52px);
+}
+
+.zenith-ingredients__title {
+  line-height: 1.5;
+  min-width: 0;
+}
+
+/* ---------- Answer ---------- */
+.zenith-ingredients .zenith-ingredients__answer {
+  padding-top: 0;
+  padding-bottom: var(--z-cgap-m, 12px);
+  font-size: var(--z-tfs-m, 1.4rem);
+}
+
+.zenith-ingredients .zenith-ingredients__answer--list {
+  padding-bottom: var(--z-ing-lgap-m, 12px);
+  font-size: var(--z-ing-lbfs-m, 1.4rem);
+}
+
+.zenith-ingredients__answer p {
+  margin: 0;
+}
+
+.zenith-ingredients__answer p + p {
+  margin-top: var(--z-space-3);
+}
+
+@media screen and (min-width: 750px) {
+  .zenith-ingredients .zenith-subheading {
+    color: rgba(var(--color-foreground), var(--z-ing-sub, 0.7));
+  }
+
+  /* Restore the desktop alignment chosen in heading_alignment. */
+  .zenith-ingredients--m-left .zenith-heading--center {
+    align-items: center;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .zenith-ingredients--m-center .zenith-heading--left {
+    align-items: flex-start;
+    text-align: left;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .zenith-ingredients__grid {
+    grid-template-columns: minmax(0, 1fr) var(--z-mw, 48%);
+    gap: var(--z-gap, 52px);
+    align-items: start;
+  }
+
+  .zenith-ingredients--media-left .zenith-ingredients__grid {
+    grid-template-columns: var(--z-mw, 48%) minmax(0, 1fr);
+  }
+
+  .zenith-ingredients--media-left .zenith-ingredients__col--media {
+    order: -1;
+  }
+
+  .zenith-ingredients__media {
+    aspect-ratio: auto;
+    height: var(--z-mmh, 600px);
+  }
+
+  .zenith-ingredients__card + .zenith-ingredients__card {
+    margin-top: var(--z-ing-cardgap, 20px);
+  }
+
+  .zenith-ingredients__item {
+    padding-left: var(--z-cpd, 20px);
+    padding-right: var(--z-cpd, 20px);
+  }
+
+  .zenith-ingredients__item--list {
+    padding-left: var(--z-ing-lpad, 12px);
+    padding-right: var(--z-ing-lpad, 12px);
+  }
+
+  .zenith-ingredients__summary--list {
+    padding-top: var(--z-ing-lpad, 12px);
+    padding-bottom: var(--z-ing-lpad, 12px);
+    font-size: var(--z-ing-ltfs, 1.8rem);
+  }
+
+  .zenith-ingredients__item[open] > .zenith-ingredients__summary {
+    padding-bottom: var(--z-ing-atop, 12px);
+  }
+
+  .zenith-ingredients__thumb {
+    width: var(--z-ing-thumb, 52px);
+    height: var(--z-ing-thumb, 52px);
+  }
+
+  .zenith-ingredients .zenith-ingredients__answer {
+    padding-bottom: var(--z-cgap, 20px);
+    font-size: var(--z-tfs, 1.6rem);
+  }
+
+  .zenith-ingredients .zenith-ingredients__answer--list {
+    padding-bottom: var(--z-ing-lgap, 32px);
+    font-size: var(--z-ing-lbfs, 1.4rem);
+  }
+}

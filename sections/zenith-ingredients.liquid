@@ -1,0 +1,895 @@
+{%- comment -%} zenith: [customers] anywhere in this section shows Theme settings → Zenith → Customer count {%- endcomment -%}
+{%- capture zenith_body -%}
+{{ 'zenith-faq.css' | asset_url | stylesheet_tag }}
+{{ 'zenith-ingredients.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'zenith-faq.js' | asset_url }}" defer="defer"></script>
+{%- liquid
+  assign media_ratio = '1 / 1'
+  case section.settings.media_ratio_mobile
+    when 'portrait'
+      assign media_ratio = '4 / 5'
+    when 'landscape'
+      assign media_ratio = '3 / 2'
+    when 'wide'
+      assign media_ratio = '16 / 9'
+  endcase
+-%}
+{%- capture extra -%}
+  --z-ing-card: {{ section.settings.card_background }};
+  --z-ing-sub: {{ section.settings.subheading_opacity | divided_by: 100.0 }};
+  --z-ing-sub-m: {{ section.settings.subheading_opacity_mobile | divided_by: 100.0 }};
+  --z-ing-thumb: {{ section.settings.thumb_size }}px;
+  --z-ing-thumb-m: {{ section.settings.thumb_size_mobile }}px;
+  --z-ing-thumb-gap: {{ section.settings.thumb_gap }}px;
+  --z-ing-atop: {{ section.settings.answer_spacing }}px;
+  --z-ing-atop-m: {{ section.settings.answer_spacing_mobile }}px;
+  --z-ing-lpad: {{ section.settings.list_padding }}px;
+  --z-ing-lpad-m: {{ section.settings.list_padding_mobile }}px;
+  --z-ing-lgap: {{ section.settings.list_content_gap }}px;
+  --z-ing-lgap-m: {{ section.settings.list_content_gap_mobile }}px;
+  --z-ing-ltfs: {{ section.settings.list_title_font_size }}px;
+  --z-ing-ltfs-m: {{ section.settings.list_title_font_size_mobile }}px;
+  --z-ing-lbfs: {{ section.settings.list_text_font_size }}px;
+  --z-ing-lbfs-m: {{ section.settings.list_text_font_size_mobile }}px;
+  --z-ing-cardgap: {{ section.settings.card_gap }}px;
+  --z-ing-cardgap-m: {{ section.settings.card_gap_mobile }}px;
+  --z-ing-ar-m: {{ media_ratio }};
+  --z-faq-icon: {{ section.settings.icon_color }};
+  --z-faq-ans: {{ section.settings.text_opacity | divided_by: 100.0 }};
+  --z-faq-div: {{ section.settings.divider_opacity | divided_by: 100.0 }};
+{%- endcapture -%}
+{%- render 'zenith-section-style', section: section, extra: extra -%}
+
+<section
+  id="Zenith-{{ section.id }}"
+  class="zenith-section zenith-ingredients zenith-ingredients--m-{{ section.settings.heading_alignment_mobile }} zenith-ingredients--media-{{ section.settings.image_position }}{% if section.settings.image_first_mobile %} zenith-ingredients--m-media-first{% endif %} color-{{ section.settings.color_scheme }} gradient{% if section.index > 2 %} zenith-defer{% endif %}"
+>
+  <div class="page-width">
+    {%- render 'zenith-section-heading',
+      eyebrow: section.settings.eyebrow,
+      heading: section.settings.heading,
+      subheading: section.settings.subheading,
+      alignment: section.settings.heading_alignment,
+      uppercase: section.settings.heading_uppercase
+    -%}
+
+    <div class="zenith-ingredients__grid">
+      <div class="zenith-ingredients__col">
+        {%- if section.blocks.size > 0 -%}
+          <div class="zenith-ingredients__card">
+            {%- for block in section.blocks -%}
+              <details
+                class="zenith-faq__item zenith-ingredients__item"
+                id="Block-{{ block.id }}-{{ section.id }}"
+                {% if forloop.first and section.settings.open_first %}
+                  open
+                {% endif %}
+                {{ block.shopify_attributes }}
+              >
+                <summary class="zenith-faq__question zenith-ingredients__summary">
+                  <span class="zenith-ingredients__lead">
+                    <span class="zenith-ingredients__thumb zenith-media">
+                      {%- if block.settings.image != blank -%}
+                        {{
+                          block.settings.image
+                          | image_url: width: 240
+                          | image_tag:
+                            loading: 'lazy',
+                            widths: '60, 104, 160, 240',
+                            sizes: '60px',
+                            alt: block.settings.image.alt
+                        }}
+                      {%- else -%}
+                        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                      {%- endif -%}
+                    </span>
+                    <span class="zenith-ingredients__title">
+                      {%- if block.settings.title_mobile != blank -%}
+                        <span class="zenith-hide-mobile">{{ block.settings.title | escape }}</span>
+                        <span class="zenith-hide-desktop">{{ block.settings.title_mobile | escape }}</span>
+                      {%- else -%}
+                        {{- block.settings.title | escape -}}
+                      {%- endif -%}
+                    </span>
+                  </span>
+                  <span class="zenith-faq__icon zenith-ingredients__icon" aria-hidden="true">
+                    {%- render 'zenith-icon', icon: 'plus' -%}
+                  </span>
+                </summary>
+                <div class="zenith-faq__answer zenith-ingredients__answer zenith-rte">
+                  {%- if block.settings.text_mobile != blank -%}
+                    <div class="zenith-hide-mobile">{{ block.settings.text }}</div>
+                    <div class="zenith-hide-desktop">{{ block.settings.text_mobile }}</div>
+                  {%- else -%}
+                    {{- block.settings.text -}}
+                  {%- endif -%}
+                </div>
+              </details>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.show_list and section.settings.list_title != blank -%}
+          <div class="zenith-ingredients__card zenith-ingredients__card--list">
+            <details class="zenith-faq__item zenith-ingredients__item zenith-ingredients__item--list" id="IngredientList-{{ section.id }}">
+              <summary class="zenith-faq__question zenith-ingredients__summary zenith-ingredients__summary--list">
+                <span class="zenith-ingredients__title zenith-ingredients__title--list">
+                  {{- section.settings.list_title | escape -}}
+                </span>
+                <span class="zenith-faq__icon zenith-ingredients__icon" aria-hidden="true">
+                  {%- render 'zenith-icon', icon: 'plus' -%}
+                </span>
+              </summary>
+              <div class="zenith-faq__answer zenith-ingredients__answer zenith-ingredients__answer--list zenith-rte">
+                {{ section.settings.list_text }}
+              </div>
+            </details>
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="zenith-ingredients__col zenith-ingredients__col--media">
+        <div class="zenith-ingredients__media zenith-media">
+          {%- if section.settings.image != blank -%}
+            {{
+              section.settings.image
+              | image_url: width: 1400
+              | image_tag:
+                loading: 'lazy',
+                widths: '400, 600, 800, 1000, 1200, 1400',
+                sizes: '(min-width: 990px) 48vw, (min-width: 750px) 48vw, 100vw',
+                alt: section.settings.image.alt
+            }}
+          {%- else -%}
+            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{%- endcapture -%}
+{{- zenith_body | replace: '[customers]', settings.customer_count -}}
+
+{% schema %}
+{
+  "name": "Zenith · Ingredients",
+  "tag": "div",
+  "class": "section",
+  "max_blocks": 12,
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Why it works differently"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "<p>Our unique formula combines time-tested tallow used for centuries with clinically proven retinol, delivering powerful anti-aging results through nature's perfect molecular match to human skin.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Product photo"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_first",
+      "label": "Open the first item",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_list",
+      "label": "Show the full ingredient list",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "list_title",
+      "label": "Full list title",
+      "default": "View Full Ingredient List"
+    },
+    {
+      "type": "richtext",
+      "id": "list_text",
+      "label": "Full list text",
+      "default": "<p>Water, Glycerin, Adeps Bovis (Tallow), Simmondsia Chinensis (Jojoba) Seed Oil, Butyrospermum Parkii (Shea Butter), Cyclopentasiloxane, Dimethicone, Butylene Glycol, Cetyl Ethylhexanoate, Ceteth-20 Phosphate, Cetearyl Alcohol, Ceteth-20, Glyceryl Stearate, PEG-100 Stearate, Hydroxyacetophenone, 1,2-Hexanediol, Stephania Tetrandra Extract, Taraxacum Officinale (Dandelion) Leaf Extract, Saururus Chinensis Leaf/Root Extract, Allantoin, Tocopherol (Vitamin E), Carbomer, Arginine, Sodium Hyaluronate, Retinol, Ectoin.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Heading alignment",
+      "default": "center",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image position",
+      "default": "right",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "heading_max_width",
+      "label": "Heading width",
+      "min": 400,
+      "max": 1200,
+      "step": 20,
+      "unit": "px",
+      "default": 800
+    },
+    {
+      "type": "range",
+      "id": "media_width",
+      "label": "Image column width",
+      "min": 30,
+      "max": 70,
+      "step": 1,
+      "unit": "%",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "media_min_height",
+      "label": "Image height",
+      "min": 240,
+      "max": 840,
+      "step": 8,
+      "unit": "px",
+      "default": 600
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Space between columns",
+      "min": 0,
+      "max": 96,
+      "step": 4,
+      "unit": "px",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "card_gap",
+      "label": "Space between cards",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "content_padding",
+      "label": "Card side padding",
+      "min": 4,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "item_padding",
+      "label": "Item padding",
+      "min": 4,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "thumb_size",
+      "label": "Thumbnail size",
+      "min": 32,
+      "max": 96,
+      "step": 2,
+      "unit": "px",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "thumb_gap",
+      "label": "Space after thumbnail",
+      "min": 4,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "answer_spacing",
+      "label": "Space above open text",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "content_gap",
+      "label": "Space below open text",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "list_padding",
+      "label": "Full list card padding",
+      "min": 4,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "list_content_gap",
+      "label": "Space below the full list",
+      "min": 0,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#202020"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Plus icon",
+      "default": "#EABE5F"
+    },
+    {
+      "type": "range",
+      "id": "divider_opacity",
+      "label": "Divider opacity",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "%",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "text_opacity",
+      "label": "Body text opacity",
+      "min": 30,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 70
+    },
+    {
+      "type": "range",
+      "id": "subheading_opacity",
+      "label": "Subheading opacity",
+      "min": 30,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 70
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size",
+      "label": "Heading size",
+      "min": 16,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "checkbox",
+      "id": "heading_uppercase",
+      "label": "Uppercase heading",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "subheading_font_size",
+      "label": "Subheading size",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_font_size",
+      "label": "Eyebrow size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "heading_spacing",
+      "label": "Space below heading",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "label": "Item title size",
+      "min": 12,
+      "max": 36,
+      "step": 1,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "text_font_size",
+      "label": "Item text size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "list_title_font_size",
+      "label": "Full list title size",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "list_text_font_size",
+      "label": "Full list text size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Plus icon size",
+      "min": 12,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment_mobile",
+      "label": "Heading alignment",
+      "default": "center",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "image_first_mobile",
+      "label": "Image first on mobile",
+      "info": "Off puts the photo below the cards.",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "media_ratio_mobile",
+      "label": "Image shape",
+      "default": "square",
+      "options": [
+        {
+          "value": "square",
+          "label": "Square (1:1)"
+        },
+        {
+          "value": "portrait",
+          "label": "Portrait (4:5)"
+        },
+        {
+          "value": "landscape",
+          "label": "Landscape (3:2)"
+        },
+        {
+          "value": "wide",
+          "label": "Wide (16:9)"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size_mobile",
+      "label": "Heading size",
+      "min": 16,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "subheading_font_size_mobile",
+      "label": "Subheading size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "subheading_opacity_mobile",
+      "label": "Subheading opacity",
+      "min": 30,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 70
+    },
+    {
+      "type": "range",
+      "id": "heading_spacing_mobile",
+      "label": "Space below heading",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "gap_mobile",
+      "label": "Space between photo and cards",
+      "min": 0,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "card_gap_mobile",
+      "label": "Space between cards",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "content_padding_mobile",
+      "label": "Card side padding",
+      "min": 4,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "item_padding_mobile",
+      "label": "Item padding",
+      "min": 4,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "thumb_size_mobile",
+      "label": "Thumbnail size",
+      "min": 32,
+      "max": 88,
+      "step": 2,
+      "unit": "px",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "answer_spacing_mobile",
+      "label": "Space above open text",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "content_gap_mobile",
+      "label": "Space below open text",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "list_padding_mobile",
+      "label": "Full list card padding",
+      "min": 4,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "list_content_gap_mobile",
+      "label": "Space below the full list",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "title_font_size_mobile",
+      "label": "Item title size",
+      "min": 12,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "text_font_size_mobile",
+      "label": "Item text size",
+      "min": 10,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "list_title_font_size_mobile",
+      "label": "Full list title size",
+      "min": 12,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "list_text_font_size_mobile",
+      "label": "Full list text size",
+      "min": 10,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "icon_size_mobile",
+      "label": "Plus icon size",
+      "min": 12,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Top padding (mobile)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Bottom padding (mobile)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    }
+  ],
+  "blocks": [
+    {
+      "type": "ingredient",
+      "name": "Ingredient",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Thumbnail"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Premium Tallow"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Our formula combines time-tested tallow with proven active ingredients, delivering real anti-aging results through nature's closest molecular match to human skin.</p>"
+        },
+        {
+          "type": "header",
+          "content": "Mobile"
+        },
+        {
+          "type": "text",
+          "id": "title_mobile",
+          "label": "Title (mobile)",
+          "info": "Leave blank to reuse the desktop title."
+        },
+        {
+          "type": "richtext",
+          "id": "text_mobile",
+          "label": "Extra text (mobile)",
+          "info": "Shown below the text on mobile only. Leave blank to reuse the desktop text."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zenith · Ingredients",
+      "blocks": [
+        {
+          "type": "ingredient",
+          "settings": {
+            "title": "Premium Tallow",
+            "title_mobile": "Premium beef tallow rebuilds the barrier",
+            "text": "<p>Our formula combines time-tested tallow with proven active ingredients, delivering real anti-aging results through nature's closest molecular match to human skin.</p>"
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "title": "Stephania Root Extract",
+            "text": "<p>A calming botanical used to steady skin that reacts to heat and pollution, so the actives can do their work without the sting.</p>"
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "title": "Retinol (Vitamin A)",
+            "title_mobile": "Retinol 0.2% for lines, tone and texture",
+            "text": "<p>The heavy lifter for anti-aging. It smooths out rough texture, evens your skin tone, and reduces the appearance of fine lines over time. Real, visible results without the complicated routine.</p>"
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "title": "Hyaluronate + Ectoin Shield",
+            "title_mobile": "Ectoin and Stephania keep skin calm",
+            "text": "<p>Your daily defense against the elements. Hyaluronate pulls in moisture to keep your skin hydrated, while Ectoin acts like an invisible shield against heat, dust, and pollution.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
