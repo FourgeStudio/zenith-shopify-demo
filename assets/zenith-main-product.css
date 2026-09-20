@@ -30,8 +30,9 @@
   background: var(--z-mp-media-bg, #fff);
 }
 
+/* Cover like the thumbs below: the shots are square, the frame is taller (Image height), and contain left a white letterbox strip under the photo. */
 .zenith-mp__media > img {
-  object-fit: contain;
+  object-fit: cover;
   padding: var(--z-ipd, 0);
 }
 
