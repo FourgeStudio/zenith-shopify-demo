@@ -1,0 +1,33 @@
+{% comment %}
+  Free-shipping progress for the cart drawer (Theme settings → Zenith · Cart).
+  The threshold is the same setting the [free_shipping] token prints in trust copy, so the promise on the
+  product page and the bar here can never drift apart.
+  Shopify re-renders the drawer section on every cart change, so the bar updates itself — no JS.
+{% endcomment %}
+{%- liquid
+  assign z_fs_goal = settings.cart_free_shipping_threshold | times: 100
+  assign z_fs_left = z_fs_goal | minus: cart.total_price
+  assign z_fs_pct = 0
+  if z_fs_goal > 0
+    assign z_fs_pct = cart.total_price | times: 100.0 | divided_by: z_fs_goal | round
+    if z_fs_pct > 100
+      assign z_fs_pct = 100
+    endif
+  endif
+-%}
+{%- if z_fs_goal > 0 and cart != empty -%}
+  <div class="zenith-cart-ship{% if z_fs_left <= 0 %} zenith-cart-ship--unlocked{% endif %}">
+    <p class="zenith-cart-ship__text" role="status">
+      {%- if z_fs_left > 0 -%}
+        {%- capture z_fs_money -%}{{ z_fs_left | money }}{%- endcapture -%}
+        {{- settings.cart_free_shipping_away | escape | replace: '[amount]', z_fs_money -}}
+      {%- else -%}
+        {%- render 'zenith-icon', icon: 'check_circle', class: 'zenith-cart-ship__icon' -%}
+        {{- settings.cart_free_shipping_unlocked | escape -}}
+      {%- endif -%}
+    </p>
+    <div class="zenith-cart-ship__track">
+      <div class="zenith-cart-ship__fill" style="width: {{ z_fs_pct }}%"></div>
+    </div>
+  </div>
+{%- endif -%}

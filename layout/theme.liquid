@@ -392,7 +392,18 @@
         CAPTURE is filtered (a policy page slices it to nothing - see the note above).
       {%- endcomment -%}
       {%- capture zenith_page_content -%}{{ content_for_layout }}{%- endcapture -%}
-      {{ zenith_page_content | slice: 0, zenith_layout_length | replace: '[customers]', settings.customer_count }}
+      {%- comment -%}
+        zenith: [free_shipping] → Theme settings → Zenith · Cart → Free shipping threshold. Left as-is when
+        no threshold is set, so the token never prints ₱0. Sections go through snippets/zenith-tokens.liquid;
+        this line covers page content that is not a section.
+      {%- endcomment -%}
+      {%- assign zenith_fs_label = '[free_shipping]' -%}
+      {%- if settings.cart_free_shipping_threshold > 0 -%}
+        {%- capture zenith_fs_label -%}
+          {{- settings.cart_free_shipping_threshold | times: 100 | money_without_trailing_zeros -}}
+        {%- endcapture -%}
+      {%- endif -%}
+      {{ zenith_page_content | slice: 0, zenith_layout_length | replace: '[customers]', settings.customer_count | replace: '[free_shipping]', zenith_fs_label }}
     </main>
 
     {% sections 'footer-group' %}

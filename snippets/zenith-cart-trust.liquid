@@ -1,0 +1,22 @@
+{% comment %}
+  Reassurance under the drawer's Checkout button — the objections that stop a Philippine order
+  (payment on delivery, refund, legitimacy) answered at the moment of decision.
+  Three optional slots in Theme settings → Zenith · Cart; an empty text hides its row.
+{% endcomment %}
+{%- capture z_ct_items -%}
+  {%- assign z_ct_slots = '1,2,3' | split: ',' -%}
+  {%- for i in z_ct_slots -%}
+    {%- assign z_ct_text_key = 'cart_trust' | append: i | append: '_text' -%}
+    {%- assign z_ct_icon_key = 'cart_trust' | append: i | append: '_icon' -%}
+    {%- assign z_ct_text = settings[z_ct_text_key] -%}
+    {%- if z_ct_text != blank -%}
+      <li class="zenith-cart-trust__item">
+        {%- render 'zenith-icon', icon: settings[z_ct_icon_key], class: 'zenith-cart-trust__icon' -%}
+        <span>{{ z_ct_text | escape }}</span>
+      </li>
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- if z_ct_items != blank -%}
+  <ul class="zenith-cart-trust list-unstyled" role="list">{{ z_ct_items }}</ul>
+{%- endif -%}

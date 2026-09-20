@@ -90,6 +90,276 @@
         "label": "Savings label",
         "default": "Save [amount]",
         "info": "[amount] is replaced by what that line saves. Leave blank to hide it."
+      },
+      {
+        "type": "header",
+        "content": "Free shipping bar"
+      },
+      {
+        "type": "paragraph",
+        "content": "Shown at the top of the cart drawer. Write [free_shipping] in any text on the store to print the amount below — trust rows, announcement bar, anywhere."
+      },
+      {
+        "type": "number",
+        "id": "cart_free_shipping_threshold",
+        "label": "Free shipping over",
+        "default": 1200,
+        "info": "In pesos, no symbol. Must match your real rule in Settings → Shipping. Set to 0 to hide the bar."
+      },
+      {
+        "type": "text",
+        "id": "cart_free_shipping_away",
+        "label": "Still short",
+        "default": "[amount] away from free shipping",
+        "info": "[amount] is replaced by what is left to spend."
+      },
+      {
+        "type": "text",
+        "id": "cart_free_shipping_unlocked",
+        "label": "Reached",
+        "default": "Free shipping unlocked"
+      },
+      {
+        "type": "header",
+        "content": "Checkout reassurance"
+      },
+      {
+        "type": "paragraph",
+        "content": "A row under the Checkout button. Leave a text blank to hide that line."
+      },
+      {
+        "type": "select",
+        "id": "cart_trust1_icon",
+        "label": "Icon 1",
+        "options": [
+          {
+            "value": "cash",
+            "label": "Cash"
+          },
+          {
+            "value": "truck",
+            "label": "Truck"
+          },
+          {
+            "value": "shield",
+            "label": "Shield"
+          },
+          {
+            "value": "shield_plus",
+            "label": "Shield plus"
+          },
+          {
+            "value": "lock",
+            "label": "Lock"
+          },
+          {
+            "value": "certified",
+            "label": "Certified"
+          },
+          {
+            "value": "certificate",
+            "label": "Certificate"
+          },
+          {
+            "value": "badge_check",
+            "label": "Badge check"
+          },
+          {
+            "value": "check_circle",
+            "label": "Check circle"
+          },
+          {
+            "value": "refresh",
+            "label": "Refresh"
+          },
+          {
+            "value": "clock",
+            "label": "Clock"
+          },
+          {
+            "value": "phone_call",
+            "label": "Phone call"
+          },
+          {
+            "value": "gift",
+            "label": "Gift"
+          },
+          {
+            "value": "leaf",
+            "label": "Leaf"
+          },
+          {
+            "value": "flag",
+            "label": "Flag"
+          },
+          {
+            "value": "hand_heart",
+            "label": "Hand heart"
+          }
+        ],
+        "default": "cash"
+      },
+      {
+        "type": "text",
+        "id": "cart_trust1_text",
+        "label": "Text 1",
+        "default": "Cash on Delivery available"
+      },
+      {
+        "type": "select",
+        "id": "cart_trust2_icon",
+        "label": "Icon 2",
+        "options": [
+          {
+            "value": "cash",
+            "label": "Cash"
+          },
+          {
+            "value": "truck",
+            "label": "Truck"
+          },
+          {
+            "value": "shield",
+            "label": "Shield"
+          },
+          {
+            "value": "shield_plus",
+            "label": "Shield plus"
+          },
+          {
+            "value": "lock",
+            "label": "Lock"
+          },
+          {
+            "value": "certified",
+            "label": "Certified"
+          },
+          {
+            "value": "certificate",
+            "label": "Certificate"
+          },
+          {
+            "value": "badge_check",
+            "label": "Badge check"
+          },
+          {
+            "value": "check_circle",
+            "label": "Check circle"
+          },
+          {
+            "value": "refresh",
+            "label": "Refresh"
+          },
+          {
+            "value": "clock",
+            "label": "Clock"
+          },
+          {
+            "value": "phone_call",
+            "label": "Phone call"
+          },
+          {
+            "value": "gift",
+            "label": "Gift"
+          },
+          {
+            "value": "leaf",
+            "label": "Leaf"
+          },
+          {
+            "value": "flag",
+            "label": "Flag"
+          },
+          {
+            "value": "hand_heart",
+            "label": "Hand heart"
+          }
+        ],
+        "default": "shield"
+      },
+      {
+        "type": "text",
+        "id": "cart_trust2_text",
+        "label": "Text 2",
+        "default": "Money-back guarantee"
+      },
+      {
+        "type": "select",
+        "id": "cart_trust3_icon",
+        "label": "Icon 3",
+        "options": [
+          {
+            "value": "cash",
+            "label": "Cash"
+          },
+          {
+            "value": "truck",
+            "label": "Truck"
+          },
+          {
+            "value": "shield",
+            "label": "Shield"
+          },
+          {
+            "value": "shield_plus",
+            "label": "Shield plus"
+          },
+          {
+            "value": "lock",
+            "label": "Lock"
+          },
+          {
+            "value": "certified",
+            "label": "Certified"
+          },
+          {
+            "value": "certificate",
+            "label": "Certificate"
+          },
+          {
+            "value": "badge_check",
+            "label": "Badge check"
+          },
+          {
+            "value": "check_circle",
+            "label": "Check circle"
+          },
+          {
+            "value": "refresh",
+            "label": "Refresh"
+          },
+          {
+            "value": "clock",
+            "label": "Clock"
+          },
+          {
+            "value": "phone_call",
+            "label": "Phone call"
+          },
+          {
+            "value": "gift",
+            "label": "Gift"
+          },
+          {
+            "value": "leaf",
+            "label": "Leaf"
+          },
+          {
+            "value": "flag",
+            "label": "Flag"
+          },
+          {
+            "value": "hand_heart",
+            "label": "Hand heart"
+          }
+        ],
+        "default": "certified"
+      },
+      {
+        "type": "text",
+        "id": "cart_trust3_text",
+        "label": "Text 3",
+        "default": "FDA-notified products"
       }
     ]
   },

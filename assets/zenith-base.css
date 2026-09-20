@@ -700,6 +700,77 @@ html.js menu-drawer > details > summary::before {
   opacity: 0.65;
 }
 
+/* ---------- Cart drawer: free-shipping progress (snippets/zenith-cart-shipping-bar.liquid) ----------
+   Sits under the fixed drawer header, so it stays in view while the item list scrolls. */
+.zenith-cart-ship {
+  padding: var(--z-space-3, 12px) 0 var(--z-space-4, 16px);
+  border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.15);
+}
+
+.zenith-cart-ship__text {
+  display: flex;
+  align-items: center;
+  gap: var(--z-space-2, 8px);
+  margin: 0 0 var(--z-space-2, 8px);
+  font-size: 1.3rem;
+  line-height: 1.3;
+}
+
+.zenith-cart-ship__icon {
+  width: 1.6rem;
+  height: 1.6rem;
+  flex: 0 0 auto;
+  color: var(--z-dawn-gold, #eabe5f);
+}
+
+.zenith-cart-ship__track {
+  height: 0.5rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background: rgba(var(--color-foreground), 0.15);
+}
+
+.zenith-cart-ship__fill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--z-dawn-gold, #eabe5f) 0%, var(--z-gold, #c59300) 100%);
+  transition: width 0.4s ease;
+}
+
+.zenith-cart-ship--unlocked .zenith-cart-ship__text {
+  color: var(--z-dawn-gold, #eabe5f);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zenith-cart-ship__fill { transition: none; }
+}
+
+/* ---------- Cart drawer: reassurance under Checkout (snippets/zenith-cart-trust.liquid) ---------- */
+.zenith-cart-trust {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--z-space-2, 8px) var(--z-space-4, 16px);
+  margin: var(--z-space-3, 12px) 0 0;
+  padding: 0;
+}
+
+.zenith-cart-trust__item {
+  display: flex;
+  align-items: center;
+  gap: var(--z-space-1, 4px);
+  font-size: 1.2rem;
+  line-height: 1.3;
+  opacity: 0.85;
+}
+
+.zenith-cart-trust__icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex: 0 0 auto;
+  color: var(--z-dawn-gold, #eabe5f);
+}
+
 /* Store-wide promotion switch (snippets/zenith-promo-state.liquid): hidden, but kept in the HTML for crawlers. */
 .zenith-promo-hidden { display: none !important; }
 

@@ -126,7 +126,7 @@
   </div>
 </section>
 {%- endcapture -%}
-{{- zenith_body | replace: '[customers]', settings.customer_count -}}
+{%- render 'zenith-tokens', body: zenith_body -%}
 
 {% schema %}
 {
