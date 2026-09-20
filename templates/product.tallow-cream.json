@@ -71,7 +71,7 @@
           "type": "trust",
           "settings": {
             "icon": "map",
-            "text": "Free Shipping ₱1,200+"
+            "text": "Free Shipping [free_shipping]+"
           }
         },
         "trust_3": {
@@ -1368,7 +1368,7 @@
           "type": "trust",
           "settings": {
             "icon": "truck",
-            "text": "Free Shipping ₱1,200+"
+            "text": "Free Shipping [free_shipping]+"
           }
         },
         "trust_3": {
