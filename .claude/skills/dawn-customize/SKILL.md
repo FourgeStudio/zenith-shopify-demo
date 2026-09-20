@@ -82,7 +82,8 @@ Rules:
 ## 6. Layout consistency (desktop / tablet / mobile)
 - Spacing scale only (CSS vars in `assets/zenith-base.css`): `--z-space-1:4px 2:8px 3:12px 4:16px 5:24px 6:32px 7:48px 8:64px 9:96px`. No arbitrary px in CSS.
 - Container: Dawn `.page-width` (uses `page_width` setting) — never custom max-widths.
-- Breakpoints: Dawn's `749px`/`750px` and `989px`/`990px` only. Mobile-first CSS.
+- Breakpoints: Dawn's `749px`/`750px` and `989px`/`990px` for layout. Mobile-first CSS.
+- **Small phones: `@media screen and (max-width: 375px)`.** When a fix is only about text running out of room on a narrow phone, scope it there — never widen it to 749px, which would change the layout at sizes that have room to spare. Layout structure still uses the Dawn breakpoints above. Check descendants for their own alignment when you flip a parent (e.g. `.zenith-footer__legal` sets `justify-content: flex-end`, `margin-left: auto` and `text-align: right`).
 - Section vertical padding: settings, desktop value × 0.75 on mobile (pattern above).
 - Grid gaps: `var(--grid-desktop-horizontal-spacing)` / `--grid-mobile-*` from Dawn settings.
 - Headings use brand type scale vars (`--z-h1`…), buttons use Dawn `.button` classes → consistent everywhere.
