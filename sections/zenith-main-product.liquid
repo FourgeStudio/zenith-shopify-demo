@@ -137,6 +137,8 @@
   --z-mp-trust-icon: {{ s.trust_icon_size }}px;
   --z-mp-trust-gap: {{ s.trust_gap }}px;
   --z-mp-trust-rgap: {{ s.trust_row_gap }}px;
+  --z-mp-rows-sp: {{ s.rows_spacing }}px;
+  --z-mp-rows-sp-m: {{ s.rows_spacing_mobile }}px;
   --z-mp-row-tfs: {{ s.row_text_font_size }}px;
   --z-mp-row-tfs-m: {{ s.row_text_font_size_mobile }}px;
   --z-mp-row-icon: {{ s.row_icon_color }};
@@ -754,6 +756,7 @@
     { "type": "range", "id": "delivery_icon_size", "label": "Delivery icon size", "min": 12, "max": 36, "step": 1, "unit": "px", "default": 20 },
     { "type": "range", "id": "trust_icon_size", "label": "Trust icon size", "min": 10, "max": 32, "step": 1, "unit": "px", "default": 18 },
     { "type": "range", "id": "trust_gap", "label": "Space between trust items", "min": 2, "max": 40, "step": 1, "unit": "px", "default": 10 },
+    { "type": "range", "id": "rows_spacing", "label": "Space above the accordion", "min": 0, "max": 80, "step": 1, "unit": "px", "default": 18 },
     { "type": "range", "id": "trust_row_gap", "label": "Space between trust rows", "min": 2, "max": 32, "step": 1, "unit": "px", "default": 8 },
     { "type": "range", "id": "item_padding", "label": "Accordion row padding", "min": 4, "max": 40, "step": 1, "unit": "px", "default": 12 },
     { "type": "range", "id": "icon_size", "label": "Accordion icon size", "min": 10, "max": 32, "step": 1, "unit": "px", "default": 16 },
@@ -866,6 +869,7 @@
     { "type": "range", "id": "trust_font_size_mobile", "label": "Trust item size", "min": 9, "max": 18, "step": 1, "unit": "px", "default": 13 },
     { "type": "range", "id": "title_font_size_mobile", "label": "Accordion title size", "min": 12, "max": 28, "step": 1, "unit": "px", "default": 18 },
     { "type": "range", "id": "row_text_font_size_mobile", "label": "Accordion text size", "min": 11, "max": 22, "step": 1, "unit": "px", "default": 15 },
+    { "type": "range", "id": "rows_spacing_mobile", "label": "Space above the accordion", "min": 0, "max": 80, "step": 1, "unit": "px", "default": 40 },
     { "type": "range", "id": "item_padding_mobile", "label": "Accordion row padding", "min": 4, "max": 40, "step": 1, "unit": "px", "default": 14 },
     { "type": "range", "id": "icon_size_mobile", "label": "Accordion icon size", "min": 10, "max": 32, "step": 1, "unit": "px", "default": 16 },
 

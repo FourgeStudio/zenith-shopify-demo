@@ -279,7 +279,7 @@
         "delivery_icon_size": 20,
         "trust_icon_size": 18,
         "trust_gap": 10,
-        "trust_row_gap": 8,
+        "trust_row_gap": 12,
         "item_padding": 12,
         "icon_size": 16,
         "color_scheme": "scheme-1",
@@ -355,12 +355,14 @@
         "trust_font_size_mobile": 13,
         "title_font_size_mobile": 18,
         "row_text_font_size_mobile": 15,
-        "item_padding_mobile": 14,
+        "item_padding_mobile": 18,
         "icon_size_mobile": 16,
         "padding_top": 40,
         "padding_bottom": 64,
         "padding_top_mobile": 8,
-        "padding_bottom_mobile": 32
+        "padding_bottom_mobile": 32,
+        "rows_spacing": 18,
+        "rows_spacing_mobile": 41
       }
     },
     "videos": {
@@ -593,7 +595,7 @@
         "gap_mobile": 24,
         "play_position_mobile": 57,
         "quote_align_mobile": "top",
-        "body_min_height_mobile": 232,
+        "body_min_height_mobile": 248,
         "thumb_size_mobile": 56,
         "text_font_size_mobile": 16,
         "title_font_size_mobile": 12,

@@ -587,6 +587,8 @@
 
 /* Accordion rows — assets/zenith-faq.css does the work; these vars retarget it */
 .zenith-mp__rows {
+  /* the flex gap already provides --z-cgap-m, so only add the remainder */
+  margin-top: calc(var(--z-mp-rows-sp-m, 40px) - var(--z-cgap-m, 12px));
   --z-tfs: var(--z-mp-row-tfs, 16px);
   --z-tfs-m: var(--z-mp-row-tfs-m, 15px);
   --z-cgap: 16px;
@@ -771,5 +773,11 @@
   .zenith-mp__fda {
     gap: 10px;
     padding: 0 4px;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .zenith-mp__rows {
+    margin-top: calc(var(--z-mp-rows-sp, 18px) - var(--z-cgap, 12px));
   }
 }
