@@ -54,7 +54,7 @@
         "seal_link": "",
         "bottom_text": "TryZenith PH",
         "copyright_text": "© [year] Amare Group Inc. All rights reserved.",
-        "show_policy": true,
+        "show_policy": false,
         "show_powered_by": false,
         "newsletter_enable": false,
         "newsletter_heading": "Subscribe to our emails",
