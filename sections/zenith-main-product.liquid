@@ -144,7 +144,7 @@
 {%- endcapture -%}
 {%- render 'zenith-section-style', section: section, extra: extra -%}
 
-<section id="Zenith-{{ section.id }}" class="zenith-section zenith-mp color-{{ s.color_scheme }} gradient">
+<section id="Zenith-{{ section.id }}" class="zenith-section zenith-mp zenith-mp--chip-{{ s.badge_align | default: 'after' }} color-{{ s.color_scheme }} gradient">
   {%- if mp_product != blank -%}
     <script type="application/ld+json">
       {{ mp_product | structured_data }}
@@ -714,6 +714,16 @@
     { "type": "range", "id": "form_gap", "label": "Space between quantity and button", "min": 0, "max": 40, "step": 1, "unit": "px", "default": 13 },
     { "type": "range", "id": "badge_height", "label": "Price badge height", "min": 14, "max": 40, "step": 2, "unit": "px", "default": 20 },
     { "type": "range", "id": "badge_padding", "label": "Price badge side padding", "min": 4, "max": 40, "step": 1, "unit": "px", "default": 15 },
+    {
+      "type": "select",
+      "id": "badge_align",
+      "label": "Price badge position",
+      "default": "after",
+      "options": [
+        { "value": "after", "label": "After the price" },
+        { "value": "right", "label": "Right edge of the column" }
+      ]
+    },
     {
       "type": "range",
       "id": "badge_spacing",

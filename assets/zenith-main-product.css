@@ -680,9 +680,10 @@
     gap: var(--z-cgap, 12px);
   }
 
-  .zenith-mp__checks { order: 60; }
-  .zenith-mp__fda { order: 70; }
-  .zenith-mp__form { order: 80; }
+  /* desktop follows the same order as phones: quantity + Add to cart, FDA bar, checklist */
+  .zenith-mp__form { order: 60; }
+  .zenith-mp__fda { order: 65; }
+  .zenith-mp__checks { order: 70; }
 
   .zenith-mp__rating .zenith-stars__icons svg {
     width: var(--z-mp-star, 22px);
@@ -711,6 +712,10 @@
 
   .zenith-mp__chip {
     margin-left: var(--z-mp-chip-sp, 36px);
+  }
+
+  .zenith-mp--chip-right .zenith-mp__chip {
+    margin-left: auto;
   }
 
   .zenith-mp__variant {
