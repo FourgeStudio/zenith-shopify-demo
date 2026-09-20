@@ -176,7 +176,7 @@
       ],
       "settings": {
         "content_source": "global",
-        "product_filter": "page",
+        "product_filter": "all",
         "filter_products": [],
         "eyebrow": "",
         "heading": "Clinically Proven. The Complete Regimen.",
@@ -407,11 +407,11 @@
         "text_font_size": 15,
         "used_font_size": 16,
         "thumb_size": 80,
-        "heading_alignment_mobile": "left",
+        "heading_alignment_mobile": "center",
         "heading_font_size_mobile": 36,
         "subheading_font_size_mobile": 16,
-        "heading_spacing_mobile": 16,
-        "image_width_mobile": 100,
+        "heading_spacing_mobile": 28,
+        "image_width_mobile": 116,
         "gap_mobile": 12,
         "title_font_size_mobile": 16,
         "text_font_size_mobile": 14,
@@ -425,7 +425,9 @@
         "padding_bottom_mobile": 0,
         "show_number": true,
         "step_layout": "beside",
-        "image_width": 152
+        "image_width": 152,
+        "number_size_mobile": 32,
+        "number_font_size_mobile": 16
       }
     },
     "reviews": {
