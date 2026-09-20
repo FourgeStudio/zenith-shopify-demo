@@ -57,7 +57,15 @@
             class: 'zenith-compare__logo'
         }}
       {%- else -%}
-        <span class="zenith-compare__logo-text">{{ zenith_label | escape }}</span>
+        {%- comment -%} zenith: bundled wordmark until Theme settings → Zenith column logo is set (same fallback as the header) {%- endcomment -%}
+        <img
+          src="{{ 'header-logo.png' | asset_url }}"
+          alt="{{ zenith_label | escape }}"
+          width="104"
+          height="28"
+          loading="lazy"
+          class="zenith-compare__logo"
+        >
       {%- endif -%}
     {%- endcapture -%}
 
