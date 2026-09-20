@@ -385,8 +385,14 @@
           vars: zenith_policy_vars
         -%}
       {%- endif -%}
-      {%- comment -%} zenith: [customers] in any page content → Theme settings → Zenith → Customer count {%- endcomment -%}
-      {{ content_for_layout | slice: 0, zenith_layout_length | replace: '[customers]', settings.customer_count }}
+      {%- comment -%}
+        zenith: [customers] in any page content → Theme settings → Zenith → Customer count.
+        Shopify's sync validator wants a plain {{ content_for_layout }} in the body: with filters on the tag
+        itself a full reimport fails with "Missing {{content_for_layout}}", so it is captured first and the
+        CAPTURE is filtered (a policy page slices it to nothing - see the note above).
+      {%- endcomment -%}
+      {%- capture zenith_page_content -%}{{ content_for_layout }}{%- endcapture -%}
+      {{ zenith_page_content | slice: 0, zenith_layout_length | replace: '[customers]', settings.customer_count }}
     </main>
 
     {% sections 'footer-group' %}
