@@ -1,6 +1,6 @@
 # Zenith Shopify — project status
 
-_Last updated: 2026-09-20. Keep this file current at the end of each work session; it is the handoff doc._
+_Last updated: 2026-09-21. Keep this file current at the end of each work session; it is the handoff doc._
 
 ## Where things stand
 - Theme: Dawn 16.0.0 + custom `zenith-*` sections. Store `tryzenith.ph` (Zenith Philippines).
@@ -76,6 +76,22 @@ _Last updated: 2026-09-20. Keep this file current at the end of each work sessio
   - Blog: featured image + excerpt per article; Terms of Service + Privacy Policy pages exist (newsletter small print links /policies/…).
   - Confirm: Verify trust list (mobile design lists 3 items incl. "Actives at Working Strength", desktop 5 — using 5); FAQ mobile subheading copy differs ("Straight answers about the daily essentials every man needs.").
 
+### Product page — Tallow Cream (built 2026-09-21, `templates/product.tallow-cream.json`)
+- Design `design/Product Page/tallow-cream/` (map in `design/README.md`). **Per-product templates**: every product gets its own design, so this is an alternate template; the default `templates/product.json` is still Dawn's.
+- Section order: **main** (new Zenith · Product page) → videos → **ingredients** (new) → difference (Before & after, 4 cards) → routine ("Two minutes at night") → **compare** (new) → reviews (Judge.me) → guarantee → money back → FAQ → closing CTA (Hero).
+- **Zenith · Product page** (`sections/zenith-main-product.liquid` + css + js) replaces Dawn's `main-product` on this template: gallery carousel (dots inside the image, thumbnail row that scrolls the carousel, edge-to-edge with peek on phones), mini **review strip** (Theme settings → Zenith · Results reviews, or the section's own blocks), rating from Judge.me (`product.metafields.reviews.rating`) with a manual fallback, title, price + teal discount chip, checklist blocks, FDA bar (logo + label + number), quantity stepper + Add to cart (`product-form.js`), payment row (Shopify's store payment icons or an image), Nationwide Delivery box, 4 trust items, and accordion rows (per row: custom text or the product description, hide on mobile/desktop). Variants render only when the product has real options. Mobile reorders the buy box (ATC above the FDA bar + checklist) with CSS `order`, and the section paints the design's top fade (#191919 → page background).
+- **Zenith · Ingredients** ("Why it works differently"): thumbnail accordion + product photo, separate full-ingredient-list card; photo above the list on phones. Desktop lists 4 ingredients, the mobile design lists 3 with longer titles → desktop copy is the default, each item has an optional mobile title.
+- **Zenith · Comparison table** ("Why guys switch to Zenith"): highlighted Zenith column (wordmark image) + 3 competitor columns on desktop; on phones the Zenith table first, then one stacked table per competitor. Rows are blocks.
+- Shared pieces added for this page: `thumbs_up` / `certificate` / `farm` / `dropper` / `minus` / `map` icons moved into `snippets/zenith-icon.liquid` (they were inline in the trust bar, so every other section rendered a blank circle for them); **Zenith · Routine steps** gained a "photo beside the text" desktop layout, numbered steps and a phones-only divider; **Zenith · Hero** gained trust blocks under the button, a Button icon setting and a **split desktop layout** (teal panel + photo inside the page margins) used by the closing CTA; **Before & after** gained a note line above the footnote.
+- Section spacing comes from the design: the whitespace between every pair of sections was measured (`scratchpad/gaps.ps1` pattern — scan the PNG for rows where nothing is drawn) and the paddings set to match within 2–3px, desktop and mobile.
+- Verified with static mocks at 1440 and 401 against the design crops. **Not yet eyeballed on the store.**
+- Client:
+  - Assign the **tallow-cream** template to "Zenith Anti-Aging Tallow Cream" (Admin → Products → Theme template) — on publish day, like the other pages.
+  - Product images: the gallery uses the product's own media (first image eager). The design shows 6 thumbnails; upload at least that many.
+  - Uploads: FDA logo for the bar, payment icons image (or leave it on Shopify's store icons), ingredient thumbnails (4) + the product photo for "Why it works differently", before/after pairs (4), routine step photos (3), the Zenith wordmark for the comparison table, closing CTA photo.
+  - Copy to confirm: the accordion answers ("How long will one jar last?", "Will this make my face greasy in the heat?", "When will I see results?", "Is it safe for sensitive skin?", plus the mobile rows How to use / What's inside / Zenith guarantee / FAQs are empty), the before/after captions ("Short summary of the results"), the note under the cards ("Short Description") and the closing CTA line ("Short description about the final cta goes here") are the design's placeholders.
+  - Decisions made from the design: the video carousel shows videos for **all** products (the design's cards are from four different products) with the desktop heading "Clinically Proven. The Complete Regimen." and the mobile one "A Complete Routine, Built for Men."; the closing CTA button uses the cart icon (mobile design) though the desktop crop shows an arrow.
+
 ### 1. Verify on the store (next task)
 - Open the preview of the `main` theme at 1440 / 768 / 375 and compare to `design/homepage/`. Agents measured static mocks; real Liquid output, Judge.me markup and the cart drawer are unverified.
 - Tablet (750–989) was not designed — check it looks sane.
@@ -94,7 +110,7 @@ _Last updated: 2026-09-20. Keep this file current at the end of each work sessio
 - [ ] Decide: featured-product check colour (desktop design orange #EF931C vs mobile #EABE5F — using #EABE5F).
 
 ### 3. Not started
-- [ ] **Product page = next task.** Design in `design/Product Page/tallow-cream/`; on hold until the user clarifies details with the client (2026-09-20). Run `design-to-page` once confirmed.
+- [ ] Product pages for the **other products** (each gets its own design; the tallow cream is done). Default `templates/product.json` is still Dawn's.
 - [ ] Default collection template (other collections), cart, search pages (404 done 2026-09-20). (Contact + About done 2026-09-18, Shop All 2026-09-19, Skin + Hair + Verify + Certificates + Blog/Article + Thank-you pages 2026-09-20.)
 - [ ] Analytics/pixels, SEO metafields, shipping/policy pages.
 - [ ] Performance + a11y pass (Lighthouse on preview), then publish `main` theme.

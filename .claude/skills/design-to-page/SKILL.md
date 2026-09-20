@@ -20,7 +20,7 @@ Workflow that took the homepage from "not accurate" to within 1–3px of the des
 3. Read every slice top to bottom, then every `guide*.png`. Designer notes are requirements (they produced: global customer count, before/after card, sale hero, countdown seconds).
 4. Map every crop → section (template key or group). **Reuse existing sections first** (`ls sections/zenith-*`): add an existing section to the template and set it up before building anything new. Build a new section only when the layout needs pieces side by side that Shopify can't stack as separate sections (e.g. contact details + FAQ beside a form) — and then reuse the shared snippets inside it. Ambiguous crops: view them; small unnamed frames are often device chrome ("MOBILE NAV AREA"). Write the map into `design/README.md`.
 5. Note desktop↔mobile differences per section: order, hidden sections, different copy, alignment, card counts.
-6. Measure page-level facts with `scripts/measure.ps1` (colours at points, row/column run lengths, zoomed crops): page bg, gutters (content edge at 1440 and mobile), header/footer colours, card gradients, eyebrow colour, button fills, carousel controls.
+6. Measure section gaps with `scripts/gaps.ps1` (rows where nothing is drawn across the content band = prev `padding_bottom` + next `padding_top`; run it on the desktop AND mobile page) and page-level facts with `scripts/measure.ps1` (colours at points, row/column run lengths, zoomed crops): page bg, gutters (content edge at 1440 and mobile), header/footer colours, card gradients, eyebrow colour, button fills, carousel controls.
 
 ## 2. Shared pieces FIRST (lead, before any agent starts)
 Anything two sections share is built once by the lead, so agents don't diverge:
