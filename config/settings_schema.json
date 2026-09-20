@@ -2851,6 +2851,10 @@
             "label": "Phone"
           },
           {
+            "value": "phone_call",
+            "label": "Phone call"
+          },
+          {
             "value": "qr",
             "label": "QR code"
           },
@@ -2954,6 +2958,10 @@
           {
             "value": "phone",
             "label": "Phone"
+          },
+          {
+            "value": "phone_call",
+            "label": "Phone call"
           },
           {
             "value": "qr",
@@ -3061,6 +3069,10 @@
             "label": "Phone"
           },
           {
+            "value": "phone_call",
+            "label": "Phone call"
+          },
+          {
             "value": "qr",
             "label": "QR code"
           },
@@ -3164,6 +3176,10 @@
           {
             "value": "phone",
             "label": "Phone"
+          },
+          {
+            "value": "phone_call",
+            "label": "Phone call"
           },
           {
             "value": "qr",
