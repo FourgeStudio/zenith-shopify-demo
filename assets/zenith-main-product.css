@@ -1,0 +1,770 @@
+/* Zenith · Product page header (buy box) — sections/zenith-main-product.liquid.
+   Mobile first; per-instance values are CSS vars on #Zenith-{section.id} (snippets/zenith-section-style.liquid).
+   Accordion rows reuse assets/zenith-faq.css; the vars it reads are redefined on .zenith-mp__rows. */
+
+.zenith-mp.gradient,
+.zenith-mp {
+  background: linear-gradient(180deg, var(--z-mp-top, #191919) 0, rgb(var(--color-background)) var(--z-mp-fade, 1200px));
+  background-attachment: scroll;
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+.zenith-mp__grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--z-gap-m, 18px);
+  max-width: var(--z-cmw, 1080px);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ---------- Gallery ---------- */
+.zenith-mp__gallery {
+  container-type: inline-size;
+  min-width: 0;
+}
+
+.zenith-mp__media {
+  aspect-ratio: 100 / var(--z-mp-ratio-m, 100);
+  background: var(--z-mp-media-bg, #fff);
+}
+
+.zenith-mp__media > img {
+  object-fit: contain;
+  padding: var(--z-ipd, 0);
+}
+
+.zenith-mp__media > .placeholder-svg {
+  background: var(--z-mp-media-bg, #fff);
+}
+
+/* Track bleeds to the screen edges on mobile; scroll padding centres the active slide so the
+   neighbours peek on both sides (design: 280px slide in a 401px screen). */
+.zenith-mp__track {
+  gap: var(--z-mp-sgap-m, 30px);
+  margin-left: calc((100cqi - 100vw) / 2);
+  margin-right: calc((100cqi - 100vw) / 2);
+  padding-left: calc((100vw - var(--z-mp-slw-m, 70) * 1vw) / 2);
+  padding-right: calc((100vw - var(--z-mp-slw-m, 70) * 1vw) / 2);
+  scroll-padding-left: calc((100vw - var(--z-mp-slw-m, 70) * 1vw) / 2);
+  scroll-padding-right: calc((100vw - var(--z-mp-slw-m, 70) * 1vw) / 2);
+}
+
+.zenith-mp__slide {
+  flex: 0 0 calc(var(--z-mp-slw-m, 70) * 1vw);
+}
+
+@supports not (width: 1cqi) {
+  .zenith-mp__track {
+    margin: 0;
+    padding: 0;
+    scroll-padding: 0;
+  }
+
+  .zenith-mp__slide {
+    flex-basis: 100%;
+  }
+}
+
+/* Dots sit inside the bottom of the image */
+.zenith-mp__gallery .zenith-carousel__controls {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: var(--z-mp-dotb-m, 8px);
+  margin: 0;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.zenith-mp__gallery .zenith-carousel__dots {
+  gap: var(--z-mp-dotg-m, 10px);
+  pointer-events: auto;
+}
+
+.zenith-mp__gallery .zenith-carousel__dot {
+  width: var(--z-mp-dot-m, 7px);
+  height: var(--z-mp-dot-m, 7px);
+  background: var(--z-mp-dot-c, #c5c5c6);
+}
+
+.zenith-mp__gallery .zenith-carousel__dot[aria-current='true'] {
+  width: var(--z-mp-dotw-m, 60px);
+  background: var(--z-mp-dot-ac, #010101);
+}
+
+/* Thumbnails + review strip: scrolling rows that run to the screen edge on mobile */
+.zenith-mp__bleed {
+  margin-left: calc((100cqi - 100vw) / 2);
+  margin-right: calc((100cqi - 100vw) / 2);
+  padding-left: calc((100vw - 100cqi) / 2);
+  padding-right: calc((100vw - 100cqi) / 2);
+  scroll-padding-left: calc((100vw - 100cqi) / 2);
+  scroll-padding-right: calc((100vw - 100cqi) / 2);
+}
+
+@supports not (width: 1cqi) {
+  .zenith-mp__bleed {
+    margin: 0;
+    padding: 0;
+    scroll-padding: 0;
+  }
+}
+
+.zenith-mp__thumbs,
+.zenith-mp__reviews {
+  display: flex;
+  list-style: none;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.zenith-mp__thumbs::-webkit-scrollbar,
+.zenith-mp__reviews::-webkit-scrollbar {
+  display: none;
+}
+
+.zenith-mp__thumbs {
+  gap: var(--z-mp-thumb-gap-m, 6px);
+  margin: var(--z-mp-thumb-sp-m, 9px) 0 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.zenith-mp__thumb-item {
+  flex: 0 0 var(--z-mp-thumb-w-m, 75px);
+}
+
+.zenith-mp__thumb {
+  display: block;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  background: var(--z-mp-media-bg, #fff);
+  cursor: pointer;
+}
+
+.zenith-mp__thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.zenith-mp__thumb.is-active {
+  outline: 2px solid var(--z-mp-thumb-bd, #eabe5f);
+  outline-offset: -2px;
+}
+
+.zenith-mp__thumb:focus-visible {
+  outline: 2px solid rgb(var(--color-foreground));
+  outline-offset: 2px;
+}
+
+/* Review strip */
+.zenith-mp__reviews {
+  gap: var(--z-mp-rev-gap, 12px);
+  margin: var(--z-mp-rev-sp-m, 9px) 0 0;
+  scroll-snap-type: x mandatory;
+}
+
+.zenith-mp__review {
+  flex: 0 0 var(--z-mp-rev-w-m, 260px);
+  scroll-snap-align: start;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  background: var(--z-mp-rev-bg, #202020);
+}
+
+.zenith-mp__review-photo {
+  flex: 0 0 var(--z-mp-rev-photo, 48px);
+  aspect-ratio: 1 / 1;
+  background: #dbdbdb;
+}
+
+.zenith-mp__review-body {
+  min-width: 0;
+}
+
+.zenith-mp__review-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.zenith-mp__review-name {
+  font-size: var(--z-mp-rev-nfs, 16px);
+  font-weight: 500;
+  color: var(--z-mp-rev-name, #c59300);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.zenith-mp__review-head .zenith-stars__icons svg {
+  width: var(--z-mp-rev-star, 12px);
+  height: var(--z-mp-rev-star, 12px);
+}
+
+.zenith-mp__review-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: 4px 0 0;
+  font-size: var(--z-mp-rev-fs, 13px);
+  line-height: 1.35;
+  color: rgba(var(--color-foreground), 0.75);
+}
+
+/* ---------- Buy box ---------- */
+.zenith-mp__buy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--z-cgap-m, 12px);
+  min-width: 0;
+}
+
+.zenith-mp__rating { order: 10; }
+.zenith-mp__title { order: 20; }
+.zenith-mp__subtitle { order: 30; }
+.zenith-mp__price { order: 40; }
+.zenith-mp__variants { order: 50; }
+.zenith-mp__form { order: 60; }
+.zenith-mp__fda { order: 65; }
+.zenith-mp__checks { order: 70; }
+.zenith-mp__payments { order: 90; }
+.zenith-mp__delivery { order: 100; }
+.zenith-mp__trust { order: 110; }
+.zenith-mp__rows { order: 120; }
+
+/* Rating */
+.zenith-mp__rating {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.zenith-mp .zenith-stars__icons {
+  gap: 2.5px;
+  color: var(--z-mp-star-c, #eabe5f);
+}
+
+.zenith-mp__rating .zenith-stars__icons svg {
+  width: var(--z-mp-star-m, 14px);
+  height: var(--z-mp-star-m, 14px);
+}
+
+.zenith-mp__rating-label {
+  font-size: var(--z-mp-rfs-m, 13px);
+  line-height: 1.2;
+  color: rgba(var(--color-foreground), 0.85);
+}
+
+/* Title + short description */
+.zenith-mp__title {
+  margin: 0;
+  font-family: var(--font-heading-family);
+  font-weight: var(--font-heading-weight, 400);
+  font-size: var(--z-hfs-m, 32px);
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+
+.zenith-mp__subtitle {
+  font-size: var(--z-sfs-m, 17px);
+  line-height: 1.45;
+  color: rgba(var(--color-foreground), 0.8);
+}
+
+.zenith-mp__subtitle p {
+  margin: 0;
+}
+
+/* Price row */
+.zenith-mp__price {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.zenith-mp__price-current {
+  font-family: var(--font-heading-family);
+  font-weight: var(--font-heading-weight, 400);
+  font-size: var(--z-pfs-m, 32px);
+  line-height: 1.1;
+  color: var(--z-mp-price-c, #fff);
+}
+
+.zenith-mp__price-compare {
+  font-family: var(--font-heading-family);
+  font-weight: var(--font-heading-weight, 400);
+  font-size: var(--z-mp-cmp-fs-m, 20px);
+  line-height: 1.1;
+  color: var(--z-mp-cmp-c, #8e8c8c);
+}
+
+.zenith-mp__price-compare--hidden {
+  display: none;
+}
+
+.zenith-mp__chip {
+  display: inline-flex;
+  align-items: center;
+  margin-left: auto;
+  min-height: var(--z-mp-chip-h, 20px);
+  padding: 0 var(--z-mp-chip-pad, 15px);
+  border-radius: 999px;
+  background: var(--z-mp-chip-bg, #294850);
+  color: var(--z-mp-chip-fg, #fff);
+  font-size: var(--z-mp-chip-fs, 13px);
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+/* Variants (only rendered when the product has real options) */
+.zenith-mp__variants {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.zenith-mp__variant {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 16px;
+  background: var(--z-mp-bar-bg, #202020);
+  color: rgb(var(--color-foreground));
+  font-size: var(--z-tfs-m, 15px);
+  line-height: 1.2;
+  cursor: pointer;
+}
+
+.zenith-mp__variant-input:checked + .zenith-mp__variant {
+  background: var(--z-mp-chip-bg, #294850);
+  color: var(--z-mp-chip-fg, #fff);
+}
+
+.zenith-mp__variant-input:focus-visible + .zenith-mp__variant {
+  outline: 2px solid rgb(var(--color-foreground));
+  outline-offset: 2px;
+}
+
+/* Checklist */
+.zenith-mp__checks {
+  display: flex;
+  flex-direction: column;
+  gap: var(--z-mp-check-gap-m, 11px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.zenith-mp__check {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: var(--z-tfs-m, 15px);
+  line-height: 1.2;
+}
+
+.zenith-mp__check-icon {
+  width: var(--z-mp-check-m, 18px);
+  height: var(--z-mp-check-m, 18px);
+  color: var(--z-mp-check-c, #eabe5f);
+}
+
+/* FDA bar */
+.zenith-mp__fda {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 11px;
+  min-height: var(--z-mp-fda-h, 30px);
+  padding: 0 12px;
+  background: var(--z-mp-bar-bg, #202020);
+  font-size: var(--z-mp-fda-fs-m, 13px);
+  line-height: 1.2;
+}
+
+.zenith-mp__fda-logo {
+  display: block;
+  height: var(--z-mp-fda-img, 15px);
+  width: auto;
+}
+
+.zenith-mp__fda-number {
+  color: rgba(var(--color-foreground), 0.9);
+}
+
+/* Quantity + add to cart */
+.zenith-mp__form {
+  display: flex;
+  align-items: stretch;
+  gap: var(--z-mp-form-gap, 13px);
+}
+
+.zenith-mp__qty {
+  flex: 0 0 var(--z-mp-qty-w, 106px);
+  display: flex;
+  align-items: center;
+  background: var(--z-mp-bar-bg, #202020);
+}
+
+.zenith-mp__qty-btn {
+  flex: 0 0 40px;
+  height: var(--z-mp-btn-h, 46px);
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: rgb(var(--color-foreground));
+  cursor: pointer;
+}
+
+.zenith-mp__qty-btn svg {
+  width: 14px;
+  height: 14px;
+  stroke-width: 2;
+}
+
+.zenith-mp__qty-input {
+  flex: 1 1 auto;
+  width: 100%;
+  min-width: 0;
+  height: var(--z-mp-btn-h, 46px);
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: rgb(var(--color-foreground));
+  font-family: var(--font-body-family);
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.zenith-mp__qty-input:focus-visible {
+  outline: 2px solid rgb(var(--color-foreground));
+  outline-offset: -2px;
+}
+
+.zenith-mp__form product-form {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin-top: 0;
+}
+
+.zenith-mp__form .form {
+  height: 100%;
+}
+
+.button.zenith-mp__atc {
+  height: 100%;
+  min-height: var(--z-mp-btn-h, 46px);
+}
+
+/* Payments */
+.zenith-mp__payments {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--z-mp-pay-gap, 6px);
+}
+
+.zenith-mp__cod {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: calc(var(--z-mp-pay-h, 20px) + 2px);
+  padding: 0 8px;
+  background: var(--z-mp-bar-bg, #202020);
+  font-size: var(--z-mp-fda-fs-m, 13px);
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.zenith-mp__cod-icon {
+  width: 1em;
+  height: 1em;
+}
+
+.zenith-mp__pay {
+  display: flex;
+  align-items: center;
+  gap: var(--z-mp-pay-gap, 6px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.zenith-mp__pay svg,
+.zenith-mp__pay-image {
+  display: block;
+  width: auto;
+  height: var(--z-mp-pay-h, 20px);
+}
+
+/* Delivery box */
+.zenith-mp__delivery {
+  padding: var(--z-mp-del-pad, 8px) 12px;
+  background: var(--z-mp-del-bg, #112328);
+  text-align: center;
+}
+
+.zenith-mp__delivery-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 0;
+  font-size: var(--z-mp-del-tfs-m, 15px);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.zenith-mp__delivery-icon {
+  width: var(--z-mp-del-icon, 20px);
+  height: var(--z-mp-del-icon, 20px);
+  color: var(--z-mp-trust-c, #eabe5f);
+}
+
+.zenith-mp__delivery-text {
+  margin: 2px 0 0;
+  font-size: var(--z-mp-del-sfs-m, 13px);
+  line-height: 1.35;
+  color: rgba(var(--color-foreground), 0.8);
+}
+
+/* Trust items — two centred columns */
+.zenith-mp__trust {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, max-content));
+  justify-content: center;
+  justify-items: center;
+  column-gap: var(--z-mp-trust-gap, 10px);
+  row-gap: var(--z-mp-trust-rgap, 8px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.zenith-mp__trust-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--z-mp-trust-fs-m, 13px);
+  line-height: 1.2;
+  text-align: left;
+}
+
+.zenith-mp__trust-icon {
+  width: var(--z-mp-trust-icon, 18px);
+  height: var(--z-mp-trust-icon, 18px);
+  color: var(--z-mp-trust-c, #eabe5f);
+}
+
+/* Accordion rows — assets/zenith-faq.css does the work; these vars retarget it */
+.zenith-mp__rows {
+  --z-tfs: var(--z-mp-row-tfs, 16px);
+  --z-tfs-m: var(--z-mp-row-tfs-m, 15px);
+  --z-cgap: 16px;
+  --z-cgap-m: 14px;
+  --z-faq-div: var(--z-mp-row-div, 0.07);
+  --z-faq-icon: var(--z-mp-row-icon, #eabe5f);
+  --z-faq-ans: 0.75;
+}
+
+.zenith-mp__row-title.zenith-faq__question {
+  font-family: var(--font-body-family);
+  font-weight: 600;
+  line-height: 1.35;
+  gap: 24px;
+}
+
+.zenith-mp__row .zenith-faq__answer p {
+  margin: 0 0 0.8em;
+}
+
+.zenith-mp__row .zenith-faq__answer p:last-child {
+  margin-bottom: 0;
+}
+
+/* ---------- Desktop ---------- */
+@media screen and (min-width: 750px) {
+  .zenith-mp__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--z-gap, 80px);
+    align-items: start;
+  }
+
+  .zenith-mp__media {
+    aspect-ratio: 100 / var(--z-mp-ratio, 108);
+  }
+
+  .zenith-mp__track {
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    scroll-padding: 0;
+  }
+
+  .zenith-mp__slide {
+    flex-basis: 100%;
+  }
+
+  .zenith-mp__gallery .zenith-carousel__controls {
+    bottom: var(--z-mp-dotb, 21px);
+  }
+
+  .zenith-mp__gallery .zenith-carousel__dots {
+    gap: var(--z-mp-dotg, 4px);
+  }
+
+  .zenith-mp__gallery .zenith-carousel__dot {
+    width: var(--z-mp-dot, 8px);
+    height: var(--z-mp-dot, 8px);
+  }
+
+  .zenith-mp__gallery .zenith-carousel__dot[aria-current='true'] {
+    width: var(--z-mp-dotw, 40px);
+  }
+
+  .zenith-mp__bleed {
+    margin: 0;
+    padding: 0;
+    scroll-padding: 0;
+  }
+
+  .zenith-mp__thumbs {
+    gap: var(--z-mp-thumb-gap, 8px);
+    margin-top: var(--z-mp-thumb-sp, 8px);
+  }
+
+  .zenith-mp__thumb-item {
+    flex: 0 0 calc((100% - (var(--z-mp-thumbs, 6) - 1) * var(--z-mp-thumb-gap, 8px)) / var(--z-mp-thumbs, 6));
+  }
+
+  .zenith-mp__reviews {
+    gap: var(--z-mp-rev-gap, 12px);
+    margin-top: var(--z-mp-rev-sp, 38px);
+  }
+
+  .zenith-mp__review {
+    flex-basis: var(--z-mp-rev-w, 220px);
+  }
+
+  .zenith-mp__buy {
+    gap: var(--z-cgap, 12px);
+  }
+
+  .zenith-mp__checks { order: 60; }
+  .zenith-mp__fda { order: 70; }
+  .zenith-mp__form { order: 80; }
+
+  .zenith-mp__rating .zenith-stars__icons svg {
+    width: var(--z-mp-star, 22px);
+    height: var(--z-mp-star, 22px);
+  }
+
+  .zenith-mp__rating-label {
+    font-size: var(--z-mp-rfs, 16px);
+  }
+
+  .zenith-mp__title {
+    font-size: var(--z-hfs, 42px);
+  }
+
+  .zenith-mp__subtitle {
+    font-size: var(--z-sfs, 17px);
+  }
+
+  .zenith-mp__price-current {
+    font-size: var(--z-pfs, 36px);
+  }
+
+  .zenith-mp__price-compare {
+    font-size: var(--z-mp-cmp-fs, 22px);
+  }
+
+  .zenith-mp__chip {
+    margin-left: var(--z-mp-chip-sp, 36px);
+  }
+
+  .zenith-mp__variant {
+    font-size: var(--z-tfs, 16px);
+  }
+
+  .zenith-mp__checks {
+    gap: var(--z-mp-check-gap, 12px);
+  }
+
+  .zenith-mp__check {
+    font-size: var(--z-tfs, 16px);
+  }
+
+  .zenith-mp__check-icon {
+    width: var(--z-mp-check, 20px);
+    height: var(--z-mp-check, 20px);
+  }
+
+  .zenith-mp__fda,
+  .zenith-mp__cod {
+    font-size: var(--z-mp-fda-fs, 14px);
+  }
+
+  .zenith-mp__delivery-title {
+    font-size: var(--z-mp-del-tfs, 16px);
+  }
+
+  .zenith-mp__delivery-text {
+    font-size: var(--z-mp-del-sfs, 14px);
+  }
+
+  .zenith-mp__trust-item {
+    font-size: var(--z-mp-trust-fs, 14px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zenith-mp__thumbs,
+  .zenith-mp__reviews {
+    scroll-behavior: auto;
+  }
+}
+
+/* Phones: the price chip sits on the price line (design: 12px text, 10px padding) */
+@media screen and (max-width: 749px) {
+  .zenith-mp__chip {
+    padding: 0 var(--z-mp-chip-pad-m, 10px);
+    font-size: var(--z-mp-chip-fs-m, 12px);
+  }
+
+  /* the bar is centered, so its side padding is invisible - keep the row on one line */
+  .zenith-mp__fda {
+    gap: 10px;
+    padding: 0 4px;
+  }
+}

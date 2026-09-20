@@ -1,0 +1,967 @@
+{%- comment -%}
+  zenith: product page header (buy box). Replaces Dawn's main-product on alternate product templates.
+  [customers] anywhere in this section shows Theme settings → Zenith → Customer count.
+{%- endcomment -%}
+{%- capture zenith_body -%}
+{%- liquid
+  assign s = section.settings
+  assign mp_product = product
+  assign form_id = 'ZenithMp-' | append: section.id
+
+  assign gallery_media = mp_product.media | where: 'media_type', 'image'
+
+  # Rating: Judge.me metafields when present, else the section's own numbers.
+  assign rating_value = s.rating_value
+  assign rating_count = s.rating_count
+  if mp_product.metafields.reviews.rating.value != blank
+    assign rating_value = mp_product.metafields.reviews.rating.value.rating
+    assign rating_count = mp_product.metafields.reviews.rating_count.value
+  endif
+  assign rating_label = s.rating_label | replace: '[rating]', rating_value | replace: '[count]', rating_count
+
+  assign benefit_blocks = section.blocks | where: 'type', 'benefit'
+  assign trust_blocks = section.blocks | where: 'type', 'trust'
+  assign row_blocks = section.blocks | where: 'type', 'row'
+  assign review_blocks = section.blocks | where: 'type', 'review'
+
+  # Review strip source: global slots rv1…rv20 (Theme settings → Zenith · Results reviews) or this section's blocks.
+  assign review_total = 0
+  if s.reviews_source == 'global'
+    for n in (1..20)
+      assign p = 'rv' | append: n | append: '_'
+      assign k_image = p | append: 'image'
+      assign k_quote = p | append: 'quote'
+      assign k_author = p | append: 'author'
+      if settings[k_image] != blank or settings[k_quote] != blank or settings[k_author] != blank
+        assign review_total = review_total | plus: 1
+      endif
+    endfor
+  elsif s.reviews_source == 'blocks'
+    assign review_total = review_blocks.size
+  endif
+
+  assign has_variants = false
+  if mp_product != blank and mp_product.has_only_default_variant == false
+    assign has_variants = true
+  endif
+  assign current_variant = mp_product.selected_or_first_available_variant
+-%}
+{{ 'zenith-main-product.css' | asset_url | stylesheet_tag }}
+{{ 'zenith-faq.css' | asset_url | stylesheet_tag }}
+{%- if s.payment_icons == 'shop' -%}
+  {{ 'component-list-payment.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
+<script src="{{ 'zenith-carousel.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'zenith-faq.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'zenith-main-product.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+
+{%- capture extra -%}
+  --z-mp-top: {{ s.top_color }};
+  --z-mp-fade: {{ s.fade_height }}px;
+  --z-mp-media-bg: {{ s.media_background }};
+  --z-mp-ratio: {{ s.gallery_ratio }};
+  --z-mp-ratio-m: {{ s.gallery_ratio_mobile }};
+  --z-mp-slw-m: {{ s.slide_width_mobile }};
+  --z-mp-sgap-m: {{ s.slide_gap_mobile }}px;
+  --z-mp-dot: {{ s.dot_size }}px;
+  --z-mp-dot-m: {{ s.dot_size_mobile }}px;
+  --z-mp-dotw: {{ s.dot_width }}px;
+  --z-mp-dotw-m: {{ s.dot_width_mobile }}px;
+  --z-mp-dotg: {{ s.dot_gap }}px;
+  --z-mp-dotg-m: {{ s.dot_gap_mobile }}px;
+  --z-mp-dotb: {{ s.dot_offset }}px;
+  --z-mp-dotb-m: {{ s.dot_offset_mobile }}px;
+  --z-mp-dot-c: {{ s.dot_color }};
+  --z-mp-dot-ac: {{ s.dot_active_color }};
+  --z-mp-thumbs: {{ s.thumb_count }};
+  --z-mp-thumb-gap: {{ s.thumb_gap }}px;
+  --z-mp-thumb-gap-m: {{ s.thumb_gap_mobile }}px;
+  --z-mp-thumb-w-m: {{ s.thumb_width_mobile }}px;
+  --z-mp-thumb-sp: {{ s.thumb_spacing }}px;
+  --z-mp-thumb-sp-m: {{ s.thumb_spacing_mobile }}px;
+  --z-mp-thumb-bd: {{ s.thumb_active_color }};
+  --z-mp-rev-w: {{ s.review_card_width }}px;
+  --z-mp-rev-w-m: {{ s.review_card_width_mobile }}px;
+  --z-mp-rev-gap: {{ s.review_gap }}px;
+  --z-mp-rev-sp: {{ s.review_spacing }}px;
+  --z-mp-rev-sp-m: {{ s.review_spacing_mobile }}px;
+  --z-mp-rev-photo: {{ s.review_photo_size }}px;
+  --z-mp-rev-bg: {{ s.card_background }};
+  --z-mp-rev-name: {{ s.review_name_color }};
+  --z-mp-rev-nfs: {{ s.review_name_font_size }}px;
+  --z-mp-rev-fs: {{ s.review_text_font_size }}px;
+  --z-mp-rev-star: {{ s.review_star_size }}px;
+  --z-mp-star: {{ s.star_size }}px;
+  --z-mp-star-m: {{ s.star_size_mobile }}px;
+  --z-mp-star-c: {{ s.star_color }};
+  --z-mp-rfs: {{ s.rating_font_size }}px;
+  --z-mp-rfs-m: {{ s.rating_font_size_mobile }}px;
+  --z-mp-price-c: {{ s.price_color }};
+  --z-mp-cmp-c: {{ s.compare_color }};
+  --z-mp-cmp-fs: {{ s.compare_font_size }}px;
+  --z-mp-cmp-fs-m: {{ s.compare_font_size_mobile }}px;
+  --z-mp-chip-bg: {{ s.badge_background }};
+  --z-mp-chip-fg: {{ s.badge_text_color }};
+  --z-mp-chip-fs: {{ s.badge_font_size }}px;
+  --z-mp-chip-fs-m: {{ s.badge_font_size_mobile }}px;
+  --z-mp-chip-pad-m: {{ s.badge_padding_mobile }}px;
+  --z-mp-chip-h: {{ s.badge_height }}px;
+  --z-mp-chip-pad: {{ s.badge_padding }}px;
+  --z-mp-chip-sp: {{ s.badge_spacing }}px;
+  --z-mp-check: {{ s.check_size }}px;
+  --z-mp-check-m: {{ s.check_size_mobile }}px;
+  --z-mp-check-c: {{ s.check_color }};
+  --z-mp-check-gap: {{ s.check_gap }}px;
+  --z-mp-check-gap-m: {{ s.check_gap_mobile }}px;
+  --z-mp-bar-bg: {{ s.bar_background }};
+  --z-mp-fda-h: {{ s.fda_height }}px;
+  --z-mp-fda-img: {{ s.fda_logo_height }}px;
+  --z-mp-fda-fs: {{ s.fda_font_size }}px;
+  --z-mp-fda-fs-m: {{ s.fda_font_size_mobile }}px;
+  --z-mp-qty-w: {{ s.qty_width }}px;
+  --z-mp-btn-h: {{ s.button_height }}px;
+  --z-mp-form-gap: {{ s.form_gap }}px;
+  --z-mp-pay-h: {{ s.payment_icon_height }}px;
+  --z-mp-pay-gap: {{ s.payment_gap }}px;
+  --z-mp-del-bg: {{ s.delivery_background }};
+  --z-mp-del-pad: {{ s.delivery_padding }}px;
+  --z-mp-del-icon: {{ s.delivery_icon_size }}px;
+  --z-mp-del-tfs: {{ s.delivery_title_font_size }}px;
+  --z-mp-del-tfs-m: {{ s.delivery_title_font_size_mobile }}px;
+  --z-mp-del-sfs: {{ s.delivery_text_font_size }}px;
+  --z-mp-del-sfs-m: {{ s.delivery_text_font_size_mobile }}px;
+  --z-mp-trust-c: {{ s.trust_icon_color }};
+  --z-mp-trust-fs: {{ s.trust_font_size }}px;
+  --z-mp-trust-fs-m: {{ s.trust_font_size_mobile }}px;
+  --z-mp-trust-icon: {{ s.trust_icon_size }}px;
+  --z-mp-trust-gap: {{ s.trust_gap }}px;
+  --z-mp-trust-rgap: {{ s.trust_row_gap }}px;
+  --z-mp-row-tfs: {{ s.row_text_font_size }}px;
+  --z-mp-row-tfs-m: {{ s.row_text_font_size_mobile }}px;
+  --z-mp-row-icon: {{ s.row_icon_color }};
+  --z-mp-row-div: {{ s.divider_opacity | divided_by: 100.0 }};
+{%- endcapture -%}
+{%- render 'zenith-section-style', section: section, extra: extra -%}
+
+<section id="Zenith-{{ section.id }}" class="zenith-section zenith-mp color-{{ s.color_scheme }} gradient">
+  {%- if mp_product != blank -%}
+    {{ mp_product | structured_data }}
+  {%- endif -%}
+
+  <div class="page-width">
+    <zenith-main-product class="zenith-mp__grid">
+      {%- comment -%} ---------------- Gallery ---------------- {%- endcomment -%}
+      <div class="zenith-mp__gallery">
+        <zenith-carousel class="zenith-mp__carousel" data-slide-label="Image">
+          <ul class="zenith-carousel__track zenith-mp__track" role="list">
+            {%- if gallery_media.size > 0 -%}
+              {%- for media in gallery_media -%}
+                {%- assign media_alt = media.alt | default: mp_product.title -%}
+                <li class="zenith-carousel__slide zenith-mp__slide">
+                  <div class="zenith-media zenith-mp__media">
+                    {%- if forloop.first -%}
+                      {{
+                        media.preview_image
+                        | image_url: width: 1200
+                        | image_tag:
+                          loading: 'eager',
+                          fetchpriority: 'high',
+                          widths: '300, 400, 500, 600, 800, 1000, 1200',
+                          sizes: '(min-width: 750px) 500px, 70vw',
+                          alt: media_alt
+                      }}
+                    {%- else -%}
+                      {{
+                        media.preview_image
+                        | image_url: width: 1200
+                        | image_tag:
+                          loading: 'lazy',
+                          widths: '300, 400, 500, 600, 800, 1000, 1200',
+                          sizes: '(min-width: 750px) 500px, 70vw',
+                          alt: media_alt
+                      }}
+                    {%- endif -%}
+                  </div>
+                </li>
+              {%- endfor -%}
+            {%- else -%}
+              <li class="zenith-carousel__slide zenith-mp__slide">
+                <div class="zenith-media zenith-mp__media">
+                  {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                </div>
+              </li>
+            {%- endif -%}
+          </ul>
+          {%- if s.show_dots -%}
+            {%- render 'zenith-carousel-controls', show_dots: true, show_arrows: false, label: 'image' -%}
+          {%- endif -%}
+        </zenith-carousel>
+
+        {%- if s.show_thumbnails and gallery_media.size > 1 -%}
+          <ul class="zenith-mp__thumbs zenith-mp__bleed" role="list">
+            {%- for media in gallery_media -%}
+              <li class="zenith-mp__thumb-item">
+                <button
+                  type="button"
+                  class="zenith-mp__thumb{% if forloop.first %} is-active{% endif %}"
+                  data-thumb="{{ forloop.index0 }}"
+                  aria-label="{{ 'products.product.media.gallery_viewer' | t }} {{ forloop.index }}"
+                  {% if forloop.first %}
+                    aria-current="true"
+                  {% endif %}
+                >
+                  {{
+                    media.preview_image
+                    | image_url: width: 300
+                    | image_tag:
+                      loading: 'lazy',
+                      widths: '80, 120, 160, 240, 300',
+                      sizes: '80px',
+                      alt: ''
+                  }}
+                </button>
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
+        {%- if review_total > 0 -%}
+          <ul class="zenith-mp__reviews zenith-mp__bleed" role="list">
+            {%- for n in (1..20) -%}
+              {%- liquid
+                if s.reviews_source == 'global'
+                  assign p = 'rv' | append: n | append: '_'
+                  assign k = p | append: 'image'
+                  assign rv_image = settings[k]
+                  assign k = p | append: 'author'
+                  assign rv_name = settings[k]
+                  assign k = p | append: 'quote'
+                  assign rv_text = settings[k]
+                  assign k = p | append: 'rating'
+                  assign rv_stars = settings[k]
+                  assign rv_attrs = ''
+                  if rv_image == blank and rv_name == blank and rv_text == blank
+                    continue
+                  endif
+                else
+                  assign rv_block = review_blocks[forloop.index0]
+                  if rv_block == blank
+                    break
+                  endif
+                  assign rv_image = rv_block.settings.image
+                  assign rv_name = rv_block.settings.name
+                  assign rv_text = rv_block.settings.text
+                  assign rv_stars = rv_block.settings.stars
+                  assign rv_attrs = 'id="Block-' | append: rv_block.id | append: '" ' | append: rv_block.shopify_attributes
+                endif
+              -%}
+              <li class="zenith-mp__review" {{ rv_attrs }}>
+                <div class="zenith-media zenith-mp__review-photo">
+                  {%- if rv_image != blank -%}
+                    {{
+                      rv_image
+                      | image_url: width: 200
+                      | image_tag: loading: 'lazy', widths: '60, 100, 150, 200', sizes: '50px', alt: ''
+                    }}
+                  {%- else -%}
+                    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {%- endif -%}
+                </div>
+                <div class="zenith-mp__review-body">
+                  <p class="zenith-mp__review-head">
+                    {%- if rv_name != blank -%}
+                      <span class="zenith-mp__review-name">{{ rv_name | escape }}</span>
+                    {%- endif -%}
+                    {%- if rv_stars != blank and rv_stars > 0 -%}
+                      {%- render 'zenith-stars', rating: rv_stars -%}
+                    {%- endif -%}
+                  </p>
+                  {%- if rv_text != blank -%}
+                    <p class="zenith-mp__review-text">{{ rv_text | escape }}</p>
+                  {%- endif -%}
+                </div>
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} ---------------- Buy box ---------------- {%- endcomment -%}
+      <div class="zenith-mp__buy">
+        {%- if s.show_rating and rating_value != blank -%}
+          <div class="zenith-mp__rating">
+            {%- render 'zenith-stars', rating: rating_value -%}
+            {%- if rating_label != blank -%}
+              <span class="zenith-mp__rating-label">{{ rating_label | escape }}</span>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        <h1 class="zenith-mp__title">
+          {%- if mp_product != blank -%}
+            {{- mp_product.title | escape -}}
+          {%- else -%}
+            {{- s.placeholder_title | escape -}}
+          {%- endif -%}
+        </h1>
+
+        {%- if s.subtitle != blank -%}
+          <div class="zenith-mp__subtitle zenith-rte{% unless s.subtitle_desktop %} zenith-hide-desktop{% endunless %}{% unless s.subtitle_mobile %} zenith-hide-mobile{% endunless %}">
+            {{- s.subtitle -}}
+          </div>
+        {%- endif -%}
+
+        <div class="zenith-mp__price" data-price-wrap>
+          <span class="zenith-mp__price-current" data-price>
+            {%- if mp_product != blank -%}
+              {{- mp_product.price | money -}}
+            {%- else -%}
+              {{- 179800 | money -}}
+            {%- endif -%}
+          </span>
+          <s class="zenith-mp__price-compare{% unless mp_product.compare_at_price > mp_product.price %} zenith-mp__price-compare--hidden{% endunless %}" data-compare>
+            {%- if mp_product.compare_at_price > mp_product.price -%}
+              {{- mp_product.compare_at_price | money -}}
+            {%- endif -%}
+          </s>
+          {%- if s.price_badge != blank -%}
+            <span class="zenith-mp__chip">{{ s.price_badge | escape }}</span>
+          {%- endif -%}
+        </div>
+
+        {%- if has_variants -%}
+          <fieldset class="zenith-mp__variants" data-variants>
+            <legend class="visually-hidden">{{ 'products.product.product_variants' | t }}</legend>
+            {%- for variant in mp_product.variants -%}
+              <input
+                type="radio"
+                class="zenith-mp__variant-input visually-hidden"
+                id="Variant-{{ section.id }}-{{ variant.id }}"
+                name="Variant-{{ section.id }}"
+                value="{{ variant.id }}"
+                data-price="{{ variant.price | money }}"
+                data-compare="{% if variant.compare_at_price > variant.price %}{{ variant.compare_at_price | money }}{% endif %}"
+                data-available="{{ variant.available }}"
+                {% if variant.id == current_variant.id %}
+                  checked
+                {% endif %}
+              >
+              <label class="zenith-mp__variant" for="Variant-{{ section.id }}-{{ variant.id }}">
+                {{- variant.title -}}
+              </label>
+            {%- endfor -%}
+          </fieldset>
+        {%- endif -%}
+
+        {%- if benefit_blocks.size > 0 -%}
+          <ul class="zenith-mp__checks" role="list">
+            {%- for block in benefit_blocks -%}
+              <li
+                class="zenith-mp__check{% if block.settings.hide_on_desktop %} zenith-hide-desktop{% endif %}{% if block.settings.hide_on_mobile %} zenith-hide-mobile{% endif %}"
+                id="Block-{{ block.id }}"
+                {{ block.shopify_attributes }}
+              >
+                {%- render 'zenith-icon', icon: 'check_filled', class: 'zenith-mp__check-icon' -%}
+                <span>{{ block.settings.text | escape }}</span>
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
+        {%- if s.show_fda -%}
+          <div class="zenith-mp__fda">
+            {%- if s.fda_image != blank -%}
+              {%- assign fda_w = s.fda_logo_height | times: s.fda_image.aspect_ratio | ceil | times: 3 -%}
+              {{
+                s.fda_image
+                | image_url: width: fda_w
+                | image_tag:
+                  loading: 'lazy',
+                  widths: '80, 160, 240',
+                  sizes: '80px',
+                  class: 'zenith-mp__fda-logo',
+                  alt: s.fda_label
+              }}
+            {%- endif -%}
+            {%- if s.fda_label != blank -%}
+              <span class="zenith-mp__fda-label">{{ s.fda_label | escape }}</span>
+            {%- endif -%}
+            {%- if s.fda_number != blank -%}
+              <span class="zenith-mp__fda-number">{{ s.fda_number | escape }}</span>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        <div class="zenith-mp__form">
+          <div class="zenith-mp__qty">
+            <button
+              type="button"
+              class="zenith-mp__qty-btn"
+              data-qty-step="-1"
+              aria-label="{{ 'products.product.quantity.decrease' | t: product: mp_product.title | escape }}"
+            >
+              {%- render 'zenith-icon', icon: 'minus' -%}
+            </button>
+            <input
+              class="zenith-mp__qty-input"
+              type="text"
+              inputmode="numeric"
+              autocomplete="off"
+              name="quantity"
+              form="{{ form_id }}"
+              id="Quantity-{{ section.id }}"
+              value="{% if s.quantity_pad %}01{% else %}1{% endif %}"
+              data-pad="{% if s.quantity_pad %}2{% else %}0{% endif %}"
+              data-min="1"
+              aria-label="{{ 'products.product.quantity.label' | t }}"
+            >
+            <button
+              type="button"
+              class="zenith-mp__qty-btn"
+              data-qty-step="1"
+              aria-label="{{ 'products.product.quantity.increase' | t: product: mp_product.title | escape }}"
+            >
+              {%- render 'zenith-icon', icon: 'plus' -%}
+            </button>
+          </div>
+
+          {%- if mp_product != blank -%}
+            {%- render 'zenith-add-to-cart',
+              product: mp_product,
+              form_id: form_id,
+              label: s.button_label,
+              style: s.button_style,
+              icon: s.button_icon,
+              class: 'zenith-mp__atc'
+            -%}
+          {%- else -%}
+            <button type="button" class="button zenith-atc zenith-btn zenith-btn--{{ s.button_style }} zenith-mp__atc" disabled>
+              <span>{{ s.button_label | escape }}</span>
+              {%- if s.button_icon != 'none' -%}
+                {%- render 'zenith-icon', icon: s.button_icon, class: 'zenith-btn__icon' -%}
+              {%- endif -%}
+            </button>
+          {%- endif -%}
+        </div>
+
+        {%- if s.show_cod or s.payment_icons != 'none' -%}
+          <div class="zenith-mp__payments">
+            {%- if s.show_cod and s.cod_label != blank -%}
+              <span class="zenith-mp__cod">
+                {%- render 'zenith-icon', icon: s.cod_icon, class: 'zenith-mp__cod-icon' -%}
+                {{ s.cod_label | escape }}
+              </span>
+            {%- endif -%}
+            {%- if s.payment_icons == 'image' and s.payment_image != blank -%}
+              {%- assign pay_w = s.payment_icon_height | times: s.payment_image.aspect_ratio | ceil | times: 3 -%}
+              {{
+                s.payment_image
+                | image_url: width: pay_w
+                | image_tag:
+                  loading: 'lazy',
+                  widths: '200, 400, 600',
+                  sizes: '200px',
+                  class: 'zenith-mp__pay-image',
+                  alt: 'sections.footer.payment' | t
+              }}
+            {%- elsif s.payment_icons == 'shop' and shop.enabled_payment_types.size > 0 -%}
+              <ul class="zenith-mp__pay list-unstyled" role="list" aria-label="{{ 'sections.footer.payment' | t | escape }}">
+                {%- for type in shop.enabled_payment_types -%}
+                  <li>{{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}</li>
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        {%- if s.show_delivery and s.delivery_title != blank -%}
+          <div class="zenith-mp__delivery">
+            <p class="zenith-mp__delivery-title">
+              {%- render 'zenith-icon', icon: s.delivery_icon, class: 'zenith-mp__delivery-icon' -%}
+              <span>{{ s.delivery_title | escape }}</span>
+            </p>
+            {%- if s.delivery_text != blank -%}
+              <p class="zenith-mp__delivery-text">{{ s.delivery_text | escape }}</p>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        {%- if trust_blocks.size > 0 -%}
+          <ul class="zenith-mp__trust" role="list">
+            {%- for block in trust_blocks -%}
+              <li class="zenith-mp__trust-item" id="Block-{{ block.id }}" {{ block.shopify_attributes }}>
+                {%- render 'zenith-icon', icon: block.settings.icon, class: 'zenith-mp__trust-icon' -%}
+                <span>{{ block.settings.text | escape }}</span>
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
+        {%- if row_blocks.size > 0 -%}
+          <div class="zenith-mp__rows">
+            {%- for block in row_blocks -%}
+              {%- liquid
+                assign row_body = block.settings.text
+                if block.settings.content_source == 'description'
+                  assign row_body = mp_product.description
+                endif
+                assign row_class = 'zenith-faq__item zenith-mp__row'
+                if block.settings.hide_on_mobile
+                  assign row_class = row_class | append: ' zenith-hide-mobile'
+                endif
+                if block.settings.hide_on_desktop
+                  assign row_class = row_class | append: ' zenith-hide-desktop'
+                endif
+              -%}
+              {%- if block.settings.title != blank -%}
+                <details
+                  class="{{ row_class }}"
+                  id="Block-{{ block.id }}"
+                  {% if block.settings.open %}
+                    open
+                  {% endif %}
+                  {{ block.shopify_attributes }}
+                >
+                  <summary class="zenith-faq__question zenith-mp__row-title">
+                    <span>{{ block.settings.title | escape }}</span>
+                    <span class="zenith-faq__icon zenith-mp__row-icon">
+                      {%- render 'zenith-icon', icon: 'plus' -%}
+                    </span>
+                  </summary>
+                  <div class="zenith-faq__answer zenith-rte">{{ row_body }}</div>
+                </details>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </zenith-main-product>
+  </div>
+</section>
+{%- endcapture -%}
+{{- zenith_body | replace: '[customers]', settings.customer_count -}}
+
+{% schema %}
+{
+  "name": "Zenith · Product page",
+  "tag": "div",
+  "class": "section",
+  "max_blocks": 40,
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    { "type": "header", "content": "Content" },
+    {
+      "type": "text",
+      "id": "placeholder_title",
+      "label": "Title shown outside a product page",
+      "default": "Zenith Anti-Aging Tallow Cream"
+    },
+    { "type": "checkbox", "id": "show_rating", "label": "Show rating", "default": true },
+    {
+      "type": "text",
+      "id": "rating_value",
+      "label": "Rating",
+      "info": "Used when the product has no Judge.me rating metafield.",
+      "default": "4.69"
+    },
+    {
+      "type": "text",
+      "id": "rating_count",
+      "label": "Number of reviews",
+      "default": "2,158"
+    },
+    {
+      "type": "text",
+      "id": "rating_label",
+      "label": "Rating text",
+      "info": "[rating] and [count] are replaced with the values above.",
+      "default": "Rated [rating] ([count] reviews)"
+    },
+    {
+      "type": "richtext",
+      "id": "subtitle",
+      "label": "Short description",
+      "default": "<p>The night cream that does the whole job. Retinol 0.2% buffered by premium beef tallow, in one lightweight step before bed.</p>"
+    },
+    {
+      "type": "text",
+      "id": "price_badge",
+      "label": "Price badge",
+      "info": "Leave empty to hide.",
+      "default": "UP TO 33% OFF + ₱300 OFF"
+    },
+    { "type": "checkbox", "id": "show_fda", "label": "Show FDA bar", "default": true },
+    { "type": "image_picker", "id": "fda_image", "label": "FDA logo" },
+    { "type": "text", "id": "fda_label", "label": "FDA label", "default": "Philippine FDA Notified" },
+    { "type": "text", "id": "fda_number", "label": "FDA number", "default": "NN-1000015008540" },
+    { "type": "text", "id": "button_label", "label": "Add to cart label", "default": "Add to Cart" },
+    {
+      "type": "select",
+      "id": "button_icon",
+      "label": "Add to cart icon",
+      "default": "cart",
+      "options": [
+        { "value": "cart", "label": "Cart" },
+        { "value": "arrow_right", "label": "Arrow" },
+        { "value": "none", "label": "None" }
+      ]
+    },
+    { "type": "checkbox", "id": "quantity_pad", "label": "Show quantity as 01, 02…", "default": true },
+    { "type": "checkbox", "id": "show_cod", "label": "Show Cash on Delivery chip", "default": true },
+    { "type": "text", "id": "cod_label", "label": "Cash on Delivery label", "default": "Cash on Delivery" },
+    {
+      "type": "select",
+      "id": "cod_icon",
+      "label": "Cash on Delivery icon",
+      "default": "cash",
+      "options": [
+        { "value": "cash", "label": "Cash" },
+        { "value": "box", "label": "Box" },
+        { "value": "truck", "label": "Delivery" },
+        { "value": "badge_check", "label": "Badge check" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "payment_icons",
+      "label": "Payment icons",
+      "info": "Store payment icons come from Settings → Payments.",
+      "default": "shop",
+      "options": [
+        { "value": "shop", "label": "Store payment icons" },
+        { "value": "image", "label": "Custom image" },
+        { "value": "none", "label": "None" }
+      ]
+    },
+    {
+      "type": "image_picker",
+      "id": "payment_image",
+      "label": "Payment icons image",
+      "info": "Used when Payment icons is set to Custom image."
+    },
+    { "type": "checkbox", "id": "show_delivery", "label": "Show delivery box", "default": true },
+    {
+      "type": "select",
+      "id": "delivery_icon",
+      "label": "Delivery icon",
+      "default": "truck",
+      "options": [
+        { "value": "truck", "label": "Delivery" },
+        { "value": "box", "label": "Box" },
+        { "value": "map", "label": "Map" },
+        { "value": "pin", "label": "Pin" },
+        { "value": "clock", "label": "Clock" }
+      ]
+    },
+    { "type": "text", "id": "delivery_title", "label": "Delivery title", "default": "Nationwide Delivery" },
+    {
+      "type": "text",
+      "id": "delivery_text",
+      "label": "Delivery text",
+      "default": "3–5 days Metro Manila, 5–7 days Visayas / Mindanao."
+    },
+    { "type": "checkbox", "id": "show_thumbnails", "label": "Show image thumbnails", "default": true },
+    { "type": "checkbox", "id": "show_dots", "label": "Show image slider dots", "default": true },
+    {
+      "type": "select",
+      "id": "reviews_source",
+      "label": "Review strip",
+      "info": "Global = Theme settings → Zenith · Results reviews (edit once, same on every page).",
+      "default": "global",
+      "options": [
+        { "value": "global", "label": "Theme settings → Zenith · Results reviews" },
+        { "value": "blocks", "label": "This section's blocks" },
+        { "value": "none", "label": "Hide" }
+      ]
+    },
+
+    { "type": "header", "content": "Layout" },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "label": "Content width",
+      "min": 800,
+      "max": 1400,
+      "step": 20,
+      "unit": "px",
+      "default": 1080
+    },
+    { "type": "range", "id": "gap", "label": "Space between columns", "min": 20, "max": 120, "step": 4, "unit": "px", "default": 80 },
+    { "type": "range", "id": "content_gap", "label": "Space between buy box items", "min": 4, "max": 40, "step": 2, "unit": "px", "default": 12 },
+    { "type": "range", "id": "gallery_ratio", "label": "Image height", "min": 60, "max": 160, "step": 2, "unit": "%", "default": 108 },
+    { "type": "range", "id": "dot_size", "label": "Slider dot size", "min": 4, "max": 16, "step": 1, "unit": "px", "default": 8 },
+    { "type": "range", "id": "dot_width", "label": "Active slider dot width", "min": 12, "max": 80, "step": 2, "unit": "px", "default": 40 },
+    { "type": "range", "id": "dot_gap", "label": "Space between dots", "min": 2, "max": 20, "step": 1, "unit": "px", "default": 4 },
+    { "type": "range", "id": "dot_offset", "label": "Dots distance from image bottom", "min": 0, "max": 60, "step": 1, "unit": "px", "default": 21 },
+    { "type": "range", "id": "thumb_count", "label": "Thumbnails visible", "min": 3, "max": 8, "step": 1, "default": 6 },
+    { "type": "range", "id": "thumb_gap", "label": "Space between thumbnails", "min": 0, "max": 24, "step": 1, "unit": "px", "default": 8 },
+    { "type": "range", "id": "thumb_spacing", "label": "Space above thumbnails", "min": 0, "max": 40, "step": 1, "unit": "px", "default": 8 },
+    { "type": "range", "id": "review_card_width", "label": "Review card width", "min": 140, "max": 320, "step": 4, "unit": "px", "default": 220 },
+    { "type": "range", "id": "review_gap", "label": "Space between review cards", "min": 0, "max": 32, "step": 2, "unit": "px", "default": 12 },
+    { "type": "range", "id": "review_spacing", "label": "Space above review strip", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 38 },
+    { "type": "range", "id": "review_photo_size", "label": "Review photo size", "min": 24, "max": 80, "step": 2, "unit": "px", "default": 48 },
+    { "type": "range", "id": "check_size", "label": "Checklist icon size", "min": 12, "max": 32, "step": 1, "unit": "px", "default": 20 },
+    { "type": "range", "id": "check_gap", "label": "Space between checklist items", "min": 4, "max": 32, "step": 1, "unit": "px", "default": 12 },
+    { "type": "range", "id": "fda_height", "label": "FDA bar height", "min": 20, "max": 60, "step": 2, "unit": "px", "default": 30 },
+    { "type": "range", "id": "fda_logo_height", "label": "FDA logo height", "min": 8, "max": 40, "step": 1, "unit": "px", "default": 15 },
+    { "type": "range", "id": "qty_width", "label": "Quantity box width", "min": 70, "max": 180, "step": 2, "unit": "px", "default": 106 },
+    { "type": "range", "id": "button_height", "label": "Add to cart height", "min": 36, "max": 72, "step": 2, "unit": "px", "default": 46 },
+    { "type": "range", "id": "form_gap", "label": "Space between quantity and button", "min": 0, "max": 40, "step": 1, "unit": "px", "default": 13 },
+    { "type": "range", "id": "badge_height", "label": "Price badge height", "min": 14, "max": 40, "step": 2, "unit": "px", "default": 20 },
+    { "type": "range", "id": "badge_padding", "label": "Price badge side padding", "min": 4, "max": 40, "step": 1, "unit": "px", "default": 15 },
+    {
+      "type": "range",
+      "id": "badge_spacing",
+      "label": "Space before the price badge",
+      "info": "Desktop only. On mobile the badge sits at the end of the row.",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    },
+    { "type": "range", "id": "payment_icon_height", "label": "Payment icon height", "min": 12, "max": 40, "step": 1, "unit": "px", "default": 20 },
+    { "type": "range", "id": "payment_gap", "label": "Space between payment icons", "min": 2, "max": 20, "step": 1, "unit": "px", "default": 6 },
+    { "type": "range", "id": "delivery_padding", "label": "Delivery box padding", "min": 4, "max": 40, "step": 1, "unit": "px", "default": 8 },
+    { "type": "range", "id": "delivery_icon_size", "label": "Delivery icon size", "min": 12, "max": 36, "step": 1, "unit": "px", "default": 20 },
+    { "type": "range", "id": "trust_icon_size", "label": "Trust icon size", "min": 10, "max": 32, "step": 1, "unit": "px", "default": 18 },
+    { "type": "range", "id": "trust_gap", "label": "Space between trust items", "min": 2, "max": 40, "step": 1, "unit": "px", "default": 10 },
+    { "type": "range", "id": "trust_row_gap", "label": "Space between trust rows", "min": 2, "max": 32, "step": 1, "unit": "px", "default": 8 },
+    { "type": "range", "id": "item_padding", "label": "Accordion row padding", "min": 4, "max": 40, "step": 1, "unit": "px", "default": 12 },
+    { "type": "range", "id": "icon_size", "label": "Accordion icon size", "min": 10, "max": 32, "step": 1, "unit": "px", "default": 16 },
+
+    { "type": "header", "content": "Colors" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "color", "id": "top_color", "label": "Top colour", "info": "Fades into the page background.", "default": "#191919" },
+    {
+      "type": "range",
+      "id": "fade_height",
+      "label": "Fade height",
+      "min": 200,
+      "max": 2000,
+      "step": 20,
+      "unit": "px",
+      "default": 1200
+    },
+    { "type": "color", "id": "media_background", "label": "Image background", "default": "#FFFFFF" },
+    { "type": "color", "id": "dot_color", "label": "Slider dots", "default": "#C5C5C6" },
+    { "type": "color", "id": "dot_active_color", "label": "Active slider dot", "default": "#010101" },
+    { "type": "color", "id": "thumb_active_color", "label": "Active thumbnail outline", "default": "#EABE5F" },
+    { "type": "color", "id": "star_color", "label": "Stars", "default": "#EABE5F" },
+    { "type": "color", "id": "price_color", "label": "Price", "default": "#FFFFFF" },
+    { "type": "color", "id": "compare_color", "label": "Compare-at price", "default": "#8E8C8C" },
+    { "type": "color", "id": "badge_background", "label": "Price badge background", "default": "#294850" },
+    { "type": "color", "id": "badge_text_color", "label": "Price badge text", "default": "#FFFFFF" },
+    { "type": "color", "id": "check_color", "label": "Checklist icons", "default": "#EABE5F" },
+    { "type": "color", "id": "bar_background", "label": "FDA bar, quantity box and chips", "default": "#202020" },
+    { "type": "color", "id": "delivery_background", "label": "Delivery box", "default": "#112328" },
+    { "type": "color", "id": "trust_icon_color", "label": "Trust icons", "default": "#EABE5F" },
+    { "type": "color", "id": "card_background", "label": "Review card", "default": "#202020" },
+    { "type": "color", "id": "review_name_color", "label": "Review name", "default": "#C59300" },
+    { "type": "color", "id": "row_icon_color", "label": "Accordion icon", "default": "#EABE5F" },
+    {
+      "type": "range",
+      "id": "divider_opacity",
+      "label": "Accordion divider strength",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "%",
+      "default": 7
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Add to cart style",
+      "default": "gold",
+      "options": [
+        { "value": "gold", "label": "Gold gradient" },
+        { "value": "dark", "label": "Dark" },
+        { "value": "outline", "label": "Outline" },
+        { "value": "light", "label": "Light" },
+        { "value": "scheme", "label": "Color scheme button" }
+      ]
+    },
+
+    { "type": "header", "content": "Typography" },
+    { "type": "range", "id": "heading_font_size", "label": "Product title size", "min": 20, "max": 80, "step": 2, "unit": "px", "default": 42 },
+    { "type": "range", "id": "rating_font_size", "label": "Rating text size", "min": 10, "max": 24, "step": 1, "unit": "px", "default": 16 },
+    { "type": "range", "id": "star_size", "label": "Star size", "min": 10, "max": 32, "step": 1, "unit": "px", "default": 22 },
+    { "type": "range", "id": "subheading_font_size", "label": "Short description size", "min": 12, "max": 28, "step": 1, "unit": "px", "default": 17 },
+    { "type": "range", "id": "price_font_size", "label": "Price size", "min": 18, "max": 64, "step": 2, "unit": "px", "default": 36 },
+    { "type": "range", "id": "compare_font_size", "label": "Compare-at price size", "min": 12, "max": 40, "step": 2, "unit": "px", "default": 22 },
+    { "type": "range", "id": "badge_font_size", "label": "Price badge size", "min": 9, "max": 20, "step": 1, "unit": "px", "default": 13 },
+    { "type": "range", "id": "text_font_size", "label": "Checklist text size", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 16 },
+    { "type": "range", "id": "fda_font_size", "label": "FDA bar text size", "min": 10, "max": 20, "step": 1, "unit": "px", "default": 12 },
+    { "type": "range", "id": "button_font_size", "label": "Add to cart text size", "min": 14, "max": 36, "step": 1, "unit": "px", "default": 22 },
+    { "type": "range", "id": "delivery_title_font_size", "label": "Delivery title size", "min": 12, "max": 26, "step": 1, "unit": "px", "default": 13 },
+    { "type": "range", "id": "delivery_text_font_size", "label": "Delivery text size", "min": 10, "max": 20, "step": 1, "unit": "px", "default": 11 },
+    { "type": "range", "id": "trust_font_size", "label": "Trust item size", "min": 10, "max": 20, "step": 1, "unit": "px", "default": 13 },
+    { "type": "range", "id": "title_font_size", "label": "Accordion title size", "min": 14, "max": 34, "step": 1, "unit": "px", "default": 20 },
+    { "type": "range", "id": "row_text_font_size", "label": "Accordion text size", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 18 },
+    { "type": "range", "id": "review_name_font_size", "label": "Review name size", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 16 },
+    { "type": "range", "id": "review_text_font_size", "label": "Review text size", "min": 10, "max": 20, "step": 1, "unit": "px", "default": 13 },
+    { "type": "range", "id": "review_star_size", "label": "Review star size", "min": 8, "max": 20, "step": 1, "unit": "px", "default": 12 },
+
+    { "type": "header", "content": "Mobile" },
+    { "type": "checkbox", "id": "subtitle_desktop", "label": "Show short description on desktop", "default": false },
+    { "type": "checkbox", "id": "subtitle_mobile", "label": "Show short description on mobile", "default": true },
+    { "type": "range", "id": "gap_mobile", "label": "Space between gallery and buy box", "min": 0, "max": 60, "step": 2, "unit": "px", "default": 18 },
+    { "type": "range", "id": "content_gap_mobile", "label": "Space between buy box items", "min": 4, "max": 40, "step": 2, "unit": "px", "default": 12 },
+    { "type": "range", "id": "gallery_ratio_mobile", "label": "Image height", "min": 60, "max": 160, "step": 2, "unit": "%", "default": 100 },
+    { "type": "range", "id": "slide_width_mobile", "label": "Slide width", "min": 50, "max": 100, "step": 1, "unit": "%", "default": 70 },
+    { "type": "range", "id": "slide_gap_mobile", "label": "Space between slides", "min": 0, "max": 48, "step": 2, "unit": "px", "default": 30 },
+    { "type": "range", "id": "dot_size_mobile", "label": "Slider dot size", "min": 4, "max": 16, "step": 1, "unit": "px", "default": 7 },
+    { "type": "range", "id": "dot_width_mobile", "label": "Active slider dot width", "min": 12, "max": 80, "step": 2, "unit": "px", "default": 60 },
+    { "type": "range", "id": "dot_gap_mobile", "label": "Space between dots", "min": 2, "max": 20, "step": 1, "unit": "px", "default": 10 },
+    { "type": "range", "id": "dot_offset_mobile", "label": "Dots distance from image bottom", "min": 0, "max": 60, "step": 1, "unit": "px", "default": 8 },
+    { "type": "range", "id": "thumb_width_mobile", "label": "Thumbnail width", "min": 48, "max": 120, "step": 1, "unit": "px", "default": 75 },
+    { "type": "range", "id": "thumb_gap_mobile", "label": "Space between thumbnails", "min": 0, "max": 24, "step": 1, "unit": "px", "default": 6 },
+    { "type": "range", "id": "thumb_spacing_mobile", "label": "Space above thumbnails", "min": 0, "max": 40, "step": 1, "unit": "px", "default": 9 },
+    { "type": "range", "id": "review_card_width_mobile", "label": "Review card width", "min": 140, "max": 320, "step": 4, "unit": "px", "default": 260 },
+    { "type": "range", "id": "review_spacing_mobile", "label": "Space above review strip", "min": 0, "max": 80, "step": 1, "unit": "px", "default": 9 },
+    { "type": "range", "id": "check_size_mobile", "label": "Checklist icon size", "min": 12, "max": 32, "step": 1, "unit": "px", "default": 18 },
+    { "type": "range", "id": "check_gap_mobile", "label": "Space between checklist items", "min": 4, "max": 32, "step": 1, "unit": "px", "default": 11 },
+    { "type": "range", "id": "heading_font_size_mobile", "label": "Product title size", "min": 16, "max": 60, "step": 2, "unit": "px", "default": 32 },
+    { "type": "range", "id": "rating_font_size_mobile", "label": "Rating text size", "min": 10, "max": 20, "step": 1, "unit": "px", "default": 13 },
+    { "type": "range", "id": "star_size_mobile", "label": "Star size", "min": 8, "max": 24, "step": 1, "unit": "px", "default": 14 },
+    { "type": "range", "id": "subheading_font_size_mobile", "label": "Short description size", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 17 },
+    { "type": "range", "id": "price_font_size_mobile", "label": "Price size", "min": 16, "max": 48, "step": 2, "unit": "px", "default": 32 },
+    { "type": "range", "id": "compare_font_size_mobile", "label": "Compare-at price size", "min": 12, "max": 32, "step": 2, "unit": "px", "default": 20 },
+    { "type": "range", "id": "text_font_size_mobile", "label": "Checklist text size", "min": 12, "max": 22, "step": 1, "unit": "px", "default": 15 },
+    { "type": "range", "id": "badge_font_size_mobile", "label": "Price badge size", "min": 9, "max": 20, "step": 1, "unit": "px", "default": 12 },
+    { "type": "range", "id": "badge_padding_mobile", "label": "Price badge side padding", "min": 4, "max": 40, "step": 1, "unit": "px", "default": 10 },
+    { "type": "range", "id": "fda_font_size_mobile", "label": "FDA bar text size", "min": 9, "max": 18, "step": 1, "unit": "px", "default": 13 },
+    { "type": "range", "id": "button_font_size_mobile", "label": "Add to cart text size", "min": 14, "max": 32, "step": 1, "unit": "px", "default": 22 },
+    { "type": "range", "id": "delivery_title_font_size_mobile", "label": "Delivery title size", "min": 11, "max": 22, "step": 1, "unit": "px", "default": 15 },
+    { "type": "range", "id": "delivery_text_font_size_mobile", "label": "Delivery text size", "min": 9, "max": 18, "step": 1, "unit": "px", "default": 13 },
+    { "type": "range", "id": "trust_font_size_mobile", "label": "Trust item size", "min": 9, "max": 18, "step": 1, "unit": "px", "default": 13 },
+    { "type": "range", "id": "title_font_size_mobile", "label": "Accordion title size", "min": 12, "max": 28, "step": 1, "unit": "px", "default": 18 },
+    { "type": "range", "id": "row_text_font_size_mobile", "label": "Accordion text size", "min": 11, "max": 22, "step": 1, "unit": "px", "default": 15 },
+    { "type": "range", "id": "item_padding_mobile", "label": "Accordion row padding", "min": 4, "max": 40, "step": 1, "unit": "px", "default": 14 },
+    { "type": "range", "id": "icon_size_mobile", "label": "Accordion icon size", "min": 10, "max": 32, "step": 1, "unit": "px", "default": 16 },
+
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 40 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 56 },
+    { "type": "range", "id": "padding_top_mobile", "label": "Top padding (mobile)", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 8 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "Bottom padding (mobile)", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 32 }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Checklist item",
+      "settings": [
+        { "type": "header", "content": "Content" },
+        { "type": "text", "id": "text", "label": "Text", "default": "Built for the heat. Won't melt or shine." },
+        { "type": "header", "content": "Mobile" },
+        { "type": "checkbox", "id": "hide_on_desktop", "label": "Hide on desktop", "default": false },
+        { "type": "checkbox", "id": "hide_on_mobile", "label": "Hide on mobile", "default": false }
+      ]
+    },
+    {
+      "type": "trust",
+      "name": "Trust item",
+      "settings": [
+        { "type": "header", "content": "Content" },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "thumbs_up",
+          "options": [
+            { "value": "thumbs_up", "label": "Thumbs up" },
+            { "value": "truck", "label": "Delivery" },
+            { "value": "map", "label": "Map" },
+            { "value": "certificate", "label": "Certificate" },
+            { "value": "dropper", "label": "Dropper" },
+            { "value": "leaf", "label": "Natural" },
+            { "value": "shield", "label": "Shield" },
+            { "value": "badge_check", "label": "Badge check" },
+            { "value": "farm", "label": "Farm" },
+            { "value": "cash", "label": "Cash" }
+          ]
+        },
+        { "type": "text", "id": "text", "label": "Text", "default": "Zenith Money-Back Guarantee" }
+      ]
+    },
+    {
+      "type": "row",
+      "name": "Accordion row",
+      "settings": [
+        { "type": "header", "content": "Content" },
+        { "type": "text", "id": "title", "label": "Title", "default": "How long will one jar last?" },
+        {
+          "type": "select",
+          "id": "content_source",
+          "label": "Text",
+          "default": "custom",
+          "options": [
+            { "value": "custom", "label": "Custom text" },
+            { "value": "description", "label": "Product description" }
+          ]
+        },
+        { "type": "richtext", "id": "text", "label": "Custom text" },
+        { "type": "checkbox", "id": "open", "label": "Open by default", "default": false },
+        { "type": "header", "content": "Mobile" },
+        { "type": "checkbox", "id": "hide_on_mobile", "label": "Hide on mobile", "default": false },
+        { "type": "checkbox", "id": "hide_on_desktop", "label": "Hide on desktop", "default": false }
+      ]
+    },
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "header", "content": "Content" },
+        { "type": "image_picker", "id": "image", "label": "Photo" },
+        { "type": "text", "id": "name", "label": "Name", "default": "Name Here" },
+        { "type": "range", "id": "stars", "label": "Stars", "min": 0, "max": 5, "step": 1, "default": 5 },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Review",
+          "default": "Customer testimonials highlight. Taken JudgeMe Embed."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zenith · Product page",
+      "blocks": [
+        { "type": "benefit", "settings": { "text": "Built for the heat. Won't melt or shine." } },
+        { "type": "benefit", "settings": { "text": "Zero irritation. Just gets the job done." } },
+        { "type": "benefit", "settings": { "text": "Science-backed active ingredients." } },
+        { "type": "benefit", "settings": { "text": "Full refund if it's not for you." } },
+        { "type": "benefit", "settings": { "text": "Formulated for Filipino skin and weather.", "hide_on_desktop": true } },
+        { "type": "benefit", "settings": { "text": "Trusted by [customers] Filipino men.", "hide_on_desktop": true } },
+        { "type": "trust", "settings": { "icon": "thumbs_up", "text": "Zenith Money-Back Guarantee" } },
+        { "type": "trust", "settings": { "icon": "map", "text": "Free Shipping ₱1,200+" } },
+        { "type": "trust", "settings": { "icon": "certificate", "text": "FDA-Notified Products" } },
+        { "type": "trust", "settings": { "icon": "dropper", "text": "Proven Ingredients" } },
+        {
+          "type": "row",
+          "settings": {
+            "title": "Will this work even if I've never used skincare before?",
+            "text": "<p>Yes. Most of our users started with just soap and water. We formulated this with 0.2% Retinol and 5% Tallow to do the heavy lifting while you sleep with no complicated routines needed.</p>",
+            "open": true,
+            "hide_on_mobile": true
+          }
+        },
+        { "type": "row", "settings": { "title": "How long will one jar last?", "hide_on_mobile": true } },
+        { "type": "row", "settings": { "title": "Will this make my face greasy in the heat?", "hide_on_mobile": true } },
+        { "type": "row", "settings": { "title": "When will I see results?", "hide_on_mobile": true } },
+        { "type": "row", "settings": { "title": "Is it safe for sensitive skin?", "hide_on_mobile": true } },
+        { "type": "row", "settings": { "title": "Description", "content_source": "description", "hide_on_desktop": true } },
+        { "type": "row", "settings": { "title": "How to use", "hide_on_desktop": true } },
+        { "type": "row", "settings": { "title": "What's inside", "hide_on_desktop": true } },
+        { "type": "row", "settings": { "title": "Zenith guarantee", "hide_on_desktop": true } },
+        { "type": "row", "settings": { "title": "FAQs", "hide_on_desktop": true } }
+      ]
+    }
+  ]
+}
+{% endschema %}

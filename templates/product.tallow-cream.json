@@ -1010,10 +1010,10 @@
         "title_font_size_mobile": 20,
         "note_font_size_mobile": 14,
         "text_font_size_mobile": 14,
-        "padding_top": 56,
-        "padding_bottom": 56,
+        "padding_top": 48,
+        "padding_bottom": 48,
         "padding_top_mobile": 20,
-        "padding_bottom_mobile": 24
+        "padding_bottom_mobile": 20
       }
     },
     "ingredients": {
@@ -1120,12 +1120,356 @@
         "icon_size_mobile": 24,
         "padding_top": 64,
         "padding_bottom": 64,
-        "padding_top_mobile": 24,
-        "padding_bottom_mobile": 12
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20
       }
+    },
+    "main": {
+      "type": "zenith-main-product",
+      "settings": {
+        "placeholder_title": "Zenith Anti-Aging Tallow Cream",
+        "show_rating": true,
+        "rating_value": "4.69",
+        "rating_count": "2,158",
+        "rating_label": "Rated [rating] ([count] reviews)",
+        "subtitle": "<p>The night cream that does the whole job. Retinol 0.2% buffered by premium beef tallow, in one lightweight step before bed.</p>",
+        "price_badge": "UP TO 33% OFF + ₱300 OFF",
+        "show_fda": true,
+        "fda_label": "Philippine FDA Notified",
+        "fda_number": "NN-1000015008540",
+        "button_label": "Add to Cart",
+        "button_icon": "cart",
+        "quantity_pad": true,
+        "show_cod": true,
+        "cod_label": "Cash on Delivery",
+        "cod_icon": "cash",
+        "payment_icons": "shop",
+        "show_delivery": true,
+        "delivery_icon": "truck",
+        "delivery_title": "Nationwide Delivery",
+        "delivery_text": "3–5 days Metro Manila, 5–7 days Visayas / Mindanao.",
+        "show_thumbnails": true,
+        "show_dots": true,
+        "reviews_source": "global",
+        "content_max_width": 1080,
+        "gap": 80,
+        "content_gap": 12,
+        "gallery_ratio": 108,
+        "dot_size": 8,
+        "dot_width": 40,
+        "dot_gap": 4,
+        "dot_offset": 21,
+        "thumb_count": 6,
+        "thumb_gap": 8,
+        "thumb_spacing": 8,
+        "review_card_width": 220,
+        "review_gap": 12,
+        "review_spacing": 38,
+        "review_photo_size": 48,
+        "check_size": 20,
+        "check_gap": 12,
+        "fda_height": 30,
+        "fda_logo_height": 15,
+        "qty_width": 106,
+        "button_height": 46,
+        "form_gap": 13,
+        "badge_height": 20,
+        "badge_padding": 8,
+        "badge_spacing": 36,
+        "payment_icon_height": 20,
+        "payment_gap": 6,
+        "delivery_padding": 8,
+        "delivery_icon_size": 20,
+        "trust_icon_size": 18,
+        "trust_gap": 10,
+        "trust_row_gap": 8,
+        "item_padding": 12,
+        "icon_size": 16,
+        "color_scheme": "scheme-1",
+        "top_color": "#191919",
+        "fade_height": 1200,
+        "media_background": "#FFFFFF",
+        "dot_color": "#C5C5C6",
+        "dot_active_color": "#010101",
+        "thumb_active_color": "#EABE5F",
+        "star_color": "#EABE5F",
+        "price_color": "#FFFFFF",
+        "compare_color": "#8E8C8C",
+        "badge_background": "#294850",
+        "badge_text_color": "#FFFFFF",
+        "check_color": "#EABE5F",
+        "bar_background": "#202020",
+        "delivery_background": "#112328",
+        "trust_icon_color": "#EABE5F",
+        "card_background": "#202020",
+        "review_name_color": "#C59300",
+        "row_icon_color": "#EABE5F",
+        "divider_opacity": 7,
+        "button_style": "gold",
+        "heading_font_size": 42,
+        "rating_font_size": 16,
+        "star_size": 22,
+        "subheading_font_size": 17,
+        "price_font_size": 36,
+        "compare_font_size": 22,
+        "badge_font_size": 12,
+        "text_font_size": 16,
+        "fda_font_size": 12,
+        "button_font_size": 22,
+        "delivery_title_font_size": 13,
+        "delivery_text_font_size": 11,
+        "trust_font_size": 13,
+        "title_font_size": 20,
+        "row_text_font_size": 18,
+        "review_name_font_size": 16,
+        "review_text_font_size": 13,
+        "review_star_size": 12,
+        "subtitle_desktop": false,
+        "subtitle_mobile": true,
+        "gap_mobile": 18,
+        "content_gap_mobile": 12,
+        "gallery_ratio_mobile": 100,
+        "slide_width_mobile": 70,
+        "slide_gap_mobile": 30,
+        "dot_size_mobile": 7,
+        "dot_width_mobile": 60,
+        "dot_gap_mobile": 10,
+        "dot_offset_mobile": 8,
+        "thumb_width_mobile": 75,
+        "thumb_gap_mobile": 6,
+        "thumb_spacing_mobile": 9,
+        "review_card_width_mobile": 260,
+        "review_spacing_mobile": 9,
+        "check_size_mobile": 18,
+        "check_gap_mobile": 11,
+        "heading_font_size_mobile": 32,
+        "rating_font_size_mobile": 13,
+        "star_size_mobile": 14,
+        "subheading_font_size_mobile": 17,
+        "price_font_size_mobile": 32,
+        "compare_font_size_mobile": 20,
+        "text_font_size_mobile": 15,
+        "fda_font_size_mobile": 12,
+        "button_font_size_mobile": 22,
+        "delivery_title_font_size_mobile": 15,
+        "delivery_text_font_size_mobile": 13,
+        "trust_font_size_mobile": 13,
+        "title_font_size_mobile": 18,
+        "row_text_font_size_mobile": 15,
+        "item_padding_mobile": 14,
+        "icon_size_mobile": 16,
+        "padding_top": 40,
+        "padding_bottom": 64,
+        "padding_top_mobile": 8,
+        "padding_bottom_mobile": 32,
+        "badge_font_size_mobile": 12,
+        "badge_padding_mobile": 8
+      },
+      "blocks": {
+        "benefit_1": {
+          "type": "benefit",
+          "settings": {
+            "text": "Built for the heat. Won't melt or shine.",
+            "hide_on_desktop": false,
+            "hide_on_mobile": false
+          }
+        },
+        "benefit_2": {
+          "type": "benefit",
+          "settings": {
+            "text": "Zero irritation. Just gets the job done.",
+            "hide_on_desktop": false,
+            "hide_on_mobile": false
+          }
+        },
+        "benefit_3": {
+          "type": "benefit",
+          "settings": {
+            "text": "Science-backed active ingredients.",
+            "hide_on_desktop": false,
+            "hide_on_mobile": false
+          }
+        },
+        "benefit_4": {
+          "type": "benefit",
+          "settings": {
+            "text": "Full refund if it's not for you.",
+            "hide_on_desktop": false,
+            "hide_on_mobile": false
+          }
+        },
+        "benefit_5": {
+          "type": "benefit",
+          "settings": {
+            "text": "Formulated for Filipino skin and weather.",
+            "hide_on_desktop": true,
+            "hide_on_mobile": false
+          }
+        },
+        "benefit_6": {
+          "type": "benefit",
+          "settings": {
+            "text": "Trusted by [customers] Filipino men.",
+            "hide_on_desktop": true,
+            "hide_on_mobile": false
+          }
+        },
+        "trust_1": {
+          "type": "trust",
+          "settings": {
+            "icon": "thumbs_up",
+            "text": "Zenith Money-Back Guarantee"
+          }
+        },
+        "trust_2": {
+          "type": "trust",
+          "settings": {
+            "icon": "map",
+            "text": "Free Shipping ₱1,200+"
+          }
+        },
+        "trust_3": {
+          "type": "trust",
+          "settings": {
+            "icon": "certificate",
+            "text": "FDA-Notified Products"
+          }
+        },
+        "trust_4": {
+          "type": "trust",
+          "settings": {
+            "icon": "dropper",
+            "text": "Proven Ingredients"
+          }
+        },
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "title": "Will this work even if I've never used skincare before?",
+            "content_source": "custom",
+            "open": true,
+            "hide_on_mobile": true,
+            "hide_on_desktop": false,
+            "text": "<p>Yes. Most of our users started with just soap and water. We formulated this with 0.2% Retinol and 5% Tallow to do the heavy lifting while you sleep with no complicated routines needed.</p>"
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "title": "How long will one jar last?",
+            "content_source": "custom",
+            "open": false,
+            "hide_on_mobile": true,
+            "hide_on_desktop": false
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "title": "Will this make my face greasy in the heat?",
+            "content_source": "custom",
+            "open": false,
+            "hide_on_mobile": true,
+            "hide_on_desktop": false
+          }
+        },
+        "row_4": {
+          "type": "row",
+          "settings": {
+            "title": "When will I see results?",
+            "content_source": "custom",
+            "open": false,
+            "hide_on_mobile": true,
+            "hide_on_desktop": false
+          }
+        },
+        "row_5": {
+          "type": "row",
+          "settings": {
+            "title": "Is it safe for sensitive skin?",
+            "content_source": "custom",
+            "open": false,
+            "hide_on_mobile": true,
+            "hide_on_desktop": false
+          }
+        },
+        "row_6": {
+          "type": "row",
+          "settings": {
+            "title": "Description",
+            "content_source": "description",
+            "open": false,
+            "hide_on_mobile": false,
+            "hide_on_desktop": true
+          }
+        },
+        "row_7": {
+          "type": "row",
+          "settings": {
+            "title": "How to use",
+            "content_source": "custom",
+            "open": false,
+            "hide_on_mobile": false,
+            "hide_on_desktop": true
+          }
+        },
+        "row_8": {
+          "type": "row",
+          "settings": {
+            "title": "What's inside",
+            "content_source": "custom",
+            "open": false,
+            "hide_on_mobile": false,
+            "hide_on_desktop": true
+          }
+        },
+        "row_9": {
+          "type": "row",
+          "settings": {
+            "title": "Zenith guarantee",
+            "content_source": "custom",
+            "open": false,
+            "hide_on_mobile": false,
+            "hide_on_desktop": true
+          }
+        },
+        "row_10": {
+          "type": "row",
+          "settings": {
+            "title": "FAQs",
+            "content_source": "custom",
+            "open": false,
+            "hide_on_mobile": false,
+            "hide_on_desktop": true
+          }
+        }
+      },
+      "block_order": [
+        "benefit_1",
+        "benefit_2",
+        "benefit_3",
+        "benefit_4",
+        "benefit_5",
+        "benefit_6",
+        "trust_1",
+        "trust_2",
+        "trust_3",
+        "trust_4",
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4",
+        "row_5",
+        "row_6",
+        "row_7",
+        "row_8",
+        "row_9",
+        "row_10"
+      ]
     }
   },
   "order": [
+    "main",
     "videos",
     "ingredients",
     "difference",
