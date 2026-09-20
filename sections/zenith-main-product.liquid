@@ -146,7 +146,9 @@
 
 <section id="Zenith-{{ section.id }}" class="zenith-section zenith-mp color-{{ s.color_scheme }} gradient">
   {%- if mp_product != blank -%}
-    {{ mp_product | structured_data }}
+    <script type="application/ld+json">
+      {{ mp_product | structured_data }}
+    </script>
   {%- endif -%}
 
   <div class="page-width">
