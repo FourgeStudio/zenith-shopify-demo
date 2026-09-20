@@ -991,3 +991,13 @@
     margin-top: calc(var(--z-mp-rows-sp, 18px) - var(--z-cgap, 12px));
   }
 }
+
+/* Tablet: the buy box column is at its narrowest between the two-column breakpoint and 990px
+   (content 1080px wide, minus the 80px gap, halved). Drop the desktop 36px separation before the
+   price badge so price + compare-at + badge still share one line, as in the design.
+   "Right edge of the column" keeps its auto margin — that rule is more specific. */
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .zenith-mp__chip {
+    margin-left: 0;
+  }
+}

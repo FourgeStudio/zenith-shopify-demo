@@ -323,14 +323,14 @@
         <div class="zenith-mp__price" data-price-wrap>
           <span class="zenith-mp__price-current" data-price>
             {%- if mp_product != blank -%}
-              {{- mp_product.price | money -}}
+              {{- mp_product.price | money_without_trailing_zeros -}}
             {%- else -%}
-              {{- 179800 | money -}}
+              {{- 179800 | money_without_trailing_zeros -}}
             {%- endif -%}
           </span>
           <s class="zenith-mp__price-compare{% unless mp_product.compare_at_price > mp_product.price %} zenith-mp__price-compare--hidden{% endunless %}" data-compare>
             {%- if mp_product.compare_at_price > mp_product.price -%}
-              {{- mp_product.compare_at_price | money -}}
+              {{- mp_product.compare_at_price | money_without_trailing_zeros -}}
             {%- endif -%}
           </s>
           {%- if s.price_badge != blank -%}
@@ -358,8 +358,8 @@
                 id="Variant-{{ section.id }}-{{ variant.id }}"
                 name="Variant-{{ section.id }}"
                 value="{{ variant.id }}"
-                data-price="{{ variant.price | money }}"
-                data-compare="{% if variant.compare_at_price > variant.price %}{{ variant.compare_at_price | money }}{% endif %}"
+                data-price="{{ variant.price | money_without_trailing_zeros }}"
+                data-compare="{% if variant.compare_at_price > variant.price %}{{ variant.compare_at_price | money_without_trailing_zeros }}{% endif %}"
                 data-available="{{ variant.available }}"
                 {% if variant.id == current_variant.id %}
                   checked
