@@ -545,6 +545,7 @@
   flex-wrap: wrap;
   gap: 11px;
   min-height: var(--z-mp-fda-h, 30px);
+  border-radius: var(--z-mp-fda-r, 8px);
   padding: 0 12px;
   background: var(--z-mp-bar-bg, #202020);
   font-size: var(--z-mp-fda-fs-m, 13px);

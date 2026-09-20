@@ -118,6 +118,7 @@
   --z-mp-check-gap-m: {{ s.check_gap_mobile }}px;
   --z-mp-bar-bg: {{ s.bar_background }};
   --z-mp-fda-h: {{ s.fda_height }}px;
+  --z-mp-fda-r: {{ s.fda_radius }}px;
   --z-mp-fda-img: {{ s.fda_logo_height }}px;
   --z-mp-fda-fs: {{ s.fda_font_size }}px;
   --z-mp-fda-fs-m: {{ s.fda_font_size_mobile }}px;
@@ -824,6 +825,7 @@
     { "type": "range", "id": "check_gap", "label": "Space between checklist items", "min": 4, "max": 32, "step": 1, "unit": "px", "default": 12 },
     { "type": "range", "id": "fda_height", "label": "FDA bar height", "min": 20, "max": 60, "step": 2, "unit": "px", "default": 30 },
     { "type": "range", "id": "fda_logo_height", "label": "FDA logo height", "min": 8, "max": 40, "step": 1, "unit": "px", "default": 15 },
+    { "type": "range", "id": "fda_radius", "label": "FDA bar corner radius", "min": 0, "max": 24, "step": 1, "unit": "px", "default": 8 },
     { "type": "range", "id": "qty_width", "label": "Quantity box width", "min": 70, "max": 180, "step": 2, "unit": "px", "default": 106 },
     { "type": "range", "id": "button_height", "label": "Add to cart height", "min": 36, "max": 72, "step": 2, "unit": "px", "default": 46 },
     { "type": "range", "id": "form_gap", "label": "Space between quantity and button", "min": 0, "max": 40, "step": 1, "unit": "px", "default": 13 },
