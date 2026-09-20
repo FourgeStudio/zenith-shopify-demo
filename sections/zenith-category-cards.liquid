@@ -139,7 +139,7 @@
                 {%- endif -%}
               </div>
               {%- if card_link != blank -%}
-                <a href="{{ card_link }}" class="zenith-cats__overlay-link" tabindex="-1" aria-hidden="true"></a>
+                <a href="{{ card_link | escape }}" class="zenith-cats__overlay-link" tabindex="-1" aria-hidden="true"></a>
               {%- endif -%}
             </div>
           </li>

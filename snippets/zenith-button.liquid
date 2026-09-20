@@ -12,7 +12,7 @@
   {%- assign btn_icon = icon | default: 'arrow_right' -%}
   <a
     {% if link != blank %}
-      href="{{ link }}"
+      href="{{ link | escape }}"
     {% else %}
       role="link" aria-disabled="true"
     {% endif %}

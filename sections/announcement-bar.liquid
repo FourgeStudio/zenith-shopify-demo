@@ -92,7 +92,7 @@
                   >
                     {%- if block.settings.link != blank -%}
                       <a
-                        href="{{ block.settings.link }}"
+                        href="{{ block.settings.link | escape }}"
                         class="zenith-ann__link"
                         {% if pass > 1 %}
                           tabindex="-1"
@@ -120,7 +120,7 @@
         {%- if section.blocks.first.settings.text != blank -%}
           {%- if section.blocks.first.settings.link != blank -%}
             <a
-              href="{{ section.blocks.first.settings.link }}"
+              href="{{ section.blocks.first.settings.link | escape }}"
               class="announcement-bar__link link link--text focus-inset animate-arrow"
             >
           {%- endif -%}
@@ -180,7 +180,7 @@
                   {%- if block.settings.text != blank -%}
                     {%- if block.settings.link != blank -%}
                       <a
-                        href="{{ block.settings.link }}"
+                        href="{{ block.settings.link | escape }}"
                         class="announcement-bar__link link link--text focus-inset animate-arrow"
                       >
                     {%- endif -%}

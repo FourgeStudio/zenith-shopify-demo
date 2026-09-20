@@ -89,7 +89,7 @@
             <{{ card_tag }}
               class="zenith-store-links__card{% if link != blank %} zenith-store-links__card--link{% endif %}"
               {% if link != blank %}
-                href="{{ link }}"
+                href="{{ link | escape }}"
                 {% if b.new_tab %}
                   target="_blank" rel="noopener"
                 {% endif %}

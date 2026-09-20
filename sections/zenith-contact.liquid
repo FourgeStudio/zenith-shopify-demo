@@ -126,7 +126,7 @@
         <ul class="zenith-contact__social list-unstyled" role="list">
           {%- if settings.social_facebook_link != blank -%}
             <li>
-              <a href="{{ settings.social_facebook_link }}" class="zenith-contact__social-link" target="_blank" rel="noopener">
+              <a href="{{ settings.social_facebook_link | escape }}" class="zenith-contact__social-link" target="_blank" rel="noopener">
                 <span class="svg-wrapper">{{- 'icon-facebook.svg' | inline_asset_content -}}</span>
                 <span class="visually-hidden">{{ 'general.social.links.facebook' | t }}</span>
               </a>
@@ -134,7 +134,7 @@
           {%- endif -%}
           {%- if settings.social_instagram_link != blank -%}
             <li>
-              <a href="{{ settings.social_instagram_link }}" class="zenith-contact__social-link" target="_blank" rel="noopener">
+              <a href="{{ settings.social_instagram_link | escape }}" class="zenith-contact__social-link" target="_blank" rel="noopener">
                 <span class="svg-wrapper">{{- 'icon-instagram.svg' | inline_asset_content -}}</span>
                 <span class="visually-hidden">{{ 'general.social.links.instagram' | t }}</span>
               </a>
@@ -142,7 +142,7 @@
           {%- endif -%}
           {%- if settings.social_tiktok_link != blank -%}
             <li>
-              <a href="{{ settings.social_tiktok_link }}" class="zenith-contact__social-link" target="_blank" rel="noopener">
+              <a href="{{ settings.social_tiktok_link | escape }}" class="zenith-contact__social-link" target="_blank" rel="noopener">
                 <span class="svg-wrapper">{{- 'icon-tiktok.svg' | inline_asset_content -}}</span>
                 <span class="visually-hidden">{{ 'general.social.links.tiktok' | t }}</span>
               </a>
@@ -150,7 +150,7 @@
           {%- endif -%}
           {%- if settings.social_lazada_link != blank -%}
             <li>
-              <a href="{{ settings.social_lazada_link }}" class="zenith-contact__social-link" target="_blank" rel="noopener">
+              <a href="{{ settings.social_lazada_link | escape }}" class="zenith-contact__social-link" target="_blank" rel="noopener">
                 <span class="svg-wrapper">{%- render 'zenith-icon', icon: 'lazada' -%}</span>
                 <span class="visually-hidden">Lazada</span>
               </a>
@@ -158,7 +158,7 @@
           {%- endif -%}
           {%- if settings.social_shopee_link != blank -%}
             <li>
-              <a href="{{ settings.social_shopee_link }}" class="zenith-contact__social-link" target="_blank" rel="noopener">
+              <a href="{{ settings.social_shopee_link | escape }}" class="zenith-contact__social-link" target="_blank" rel="noopener">
                 <span class="svg-wrapper">{%- render 'zenith-icon', icon: 'shopee' -%}</span>
                 <span class="visually-hidden">Shopee</span>
               </a>

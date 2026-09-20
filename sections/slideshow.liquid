@@ -174,7 +174,7 @@
               <div class="banner__buttons">
                 <a
                   {% if block.settings.link %}
-                    href="{{ block.settings.link }}"
+                    href="{{ block.settings.link | escape }}"
                   {% else %}
                     role="link" aria-disabled="true"
                   {% endif %}

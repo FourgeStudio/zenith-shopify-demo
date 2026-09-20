@@ -264,7 +264,7 @@
       {%- if section.settings.link_label != blank -%}
         <a
           {% if section.settings.link != blank %}
-            href="{{ section.settings.link }}"
+            href="{{ section.settings.link | escape }}"
           {% else %}
             role="link" aria-disabled="true"
           {% endif %}

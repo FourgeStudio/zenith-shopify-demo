@@ -42,7 +42,7 @@
             >
               {%- if block.settings.link != blank -%}
                 <a
-                  href="{{ block.settings.link }}"
+                  href="{{ block.settings.link | escape }}"
                   class="zenith-icon-bar__link"
                   {% if clone %}
                     tabindex="-1"

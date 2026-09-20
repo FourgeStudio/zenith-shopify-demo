@@ -8,6 +8,7 @@ _Last updated: 2026-09-21. Keep this file current at the end of each work sessio
 - Homepage (desktop + mobile), header, announcement bar, menu drawer and footer rebuilt to the design exports in `design/homepage/` (2026-09-18 design-accuracy pass). Verified against static renders of the CSS, **not yet eyeballed on the real store** → first job next session.
 - Contact page (`templates/page.contact.json` → new `zenith-contact` section: contact details + FAQ + contact form) built to `design/contact-us/` (2026-09-18). Same verification caveat.
 - About page (`templates/page.about.json`) built to `design/about-us/` (2026-09-18): Brand story ×3 (intro / story / care — new options: heading tag + colour, mobile heading above image, mobile edge-to-edge image + fade + text overlap, wordmark logo), Feature columns as icon cards ("What We Believe": card colours, number badge, icon beside text on mobile), new **Zenith · Store links** (Lazada / Shopee / TikTok Shop cards) and **Zenith · Trust checklist** (checklist + Amare seal card), homepage Hero reused as the closing CTA. Same verification caveat.
+- Security pass 2026-09-21: whole repo + full git history audited (no secrets, no third-party JS, every fetch same-origin, all `<script>`/JSON-LD output goes through `| json`, all forms are native `{% form %}`). Hardening applied: every merchant-entered link is now `{{ ... | escape }}`, `current_tags` escaped in the `<title>`, and every `target="_blank"` carries `rel="noopener"`.
 - Brand tokens, colors, fonts, logos: see `.claude/brand.md`.
 
 ## Branch flow (two branches only)
@@ -132,6 +133,7 @@ _Last updated: 2026-09-21. Keep this file current at the end of each work sessio
 - Dawn's `div:empty { display: none }` hides empty divs — overlays use `div.zenith-overlay` to beat it; watch for this with any new empty decorative div.
 - `sections/cart-icon-bubble.liquid` carries the same cart SVG as `sections/header.liquid` (Dawn re-renders it after add-to-cart) — change both together.
 - Theme check: 0 errors; `ExcessiveSettingsCount` warnings on 11 sections (>40 settings, editor-usability warning only). Dawn orphan snippets `header-drawer.liquid`, `quick-order-product-row.liquid`.
+- **Escape merchant-entered URLs**: any new `href="{{ ...settings.some_link }}"` gets `| escape`, and any `target="_blank"` gets `rel="noopener"` (repo-wide convention since the 2026-09-21 security pass). `| escape` on a URL only turns `&` into `&amp;`, which browsers decode back — it never changes where a link points.
 - `gh` CLI not installed; PRs are opened via compare URLs. Pushing needs `GCM_INTERACTIVE=always` in this environment.
 
 ## Commands

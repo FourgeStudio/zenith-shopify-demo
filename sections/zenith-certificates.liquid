@@ -114,7 +114,7 @@
             endif
           -%}
           <li class="zenith-cert__logo" style="--z-cert-logo-s: {{ block.settings.size | divided_by: 100.0 }};" {{ block.shopify_attributes }}>
-            {%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}" class="zenith-cert__logo-link">{%- endif -%}
+            {%- if block.settings.link != blank -%}<a href="{{ block.settings.link | escape }}" class="zenith-cert__logo-link">{%- endif -%}
             {%- if block.settings.image != blank -%}
               {{
                 block.settings.image
@@ -178,7 +178,7 @@
           {{ block.shopify_attributes }}
         >
           {%- if full_link != blank -%}
-            <a href="{{ full_link }}" class="zenith-cert__frame" target="_blank" rel="noopener">
+            <a href="{{ full_link | escape }}" class="zenith-cert__frame" target="_blank" rel="noopener">
           {%- else -%}
             <div class="zenith-cert__frame">
           {%- endif -%}

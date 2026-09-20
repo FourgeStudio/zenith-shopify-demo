@@ -67,7 +67,7 @@
                     {% if block.settings.button_link == blank %}
                       role="link" aria-disabled="true"
                     {% else %}
-                      href="{{ block.settings.button_link }}"
+                      href="{{ block.settings.button_link | escape }}"
                     {% endif %}
                     class="button{% if block.settings.button_style_secondary %} button--secondary{% else %} button--primary{% endif %}"
                   >
@@ -79,7 +79,7 @@
                     {% if block.settings.button_link_2 == blank %}
                       role="link" aria-disabled="true"
                     {% else %}
-                      href="{{ block.settings.button_link_2 }}"
+                      href="{{ block.settings.button_link_2 | escape }}"
                     {% endif %}
                     class="button{% if block.settings.button_style_secondary_2 %} button--secondary{% else %} button--primary{% endif %}"
                   >

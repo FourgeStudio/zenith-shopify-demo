@@ -250,7 +250,7 @@
                 {{ logo_attrs }}
               >
                 {%- if logo_link != blank -%}
-                  <a href="{{ logo_link }}" class="zenith-features__logo-link" target="_blank" rel="noopener">
+                  <a href="{{ logo_link | escape }}" class="zenith-features__logo-link" target="_blank" rel="noopener">
                 {%- endif -%}
                 {%- if logo_image != blank -%}
                   {%- assign logo_alt = logo_image.alt | default: logo_name -%}

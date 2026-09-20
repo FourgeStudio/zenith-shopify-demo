@@ -36,7 +36,7 @@
           {{ section.settings.title }}
         </h2>
         {%- if section.settings.button_label != blank and show_mobile_slider -%}
-          <a href="{{ section.settings.button_link }}" class="link underlined-link large-up-hide">
+          <a href="{{ section.settings.button_link | escape }}" class="link underlined-link large-up-hide">
             {{- section.settings.button_label | escape -}}
           </a>
         {%- endif -%}
@@ -131,7 +131,7 @@
                     {% if block.settings.link == blank %}
                       role="link" aria-disabled="true"
                     {% else %}
-                      href="{{ block.settings.link }}"
+                      href="{{ block.settings.link | escape }}"
                     {% endif %}
                   >
                     {{- block.settings.link_label | escape -}}
@@ -180,7 +180,7 @@
           {% if section.settings.button_link == blank %}
             role="link" aria-disabled="true"
           {% else %}
-            href="{{ section.settings.button_link }}"
+            href="{{ section.settings.button_link | escape }}"
           {% endif %}
         >
           {{ section.settings.button_label | escape }}
