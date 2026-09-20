@@ -387,6 +387,16 @@
                   class: 'zenith-mp__fda-logo',
                   alt: s.fda_label
               }}
+            {%- else -%}
+              {%- comment -%} zenith: bundled Philippine FDA mark until an image is chosen {%- endcomment -%}
+              <img
+                src="{{ 'zenith-fda.png' | asset_url }}"
+                alt="{{ s.fda_label | escape }}"
+                width="66"
+                height="21"
+                loading="lazy"
+                class="zenith-mp__fda-logo"
+              >
             {%- endif -%}
             {%- if s.fda_label != blank -%}
               <span class="zenith-mp__fda-label">{{ s.fda_label | escape }}</span>
@@ -598,7 +608,7 @@
       "default": "UP TO 33% OFF + ₱300 OFF"
     },
     { "type": "checkbox", "id": "show_fda", "label": "Show FDA bar", "default": true },
-    { "type": "image_picker", "id": "fda_image", "label": "FDA logo" },
+    { "type": "image_picker", "id": "fda_image", "label": "FDA logo", "info": "Blank = the bundled Philippine FDA mark." },
     { "type": "text", "id": "fda_label", "label": "FDA label", "default": "Philippine FDA Notified" },
     { "type": "text", "id": "fda_number", "label": "FDA number", "default": "NN-1000015008540" },
     { "type": "text", "id": "button_label", "label": "Add to cart label", "default": "Add to Cart" },
