@@ -9,10 +9,14 @@
     visibility {String} 'promo_on' (only while the promotion runs) | 'promo_off' (only while it doesn't) | 'always'
     output {String} 'class' (default) | 'attrs'
 {% endcomment %}
+{%- capture zps_promo -%}{%- render 'zenith-promo-on' -%}{%- endcapture -%}
 {%- liquid
   assign pv = visibility | default: 'always'
   if pv != 'always'
-    assign promo_on = settings.promo_enabled
+    assign promo_on = false
+    if zps_promo != blank
+      assign promo_on = true
+    endif
     assign promo_end = ''
     if settings.promo_end_date != blank
       assign pe_time = settings.promo_end_time | default: '23:59' | strip
@@ -20,17 +24,13 @@
       assign promo_end = settings.promo_end_date | strip | append: 'T' | append: pe_time | append: ':00' | append: pe_tz
     endif
 
-    # Auto end: once the end date/time has passed, the promotion counts as off.
+    # Watch a promotion that is still running and has a real end date, so zenith-promo-state.js can
+    # swap the sections when it ends on an open page. zenith-promo-on has already ruled out a past one.
     assign watch_end = false
     if promo_on and settings.promo_auto_end and promo_end != ''
       assign end_s = promo_end | date: '%s' | plus: 0
-      assign now_s = 'now' | date: '%s' | plus: 0
       if end_s > 1000000000
-        if now_s >= end_s
-          assign promo_on = false
-        else
-          assign watch_end = true
-        endif
+        assign watch_end = true
       endif
     endif
 

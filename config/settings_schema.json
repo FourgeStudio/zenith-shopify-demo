@@ -97,14 +97,41 @@
       },
       {
         "type": "paragraph",
-        "content": "Write [free_shipping] in any text on the store — trust rows, announcement bar, anywhere — and it prints the amount below."
+        "content": "Write [free_shipping] or [shipping_fee] in any text on the store — trust rows, announcement bar, anywhere — and the figures below are printed."
       },
       {
         "type": "number",
         "id": "cart_free_shipping_threshold",
         "label": "Free shipping over",
         "default": 1200,
-        "info": "In pesos, no symbol. Must match your real rule in Settings → Shipping. Printed wherever [free_shipping] appears."
+        "info": "In pesos, no symbol. Must match your real rule in Settings → Shipping. Set to 0 to hide the cart bar."
+      },
+      {
+        "type": "number",
+        "id": "cart_free_shipping_threshold_promo",
+        "label": "Free shipping over (while a promotion runs)",
+        "default": 900,
+        "info": "Takes over whenever Zenith · Promo → \"Promotion is running\" is on and the countdown has not passed. Set to 0 to keep the figure above during promotions."
+      },
+      {
+        "type": "number",
+        "id": "cart_shipping_fee",
+        "label": "Flat shipping fee below that",
+        "default": 100,
+        "info": "In pesos, no symbol. Printed by [shipping_fee] and by the bundle card ribbons."
+      },
+      {
+        "type": "text",
+        "id": "cart_free_shipping_away",
+        "label": "Cart bar — still short",
+        "default": "[amount] away from free shipping",
+        "info": "[amount] is what is left to spend; [fee] is the flat fee. Blank hides the bar's text."
+      },
+      {
+        "type": "text",
+        "id": "cart_free_shipping_unlocked",
+        "label": "Cart bar — reached",
+        "default": "Free shipping unlocked"
       },
       {
         "type": "header",

@@ -1,0 +1,17 @@
+{% comment %}
+  The free-shipping threshold that applies right now, in cents. Echoes a number.
+  Theme settings → Zenith · Cart holds both figures; the promotion one takes over while a promotion
+  is running (see zenith-promo-on), so the cart bar, the [free_shipping] token and the bundle card
+  ribbons all move together and cannot disagree.
+  Usage:
+    {%- capture goal -%}{%- render 'zenith-shipping-goal' -%}{%- endcapture -%}
+    {%- assign goal = goal | plus: 0 -%}
+{% endcomment %}
+{%- capture zsg_promo -%}{%- render 'zenith-promo-on' -%}{%- endcapture -%}
+{%- liquid
+  assign zsg = settings.cart_free_shipping_threshold
+  if zsg_promo != blank and settings.cart_free_shipping_threshold_promo > 0
+    assign zsg = settings.cart_free_shipping_threshold_promo
+  endif
+  echo zsg | times: 100
+-%}

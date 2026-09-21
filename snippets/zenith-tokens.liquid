@@ -2,19 +2,29 @@
   Replaces the store-wide text tokens in a section's captured output, so a number that appears in copy all
   over the store is typed once in Theme settings instead of being retyped into every text field.
     [customers]     → Theme settings → Zenith → Customer count
-    [free_shipping] → Theme settings → Zenith · Cart → Free shipping threshold
+    [free_shipping] → the threshold that applies right now (snippets/zenith-shipping-goal.liquid), so trust
+                      copy follows the promotion figure automatically while a promotion runs
+    [shipping_fee]  → Theme settings → Zenith · Cart → Flat shipping fee
   Accepts: body {String} the section's captured markup
   Usage:
     {%- capture zenith_body -%}…{%- endcapture -%}
     {%- render 'zenith-tokens', body: zenith_body -%}
 {% endcomment %}
+{%- capture zt_goal -%}{%- render 'zenith-shipping-goal' -%}{%- endcapture -%}
 {%- liquid
-  assign z_tok = body | replace: '[customers]', settings.customer_count
-  if settings.cart_free_shipping_threshold > 0
-    capture z_tok_ship
-      echo settings.cart_free_shipping_threshold | times: 100 | money_without_trailing_zeros
+  assign zt = body | replace: '[customers]', settings.customer_count
+  assign zt_goal = zt_goal | plus: 0
+  if zt_goal > 0
+    capture zt_ship
+      echo zt_goal | money_without_trailing_zeros
     endcapture
-    assign z_tok = z_tok | replace: '[free_shipping]', z_tok_ship
+    assign zt = zt | replace: '[free_shipping]', zt_ship
   endif
-  echo z_tok
+  if settings.cart_shipping_fee > 0
+    capture zt_fee
+      echo settings.cart_shipping_fee | times: 100 | money_without_trailing_zeros
+    endcapture
+    assign zt = zt | replace: '[shipping_fee]', zt_fee
+  endif
+  echo zt
 -%}

@@ -1,0 +1,39 @@
+{% comment %}
+  Free-shipping progress for the cart drawer. Copy and figures: Theme settings → Zenith · Cart.
+  The threshold comes from zenith-shipping-goal, which drops to the promotion figure while a
+  promotion runs — the same number the [free_shipping] token prints in trust copy and the bundle
+  card ribbons compare against, so the store can never quote two different thresholds at once.
+  Shopify re-renders the whole #CartDrawer on every cart change, so the bar updates itself. No JS.
+{% endcomment %}
+{%- capture zcs_goal -%}{%- render 'zenith-shipping-goal' -%}{%- endcapture -%}
+{%- liquid
+  assign zcs_goal = zcs_goal | plus: 0
+  assign zcs_left = zcs_goal | minus: cart.total_price
+  assign zcs_pct = 0
+  if zcs_goal > 0
+    assign zcs_pct = cart.total_price | times: 100.0 | divided_by: zcs_goal | round
+    if zcs_pct > 100
+      assign zcs_pct = 100
+    endif
+  endif
+  capture zcs_fee
+    echo settings.cart_shipping_fee | times: 100 | money_without_trailing_zeros
+  endcapture
+-%}
+{%- if zcs_goal > 0 and cart != empty -%}
+  <div class="zenith-cart-ship{% if zcs_left <= 0 %} zenith-cart-ship--unlocked{% endif %}">
+    <p class="zenith-cart-ship__text" role="status">
+      {%- if zcs_left > 0 -%}
+        {%- capture zcs_money -%}{{ zcs_left | money }}{%- endcapture -%}
+        {%- assign zcs_text = settings.cart_free_shipping_away | escape | replace: '[amount]', zcs_money -%}
+        {{- zcs_text | replace: '[fee]', zcs_fee -}}
+      {%- else -%}
+        {%- render 'zenith-icon', icon: 'check_circle', class: 'zenith-cart-ship__icon' -%}
+        {{- settings.cart_free_shipping_unlocked | escape -}}
+      {%- endif -%}
+    </p>
+    <div class="zenith-cart-ship__track">
+      <div class="zenith-cart-ship__fill" style="width: {{ zcs_pct }}%"></div>
+    </div>
+  </div>
+{%- endif -%}

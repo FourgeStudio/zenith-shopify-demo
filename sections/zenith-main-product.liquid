@@ -340,12 +340,13 @@
         </div>
 
         {%- if has_variants -%}
+          {%- capture v_ship_goal_raw -%}{%- render 'zenith-shipping-goal' -%}{%- endcapture -%}
           {%- liquid
             assign v_style = s.variant_style | default: 'cards'
-            assign v_ship_goal = settings.cart_free_shipping_threshold | times: 100
+            assign v_ship_goal = v_ship_goal_raw | plus: 0
             capture v_ship_fee_text
               capture v_ship_fee_money
-                echo s.variant_card_ship_fee_amount | times: 100 | money_without_trailing_zeros
+                echo settings.cart_shipping_fee | times: 100 | money_without_trailing_zeros
               endcapture
               echo s.variant_card_ship_fee | escape | replace: '[amount]', v_ship_fee_money
             endcapture
@@ -782,17 +783,16 @@
       "type": "text",
       "id": "variant_card_ship_free",
       "label": "Free shipping ribbon",
-      "info": "Shown on a variant priced at or above Theme settings → Zenith · Cart → Free shipping over.",
+      "info": "At or above the free-shipping threshold in Theme settings → Zenith · Cart. The promotion figure takes over while a promotion runs.",
       "default": "FREE SHIPPING"
     },
     {
       "type": "text",
       "id": "variant_card_ship_fee",
       "label": "Paid shipping ribbon",
-      "info": "Shown below that threshold. [amount] is the fee below.",
+      "info": "Below that threshold. [amount] is Theme settings → Zenith · Cart → Flat shipping fee.",
       "default": "+[amount] Shipping"
     },
-    { "type": "number", "id": "variant_card_ship_fee_amount", "label": "Shipping fee", "info": "In pesos, no symbol.", "default": 100 },
 
     { "type": "header", "content": "Layout" },
     {

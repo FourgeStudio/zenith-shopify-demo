@@ -1,0 +1,25 @@
+{% comment %}
+  Is the store-wide promotion running right now? Echoes 1 when it is, nothing when it is not.
+  Single source for the answer: Theme settings → Zenith · Promo → "Promotion is running", minus the
+  auto-end once the countdown date/time has passed.
+  Usage:
+    {%- capture promo_on -%}{%- render 'zenith-promo-on' -%}{%- endcapture -%}
+    {%- if promo_on != blank -%}…{%- endif -%}
+  Callers: zenith-promo-state (section visibility), zenith-shipping-goal (free-shipping threshold).
+{% endcomment %}
+{%- liquid
+  assign zpo_on = settings.promo_enabled
+  if zpo_on and settings.promo_auto_end and settings.promo_end_date != blank
+    assign zpo_time = settings.promo_end_time | default: '23:59' | strip
+    assign zpo_tz = settings.promo_timezone | default: '+08:00'
+    assign zpo_end = settings.promo_end_date | strip | append: 'T' | append: zpo_time | append: ':00' | append: zpo_tz
+    assign zpo_end_s = zpo_end | date: '%s' | plus: 0
+    assign zpo_now_s = 'now' | date: '%s' | plus: 0
+    if zpo_end_s > 1000000000 and zpo_now_s >= zpo_end_s
+      assign zpo_on = false
+    endif
+  endif
+  if zpo_on
+    echo 1
+  endif
+-%}
