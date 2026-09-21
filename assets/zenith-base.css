@@ -731,7 +731,11 @@ html.js menu-drawer > details > summary::before {
   background: rgba(var(--color-foreground), 0.15);
 }
 
-.zenith-cart-ship__fill {
+/* The fill is an empty div, so it needs div.* to beat Dawn's div:empty { display: none } in base.css
+   — same trap as zenith-overlay and the Judge.me histogram bars. Without this the track reads grey
+   at every percentage, including 100%. */
+div.zenith-cart-ship__fill {
+  display: block;
   height: 100%;
   border-radius: inherit;
   background: linear-gradient(90deg, var(--z-dawn-gold, #eabe5f) 0%, var(--z-gold, #c59300) 100%);
@@ -743,7 +747,7 @@ html.js menu-drawer > details > summary::before {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .zenith-cart-ship__fill { transition: none; }
+  div.zenith-cart-ship__fill { transition: none; }
 }
 
 /* ---------- Cart drawer: reassurance under Checkout (snippets/zenith-cart-trust.liquid) ---------- */
