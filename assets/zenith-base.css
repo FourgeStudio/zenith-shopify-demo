@@ -701,6 +701,20 @@ html.js menu-drawer > details > summary::before {
   opacity: 0.65;
 }
 
+/* Cart drawer: no PRODUCT / TOTAL header row. The labels are in visually-hidden spans rather than
+   deleted, because every cart cell points at these th ids with headers="CartDrawer-Column…" —
+   removing them would leave those attributes referencing nothing. This collapses what is left:
+   Dawn draws the rule under .cart-items th at ≥750 and under .cart-items thead tr below it.
+   component-cart-drawer.css loads after this file, so the `table` qualifier is there to out-specify
+   its .cart-drawer .cart-items thead { margin-bottom }, not decoration. */
+.cart-drawer table.cart-items thead,
+.cart-drawer table.cart-items thead tr,
+.cart-drawer table.cart-items thead th {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
 /* ---------- Cart drawer: free-shipping progress (snippets/zenith-cart-shipping-bar.liquid) ----------
    Sits under the fixed drawer header, so it stays in view while the item list scrolls. */
 .zenith-cart-ship {
