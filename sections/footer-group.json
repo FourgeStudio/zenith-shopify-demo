@@ -98,7 +98,8 @@
         "padding_bottom": 20,
         "padding_top_mobile": 26,
         "padding_bottom_mobile": 20,
-        "divider_spacing": 15
+        "divider_spacing": 15,
+        "seal_spacing": 16
       }
     }
   },

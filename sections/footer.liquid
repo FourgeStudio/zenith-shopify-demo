@@ -78,6 +78,7 @@
   --z-pay-h-m: {{ s.payment_image_height_mobile }}px;
   --z-seal-w: {{ s.seal_width }}px;
   --z-seal-w-m: {{ s.seal_width_mobile }}px;
+  --z-seal-sp: {{ s.seal_spacing }}px;
   --z-cfs: {{ s.caption_font_size }}px;
   --z-cfs-m: {{ s.caption_font_size_mobile }}px;
   {%- if s.background_color != blank and s.background_color.alpha != 0 %}
@@ -1051,6 +1052,16 @@
       "unit": "px",
       "label": "Space above and below divider",
       "default": 15
+    },
+    {
+      "type": "range",
+      "id": "seal_spacing",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Space above seal (desktop)",
+      "default": 0
     }
   ],
   "default": {

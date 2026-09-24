@@ -322,9 +322,12 @@ footer.footer.zenith-footer {
   }
 
   .zenith-footer__info,
-  .zenith-footer__seal,
   .zenith-footer__extras.footer-block--newsletter {
     margin-top: 0;
+  }
+
+  .zenith-footer__seal {
+    margin-top: var(--z-seal-sp, 0);
   }
 
   .zenith-footer__social .list-social__link {
