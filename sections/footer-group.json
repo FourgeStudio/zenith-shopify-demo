@@ -14,20 +14,11 @@
     "footer": {
       "type": "footer",
       "blocks": {
-        "menu_main": {
-          "type": "link_list",
-          "settings": {
-            "heading": "",
-            "menu": "footer",
-            "menu_mobile": "",
-            "mobile_full_width": true
-          }
-        },
         "menu_products": {
           "type": "link_list",
           "settings": {
             "heading": "",
-            "menu": "",
+            "menu": "quick-links",
             "menu_mobile": "",
             "mobile_full_width": false
           }
@@ -36,21 +27,31 @@
           "type": "link_list",
           "settings": {
             "heading": "",
-            "menu": "",
+            "menu": "collections",
+            "menu_mobile": "",
+            "mobile_full_width": false
+          }
+        },
+        "link_list_YRhAig": {
+          "type": "link_list",
+          "settings": {
+            "heading": "",
+            "menu": "faq",
             "menu_mobile": "",
             "mobile_full_width": false
           }
         }
       },
       "block_order": [
-        "menu_main",
         "menu_products",
-        "menu_policies"
+        "menu_policies",
+        "link_list_YRhAig"
       ],
       "settings": {
         "show_social": true,
         "email": "hello@tryzenith.ph",
         "payment_enable": true,
+        "seal_image": "shopify://shop_images/amare-group-badge.png",
         "seal_link": "",
         "bottom_text": "TryZenith PH",
         "copyright_text": "© [year] Amare Group Inc. All rights reserved.",
