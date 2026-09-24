@@ -279,7 +279,7 @@
         {%- capture seal_sizes -%}(min-width: 750px) {{ s.seal_width }}px, {{ s.seal_width_mobile }}px{%- endcapture -%}
         <div class="zenith-footer__seal zenith-footer__seal--{{ s.seal_style }} zenith-footer__seal--m-{{ s.seal_style_mobile }}">
           {%- if s.seal_link != blank -%}
-            <a href="{{ s.seal_link }}" class="zenith-footer__seal-link">
+            <a href="{{ s.seal_link | escape }}" class="zenith-footer__seal-link">
           {%- endif -%}
           {{
             s.seal_image
