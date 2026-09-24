@@ -70,7 +70,7 @@
         "social_gap": 14,
         "payment_image_height": 20,
         "seal_width": 85,
-        "seal_style": "muted",
+        "seal_style": "original",
         "top_line_height": 6,
         "color_scheme": "scheme-1",
         "background_color": "#1a1a1a",
