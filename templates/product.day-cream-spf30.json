@@ -1,0 +1,1257 @@
+{
+  "sections": {
+    "main": {
+      "type": "zenith-main-product",
+      "blocks": {
+        "benefit_1": {
+          "type": "benefit",
+          "settings": {
+            "text": "Broad-spectrum SPF 30, six UV filters",
+            "hide_on_desktop": false,
+            "hide_on_mobile": false
+          }
+        },
+        "benefit_2": {
+          "type": "benefit",
+          "settings": {
+            "text": "No white cast",
+            "hide_on_desktop": false,
+            "hide_on_mobile": false
+          }
+        },
+        "benefit_3": {
+          "type": "benefit",
+          "settings": {
+            "text": "Bakuchiol and Niacinamide, day-safe",
+            "hide_on_desktop": false,
+            "hide_on_mobile": false
+          }
+        },
+        "benefit_4": {
+          "type": "benefit",
+          "settings": {
+            "text": "Matte finish for Philippine heat",
+            "hide_on_desktop": false,
+            "hide_on_mobile": false
+          }
+        },
+        "benefit_5": {
+          "type": "benefit",
+          "settings": {
+            "text": "One step every morning",
+            "hide_on_desktop": false,
+            "hide_on_mobile": false
+          }
+        },
+        "benefit_6": {
+          "type": "benefit",
+          "settings": {
+            "text": "FDA-notified",
+            "hide_on_desktop": false,
+            "hide_on_mobile": false
+          }
+        },
+        "trust_1": {
+          "type": "trust",
+          "settings": {
+            "icon": "thumbs_up",
+            "text": "Zenith Money-Back Guarantee"
+          }
+        },
+        "trust_2": {
+          "type": "trust",
+          "settings": {
+            "icon": "map",
+            "text": "Free Shipping [free_shipping]+"
+          }
+        },
+        "trust_3": {
+          "type": "trust",
+          "settings": {
+            "icon": "certificate",
+            "text": "FDA-Notified Products"
+          }
+        },
+        "trust_4": {
+          "type": "trust",
+          "settings": {
+            "icon": "dropper",
+            "text": "Ingredients named on the label"
+          }
+        },
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "title": "About this product",
+            "content_source": "custom",
+            "text": "<p>Most sunscreens feel heavy in our heat, and most anti-aging creams are made for night.</p><p>This does the morning in one step: broad-spectrum SPF 30 from six UV filters, Bakuchiol and Niacinamide, on a beef tallow base with Zinc PCA and silica for a matte finish. No white cast.</p>",
+            "open": true,
+            "hide_on_mobile": false,
+            "hide_on_desktop": false
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "title": "How to use",
+            "content_source": "custom",
+            "text": "<p>1. Every morning, on clean, dry skin, apply about a quarter teaspoon to the face and neck.</p><p>2. Massage until absorbed, 15 minutes before heading out.</p><p>3. Reapply every 2 hours when you are outdoors or sweating.</p>",
+            "open": false,
+            "hide_on_mobile": false,
+            "hide_on_desktop": false
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "title": "Ingredients",
+            "content_source": "custom",
+            "text": "<p>Key ingredients: six UV filters including Tinosorb M and Tinosorb S, Bakuchiol, Niacinamide, beef tallow, Zinc PCA, silica, Sodium Hyaluronate.</p><p>Full ingredient list:<br>Water, Isohexadecane, Methylene Bis-Benzotriazolyl Tetramethylbutylphenol, Ethylhexyl Salicylate, Phenylbenzimidazole Sulfonic Acid, Ethylhexyl Triazone, Butylene Glycol, Homosalate, Cetearyl Olivate, C12-15 Alkyl Benzoate, Bis-Ethylhexyloxyphenol Methoxyphenyl Triazine, Niacinamide, Aminomethyl Propanol, Adeps Bovis, Polysorbate 60, Cetearyl Glucoside, Silica, Dimethicone/Vinyl Dimethicone Crosspolymer, Bakuchiol, Zinc PCA, Hydroxyacetophenone, 1,2-Hexanediol, Oryza Sativa Extract, Phragmites Communis Extract, Zea Mays Silk Extract, Malva Sylvestris Extract, Aloe Barbadensis Extract, Stephania Tetrandra Extract, Taraxacum Officinale Extract, Saururus Chinensis Extract, Xanthan Gum, Sodium Hyaluronate, Disodium EDTA.</p>",
+            "open": false,
+            "hide_on_mobile": false,
+            "hide_on_desktop": false
+          }
+        },
+        "row_4": {
+          "type": "row",
+          "settings": {
+            "title": "Delivery and returns",
+            "content_source": "custom",
+            "text": "<p>Nationwide delivery, with Cash on Delivery available. Every order carries the Zenith Money-Back Guarantee. Full terms on our <a href=\"/policies/refund-policy\">Refunds and Returns</a> page.</p>",
+            "open": false,
+            "hide_on_mobile": false,
+            "hide_on_desktop": false
+          }
+        },
+        "row_5": {
+          "type": "row",
+          "settings": {
+            "title": "FAQs",
+            "content_source": "questions",
+            "text": "",
+            "open": false,
+            "hide_on_mobile": false,
+            "hide_on_desktop": false
+          }
+        },
+        "question_1": {
+          "type": "question",
+          "settings": {
+            "question": "Will it feel heavy or greasy in our weather?",
+            "answer": "<p>No. Zinc PCA and silica keep it matte, and it sets light.</p>",
+            "open": false
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "Does it leave a white cast?",
+            "answer": "<p>No. It goes on without a white cast.</p>",
+            "open": false
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "How often should I reapply?",
+            "answer": "<p>Every 2 hours when you are outdoors or sweating. Put it on every morning, even on cloudy days.</p>",
+            "open": false
+          }
+        },
+        "question_4": {
+          "type": "question",
+          "settings": {
+            "question": "How much do I use?",
+            "answer": "<p>About a quarter teaspoon for the face and neck, every morning.</p>",
+            "open": false
+          }
+        },
+        "question_5": {
+          "type": "question",
+          "settings": {
+            "question": "Is it the same as the Tallow Cream?",
+            "answer": "<p>No. The Day Cream has SPF 30 for the day. The Tallow Cream has 0.2% retinol for the night. Use both for the full routine.</p>",
+            "open": false
+          }
+        },
+        "question_6": {
+          "type": "question",
+          "settings": {
+            "question": "Paano kung hindi ako hiyang?",
+            "answer": "<p>Every order carries the Zenith Money-Back Guarantee. Skin products are covered for 30 days, counted from delivery.</p><p>Message us on Facebook or email hello@tryzenith.ph with your order number and a photo of the product. Full terms on our Refunds and Returns page.</p>",
+            "open": false
+          }
+        }
+      },
+      "block_order": [
+        "benefit_1",
+        "benefit_2",
+        "benefit_3",
+        "benefit_4",
+        "benefit_5",
+        "benefit_6",
+        "trust_1",
+        "trust_2",
+        "trust_3",
+        "trust_4",
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4",
+        "row_5",
+        "question_1",
+        "question_2",
+        "question_3",
+        "question_4",
+        "question_5",
+        "question_6"
+      ],
+      "settings": {
+        "placeholder_title": "Zenith Anti-Aging Tallow Day Cream SPF 30",
+        "show_rating": true,
+        "rating_value": "4.69",
+        "rating_count": "2,158",
+        "rating_label": "Trusted by [customers] Filipino men",
+        "subtitle": "<p>Light day cream with SPF 30. No white cast.</p>",
+        "price_badge": "UP TO 33% OFF + ₱300 OFF",
+        "show_fda": true,
+        "fda_label": "FDA-Notified",
+        "fda_number": "",
+        "button_label": "Add to Cart",
+        "button_icon": "cart",
+        "quantity_pad": true,
+        "show_cod": true,
+        "cod_label": "Cash on Delivery",
+        "cod_icon": "cash",
+        "payment_icons": "shop",
+        "show_delivery": true,
+        "delivery_icon": "truck",
+        "delivery_title": "Nationwide Delivery",
+        "delivery_text": "3 days Metro Manila, 3–7 days Visayas / Mindanao.",
+        "show_thumbnails": true,
+        "show_dots": true,
+        "reviews_source": "global",
+        "content_max_width": 1080,
+        "gap": 80,
+        "content_gap": 12,
+        "gallery_ratio": 108,
+        "dot_size": 8,
+        "dot_width": 40,
+        "dot_gap": 4,
+        "dot_offset": 21,
+        "thumb_count": 6,
+        "thumb_gap": 8,
+        "thumb_spacing": 8,
+        "review_card_width": 220,
+        "review_gap": 12,
+        "review_autoplay": 4,
+        "review_spacing": 38,
+        "review_photo_size": 48,
+        "check_size": 20,
+        "check_gap": 12,
+        "fda_height": 30,
+        "fda_logo_height": 15,
+        "qty_width": 106,
+        "button_height": 46,
+        "form_gap": 13,
+        "badge_height": 20,
+        "badge_padding": 8,
+        "badge_align": "right",
+        "badge_spacing": 36,
+        "payment_icon_height": 20,
+        "payment_gap": 6,
+        "delivery_padding": 8,
+        "delivery_icon_size": 20,
+        "trust_icon_size": 18,
+        "trust_gap": 10,
+        "trust_row_gap": 12,
+        "item_padding": 12,
+        "icon_size": 16,
+        "color_scheme": "scheme-1",
+        "top_color": "#191919",
+        "fade_height": 1200,
+        "media_background": "#ffffff",
+        "dot_color": "#c5c5c6",
+        "dot_active_color": "#010101",
+        "thumb_active_color": "#eabe5f",
+        "star_color": "#eabe5f",
+        "price_color": "#ffffff",
+        "compare_color": "#8e8c8c",
+        "badge_background": "#294850",
+        "badge_text_color": "#ffffff",
+        "check_color": "#eabe5f",
+        "bar_background": "#202020",
+        "delivery_background": "#112328",
+        "trust_icon_color": "#eabe5f",
+        "card_background": "#202020",
+        "review_name_color": "#c59300",
+        "row_icon_color": "#eabe5f",
+        "divider_opacity": 7,
+        "button_style": "gold",
+        "heading_font_size": 42,
+        "rating_font_size": 16,
+        "star_size": 22,
+        "subheading_font_size": 17,
+        "price_font_size": 36,
+        "compare_font_size": 22,
+        "badge_font_size": 12,
+        "text_font_size": 16,
+        "fda_font_size": 12,
+        "button_font_size": 22,
+        "delivery_title_font_size": 13,
+        "delivery_text_font_size": 11,
+        "trust_font_size": 13,
+        "title_font_size": 20,
+        "row_text_font_size": 18,
+        "review_name_font_size": 16,
+        "review_text_font_size": 13,
+        "review_star_size": 12,
+        "subtitle_desktop": true,
+        "subtitle_mobile": true,
+        "gap_mobile": 18,
+        "content_gap_mobile": 12,
+        "gallery_ratio_mobile": 100,
+        "slide_width_mobile": 70,
+        "slide_gap_mobile": 30,
+        "dot_size_mobile": 7,
+        "dot_width_mobile": 60,
+        "dot_gap_mobile": 10,
+        "dot_offset_mobile": 8,
+        "thumb_width_mobile": 75,
+        "thumb_gap_mobile": 6,
+        "thumb_spacing_mobile": 9,
+        "review_card_width_mobile": 260,
+        "review_spacing_mobile": 9,
+        "check_size_mobile": 18,
+        "check_gap_mobile": 11,
+        "heading_font_size_mobile": 32,
+        "rating_font_size_mobile": 13,
+        "star_size_mobile": 14,
+        "subheading_font_size_mobile": 17,
+        "price_font_size_mobile": 32,
+        "compare_font_size_mobile": 20,
+        "text_font_size_mobile": 15,
+        "badge_font_size_mobile": 12,
+        "badge_padding_mobile": 8,
+        "fda_font_size_mobile": 12,
+        "button_font_size_mobile": 22,
+        "delivery_title_font_size_mobile": 15,
+        "delivery_text_font_size_mobile": 13,
+        "trust_font_size_mobile": 13,
+        "title_font_size_mobile": 20,
+        "row_text_font_size_mobile": 18,
+        "item_padding_mobile": 18,
+        "icon_size_mobile": 16,
+        "padding_top": 40,
+        "padding_bottom": 48,
+        "padding_top_mobile": 8,
+        "padding_bottom_mobile": 32,
+        "rows_spacing": 18,
+        "rows_spacing_mobile": 38,
+        "question_font_size": 17,
+        "question_text_font_size": 15,
+        "question_font_size_mobile": 17,
+        "question_text_font_size_mobile": 15
+      }
+    },
+    "videos": {
+      "type": "zenith-video-carousel",
+      "blocks": {},
+      "block_order": [],
+      "settings": {
+        "content_source": "global",
+        "product_filter": "page",
+        "filter_products": [],
+        "eyebrow": "",
+        "heading": "A Complete Routine, Built for Men.",
+        "heading_mobile": "A Complete Routine,\nBuilt for Men.",
+        "subheading": "<p>Hear from the men who use Zenith every day.</p>",
+        "subheading_mobile_only": false,
+        "play_label": "Play video",
+        "center_when_fits": true,
+        "heading_alignment": "center",
+        "slides_desktop": 4,
+        "show_peek": true,
+        "show_dots": true,
+        "show_arrows": true,
+        "autoplay": 0,
+        "heading_max_width": 800,
+        "heading_gap": 4,
+        "heading_spacing": 24,
+        "gap": 24,
+        "controls_spacing": 32,
+        "video_ratio": "13-18",
+        "play_size": 80,
+        "play_position": 53,
+        "show_play_without_video": true,
+        "quote_align": "center",
+        "body_min_height": 200,
+        "thumb_size": 56,
+        "color_scheme": "scheme-1",
+        "card_color_scheme": "scheme-6",
+        "card_border_color": "#294850",
+        "title_color": "#d6b356",
+        "overlay_style": "bottom",
+        "overlay_color": "#112328",
+        "overlay_opacity": 100,
+        "overlay_coverage": 30,
+        "play_color": "#000000",
+        "play_opacity": 50,
+        "play_icon_color": "#ffffff",
+        "heading_font_size": 48,
+        "heading_uppercase": false,
+        "subheading_font_size": 18,
+        "eyebrow_font_size": 14,
+        "text_font_size": 16,
+        "title_font_size": 12,
+        "handle_font_size": 10,
+        "heading_alignment_mobile": "left",
+        "mobile_slide_width": 83,
+        "heading_font_size_mobile": 36,
+        "subheading_font_size_mobile": 16,
+        "heading_gap_mobile": 4,
+        "heading_spacing_mobile": 24,
+        "gap_mobile": 24,
+        "play_position_mobile": 57,
+        "quote_align_mobile": "top",
+        "body_min_height_mobile": 248,
+        "thumb_size_mobile": 56,
+        "text_font_size_mobile": 16,
+        "title_font_size_mobile": 12,
+        "handle_font_size_mobile": 10,
+        "padding_top": 56,
+        "padding_bottom": 40,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20
+      }
+    },
+    "ingredients": {
+      "type": "zenith-ingredients",
+      "blocks": {
+        "ingredient-1": {
+          "type": "ingredient",
+          "settings": {
+            "title": "Broad-spectrum SPF 30",
+            "text": "<p>Six modern UV filters. No white cast.</p>",
+            "title_mobile": "",
+            "text_mobile": ""
+          }
+        },
+        "ingredient-2": {
+          "type": "ingredient",
+          "settings": {
+            "title": "Bakuchiol and Niacinamide",
+            "text": "<p>Day-safe, so they go on in the morning with your SPF.</p>",
+            "title_mobile": "",
+            "text_mobile": ""
+          }
+        },
+        "ingredient-3": {
+          "type": "ingredient",
+          "settings": {
+            "title": "Zinc PCA and silica",
+            "text": "<p>Keep the finish matte in Philippine heat.</p>",
+            "title_mobile": "",
+            "text_mobile": ""
+          }
+        }
+      },
+      "block_order": [
+        "ingredient-1",
+        "ingredient-2",
+        "ingredient-3"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "What's in the tube",
+        "subheading": "<p>Three things, named on the label.</p>",
+        "open_first": true,
+        "show_list": true,
+        "list_title": "View Full Ingredient List",
+        "list_text": "<p>Water, Isohexadecane, Methylene Bis-Benzotriazolyl Tetramethylbutylphenol, Ethylhexyl Salicylate, Phenylbenzimidazole Sulfonic Acid, Ethylhexyl Triazone, Butylene Glycol, Homosalate, Cetearyl Olivate, C12-15 Alkyl Benzoate, Bis-Ethylhexyloxyphenol Methoxyphenyl Triazine, Niacinamide, Aminomethyl Propanol, Adeps Bovis, Polysorbate 60, Cetearyl Glucoside, Silica, Dimethicone/Vinyl Dimethicone Crosspolymer, Bakuchiol, Zinc PCA, Hydroxyacetophenone, 1,2-Hexanediol, Oryza Sativa Extract, Phragmites Communis Extract, Zea Mays Silk Extract, Malva Sylvestris Extract, Aloe Barbadensis Extract, Stephania Tetrandra Extract, Taraxacum Officinale Extract, Saururus Chinensis Extract, Xanthan Gum, Sodium Hyaluronate, Disodium EDTA.</p>",
+        "heading_alignment": "center",
+        "image_position": "right",
+        "heading_max_width": 800,
+        "media_width": 48,
+        "media_min_height": 600,
+        "gap": 52,
+        "card_gap": 20,
+        "content_padding": 20,
+        "item_padding": 20,
+        "thumb_size": 52,
+        "thumb_gap": 16,
+        "answer_spacing": 12,
+        "content_gap": 20,
+        "list_padding": 12,
+        "list_content_gap": 32,
+        "color_scheme": "scheme-1",
+        "card_background": "#202020",
+        "icon_color": "#eabe5f",
+        "divider_opacity": 10,
+        "text_opacity": 70,
+        "subheading_opacity": 70,
+        "heading_font_size": 48,
+        "heading_uppercase": false,
+        "subheading_font_size": 18,
+        "eyebrow_font_size": 14,
+        "heading_spacing": 56,
+        "title_font_size": 22,
+        "text_font_size": 16,
+        "list_title_font_size": 18,
+        "list_text_font_size": 14,
+        "icon_size": 24,
+        "heading_alignment_mobile": "center",
+        "image_first_mobile": true,
+        "media_ratio_mobile": "square",
+        "heading_font_size_mobile": 32,
+        "subheading_font_size_mobile": 14,
+        "subheading_opacity_mobile": 70,
+        "heading_spacing_mobile": 20,
+        "gap_mobile": 20,
+        "card_gap_mobile": 20,
+        "content_padding_mobile": 12,
+        "item_padding_mobile": 12,
+        "thumb_size_mobile": 52,
+        "answer_spacing_mobile": 12,
+        "content_gap_mobile": 12,
+        "list_padding_mobile": 12,
+        "list_content_gap_mobile": 12,
+        "title_font_size_mobile": 18,
+        "text_font_size_mobile": 14,
+        "list_title_font_size_mobile": 18,
+        "list_text_font_size_mobile": 14,
+        "icon_size_mobile": 24,
+        "padding_top": 52,
+        "padding_bottom": 64,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20
+      }
+    },
+    "routine": {
+      "type": "zenith-routine",
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "title": "",
+            "text": "Wash with the Cleanser"
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "title": "",
+            "text": "Quarter teaspoon, face and neck"
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "title": "",
+            "text": "Reapply every 2 hours outdoors"
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "3-Step Process",
+        "subheading": "<p>One morning step, then reapply when you are out.</p>",
+        "products": [],
+        "used_text": "",
+        "show_number": true,
+        "show_divider": true,
+        "divider_breakpoint": "mobile",
+        "step_layout": "beside",
+        "image_width": 152,
+        "heading_alignment": "center",
+        "heading_max_width": 760,
+        "content_max_width": 1280,
+        "heading_spacing": 44,
+        "gap": 24,
+        "image_ratio": "1",
+        "step_title_spacing": 20,
+        "used_spacing": 40,
+        "used_width": 520,
+        "divider_spacing": 56,
+        "color_scheme": "scheme-1",
+        "title_color": "#d6b356",
+        "number_background": "#c59300",
+        "number_color": "#121212",
+        "text_opacity": 70,
+        "bar_color": "#202020",
+        "bar_text_color": "#d6b356",
+        "thumb_background": "#ffffff",
+        "divider_color": "#3e3e3e",
+        "heading_font_size": 48,
+        "heading_uppercase": false,
+        "eyebrow_font_size": 14,
+        "subheading_font_size": 16,
+        "title_font_size": 22,
+        "number_size": 28,
+        "number_font_size": 14,
+        "text_font_size": 15,
+        "used_font_size": 16,
+        "thumb_size": 80,
+        "heading_alignment_mobile": "center",
+        "heading_font_size_mobile": 36,
+        "subheading_font_size_mobile": 16,
+        "heading_spacing_mobile": 28,
+        "image_width_mobile": 116,
+        "number_size_mobile": 32,
+        "number_font_size_mobile": 16,
+        "gap_mobile": 12,
+        "title_font_size_mobile": 16,
+        "text_font_size_mobile": 14,
+        "used_font_size_mobile": 12,
+        "thumb_size_mobile": 52,
+        "used_spacing_mobile": 20,
+        "divider_spacing_mobile": 20,
+        "padding_top": 56,
+        "padding_bottom": 48,
+        "padding_top_mobile": 28,
+        "padding_bottom_mobile": 0
+      }
+    },
+    "compare": {
+      "type": "zenith-compare",
+      "blocks": {
+        "row-1": {
+          "type": "row",
+          "settings": {
+            "label": "Broad-spectrum SPF 30",
+            "zenith_value": "Yes",
+            "value_1": "Yes",
+            "value_2": "No",
+            "value_3": ""
+          }
+        },
+        "row-2": {
+          "type": "row",
+          "settings": {
+            "label": "Anti-aging actives",
+            "zenith_value": "Yes",
+            "value_1": "No",
+            "value_2": "Yes",
+            "value_3": ""
+          }
+        },
+        "row-3": {
+          "type": "row",
+          "settings": {
+            "label": "Matte in humidity",
+            "zenith_value": "Yes",
+            "value_1": "No",
+            "value_2": "No",
+            "value_3": ""
+          }
+        },
+        "row-4": {
+          "type": "row",
+          "settings": {
+            "label": "One morning step",
+            "zenith_value": "Yes",
+            "value_1": "Yes",
+            "value_2": "No",
+            "value_3": ""
+          }
+        }
+      },
+      "block_order": [
+        "row-1",
+        "row-2",
+        "row-3",
+        "row-4"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "Why guys switch to Zenith",
+        "subheading": "<p>Built specifically for the Filipino climate and lifestyle.</p>",
+        "zenith_label": "Zenith",
+        "zenith_caption": "Zenith Anti-Aging Tallow Day Cream SPF 30",
+        "column_1_title": "Other Product",
+        "column_1_note": "(Regular sunscreen, Sun protection only)",
+        "column_2_title": "Other Product",
+        "column_2_note": "(Night-only anti-aging cream, Made for use at night)",
+        "column_3_title": "",
+        "column_3_note": "",
+        "heading_alignment": "center",
+        "heading_spacing": 52,
+        "label_column_width": 25,
+        "header_height": 108,
+        "row_height": 49,
+        "cell_padding": 12,
+        "logo_width": 104,
+        "color_scheme": "scheme-1",
+        "zenith_header_background": "#203940",
+        "zenith_column_background": "#203940",
+        "row_background": "#202020",
+        "row_background_alt": "#202020",
+        "divider_color": "#0e0e0e",
+        "note_opacity": 70,
+        "subheading_opacity": 70,
+        "heading_font_size": 40,
+        "heading_uppercase": false,
+        "subheading_font_size": 18,
+        "eyebrow_font_size": 14,
+        "title_font_size": 16,
+        "note_font_size": 14,
+        "text_font_size": 16,
+        "heading_alignment_mobile": "left",
+        "divider_color_mobile": "#363636",
+        "heading_font_size_mobile": 24,
+        "subheading_font_size_mobile": 14,
+        "subheading_opacity_mobile": 70,
+        "heading_spacing_mobile": 12,
+        "label_column_width_mobile": 63,
+        "header_height_mobile": 32,
+        "row_height_mobile": 38,
+        "cell_padding_mobile": 8,
+        "logo_width_mobile": 60,
+        "table_gap_mobile": 24,
+        "group_title_gap_mobile": 8,
+        "title_font_size_mobile": 20,
+        "note_font_size_mobile": 14,
+        "text_font_size_mobile": 14,
+        "padding_top": 48,
+        "padding_bottom": 32,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20
+      }
+    },
+    "reviews": {
+      "type": "zenith-reviews",
+      "settings": {
+        "eyebrow": "",
+        "heading": "What Filipino men say about the Day Cream SPF 30",
+        "heading_mobile": "[customers] Filipino Men Trust Zenith Products",
+        "subheading": "<p>Reviews from customers who bought the Zenith Anti-Aging Tallow Day Cream SPF 30, shown as they wrote them.</p>",
+        "heading_alignment": "center",
+        "heading_max_width": 840,
+        "subheading_spacing": 28,
+        "heading_spacing": 48,
+        "jdgm_masonry": true,
+        "columns_desktop": 4,
+        "gap": 20,
+        "content_padding": 12,
+        "card_radius": 4,
+        "color_scheme": "scheme-1",
+        "card_color": "#202020",
+        "card_border_color": "",
+        "button_style": "outline",
+        "star_color": "#d6b356",
+        "accent_color": "#c59300",
+        "heading_font_size": 48,
+        "heading_uppercase": false,
+        "subheading_font_size": 18,
+        "subheading_opacity": 70,
+        "eyebrow_font_size": 14,
+        "text_font_size": 14,
+        "icon_size": 14,
+        "button_font_size": 20,
+        "subheading_mobile": "",
+        "heading_font_size_mobile": 36,
+        "subheading_font_size_mobile": 16,
+        "subheading_opacity_mobile": 70,
+        "heading_spacing_mobile": 24,
+        "columns_mobile": 2,
+        "gap_mobile": 20,
+        "content_padding_mobile": 12,
+        "text_font_size_mobile": 14,
+        "button_font_size_mobile": 20,
+        "padding_top": 32,
+        "padding_bottom": 48,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 48
+      }
+    },
+    "guarantee": {
+      "type": "zenith-feature-columns",
+      "blocks": {
+        "column_1": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Image.jpg",
+            "icon": "phone",
+            "icon_text": "",
+            "title": "",
+            "text": "<p>Our local team will text or call to verify your details, ensuring your order gets exactly where it needs to go.</p>"
+          }
+        },
+        "column_2": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Image_1.jpg",
+            "icon": "qr",
+            "icon_text": "",
+            "title": "",
+            "text": "<p>Every box features a unique, tamper-proof QR code. Scan it upon arrival to instantly verify your gear is 100% authentic.</p>"
+          }
+        },
+        "column_4": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Image_2.jpg",
+            "icon": "badge_check",
+            "icon_text": "",
+            "title": "",
+            "text": "<p>Pay only when the product is in your hands with our nationwide Cash on Delivery.</p>"
+          }
+        },
+        "logo_gogo": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/vector-icons_4.png",
+            "name": "GOGO Xpress",
+            "link": "",
+            "logo_scale": 100
+          }
+        },
+        "logo_spx": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/vector-icons_5.png",
+            "name": "SPX Express",
+            "link": "",
+            "logo_scale": 100
+          }
+        },
+        "logo_lbc": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/vector-icons_6.png",
+            "name": "LBC",
+            "link": "",
+            "logo_scale": 100
+          }
+        },
+        "logo_jnt": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/vector-icons_3.png",
+            "name": "J&T Express",
+            "link": "",
+            "logo_scale": 100
+          }
+        },
+        "logo_ninjavan": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/vector-icons_2.png",
+            "name": "Ninja Van",
+            "link": "",
+            "logo_scale": 100
+          }
+        }
+      },
+      "block_order": [
+        "column_1",
+        "column_2",
+        "column_4",
+        "logo_gogo",
+        "logo_spx",
+        "logo_lbc",
+        "logo_jnt",
+        "logo_ninjavan"
+      ],
+      "settings": {
+        "content_source": "global",
+        "eyebrow": "",
+        "heading": "What happens after you order",
+        "subheading": "",
+        "show_payment_icons": false,
+        "footer_text": "<p>Delivered by LBC, J&T, Gogo Express, Ninja Van, and Amare Group's own rider fleet.</p>",
+        "heading_alignment": "center",
+        "columns_desktop": 3,
+        "show_media": true,
+        "media_position": "left",
+        "image_ratio": "square",
+        "image_size": 152,
+        "text_alignment": "left",
+        "icon_position": "top",
+        "vertical_alignment": "top",
+        "heading_max_width": 760,
+        "heading_spacing": 36,
+        "gap": 32,
+        "content_gap": 20,
+        "icon_gap": 12,
+        "title_spacing": 8,
+        "card_padding_y": 0,
+        "card_padding_x": 0,
+        "text_max_width": 0,
+        "footer_spacing": 32,
+        "footer_image_width": 336,
+        "logo_height": 24,
+        "logo_max_width": 120,
+        "logo_gap": 18,
+        "color_scheme": "scheme-1",
+        "icon_color": "#eabe5f",
+        "title_color": "",
+        "card_background": "",
+        "card_border_color": "",
+        "badge_background": "#4e3a05",
+        "badge_color": "#eabe5f",
+        "text_opacity": 70,
+        "logo_style": "original",
+        "logo_opacity": 100,
+        "heading_font_size": 48,
+        "heading_uppercase": false,
+        "subheading_font_size": 16,
+        "eyebrow_font_size": 14,
+        "title_font_size": 24,
+        "title_line_height": 110,
+        "text_font_size": 16,
+        "text_line_height": 150,
+        "icon_size": 32,
+        "icon_stroke_width": "1.5",
+        "badge_size": 44,
+        "badge_font_size": 30,
+        "footer_text_size": 10,
+        "columns_mobile": "1",
+        "vertical_alignment_mobile": "center",
+        "icon_position_mobile": "top",
+        "text_alignment_mobile": "desktop",
+        "image_size_mobile": 128,
+        "heading_font_size_mobile": 36,
+        "subheading_font_size_mobile": 15,
+        "heading_spacing_mobile": 32,
+        "gap_mobile": 20,
+        "content_gap_mobile": 20,
+        "icon_gap_mobile": 8,
+        "title_spacing_mobile": 8,
+        "card_padding_y_mobile": 0,
+        "card_padding_x_mobile": 0,
+        "icon_size_mobile": 32,
+        "badge_size_mobile": 32,
+        "badge_font_size_mobile": 22,
+        "title_font_size_mobile": 20,
+        "title_line_height_mobile": 110,
+        "text_font_size_mobile": 14,
+        "text_line_height_mobile": 130,
+        "footer_spacing_mobile": 32,
+        "footer_image_width_mobile": 336,
+        "logo_height_mobile": 20,
+        "logo_gap_mobile": 12,
+        "footer_text_size_mobile": 10,
+        "footer_max_width_mobile": 256,
+        "padding_top": 56,
+        "padding_bottom": 56,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20
+      }
+    },
+    "money_back": {
+      "type": "zenith-guarantee-banner",
+      "settings": {
+        "eyebrow": "",
+        "heading": "Zenith Money-Back Guarantee",
+        "text": "<p>We stand behind every Zenith product. Kung hindi para sa iyo, ibabalik namin ang bayad mo. Full terms on our <a href=\"/policies/refund-policy\">Refunds and Returns</a> page.</p>",
+        "button_label": "",
+        "button_link": "",
+        "image": "shopify://shop_images/vector-icons_7.png",
+        "desktop_layout": "band",
+        "image_position": "right",
+        "image_width": 290,
+        "badge_inset": 24,
+        "band_overhang": 16,
+        "content_max_width": 700,
+        "content_gap": 24,
+        "content_padding": 48,
+        "color_scheme": "scheme-1",
+        "band_color_scheme": "scheme-4",
+        "border_color": "#363636",
+        "text_opacity": 70,
+        "button_style": "gold",
+        "heading_font_size": 40,
+        "heading_uppercase": false,
+        "eyebrow_font_size": 14,
+        "text_font_size": 18,
+        "button_font_size": 22,
+        "heading_font_size_mobile": 32,
+        "text_font_size_mobile": 18,
+        "text_opacity_mobile": 70,
+        "button_font_size_mobile": 20,
+        "image_width_mobile": 80,
+        "badge_align_mobile": "left",
+        "badge_spacing_mobile": 12,
+        "content_gap_mobile": 24,
+        "content_padding_mobile": 20,
+        "padding_top": 40,
+        "padding_bottom": 48,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20
+      }
+    },
+    "faq": {
+      "type": "zenith-faq",
+      "blocks": {
+        "question_1": {
+          "type": "question",
+          "settings": {
+            "question": "Will this work even if I've never used sunscreen with anti-aging before?",
+            "answer": "<p>Yes! The Zenith Anti-Aging Tallow Day Cream SPF 30 is specifically designed for Filipino men who are new to comprehensive daytime protection. Our lightweight formula is engineered to work with your skin’s natural processes, making it perfect for beginners. You’ll get professional protection and anti-aging results even if this is your first SPF product.</p>"
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "Hindi ba ito magiging white cast or greasy sa face? Ayoko kasing parang typical sunscreen yung feeling.",
+            "answer": "<p>Not at all! We’ve specially formulated the Zenith Anti-Aging Tallow Day Cream SPF 30 for the Philippine climate with zero white cast technology.</p><p>Unlike heavy sunscreens, the Zenith Anti-Aging Tallow Day Cream SPF 30 absorbs instantly with a natural matte finish. It’s lightweight enough for daily use but powerful enough to give real protection and anti-aging results.</p>"
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "Can I use this if I have sensitive skin?",
+            "answer": "<p>Yes! Beef tallow actually matches your skin’s natural oils, making the Zenith Anti-Aging Tallow Day Cream SPF 30 ideal for sensitive skin.</p><p>Our formula uses bakuchiol instead of harsh retinol and botanical extracts that are perfect for sensitive skin that still needs strong sun protection.</p>"
+          }
+        },
+        "question_4": {
+          "type": "question",
+          "settings": {
+            "question": "How long will one tube last?",
+            "answer": "<p>One 50g tube of the Zenith Anti-Aging Tallow Day Cream SPF 30 typically lasts 30 days when used as directed (once daily). You only need a quarter-teaspoon amount for full face and neck coverage, making it excellent value for comprehensive protection.</p>"
+          }
+        },
+        "question_5": {
+          "type": "question",
+          "settings": {
+            "question": "Can I use this with my other products like cleanser and night cream?",
+            "answer": "<p>Yes! The Zenith Anti-Aging Tallow Day Cream SPF 30 works perfectly as your final morning step. For complete anti-aging care, start with Zenith Anti-Aging Tallow Cleanser, then apply the Zenith Anti-Aging Tallow Day Cream SPF 30 for protection. At night, use Zenith Anti-Aging Tallow Cream for maximum repair and renewal.</p>"
+          }
+        },
+        "question_6": {
+          "type": "question",
+          "settings": {
+            "question": "Bakit mas mahal compared sa ibang sunscreen sa mall?",
+            "answer": "<p>While the Zenith Anti-Aging Tallow Day Cream SPF 30 costs more upfront, you’re getting premium tallow, advanced 6-filter UV protection, and concentrated anti-aging actives in one product.</p><p>Most mall sunscreens only offer basic protection with white cast and greasy feel, requiring you to buy separate moisturizer and anti-aging products that don’t work safely under sun.</p>"
+          }
+        },
+        "question_7": {
+          "type": "question",
+          "settings": {
+            "question": "When will I see results?",
+            "answer": "<p>Sun protection and comfort from the first use with the Zenith Anti-Aging Tallow Day Cream SPF 30.</p><p>That’s why we offer the Zenith Money-Back Guarantee – we’re confident you’ll see real protection and anti-aging results.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_1",
+        "question_2",
+        "question_3",
+        "question_4",
+        "question_5",
+        "question_6",
+        "question_7"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "Frequently Asked Questions",
+        "subheading": "<p>No-nonsense answers about your daily essentials.</p>",
+        "enable_schema": true,
+        "heading_alignment": "center",
+        "max_width": 720,
+        "open_first": true,
+        "heading_spacing": 32,
+        "item_padding": 10,
+        "content_gap": 24,
+        "color_scheme": "scheme-1",
+        "icon_color": "#eabe5f",
+        "divider_opacity": 10,
+        "answer_opacity": 70,
+        "heading_font_size": 48,
+        "heading_uppercase": false,
+        "subheading_font_size": 18,
+        "subheading_opacity": 100,
+        "eyebrow_font_size": 14,
+        "title_font_size": 24,
+        "text_font_size": 16,
+        "icon_size": 20,
+        "heading_alignment_mobile": "left",
+        "heading_font_size_mobile": 36,
+        "subheading_font_size_mobile": 18,
+        "subheading_opacity_mobile": 100,
+        "heading_spacing_mobile": 32,
+        "title_font_size_mobile": 24,
+        "text_font_size_mobile": 16,
+        "item_padding_mobile": 10,
+        "content_gap_mobile": 24,
+        "icon_size_mobile": 20,
+        "padding_top": 72,
+        "padding_bottom": 100,
+        "padding_top_mobile": 28,
+        "padding_bottom_mobile": 44
+      }
+    },
+    "cta": {
+      "type": "zenith-hero",
+      "blocks": {
+        "trust_1": {
+          "type": "trust",
+          "settings": {
+            "icon": "thumbs_up",
+            "text": "Zenith Money-Back Guarantee"
+          }
+        },
+        "trust_2": {
+          "type": "trust",
+          "settings": {
+            "icon": "truck",
+            "text": "Free Shipping [free_shipping]+"
+          }
+        },
+        "trust_3": {
+          "type": "trust",
+          "settings": {
+            "icon": "certificate",
+            "text": "Philippine FDA Notified"
+          }
+        },
+        "trust_4": {
+          "type": "trust",
+          "settings": {
+            "icon": "dropper",
+            "text": "Ingredients named on the labels"
+          }
+        }
+      },
+      "block_order": [
+        "trust_1",
+        "trust_2",
+        "trust_3",
+        "trust_4"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "Zenith Anti-Aging Tallow Day Cream SPF 30",
+        "heading_mobile": "",
+        "text": "<p>Light day cream with SPF 30. No white cast. Made for daytime in the Philippines.</p>",
+        "button_label": "Add to Cart",
+        "button_link": "",
+        "button_product": "zenith-anti-aging-tallow-day-cream-spf30",
+        "button_label_mobile": "",
+        "button_link_mobile": "",
+        "show_image": true,
+        "icon": "none",
+        "display_text": "",
+        "show_confetti": false,
+        "ribbon_text": "",
+        "highlight_title": "",
+        "badge_text": "",
+        "countdown_source": "off",
+        "countdown_label": "",
+        "countdown_end_date": "",
+        "countdown_end_time": "23:59",
+        "countdown_timezone": "+08:00",
+        "countdown_hide_expired": true,
+        "countdown_show_labels": false,
+        "promo_visibility": "always",
+        "button_full": true,
+        "desktop_layout": "image_beside",
+        "panel_width": "page",
+        "media_width": 50,
+        "content_position": "center",
+        "content_vertical": "middle",
+        "height": 560,
+        "content_max_width": 440,
+        "vertical_padding": 64,
+        "eyebrow_spacing": 4,
+        "text_spacing": 12,
+        "paragraph_spacing": 0,
+        "text_max_width": 1000,
+        "icon_spacing": 32,
+        "display_spacing": 16,
+        "content_gap": 32,
+        "trust_spacing": 24,
+        "trust_max_width": 420,
+        "confetti_align": "stretch",
+        "confetti_width": 970,
+        "color_scheme": "scheme-6",
+        "button_style": "gold",
+        "button_icon": "cart",
+        "trust_icon_color": "#eabe5f",
+        "overlay_style": "none",
+        "overlay_color": "#203940",
+        "overlay_opacity": 100,
+        "overlay_coverage": 50,
+        "ribbon_color": "#f6233b",
+        "ribbon_text_color": "#ffffff",
+        "highlight_color": "#eabe5f",
+        "badge_color": "#007941",
+        "badge_text_color": "#ffffff",
+        "countdown_background_color": "#ffffff",
+        "countdown_text_color": "#121212",
+        "countdown_box_color": "#010101",
+        "countdown_digit_color": "#ffffff",
+        "confetti_opacity": 100,
+        "text_opacity": 100,
+        "icon_color": "#d6b356",
+        "display_color": "#e8bc5b",
+        "display_color_2": "#c6950f",
+        "icon_size": 104,
+        "display_font_size": 288,
+        "heading_tag": "h2",
+        "heading_font_size": 56,
+        "heading_uppercase": false,
+        "subheading_font_size": 18,
+        "eyebrow_font_size": 14,
+        "button_font_size": 22,
+        "trust_font_size": 14,
+        "trust_icon_size": 16,
+        "highlight_font_size": 64,
+        "ribbon_font_size": 16,
+        "badge_font_size": 14,
+        "text_font_size": 16,
+        "countdown_font_size": 18,
+        "countdown_label_font_size": 14,
+        "mobile_text_alignment": "center",
+        "mobile_alignment": "bottom",
+        "mobile_button_bottom": false,
+        "mobile_button_full": false,
+        "mobile_hide_button": false,
+        "mobile_height": 520,
+        "mobile_overlay_style": "bottom",
+        "mobile_overlay_coverage": 70,
+        "vertical_padding_mobile": 24,
+        "heading_font_size_mobile": 32,
+        "subheading_font_size_mobile": 16,
+        "button_font_size_mobile": 22,
+        "trust_font_size_mobile": 13,
+        "trust_icon_size_mobile": 16,
+        "highlight_font_size_mobile": 48,
+        "ribbon_font_size_mobile": 14,
+        "badge_font_size_mobile": 14,
+        "text_font_size_mobile": 14,
+        "countdown_font_size_mobile": 16,
+        "countdown_label_font_size_mobile": 12,
+        "content_gap_mobile": 24,
+        "confetti_width_mobile": 100,
+        "content_max_width_mobile": 1000,
+        "icon_size_mobile": 80,
+        "display_font_size_mobile": 156,
+        "display_spacing_mobile": 12,
+        "icon_spacing_mobile": 24,
+        "padding_top": 40,
+        "padding_bottom": 48,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0
+      }
+    }
+  },
+  "order": [
+    "main",
+    "videos",
+    "ingredients",
+    "routine",
+    "compare",
+    "reviews",
+    "guarantee",
+    "money_back",
+    "faq",
+    "cta"
+  ]
+}
