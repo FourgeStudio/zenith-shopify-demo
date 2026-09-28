@@ -1,0 +1,25 @@
+/* Zenith · Custom code — pasted HTML / app embeds. Per-instance vars on #Zenith-{section.id}. */
+
+.zenith-cc--narrow .zenith-cc__code {
+  max-width: var(--z-cmw, 800px);
+  margin-inline: auto;
+}
+
+.zenith-cc__code {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.zenith-cc__code img,
+.zenith-cc__code iframe,
+.zenith-cc__code video {
+  max-width: 100%;
+}
+
+.zenith-cc__placeholder {
+  margin: 0;
+  padding: 24px;
+  border: 1px dashed rgba(var(--color-foreground), 0.3);
+  text-align: center;
+  color: rgba(var(--color-foreground), 0.7);
+}

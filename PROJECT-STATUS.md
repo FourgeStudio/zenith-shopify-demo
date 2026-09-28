@@ -120,6 +120,9 @@ _Last updated: 2026-09-29. Keep this file current at the end of each work sessio
   - Confirm: FDA numbers (designs say "[CONFIRM: NN]", left blank); shampoo full ingredient list ("[SLOT: …]" kept in the Ingredients row); delivery times in the designs ("3 days Metro Manila, 3–7 days Visayas / Mindanao") vs tallow's (3–5 / 5–7); customer count — designs say 100,000+, Theme settings say 200,000+.
   - Desktop vs mobile copy conflicts (desktop used): guarantee heading "What happens after you order" vs "The Zenith Guarantee" + a shorter desktop rewrite of the global guarantee columns (global kept — change in Theme settings → Zenith · Guarantee if wanted, affects every page); money-back text (Spray/Cleanser/Day Cream mobile differ); Spray routine subheading.
 
+### Zenith · Custom code (2026-09-29)
+- `sections/zenith-custom-code.liquid`: paste HTML / Liquid / app embed code (e.g. Judge.me widget code) on any page; heading + mobile heading, width (page / narrow / full), hide on mobile/desktop, paddings. Each instance is per template, so every page can hold different code.
+
 ### 1. Verify on the store (next task)
 - Open the preview of the `main` theme at 1440 / 768 / 375 and compare to `design/homepage/`. Agents measured static mocks; real Liquid output, Judge.me markup and the cart drawer are unverified.
 - Tablet (750–989) was not designed — check it looks sane.
