@@ -1,6 +1,6 @@
 # Zenith Shopify — project status
 
-_Last updated: 2026-09-21. Keep this file current at the end of each work session; it is the handoff doc._
+_Last updated: 2026-09-29. Keep this file current at the end of each work session; it is the handoff doc._
 
 ## Where things stand
 - Theme: Dawn 16.0.0 + custom `zenith-*` sections. Store `tryzenith.ph` (Zenith Philippines).
@@ -106,6 +106,20 @@ _Last updated: 2026-09-21. Keep this file current at the end of each work sessio
   - Copy to confirm: the accordion answers ("How long will one jar last?", "Will this make my face greasy in the heat?", "When will I see results?", "Is it safe for sensitive skin?", plus the mobile rows How to use / What's inside / Zenith guarantee / FAQs are empty), the before/after captions ("Short summary of the results"), the note under the cards ("Short Description") and the closing CTA line ("Short description about the final cta goes here") are the design's placeholders.
   - Decisions made from the design: the video carousel shows videos for **all** products (the design's cards are from four different products) with the desktop heading "Clinically Proven. The Complete Regimen." and the mobile one "A Complete Routine, Built for Men."; the closing CTA button uses the cart icon (mobile design) though the desktop crop shows an arrow.
 
+### Product pages — Shampoo, Spray, Cleanser, Day Cream SPF 30 (built 2026-09-29)
+- One alternate template per product, same section keys as tallow minus before/after: `product.hair-density-shampoo`, `product.hair-density-spray`, `product.tallow-cleanser`, `product.day-cream-spf30` (map + handles in `design/README.md`). Content, paddings (measured gaps) and type sizes set per design; verified by schema checks + theme check, **not on the store yet**.
+- New shared pieces:
+  - **Zenith · Product page**: `question` blocks (Question / Answer / Open) render nested inside the accordion row whose *Text* = **FAQ questions** (chevron that flips, body-font question; sizes *FAQ question / answer size* desktop + mobile). **`@app` blocks** (e.g. a Judge.me carousel) replace the curated review strip under the gallery when added.
+  - **Zenith · Comparison table**: *Product name under the logo* (`zenith_caption`) — under the logo on desktop, beside the Zenith header cell on mobile. Empty column 3 was already hidden (2-competitor tables).
+  - **Zenith · Reviews**: mobile *Heading* (`heading_mobile`); `snippets/zenith-section-heading.liquid` takes an optional `heading_mobile` for any section.
+- Videos: global slots (Theme settings → Zenith · Video testimonials) already carry each product's handle; `product_filter: page` shows only this product's. Slot quotes/titles/handles differ from the designs (e.g. spray card 1 quote, @explore_mnl / @kristeltoledoo / @cedriclucero) — edit the slots if the design copy is wanted.
+- Client:
+  - Assign each template to its product (Admin → Products → Theme template) — on publish day, like tallow.
+  - In each template: **Zenith · Reviews → Add block → Apps → Judge.me Review Widget** (Judge.me is installed; its app-block id isn't in the repo, so it can't be added from code). Same on every page that has a Zenith · Reviews section (home, Shop All, Skin, Hair, Verify, Certificates, tallow).
+  - Uploads per product: ingredients photo + 3 thumbnails, 3 routine step photos, closing CTA photo, product gallery media.
+  - Confirm: FDA numbers (designs say "[CONFIRM: NN]", left blank); shampoo full ingredient list ("[SLOT: …]" kept in the Ingredients row); delivery times in the designs ("3 days Metro Manila, 3–7 days Visayas / Mindanao") vs tallow's (3–5 / 5–7); customer count — designs say 100,000+, Theme settings say 200,000+.
+  - Desktop vs mobile copy conflicts (desktop used): guarantee heading "What happens after you order" vs "The Zenith Guarantee" + a shorter desktop rewrite of the global guarantee columns (global kept — change in Theme settings → Zenith · Guarantee if wanted, affects every page); money-back text (Spray/Cleanser/Day Cream mobile differ); Spray routine subheading.
+
 ### 1. Verify on the store (next task)
 - Open the preview of the `main` theme at 1440 / 768 / 375 and compare to `design/homepage/`. Agents measured static mocks; real Liquid output, Judge.me markup and the cart drawer are unverified.
 - Tablet (750–989) was not designed — check it looks sane.
@@ -127,7 +141,7 @@ _Last updated: 2026-09-21. Keep this file current at the end of each work sessio
 - [ ] Decide: featured-product check colour (desktop design orange #EF931C vs mobile #EABE5F — using #EABE5F).
 
 ### 3. Not started
-- [ ] Product pages for the **other products** (each gets its own design; the tallow cream is done). Default `templates/product.json` is still Dawn's.
+- [ ] Product pages for products without a design yet (tallow cream, shampoo, spray, cleanser, day cream are done). Default `templates/product.json` is still Dawn's.
 - [ ] Default collection template (other collections), cart, search pages (404 done 2026-09-20). (Contact + About done 2026-09-18, Shop All 2026-09-19, Skin + Hair + Verify + Certificates + Blog/Article + Thank-you pages 2026-09-20.)
 - [ ] Analytics/pixels, SEO metafields, shipping/policy pages.
 - [ ] Performance + a11y pass (Lighthouse on preview), then publish `main` theme.

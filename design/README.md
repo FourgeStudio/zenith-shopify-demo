@@ -152,6 +152,20 @@ Every product gets its own design in this store, so this is an ALTERNATE templat
 
 Desktop/mobile differences: the buy box reorders on phones (quantity + Add to cart move above the FDA bar and the checklist) and shows a short description the desktop hides; the video carousel heading is "Clinically Proven. The Complete Regimen." on desktop and "A Complete Routine, Built for Men." on phones; the accordion rows differ (desktop = 4 product questions, mobile = Description / How to use / What's inside / Zenith guarantee / FAQs — both are in the template, each hidden on the other breakpoint); the ingredient list has 4 items on desktop and 3 longer-titled ones on mobile (desktop copy used, `title_mobile` per item). `mobile/sections/Frame 1000005205.png` is blank.
 
+## Product pages — Shampoo, Spray, Cleanser, Day Cream SPF 30 (`design/Product Page/<Product>/`, desktop 1x, mobile full page 2x, mobile sections 1x)
+One alternate template per product, all built on the tallow-cream layout (2026-09-29):
+
+| Product (handle) | Template |
+|---|---|
+| Zenith Advanced Hair Density Shampoo (`zenith-advanced-hair-density-shampoo`) | `templates/product.hair-density-shampoo.json` |
+| Zenith Advanced Hair Density Spray (`zenith-advanced-hair-density-spray`) | `templates/product.hair-density-spray.json` |
+| Zenith Anti-Aging Tallow Cleanser (`zenith-anti-aging-tallow-cleanser`) | `templates/product.tallow-cleanser.json` |
+| Zenith Anti-Aging Tallow Day Cream SPF 30 (`zenith-anti-aging-tallow-day-cream-spf30`) | `templates/product.day-cream-spf30.json` |
+
+Section order in all four (same keys as tallow, no before/after): `main` (`Header/6.png`; buy box → accordion About / How to use / Ingredients / Delivery and returns / FAQs with nested Question blocks) → `videos` (`Testimonial/57.png`, global slots filtered to the page's product) → `ingredients` (`Layout/1.png`) → `routine` (`Header/78.png`) → `compare` (`Header/78-1.png`, 2 competitors + product name under the logo) → `reviews` (`Testimonial/18.png` = the Judge.me Review Widget) → `guarantee` (`Zenith Guarantee.png`) → `money_back` → `faq` (`FAQ/2.png`) → `cta` (`CTA/6.png`, split hero).
+
+Desktop/mobile differences: the reviews heading on phones is "[customers] Filipino Men Trust Zenith Products" (`heading_mobile`); the guarantee heading is "The Zenith Guarantee" on mobile and the desktop column copy is a shorter rewrite of the global Zenith · Guarantee copy (global kept); the money-back and routine sub-copy differ per breakpoint on some products (desktop used). Mobile ingredient headings on Shampoo/Day Cream are designer placeholders (desktop copy used).
+
 ## Adding a new page
 Drop the exports in, then ask Claude to run the `design-to-page` skill for that page.
 Same layout under `design/<page>/` (`product`, `collection`, `cart`, `about`, `contact`, `global`). Export sections at 1x; full-page export optional.
