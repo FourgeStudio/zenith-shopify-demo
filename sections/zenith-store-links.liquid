@@ -27,6 +27,7 @@
   --z-sl-stat: {{ s.stat_color }};
   --z-sl-lh: {{ s.line_height | default: 130 | divided_by: 100.0 }};
   --z-sl-lh-m: {{ s.line_height_mobile | default: 130 | divided_by: 100.0 }};
+  --z-sl-radius: {{ s.card_radius | default: 0 }}px;
   {%- if s.card_width > 0 %}
   --z-sl-cw: {{ s.card_width }}px;
   --z-sl-justify: {% if s.heading_alignment == 'left' %}flex-start{% else %}center{% endif %};
@@ -43,7 +44,8 @@
     {%- render 'zenith-section-heading',
       eyebrow: blank,
       heading: s.heading,
-      subheading: blank,
+      heading_mobile: s.heading_mobile,
+      subheading: s.text_mobile,
       alignment: s.heading_alignment,
       class: 'zenith-store-links__heading'
     -%}
@@ -76,6 +78,11 @@
                   assign link = settings.social_facebook_link
                 endif
                 assign store_name = store_name | default: 'Facebook'
+              when 'instagram'
+                if link == blank
+                  assign link = settings.social_instagram_link
+                endif
+                assign store_name = store_name | default: 'Instagram'
             endcase
             if b.icon == 'custom' and b.custom_icon != blank and store_name == blank
               assign store_name = b.custom_icon.alt
@@ -153,8 +160,20 @@
       "default": "Our Official Stores"
     },
     {
+      "type": "text",
+      "id": "heading_mobile",
+      "label": "Mobile heading",
+      "info": "Optional. Replaces the heading on mobile."
+    },
+    {
+      "type": "richtext",
+      "id": "text_mobile",
+      "label": "Text under the heading (mobile only)",
+      "info": "Optional. Hidden on desktop."
+    },
+    {
       "type": "paragraph",
-      "content": "Add one Store block per marketplace. A store without its own link uses Theme settings → Zenith → Marketplaces (Lazada, Shopee) or Theme settings → Social media (TikTok)."
+      "content": "Add one Store block per marketplace. A store without its own link uses Theme settings → Zenith → Marketplaces (Lazada, Shopee) or Theme settings → Social media (TikTok, Facebook, Instagram)."
     },
     {
       "type": "header",
@@ -219,6 +238,16 @@
       "step": 2,
       "unit": "px",
       "default": 74
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "label": "Card corner radius",
+      "min": 0,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 0
     },
     {
       "type": "range",
@@ -501,6 +530,16 @@
     },
     {
       "type": "range",
+      "id": "subheading_font_size_mobile",
+      "label": "Text under the heading size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
       "id": "icon_size_mobile",
       "label": "Icon size",
       "min": 16,
@@ -603,6 +642,7 @@
             { "value": "shopee", "label": "Shopee" },
             { "value": "tiktok_shop", "label": "TikTok Shop" },
             { "value": "facebook", "label": "Facebook" },
+            { "value": "instagram", "label": "Instagram" },
             { "value": "custom", "label": "Custom image" }
           ]
         },
@@ -629,7 +669,7 @@
           "type": "url",
           "id": "link",
           "label": "Store link",
-          "info": "Leave blank to use the Lazada / Shopee link from Theme settings → Zenith, or the TikTok / Facebook link from Theme settings → Social media."
+          "info": "Leave blank to use the Lazada / Shopee link from Theme settings → Zenith, or the TikTok / Facebook / Instagram link from Theme settings → Social media."
         },
         {
           "type": "checkbox",

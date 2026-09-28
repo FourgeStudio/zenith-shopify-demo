@@ -4,7 +4,7 @@
   Accepts:
     blocks {Array} section.blocks
     type {String} only render blocks of this type (blank = all), each with settings question + answer
-    open_first {Boolean} open the first item
+    open_first {Boolean} open the first item; open_all {Boolean} open every item
     schema {Boolean} output FAQPage structured data
     section_id {String} section.id — keeps element ids unique when two sections share block ids
   [customers] in questions/answers is replaced by Theme settings → Zenith → Customer count.
@@ -19,7 +19,7 @@
   <details
     class="zenith-faq__item"
     id="Block-{{ block.id }}-{{ section_id }}"
-    {% if faq_count == 1 and open_first %}
+    {% if open_all or faq_count == 1 and open_first %}
       open
     {% endif %}
     {{ block.shopify_attributes }}

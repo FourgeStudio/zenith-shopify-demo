@@ -296,6 +296,16 @@
     width: auto;
   }
 
+  /* Left-aligned content: trust / note line starts under the button instead of centring in the column */
+  .zenith-hero--left .zenith-hero__trust {
+    margin-left: 0;
+  }
+
+  .zenith-hero__button,
+  .zenith-hero__atc .zenith-atc {
+    min-width: var(--z-hero-btn-minw, 0);
+  }
+
   .zenith-hero__ribbon {
     font-size: var(--z-rib-fs, 1.6rem);
   }

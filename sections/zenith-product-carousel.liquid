@@ -16,7 +16,18 @@
     assign gap_count_t = gap_count_t | plus: 1
   endif
   assign pc_collection = section.settings.collection
-  assign card_sizes = '(min-width: 990px) calc((100vw - 10rem) / ' | append: cols | append: '), (min-width: 750px) calc((100vw - 10rem) / ' | append: cols_t | append: '), ' | append: section.settings.mobile_slide_width | append: 'vw'
+  assign pc_products = section.settings.product_list
+  if pc_products == blank or pc_products.size == 0
+    if pc_collection != blank and pc_collection.products_count > 0
+      assign pc_products = pc_collection.products
+    endif
+  endif
+  assign mobile_vw = section.settings.mobile_slide_width
+  if section.settings.mobile_layout == 'stack'
+    assign mobile_vw = 100
+  endif
+  assign card_sizes = '(min-width: 990px) calc((100vw - 10rem) / ' | append: cols | append: '), (min-width: 750px) calc((100vw - 10rem) / ' | append: cols_t | append: '), ' | append: mobile_vw | append: 'vw'
+  assign img_bg = section.settings.card_image_gradient | default: section.settings.card_image_bg
 -%}
 {%- capture extra -%}
   --z-slide: calc((100% - {{ gap_count }} * var(--z-gap, 24px)) / {{ cols }});
@@ -30,14 +41,17 @@
   --z-pc-atcfs: {{ section.settings.card_button_font_size }}px;
   --z-pc-atcfs-m: {{ section.settings.card_button_font_size_mobile }}px;
   --z-pc-ctlsp: {{ section.settings.controls_spacing }}px;
-  --z-pc-img-bg: {{ section.settings.card_image_bg }};
+  --z-pc-img-bg: {{ img_bg }};
   --z-pc-fit: {{ section.settings.image_fit }};
+  --z-pc-descsp: {{ section.settings.card_desc_spacing }}px;
+  --z-pc-stack-gap-m: {{ section.settings.stack_gap_mobile }}px;
+  --z-pc-divider: {{ section.settings.divider_color }};
 {%- endcapture -%}
 {%- render 'zenith-section-style', section: section, extra: extra -%}
 
 <section
   id="Zenith-{{ section.id }}"
-  class="zenith-section zenith-pc zenith-pc--{{ section.settings.image_ratio }}{% if section.settings.bleed_right %} zenith-pc--bleed{% endif %} color-{{ section.settings.color_scheme }} gradient{% if section.index > 2 %} zenith-defer{% endif %}"
+  class="zenith-section zenith-pc zenith-pc--{{ section.settings.image_ratio }}{% if section.settings.bleed_right %} zenith-pc--bleed{% endif %}{% if section.settings.mobile_layout == 'stack' %} zenith-pc--stack-m{% if section.settings.show_dividers_mobile %} zenith-pc--dividers-m{% endif %}{% endif %}{% if section.settings.title_font == 'heading' %} zenith-pc--title-heading{% endif %} color-{{ section.settings.color_scheme }} gradient{% if section.index > 2 %} zenith-defer{% endif %}"
 >
   <div class="page-width">
     <div class="zenith-pc__header">
@@ -55,20 +69,37 @@
           if view_all_url == blank and pc_collection != blank
             assign view_all_url = pc_collection.url
           endif
+          assign view_all_class = 'zenith-pc__view-all'
+          if section.settings.hide_view_all_mobile
+            assign view_all_class = 'zenith-pc__view-all zenith-hide-mobile'
+          endif
         -%}
         {%- render 'zenith-button',
           label: section.settings.view_all_label,
           link: view_all_url,
           style: section.settings.button_style,
-          class: 'zenith-pc__view-all'
+          class: view_all_class
         -%}
       {%- endif -%}
     </div>
 
     <zenith-carousel data-autoplay="{{ section.settings.autoplay }}" data-slide-label="Product">
       <ul class="zenith-carousel__track" role="list">
-        {%- if pc_collection != blank and pc_collection.products_count > 0 -%}
-          {%- for product in pc_collection.products limit: section.settings.products_to_show -%}
+        {%- if pc_products != blank -%}
+          {%- for product in pc_products limit: section.settings.products_to_show -%}
+            {%- liquid
+              assign card_desc = blank
+              if section.settings.show_description
+                assign card_desc = product.metafields.custom.short_description | metafield_text | strip
+                if card_desc == blank
+                  assign card_desc = product.description | strip_html | strip | truncatewords: section.settings.description_words
+                endif
+              endif
+              assign card_img = blank
+              if section.settings.image_source == 'metafield'
+                assign card_img = product.metafields.custom.card_image.value
+              endif
+            -%}
             <li class="zenith-carousel__slide">
               {%- render 'zenith-product-card',
                 product: product,
@@ -76,11 +107,21 @@
                 button_label: section.settings.button_label,
                 button_style: section.settings.card_button_style,
                 button_icon: section.settings.card_button_icon,
+                button_action: section.settings.card_button_action,
+                show_price: section.settings.show_price,
+                description: card_desc,
+                image: card_img,
                 image_sizes: card_sizes
               -%}
             </li>
           {%- endfor -%}
         {%- else -%}
+          {%- liquid
+            assign placeholder_desc = blank
+            if section.settings.show_description
+              assign placeholder_desc = 'A short line about the product appears here.'
+            endif
+          -%}
           {%- for i in (1..6) -%}
             <li class="zenith-carousel__slide">
               {%- render 'zenith-product-card',
@@ -89,6 +130,8 @@
                 button_label: section.settings.button_label,
                 button_style: section.settings.card_button_style,
                 button_icon: section.settings.card_button_icon,
+                show_price: section.settings.show_price,
+                description: placeholder_desc,
                 index: forloop.index0
               -%}
             </li>
@@ -96,6 +139,7 @@
         {%- endif -%}
       </ul>
 
+      {%- comment -%} Stacked mobile layout hides these below 750px (CSS) {%- endcomment -%}
       {%- render 'zenith-carousel-controls',
         show_dots: section.settings.show_dots,
         show_arrows: section.settings.show_arrows,
@@ -144,6 +188,13 @@
       "label": "Collection"
     },
     {
+      "type": "product_list",
+      "id": "product_list",
+      "label": "Products",
+      "info": "Pick products in the order to show. Replaces the collection when set.",
+      "limit": 24
+    },
+    {
       "type": "range",
       "id": "products_to_show",
       "label": "Maximum products",
@@ -153,11 +204,55 @@
       "default": 10
     },
     {
+      "type": "select",
+      "id": "image_source",
+      "label": "Product image",
+      "info": "Card image uses the product metafield custom.card_image (e.g. a transparent cut-out). Products without it show their featured image.",
+      "default": "featured",
+      "options": [
+        { "value": "featured", "label": "Featured image" },
+        { "value": "metafield", "label": "Card image metafield" }
+      ]
+    },
+    {
       "type": "checkbox",
       "id": "show_rating",
       "label": "Show product rating",
       "info": "Requires a reviews app that sets product ratings",
       "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_description",
+      "label": "Show short description",
+      "info": "Uses the product metafield custom.short_description, or the start of the product description.",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "description_words",
+      "label": "Description length (words)",
+      "info": "Only when the product has no short description metafield.",
+      "min": 5,
+      "max": 60,
+      "step": 1,
+      "default": 20
+    },
+    {
+      "type": "checkbox",
+      "id": "show_price",
+      "label": "Show price",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "card_button_action",
+      "label": "Card button action",
+      "default": "cart",
+      "options": [
+        { "value": "cart", "label": "Add to cart" },
+        { "value": "link", "label": "View product" }
+      ]
     },
     {
       "type": "text",
@@ -321,6 +416,16 @@
     },
     {
       "type": "range",
+      "id": "card_desc_spacing",
+      "label": "Space between title and description",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "range",
       "id": "card_button_spacing",
       "label": "Space above card button",
       "min": 0,
@@ -392,6 +497,19 @@
       "default": "#FFFFFF"
     },
     {
+      "type": "color_background",
+      "id": "card_image_gradient",
+      "label": "Product image background gradient",
+      "info": "Replaces the background color when set."
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "Divider color",
+      "info": "Lines between stacked cards on mobile.",
+      "default": "#454545"
+    },
+    {
       "type": "header",
       "content": "Typography"
     },
@@ -436,10 +554,30 @@
       "id": "title_font_size",
       "label": "Product title size",
       "min": 12,
-      "max": 28,
+      "max": 40,
       "step": 1,
       "unit": "px",
       "default": 16
+    },
+    {
+      "type": "select",
+      "id": "title_font",
+      "label": "Product title font",
+      "default": "body",
+      "options": [
+        { "value": "body", "label": "Body" },
+        { "value": "heading", "label": "Heading" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "text_font_size",
+      "label": "Description size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
     },
     {
       "type": "range",
@@ -474,6 +612,38 @@
     {
       "type": "header",
       "content": "Mobile"
+    },
+    {
+      "type": "select",
+      "id": "mobile_layout",
+      "label": "Layout",
+      "default": "carousel",
+      "options": [
+        { "value": "carousel", "label": "Carousel" },
+        { "value": "stack", "label": "Stacked, full width" }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dividers_mobile",
+      "label": "Lines between stacked cards",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "stack_gap_mobile",
+      "label": "Space around lines between stacked cards",
+      "min": 0,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_view_all_mobile",
+      "label": "Hide view all button",
+      "default": false
     },
     {
       "type": "range",
@@ -541,10 +711,20 @@
       "id": "title_font_size_mobile",
       "label": "Product title size",
       "min": 12,
-      "max": 24,
+      "max": 40,
       "step": 1,
       "unit": "px",
       "default": 16
+    },
+    {
+      "type": "range",
+      "id": "text_font_size_mobile",
+      "label": "Description size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
     },
     {
       "type": "range",

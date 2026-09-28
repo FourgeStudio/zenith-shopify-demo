@@ -73,6 +73,7 @@
   --z-hero-h: {{ s.height }}px;
   --z-hero-h-m: {{ s.mobile_height }}px;
   --z-hero-py: {{ s.vertical_padding }}px;
+  --z-hero-btn-minw: {{ s.button_min_width | default: 0 }}px;
   --z-hero-py-m: {{ s.vertical_padding_mobile }}px;
   --z-hero-eg: {{ s.eyebrow_spacing }}px;
   --z-hero-tg: {{ s.text_spacing }}px;
@@ -525,6 +526,17 @@
       "id": "button_full",
       "label": "Full-width button (desktop)",
       "default": false
+    },
+    {
+      "type": "range",
+      "id": "button_min_width",
+      "label": "Button minimum width (desktop)",
+      "info": "0 = fits the label.",
+      "min": 0,
+      "max": 400,
+      "step": 10,
+      "unit": "px",
+      "default": 0
     },
 {
       "type": "select",

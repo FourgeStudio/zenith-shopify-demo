@@ -29,6 +29,7 @@
         {%- render 'zenith-faq-items',
           blocks: section.blocks,
           open_first: section.settings.open_first,
+          open_all: section.settings.open_all,
           schema: section.settings.enable_schema,
           section_id: section.id
         -%}
@@ -115,6 +116,12 @@
       "id": "open_first",
       "label": "Open first question",
       "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "open_all",
+      "label": "Open all questions",
+      "default": false
     },
     {
       "type": "range",

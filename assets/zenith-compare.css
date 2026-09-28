@@ -1,4 +1,4 @@
-/* Zenith · Comparison table — highlighted Zenith column on desktop, one stacked table per competitor on mobile.
+/* Zenith · Comparison table — highlighted Zenith column on desktop, one stacked table per competitor on mobile (or the same table: mobile_layout "table").
    Per-instance values are CSS vars on #Zenith-{section.id} (snippets/zenith-section-style.liquid + the section's `extra`).
    Mobile first. */
 
@@ -73,12 +73,12 @@
 .zenith-compare__table-m tbody th,
 .zenith-compare__table-m tbody td {
   height: var(--z-cmp-rh-m, 38px);
-  padding: var(--z-space-1) var(--z-cmp-cpad-m, 8px);
+  padding: var(--z-cmp-py-m, 4px) var(--z-cmp-cpad-m, 8px);
   background: var(--z-cmp-row, #202020);
   font-family: var(--font-body-family);
   font-weight: 400;
   font-size: var(--z-tfs-m, 1.4rem);
-  line-height: 1.4;
+  line-height: var(--z-cmp-lh-m, 1.4);
   color: rgb(var(--color-foreground));
   text-align: center;
   vertical-align: middle;
@@ -192,12 +192,12 @@
 .zenith-compare__table tbody th,
 .zenith-compare__table tbody td {
   height: var(--z-cmp-rh, 48px);
-  padding: var(--z-space-2) var(--z-cmp-cpad, 12px);
+  padding: var(--z-cmp-py, 8px) var(--z-cmp-cpad, 12px);
   background: var(--z-cmp-row, #202020);
   font-family: var(--font-body-family);
   font-weight: 400;
   font-size: var(--z-tfs, 1.6rem);
-  line-height: 1.4;
+  line-height: var(--z-cmp-lh, 1.4);
   color: rgb(var(--color-foreground));
   text-align: center;
   vertical-align: middle;
@@ -220,7 +220,100 @@
   background: var(--z-cmp-zen, #203940);
 }
 
+/* Zenith column text size (0 = row text size) and competitor value opacity — both table layouts. */
+.zenith-compare__table tbody td.zenith-compare__value--zenith {
+  font-size: var(--z-cmp-zfs, var(--z-tfs, 1.6rem));
+}
+
+.zenith-compare__table-m tbody td.zenith-compare__value--zenith {
+  font-size: var(--z-cmp-zfs-m, var(--z-tfs-m, 1.4rem));
+}
+
+.zenith-compare__table tbody td.zenith-compare__value:not(.zenith-compare__value--zenith),
+.zenith-compare__table-m tbody td.zenith-compare__value:not(.zenith-compare__value--zenith) {
+  color: rgba(var(--color-foreground), var(--z-cmp-vo, 1));
+}
+
+/* ---------- Table lines: "outlined" = 1px outline + row dividers, no column dividers ----------
+   The corner cell stays open; the Zenith column can use its own divider colour. */
+.zenith-compare--outlined .zenith-compare__table {
+  --z-cmp-line: var(--z-cmp-div-m, #363636);
+  --z-cmp-line-zen: var(--z-cmp-divz, var(--z-cmp-line));
+}
+
+.zenith-compare--outlined .zenith-compare__table tbody tr {
+  border-top: 0;
+}
+
+.zenith-compare--outlined .zenith-compare__table :is(th, td):not(.zenith-compare__corner) {
+  border: 1px solid var(--z-cmp-line);
+  border-left-width: 0;
+  border-right-width: 0;
+}
+
+.zenith-compare--outlined .zenith-compare__table tbody tr > :first-child {
+  border-left-width: 1px;
+}
+
+.zenith-compare--outlined .zenith-compare__table tr > :last-child {
+  border-right-width: 1px;
+}
+
+.zenith-compare--outlined .zenith-compare__table :is(th, td):nth-child(2):not(.zenith-compare__corner) {
+  border-top-color: var(--z-cmp-line-zen);
+  border-bottom-color: var(--z-cmp-line-zen);
+}
+
+.zenith-compare--outlined .zenith-compare__table thead .zenith-compare__head:not(.zenith-compare__head--zenith) {
+  background: var(--z-cmp-row, #202020);
+}
+
+/* ---------- Mobile layout "One table, all columns": the desktop table with the mobile settings ---------- */
+@media screen and (max-width: 749px) {
+  .zenith-compare__table .zenith-compare__corner {
+    width: var(--z-cmp-lw-m, 63%);
+  }
+
+  .zenith-compare__table .zenith-compare__head {
+    height: var(--z-cmp-hh-m, 32px);
+    padding: var(--z-space-1) var(--z-cmp-cpad-m, 8px);
+    font-size: var(--z-ttfs-m, 1.4rem);
+    border-left-color: var(--z-cmp-div-m, #363636);
+  }
+
+  .zenith-compare__table .zenith-compare__head-note {
+    font-size: var(--z-cmp-note-m, 1.4rem);
+  }
+
+  .zenith-compare__table tbody tr {
+    border-top-color: var(--z-cmp-div-m, #363636);
+  }
+
+  .zenith-compare__table tbody th,
+  .zenith-compare__table tbody td {
+    height: var(--z-cmp-rh-m, 38px);
+    padding: var(--z-cmp-py-m, 4px) var(--z-cmp-cpad-m, 8px);
+    font-size: var(--z-tfs-m, 1.4rem);
+    line-height: var(--z-cmp-lh-m, 1.4);
+    border-left-color: var(--z-cmp-div-m, #363636);
+  }
+
+  .zenith-compare__table tbody td.zenith-compare__value--zenith {
+    font-size: var(--z-cmp-zfs-m, var(--z-tfs-m, 1.4rem));
+  }
+}
+
 @media screen and (min-width: 750px) {
+  .zenith-compare__table {
+    max-width: var(--z-cmp-tmw, none);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .zenith-compare--outlined .zenith-compare__table {
+    --z-cmp-line: var(--z-cmp-div, #363636);
+  }
+
   .zenith-compare .zenith-subheading {
     color: rgba(var(--color-foreground), var(--z-cmp-sub, 0.7));
   }

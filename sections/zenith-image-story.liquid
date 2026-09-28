@@ -19,6 +19,15 @@
   {%- if section.settings.heading_color != blank %}
   --z-story-hc: {{ section.settings.heading_color }};
   {%- endif %}
+  {%- if section.settings.column_icon_color != blank %}
+  --z-story-icon-c: {{ section.settings.column_icon_color }};
+  {%- endif %}
+  {%- if section.settings.column_text_opacity > 0 %}
+  --z-story-coltext-a: {{ section.settings.column_text_opacity | divided_by: 100.0 }};
+  {%- endif %}
+  {%- if section.settings.text_max_width < 1000 %}
+  --z-story-tmw: {{ section.settings.text_max_width }}px;
+  {%- endif %}
 {%- endcapture -%}
 {%- render 'zenith-section-style', section: section, extra: extra -%}
 
@@ -51,6 +60,9 @@
   endif
   if section.settings.hide_heading_desktop
     assign story_classes = story_classes | append: ' zenith-story--heading-hide-d'
+  endif
+  if section.settings.columns_layout == 'list'
+    assign story_classes = story_classes | append: ' zenith-story--list'
   endif
 
   assign image_sizes = '(min-width: 990px) calc((100vw - 10rem) / 2), (min-width: 750px) calc(100vw - 10rem), calc(100vw - 3rem)'
@@ -156,17 +168,27 @@
         {%- if section.blocks.size > 0 -%}
           <div class="zenith-story__columns">
             {%- for block in section.blocks -%}
-              <div class="zenith-story__column" id="Block-{{ block.id }}" {{ block.shopify_attributes }}>
-                {%- if block.settings.title != blank -%}
-                  <h3 class="zenith-story__column-title">
-                    {{- block.settings.title | escape | replace: '[customers]', settings.customer_count -}}
-                  </h3>
+              {%- assign column_icon = block.settings.icon | default: 'none' -%}
+              <div
+                class="zenith-story__column{% if column_icon != 'none' %} zenith-story__column--icon{% endif %}"
+                id="Block-{{ block.id }}"
+                {{ block.shopify_attributes }}
+              >
+                {%- if column_icon != 'none' -%}
+                  <span class="zenith-story__column-icon">{% render 'zenith-icon', icon: column_icon %}</span>
                 {%- endif -%}
-                {%- if block.settings.text != blank -%}
-                  <div class="zenith-story__column-text zenith-rte">
-                    {{- block.settings.text | replace: '[customers]', settings.customer_count -}}
-                  </div>
-                {%- endif -%}
+                <div class="zenith-story__column-body">
+                  {%- if block.settings.title != blank -%}
+                    <h3 class="zenith-story__column-title">
+                      {{- block.settings.title | escape | replace: '[customers]', settings.customer_count -}}
+                    </h3>
+                  {%- endif -%}
+                  {%- if block.settings.text != blank -%}
+                    <div class="zenith-story__column-text zenith-rte">
+                      {{- block.settings.text | replace: '[customers]', settings.customer_count -}}
+                    </div>
+                  {%- endif -%}
+                </div>
               </div>
             {%- endfor -%}
           </div>
@@ -370,6 +392,17 @@
       "default": 1000
     },
     {
+      "type": "range",
+      "id": "text_max_width",
+      "label": "Text max width (desktop)",
+      "info": "Limits only the paragraph text, so the heading can run wider. 1000 = no limit.",
+      "min": 240,
+      "max": 1000,
+      "step": 10,
+      "unit": "px",
+      "default": 1000
+    },
+    {
       "type": "checkbox",
       "id": "hide_heading_desktop",
       "label": "Hide heading on desktop",
@@ -385,6 +418,17 @@
       "step": 10,
       "unit": "px",
       "default": 200
+    },
+    {
+      "type": "select",
+      "id": "columns_layout",
+      "label": "Text columns layout",
+      "info": "List = one item per row with its icon beside the text.",
+      "default": "columns",
+      "options": [
+        { "value": "columns", "label": "Columns (2 per row on desktop)" },
+        { "value": "list", "label": "List (icon beside text)" }
+      ]
     },
     {
       "type": "range",
@@ -439,6 +483,12 @@
       "default": "#EABE5F"
     },
     {
+      "type": "color",
+      "id": "column_icon_color",
+      "label": "Column icon color",
+      "default": "#EABE5F"
+    },
+    {
       "type": "range",
       "id": "text_opacity",
       "label": "Body text opacity",
@@ -447,6 +497,17 @@
       "step": 5,
       "unit": "%",
       "default": 70
+    },
+    {
+      "type": "range",
+      "id": "column_text_opacity",
+      "label": "Column text opacity",
+      "info": "0 = same as body text.",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 0
     },
     {
       "type": "select",
@@ -576,6 +637,16 @@
     },
     {
       "type": "range",
+      "id": "icon_size",
+      "label": "Column icon size",
+      "min": 12,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
       "id": "button_font_size",
       "label": "Button text size",
       "min": 14,
@@ -692,6 +763,16 @@
       "step": 2,
       "unit": "px",
       "default": 32
+    },
+    {
+      "type": "range",
+      "id": "icon_size_mobile",
+      "label": "Column icon size",
+      "min": 12,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 24
     },
     {
       "type": "range",
@@ -833,6 +914,44 @@
         {
           "type": "header",
           "content": "Content"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "info": "Shown beside the text in the List layout, above it in Columns.",
+          "default": "none",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "sparkles", "label": "Sparkles" },
+            { "value": "sun_cloud", "label": "Sun and cloud" },
+            { "value": "sun", "label": "Sun" },
+            { "value": "dropper", "label": "Dropper" },
+            { "value": "droplet", "label": "Droplet" },
+            { "value": "book_open", "label": "Open book" },
+            { "value": "leaf", "label": "Leaf" },
+            { "value": "farm", "label": "Farm" },
+            { "value": "thermometer", "label": "Thermometer" },
+            { "value": "clock", "label": "Clock" },
+            { "value": "check", "label": "Check" },
+            { "value": "check_circle", "label": "Check in circle" },
+            { "value": "badge_check", "label": "Badge check" },
+            { "value": "certified", "label": "Certified" },
+            { "value": "certificate", "label": "Certificate" },
+            { "value": "shield", "label": "Shield" },
+            { "value": "shield_plus", "label": "Shield plus" },
+            { "value": "thumbs_up", "label": "Thumbs up" },
+            { "value": "hand_heart", "label": "Hand and heart" },
+            { "value": "flag", "label": "Flag" },
+            { "value": "cash", "label": "Cash" },
+            { "value": "truck", "label": "Truck" },
+            { "value": "box", "label": "Box" },
+            { "value": "lock", "label": "Lock" },
+            { "value": "user", "label": "Person" },
+            { "value": "chat", "label": "Chat" },
+            { "value": "gift", "label": "Gift" },
+            { "value": "pin", "label": "Location pin" }
+          ]
         },
         {
           "type": "text",

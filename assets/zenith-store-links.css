@@ -39,6 +39,7 @@
   padding: var(--z-space-2) var(--z-ipad-m, 8px);
   background: var(--z-sl-bg, #202020);
   border: var(--z-sl-bw, 1px) solid var(--z-sl-border, #363636);
+  border-radius: var(--z-sl-radius, 0);
   color: rgb(var(--color-foreground));
   text-decoration: none;
 }
@@ -107,6 +108,11 @@
 }
 
 @media screen and (min-width: 750px) {
+  /* "Text under the heading" is mobile only */
+  .zenith-store-links__heading .zenith-subheading {
+    display: none;
+  }
+
   .zenith-store-links__heading.zenith-heading--center {
     align-items: center;
     text-align: center;

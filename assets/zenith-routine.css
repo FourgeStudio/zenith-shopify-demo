@@ -62,8 +62,27 @@
 .zenith-rt__text {
   margin: var(--z-space-2) 0 0;
   font-size: var(--z-tfs-m, 1.4rem);
-  line-height: 1.6;
+  line-height: var(--z-rt-tlh-m, 1.6);
   color: rgba(var(--color-foreground), var(--z-rt-text-o, 0.7));
+}
+
+/* ---------- Note under the steps (phones; desktop with show_note_desktop) ---------- */
+.zenith-rt__note {
+  margin: var(--z-rt-nsp-m, 20px) 0 0;
+  font-size: var(--z-rt-nfs-m, 1.3rem);
+  line-height: 1.6;
+  text-align: center;
+  color: rgba(var(--color-foreground), var(--z-rt-text-o, 0.7));
+}
+
+.zenith-rt__note > * {
+  margin: 0;
+}
+
+@media screen and (max-width: 749px) {
+  .zenith-rt__heading.zenith-heading {
+    max-width: var(--z-rt-hmw-m, var(--z-hmw, 76rem));
+  }
 }
 
 /* ---------- Products used ---------- */
@@ -150,6 +169,17 @@
 
   .zenith-rt__text {
     font-size: var(--z-tfs, 1.5rem);
+    line-height: var(--z-rt-tlh, 1.6);
+  }
+
+  .zenith-rt__note {
+    display: none;
+    margin-top: var(--z-rt-nsp, 24px);
+    font-size: var(--z-rt-nfs, 1.4rem);
+  }
+
+  .zenith-rt--note-d .zenith-rt__note {
+    display: block;
   }
 
   .zenith-rt__used {
@@ -206,6 +236,15 @@
     align-items: center;
     column-gap: var(--z-rt-tsp, 20px);
     text-align: left;
+  }
+}
+
+/* Tablet: three "photo beside text" columns are too narrow → one step per row */
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .zenith-rt--d-beside .zenith-rt__steps {
+    grid-auto-flow: row;
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 64rem;
   }
 }
 
