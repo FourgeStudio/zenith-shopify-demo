@@ -548,7 +548,7 @@
             "icon": "box",
             "icon_text": "",
             "title": "Fulfillment Center & Manila Office",
-            "text": "<p>1208 Pablo Ocampo, Cor. Alfonso St. Vito Cruz, Brgy 757, Manila, Metro Manila 1017 Philippines</p>"
+            "text": "<p><a href=\"https://maps.app.goo.gl/kytWPJfQjtJEA89g8\" target=\"_blank\">1208 Pablo Ocampo, Cor. Alfonso St. Vito Cruz, Brgy 757, Manila, Metro Manila 1017 Philippines</a></p>"
           }
         },
         "location_cebu": {
@@ -557,7 +557,7 @@
             "icon": "pin",
             "icon_text": "",
             "title": "Corporate Head Office",
-            "text": "<p>MIT Bldg 2 Unit #3B-3, 117 Gorordo Ave., Cor. Sanjercasville Rd. Lahug, Cebu City, Cebu 6000 Philippines</p>"
+            "text": "<p><a href=\"https://maps.app.goo.gl/sSiDuTjqH5DBzZCo9\" target=\"_blank\">MIT Bldg 2 Unit #3B-3, 117 Gorordo Ave., Cor. Sanjercasville Rd. Lahug, Cebu City, Cebu 6000 Philippines</a></p>"
           }
         }
       },
