@@ -820,3 +820,10 @@ div.zenith-overlay {
   .zenith-overlay.zenith-overlay--m-left { background: linear-gradient(to right, rgba(var(--z-ov-rgb), var(--z-ov-a)) 0%, rgba(var(--z-ov-rgb), 0) var(--z-ov-cover)); }
   .zenith-overlay.zenith-overlay--m-right { background: linear-gradient(to left, rgba(var(--z-ov-rgb), var(--z-ov-a)) 0%, rgba(var(--z-ov-rgb), 0) var(--z-ov-cover)); }
 }
+
+/* "Amare Group" auto-links (assets/zenith-amare-link.js): keep the surrounding text colour, underline only */
+a.zenith-amare-link {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
