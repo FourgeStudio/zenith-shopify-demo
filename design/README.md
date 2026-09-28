@@ -152,6 +152,9 @@ Every product gets its own design in this store, so this is an ALTERNATE templat
 
 Desktop/mobile differences: the buy box reorders on phones (quantity + Add to cart move above the FDA bar and the checklist) and shows a short description the desktop hides; the video carousel heading is "Clinically Proven. The Complete Regimen." on desktop and "A Complete Routine, Built for Men." on phones; the accordion rows differ (desktop = 4 product questions, mobile = Description / How to use / What's inside / Zenith guarantee / FAQs — both are in the template, each hidden on the other breakpoint); the ingredient list has 4 items on desktop and 3 longer-titled ones on mobile (desktop copy used, `title_mobile` per item). `mobile/sections/Frame 1000005205.png` is blank.
 
+## Homepage v2 revision (`design/homepage/revisions/homepagev2/`, desktop 1x, mobile 1x; promo variants in `revisions/promo-banner/`) — built 2026-09-29
+Order in `templates/index.json`: promo_hero → hero (v2 copy) → trust_bar → brand_story (intro, `Layout/1.png`, icon list) → routine (Morning / Shower / Night; mobile note + divider) → shelf (`Carousel.png`, "Five products. One shelf.", stacked on mobile) → results → compare ("How is Zenith different?", 1 competitor, single table on mobile) → money_back → social (`Ecom Stores.png` / `Socials.png`) → collection → faq (9 v2 questions, all open) → reviews (Judge.me homepage widget inside Zenith · Reviews). v1-only sections (press, videos, guarantee, categories, featured_product, promo_bottom, Dawn apps) are kept but disabled.
+
 ## Product pages — Shampoo, Spray, Cleanser, Day Cream SPF 30 (`design/Product Page/<Product>/`, desktop 1x, mobile full page 2x, mobile sections 1x)
 One alternate template per product, all built on the tallow-cream layout (2026-09-29):
 
