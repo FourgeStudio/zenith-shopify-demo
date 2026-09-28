@@ -50,6 +50,7 @@
       "settings": {
         "show_social": true,
         "email": "hello@tryzenith.ph",
+        "payment_image": "shopify://shop_images/Payment_Options.png",
         "payment_enable": true,
         "seal_image": "shopify://shop_images/amare-group-badge.png",
         "seal_link": "",
@@ -99,7 +100,7 @@
         "padding_top_mobile": 26,
         "padding_bottom_mobile": 20,
         "divider_spacing": 15,
-        "seal_spacing": 16
+        "seal_spacing": 0
       }
     }
   },
