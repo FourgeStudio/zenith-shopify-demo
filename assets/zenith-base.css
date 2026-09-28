@@ -843,3 +843,10 @@ a.zenith-amare-link {
 .zenith-rte :is(p a, li > a):not([class]):hover {
   text-decoration-thickness: 2px;
 }
+
+/* Office address links (Google Maps): text colour, no underline */
+.zenith-section a[href*="maps.app.goo.gl"],
+.zenith-section a[href*="google.com/maps"] {
+  color: inherit;
+  text-decoration: none;
+}
