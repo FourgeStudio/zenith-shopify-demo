@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -264,6 +273,7 @@
         "delivery_icon_size": 20,
         "trust_icon_size": 18,
         "trust_gap": 10,
+        "rows_spacing": 18,
         "trust_row_gap": 12,
         "item_padding": 12,
         "icon_size": 16,
@@ -303,6 +313,8 @@
         "trust_font_size": 13,
         "title_font_size": 20,
         "row_text_font_size": 18,
+        "question_font_size": 18,
+        "question_text_font_size": 16,
         "review_name_font_size": 16,
         "review_text_font_size": 13,
         "review_star_size": 12,
@@ -340,24 +352,19 @@
         "trust_font_size_mobile": 13,
         "title_font_size_mobile": 20,
         "row_text_font_size_mobile": 18,
+        "question_font_size_mobile": 18,
+        "question_text_font_size_mobile": 16,
+        "rows_spacing_mobile": 41,
         "item_padding_mobile": 18,
         "icon_size_mobile": 16,
         "padding_top": 40,
         "padding_bottom": 64,
         "padding_top_mobile": 0,
-        "padding_bottom_mobile": 32,
-        "rows_spacing": 18,
-        "rows_spacing_mobile": 41,
-        "question_font_size": 18,
-        "question_text_font_size": 16,
-        "question_font_size_mobile": 18,
-        "question_text_font_size_mobile": 16
+        "padding_bottom_mobile": 32
       }
     },
     "videos": {
       "type": "zenith-video-carousel",
-      "blocks": {},
-      "block_order": [],
       "settings": {
         "content_source": "global",
         "product_filter": "page",
@@ -672,6 +679,7 @@
         "heading": "Why guys switch to Zenith",
         "subheading": "<p>Built specifically for the Filipino climate and lifestyle.</p>",
         "zenith_label": "Zenith",
+        "zenith_caption": "Zenith Anti-Aging Tallow Cleanser",
         "column_1_title": "Other Product",
         "column_1_note": "(Harsh deep-clean washes, Strong foaming face washes)",
         "column_2_title": "Other Product",
@@ -719,8 +727,7 @@
         "padding_top": 48,
         "padding_bottom": 48,
         "padding_top_mobile": 24,
-        "padding_bottom_mobile": 20,
-        "zenith_caption": "Zenith Anti-Aging Tallow Cleanser"
+        "padding_bottom_mobile": 20
       }
     },
     "reviews": {
@@ -752,6 +759,7 @@
         "text_font_size": 14,
         "icon_size": 14,
         "button_font_size": 20,
+        "heading_mobile": "[customers] Filipino Men Trust Zenith Products",
         "subheading_mobile": "",
         "heading_font_size_mobile": 36,
         "subheading_font_size_mobile": 16,
@@ -765,8 +773,7 @@
         "padding_top": 36,
         "padding_bottom": 52,
         "padding_top_mobile": 24,
-        "padding_bottom_mobile": 48,
-        "heading_mobile": "[customers] Filipino Men Trust Zenith Products"
+        "padding_bottom_mobile": 48
       }
     },
     "guarantee": {
