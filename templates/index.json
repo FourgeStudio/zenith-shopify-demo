@@ -91,14 +91,14 @@
     "hero": {
       "type": "zenith-hero",
       "settings": {
-        "eyebrow": "Trusted by [customers] Filipino men",
-        "heading": "The Maintenance System Built for Filipino Men",
+        "eyebrow": "FDA-notified · Made for Filipino men",
+        "heading": "Skin and hair care built for Filipino men.",
         "heading_mobile": "",
-        "text": "<p>Everything you need to stay in your prime.</p>",
-        "button_label": "Add to Cart",
-        "button_link": "",
-        "button_product": "zenith-anti-aging-tallow-cream",
-        "button_label_mobile": "Shop Zenith Products",
+        "text": "<p>Simple routines for Philippine heat. One cream at night. One wash in the shower. Walang kailangang i-memorize.</p>",
+        "button_label": "Shop Now",
+        "button_link": "shopify://collections/all",
+        "button_product": "",
+        "button_label_mobile": "",
         "button_link_mobile": "",
         "image": "shopify://shop_images/PDP1_-_IMG1g.png",
         "show_image": true,
@@ -128,12 +128,12 @@
         "eyebrow_spacing": 4,
         "text_spacing": 8,
         "paragraph_spacing": 0,
-        "text_max_width": 1000,
+        "text_max_width": 570,
         "icon_spacing": 32,
         "display_spacing": 16,
         "content_gap": 32,
-        "trust_spacing": 24,
-        "trust_max_width": 420,
+        "trust_spacing": 8,
+        "trust_max_width": 280,
         "confetti_align": "stretch",
         "confetti_width": 970,
         "color_scheme": "scheme-1",
@@ -186,7 +186,7 @@
         "heading_font_size_mobile": 40,
         "subheading_font_size_mobile": 16,
         "button_font_size_mobile": 22,
-        "trust_font_size_mobile": 13,
+        "trust_font_size_mobile": 14,
         "trust_icon_size_mobile": 16,
         "highlight_font_size_mobile": 48,
         "ribbon_font_size_mobile": 14,
@@ -204,8 +204,21 @@
         "padding_top": 0,
         "padding_bottom": 0,
         "padding_top_mobile": 0,
-        "padding_bottom_mobile": 0
-      }
+        "padding_bottom_mobile": 0,
+        "button_min_width": 280
+      },
+      "blocks": {
+        "trust_note": {
+          "type": "trust",
+          "settings": {
+            "icon": "none",
+            "text": "Zenith Money-Back Guarantee."
+          }
+        }
+      },
+      "block_order": [
+        "trust_note"
+      ]
     },
     "trust_bar": {
       "type": "zenith-icon-bar",
@@ -230,7 +243,7 @@
           "type": "item",
           "settings": {
             "icon": "certificate",
-            "text": "FDA-Notified Products",
+            "text": "Philippine FDA Notified",
             "link": ""
           }
         },
@@ -238,7 +251,7 @@
           "type": "item",
           "settings": {
             "icon": "farm",
-            "text": "100% Grass-Fed Beef Tallow",
+            "text": "100% Beef Tallow",
             "link": ""
           }
         },
@@ -272,10 +285,10 @@
         "text_font_size_mobile": 14,
         "icon_size_mobile": 22,
         "gap_mobile": 24,
-        "padding_top": 12,
+        "padding_top": 14,
         "padding_bottom": 12,
-        "padding_top_mobile": 10,
-        "padding_bottom_mobile": 10
+        "padding_top_mobile": 14,
+        "padding_bottom_mobile": 12
       }
     },
     "press": {
@@ -359,7 +372,8 @@
         "padding_bottom": 24,
         "padding_top_mobile": 24,
         "padding_bottom_mobile": 24
-      }
+      },
+      "disabled": true
     },
     "results": {
       "type": "zenith-results-marquee",
@@ -505,9 +519,9 @@
       "settings": {
         "content_source": "global",
         "eyebrow": "Used by [customers] Filipino men",
-        "heading": "Real Men. Real Results.",
-        "heading_mobile": "Built for Filipino men over 35",
-        "subheading": "<p>See the difference a proper regimen makes.</p><p>From clearer skin to thicker hair, every transformation here comes from verified Zenith customers putting in the consistent work.</p>",
+        "heading": "Built for Filipino men. In their words.",
+        "heading_mobile": "Built for Filipino men.\nIn their words.",
+        "subheading": "",
         "product_prefix": "Used",
         "verified_label": "Verified buyer",
         "disclaimer": "Individual results may vary.*",
@@ -522,8 +536,8 @@
         "speed": 120,
         "alternate_direction": true,
         "pause_on_hover": true,
-        "heading_max_width": 760,
-        "heading_gap": 8,
+        "heading_max_width": 460,
+        "heading_gap": 10,
         "heading_spacing": 32,
         "gap": 20,
         "content_padding": 16,
@@ -556,25 +570,25 @@
         "name_font_size": 15,
         "detail_font_size": 12,
         "disclaimer_font_size": 12,
-        "heading_alignment_mobile": "left",
-        "mobile_card_width": 340,
-        "card_height_mobile": 180,
+        "heading_alignment_mobile": "center",
+        "mobile_card_width": 420,
+        "card_height_mobile": 220,
         "media_width_mobile": 50,
         "heading_font_size_mobile": 36,
         "subheading_font_size_mobile": 16,
-        "heading_gap_mobile": 4,
-        "heading_spacing_mobile": 24,
-        "gap_mobile": 16,
-        "content_padding_mobile": 10,
-        "review_padding_mobile": 12,
-        "thumb_size_mobile": 32,
-        "avatar_size_mobile": 26,
-        "text_font_size_mobile": 10,
-        "star_size_mobile": 11,
-        "quote_font_size_mobile": 12,
-        "name_font_size_mobile": 13,
-        "detail_font_size_mobile": 10,
-        "disclaimer_font_size_mobile": 10,
+        "heading_gap_mobile": 8,
+        "heading_spacing_mobile": 32,
+        "gap_mobile": 20,
+        "content_padding_mobile": 16,
+        "review_padding_mobile": 20,
+        "thumb_size_mobile": 40,
+        "avatar_size_mobile": 32,
+        "text_font_size_mobile": 12,
+        "star_size_mobile": 14,
+        "quote_font_size_mobile": 14,
+        "name_font_size_mobile": 15,
+        "detail_font_size_mobile": 12,
+        "disclaimer_font_size_mobile": 12,
         "disclaimer_spacing_mobile": 16,
         "padding_top": 32,
         "padding_bottom": 32,
@@ -821,7 +835,8 @@
         "padding_bottom": 32,
         "padding_top_mobile": 20,
         "padding_bottom_mobile": 20
-      }
+      },
+      "disabled": true
     },
     "guarantee": {
       "type": "zenith-feature-columns",
@@ -996,7 +1011,8 @@
         "padding_bottom": 56,
         "padding_top_mobile": 20,
         "padding_bottom_mobile": 28
-      }
+      },
+      "disabled": true
     },
     "categories": {
       "type": "zenith-category-cards",
@@ -1110,7 +1126,8 @@
         "padding_bottom": 48,
         "padding_top_mobile": 24,
         "padding_bottom_mobile": 32
-      }
+      },
+      "disabled": true
     },
     "featured_product": {
       "type": "zenith-featured-product",
@@ -1240,52 +1257,73 @@
         "padding_bottom": 0,
         "padding_top_mobile": 20,
         "padding_bottom_mobile": 20
-      }
+      },
+      "disabled": true
     },
     "brand_story": {
       "type": "zenith-image-story",
       "blocks": {
-        "column_1": {
+        "item_1": {
           "type": "column",
           "settings": {
-            "title": "Mission",
-            "text": "<p>To build premium, high-performance self-care for mature Filipino men, and give them easy access to it.</p>"
+            "icon": "sparkles",
+            "title": "",
+            "text": "<p>One simple routine for skin and hair</p>"
           }
         },
-        "column_2": {
+        "item_2": {
           "type": "column",
           "settings": {
-            "title": "Vision",
-            "text": "<p>To empower mature Filipino men to always feel in their prime.</p>"
+            "icon": "sun_cloud",
+            "title": "",
+            "text": "<p>Built for Philippine heat and humidity</p>"
+          }
+        },
+        "item_3": {
+          "type": "column",
+          "settings": {
+            "icon": "dropper",
+            "title": "",
+            "text": "<p>Ingredients named on the label</p>"
+          }
+        },
+        "item_4": {
+          "type": "column",
+          "settings": {
+            "icon": "book_open",
+            "title": "",
+            "text": "<p>Directions you can read before you buy</p>"
           }
         }
       },
       "block_order": [
-        "column_1",
-        "column_2"
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4"
       ],
       "settings": {
         "image": "shopify://shop_images/Team_Photo.jpg",
-        "use_brand_logo": true,
+        "use_brand_logo": false,
         "brand_logo_style": "wordmark",
         "eyebrow": "",
-        "heading": "",
-        "text": "<p>Filipino men over 35 have been underserved for too long. Forced to choose between overly complicated routines or generic imported products not built for the climate, Zenith was built to fix that.</p><p>The brand wasn't created to be just another skincare line focused on aesthetics or flashy packaging. Instead, Zenith is committed to building high-performance personal care gear designed for real conditions, real needs, and real lives.</p><p>No hype and no shortcuts. Just straightforward, highly effective products that solve real, everyday problems for men who just want things that actually work.</p><p>Fast forward to today, and [customers] men have made Zenith a part of their daily routine. But looking back on this growth, this milestone isn't really about the company or its logos. It is a testament to the customers who truly built the brand.</p>",
+        "heading": "Made for the way Filipino men actually live.",
+        "text": "<p>Init, pawis, mahabang araw. Zenith is built around that, not around a routine you will skip by Wednesday.</p>",
         "button_label": "",
         "button_link": "",
         "image_position": "left",
-        "image_ratio": "adapt",
+        "image_ratio": "square",
         "media_min_height": 720,
-        "content_align": "top",
-        "content_padding": 44,
-        "gap": 64,
+        "content_align": "center",
+        "content_padding": 0,
+        "gap": 80,
         "content_gap": 20,
-        "heading_spacing": 20,
-        "content_max_width": 1000,
+        "heading_spacing": 8,
+        "content_max_width": 500,
         "hide_heading_desktop": false,
         "logo_width": 200,
-        "columns_spacing": 40,
-        "columns_gap": 32,
+        "columns_spacing": 24,
+        "columns_gap": 8,
         "column_title_spacing": 14,
         "color_scheme": "scheme-1",
         "heading_color": "",
@@ -1297,44 +1335,50 @@
         "overlay_opacity": 30,
         "overlay_coverage": 60,
         "heading_tag": "h2",
-        "heading_font_size": 44,
-        "heading_line_height": 110,
+        "heading_font_size": 48,
+        "heading_line_height": 120,
         "heading_uppercase": false,
         "eyebrow_font_size": 14,
-        "text_font_size": 16,
+        "text_font_size": 18,
         "title_font_size": 32,
         "button_font_size": 22,
-        "image_ratio_mobile": "landscape",
+        "image_ratio_mobile": "square",
         "media_height_mobile": 348,
         "image_full_bleed_mobile": false,
         "image_fade_mobile": 0,
         "heading_position_mobile": "below",
         "content_overlap_mobile": 0,
-        "heading_font_size_mobile": 32,
+        "heading_font_size_mobile": 36,
         "heading_line_height_mobile": 110,
         "text_font_size_mobile": 16,
         "title_font_size_mobile": 32,
         "button_font_size_mobile": 20,
         "button_label_mobile": "",
-        "gap_mobile": 20,
+        "gap_mobile": 24,
         "content_gap_mobile": 20,
-        "heading_spacing_mobile": 20,
+        "heading_spacing_mobile": 8,
         "content_max_width_mobile": 800,
-        "columns_spacing_mobile": 16,
+        "columns_spacing_mobile": 24,
         "columns_mobile": "1",
-        "columns_gap_mobile": 16,
+        "columns_gap_mobile": 8,
         "padding_top": 64,
-        "padding_bottom": 32,
+        "padding_bottom": 56,
         "padding_top_mobile": 20,
-        "padding_bottom_mobile": 20
+        "padding_bottom_mobile": 20,
+        "text_max_width": 460,
+        "columns_layout": "list",
+        "column_icon_color": "#eabe5f",
+        "column_text_opacity": 80,
+        "icon_size": 24,
+        "icon_size_mobile": 22
       }
     },
     "money_back": {
       "type": "zenith-guarantee-banner",
       "settings": {
         "eyebrow": "",
-        "heading": "The Zenith Money-Back Guarantee",
-        "text": "<p>We stand behind every Zenith formula with complete confidence. Every order carries the Zenith Money-Back Guarantee, so you can try it on your own terms.</p><p>Not happy with your purchase? Simply contact us and we'll refund it. No hassle. Just show us proof. Full terms on our Refunds and Returns page.</p>",
+        "heading": "Zenith Money-Back Guarantee",
+        "text": "<p>We stand behind every Zenith product. Kung hindi para sa iyo,<br>ibabalik namin ang bayad mo. Full terms on our <a href=\"/policies/refund-policy\">Refunds and Returns</a> page.</p>",
         "button_label": "",
         "button_link": "",
         "image": "shopify://shop_images/vector-icons_7.png",
@@ -1349,7 +1393,7 @@
         "color_scheme": "scheme-1",
         "band_color_scheme": "scheme-4",
         "border_color": "#363636",
-        "text_opacity": 100,
+        "text_opacity": 70,
         "button_style": "gold",
         "heading_font_size": 40,
         "heading_uppercase": false,
@@ -1376,14 +1420,17 @@
       "settings": {
         "eyebrow": "All Products",
         "heading": "The Zenith Grooming Collection",
-        "subheading": "<p>The products men come back for. Simple. Effective. Proven.</p>",
-        "collection": "all",
+        "subheading": "<p>The products men come back for. Simple routines, named ingredients.</p>",
         "products_to_show": 10,
+        "image_source": "featured",
         "show_rating": false,
+        "show_description": false,
+        "description_words": 20,
+        "show_price": true,
+        "card_button_action": "cart",
         "button_label": "Add to Cart",
         "card_button_icon": "arrow_right",
         "view_all_label": "Shop All Products",
-        "view_all_link": "shopify://collections/all",
         "slides_desktop": 4,
         "bleed_right": true,
         "show_peek": false,
@@ -1398,6 +1445,7 @@
         "image_fit": "cover",
         "image_padding": 0,
         "card_text_spacing": 14,
+        "card_desc_spacing": 4,
         "card_button_spacing": 6,
         "card_button_height": 38,
         "controls_spacing": 32,
@@ -1405,14 +1453,21 @@
         "button_style": "outline",
         "card_button_style": "gold",
         "card_image_bg": "#ffffff",
+        "divider_color": "#454545",
         "heading_font_size": 36,
         "heading_uppercase": false,
         "subheading_font_size": 16,
         "eyebrow_font_size": 14,
         "title_font_size": 16,
+        "title_font": "body",
+        "text_font_size": 14,
         "price_font_size": 16,
         "button_font_size": 24,
         "card_button_font_size": 23,
+        "mobile_layout": "carousel",
+        "show_dividers_mobile": true,
+        "stack_gap_mobile": 24,
+        "hide_view_all_mobile": false,
         "mobile_slide_width": 83,
         "heading_font_size_mobile": 36,
         "subheading_font_size_mobile": 16,
@@ -1420,14 +1475,17 @@
         "heading_spacing_mobile": 20,
         "gap_mobile": 24,
         "title_font_size_mobile": 16,
+        "text_font_size_mobile": 14,
         "price_font_size_mobile": 16,
         "button_font_size_mobile": 24,
         "card_button_font_size_mobile": 23,
         "card_button_height_mobile": 44,
         "padding_top": 64,
-        "padding_bottom": 64,
+        "padding_bottom": 80,
         "padding_top_mobile": 20,
-        "padding_bottom_mobile": 20
+        "padding_bottom_mobile": 20,
+        "collection": "all",
+        "view_all_link": "shopify://collections/all"
       }
     },
     "1790629529cb985278": {
@@ -1447,7 +1505,8 @@
       ],
       "settings": {
         "include_margins": true
-      }
+      },
+      "disabled": true
     },
     "faq": {
       "type": "zenith-faq",
@@ -1455,36 +1514,64 @@
         "question_1": {
           "type": "question",
           "settings": {
-            "question": "Different from drugstore brands?",
-            "answer": "<p>Drugstore products are built for mass appeal and the lowest possible cost. Zenith formulas are built specifically for the Philippine climate and the realities of men over 35. We use higher-grade ingredients with absolutely zero unnecessary fillers.</p>"
+            "question": "What makes Zenith different from other men’s grooming brands?",
+            "answer": "<p>Zenith is made for Filipino men and Philippine weather. Every product is FDA-notified, the ingredients are named on the label, and the routine is short enough to keep.</p>"
           }
         },
         "question_2": {
           "type": "question",
           "settings": {
-            "question": "Safe for sensitive skin?",
-            "answer": "<p>Yes. Every product is tested in tropical humidity and designed to be gentle. We avoid harsh sulfates and synthetic fragrances that cause irritation. If your skin reacts, stop use and message us right away with photos. Covered by the Zenith Money-Back Guarantee.</p>"
+            "question": "Who is Zenith for?",
+            "answer": "<p>Men who want a short routine that works with heat and sweat. Most Zenith customers are Filipino men over 35.</p>"
           }
         },
         "question_3": {
           "type": "question",
           "settings": {
-            "question": "How to layer with skincare?",
-            "answer": "<p>Keep it simple. Cleanse first with the Tallow Cleanser, then Tallow Day Cream SPF 30 in the morning and Anti-Aging Tallow Cream at night. Three steps, that's it.</p>"
+            "question": "How long should I use Zenith before I judge it?",
+            "answer": "<p>Use it as directed every day and give one full product a fair run before you decide. Skin care and hair care both take time. Full guarantee terms are on the Refunds and Returns page.</p>"
           }
         },
         "question_4": {
           "type": "question",
           "settings": {
-            "question": "What is coming next?",
-            "answer": "<p>We are developing a full body wash, a deodorant that respects your skin, and a shave cream that reduces razor burn. The toothpaste is in development. Sign up for notifications on the product page to know the moment they launch.</p>"
+            "question": "Can I use Zenith products together?",
+            "answer": "<p>Yes. Cleanser and day cream in the morning, tallow cream at night, shampoo in the shower, spray on a clean dry scalp before bed. The directions are on every label.</p>"
           }
         },
         "question_5": {
           "type": "question",
           "settings": {
-            "question": "Why no antiperspirant yet?",
-            "answer": "<p>We are taking our time to get it right. A deodorant that performs in this heat without staining shirts or clogging pores requires real testing. It is coming when it is ready, not a moment sooner.</p>"
+            "question": "Can I use Zenith if my skin is sensitive?",
+            "answer": "<p>Check the full ingredient list on the product page first. Start with a small amount. If anything feels wrong, stop and message us.</p>"
+          }
+        },
+        "question_6": {
+          "type": "question",
+          "settings": {
+            "question": "What is beef tallow and why is it in your skincare?",
+            "answer": "<p>Beef tallow is rendered beef fat. It is the base of the Zenith Anti-Aging Tallow Cream, Cleanser and Day Cream SPF 30. The full ingredient list is on every product page.</p>"
+          }
+        },
+        "question_7": {
+          "type": "question",
+          "settings": {
+            "question": "Do you offer free shipping?",
+            "answer": "<p>Shipping fees vary by location and promotion. Check the product page or your cart for the latest.</p>"
+          }
+        },
+        "question_8": {
+          "type": "question",
+          "settings": {
+            "question": "How long is delivery?",
+            "answer": "<p>Metro Manila orders arrive in about 3 days. Visayas and Mindanao in 3 to 7 days.</p>"
+          }
+        },
+        "question_9": {
+          "type": "question",
+          "settings": {
+            "question": "What is your return policy?",
+            "answer": "<p>Every order carries the Zenith Money-Back Guarantee. Skin products are covered for 30 days and hair products for 60 days. Full terms on our Refunds and Returns page.</p>"
           }
         }
       },
@@ -1493,7 +1580,11 @@
         "question_2",
         "question_3",
         "question_4",
-        "question_5"
+        "question_5",
+        "question_6",
+        "question_7",
+        "question_8",
+        "question_9"
       ],
       "settings": {
         "eyebrow": "",
@@ -1529,9 +1620,10 @@
         "content_gap_mobile": 24,
         "icon_size_mobile": 20,
         "padding_top": 64,
-        "padding_bottom": 64,
+        "padding_bottom": 72,
         "padding_top_mobile": 20,
-        "padding_bottom_mobile": 20
+        "padding_bottom_mobile": 32,
+        "open_all": true
       }
     },
     "promo_bottom": {
@@ -1611,6 +1703,491 @@
         "padding_bottom": 32,
         "padding_top_mobile": 24,
         "padding_bottom_mobile": 24
+      },
+      "disabled": true
+    },
+    "compare": {
+      "type": "zenith-compare",
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "label": "FDA-notified",
+            "zenith_value": "Yes",
+            "value_1": "Not always stated",
+            "value_2": "",
+            "value_3": ""
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "label": "Made for Filipino men",
+            "zenith_value": "Yes",
+            "value_1": "Generic global formulas",
+            "value_2": "",
+            "value_3": ""
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "label": "Built for Philippine heat and humidity",
+            "zenith_value": "Yes",
+            "value_1": "Made for other climates",
+            "value_2": "",
+            "value_3": ""
+          }
+        },
+        "row_4": {
+          "type": "row",
+          "settings": {
+            "label": "Ingredients named on the label (beef tallow, 0.2% retinol, CABROXIL)",
+            "zenith_value": "Yes",
+            "value_1": "Varies",
+            "value_2": "",
+            "value_3": ""
+          }
+        },
+        "row_5": {
+          "type": "row",
+          "settings": {
+            "label": "One short routine",
+            "zenith_value": "Yes",
+            "value_1": "Multi-step",
+            "value_2": "",
+            "value_3": ""
+          }
+        },
+        "row_6": {
+          "type": "row",
+          "settings": {
+            "label": "Zenith Money-Back Guarantee",
+            "zenith_value": "Yes",
+            "value_1": "Varies",
+            "value_2": "",
+            "value_3": ""
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4",
+        "row_5",
+        "row_6"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "How is Zenith different?",
+        "subheading": "<p>We built Zenith for one market: Filipino men, in Philippine weather. Hindi kopya ng formula ng iba.</p>",
+        "zenith_label": "Zenith",
+        "zenith_caption": "",
+        "column_1_title": "Other Brands",
+        "column_1_note": "",
+        "column_2_title": "",
+        "column_2_note": "",
+        "column_3_title": "",
+        "column_3_note": "",
+        "heading_alignment": "center",
+        "heading_spacing": 52,
+        "heading_max_width": 500,
+        "table_style": "outlined",
+        "table_max_width": 920,
+        "label_column_width": 43,
+        "header_height": 56,
+        "row_height": 53,
+        "cell_padding": 32,
+        "cell_padding_y": 16,
+        "logo_width": 88,
+        "color_scheme": "scheme-1",
+        "zenith_header_background": "#203940",
+        "zenith_column_background": "#203940",
+        "row_background": "#202020",
+        "row_background_alt": "#202020",
+        "divider_color": "#363636",
+        "divider_color_zenith": "#364c53",
+        "note_opacity": 70,
+        "value_opacity": 80,
+        "subheading_opacity": 70,
+        "heading_font_size": 40,
+        "heading_uppercase": false,
+        "subheading_font_size": 18,
+        "eyebrow_font_size": 14,
+        "title_font_size": 16,
+        "note_font_size": 14,
+        "text_font_size": 14,
+        "zenith_text_font_size": 16,
+        "row_line_height": 150,
+        "mobile_layout": "table",
+        "heading_alignment_mobile": "left",
+        "divider_color_mobile": "#363636",
+        "heading_font_size_mobile": 32,
+        "subheading_font_size_mobile": 14,
+        "subheading_opacity_mobile": 70,
+        "heading_spacing_mobile": 12,
+        "label_column_width_mobile": 43,
+        "header_height_mobile": 38,
+        "row_height_mobile": 34,
+        "cell_padding_mobile": 8,
+        "cell_padding_y_mobile": 8,
+        "logo_width_mobile": 58,
+        "table_gap_mobile": 24,
+        "group_title_gap_mobile": 8,
+        "title_font_size_mobile": 12,
+        "note_font_size_mobile": 12,
+        "text_font_size_mobile": 12,
+        "zenith_text_font_size_mobile": 14,
+        "row_line_height_mobile": 150,
+        "padding_top": 48,
+        "padding_bottom": 48,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20
+      }
+    },
+    "reviews": {
+      "type": "zenith-reviews",
+      "blocks": {
+        "judge_me_reviews_review_widget_homepage_BKCqgw": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget_homepage/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "product": "zenith-anti-aging-tallow-cream",
+            "review_data": "real_data",
+            "max_width": 1200
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_homepage_BKCqgw"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "[customers] Filipino men have ordered from Zenith.",
+        "subheading": "<p>Real Filipino men using Zenith.</p>",
+        "heading_alignment": "center",
+        "heading_max_width": 900,
+        "subheading_spacing": 28,
+        "heading_spacing": 48,
+        "jdgm_masonry": false,
+        "columns_desktop": 4,
+        "gap": 20,
+        "content_padding": 12,
+        "card_radius": 4,
+        "color_scheme": "scheme-1",
+        "card_color": "#202020",
+        "card_border_color": "",
+        "button_style": "outline",
+        "star_color": "#d6b356",
+        "accent_color": "#c59300",
+        "heading_font_size": 48,
+        "heading_uppercase": false,
+        "subheading_font_size": 18,
+        "subheading_opacity": 100,
+        "eyebrow_font_size": 14,
+        "text_font_size": 14,
+        "icon_size": 14,
+        "button_font_size": 20,
+        "heading_mobile": "[customers] Filipino Men Trust Zenith Products",
+        "subheading_mobile": "",
+        "heading_font_size_mobile": 36,
+        "subheading_font_size_mobile": 16,
+        "subheading_opacity_mobile": 70,
+        "heading_spacing_mobile": 24,
+        "columns_mobile": 2,
+        "gap_mobile": 20,
+        "content_padding_mobile": 12,
+        "text_font_size_mobile": 14,
+        "button_font_size_mobile": 20,
+        "padding_top": 72,
+        "padding_bottom": 48,
+        "padding_top_mobile": 32,
+        "padding_bottom_mobile": 20
+      }
+    },
+    "routine": {
+      "type": "zenith-routine",
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "title": "Morning",
+            "text": "Wash with Zenith Anti-Aging Tallow Cleanser. Then a thin layer of Zenith Anti-Aging Tallow Day Cream SPF 30."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "title": "Shower",
+            "text": "Zenith Advanced Hair Density Shampoo. Massage 60 seconds, leave the lather 2 minutes, rinse."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "title": "Night",
+            "text": "A thin layer of Zenith Anti-Aging Tallow Cream. Then 3 to 5 sprays of Zenith Advanced Hair Density Spray on a clean dry scalp."
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "The whole routine, in under five minutes.",
+        "subheading": "",
+        "products": [],
+        "used_text": "",
+        "note": "<p>Pick one product or run the full set.</p><p>Pareho lang ang directions, nasa label.</p>",
+        "show_number": false,
+        "show_divider": true,
+        "divider_breakpoint": "mobile",
+        "step_layout": "beside",
+        "image_width": 152,
+        "heading_alignment": "center",
+        "heading_max_width": 760,
+        "content_max_width": 1280,
+        "heading_spacing": 44,
+        "gap": 24,
+        "image_ratio": "1",
+        "step_title_spacing": 20,
+        "used_spacing": 40,
+        "used_width": 520,
+        "show_note_desktop": false,
+        "note_spacing": 24,
+        "divider_spacing": 40,
+        "color_scheme": "scheme-1",
+        "title_color": "#d6b356",
+        "number_background": "#c59300",
+        "number_color": "#121212",
+        "text_opacity": 70,
+        "bar_color": "#202020",
+        "bar_text_color": "#d6b356",
+        "thumb_background": "#ffffff",
+        "divider_color": "#454545",
+        "heading_font_size": 48,
+        "heading_uppercase": false,
+        "eyebrow_font_size": 14,
+        "subheading_font_size": 16,
+        "title_font_size": 14,
+        "number_size": 28,
+        "number_font_size": 14,
+        "text_font_size": 14,
+        "text_line_height": 150,
+        "note_font_size": 14,
+        "used_font_size": 16,
+        "thumb_size": 80,
+        "heading_alignment_mobile": "center",
+        "heading_font_size_mobile": 32,
+        "heading_max_width_mobile": 260,
+        "subheading_font_size_mobile": 16,
+        "heading_spacing_mobile": 16,
+        "image_width_mobile": 120,
+        "number_size_mobile": 28,
+        "number_font_size_mobile": 14,
+        "gap_mobile": 20,
+        "title_font_size_mobile": 14,
+        "text_font_size_mobile": 14,
+        "text_line_height_mobile": 130,
+        "note_font_size_mobile": 13,
+        "note_spacing_mobile": 20,
+        "used_font_size_mobile": 12,
+        "thumb_size_mobile": 52,
+        "used_spacing_mobile": 20,
+        "divider_spacing_mobile": 20,
+        "padding_top": 60,
+        "padding_bottom": 80,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 0
+      }
+    },
+    "shelf": {
+      "type": "zenith-product-carousel",
+      "settings": {
+        "eyebrow": "",
+        "heading": "Five products. One shelf.",
+        "subheading": "",
+        "products_to_show": 5,
+        "image_source": "metafield",
+        "show_rating": false,
+        "show_description": true,
+        "description_words": 20,
+        "show_price": false,
+        "card_button_action": "link",
+        "button_label": "View Product",
+        "card_button_icon": "arrow_right",
+        "view_all_label": "Shop All Products",
+        "slides_desktop": 4,
+        "bleed_right": true,
+        "show_peek": false,
+        "show_dots": true,
+        "show_arrows": true,
+        "autoplay": 0,
+        "heading_max_width": 760,
+        "eyebrow_spacing": 0,
+        "heading_spacing": 32,
+        "gap": 24,
+        "image_ratio": "square",
+        "image_fit": "contain",
+        "image_padding": 0,
+        "card_text_spacing": 16,
+        "card_desc_spacing": 4,
+        "card_button_spacing": 12,
+        "card_button_height": 38,
+        "controls_spacing": 16,
+        "color_scheme": "scheme-1",
+        "button_style": "outline",
+        "card_button_style": "gold",
+        "card_image_bg": "#ffffff",
+        "divider_color": "#454545",
+        "heading_font_size": 48,
+        "heading_uppercase": false,
+        "subheading_font_size": 16,
+        "eyebrow_font_size": 14,
+        "title_font_size": 28,
+        "title_font": "heading",
+        "text_font_size": 13,
+        "price_font_size": 16,
+        "button_font_size": 24,
+        "card_button_font_size": 23,
+        "mobile_layout": "stack",
+        "show_dividers_mobile": true,
+        "stack_gap_mobile": 24,
+        "hide_view_all_mobile": true,
+        "mobile_slide_width": 83,
+        "heading_font_size_mobile": 36,
+        "subheading_font_size_mobile": 16,
+        "content_gap_mobile": 24,
+        "heading_spacing_mobile": 24,
+        "gap_mobile": 24,
+        "title_font_size_mobile": 32,
+        "text_font_size_mobile": 16,
+        "price_font_size_mobile": 16,
+        "button_font_size_mobile": 24,
+        "card_button_font_size_mobile": 23,
+        "card_button_height_mobile": 46,
+        "padding_top": 80,
+        "padding_bottom": 64,
+        "padding_top_mobile": 32,
+        "padding_bottom_mobile": 32,
+        "collection": "all",
+        "product_list": [
+          "zenith-anti-aging-tallow-cream",
+          "zenith-anti-aging-tallow-cleanser",
+          "zenith-anti-aging-tallow-day-cream-spf30",
+          "zenith-advanced-hair-density-spray",
+          "zenith-advanced-hair-density-shampoo"
+        ],
+        "view_all_link": "shopify://collections/all",
+        "card_image_gradient": "linear-gradient(180deg, rgba(32, 57, 64, 1), rgba(255, 255, 255, 1) 100%)"
+      }
+    },
+    "social": {
+      "type": "zenith-store-links",
+      "blocks": {
+        "page_facebook_zenith_ph": {
+          "type": "store",
+          "settings": {
+            "icon": "facebook",
+            "handle": "Zenith PH",
+            "stat": "",
+            "link": "",
+            "new_tab": true,
+            "store_name": "Facebook"
+          }
+        },
+        "page_instagram_zenith_ph": {
+          "type": "store",
+          "settings": {
+            "icon": "instagram",
+            "handle": "Zenith PH",
+            "stat": "",
+            "link": "",
+            "new_tab": true,
+            "store_name": "Instagram"
+          }
+        },
+        "page_high_performance": {
+          "type": "store",
+          "settings": {
+            "icon": "facebook",
+            "handle": "High Performance",
+            "stat": "Skincare For Men",
+            "link": "",
+            "new_tab": true,
+            "store_name": "Facebook"
+          }
+        },
+        "page_self_care": {
+          "type": "store",
+          "settings": {
+            "icon": "facebook",
+            "handle": "For Filipino Men's",
+            "stat": "Self Care",
+            "link": "",
+            "new_tab": true,
+            "store_name": "Facebook"
+          }
+        }
+      },
+      "block_order": [
+        "page_facebook_zenith_ph",
+        "page_instagram_zenith_ph",
+        "page_high_performance",
+        "page_self_care"
+      ],
+      "settings": {
+        "heading": "Our Official Pages",
+        "heading_mobile": "Join the #ZenithTribe",
+        "text_mobile": "<p>Follow Zenith on Facebook and Instagram. Official pages only, listed on our Verify Zenith Products page.</p>",
+        "heading_alignment": "center",
+        "columns_desktop": 4,
+        "card_layout": "stacked",
+        "card_alignment": "left",
+        "card_width": 216,
+        "card_min_height": 74,
+        "card_radius": 4,
+        "gap": 22,
+        "item_padding": 12,
+        "glyph_gap": 8,
+        "text_gap": 0,
+        "heading_spacing": 25,
+        "color_scheme": "scheme-1",
+        "card_background": "#202020",
+        "card_border_color": "#363636",
+        "card_border_width": 1,
+        "glyph_color": "#ffffff",
+        "handle_color": "#ffffff",
+        "handle_opacity": 70,
+        "stat_color": "#bcbcbc",
+        "heading_font_size": 41,
+        "icon_size": 48,
+        "title_font_size": 16,
+        "text_font_size": 16,
+        "line_height": 150,
+        "heading_alignment_mobile": "left",
+        "columns_mobile": 2,
+        "card_layout_mobile": "stacked",
+        "card_alignment_mobile": "left",
+        "card_min_height_mobile": 60,
+        "gap_mobile": 20,
+        "item_padding_mobile": 8,
+        "glyph_gap_mobile": 5,
+        "text_gap_mobile": 0,
+        "heading_font_size_mobile": 36,
+        "heading_spacing_mobile": 24,
+        "subheading_font_size_mobile": 16,
+        "icon_size_mobile": 42,
+        "title_font_size_mobile": 12,
+        "text_font_size_mobile": 12,
+        "line_height_mobile": 135,
+        "padding_top": 32,
+        "padding_bottom": 32,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20
       }
     }
   },
@@ -1618,17 +2195,22 @@
     "promo_hero",
     "hero",
     "trust_bar",
-    "press",
+    "brand_story",
+    "routine",
+    "shelf",
     "results",
+    "compare",
+    "money_back",
+    "social",
+    "collection",
+    "faq",
+    "reviews",
+    "press",
     "videos",
     "guarantee",
     "categories",
     "featured_product",
-    "brand_story",
-    "money_back",
-    "collection",
     "1790629529cb985278",
-    "faq",
     "promo_bottom"
   ]
 }
