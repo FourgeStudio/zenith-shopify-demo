@@ -63,6 +63,17 @@
         "type": "url",
         "id": "social_shopee_link",
         "label": "Shopee store link"
+      },
+      {
+        "type": "header",
+        "content": "Judge.me"
+      },
+      {
+        "type": "checkbox",
+        "id": "jdgm_custom_style",
+        "label": "Dark Judge.me review style",
+        "info": "Loads assets/zenith-judgeme.css on every page: dark cards, gold stars, 5-column grid. Turn off to go back to the app's own look (plus the Zenith · Reviews section settings).",
+        "default": true
       }
     ]
   },

@@ -394,7 +394,8 @@
           "shadow": "#000000"
         }
       }
-    }
+    },
+    "jdgm_custom_style": true
   },
   "presets": {
     "Dawn": {

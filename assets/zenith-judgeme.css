@@ -1,0 +1,193 @@
+/* Zenith · Judge.me dark style (client-supplied). Loaded by layout/theme.liquid when
+   Theme settings → Zenith → "Dark Judge.me review style" is on. Overrides the app's own CSS with !important.
+   Only change from the original: rem font sizes → px (this theme's root font size is 10px, so 0.9rem would be 9px). */
+
+.jdgm-rev-widg__reviews .jdgm-divider-top {
+  padding: 20px !important;
+  background: #191919 !important;
+  margin-bottom: 10px !important;
+}
+
+.jdgm--leex-script-loaded .jdgm-rev,
+.jdgm--leex-script-loaded .jdgm-rev-widg__header,
+.jdgm--leex-script-loaded .jdgm-rev-widg__title,
+.jdgm--leex-script-loaded .jdgm-quest {
+  color: white !important;
+}
+
+.jdgm--leex-script-loaded .jdgm-rev-widg__header,
+.jdgm--leex-script-loaded .jdgm-rev-widg__actions,
+.jdgm--leex-script-loaded .jdgm-rev,
+.jdgm--leex-script-loaded .jdgm-quest {
+  background: #191919 !important;
+}
+
+.jdgm-rev-widg.jdgm-rev-widg {
+  background: transparent !important; /* let the page background show through */
+  color: #F3F4F6 !important;
+}
+
+/* Headers / summary / stars */
+.jdgm-rev-widg__title,
+.jdgm-rev-widg__summary,
+.jdgm-rev-widg__header {
+  color: #F3F4F6 !important;
+}
+
+.jdgm-rev-widg .jdgm-star,
+.jdgm-rev-widg .jdgm-star.jdgm--on {
+  color: #F5C518 !important;
+}
+
+/* Sorting dropdown */
+.jdgm-rev-widg .jdgm-sort-dropdown {
+  background-color: #0F1115 !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  color: #E5E7EB !important;
+  border-radius: 10px !important;
+  padding: 8px 36px 8px 12px !important;
+}
+
+/* Review cards */
+.jdgm-rev.jdgm-rev {
+  background: #0F1115 !important;
+  color: #E5E7EB !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35) !important;
+  overflow: hidden !important;
+}
+
+.jdgm-rev-widg .jdgm-rev__content,
+.jdgm-rev-widg .jdgm-rev__header,
+.jdgm-rev-widg .jdgm-rev__pics,
+.jdgm-rev-widg .jdgm-rev__actions {
+  padding-left: 14px !important;
+  padding-right: 14px !important;
+}
+
+.jdgm-rev-widg .jdgm-rev__pics {
+  margin-top: 8px !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+/* Reviewer meta */
+.jdgm-rev-widg .jdgm-rev__author,
+.jdgm-rev-widg .jdgm-rev__timestamp,
+.jdgm-rev-widg .jdgm-rev__buyer-badge,
+.jdgm-rev-widg .jdgm-rev__title {
+  color: #CBD5E1 !important;
+}
+
+/* Review titles hidden to tighten cards */
+.jdgm-rev-widg .jdgm-rev__title {
+  display: none !important;
+}
+
+/* Buttons (Write a review / Read more) */
+.jdgm-rev-widg .jdgm-btn,
+.jdgm-rev-widg .jdgm-write-rev-link {
+  background: transparent !important;
+  color: #F3F4F6 !important;
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+  border-radius: 9999px !important;
+  padding: 10px 16px !important;
+}
+
+.jdgm-rev-widg .jdgm-btn:hover,
+.jdgm-rev-widg .jdgm-write-rev-link:hover {
+  background: #111827 !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
+}
+
+/* Layout: cards in rows with clean gaps */
+.jdgm-rev-widg .jdgm-rev-list {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 16px !important;
+}
+
+/* 5 columns */
+.jdgm-rev.jdgm-rev {
+  width: calc(20% - 16px) !important;
+}
+
+/* 4 columns */
+@media (max-width: 1400px) {
+  .jdgm-rev.jdgm-rev {
+    width: calc(25% - 16px) !important;
+  }
+}
+
+/* 3 columns */
+@media (max-width: 1100px) {
+  .jdgm-rev.jdgm-rev {
+    width: calc(33.333% - 16px) !important;
+  }
+}
+
+/* 2 columns */
+@media (max-width: 820px) {
+  .jdgm-rev.jdgm-rev {
+    width: calc(50% - 16px) !important;
+  }
+}
+
+/* Images inside cards */
+.jdgm-rev-widg .jdgm-rev__pic-img,
+.jdgm-rev-widg .jdgm-rev__pics a {
+  width: 100% !important;
+  height: auto !important;
+  border-radius: 12px !important;
+}
+
+/* Histogram bars on dark */
+.jdgm-rev-widg .jdgm-histogram__bar {
+  background: rgba(255, 255, 255, 0.12) !important;
+}
+
+.jdgm-rev-widg .jdgm-histogram__bar-fill {
+  background: #F5C518 !important;
+}
+
+.jdgm-rev-widg .jdgm-histogram__frequency,
+.jdgm-rev-widg .jdgm-rev-widg__summary-text,
+.jdgm-rev-widg .jdgm-rev-widg__summary-average {
+  color: #E5E7EB !important;
+}
+
+/* Links */
+.jdgm-rev-widg a {
+  color: #F5C518 !important;
+}
+
+/* Dark modal / inputs for write-a-review */
+.jdgm-rev-widg .jdgm-write-review-modal,
+.jdgm-rev-widg .jdgm-form {
+  background: #0F1115 !important;
+  color: #E5E7EB !important;
+}
+
+.jdgm-rev-widg .jdgm-form input:not([type='submit']),
+.jdgm-rev-widg .jdgm-form textarea,
+.jdgm-rev-widg .jdgm-form select {
+  background: #111827 !important;
+  color: #E5E7EB !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: 10px !important;
+}
+
+/* Smaller text on small screens (All Reviews page widget) */
+@media (max-width: 820px) {
+  .jdgm-all-reviews__body,
+  .jdgm-all-reviews__body * {
+    font-size: 14px !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .jdgm-all-reviews__body,
+  .jdgm-all-reviews__body * {
+    font-size: 13px !important;
+  }
+}
