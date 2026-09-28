@@ -828,17 +828,18 @@ a.zenith-amare-link {
   text-underline-offset: 0.15em;
 }
 
-/* Plain text links inside Zenith sections (richtext: guarantee banner, FAQ answers, accordion rows…):
-   the surrounding text colour + underline, never the browser's default blue. Buttons and styled links carry a class. */
-.zenith-section a:not([class]),
-.zenith-rte a:not([class]) {
+/* Text links typed into richtext (guarantee banner, FAQ answers, accordion rows, policy text):
+   inside a sentence or list item only, so card/product titles and other linked blocks stay undecorated.
+   The surrounding text colour + underline, never the browser's default blue. */
+.zenith-section :is(p a, li > a):not([class]),
+.zenith-rte :is(p a, li > a):not([class]) {
   color: inherit;
   text-decoration: underline;
   text-underline-offset: 0.15em;
   text-decoration-thickness: 1px;
 }
 
-.zenith-section a:not([class]):hover,
-.zenith-rte a:not([class]):hover {
+.zenith-section :is(p a, li > a):not([class]):hover,
+.zenith-rte :is(p a, li > a):not([class]):hover {
   text-decoration-thickness: 2px;
 }
