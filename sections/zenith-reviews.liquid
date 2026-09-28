@@ -52,6 +52,7 @@
     {%- render 'zenith-section-heading',
       eyebrow: section.settings.eyebrow,
       heading: section.settings.heading,
+      heading_mobile: section.settings.heading_mobile,
       subheading: subheading,
       alignment: section.settings.heading_alignment,
       uppercase: section.settings.heading_uppercase
@@ -391,6 +392,12 @@
     {
       "type": "header",
       "content": "Mobile"
+    },
+    {
+      "type": "text",
+      "id": "heading_mobile",
+      "label": "Heading",
+      "info": "Leave empty to use the desktop heading. [customers] = Theme settings → Zenith → Customer count."
     },
     {
       "type": "richtext",

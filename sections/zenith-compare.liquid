@@ -69,13 +69,19 @@
         >
       {%- endif -%}
     {%- endcapture -%}
+    {%- assign zenith_caption = section.settings.zenith_caption -%}
 
     <table class="zenith-compare__table zenith-hide-mobile">
       <caption class="visually-hidden">{{ table_caption | escape }}</caption>
       <thead>
         <tr>
           <td class="zenith-compare__corner"></td>
-          <th scope="col" class="zenith-compare__head zenith-compare__head--zenith">{{ zenith_head_cell }}</th>
+          <th scope="col" class="zenith-compare__head zenith-compare__head--zenith">
+            {{- zenith_head_cell -}}
+            {%- if zenith_caption != blank -%}
+              <span class="zenith-compare__head-caption">{{ zenith_caption | escape }}</span>
+            {%- endif -%}
+          </th>
           {%- for i in (1..3) -%}
             {%- liquid
               assign tkey = 'column_' | append: i | append: '_title'
@@ -118,7 +124,11 @@
         <caption class="visually-hidden">{{ table_caption | escape }} — {{ zenith_label | escape }}</caption>
         <thead>
           <tr>
-            <td class="zenith-compare__corner"></td>
+            <td class="zenith-compare__corner">
+              {%- if zenith_caption != blank -%}
+                <span class="zenith-compare__group-title zenith-compare__corner-title">{{ zenith_caption | escape }}</span>
+              {%- endif -%}
+            </td>
             <th scope="col" class="zenith-compare__head zenith-compare__head--zenith">{{ zenith_head_cell }}</th>
           </tr>
         </thead>
@@ -213,6 +223,12 @@
       "label": "Zenith column name",
       "info": "Used as the logo's alt text, and shown instead of the logo if none is chosen.",
       "default": "Zenith"
+    },
+    {
+      "type": "text",
+      "id": "zenith_caption",
+      "label": "Product name under the logo",
+      "info": "Optional. Desktop: under the logo. Mobile: beside the Zenith table header."
     },
     {
       "type": "text",

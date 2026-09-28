@@ -156,6 +156,27 @@
   display: block;
 }
 
+/* Optional product name: under the logo on desktop, in the corner cell of the Zenith table on mobile */
+.zenith-compare__head-caption {
+  display: block;
+  margin-top: 6px;
+  line-height: 1.4;
+}
+
+.zenith-compare__table-m .zenith-compare__corner-title {
+  display: block;
+  margin: 0;
+  padding: 0 var(--z-cmp-cpad-m, 8px) var(--z-cmp-tgap-m, 8px) 0;
+  font-family: var(--font-heading-family);
+  font-weight: var(--font-heading-weight, 400);
+  text-align: left;
+  color: rgb(var(--color-foreground));
+}
+
+.zenith-compare__table-m .zenith-compare__corner:has(.zenith-compare__corner-title) {
+  vertical-align: bottom;
+}
+
 .zenith-compare__head-note {
   display: block;
   margin-top: 2px;

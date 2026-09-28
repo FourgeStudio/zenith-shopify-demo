@@ -23,10 +23,15 @@
   assign trust_blocks = section.blocks | where: 'type', 'trust'
   assign row_blocks = section.blocks | where: 'type', 'row'
   assign review_blocks = section.blocks | where: 'type', 'review'
+  assign question_blocks = section.blocks | where: 'type', 'question'
+  assign app_blocks = section.blocks | where: 'type', '@app'
 
   # Review strip source: global slots rv1…rv20 (Theme settings → Zenith · Results reviews) or this section's blocks.
+  # An app block (e.g. a Judge.me carousel) takes the strip's place.
   assign review_total = 0
-  if s.reviews_source == 'global'
+  if app_blocks.size > 0
+    # the app block replaces the strip
+  elsif s.reviews_source == 'global'
     for n in (1..20)
       assign p = 'rv' | append: n | append: '_'
       assign k_image = p | append: 'image'
@@ -146,6 +151,10 @@
   --z-mp-row-tfs-m: {{ s.row_text_font_size_mobile }}px;
   --z-mp-row-icon: {{ s.row_icon_color }};
   --z-mp-row-div: {{ s.divider_opacity | divided_by: 100.0 }};
+  --z-mp-q-fs: {{ s.question_font_size }}px;
+  --z-mp-q-fs-m: {{ s.question_font_size_mobile }}px;
+  --z-mp-qa-fs: {{ s.question_text_font_size }}px;
+  --z-mp-qa-fs-m: {{ s.question_text_font_size_mobile }}px;
 {%- endcapture -%}
 {%- render 'zenith-section-style', section: section, extra: extra -%}
 
@@ -293,6 +302,14 @@
             {%- endfor -%}
             </ul>
           </zenith-carousel>
+        {%- endif -%}
+
+        {%- if app_blocks.size > 0 -%}
+          <div class="zenith-mp__apps">
+            {%- for block in app_blocks -%}
+              {% render block %}
+            {%- endfor -%}
+          </div>
         {%- endif -%}
       </div>
 
@@ -608,7 +625,33 @@
                       {%- render 'zenith-icon', icon: 'plus' -%}
                     </span>
                   </summary>
-                  <div class="zenith-faq__answer zenith-rte">{{ row_body }}</div>
+                  <div class="zenith-faq__answer zenith-rte">
+                    {{- row_body -}}
+                    {%- if block.settings.content_source == 'questions' and question_blocks.size > 0 -%}
+                      <div class="zenith-mp__questions">
+                        {%- for q in question_blocks -%}
+                          {%- if q.settings.question != blank -%}
+                            <details
+                              class="zenith-faq__item zenith-mp__q"
+                              id="Block-{{ q.id }}"
+                              {% if q.settings.open %}
+                                open
+                              {% endif %}
+                              {{ q.shopify_attributes }}
+                            >
+                              <summary class="zenith-faq__question zenith-mp__q-title">
+                                <span>{{ q.settings.question | escape }}</span>
+                                <span class="zenith-faq__icon zenith-mp__q-icon">
+                                  {%- render 'zenith-icon', icon: 'chevron_down' -%}
+                                </span>
+                              </summary>
+                              <div class="zenith-faq__answer zenith-mp__q-answer">{{ q.settings.answer }}</div>
+                            </details>
+                          {%- endif -%}
+                        {%- endfor -%}
+                      </div>
+                    {%- endif -%}
+                  </div>
                 </details>
               {%- endif -%}
             {%- endfor -%}
@@ -932,6 +975,8 @@
     { "type": "range", "id": "trust_font_size", "label": "Trust item size", "min": 10, "max": 20, "step": 1, "unit": "px", "default": 13 },
     { "type": "range", "id": "title_font_size", "label": "Accordion title size", "min": 14, "max": 34, "step": 1, "unit": "px", "default": 20 },
     { "type": "range", "id": "row_text_font_size", "label": "Accordion text size", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 18 },
+    { "type": "range", "id": "question_font_size", "label": "FAQ question size", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 17 },
+    { "type": "range", "id": "question_text_font_size", "label": "FAQ answer size", "min": 11, "max": 22, "step": 1, "unit": "px", "default": 15 },
     { "type": "range", "id": "review_name_font_size", "label": "Review name size", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 16 },
     { "type": "range", "id": "review_text_font_size", "label": "Review text size", "min": 10, "max": 20, "step": 1, "unit": "px", "default": 13 },
     { "type": "range", "id": "review_star_size", "label": "Review star size", "min": 8, "max": 20, "step": 1, "unit": "px", "default": 12 },
@@ -972,6 +1017,8 @@
     { "type": "range", "id": "trust_font_size_mobile", "label": "Trust item size", "min": 9, "max": 18, "step": 1, "unit": "px", "default": 13 },
     { "type": "range", "id": "title_font_size_mobile", "label": "Accordion title size", "min": 12, "max": 28, "step": 1, "unit": "px", "default": 18 },
     { "type": "range", "id": "row_text_font_size_mobile", "label": "Accordion text size", "min": 11, "max": 22, "step": 1, "unit": "px", "default": 15 },
+    { "type": "range", "id": "question_font_size_mobile", "label": "FAQ question size", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 16 },
+    { "type": "range", "id": "question_text_font_size_mobile", "label": "FAQ answer size", "min": 11, "max": 22, "step": 1, "unit": "px", "default": 15 },
     { "type": "range", "id": "rows_spacing_mobile", "label": "Space above the accordion", "min": 0, "max": 80, "step": 1, "unit": "px", "default": 40 },
     { "type": "range", "id": "item_padding_mobile", "label": "Accordion row padding", "min": 4, "max": 40, "step": 1, "unit": "px", "default": 14 },
     { "type": "range", "id": "icon_size_mobile", "label": "Accordion icon size", "min": 10, "max": 32, "step": 1, "unit": "px", "default": 16 },
@@ -1033,10 +1080,11 @@
           "default": "custom",
           "options": [
             { "value": "custom", "label": "Custom text" },
-            { "value": "description", "label": "Product description" }
+            { "value": "description", "label": "Product description" },
+            { "value": "questions", "label": "FAQ questions (Question blocks)" }
           ]
         },
-        { "type": "richtext", "id": "text", "label": "Custom text" },
+        { "type": "richtext", "id": "text", "label": "Custom text", "info": "With \"FAQ questions\", optional text above the questions." },
         { "type": "checkbox", "id": "open", "label": "Open by default", "default": false },
         { "type": "header", "content": "Mobile" },
         { "type": "checkbox", "id": "hide_on_mobile", "label": "Hide on mobile", "default": false },
@@ -1058,6 +1106,20 @@
           "default": "Customer testimonials highlight. Taken JudgeMe Embed."
         }
       ]
+    },
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        { "type": "header", "content": "Content" },
+        { "type": "paragraph", "content": "Shows inside the accordion row whose Text is set to \"FAQ questions\"." },
+        { "type": "text", "id": "question", "label": "Question", "default": "Can I use it every day?" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Yes.</p>" },
+        { "type": "checkbox", "id": "open", "label": "Open by default", "default": false }
+      ]
+    },
+    {
+      "type": "@app"
     }
   ],
   "presets": [

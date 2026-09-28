@@ -762,6 +762,33 @@
   margin-bottom: 0;
 }
 
+/* Question blocks nested in the "FAQ questions" row: body-font questions, chevron that flips when open.
+   The row's own [open] rule rotates every .zenith-faq__icon inside it, so the chevron resets first. */
+.zenith-mp__questions {
+  margin-bottom: calc(var(--z-cgap-m, 14px) * -1);
+}
+
+
+.zenith-mp__q-title.zenith-faq__question {
+  font-family: var(--font-body-family);
+  font-weight: 400;
+  font-size: var(--z-mp-q-fs-m, 16px);
+  line-height: 1.4;
+  gap: 24px;
+}
+
+.zenith-mp__row[open] .zenith-mp__q-icon {
+  transform: none;
+}
+
+.zenith-mp__row .zenith-mp__q[open] > summary .zenith-mp__q-icon {
+  transform: rotate(180deg);
+}
+
+.zenith-mp__q-answer.zenith-faq__answer {
+  font-size: var(--z-mp-qa-fs-m, 15px);
+}
+
 /* ---------- Desktop ---------- */
 @media screen and (min-width: 750px) {
   /* Bundle cards: full size once the column is wide */
@@ -991,6 +1018,30 @@
 @media screen and (min-width: 750px) {
   .zenith-mp__rows {
     margin-top: calc(var(--z-mp-rows-sp, 18px) - var(--z-cgap, 12px));
+  }
+
+  .zenith-mp__questions {
+    margin-bottom: calc(var(--z-cgap, 16px) * -1);
+  }
+
+
+  .zenith-mp__q-title.zenith-faq__question {
+    font-size: var(--z-mp-q-fs, 17px);
+  }
+
+  .zenith-mp__q-answer.zenith-faq__answer {
+    font-size: var(--z-mp-qa-fs, 15px);
+  }
+}
+
+/* App blocks (e.g. a Judge.me reviews carousel) sit where the review strip would be */
+.zenith-mp__apps {
+  margin-top: var(--z-mp-rev-sp-m, 9px);
+}
+
+@media screen and (min-width: 750px) {
+  .zenith-mp__apps {
+    margin-top: var(--z-mp-rev-sp, 38px);
   }
 }
 

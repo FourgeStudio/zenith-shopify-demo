@@ -2,7 +2,8 @@
   Eyebrow + heading + subheading block used by all zenith sections.
   Sizes, spacing and max width come from section settings via 'zenith-section-style' CSS variables.
   Accepts: eyebrow, heading, subheading (richtext), alignment ('left'|'center'),
-           tag ('h1'|'h2'|'h3'), uppercase {Boolean}, class optional
+           tag ('h1'|'h2'|'h3'), uppercase {Boolean}, class optional,
+           heading_mobile optional (replaces the heading below 750px)
   [customers] in any text is replaced by Theme settings → Zenith → Customer count.
 {% endcomment %}
 {%- if eyebrow != blank or heading != blank or subheading != blank -%}
@@ -11,7 +12,10 @@
     {%- if eyebrow != blank -%}
       <p class="zenith-eyebrow">{{ eyebrow | escape | replace: '[customers]', settings.customer_count }}</p>
     {%- endif -%}
-    {%- if heading != blank -%}
+    {%- if heading != blank and heading_mobile != blank -%}
+      <{{ heading_tag }} class="zenith-heading__title zenith-hide-mobile">{{ heading | escape | replace: '[customers]', settings.customer_count }}</{{ heading_tag }}>
+      <{{ heading_tag }} class="zenith-heading__title zenith-hide-desktop">{{ heading_mobile | escape | replace: '[customers]', settings.customer_count }}</{{ heading_tag }}>
+    {%- elsif heading != blank -%}
       <{{ heading_tag }} class="zenith-heading__title">{{ heading | escape | replace: '[customers]', settings.customer_count }}</{{ heading_tag }}>
     {%- endif -%}
     {%- if subheading != blank -%}
