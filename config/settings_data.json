@@ -12,6 +12,7 @@
     "customer_count": "200,000+",
     "page_margin": 30,
     "page_margin_mobile": 20,
+    "jdgm_custom_style": true,
     "promo_enabled": false,
     "promo_auto_end": false,
     "promo_heading": "Exclusive Offers for this Season",
@@ -316,6 +317,13 @@
       }
     },
     "content_for_index": [],
+    "blocks": {
+      "14060646107696862457": {
+        "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+        "disabled": false,
+        "settings": {}
+      }
+    },
     "color_schemes": {
       "scheme-1": {
         "settings": {
@@ -394,8 +402,7 @@
           "shadow": "#000000"
         }
       }
-    },
-    "jdgm_custom_style": true
+    }
   },
   "presets": {
     "Dawn": {
