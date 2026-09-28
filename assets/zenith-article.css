@@ -117,9 +117,13 @@
 
 .zenith-article__content a {
   color: var(--z-ar-link, #eabe5f);
-  text-decoration: underline;
+  text-decoration: none;
   text-underline-offset: 0.15em;
   text-decoration-thickness: 1px;
+}
+
+.zenith-article__content a:hover {
+  text-decoration: underline;
 }
 
 .zenith-article__content a:hover {

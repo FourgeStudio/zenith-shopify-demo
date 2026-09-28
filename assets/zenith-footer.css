@@ -83,8 +83,7 @@ footer.footer.zenith-footer {
   text-decoration: none;
 }
 
-.zenith-footer__link:hover,
-.zenith-footer__link--active {
+.zenith-footer__link:hover {
   text-decoration: underline;
   text-underline-offset: 0.3rem;
 }

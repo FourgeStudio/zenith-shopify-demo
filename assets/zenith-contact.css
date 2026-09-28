@@ -168,9 +168,13 @@
 
 .zenith-contact__form-card .zenith-subheading a {
   color: inherit;
-  text-decoration: underline;
+  text-decoration: none;
   text-decoration-color: var(--z-ct-link-line, var(--z-gold));
   text-underline-offset: 3px;
+}
+
+.zenith-contact__form-card .zenith-subheading a:hover {
+  text-decoration: underline;
 }
 
 /* ---------- Fields ---------- */
@@ -279,8 +283,12 @@
 
 .zenith-contact__consent a {
   color: inherit;
-  text-decoration: underline;
+  text-decoration: none;
   text-underline-offset: 2px;
+}
+
+.zenith-contact__consent a:hover {
+  text-decoration: underline;
 }
 
 /* input[type] beats Dawn's input[type='checkbox'] { width: auto }. */

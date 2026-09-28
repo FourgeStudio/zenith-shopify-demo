@@ -66,8 +66,13 @@
 .zenith-co__text a,
 .zenith-co__small a {
   color: inherit;
-  text-decoration: underline;
+  text-decoration: none;
   text-underline-offset: 0.2em;
+}
+
+.zenith-co__text a:hover,
+.zenith-co__small a:hover {
+  text-decoration: underline;
 }
 
 @media screen and (min-width: 750px) {
