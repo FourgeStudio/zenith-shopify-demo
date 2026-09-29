@@ -1,9 +1,9 @@
 {% comment %}
   "Spend more, save more" panel for the cart drawer: savings box, next-goal message, a progress bar
   with a dot per goal, and one row per offer. Copy and tiers: Theme settings → Zenith · Cart.
-  Shows only while a promotion runs (zenith-promo-on) and at least one tier is set; otherwise the
-  drawer falls back to zenith-cart-shipping-bar. Free shipping uses zenith-shipping-goal (₱900 during
-  the promotion), so it always matches the bar and the bundle card ribbons.
+  Tiers (box, % dots, list) show only while a promotion runs (zenith-promo-on) with a tier set; otherwise
+  the panel keeps its layout for free shipping alone (₱1,200). Renders nothing when the cart is empty.
+  Free shipping uses zenith-shipping-goal (₱900 during the promotion), so it always matches the bar and the bundle card ribbons.
 
   DISPLAY ONLY. The theme cannot apply a discount. Each tier needs a matching automatic discount in
   Admin → Discounts (Amount off products, minimum purchase amount, not combinable with other product
@@ -28,6 +28,12 @@
     assign zco_ship_on = true
   endif
 
+  # Outside a promotion the panel keeps its layout but only chases free shipping.
+  assign zco_tiers_on = false
+  if zco_promo != blank and settings.cart_tiers_enabled
+    assign zco_tiers_on = true
+  endif
+
   # Tiers: best reached % wins, discounts never add up.
   assign zco_count = 0
   assign zco_top = zco_goal
@@ -36,6 +42,9 @@
     assign zco_kmin = 'cart_tier_' | append: i | append: '_min'
     assign zco_kpct = 'cart_tier_' | append: i | append: '_percent'
     assign zco_tmin = settings[zco_kmin] | times: 100
+    if zco_tiers_on == false
+      assign zco_tmin = 0
+    endif
     assign zco_tpct = settings[zco_kpct] | plus: 0
     if zco_tmin > 0 and zco_tpct > 0
       assign zco_count = zco_count | plus: 1
@@ -49,7 +58,7 @@
   endfor
 
   assign zco_show = false
-  if zco_promo != blank and settings.cart_tiers_enabled and zco_count > 0 and cart != empty
+  if cart != empty and zco_count > 0 or cart != empty and zco_goal > 0
     assign zco_show = true
   endif
 -%}
@@ -80,6 +89,9 @@
       assign zco_kmin = 'cart_tier_' | append: i | append: '_min'
       assign zco_kpct = 'cart_tier_' | append: i | append: '_percent'
       assign zco_tmin = settings[zco_kmin] | times: 100
+      if zco_tiers_on == false
+        assign zco_tmin = 0
+      endif
       assign zco_tpct = settings[zco_kpct] | plus: 0
       if zco_tmin > 0 and zco_tpct > zco_pct and zco_sub < zco_tmin
         assign zco_left = zco_tmin | minus: zco_sub
@@ -96,6 +108,7 @@
     endif
   -%}
   <div class="zenith-cart-offers{% if context == 'page' %} zenith-cart-offers--page{% endif %}">
+    {%- if zco_count > 0 -%}
     <div class="zenith-cart-offers__box{% if zco_saving > 0 %} zenith-cart-offers__box--on{% endif %}">
       <span class="zenith-cart-offers__big">{{ zco_pct }}%</span>
       <div class="zenith-cart-offers__box-text">
@@ -114,6 +127,7 @@
         {%- endif -%}
       </div>
     </div>
+    {%- endif -%}
 
     <p class="zenith-cart-offers__msg" role="status">
       {%- if zco_next_offer != '' -%}
@@ -149,6 +163,9 @@
           assign zco_kmin = 'cart_tier_' | append: i | append: '_min'
           assign zco_kpct = 'cart_tier_' | append: i | append: '_percent'
           assign zco_tmin = settings[zco_kmin] | times: 100
+          if zco_tiers_on == false
+            assign zco_tmin = 0
+          endif
           assign zco_tpct = settings[zco_kpct] | plus: 0
         -%}
         {%- if zco_tmin > 0 and zco_tpct > 0 -%}
@@ -163,6 +180,7 @@
       {%- endfor -%}
     </div>
 
+    {%- if zco_count > 0 -%}
     <div class="zenith-cart-offers__list">
       {%- if settings.cart_offers_heading != blank -%}
         <p class="zenith-cart-offers__heading">{{ settings.cart_offers_heading | escape }}</p>
@@ -189,6 +207,9 @@
             assign zco_kmin = 'cart_tier_' | append: i | append: '_min'
             assign zco_kpct = 'cart_tier_' | append: i | append: '_percent'
             assign zco_tmin = settings[zco_kmin] | times: 100
+            if zco_tiers_on == false
+              assign zco_tmin = 0
+            endif
             assign zco_tpct = settings[zco_kpct] | plus: 0
           -%}
           {%- if zco_tmin > 0 and zco_tpct > 0 -%}
@@ -230,5 +251,6 @@
         {%- endfor -%}
       </ul>
     </div>
+    {%- endif -%}
   </div>
 {%- endif -%}
