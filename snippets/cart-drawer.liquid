@@ -635,7 +635,10 @@
             {{ 'sections.cart.checkout' | t }}
           </button>
         </div>
-        {%- render 'zenith-cart-trust' -%}
+        {%- comment -%}zenith: skip when the offers panel already lists these as perks (no promotion){%- endcomment -%}
+        {%- unless zenith_offers contains 'zenith-cart-offers__row-icon' -%}
+          {%- render 'zenith-cart-trust' -%}
+        {%- endunless -%}
       </div>
     </div>
   </div>

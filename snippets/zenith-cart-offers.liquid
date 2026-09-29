@@ -102,6 +102,30 @@
       endif
     endfor
 
+    # Outside a promotion the box shows the compare-at (sale) saving instead of a tier.
+    assign zco_reg = 0
+    for item in cart.items
+      assign zco_line_reg = item.original_line_price
+      if settings.cart_show_compare_price and item.variant.compare_at_price > item.variant.price
+        assign zco_cmp = item.variant.compare_at_price | times: item.quantity
+        if zco_cmp > zco_line_reg
+          assign zco_line_reg = zco_cmp
+        endif
+      endif
+      assign zco_reg = zco_reg | plus: zco_line_reg
+    endfor
+    assign zco_sale = zco_reg | minus: zco_sub
+    assign zco_sale_pct = 0
+    if zco_sale > 0
+      assign zco_sale_pct = zco_sale | times: 100.0 | divided_by: zco_reg | round
+    endif
+    capture zco_threshold
+      echo zco_goal | money_without_trailing_zeros
+    endcapture
+    capture zco_fee
+      echo settings.cart_shipping_fee | times: 100 | money_without_trailing_zeros
+    endcapture
+
     assign zco_fill = zco_sub | times: 100.0 | divided_by: zco_top | round: 1
     if zco_fill > 100
       assign zco_fill = 100
@@ -124,6 +148,43 @@
         </p>
         {%- if zco_saving > 0 and zco_ship_on and settings.cart_offers_plus_ship != blank -%}
           <p class="zenith-cart-offers__box-sub">{{ settings.cart_offers_plus_ship | escape }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+    {%- else -%}
+    {%- comment -%} No promotion: sale saving if the cart has one, otherwise free shipping status. {%- endcomment -%}
+    <div class="zenith-cart-offers__box{% if zco_sale > 0 or zco_ship_on %} zenith-cart-offers__box--on{% endif %}">
+      {%- if zco_sale > 0 -%}
+        <span class="zenith-cart-offers__big">{{ zco_sale_pct }}%</span>
+      {%- else -%}
+        {%- render 'zenith-icon', icon: 'truck', class: 'zenith-cart-offers__big zenith-cart-offers__big-icon' -%}
+      {%- endif -%}
+      <div class="zenith-cart-offers__box-text">
+        <p class="zenith-cart-offers__box-title">
+          {%- if zco_sale > 0 -%}
+            {%- capture zco_money -%}{{ zco_sale | money }}{%- endcapture -%}
+            {{- settings.cart_offers_saving | escape | replace: '[amount]', zco_money -}}
+          {%- elsif zco_ship_on -%}
+            {{- settings.cart_free_shipping_unlocked | escape -}}
+          {%- else -%}
+            {{- settings.cart_offers_ship_title | escape | replace: '[threshold]', zco_threshold | replace: '[fee]', zco_fee -}}
+          {%- endif -%}
+        </p>
+        {%- liquid
+          if zco_sale > 0 and zco_ship_on
+            assign zco_box_sub = settings.cart_offers_plus_ship
+          elsif zco_sale > 0
+            assign zco_box_sub = settings.cart_offers_sale_sub
+          elsif zco_ship_on
+            assign zco_box_sub = settings.cart_offers_ship_sub_on
+          else
+            assign zco_box_sub = settings.cart_offers_ship_sub
+          endif
+        -%}
+        {%- if zco_box_sub != blank -%}
+          <p class="zenith-cart-offers__box-sub">
+            {{- zco_box_sub | escape | replace: '[threshold]', zco_threshold | replace: '[fee]', zco_fee -}}
+          </p>
         {%- endif -%}
       </div>
     </div>
@@ -180,10 +241,15 @@
       {%- endfor -%}
     </div>
 
-    {%- if zco_count > 0 -%}
     <div class="zenith-cart-offers__list">
-      {%- if settings.cart_offers_heading != blank -%}
-        <p class="zenith-cart-offers__heading">{{ settings.cart_offers_heading | escape }}</p>
+      {%- liquid
+        assign zco_heading = settings.cart_offers_heading
+        if zco_count == 0
+          assign zco_heading = settings.cart_offers_perks_heading
+        endif
+      -%}
+      {%- if zco_heading != blank -%}
+        <p class="zenith-cart-offers__heading">{{ zco_heading | escape }}</p>
       {%- endif -%}
       <ul class="zenith-cart-offers__rows" role="list">
         {%- if zco_goal > 0 -%}
@@ -249,8 +315,21 @@
             </li>
           {%- endif -%}
         {%- endfor -%}
+        {%- comment -%} No promotion: the checkout reassurance lines (Zenith · Cart) as included perks. {%- endcomment -%}
+        {%- if zco_count == 0 -%}
+          {%- for i in (1..3) -%}
+            {%- assign zco_perk_key = 'cart_trust' | append: i | append: '_text' -%}
+            {%- assign zco_perk_icon = 'cart_trust' | append: i | append: '_icon' -%}
+            {%- if settings[zco_perk_key] != blank -%}
+              <li class="zenith-cart-offers__row is-reached">
+                {%- render 'zenith-icon', icon: settings[zco_perk_icon], class: 'zenith-cart-offers__row-icon' -%}
+                <span class="zenith-cart-offers__row-name">{{ settings[zco_perk_key] | escape }}</span>
+                <span class="zenith-cart-offers__row-status">{{ settings.cart_offers_perk_status | escape }}</span>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
       </ul>
     </div>
-    {%- endif -%}
   </div>
 {%- endif -%}
