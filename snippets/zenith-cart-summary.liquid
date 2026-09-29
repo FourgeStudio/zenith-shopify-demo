@@ -1,5 +1,5 @@
 {% comment %}
-  Cart drawer totals while the "spend more, save more" panel shows (promotion running): regular price,
+  Cart drawer + cart page totals (promotion or not): regular price,
   sale discount (compare-at), subtotal, purchase discount with its tier chip, free shipping, total and a
   total-savings bar. Copy: Theme settings → Zenith · Cart → Cart summary.
   Purchase discount = cart.total_discount once the Admin automatic discounts exist; until then it is the
@@ -7,9 +7,14 @@
 {% endcomment %}
 {%- capture zcsum_pct -%}{%- render 'zenith-cart-tier-pct' -%}{%- endcapture -%}
 {%- capture zcsum_goal -%}{%- render 'zenith-shipping-goal' -%}{%- endcapture -%}
+{%- capture zcsum_promo -%}{%- render 'zenith-promo-on' -%}{%- endcapture -%}
 {%- liquid
   assign zcsum_pct = zcsum_pct | plus: 0
   assign zcsum_goal = zcsum_goal | plus: 0
+  assign zcsum_tiers = false
+  if zcsum_promo != blank and settings.cart_tiers_enabled
+    assign zcsum_tiers = true
+  endif
 
   assign zcsum_sub = 0
   assign zcsum_reg = 0
@@ -63,6 +68,7 @@
     <span>{{ settings.cart_summary_subtotal | escape }}</span>
     <span>{{ zcsum_sub | money }}</span>
   </div>
+  {%- if zcsum_tiers or zcsum_disc > 0 -%}
   <div class="zenith-cart-sum__row">
     <span>
       {{- settings.cart_summary_discount | escape -}}
@@ -75,9 +81,12 @@
       {%- if zcsum_disc > 0 -%}−{{ zcsum_disc | money }}{%- else -%}—{%- endif -%}
     </span>
   </div>
+  {%- endif -%}
   {%- if zcsum_goal > 0 -%}
     <div class="zenith-cart-sum__row">
-      <span>{{ settings.cart_summary_shipping | escape }}</span>
+      <span>
+        {%- if zcsum_tiers -%}{{ settings.cart_summary_shipping | escape }}{%- else -%}{{ settings.cart_summary_shipping_regular | escape }}{%- endif -%}
+      </span>
       {%- if zcsum_ship_on -%}
         <span class="zenith-cart-sum__ok">{{ settings.cart_summary_free | escape }}</span>
       {%- else -%}

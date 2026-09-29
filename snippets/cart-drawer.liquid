@@ -74,7 +74,7 @@
           </span>
         </button>
       </div>
-      {%- comment -%}zenith: tier panel while a promotion runs, otherwise the plain free-shipping bar{%- endcomment -%}
+      {%- comment -%}zenith: offers panel (tiers during a promotion, free shipping only otherwise); old bar only if it renders nothing{%- endcomment -%}
       {%- capture zenith_offers -%}{%- render 'zenith-cart-offers' -%}{%- endcapture -%}
       {%- assign zenith_offers = zenith_offers | strip -%}
       {%- capture zenith_tier_pct -%}{%- render 'zenith-cart-tier-pct' -%}{%- endcapture -%}

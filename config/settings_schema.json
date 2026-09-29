@@ -150,7 +150,7 @@
       },
       {
         "type": "paragraph",
-        "content": "Tier panel in the cart drawer. Shows only while Zenith · Promo → \"Promotion is running\" is on, and replaces the free-shipping bar then. Display only: create one automatic discount per tier in Discounts (Amount off products, minimum purchase amount, combines with shipping discounts only) so checkout applies it."
+        "content": "Panel at the top of the cart drawer and cart page. The tiers (savings box, % dots, offer list) show only while Zenith · Promo → \"Promotion is running\" is on; otherwise it only tracks free shipping. Display only: create one automatic discount per tier in Discounts (Amount off products, minimum purchase amount, combines with shipping discounts only) so checkout applies it."
       },
       {
         "type": "checkbox",
@@ -283,11 +283,11 @@
       },
       {
         "type": "header",
-        "content": "Cart summary (during a promotion)"
+        "content": "Cart summary"
       },
       {
         "type": "paragraph",
-        "content": "Replaces Estimated total above Check out while the tier panel shows. Regular price and Sale discount appear only when a product has a compare-at price."
+        "content": "Replaces Estimated total in the cart drawer and on the cart page. Purchase discount shows during a promotion, or whenever a discount code applies. Regular price and Sale discount appear only when a product has a compare-at price."
       },
       {
         "type": "text",
@@ -317,7 +317,14 @@
         "type": "text",
         "id": "cart_summary_shipping",
         "label": "Shipping",
-        "default": "Free shipping promo"
+        "default": "Free shipping promo",
+        "info": "While a promotion runs."
+      },
+      {
+        "type": "text",
+        "id": "cart_summary_shipping_regular",
+        "label": "Shipping (no promotion)",
+        "default": "Shipping"
       },
       {
         "type": "text",
