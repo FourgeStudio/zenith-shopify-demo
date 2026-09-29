@@ -146,6 +146,143 @@
       },
       {
         "type": "header",
+        "content": "Spend more, save more"
+      },
+      {
+        "type": "paragraph",
+        "content": "Tier panel in the cart drawer. Shows only while Zenith · Promo → \"Promotion is running\" is on, and replaces the free-shipping bar then. Display only: create one automatic discount per tier in Discounts (Amount off products, minimum purchase amount, combines with shipping discounts only) so checkout applies it."
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_tiers_enabled",
+        "label": "Show tiers during a promotion",
+        "default": true
+      },
+      {
+        "type": "number",
+        "id": "cart_tier_1_min",
+        "label": "Tier 1 — spend at least",
+        "default": 2000,
+        "info": "In pesos, no symbol. 0 hides the tier."
+      },
+      {
+        "type": "number",
+        "id": "cart_tier_1_percent",
+        "label": "Tier 1 — % off",
+        "default": 10
+      },
+      {
+        "type": "number",
+        "id": "cart_tier_2_min",
+        "label": "Tier 2 — spend at least",
+        "default": 3000
+      },
+      {
+        "type": "number",
+        "id": "cart_tier_2_percent",
+        "label": "Tier 2 — % off",
+        "default": 20
+      },
+      {
+        "type": "number",
+        "id": "cart_tier_3_min",
+        "label": "Tier 3 — spend at least",
+        "default": 4000
+      },
+      {
+        "type": "number",
+        "id": "cart_tier_3_percent",
+        "label": "Tier 3 — % off",
+        "default": 30
+      },
+      {
+        "type": "text",
+        "id": "cart_offers_heading",
+        "label": "List heading",
+        "default": "Spend more, save more"
+      },
+      {
+        "type": "text",
+        "id": "cart_offers_tier_label",
+        "label": "Tier name",
+        "default": "[percent]% off",
+        "info": "[percent] is the tier's number."
+      },
+      {
+        "type": "text",
+        "id": "cart_offers_ship_label",
+        "label": "Free shipping name",
+        "default": "free shipping",
+        "info": "Lower case: it is used mid-sentence. The list capitalises it."
+      },
+      {
+        "type": "text",
+        "id": "cart_offers_ship_short",
+        "label": "Free shipping — bar label",
+        "default": "Free ship"
+      },
+      {
+        "type": "text",
+        "id": "cart_offers_next",
+        "label": "Message — next goal",
+        "default": "Add [amount] more to get [offer]"
+      },
+      {
+        "type": "text",
+        "id": "cart_offers_done",
+        "label": "Message — everything reached",
+        "default": "You've unlocked [offer]"
+      },
+      {
+        "type": "text",
+        "id": "cart_offers_saving",
+        "label": "Box — saving",
+        "default": "You're saving [amount]"
+      },
+      {
+        "type": "text",
+        "id": "cart_offers_plus_ship",
+        "label": "Box — with free shipping",
+        "default": "Plus free shipping"
+      },
+      {
+        "type": "text",
+        "id": "cart_offers_no_saving",
+        "label": "Box — nothing yet",
+        "default": "No savings yet"
+      },
+      {
+        "type": "text",
+        "id": "cart_offers_unlocked",
+        "label": "Row — unlocked",
+        "default": "Unlocked"
+      },
+      {
+        "type": "text",
+        "id": "cart_offers_add",
+        "label": "Row — still short",
+        "default": "Add [amount]"
+      },
+      {
+        "type": "text",
+        "id": "cart_offers_saving_row",
+        "label": "Row — in use",
+        "default": "Saving [amount]"
+      },
+      {
+        "type": "text",
+        "id": "cart_offers_replaced",
+        "label": "Row — beaten by a higher tier",
+        "default": "Replaced by a better deal"
+      },
+      {
+        "type": "text",
+        "id": "cart_offers_save_est",
+        "label": "Row — not reached",
+        "default": "Save ~[amount]"
+      },
+      {
+        "type": "header",
         "content": "Checkout reassurance"
       },
       {

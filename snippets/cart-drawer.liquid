@@ -74,7 +74,12 @@
           </span>
         </button>
       </div>
-      {%- render 'zenith-cart-shipping-bar' -%}
+      {%- comment -%}zenith: tier panel while a promotion runs, otherwise the plain free-shipping bar{%- endcomment -%}
+      {%- capture zenith_offers -%}{%- render 'zenith-cart-offers' -%}{%- endcapture -%}
+      {%- assign zenith_offers = zenith_offers | strip -%}
+      {%- if zenith_offers == blank -%}
+        {%- render 'zenith-cart-shipping-bar' -%}
+      {%- endif -%}
       <cart-drawer-items
         view-event-payload="{{ cart | standard_event_data: 'view', context: 'dialog' | escape }}"
         view-event-trigger="manual"
@@ -90,6 +95,7 @@
         >
           <div id="CartDrawer-CartItems" class="drawer__contents js-contents">
             {%- if cart != empty -%}
+              {{- zenith_offers -}}
               <div class="drawer__cart-items-wrapper">
                 <table class="cart-items" role="table">
                   <thead role="rowgroup">

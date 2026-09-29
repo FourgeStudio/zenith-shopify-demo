@@ -1,0 +1,233 @@
+{% comment %}
+  "Spend more, save more" panel for the cart drawer: savings box, next-goal message, a progress bar
+  with a dot per goal, and one row per offer. Copy and tiers: Theme settings → Zenith · Cart.
+  Shows only while a promotion runs (zenith-promo-on) and at least one tier is set; otherwise the
+  drawer falls back to zenith-cart-shipping-bar. Free shipping uses zenith-shipping-goal (₱900 during
+  the promotion), so it always matches the bar and the bundle card ribbons.
+
+  DISPLAY ONLY. The theme cannot apply a discount. Each tier needs a matching automatic discount in
+  Admin → Discounts (Amount off products, minimum purchase amount, not combinable with other product
+  discounts, combinable with shipping discounts). Once those exist, cart.total_discount is what the
+  box shows; until then it shows the estimate worked out from the tier settings.
+  Dawn re-renders .drawer__inner on every cart change, so this updates with no JS.
+{% endcomment %}
+{%- capture zco_promo -%}{%- render 'zenith-promo-on' -%}{%- endcapture -%}
+{%- capture zco_goal -%}{%- render 'zenith-shipping-goal' -%}{%- endcapture -%}
+{%- liquid
+  assign zco_goal = zco_goal | plus: 0
+
+  # Subtotal before any discount (the tiers are spend goals on the full price).
+  assign zco_sub = 0
+  for item in cart.items
+    assign zco_sub = zco_sub | plus: item.original_line_price
+  endfor
+
+  assign zco_ship_on = false
+  if zco_goal > 0 and cart.total_price >= zco_goal
+    assign zco_ship_on = true
+  endif
+
+  # Tiers: best reached % wins, discounts never add up.
+  assign zco_count = 0
+  assign zco_top = zco_goal
+  assign zco_pct = 0
+  for i in (1..3)
+    assign zco_kmin = 'cart_tier_' | append: i | append: '_min'
+    assign zco_kpct = 'cart_tier_' | append: i | append: '_percent'
+    assign zco_tmin = settings[zco_kmin] | times: 100
+    assign zco_tpct = settings[zco_kpct] | plus: 0
+    if zco_tmin > 0 and zco_tpct > 0
+      assign zco_count = zco_count | plus: 1
+      if zco_tmin > zco_top
+        assign zco_top = zco_tmin
+      endif
+      if zco_sub >= zco_tmin and zco_tpct > zco_pct
+        assign zco_pct = zco_tpct
+      endif
+    endif
+  endfor
+
+  assign zco_show = false
+  if zco_promo != blank and settings.cart_tiers_enabled and zco_count > 0 and cart != empty
+    assign zco_show = true
+  endif
+-%}
+{%- if zco_show -%}
+  {%- liquid
+    # Real discount once Admin discounts exist, the settings estimate until then.
+    assign zco_saving = 0
+    if cart.total_discount > 0
+      assign zco_saving = cart.total_discount
+    elsif zco_pct > 0
+      for item in cart.items
+        assign zco_off = item.original_line_price | times: zco_pct | divided_by: 100.0 | round
+        assign zco_saving = zco_saving | plus: zco_off
+      endfor
+    endif
+
+    assign zco_ship_label = settings.cart_offers_ship_label | default: 'free shipping' | escape
+    assign zco_tier_label = settings.cart_offers_tier_label | default: '[percent]% off' | escape
+
+    # Nearest goal that improves the deal.
+    assign zco_next_left = 0
+    assign zco_next_offer = ''
+    if zco_goal > 0 and zco_ship_on == false
+      assign zco_next_left = zco_goal | minus: cart.total_price
+      assign zco_next_offer = zco_ship_label
+    endif
+    for i in (1..3)
+      assign zco_kmin = 'cart_tier_' | append: i | append: '_min'
+      assign zco_kpct = 'cart_tier_' | append: i | append: '_percent'
+      assign zco_tmin = settings[zco_kmin] | times: 100
+      assign zco_tpct = settings[zco_kpct] | plus: 0
+      if zco_tmin > 0 and zco_tpct > zco_pct and zco_sub < zco_tmin
+        assign zco_left = zco_tmin | minus: zco_sub
+        if zco_next_left == 0 or zco_left < zco_next_left
+          assign zco_next_left = zco_left
+          assign zco_next_offer = zco_tier_label | replace: '[percent]', zco_tpct
+        endif
+      endif
+    endfor
+
+    assign zco_fill = zco_sub | times: 100.0 | divided_by: zco_top | round: 1
+    if zco_fill > 100
+      assign zco_fill = 100
+    endif
+  -%}
+  <div class="zenith-cart-offers">
+    <div class="zenith-cart-offers__box{% if zco_saving > 0 %} zenith-cart-offers__box--on{% endif %}">
+      <span class="zenith-cart-offers__big">{{ zco_pct }}%</span>
+      <div class="zenith-cart-offers__box-text">
+        <p class="zenith-cart-offers__box-title">
+          {%- if zco_saving > 0 -%}
+            {%- capture zco_money -%}{{ zco_saving | money }}{%- endcapture -%}
+            {{- settings.cart_offers_saving | escape | replace: '[amount]', zco_money -}}
+          {%- elsif zco_ship_on -%}
+            {{- settings.cart_free_shipping_unlocked | escape -}}
+          {%- else -%}
+            {{- settings.cart_offers_no_saving | escape -}}
+          {%- endif -%}
+        </p>
+        {%- if zco_saving > 0 and zco_ship_on and settings.cart_offers_plus_ship != blank -%}
+          <p class="zenith-cart-offers__box-sub">{{ settings.cart_offers_plus_ship | escape }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <p class="zenith-cart-offers__msg" role="status">
+      {%- if zco_next_offer != '' -%}
+        {%- capture zco_money -%}<strong>{{ zco_next_left | money }}</strong>{%- endcapture -%}
+        {%- capture zco_offer -%}<strong>{{ zco_next_offer }}</strong>{%- endcapture -%}
+        {{- settings.cart_offers_next | escape | replace: '[amount]', zco_money | replace: '[offer]', zco_offer -}}
+      {%- else -%}
+        {%- capture zco_offer -%}
+          {%- if zco_pct > 0 -%}{{ zco_tier_label | replace: '[percent]', zco_pct }}{%- endif -%}
+          {%- if zco_pct > 0 and zco_ship_on %} + {% endif -%}
+          {%- if zco_ship_on -%}{{ zco_ship_label }}{%- endif -%}
+        {%- endcapture -%}
+        {%- capture zco_offer -%}<strong>{{ zco_offer | strip }}</strong>{%- endcapture -%}
+        {{- settings.cart_offers_done | escape | replace: '[offer]', zco_offer -}}
+      {%- endif -%}
+    </p>
+
+    <div class="zenith-cart-offers__bar" aria-hidden="true">
+      <div class="zenith-cart-offers__track">
+        <div class="zenith-cart-offers__fill" style="width: {{ zco_fill }}%"></div>
+      </div>
+      {%- if zco_goal > 0 -%}
+        {%- assign zco_pos = zco_goal | times: 100.0 | divided_by: zco_top | round: 1 -%}
+        <span
+          class="zenith-cart-offers__dot{% if zco_ship_on %} is-reached{% endif %}{% if zco_pos >= 90 %} is-end{% endif %}"
+          style="left: {{ zco_pos }}%"
+        >
+          <span class="zenith-cart-offers__dot-label">{{ settings.cart_offers_ship_short | escape }}</span>
+        </span>
+      {%- endif -%}
+      {%- for i in (1..3) -%}
+        {%- liquid
+          assign zco_kmin = 'cart_tier_' | append: i | append: '_min'
+          assign zco_kpct = 'cart_tier_' | append: i | append: '_percent'
+          assign zco_tmin = settings[zco_kmin] | times: 100
+          assign zco_tpct = settings[zco_kpct] | plus: 0
+        -%}
+        {%- if zco_tmin > 0 and zco_tpct > 0 -%}
+          {%- assign zco_pos = zco_tmin | times: 100.0 | divided_by: zco_top | round: 1 -%}
+          <span
+            class="zenith-cart-offers__dot{% if zco_sub >= zco_tmin %} is-reached{% endif %}{% if zco_pos >= 90 %} is-end{% endif %}"
+            style="left: {{ zco_pos }}%"
+          >
+            <span class="zenith-cart-offers__dot-label">{{ zco_tier_label | replace: '[percent]', zco_tpct }}</span>
+          </span>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    <div class="zenith-cart-offers__list">
+      {%- if settings.cart_offers_heading != blank -%}
+        <p class="zenith-cart-offers__heading">{{ settings.cart_offers_heading | escape }}</p>
+      {%- endif -%}
+      <ul class="zenith-cart-offers__rows" role="list">
+        {%- if zco_goal > 0 -%}
+          <li class="zenith-cart-offers__row{% if zco_ship_on %} is-reached{% endif %}">
+            <span class="zenith-cart-offers__row-dot"></span>
+            <span class="zenith-cart-offers__row-name">
+              {{- zco_goal | money_without_trailing_zeros }}+ · {{ zco_ship_label | capitalize -}}
+            </span>
+            <span class="zenith-cart-offers__row-status">
+              {%- if zco_ship_on -%}
+                {{- settings.cart_offers_unlocked | escape -}}
+              {%- else -%}
+                {%- capture zco_money -%}{{ zco_goal | minus: cart.total_price | money }}{%- endcapture -%}
+                {{- settings.cart_offers_add | escape | replace: '[amount]', zco_money -}}
+              {%- endif -%}
+            </span>
+          </li>
+        {%- endif -%}
+        {%- for i in (1..3) -%}
+          {%- liquid
+            assign zco_kmin = 'cart_tier_' | append: i | append: '_min'
+            assign zco_kpct = 'cart_tier_' | append: i | append: '_percent'
+            assign zco_tmin = settings[zco_kmin] | times: 100
+            assign zco_tpct = settings[zco_kpct] | plus: 0
+          -%}
+          {%- if zco_tmin > 0 and zco_tpct > 0 -%}
+            {%- liquid
+              assign zco_reached = false
+              if zco_sub >= zco_tmin
+                assign zco_reached = true
+              endif
+              assign zco_active = false
+              if zco_reached and zco_tpct == zco_pct
+                assign zco_active = true
+              endif
+            -%}
+            <li class="zenith-cart-offers__row{% if zco_reached %} is-reached{% endif %}{% if zco_active %} is-active{% endif %}">
+              <span class="zenith-cart-offers__row-dot"></span>
+              <span class="zenith-cart-offers__row-name">
+                {{- zco_tmin | money_without_trailing_zeros }}+ · {{ zco_tier_label | replace: '[percent]', zco_tpct -}}
+              </span>
+              <span class="zenith-cart-offers__row-status">
+                {%- if zco_active -%}
+                  {%- capture zco_money -%}{{ zco_saving | money }}{%- endcapture -%}
+                  {{- settings.cart_offers_saving_row | escape | replace: '[amount]', zco_money -}}
+                {%- elsif zco_reached -%}
+                  {{- settings.cart_offers_replaced | escape -}}
+                {%- else -%}
+                  {%- liquid
+                    assign zco_base = zco_sub
+                    if zco_tmin > zco_base
+                      assign zco_base = zco_tmin
+                    endif
+                    assign zco_est = zco_base | times: zco_tpct | divided_by: 100.0 | round
+                  -%}
+                  {%- capture zco_money -%}{{ zco_est | money_without_trailing_zeros }}{%- endcapture -%}
+                  {{- settings.cart_offers_save_est | escape | replace: '[amount]', zco_money -}}
+                {%- endif -%}
+              </span>
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </div>
+  </div>
+{%- endif -%}
