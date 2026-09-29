@@ -951,6 +951,28 @@ span.zenith-cart-offers__row-dot:empty {
   font-weight: 600;
 }
 
+/* Cart page: same panel above the item table; box, message and bar left, offer list right on desktop. */
+.zenith-cart-offers--page {
+  padding-top: 0;
+  margin-bottom: var(--z-space-5, 24px);
+}
+
+@media screen and (min-width: 990px) {
+  .zenith-cart-offers--page {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: auto auto 1fr;
+    column-gap: var(--z-space-7, 48px);
+    align-items: start;
+  }
+
+  .zenith-cart-offers--page .zenith-cart-offers__list {
+    grid-column: 2;
+    grid-row: 1 / span 3;
+    margin-top: 0;
+  }
+}
+
 @media screen and (max-width: 375px) {
   .zenith-cart-offers__box { padding: var(--z-space-3, 12px) var(--z-space-4, 16px); }
   .zenith-cart-offers__big { font-size: 3rem; }

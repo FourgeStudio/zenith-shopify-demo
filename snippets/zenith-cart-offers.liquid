@@ -9,7 +9,8 @@
   Admin → Discounts (Amount off products, minimum purchase amount, not combinable with other product
   discounts, combinable with shipping discounts). Once those exist, cart.total_discount is what the
   box shows; until then it shows the estimate worked out from the tier settings.
-  Dawn re-renders .drawer__inner on every cart change, so this updates with no JS.
+  Dawn re-renders .drawer__inner (drawer) and main-cart-items .js-contents (cart page) on every cart
+  change, so this updates with no JS. Accepts: context ('page' = two-column layout on the cart page).
 {% endcomment %}
 {%- capture zco_promo -%}{%- render 'zenith-promo-on' -%}{%- endcapture -%}
 {%- capture zco_goal -%}{%- render 'zenith-shipping-goal' -%}{%- endcapture -%}
@@ -94,7 +95,7 @@
       assign zco_fill = 100
     endif
   -%}
-  <div class="zenith-cart-offers">
+  <div class="zenith-cart-offers{% if context == 'page' %} zenith-cart-offers--page{% endif %}">
     <div class="zenith-cart-offers__box{% if zco_saving > 0 %} zenith-cart-offers__box--on{% endif %}">
       <span class="zenith-cart-offers__big">{{ zco_pct }}%</span>
       <div class="zenith-cart-offers__box-text">

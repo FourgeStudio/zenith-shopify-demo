@@ -54,7 +54,13 @@
     <form action="{{ routes.cart_url }}" class="cart__contents critical-hidden" method="post" id="cart">
       <div class="cart__items" id="main-cart-items" data-id="{{ section.id }}">
         <div class="js-contents">
+          {%- comment -%}zenith: "spend more, save more" panel while a promotion runs (matches the cart drawer){%- endcomment -%}
+          {%- capture zenith_offers -%}{%- render 'zenith-cart-offers', context: 'page' -%}{%- endcapture -%}
+          {%- assign zenith_offers = zenith_offers | strip -%}
+          {%- capture zenith_tier_pct -%}{%- render 'zenith-cart-tier-pct' -%}{%- endcapture -%}
+          {%- assign zenith_tier_pct = zenith_tier_pct | plus: 0 -%}
           {%- if cart != empty -%}
+            {{- zenith_offers -}}
             <table class="cart-items">
               <caption class="visually-hidden">
                 {{ 'sections.cart.title' | t }}
@@ -187,10 +193,21 @@
                       </ul>
                     </td>
 
+                    {%- comment -%}
+                      zenith: during a promotion the line shows the tier price — Shopify's real discount once it
+                      exists, the tier estimate until then (same rule as cart-drawer.liquid).
+                    {%- endcomment -%}
+                    {%- liquid
+                      assign z_now = item.final_line_price
+                      if zenith_offers != blank and z_now >= item.original_line_price and zenith_tier_pct > 0
+                        assign z_off = item.original_line_price | times: zenith_tier_pct | divided_by: 100.0 | round
+                        assign z_now = item.original_line_price | minus: z_off
+                      endif
+                    -%}
                     <td class="cart-item__totals right medium-hide large-up-hide">
                       {%- render 'loading-spinner' -%}
                       <div class="cart-item__price-wrapper">
-                        {%- if item.original_line_price != item.final_line_price -%}
+                        {%- if item.original_line_price != z_now -%}
                           <dl class="cart-item__discounted-prices">
                             <dt class="visually-hidden">
                               {{ 'products.product.price.regular_price' | t }}
@@ -204,7 +221,7 @@
                               {{ 'products.product.price.sale_price' | t }}
                             </dt>
                             <dd class="price price--end">
-                              {{ item.final_line_price | money }}
+                              {{ z_now | money }}
                             </dd>
                           </dl>
                         {%- else -%}
@@ -418,7 +435,7 @@
                     <td class="cart-item__totals right small-hide">
                       {%- render 'loading-spinner' -%}
                       <div class="cart-item__price-wrapper">
-                        {%- if item.original_line_price != item.final_line_price -%}
+                        {%- if item.original_line_price != z_now -%}
                           <dl class="cart-item__discounted-prices">
                             <dt class="visually-hidden">
                               {{ 'products.product.price.regular_price' | t }}
@@ -432,7 +449,7 @@
                               {{ 'products.product.price.sale_price' | t }}
                             </dt>
                             <dd class="price price--end">
-                              {{ item.final_line_price | money }}
+                              {{ z_now | money }}
                             </dd>
                           </dl>
                         {%- else -%}

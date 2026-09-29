@@ -44,6 +44,12 @@
               {% render block %}
             {%- when 'subtotal' -%}
               <div class="js-contents" {{ block.shopify_attributes }}>
+                {%- comment -%}zenith: itemised savings summary while the tier panel shows (matches the cart drawer){%- endcomment -%}
+                {%- capture zenith_offers -%}{%- render 'zenith-cart-offers' -%}{%- endcapture -%}
+                {%- assign zenith_offers = zenith_offers | strip -%}
+                {%- if zenith_offers != blank -%}
+                  {%- render 'zenith-cart-summary' -%}
+                {%- else -%}
                 <div>
                   {%- if cart.cart_level_discount_applications.size > 0 -%}
                     <ul class="discounts list-unstyled" role="list" aria-label="{{ 'customer.order.discount' | t }}">
@@ -102,6 +108,7 @@
                     {%- endif -%}
                   {%- endif -%}
                 </small>
+                {%- endif -%}
               </div>
             {%- else -%}
               <div class="cart__ctas" {{ block.shopify_attributes }}>
