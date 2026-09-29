@@ -769,6 +769,8 @@ div.zenith-cart-ship__fill {
 .zenith-cart-offers {
   padding: var(--z-space-4, 16px) 0 var(--z-space-5, 24px);
   border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.15);
+  /* The end label and dot sit near the edge; never let them make the item list scroll sideways. */
+  overflow-x: clip;
 }
 
 .zenith-cart-offers p {
@@ -872,7 +874,7 @@ div.zenith-cart-offers__fill {
 
 .zenith-cart-offers__dot.is-end .zenith-cart-offers__dot-label {
   left: auto;
-  right: -0.4rem;
+  right: 0;
   transform: none;
 }
 
