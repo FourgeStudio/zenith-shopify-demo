@@ -282,6 +282,46 @@
         "default": "Save ~[amount]"
       },
       {
+        "type": "paragraph",
+        "content": "No promotion running: the box shows the sale saving (compare-at price) or free shipping, and the list shows free shipping plus the three Checkout reassurance lines below. [threshold] = free shipping minimum, [fee] = flat fee."
+      },
+      {
+        "type": "text",
+        "id": "cart_offers_perks_heading",
+        "label": "List heading (no promotion)",
+        "default": "Every order includes"
+      },
+      {
+        "type": "text",
+        "id": "cart_offers_perk_status",
+        "label": "Perk row status",
+        "default": "Included"
+      },
+      {
+        "type": "text",
+        "id": "cart_offers_ship_title",
+        "label": "Box — free shipping not reached",
+        "default": "Free shipping on orders [threshold]+"
+      },
+      {
+        "type": "text",
+        "id": "cart_offers_ship_sub",
+        "label": "Box — under it (not reached)",
+        "default": "Flat [fee] shipping below that"
+      },
+      {
+        "type": "text",
+        "id": "cart_offers_ship_sub_on",
+        "label": "Box — under it (reached)",
+        "default": "Your order ships free"
+      },
+      {
+        "type": "text",
+        "id": "cart_offers_sale_sub",
+        "label": "Box — under a sale saving",
+        "default": "Off the regular price"
+      },
+      {
         "type": "header",
         "content": "Cart summary"
       },

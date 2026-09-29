@@ -800,6 +800,11 @@ div.zenith-cart-ship__fill {
   color: var(--z-dawn-gold, #eabe5f);
 }
 
+.zenith-cart-offers__big-icon {
+  width: 3.6rem;
+  height: 3.6rem;
+}
+
 .zenith-cart-offers__box-title {
   font-size: 1.6rem;
   font-weight: 700;
@@ -942,6 +947,15 @@ span.zenith-cart-offers__row-dot:empty {
 .zenith-cart-offers__row.is-reached .zenith-cart-offers__row-dot {
   background: var(--z-dawn-gold, #eabe5f);
   border-color: var(--z-dawn-gold, #eabe5f);
+}
+
+/* Perk rows (no promotion) use the reassurance icon in place of the dot. */
+.zenith-cart-offers__row-icon {
+  flex: 0 0 auto;
+  width: 1.6rem;
+  height: 1.6rem;
+  margin: 0 -0.3rem;
+  color: var(--z-dawn-gold, #eabe5f);
 }
 
 .zenith-cart-offers__row-name {
