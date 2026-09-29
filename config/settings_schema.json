@@ -283,6 +283,69 @@
       },
       {
         "type": "header",
+        "content": "Cart summary (during a promotion)"
+      },
+      {
+        "type": "paragraph",
+        "content": "Replaces Estimated total above Check out while the tier panel shows. Regular price and Sale discount appear only when a product has a compare-at price."
+      },
+      {
+        "type": "text",
+        "id": "cart_summary_regular",
+        "label": "Regular price",
+        "default": "Regular price"
+      },
+      {
+        "type": "text",
+        "id": "cart_summary_sale",
+        "label": "Sale discount",
+        "default": "Sale discount"
+      },
+      {
+        "type": "text",
+        "id": "cart_summary_subtotal",
+        "label": "Subtotal",
+        "default": "Subtotal"
+      },
+      {
+        "type": "text",
+        "id": "cart_summary_discount",
+        "label": "Purchase discount",
+        "default": "Purchase discount"
+      },
+      {
+        "type": "text",
+        "id": "cart_summary_shipping",
+        "label": "Shipping",
+        "default": "Free shipping promo"
+      },
+      {
+        "type": "text",
+        "id": "cart_summary_free",
+        "label": "Shipping — reached",
+        "default": "FREE"
+      },
+      {
+        "type": "text",
+        "id": "cart_summary_ship_later",
+        "label": "Shipping — not reached",
+        "default": "Calculated at checkout"
+      },
+      {
+        "type": "text",
+        "id": "cart_summary_total",
+        "label": "Total",
+        "default": "Total"
+      },
+      {
+        "type": "text",
+        "id": "cart_summary_all",
+        "label": "Total savings bar",
+        "default": "Total savings [amount] ([percent]% off regular price)",
+        "info": "[amount] = regular price minus total; [percent] = that as a share of the regular price. \"+ free shipping\" is added once reached. Blank hides the bar."
+      },
+      {
+        "type": "header",
         "content": "Checkout reassurance"
       },
       {

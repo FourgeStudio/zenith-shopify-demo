@@ -77,6 +77,8 @@
       {%- comment -%}zenith: tier panel while a promotion runs, otherwise the plain free-shipping bar{%- endcomment -%}
       {%- capture zenith_offers -%}{%- render 'zenith-cart-offers' -%}{%- endcapture -%}
       {%- assign zenith_offers = zenith_offers | strip -%}
+      {%- capture zenith_tier_pct -%}{%- render 'zenith-cart-tier-pct' -%}{%- endcapture -%}
+      {%- assign zenith_tier_pct = zenith_tier_pct | plus: 0 -%}
       {%- if zenith_offers == blank -%}
         {%- render 'zenith-cart-shipping-bar' -%}
       {%- endif -%}
@@ -257,15 +259,28 @@
                               zenith: the drawer only ever showed what is charged. Anchor each line against the
                               compare-at price (or the cart discount, whichever is higher) and name the saving.
                             {%- endcomment -%}
+                            {%- comment -%}
+                              zenith: while the tier panel shows, the line anchors against its full price and shows the
+                              tier price instead (Shopify's real discount once it exists, the tier estimate until then);
+                              the compare-at saving moves to zenith-cart-summary.
+                            {%- endcomment -%}
                             {%- liquid
                               assign z_was = item.original_line_price
-                              if settings.cart_show_compare_price and item.variant.compare_at_price > item.variant.price
+                              assign z_now = item.final_line_price
+                              assign z_label = settings.cart_savings_label
+                              if zenith_offers != blank
+                                assign z_label = blank
+                                if z_now >= z_was and zenith_tier_pct > 0
+                                  assign z_off = z_was | times: zenith_tier_pct | divided_by: 100.0 | round
+                                  assign z_now = z_was | minus: z_off
+                                endif
+                              elsif settings.cart_show_compare_price and item.variant.compare_at_price > item.variant.price
                                 assign z_compare = item.variant.compare_at_price | times: item.quantity
                                 if z_compare > z_was
                                   assign z_was = z_compare
                                 endif
                               endif
-                              assign z_saved = z_was | minus: item.final_line_price
+                              assign z_saved = z_was | minus: z_now
                             -%}
                             {%- if z_saved > 0 -%}
                               <div class="cart-item__discounted-prices">
@@ -279,12 +294,12 @@
                                   {{ 'products.product.price.sale_price' | t }}
                                 </span>
                                 <span class="price price--end">
-                                  {{ item.final_line_price | money }}
+                                  {{ z_now | money }}
                                 </span>
                               </div>
-                              {%- if settings.cart_savings_label != blank -%}
+                              {%- if z_label != blank -%}
                                 {%- capture z_saved_money -%}{{ z_saved | money }}{%- endcapture -%}
-                                {%- assign z_saved_text = settings.cart_savings_label | escape | replace: '[amount]', z_saved_money -%}
+                                {%- assign z_saved_text = z_label | escape | replace: '[amount]', z_saved_money -%}
                                 <span class="zenith-cart__saved">{{ z_saved_text }}</span>
                               {%- endif -%}
                             {%- else -%}
@@ -539,6 +554,10 @@
         <!-- Subtotals -->
 
         <div class="cart-drawer__footer" {{ block.shopify_attributes }}>
+          {%- comment -%}zenith: itemised savings summary while the tier panel shows{%- endcomment -%}
+          {%- if zenith_offers != blank -%}
+            {%- render 'zenith-cart-summary' -%}
+          {%- else -%}
           <div>
             {%- if cart.cart_level_discount_applications.size > 0 -%}
               <ul class="discounts list-unstyled" role="list" aria-label="{{ 'customer.order.discount' | t }}">
@@ -597,6 +616,7 @@
               {%- endif -%}
             {%- endif -%}
           </small>
+          {%- endif -%}
         </div>
 
         <!-- CTAs -->

@@ -1,0 +1,30 @@
+{% comment %}
+  The "spend more, save more" tier % the cart qualifies for right now. Echoes a whole number, 0 when
+  no tier is reached, the tiers are off, or no promotion is running. Best tier wins; tiers never add up.
+  Tiers: Theme settings → Zenith · Cart → Spend more, save more. Read by cart-drawer (line prices),
+  zenith-cart-summary and zenith-cart-offers, so all three agree.
+  Usage:
+    {%- capture pct -%}{%- render 'zenith-cart-tier-pct' -%}{%- endcapture -%}
+    {%- assign pct = pct | plus: 0 -%}
+{% endcomment %}
+{%- capture zct_promo -%}{%- render 'zenith-promo-on' -%}{%- endcapture -%}
+{%- liquid
+  assign zct_pct = 0
+  if zct_promo != blank and settings.cart_tiers_enabled
+    # Tiers are spend goals on the full price, before any discount.
+    assign zct_sub = 0
+    for item in cart.items
+      assign zct_sub = zct_sub | plus: item.original_line_price
+    endfor
+    for i in (1..3)
+      assign zct_kmin = 'cart_tier_' | append: i | append: '_min'
+      assign zct_kpct = 'cart_tier_' | append: i | append: '_percent'
+      assign zct_tmin = settings[zct_kmin] | times: 100
+      assign zct_tpct = settings[zct_kpct] | plus: 0
+      if zct_tmin > 0 and zct_sub >= zct_tmin and zct_tpct > zct_pct
+        assign zct_pct = zct_tpct
+      endif
+    endfor
+  endif
+  echo zct_pct
+-%}

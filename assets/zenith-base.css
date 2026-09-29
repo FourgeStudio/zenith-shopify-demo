@@ -961,6 +961,71 @@ span.zenith-cart-offers__row-dot:empty {
   div.zenith-cart-offers__fill { transition: none; }
 }
 
+/* ---------- Cart drawer: savings summary (snippets/zenith-cart-summary.liquid) ---------- */
+.zenith-cart-sum {
+  display: flex;
+  flex-direction: column;
+  gap: var(--z-space-2, 8px);
+  width: 100%;
+  font-size: 1.4rem;
+  line-height: 1.3;
+}
+
+.zenith-cart-sum__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--z-space-3, 12px);
+}
+
+.zenith-cart-sum__row > span:last-child,
+.zenith-cart-sum__row > s {
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.zenith-cart-sum__row--muted s {
+  color: rgba(var(--color-foreground), 0.55);
+}
+
+.zenith-cart-sum__gold {
+  color: var(--z-dawn-gold, #eabe5f);
+}
+
+.zenith-cart-sum__ok {
+  color: #7fd49b;
+  font-weight: 600;
+}
+
+.zenith-cart-sum__tag {
+  display: inline-block;
+  margin-left: var(--z-space-2, 8px);
+  padding: 0.2rem 0.8rem;
+  border-radius: 99rem;
+  background: rgba(var(--z-gold-rgb), 0.3);
+  color: var(--z-dawn-gold, #eabe5f);
+  font-size: 1.1rem;
+  line-height: 1.3;
+  vertical-align: middle;
+}
+
+.zenith-cart-sum__total {
+  padding-top: var(--z-space-1, 4px);
+  font-family: var(--font-heading-family);
+  font-weight: var(--font-heading-weight);
+  font-size: 2rem;
+}
+
+.zenith-cart-sum__all {
+  margin: var(--z-space-1, 4px) 0 0;
+  padding: var(--z-space-2, 8px) var(--z-space-3, 12px);
+  background: rgba(var(--z-gold-rgb), 0.3);
+  color: var(--z-dawn-gold, #eabe5f);
+  font-weight: 600;
+  font-size: 1.3rem;
+  text-align: center;
+}
+
 /* ---------- Cart drawer: reassurance under Checkout (snippets/zenith-cart-trust.liquid) ---------- */
 .zenith-cart-trust {
   display: flex;

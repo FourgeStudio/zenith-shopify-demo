@@ -1,0 +1,99 @@
+{% comment %}
+  Cart drawer totals while the "spend more, save more" panel shows (promotion running): regular price,
+  sale discount (compare-at), subtotal, purchase discount with its tier chip, free shipping, total and a
+  total-savings bar. Copy: Theme settings → Zenith · Cart → Cart summary.
+  Purchase discount = cart.total_discount once the Admin automatic discounts exist; until then it is the
+  estimate from the tier settings, so the drawer total can be lower than what checkout charges.
+{% endcomment %}
+{%- capture zcsum_pct -%}{%- render 'zenith-cart-tier-pct' -%}{%- endcapture -%}
+{%- capture zcsum_goal -%}{%- render 'zenith-shipping-goal' -%}{%- endcapture -%}
+{%- liquid
+  assign zcsum_pct = zcsum_pct | plus: 0
+  assign zcsum_goal = zcsum_goal | plus: 0
+
+  assign zcsum_sub = 0
+  assign zcsum_reg = 0
+  assign zcsum_est = 0
+  for item in cart.items
+    assign zcsum_sub = zcsum_sub | plus: item.original_line_price
+    assign zcsum_line_reg = item.original_line_price
+    if settings.cart_show_compare_price and item.variant.compare_at_price > item.variant.price
+      assign zcsum_cmp = item.variant.compare_at_price | times: item.quantity
+      if zcsum_cmp > zcsum_line_reg
+        assign zcsum_line_reg = zcsum_cmp
+      endif
+    endif
+    assign zcsum_reg = zcsum_reg | plus: zcsum_line_reg
+    assign zcsum_off = item.original_line_price | times: zcsum_pct | divided_by: 100.0 | round
+    assign zcsum_est = zcsum_est | plus: zcsum_off
+  endfor
+
+  if cart.total_discount > 0
+    assign zcsum_disc = cart.total_discount
+    assign zcsum_total = cart.total_price
+  else
+    assign zcsum_disc = zcsum_est
+    assign zcsum_total = zcsum_sub | minus: zcsum_est
+  endif
+
+  assign zcsum_sale = zcsum_reg | minus: zcsum_sub
+  assign zcsum_all = zcsum_reg | minus: zcsum_total
+  assign zcsum_all_pct = 0
+  if zcsum_reg > 0
+    assign zcsum_all_pct = zcsum_all | times: 100.0 | divided_by: zcsum_reg | round
+  endif
+
+  assign zcsum_ship_on = false
+  if zcsum_goal > 0 and cart.total_price >= zcsum_goal
+    assign zcsum_ship_on = true
+  endif
+-%}
+<div class="zenith-cart-sum" role="status">
+  {%- if zcsum_sale > 0 -%}
+    <div class="zenith-cart-sum__row zenith-cart-sum__row--muted">
+      <span>{{ settings.cart_summary_regular | escape }}</span>
+      <s>{{ zcsum_reg | money }}</s>
+    </div>
+    <div class="zenith-cart-sum__row">
+      <span>{{ settings.cart_summary_sale | escape }}</span>
+      <span class="zenith-cart-sum__gold">−{{ zcsum_sale | money }}</span>
+    </div>
+  {%- endif -%}
+  <div class="zenith-cart-sum__row">
+    <span>{{ settings.cart_summary_subtotal | escape }}</span>
+    <span>{{ zcsum_sub | money }}</span>
+  </div>
+  <div class="zenith-cart-sum__row">
+    <span>
+      {{- settings.cart_summary_discount | escape -}}
+      {%- if zcsum_pct > 0 -%}
+        {%- assign zcsum_tag = settings.cart_offers_tier_label | default: '[percent]% off' | replace: '[percent]', zcsum_pct -%}
+        <span class="zenith-cart-sum__tag">{{ zcsum_tag | escape | upcase }}</span>
+      {%- endif -%}
+    </span>
+    <span class="zenith-cart-sum__gold">
+      {%- if zcsum_disc > 0 -%}−{{ zcsum_disc | money }}{%- else -%}—{%- endif -%}
+    </span>
+  </div>
+  {%- if zcsum_goal > 0 -%}
+    <div class="zenith-cart-sum__row">
+      <span>{{ settings.cart_summary_shipping | escape }}</span>
+      {%- if zcsum_ship_on -%}
+        <span class="zenith-cart-sum__ok">{{ settings.cart_summary_free | escape }}</span>
+      {%- else -%}
+        <span>{{ settings.cart_summary_ship_later | escape }}</span>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+  <div class="zenith-cart-sum__row zenith-cart-sum__total">
+    <span>{{ settings.cart_summary_total | escape }}</span>
+    <span>{{ zcsum_total | money }}</span>
+  </div>
+  {%- if zcsum_all > 0 and settings.cart_summary_all != blank -%}
+    {%- capture zcsum_money -%}{{ zcsum_all | money }}{%- endcapture -%}
+    <p class="zenith-cart-sum__all">
+      {{- settings.cart_summary_all | escape | replace: '[amount]', zcsum_money | replace: '[percent]', zcsum_all_pct -}}
+      {%- if zcsum_ship_on %} + {{ settings.cart_offers_ship_label | default: 'free shipping' | escape }}{% endif -%}
+    </p>
+  {%- endif -%}
+</div>
