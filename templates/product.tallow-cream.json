@@ -15,7 +15,7 @@
         "benefit_1": {
           "type": "benefit",
           "settings": {
-            "text": "Built for the heat. Won't melt or shine.",
+            "text": "0.2% retinol on a beef tallow base",
             "hide_on_desktop": false,
             "hide_on_mobile": false
           }
@@ -23,7 +23,7 @@
         "benefit_2": {
           "type": "benefit",
           "settings": {
-            "text": "Zero irritation. Just gets the job done.",
+            "text": "One pea-sized amount before bed",
             "hide_on_desktop": false,
             "hide_on_mobile": false
           }
@@ -31,7 +31,7 @@
         "benefit_3": {
           "type": "benefit",
           "settings": {
-            "text": "Science-backed active ingredients.",
+            "text": "Ectoin and Stephania keep skin calm",
             "hide_on_desktop": false,
             "hide_on_mobile": false
           }
@@ -39,7 +39,7 @@
         "benefit_4": {
           "type": "benefit",
           "settings": {
-            "text": "Full refund if it's not for you.",
+            "text": "Absorbs fast, no grease on the pillow",
             "hide_on_desktop": false,
             "hide_on_mobile": false
           }
@@ -47,7 +47,7 @@
         "benefit_5": {
           "type": "benefit",
           "settings": {
-            "text": "Formulated for Filipino skin and weather.",
+            "text": "Light enough for Philippine humidity",
             "hide_on_desktop": false,
             "hide_on_mobile": false
           }
@@ -55,7 +55,7 @@
         "benefit_6": {
           "type": "benefit",
           "settings": {
-            "text": "Trusted by [customers] Filipino men.",
+            "text": "FDA-notified",
             "hide_on_desktop": false,
             "hide_on_mobile": false
           }
@@ -146,9 +146,9 @@
         "row_6": {
           "type": "row",
           "settings": {
-            "title": "Description",
-            "content_source": "description",
-            "text": "",
+            "title": "About this product",
+            "content_source": "custom",
+            "text": "<p>Night skincare usually gets dropped for one of two reasons: too many steps, or a retinol that feels too harsh to keep using.&nbsp;<br/><br/>This is one step. 0.2% retinol sits on a beef tallow base, with Ectoin and Stephania to keep skin calm. A pea-sized amount before bed, and that is your night routine.</p>",
             "open": false,
             "hide_on_mobile": false,
             "hide_on_desktop": false
@@ -159,7 +159,7 @@
           "settings": {
             "title": "How to use",
             "content_source": "custom",
-            "text": "",
+            "text": "<p>1. At night, on a clean, dry face, take a pea-sized amount.<br/><br/>2. Dot it on forehead, cheeks and chin, then massage upward into the face and neck until absorbed.<br/><br/>3. New to retinol? Use it 2 to 3 nights a week for the first two weeks, then move to nightly. Always wear SPF 30 in the morning.</p>",
             "open": false,
             "hide_on_mobile": false,
             "hide_on_desktop": false
@@ -168,9 +168,9 @@
         "row_8": {
           "type": "row",
           "settings": {
-            "title": "What's inside",
+            "title": "Ingredients",
             "content_source": "custom",
-            "text": "",
+            "text": "<p>Key ingredients: Retinol 0.2%, beef tallow, Ectoin, Stephania Tetrandra Extract, Vitamin E, Sodium Hyaluronate, Glycerin, Jojoba Seed Oil, Shea Butter.<br/><br/>Full ingredient list: [SLOT: copy word for word from the label]</p>",
             "open": false,
             "hide_on_mobile": false,
             "hide_on_desktop": false
@@ -179,9 +179,9 @@
         "row_9": {
           "type": "row",
           "settings": {
-            "title": "Zenith guarantee",
+            "title": "Delivery and returns",
             "content_source": "custom",
-            "text": "",
+            "text": "<p>Nationwide delivery, with Cash on Delivery available. Every order carries the Zenith Money-Back Guarantee. Full terms on our <a href=\"https://tryzenith.ph/policies/refund-policy\" target=\"_blank\" title=\"https://tryzenith.ph/policies/refund-policy\"><span style=\"text-decoration:underline\">Refunds and Returns</span></a> page.</p>",
             "open": false,
             "hide_on_mobile": false,
             "hide_on_desktop": false
@@ -191,8 +191,8 @@
           "type": "row",
           "settings": {
             "title": "FAQs",
-            "content_source": "custom",
-            "text": "",
+            "content_source": "questions",
+            "text": "<p>0.2% is a gentle retinol level, and the tallow base buffers it. New to retinol? Start 2 to 3 nights a week for the first two weeks, then go nightly. If anything feels wrong, stop and message us.</p>",
             "open": false,
             "hide_on_mobile": false,
             "hide_on_desktop": false
@@ -859,6 +859,7 @@
         "subheading": "<p>No 10-step routines</p>",
         "products": [],
         "used_text": "",
+        "note": "",
         "show_number": true,
         "show_divider": true,
         "divider_breakpoint": "mobile",
@@ -873,6 +874,8 @@
         "step_title_spacing": 20,
         "used_spacing": 40,
         "used_width": 520,
+        "show_note_desktop": false,
+        "note_spacing": 24,
         "divider_spacing": 56,
         "color_scheme": "scheme-1",
         "title_color": "#d6b356",
@@ -891,10 +894,13 @@
         "number_size": 28,
         "number_font_size": 14,
         "text_font_size": 15,
+        "text_line_height": 160,
+        "note_font_size": 14,
         "used_font_size": 16,
         "thumb_size": 80,
         "heading_alignment_mobile": "center",
         "heading_font_size_mobile": 36,
+        "heading_max_width_mobile": 800,
         "subheading_font_size_mobile": 16,
         "heading_spacing_mobile": 28,
         "image_width_mobile": 116,
@@ -903,6 +909,9 @@
         "gap_mobile": 12,
         "title_font_size_mobile": 16,
         "text_font_size_mobile": 14,
+        "text_line_height_mobile": 160,
+        "note_font_size_mobile": 13,
+        "note_spacing_mobile": 20,
         "used_font_size_mobile": 12,
         "thumb_size_mobile": 52,
         "used_spacing_mobile": 20,
@@ -977,10 +986,14 @@
         "column_3_note": "(Kiehl's, Clinique for Men)",
         "heading_alignment": "center",
         "heading_spacing": 52,
+        "heading_max_width": 760,
+        "table_style": "divided",
+        "table_max_width": 0,
         "label_column_width": 20,
         "header_height": 69,
         "row_height": 49,
         "cell_padding": 12,
+        "cell_padding_y": 8,
         "logo_width": 104,
         "color_scheme": "scheme-1",
         "zenith_header_background": "#203940",
@@ -988,7 +1001,9 @@
         "row_background": "#202020",
         "row_background_alt": "#202020",
         "divider_color": "#0e0e0e",
+        "divider_color_zenith": "",
         "note_opacity": 70,
+        "value_opacity": 100,
         "subheading_opacity": 70,
         "heading_font_size": 40,
         "heading_uppercase": false,
@@ -997,6 +1012,9 @@
         "title_font_size": 16,
         "note_font_size": 14,
         "text_font_size": 16,
+        "zenith_text_font_size": 0,
+        "row_line_height": 140,
+        "mobile_layout": "stacked",
         "heading_alignment_mobile": "left",
         "divider_color_mobile": "#363636",
         "heading_font_size_mobile": 24,
@@ -1007,12 +1025,15 @@
         "header_height_mobile": 32,
         "row_height_mobile": 38,
         "cell_padding_mobile": 8,
+        "cell_padding_y_mobile": 4,
         "logo_width_mobile": 60,
         "table_gap_mobile": 24,
         "group_title_gap_mobile": 8,
         "title_font_size_mobile": 20,
         "note_font_size_mobile": 14,
         "text_font_size_mobile": 14,
+        "zenith_text_font_size_mobile": 0,
+        "row_line_height_mobile": 140,
         "padding_top": 48,
         "padding_bottom": 48,
         "padding_top_mobile": 20,
@@ -1336,6 +1357,7 @@
         "heading_alignment": "center",
         "max_width": 720,
         "open_first": true,
+        "open_all": false,
         "heading_spacing": 32,
         "item_padding": 10,
         "content_gap": 24,
@@ -1432,6 +1454,7 @@
         "countdown_show_labels": false,
         "promo_visibility": "always",
         "button_full": true,
+        "button_min_width": 0,
         "desktop_layout": "image_beside",
         "panel_width": "page",
         "media_width": 50,
