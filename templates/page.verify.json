@@ -15,30 +15,34 @@
         "step_1": {
           "type": "step",
           "settings": {
+            "image": "shopify://shop_images/verify-products-steps-step-1-qr-code-on-box-1-desktop.webp",
+            "label": "",
             "title": "Locate Tamper-proof QR Code",
-            "text": "Each box is equipped with a unique, tamper-proof QR code.",
-            "image": "shopify://shop_images/verify-products-steps-step-1-qr-code-on-box-1-desktop.webp"
+            "text": "Each box is equipped with a unique, tamper-proof QR code."
           }
         },
         "step_2": {
           "type": "step",
           "settings": {
+            "image": "shopify://shop_images/verify-products-steps-step-2-scanning-qr-1-desktop.webp",
+            "label": "",
             "title": "Scan with Camera/QR Scanner",
-            "text": "Use your camera or QR scanner app to verify.",
-            "image": "shopify://shop_images/verify-products-steps-step-2-scanning-qr-1-desktop.webp"
+            "text": "Use your camera or QR scanner app to verify."
           }
         },
         "step_3": {
           "type": "step",
           "settings": {
+            "image": "shopify://shop_images/verify-products-steps-step-3-genuine-confirmation-1-desktop.webp",
+            "label": "",
             "title": "Confirm Verification",
-            "text": "The page shows the unique serial number and the product it belongs to.",
-            "image": "shopify://shop_images/verify-products-steps-step-3-genuine-confirmation-1-desktop.webp"
+            "text": "The page shows the unique serial number and the product it belongs to."
           }
         },
         "seal": {
           "type": "seal",
           "settings": {
+            "image": "shopify://shop_images/seal.png",
             "title": "Amare Seal of Authenticity",
             "text": "The parent group's mark, on every Zenith product."
           }
@@ -64,6 +68,8 @@
       "settings": {
         "heading": "Verify Your Zenith Product",
         "subheading": "<p>Every Zenith box carries a tamper-proof QR code. Scan it to confirm yours is genuine.</p>",
+        "cover_image": "shopify://shop_images/verify-products-how-it-works-hands-scanning-box-qr-1-desktop.webp",
+        "video_url": "",
         "play_label": "Play video",
         "steps_heading": "How To Check Yours Is Real",
         "steps_subheading": "<p>Three steps to check, plus the Amare Seal of Authenticity.</p>",
@@ -94,14 +100,14 @@
         "caption_spacing": 8,
         "color_scheme": "scheme-1",
         "intro_text_opacity": 70,
-        "label_color": "#EABE5F",
+        "label_color": "#eabe5f",
         "title_opacity": 70,
         "text_opacity": 70,
         "card_color": "#202020",
         "border_color": "#454545",
-        "play_color": "#F9F4E6",
+        "play_color": "#f9f4e6",
         "play_icon_style": "cutout",
-        "play_icon_color": "#0E0E0E",
+        "play_icon_color": "#0e0e0e",
         "heading_tag": "h1",
         "heading_font_size": 57,
         "subheading_font_size": 18,
@@ -144,8 +150,7 @@
         "padding_top": 50,
         "padding_bottom": 48,
         "padding_top_mobile": 32,
-        "padding_bottom_mobile": 20,
-        "cover_image": "shopify://shop_images/verify-products-how-it-works-hands-scanning-box-qr-1-desktop.webp"
+        "padding_bottom_mobile": 20
       }
     },
     "trust_bar": {
@@ -207,6 +212,7 @@
         "color_scheme": "scheme-4",
         "icon_color": "dawn_gold",
         "text_font_size": 14,
+        "hide_on_mobile": true,
         "mobile_layout": "marquee",
         "marquee_speed": 25,
         "text_font_size_mobile": 14,
@@ -215,8 +221,7 @@
         "padding_top": 12,
         "padding_bottom": 12,
         "padding_top_mobile": 10,
-        "padding_bottom_mobile": 10,
-        "hide_on_mobile": true
+        "padding_bottom_mobile": 10
       }
     },
     "press": {
@@ -290,6 +295,7 @@
         "heading_opacity": 70,
         "text_font_size": 14,
         "heading_uppercase": false,
+        "hide_on_mobile": true,
         "mobile_layout": "scroll",
         "logo_height_mobile": 24,
         "gap_mobile": 40,
@@ -298,8 +304,7 @@
         "padding_top": 24,
         "padding_bottom": 24,
         "padding_top_mobile": 24,
-        "padding_bottom_mobile": 24,
-        "hide_on_mobile": true
+        "padding_bottom_mobile": 24
       }
     },
     "videos": {
@@ -484,8 +489,10 @@
         "heading": "Clinically Proven. The Complete Regimen.",
         "heading_mobile": "Is Zenith Legit?",
         "subheading": "<p>Hear from the men who use Zenith every day.</p>",
+        "subheading_mobile_only": true,
         "play_label": "Play video",
         "center_when_fits": true,
+        "start_slide": 1,
         "heading_alignment": "center",
         "slides_desktop": 4,
         "show_peek": true,
@@ -539,8 +546,7 @@
         "padding_top": 32,
         "padding_bottom": 32,
         "padding_top_mobile": 20,
-        "padding_bottom_mobile": 20,
-        "subheading_mobile_only": true
+        "padding_bottom_mobile": 20
       }
     },
     "locations": {
@@ -549,21 +555,21 @@
         "location_manila": {
           "type": "column",
           "settings": {
+            "image": "shopify://shop_images/verify-products-locations-manila-fulfillment-team-1-desktop.webp",
             "icon": "box",
             "icon_text": "",
             "title": "Fulfillment Center & Manila Office",
-            "text": "<p><a href=\"https://maps.app.goo.gl/kytWPJfQjtJEA89g8\" target=\"_blank\">1208 Pablo Ocampo, Cor. Alfonso St. Vito Cruz, Brgy 757, Manila, Metro Manila 1017 Philippines</a></p>",
-            "image": "shopify://shop_images/verify-products-locations-manila-fulfillment-team-1-desktop.webp"
+            "text": "<p><a href=\"https://maps.app.goo.gl/kytWPJfQjtJEA89g8\" target=\"_blank\">1208 Pablo Ocampo, Cor. Alfonso St. Vito Cruz, Brgy 757, Manila, Metro Manila 1017 Philippines</a></p>"
           }
         },
         "location_cebu": {
           "type": "column",
           "settings": {
+            "image": "shopify://shop_images/verify-products-locations-cebu-head-office-team-1-desktop.webp",
             "icon": "pin",
             "icon_text": "",
             "title": "Corporate Head Office",
-            "text": "<p><a href=\"https://maps.app.goo.gl/sSiDuTjqH5DBzZCo9\" target=\"_blank\">MIT Bldg 2 Unit #3B-3, 117 Gorordo Ave., Cor. Sanjercasville Rd. Lahug, Cebu City, Cebu 6000 Philippines</a></p>",
-            "image": "shopify://shop_images/verify-products-locations-cebu-head-office-team-1-desktop.webp"
+            "text": "<p><a href=\"https://maps.app.goo.gl/sSiDuTjqH5DBzZCo9\" target=\"_blank\">MIT Bldg 2 Unit #3B-3, 117 Gorordo Ave., Cor. Sanjercasville Rd. Lahug, Cebu City, Cebu 6000 Philippines</a></p>"
           }
         }
       },
@@ -792,12 +798,17 @@
         "store_tiktok"
       ],
       "settings": {
+        "content_source": "global",
         "heading": "Our Official Pages",
+        "heading_mobile": "",
+        "text_mobile": "",
         "heading_alignment": "center",
         "columns_desktop": 5,
         "card_layout": "stacked",
         "card_alignment": "left",
+        "card_width": 216,
         "card_min_height": 74,
+        "card_radius": 4,
         "gap": 22,
         "item_padding": 12,
         "glyph_gap": 8,
@@ -815,6 +826,7 @@
         "icon_size": 48,
         "title_font_size": 16,
         "text_font_size": 16,
+        "line_height": 150,
         "heading_alignment_mobile": "left",
         "columns_mobile": 2,
         "card_layout_mobile": "stacked",
@@ -826,19 +838,15 @@
         "text_gap_mobile": 0,
         "heading_font_size_mobile": 36,
         "heading_spacing_mobile": 24,
+        "subheading_font_size_mobile": 16,
         "icon_size_mobile": 42,
         "title_font_size_mobile": 12,
         "text_font_size_mobile": 12,
+        "line_height_mobile": 135,
         "padding_top": 32,
         "padding_bottom": 40,
         "padding_top_mobile": 20,
-        "padding_bottom_mobile": 20,
-        "card_width": 216,
-        "line_height": 150,
-        "line_height_mobile": 135,
-        "content_source": "global",
-        "card_radius": 4,
-        "subheading_font_size_mobile": 16
+        "padding_bottom_mobile": 20
       }
     },
     "pages": {
@@ -896,12 +904,17 @@
         "page_self_care"
       ],
       "settings": {
+        "content_source": "custom",
         "heading": "Our Official Pages",
+        "heading_mobile": "",
+        "text_mobile": "",
         "heading_alignment": "center",
         "columns_desktop": 4,
         "card_layout": "stacked",
         "card_alignment": "left",
+        "card_width": 216,
         "card_min_height": 74,
+        "card_radius": 0,
         "gap": 22,
         "item_padding": 12,
         "glyph_gap": 8,
@@ -919,6 +932,7 @@
         "icon_size": 48,
         "title_font_size": 16,
         "text_font_size": 16,
+        "line_height": 150,
         "heading_alignment_mobile": "left",
         "columns_mobile": 2,
         "card_layout_mobile": "stacked",
@@ -930,27 +944,30 @@
         "text_gap_mobile": 0,
         "heading_font_size_mobile": 36,
         "heading_spacing_mobile": 24,
+        "subheading_font_size_mobile": 16,
         "icon_size_mobile": 42,
         "title_font_size_mobile": 12,
         "text_font_size_mobile": 12,
+        "line_height_mobile": 135,
         "padding_top": 32,
         "padding_bottom": 40,
         "padding_top_mobile": 20,
-        "padding_bottom_mobile": 20,
-        "card_width": 216,
-        "line_height": 150,
-        "line_height_mobile": 135
+        "padding_bottom_mobile": 20
       }
     },
     "fda": {
       "type": "zenith-image-story",
       "settings": {
+        "image": "shopify://shop_images/verify-products-cta-fda-notification-certificates-1-desktop.webp",
         "use_brand_logo": false,
         "brand_logo_style": "tagline",
         "eyebrow": "",
         "heading": "Zenith Products are Philippine FDA Notified",
+        "shared_text": false,
+        "shared_columns": false,
         "text": "<p>All Zenith products are FDA-notified and proudly manufactured in a US FDA-certified facility following the highest international quality standards.</p><p>For your protection, buy only from our official website, our Facebook page, or our official Shopee, Lazada and TikTok Shop stores.</p>",
         "button_label": "",
+        "button_link": "",
         "image_position": "left",
         "image_ratio": "square",
         "media_min_height": 720,
@@ -960,15 +977,19 @@
         "content_gap": 8,
         "heading_spacing": 8,
         "content_max_width": 420,
+        "text_max_width": 1000,
         "hide_heading_desktop": false,
         "logo_width": 110,
+        "columns_layout": "columns",
         "columns_spacing": 40,
         "columns_gap": 32,
         "column_title_spacing": 14,
         "color_scheme": "scheme-1",
         "heading_color": "",
         "column_title_color": "#eabe5f",
+        "column_icon_color": "#eabe5f",
         "text_opacity": 70,
+        "column_text_opacity": 0,
         "button_style": "gold",
         "overlay_style": "none",
         "overlay_color": "#121212",
@@ -981,6 +1002,7 @@
         "eyebrow_font_size": 14,
         "text_font_size": 18,
         "title_font_size": 32,
+        "icon_size": 24,
         "button_font_size": 22,
         "image_ratio_mobile": "square",
         "media_height_mobile": 348,
@@ -992,6 +1014,7 @@
         "heading_line_height_mobile": 110,
         "text_font_size_mobile": 16,
         "title_font_size_mobile": 32,
+        "icon_size_mobile": 24,
         "button_font_size_mobile": 20,
         "button_label_mobile": "",
         "gap_mobile": 32,
@@ -1004,8 +1027,7 @@
         "padding_top": 48,
         "padding_bottom": 48,
         "padding_top_mobile": 20,
-        "padding_bottom_mobile": 48,
-        "image": "shopify://shop_images/verify-products-cta-fda-notification-certificates-1-desktop.webp"
+        "padding_bottom_mobile": 48
       }
     },
     "faq": {
@@ -1062,6 +1084,7 @@
         "heading_alignment": "center",
         "max_width": 720,
         "open_first": false,
+        "open_all": false,
         "heading_spacing": 32,
         "item_padding": 10,
         "content_gap": 24,
@@ -1090,8 +1113,7 @@
         "padding_top": 64,
         "padding_bottom": 64,
         "padding_top_mobile": 20,
-        "padding_bottom_mobile": 20,
-        "open_all": false
+        "padding_bottom_mobile": 20
       }
     },
     "reviews": {
@@ -1136,6 +1158,7 @@
         "text_font_size": 14,
         "icon_size": 14,
         "button_font_size": 20,
+        "heading_mobile": "",
         "subheading_mobile": "<p>Real Filipino men using Zenith. Unedited and verified.</p>",
         "heading_font_size_mobile": 36,
         "subheading_font_size_mobile": 16,
