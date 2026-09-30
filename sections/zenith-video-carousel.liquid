@@ -178,7 +178,14 @@
     {%- if card_count == 0 -%}
       <p class="zenith-videos__empty">No videos match this section's product filter, so it's hidden on the live store.</p>
     {%- else -%}
-      <zenith-carousel data-autoplay="{{ section.settings.autoplay }}" data-slide-label="Video" data-start="{{ section.settings.start_slide | default: 1 }}">
+      {%- liquid
+        # Global videos open at the global start card (Theme settings → Zenith · Video testimonials) so every page matches.
+        assign vc_start = section.settings.start_slide | default: 1
+        if section.settings.content_source != 'custom'
+          assign vc_start = settings.vt_start_slide | default: vc_start
+        endif
+      -%}
+      <zenith-carousel data-autoplay="{{ section.settings.autoplay }}" data-slide-label="Video" data-start="{{ vc_start }}">
         <ul class="zenith-carousel__track" role="list">
           {{- cards -}}
         </ul>
@@ -310,7 +317,7 @@
       "type": "range",
       "id": "start_slide",
       "label": "Start at video",
-      "info": "The carousel opens scrolled to this card (1 = first).",
+      "info": "The carousel opens scrolled to this card (1 = first). With Videos = Global this comes from Theme settings → Zenith · Video testimonials instead.",
       "min": 1,
       "max": 20,
       "step": 1,

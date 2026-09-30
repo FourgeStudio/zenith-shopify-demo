@@ -494,6 +494,16 @@
         "content": "Shared by every \"Zenith · Video carousel\" section set to Videos = Global. Fill slots in the order they should appear; empty slots are skipped. Each video: a YouTube link (Shorts work) or an uploaded video file, plus the text under it."
       },
       {
+        "type": "range",
+        "id": "vt_start_slide",
+        "label": "Start at video",
+        "info": "Every Global video carousel opens scrolled to this card (1 = first).",
+        "min": 1,
+        "max": 20,
+        "step": 1,
+        "default": 3
+      },
+      {
         "type": "header",
         "content": "Video 1"
       },
