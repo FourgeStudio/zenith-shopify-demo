@@ -2015,7 +2015,7 @@
         "show_rating": false,
         "show_description": true,
         "description_words": 20,
-        "show_price": false,
+        "show_price": true,
         "card_button_action": "cart",
         "button_label": "Add to Cart",
         "card_button_icon": "arrow_right",
