@@ -52,14 +52,14 @@
   assign photo_w_m = section.settings.mobile_card_width | times: section.settings.media_width_mobile | divided_by: 100
   assign photo_sizes = '(min-width: 750px) ' | append: photo_w | append: 'px, ' | append: photo_w_m | append: 'px'
 
-  # Global: Theme settings → Zenith · Results reviews, slots rv1–rv20 (empty slots skipped). Custom: this section's blocks.
+  # Global: Theme settings → Zenith · Results reviews, slots rv1–rv30 (empty slots skipped). Custom: this section's blocks.
   assign use_global = false
   if section.settings.content_source == 'global'
     assign use_global = true
   endif
   assign total_count = 0
   if use_global
-    assign item_max = 20
+    assign item_max = 30
     assign empty_note = 'Add reviews in Theme settings → Zenith · Results reviews'
     for n in (1..item_max)
       assign p = 'rv' | append: n | append: '_'
@@ -172,6 +172,7 @@
             verified: c_verified,
             avatar: c_avatar,
             author_detail: c_detail,
+            show_avatar: section.settings.show_avatar,
             attrs: c_attrs,
             clone: false,
             prefix: prefix,
@@ -192,6 +193,7 @@
             verified: c_verified,
             avatar: c_avatar,
             author_detail: c_detail,
+            show_avatar: section.settings.show_avatar,
             attrs: '',
             clone: true,
             prefix: prefix,
@@ -353,6 +355,12 @@
       "label": "Verified badge text",
       "info": "Read by screen readers and shown when hovering the badge",
       "default": "Verified buyer"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_avatar",
+      "label": "Show reviewer photo next to the name",
+      "default": false
     },
     {
       "type": "text",

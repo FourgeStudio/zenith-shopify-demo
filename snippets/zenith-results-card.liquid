@@ -6,7 +6,7 @@
   - photo, review_product, thumbnail, rating, quote, author, verified, avatar, author_detail: card content
   - attrs: id + editor attributes (first copy only)
   - clone: true for the looping copies (links out of tab order)
-  - prefix, verified_label, photo_sizes, overlay_style: section settings
+  - prefix, verified_label, photo_sizes, overlay_style, show_avatar: section settings (avatar/initial beside the name only when show_avatar)
 {%- endcomment -%}
 {%- liquid
   assign thumb = thumbnail
@@ -93,7 +93,8 @@
     </div>
     {%- if author_text != blank or detail != blank -%}
       <figcaption class="zenith-results__author">
-        {%- if avatar_img != blank -%}
+        {%- if show_avatar != true -%}
+        {%- elsif avatar_img != blank -%}
           <span class="zenith-results__avatar">
             {{ avatar_img | image_url: width: 128 | image_tag: loading: 'lazy', widths: '48, 64, 96, 128', sizes: '40px', alt: '' }}
           </span>

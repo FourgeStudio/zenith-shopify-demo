@@ -3103,6 +3103,786 @@
             "label": "Row 2"
           }
         ]
+      },
+      {
+        "type": "header",
+        "content": "Review 21"
+      },
+      {
+        "type": "image_picker",
+        "id": "rv21_image",
+        "label": "Photo",
+        "info": "Customer or lifestyle photo on the left of the card"
+      },
+      {
+        "type": "product",
+        "id": "rv21_product",
+        "label": "Product used",
+        "info": "Shows \"Used\" + the product name on the photo. Leave empty to hide."
+      },
+      {
+        "type": "image_picker",
+        "id": "rv21_thumb",
+        "label": "Product thumbnail",
+        "info": "Defaults to the product's image"
+      },
+      {
+        "type": "range",
+        "id": "rv21_rating",
+        "label": "Star rating",
+        "info": "0 hides the stars",
+        "min": 0,
+        "max": 5,
+        "step": 1,
+        "default": 5
+      },
+      {
+        "type": "textarea",
+        "id": "rv21_quote",
+        "label": "Review",
+        "info": "Quotation marks are added automatically"
+      },
+      {
+        "type": "text",
+        "id": "rv21_author",
+        "label": "Reviewer name"
+      },
+      {
+        "type": "checkbox",
+        "id": "rv21_verified",
+        "label": "Show verified badge",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "rv21_avatar",
+        "label": "Reviewer photo",
+        "info": "Small round photo. Leave empty to use the photo above."
+      },
+      {
+        "type": "text",
+        "id": "rv21_detail",
+        "label": "Text under the name",
+        "info": "Leave empty to show the product's name"
+      },
+      {
+        "type": "select",
+        "id": "rv21_row",
+        "label": "Row",
+        "info": "Used when the section shows 2 rows",
+        "default": "2",
+        "options": [
+          {
+            "value": "1",
+            "label": "Row 1"
+          },
+          {
+            "value": "2",
+            "label": "Row 2"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Review 22"
+      },
+      {
+        "type": "image_picker",
+        "id": "rv22_image",
+        "label": "Photo",
+        "info": "Customer or lifestyle photo on the left of the card"
+      },
+      {
+        "type": "product",
+        "id": "rv22_product",
+        "label": "Product used",
+        "info": "Shows \"Used\" + the product name on the photo. Leave empty to hide."
+      },
+      {
+        "type": "image_picker",
+        "id": "rv22_thumb",
+        "label": "Product thumbnail",
+        "info": "Defaults to the product's image"
+      },
+      {
+        "type": "range",
+        "id": "rv22_rating",
+        "label": "Star rating",
+        "info": "0 hides the stars",
+        "min": 0,
+        "max": 5,
+        "step": 1,
+        "default": 5
+      },
+      {
+        "type": "textarea",
+        "id": "rv22_quote",
+        "label": "Review",
+        "info": "Quotation marks are added automatically"
+      },
+      {
+        "type": "text",
+        "id": "rv22_author",
+        "label": "Reviewer name"
+      },
+      {
+        "type": "checkbox",
+        "id": "rv22_verified",
+        "label": "Show verified badge",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "rv22_avatar",
+        "label": "Reviewer photo",
+        "info": "Small round photo. Leave empty to use the photo above."
+      },
+      {
+        "type": "text",
+        "id": "rv22_detail",
+        "label": "Text under the name",
+        "info": "Leave empty to show the product's name"
+      },
+      {
+        "type": "select",
+        "id": "rv22_row",
+        "label": "Row",
+        "info": "Used when the section shows 2 rows",
+        "default": "2",
+        "options": [
+          {
+            "value": "1",
+            "label": "Row 1"
+          },
+          {
+            "value": "2",
+            "label": "Row 2"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Review 23"
+      },
+      {
+        "type": "image_picker",
+        "id": "rv23_image",
+        "label": "Photo",
+        "info": "Customer or lifestyle photo on the left of the card"
+      },
+      {
+        "type": "product",
+        "id": "rv23_product",
+        "label": "Product used",
+        "info": "Shows \"Used\" + the product name on the photo. Leave empty to hide."
+      },
+      {
+        "type": "image_picker",
+        "id": "rv23_thumb",
+        "label": "Product thumbnail",
+        "info": "Defaults to the product's image"
+      },
+      {
+        "type": "range",
+        "id": "rv23_rating",
+        "label": "Star rating",
+        "info": "0 hides the stars",
+        "min": 0,
+        "max": 5,
+        "step": 1,
+        "default": 5
+      },
+      {
+        "type": "textarea",
+        "id": "rv23_quote",
+        "label": "Review",
+        "info": "Quotation marks are added automatically"
+      },
+      {
+        "type": "text",
+        "id": "rv23_author",
+        "label": "Reviewer name"
+      },
+      {
+        "type": "checkbox",
+        "id": "rv23_verified",
+        "label": "Show verified badge",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "rv23_avatar",
+        "label": "Reviewer photo",
+        "info": "Small round photo. Leave empty to use the photo above."
+      },
+      {
+        "type": "text",
+        "id": "rv23_detail",
+        "label": "Text under the name",
+        "info": "Leave empty to show the product's name"
+      },
+      {
+        "type": "select",
+        "id": "rv23_row",
+        "label": "Row",
+        "info": "Used when the section shows 2 rows",
+        "default": "2",
+        "options": [
+          {
+            "value": "1",
+            "label": "Row 1"
+          },
+          {
+            "value": "2",
+            "label": "Row 2"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Review 24"
+      },
+      {
+        "type": "image_picker",
+        "id": "rv24_image",
+        "label": "Photo",
+        "info": "Customer or lifestyle photo on the left of the card"
+      },
+      {
+        "type": "product",
+        "id": "rv24_product",
+        "label": "Product used",
+        "info": "Shows \"Used\" + the product name on the photo. Leave empty to hide."
+      },
+      {
+        "type": "image_picker",
+        "id": "rv24_thumb",
+        "label": "Product thumbnail",
+        "info": "Defaults to the product's image"
+      },
+      {
+        "type": "range",
+        "id": "rv24_rating",
+        "label": "Star rating",
+        "info": "0 hides the stars",
+        "min": 0,
+        "max": 5,
+        "step": 1,
+        "default": 5
+      },
+      {
+        "type": "textarea",
+        "id": "rv24_quote",
+        "label": "Review",
+        "info": "Quotation marks are added automatically"
+      },
+      {
+        "type": "text",
+        "id": "rv24_author",
+        "label": "Reviewer name"
+      },
+      {
+        "type": "checkbox",
+        "id": "rv24_verified",
+        "label": "Show verified badge",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "rv24_avatar",
+        "label": "Reviewer photo",
+        "info": "Small round photo. Leave empty to use the photo above."
+      },
+      {
+        "type": "text",
+        "id": "rv24_detail",
+        "label": "Text under the name",
+        "info": "Leave empty to show the product's name"
+      },
+      {
+        "type": "select",
+        "id": "rv24_row",
+        "label": "Row",
+        "info": "Used when the section shows 2 rows",
+        "default": "2",
+        "options": [
+          {
+            "value": "1",
+            "label": "Row 1"
+          },
+          {
+            "value": "2",
+            "label": "Row 2"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Review 25"
+      },
+      {
+        "type": "image_picker",
+        "id": "rv25_image",
+        "label": "Photo",
+        "info": "Customer or lifestyle photo on the left of the card"
+      },
+      {
+        "type": "product",
+        "id": "rv25_product",
+        "label": "Product used",
+        "info": "Shows \"Used\" + the product name on the photo. Leave empty to hide."
+      },
+      {
+        "type": "image_picker",
+        "id": "rv25_thumb",
+        "label": "Product thumbnail",
+        "info": "Defaults to the product's image"
+      },
+      {
+        "type": "range",
+        "id": "rv25_rating",
+        "label": "Star rating",
+        "info": "0 hides the stars",
+        "min": 0,
+        "max": 5,
+        "step": 1,
+        "default": 5
+      },
+      {
+        "type": "textarea",
+        "id": "rv25_quote",
+        "label": "Review",
+        "info": "Quotation marks are added automatically"
+      },
+      {
+        "type": "text",
+        "id": "rv25_author",
+        "label": "Reviewer name"
+      },
+      {
+        "type": "checkbox",
+        "id": "rv25_verified",
+        "label": "Show verified badge",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "rv25_avatar",
+        "label": "Reviewer photo",
+        "info": "Small round photo. Leave empty to use the photo above."
+      },
+      {
+        "type": "text",
+        "id": "rv25_detail",
+        "label": "Text under the name",
+        "info": "Leave empty to show the product's name"
+      },
+      {
+        "type": "select",
+        "id": "rv25_row",
+        "label": "Row",
+        "info": "Used when the section shows 2 rows",
+        "default": "2",
+        "options": [
+          {
+            "value": "1",
+            "label": "Row 1"
+          },
+          {
+            "value": "2",
+            "label": "Row 2"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Review 26"
+      },
+      {
+        "type": "image_picker",
+        "id": "rv26_image",
+        "label": "Photo",
+        "info": "Customer or lifestyle photo on the left of the card"
+      },
+      {
+        "type": "product",
+        "id": "rv26_product",
+        "label": "Product used",
+        "info": "Shows \"Used\" + the product name on the photo. Leave empty to hide."
+      },
+      {
+        "type": "image_picker",
+        "id": "rv26_thumb",
+        "label": "Product thumbnail",
+        "info": "Defaults to the product's image"
+      },
+      {
+        "type": "range",
+        "id": "rv26_rating",
+        "label": "Star rating",
+        "info": "0 hides the stars",
+        "min": 0,
+        "max": 5,
+        "step": 1,
+        "default": 5
+      },
+      {
+        "type": "textarea",
+        "id": "rv26_quote",
+        "label": "Review",
+        "info": "Quotation marks are added automatically"
+      },
+      {
+        "type": "text",
+        "id": "rv26_author",
+        "label": "Reviewer name"
+      },
+      {
+        "type": "checkbox",
+        "id": "rv26_verified",
+        "label": "Show verified badge",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "rv26_avatar",
+        "label": "Reviewer photo",
+        "info": "Small round photo. Leave empty to use the photo above."
+      },
+      {
+        "type": "text",
+        "id": "rv26_detail",
+        "label": "Text under the name",
+        "info": "Leave empty to show the product's name"
+      },
+      {
+        "type": "select",
+        "id": "rv26_row",
+        "label": "Row",
+        "info": "Used when the section shows 2 rows",
+        "default": "2",
+        "options": [
+          {
+            "value": "1",
+            "label": "Row 1"
+          },
+          {
+            "value": "2",
+            "label": "Row 2"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Review 27"
+      },
+      {
+        "type": "image_picker",
+        "id": "rv27_image",
+        "label": "Photo",
+        "info": "Customer or lifestyle photo on the left of the card"
+      },
+      {
+        "type": "product",
+        "id": "rv27_product",
+        "label": "Product used",
+        "info": "Shows \"Used\" + the product name on the photo. Leave empty to hide."
+      },
+      {
+        "type": "image_picker",
+        "id": "rv27_thumb",
+        "label": "Product thumbnail",
+        "info": "Defaults to the product's image"
+      },
+      {
+        "type": "range",
+        "id": "rv27_rating",
+        "label": "Star rating",
+        "info": "0 hides the stars",
+        "min": 0,
+        "max": 5,
+        "step": 1,
+        "default": 5
+      },
+      {
+        "type": "textarea",
+        "id": "rv27_quote",
+        "label": "Review",
+        "info": "Quotation marks are added automatically"
+      },
+      {
+        "type": "text",
+        "id": "rv27_author",
+        "label": "Reviewer name"
+      },
+      {
+        "type": "checkbox",
+        "id": "rv27_verified",
+        "label": "Show verified badge",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "rv27_avatar",
+        "label": "Reviewer photo",
+        "info": "Small round photo. Leave empty to use the photo above."
+      },
+      {
+        "type": "text",
+        "id": "rv27_detail",
+        "label": "Text under the name",
+        "info": "Leave empty to show the product's name"
+      },
+      {
+        "type": "select",
+        "id": "rv27_row",
+        "label": "Row",
+        "info": "Used when the section shows 2 rows",
+        "default": "2",
+        "options": [
+          {
+            "value": "1",
+            "label": "Row 1"
+          },
+          {
+            "value": "2",
+            "label": "Row 2"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Review 28"
+      },
+      {
+        "type": "image_picker",
+        "id": "rv28_image",
+        "label": "Photo",
+        "info": "Customer or lifestyle photo on the left of the card"
+      },
+      {
+        "type": "product",
+        "id": "rv28_product",
+        "label": "Product used",
+        "info": "Shows \"Used\" + the product name on the photo. Leave empty to hide."
+      },
+      {
+        "type": "image_picker",
+        "id": "rv28_thumb",
+        "label": "Product thumbnail",
+        "info": "Defaults to the product's image"
+      },
+      {
+        "type": "range",
+        "id": "rv28_rating",
+        "label": "Star rating",
+        "info": "0 hides the stars",
+        "min": 0,
+        "max": 5,
+        "step": 1,
+        "default": 5
+      },
+      {
+        "type": "textarea",
+        "id": "rv28_quote",
+        "label": "Review",
+        "info": "Quotation marks are added automatically"
+      },
+      {
+        "type": "text",
+        "id": "rv28_author",
+        "label": "Reviewer name"
+      },
+      {
+        "type": "checkbox",
+        "id": "rv28_verified",
+        "label": "Show verified badge",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "rv28_avatar",
+        "label": "Reviewer photo",
+        "info": "Small round photo. Leave empty to use the photo above."
+      },
+      {
+        "type": "text",
+        "id": "rv28_detail",
+        "label": "Text under the name",
+        "info": "Leave empty to show the product's name"
+      },
+      {
+        "type": "select",
+        "id": "rv28_row",
+        "label": "Row",
+        "info": "Used when the section shows 2 rows",
+        "default": "2",
+        "options": [
+          {
+            "value": "1",
+            "label": "Row 1"
+          },
+          {
+            "value": "2",
+            "label": "Row 2"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Review 29"
+      },
+      {
+        "type": "image_picker",
+        "id": "rv29_image",
+        "label": "Photo",
+        "info": "Customer or lifestyle photo on the left of the card"
+      },
+      {
+        "type": "product",
+        "id": "rv29_product",
+        "label": "Product used",
+        "info": "Shows \"Used\" + the product name on the photo. Leave empty to hide."
+      },
+      {
+        "type": "image_picker",
+        "id": "rv29_thumb",
+        "label": "Product thumbnail",
+        "info": "Defaults to the product's image"
+      },
+      {
+        "type": "range",
+        "id": "rv29_rating",
+        "label": "Star rating",
+        "info": "0 hides the stars",
+        "min": 0,
+        "max": 5,
+        "step": 1,
+        "default": 5
+      },
+      {
+        "type": "textarea",
+        "id": "rv29_quote",
+        "label": "Review",
+        "info": "Quotation marks are added automatically"
+      },
+      {
+        "type": "text",
+        "id": "rv29_author",
+        "label": "Reviewer name"
+      },
+      {
+        "type": "checkbox",
+        "id": "rv29_verified",
+        "label": "Show verified badge",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "rv29_avatar",
+        "label": "Reviewer photo",
+        "info": "Small round photo. Leave empty to use the photo above."
+      },
+      {
+        "type": "text",
+        "id": "rv29_detail",
+        "label": "Text under the name",
+        "info": "Leave empty to show the product's name"
+      },
+      {
+        "type": "select",
+        "id": "rv29_row",
+        "label": "Row",
+        "info": "Used when the section shows 2 rows",
+        "default": "2",
+        "options": [
+          {
+            "value": "1",
+            "label": "Row 1"
+          },
+          {
+            "value": "2",
+            "label": "Row 2"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Review 30"
+      },
+      {
+        "type": "image_picker",
+        "id": "rv30_image",
+        "label": "Photo",
+        "info": "Customer or lifestyle photo on the left of the card"
+      },
+      {
+        "type": "product",
+        "id": "rv30_product",
+        "label": "Product used",
+        "info": "Shows \"Used\" + the product name on the photo. Leave empty to hide."
+      },
+      {
+        "type": "image_picker",
+        "id": "rv30_thumb",
+        "label": "Product thumbnail",
+        "info": "Defaults to the product's image"
+      },
+      {
+        "type": "range",
+        "id": "rv30_rating",
+        "label": "Star rating",
+        "info": "0 hides the stars",
+        "min": 0,
+        "max": 5,
+        "step": 1,
+        "default": 5
+      },
+      {
+        "type": "textarea",
+        "id": "rv30_quote",
+        "label": "Review",
+        "info": "Quotation marks are added automatically"
+      },
+      {
+        "type": "text",
+        "id": "rv30_author",
+        "label": "Reviewer name"
+      },
+      {
+        "type": "checkbox",
+        "id": "rv30_verified",
+        "label": "Show verified badge",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "rv30_avatar",
+        "label": "Reviewer photo",
+        "info": "Small round photo. Leave empty to use the photo above."
+      },
+      {
+        "type": "text",
+        "id": "rv30_detail",
+        "label": "Text under the name",
+        "info": "Leave empty to show the product's name"
+      },
+      {
+        "type": "select",
+        "id": "rv30_row",
+        "label": "Row",
+        "info": "Used when the section shows 2 rows",
+        "default": "2",
+        "options": [
+          {
+            "value": "1",
+            "label": "Row 1"
+          },
+          {
+            "value": "2",
+            "label": "Row 2"
+          }
+        ]
       }
     ]
   },
