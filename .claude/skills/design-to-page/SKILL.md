@@ -79,12 +79,13 @@ Then fill `brief-template.md` → `<scratchpad>/BRIEF.md` (placeholders + "Measu
 | Simple message page (thank-you, confirmation) | `zenith-hero` with *Show background image* off + confetti + *Icon above heading* (see `page.thank-you*.json`) |
 | Notice / callout box | `zenith-callout` (logo or wordmark, text, box colour) |
 | Photo beside text columns (locations) | `zenith-feature-columns` (media left, `title_color`) |
+| Customer reviews (any page) | `zenith-reviews` section **with the Judge.me app block already in the template JSON** — never leave the empty placeholder for the user to fill. Non-product pages: copy the `reviews` section's block from `templates/index.json` (`shopify://apps/judge-me-reviews/blocks/review_widget_homepage/…`, product `zenith-anti-aging-tallow-cream`, `real_data`, `max_width` 1200). Product templates: the `review_widget` block from any `product.*.json`. Presets can't hold app blocks, so this is done in the template when the page is built |
 | Blog / article cards | `snippets/zenith-article-card.liquid` + `assets/zenith-blog.css` |
 
 Global-toggle candidates when a section repeats across pages with the same content: trust bar, money-back guarantee, Zenith Guarantee, press logos, promo. Page-specific sections (hero, story, featured product) stay per section.
 
 ## Page notes
-- **Product**: Dawn `main-product` (extend with `zenith:` edits/blocks) + zenith sections below it in `templates/product.json`; one template serves all products — alternate templates (`product.<name>.json`) only for different layouts. Reviews = Judge.me block.
+- **Product**: Dawn `main-product` (extend with `zenith:` edits/blocks) + zenith sections below it in `templates/product.json`; one template serves all products — alternate templates (`product.<name>.json`) only for different layouts. Reviews = Judge.me block (see Building blocks → Customer reviews).
 - **Collection / search**: landing-style collection pages (Shop All, Skin, Hair) = `templates/collection.<name>.json` with homepage sections + `zenith-product-grid` (built for Shop All 2026-09-19). A plain filterable listing would use Dawn `main-collection-product-grid` / facets; restyle cards via shared card CSS rather than new sections.
 - **Pages (about, contact)**: `templates/page.<name>.json`; reuse `zenith-image-story`, `zenith-feature-columns`, `zenith-faq`. Contact = `zenith-contact` in `templates/page.contact.json` (Dawn `main-page` kept but disabled). The admin page must use that template.
 
