@@ -1072,6 +1072,48 @@ div.zenith-cart-offers__fill {
   height: 1.6rem;
 }
 
+/* ---------- Cart drawer: compact scale (client asked to "zoom out" the drawer, 2026-09-30) ----------
+   component-cart-drawer.css loads after this file, so Dawn rules are out-specified with the
+   cart-drawer element prefix. Cart page keeps the full sizes. */
+cart-drawer .zenith-cart-offers { padding: var(--z-space-3, 12px) 0 var(--z-space-4, 16px); }
+cart-drawer .zenith-cart-offers__box { gap: var(--z-space-3, 12px); padding: var(--z-space-3, 12px); }
+cart-drawer .zenith-cart-offers__van { width: 3rem; height: 2.3rem; }
+cart-drawer .zenith-cart-offers__title { font-size: 1.5rem; }
+cart-drawer .zenith-cart-offers__msg { margin-top: 0.2rem; font-size: 1.2rem; }
+cart-drawer .zenith-cart-offers__steps { margin-top: var(--z-space-3, 12px); padding-top: 3rem; }
+cart-drawer .zenith-cart-offers__step-label { width: 6rem; font-size: 0.95rem; }
+cart-drawer .zenith-cart-offers__step.is-end .zenith-cart-offers__step-label { width: 4.4rem; }
+
+cart-drawer .cart-drawer .cart-item {
+  grid-template-columns: 7.2rem repeat(3, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+cart-drawer .cart-drawer .cart-items td { padding-top: 1.2rem; }
+cart-drawer .cart-drawer .cart-item__name { font-size: 1.6rem; }
+cart-drawer .cart-drawer .cart-item .product-option,
+cart-drawer .cart-drawer .cart-item__details dl,
+cart-drawer .cart-drawer .cart-item__totals .price { font-size: 1.3rem; }
+cart-drawer .cart-drawer .zenith-cart-item__type { font-size: 1.2rem; }
+cart-drawer .cart-drawer .quantity {
+  width: 10.4rem;
+  min-height: 3.6rem;
+}
+cart-drawer .cart-drawer .quantity__button { width: 3.4rem; }
+cart-drawer .cart-drawer .quantity__input { font-size: 1.4rem; }
+
+cart-drawer .zenith-cart-upsell { padding: var(--z-space-3, 12px) 0; }
+cart-drawer .zenith-cart-upsell__heading { margin-bottom: var(--z-space-2, 8px); font-size: 1rem; }
+cart-drawer .zenith-cart-upsell__list { gap: var(--z-space-2, 8px); }
+cart-drawer .zenith-cart-upsell__media { width: 4.4rem; height: 4.4rem; }
+cart-drawer .zenith-cart-upsell__title { font-size: 1.3rem; }
+cart-drawer .zenith-cart-upsell__meta { font-size: 1.15rem; }
+cart-drawer .zenith-cart-upsell__add { min-height: 3.6rem; padding: 0 var(--z-space-3, 12px); font-size: 1.2rem; }
+
+cart-drawer .zenith-cart-sum { gap: 0.6rem; font-size: 1.3rem; }
+cart-drawer .zenith-cart-sum__total { font-size: 1.8rem; }
+cart-drawer .cart-drawer .drawer__footer { padding: 1.2rem 0; }
+cart-drawer .cart-drawer .cart__checkout-button { min-height: 4.4rem; }
+
 /* ---------- Cart drawer + cart page: totals (snippets/zenith-cart-summary.liquid) ---------- */
 .zenith-cart-sum {
   display: flex;
@@ -1120,33 +1162,6 @@ div.zenith-cart-offers__fill {
   font-family: var(--font-heading-family);
   font-weight: var(--font-heading-weight);
   font-size: 2rem;
-}
-
-/* ---------- Cart drawer: reassurance under Checkout (snippets/zenith-cart-trust.liquid) ---------- */
-.zenith-cart-trust {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: var(--z-space-2, 8px) var(--z-space-4, 16px);
-  margin: var(--z-space-4, 16px) 0 0;
-  padding: 0;
-}
-
-.zenith-cart-trust__item {
-  display: flex;
-  align-items: center;
-  gap: var(--z-space-1, 4px);
-  font-size: 1.2rem;
-  line-height: 1.3;
-  opacity: 0.85;
-}
-
-.zenith-cart-trust__icon {
-  width: 1.5rem;
-  height: 1.5rem;
-  flex: 0 0 auto;
-  color: var(--z-dawn-gold, #eabe5f);
 }
 
 /* Store-wide promotion switch (snippets/zenith-promo-state.liquid): hidden, but kept in the HTML for crawlers. */
