@@ -1085,9 +1085,22 @@ cart-drawer .zenith-cart-offers__step-label { width: 6rem; font-size: 0.95rem; }
 cart-drawer .zenith-cart-offers__step.is-end .zenith-cart-offers__step-label { width: 4.4rem; }
 
 cart-drawer .cart-drawer .cart-item {
-  grid-template-columns: 7.2rem repeat(3, minmax(0, 1fr));
-  gap: 0.8rem;
+  grid-template-columns: 8.4rem repeat(3, minmax(0, 1fr));
+  gap: 0.8rem 1.2rem;
 }
+/* Dawn's image container is inline-flex, so it shrink-wraps the 150px image and spills over the
+   details column. Pin it (and the image) to the image column. */
+cart-drawer .cart-drawer .cart-item__media { min-width: 0; }
+cart-drawer .cart-drawer .cart-item__image-container {
+  display: flex;
+  width: 100%;
+}
+cart-drawer .cart-drawer .cart-item__image {
+  width: 100%;
+  max-width: 100%;
+}
+/* The grid gap does the spacing; Dawn's extra left padding on every cell after the image doubled it. */
+cart-drawer .cart-drawer .cart-item > td + td { padding-left: 0; }
 cart-drawer .cart-drawer .cart-items td { padding-top: 1.2rem; }
 cart-drawer .cart-drawer .cart-item__name { font-size: 1.6rem; }
 cart-drawer .cart-drawer .cart-item .product-option,
