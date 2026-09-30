@@ -249,19 +249,13 @@
       },
       {
         "type": "paragraph",
-        "content": "Products suggested under the cart items, skipping anything already in the cart. First each cart product's complementary products (Search & Discovery app → Product recommendations), then the list below."
+        "content": "Automatic: Shopify recommends products for what is in the cart (complementary products from the Search & Discovery app first, then Shopify's own picks), skipping anything already in the cart. Recommendations need some store traffic/orders before Shopify has data; complementary products can be set by hand in the Search & Discovery app."
       },
       {
         "type": "text",
         "id": "cart_upsell_heading",
         "label": "Heading",
         "default": "Pairs well with"
-      },
-      {
-        "type": "product_list",
-        "id": "cart_upsell_products",
-        "label": "Products",
-        "limit": 10
       },
       {
         "type": "range",

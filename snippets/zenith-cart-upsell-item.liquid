@@ -1,0 +1,40 @@
+{% comment %}
+  One "Pairs well with" row: image, title, type · price, "+ Add". Rendered by
+  sections/zenith-cart-upsell.liquid (Shopify's product recommendations). The add button is Dawn's
+  <product-form>, so the cart drawer re-renders in place; on the cart page zenith-cart-upsell.js lets the
+  form post normally (/cart/add → back to /cart) instead.
+  Accepts: product {Object}
+{% endcomment %}
+{%- liquid
+  assign zcui_variant = product.selected_or_first_available_variant
+  assign zcui_image = zcui_variant.featured_image | default: product.featured_image
+  assign zcui_form_id = 'ZenithUpsell-' | append: product.id
+-%}
+<li class="zenith-cart-upsell__item" data-product-id="{{ product.id }}">
+  <a href="{{ product.url }}" class="zenith-cart-upsell__media" tabindex="-1" aria-hidden="true">
+    {%- if zcui_image != blank -%}
+      {{
+        zcui_image
+        | image_url: width: 160
+        | image_tag: loading: 'lazy', widths: '80, 160', sizes: '52px', alt: '', class: 'zenith-cart-upsell__img'
+      }}
+    {%- endif -%}
+  </a>
+  <div class="zenith-cart-upsell__info">
+    <a href="{{ product.url }}" class="zenith-cart-upsell__title">{{ product.title | escape }}</a>
+    <p class="zenith-cart-upsell__meta">
+      {%- if product.type != blank -%}{{ product.type | escape }} · {% endif -%}
+      {{- zcui_variant.price | money -}}
+    </p>
+  </div>
+  <product-form data-section-id="cart-drawer" data-hide-errors="true" class="zenith-cart-upsell__form">
+    {%- form 'product', product, id: zcui_form_id, novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+      <input type="hidden" name="id" value="{{ zcui_variant.id }}" class="product-variant-id">
+      <button id="{{ zcui_form_id }}-submit" type="submit" name="add" class="zenith-cart-upsell__add">
+        <span>{{ settings.cart_upsell_button | default: '+ Add' | escape }}</span>
+        <span class="visually-hidden">{{ product.title | escape }}</span>
+        {%- render 'loading-spinner' -%}
+      </button>
+    {%- endform -%}
+  </product-form>
+</li>

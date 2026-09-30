@@ -135,8 +135,9 @@
     assign zco_fill = 0
     assign zco_prev_amt = 0
     assign zco_prev_pos = 0
-    for zco_amt in zco_amts
-      assign zco_amt = zco_amt | plus: 0
+    for zco_amt_s in zco_amts
+      # Shopify ignores reassigning a for-loop variable, so the number goes under a new name.
+      assign zco_amt = zco_amt_s | plus: 0
       assign zco_pos = forloop.index | plus: 1 | times: 100.0 | divided_by: zco_units
       if zco_sub >= zco_amt
         assign zco_fill = zco_pos
