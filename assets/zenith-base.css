@@ -483,9 +483,8 @@ zenith-carousel.is-static .zenith-carousel__controls {
   gap: 0;
 }
 
-/* Design: active = 60×8 light pill, inactive = 8px dot. The 8px side padding is transparent (background-clip),
-   so each button is a 24px-wide target and dots sit 16px apart. Width = visual width + 16px; overrides set
-   background-color (the shorthand would reset the clip). */
+/* Design: active = 60×8 light pill, inactive = 8px dot. Each button is a 24px-wide target; the visible dot is its
+   ::before (8px transparent each side), coloured by --z-dot-c (sections override the var, not the background). */
 .zenith-carousel__dot {
   width: 24px;
   height: 8px;
@@ -1422,4 +1421,34 @@ body cart-drawer cart-drawer-items.is-empty + .drawer__footer {
   color: var(--z-dawn-gold, #eabe5f);
   text-decoration: underline;
   text-underline-offset: 0.2em;
+}
+
+/* Review / video cards: the whole card is clickable (assets/zenith-card-link.js) */
+.zenith-results__card:has(a.zenith-results__meta),
+.zenith-video-card:has(a.zenith-video-card__title) .zenith-video-card__body {
+  cursor: pointer;
+}
+
+/* Phones: many carousel pages (e.g. 14 videos) must stay on one dot line beside the arrows —
+   smaller dots there; the arrows are the equivalent large controls. */
+@media screen and (max-width: 749px) {
+  .zenith-carousel__dots {
+    flex-wrap: nowrap;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .zenith-carousel__dot:not(.zenith-mp__gallery *, .zenith-fp *) {
+    flex: 0 0 auto;
+    width: 14px;
+    height: 6px;
+  }
+
+  .zenith-carousel__dot:not(.zenith-mp__gallery *, .zenith-fp *)::before {
+    inset: 0 4px;
+  }
+
+  .zenith-carousel__dot:not(.zenith-mp__gallery *, .zenith-fp *)[aria-current='true'] {
+    width: 36px;
+  }
 }
