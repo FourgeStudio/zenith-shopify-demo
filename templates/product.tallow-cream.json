@@ -1306,36 +1306,43 @@
         "question_1": {
           "type": "question",
           "settings": {
-            "question": "Different from drugstore brands?",
-            "answer": "<p>Drugstore products are built for mass appeal and the lowest possible cost. Zenith formulas are built specifically for the Philippine climate and the realities of men over 35. We use higher-grade ingredients with absolutely zero unnecessary fillers.</p>"
+            "question": "Is the Zenith Anti-Aging Tallow Cream suitable for all skin types?",
+            "answer": "<p>Yes, the Zenith Anti-Aging Tallow Cream is formulated to benefit all skin types, including sensitive skin. The tallow helps buffer potential retinol irritation.<br/><br/>However, as with any skincare product containing active ingredients, we recommend starting with less frequent application (2-3 times weekly) until your skin adjusts.</p>"
           }
         },
         "question_2": {
           "type": "question",
           "settings": {
-            "question": "Safe for sensitive skin?",
-            "answer": "<p>Yes. Every product is tested in tropical humidity and designed to be gentle. We avoid harsh sulfates and synthetic fragrances that cause irritation. If your skin reacts, stop use and message us right away with photos. Covered by the Zenith Money-Back Guarantee.</p>"
+            "question": "Can I use the Zenith Anti-Aging Tallow Cream with my other skincare products?",
+            "answer": "<p>The Zenith Anti-Aging Tallow Cream works well with most non-active skincare products.<br/><br/>Avoid using other retinol products, strong acids (AHA/BHA), or vitamin C serums at the same time. Apply Zenith Anti-Aging Tallow Cream after cleansing but before thicker moisturizers if needed.</p>"
           }
         },
         "question_3": {
           "type": "question",
           "settings": {
-            "question": "How to layer with skincare?",
-            "answer": "<p>Keep it simple. Cleanse first with the Tallow Cleanser, then Tallow Day Cream SPF 30 in the morning and Anti-Aging Tallow Cream at night. Three steps, that's it.</p>"
+            "question": "How long will one jar of the Zenith Anti-Aging Tallow Cream last?",
+            "answer": "<p>With recommended nightly use, one jar of Zenith Anti-Aging Tallow Cream typically lasts 1 -2 months.<br/><br/>Since you only need a pea-sized amount for the entire face, a little goes a long way.</p>"
           }
         },
         "question_4": {
           "type": "question",
           "settings": {
-            "question": "What is coming next?",
-            "answer": "<p>We are developing a full body wash, a deodorant that respects your skin, and a shave cream that reduces razor burn. The toothpaste is in development. Sign up for notifications on the product page to know the moment they launch.</p>"
+            "question": "Should I use the Zenith Anti-Aging Tallow Cream in the morning or evening?",
+            "answer": "<p>The Zenith Anti-Aging Tallow Cream is best used in the evening, as retinol can increase sun sensitivity.<br/><br/>Apply to clean, dry skin before bed. We recommend to use sunscreen during daytime hours when using any retinol product, regardless of when you apply it.</p>"
           }
         },
         "question_5": {
           "type": "question",
           "settings": {
-            "question": "Why no antiperspirant yet?",
-            "answer": "<p>We are taking our time to get it right. A deodorant that performs in this heat without staining shirts or clogging pores requires real testing. It is coming when it is ready, not a moment sooner.</p>"
+            "question": "Does it contain artificial fragrances?",
+            "answer": "<p>No, it has a mild natural scent derived from its ingredients.</p>"
+          }
+        },
+        "question_rcbiaD": {
+          "type": "question",
+          "settings": {
+            "question": "How long will it take for the product to ship to me?",
+            "answer": "<p>We ship within 1 business day using GoGoXpress, NinjaVan, and SPX.<br/><br/>Delivery typically takes 3-5 business days for Metro Manila and 5-7 business days for Visayas and Mindanao regions.</p>"
           }
         }
       },
@@ -1344,7 +1351,8 @@
         "question_2",
         "question_3",
         "question_4",
-        "question_5"
+        "question_5",
+        "question_rcbiaD"
       ],
       "settings": {
         "eyebrow": "",
@@ -1407,14 +1415,14 @@
           "type": "trust",
           "settings": {
             "icon": "certificate",
-            "text": "FDA-Notified Products"
+            "text": "Philippine FDA Notified"
           }
         },
         "trust_4": {
           "type": "trust",
           "settings": {
             "icon": "dropper",
-            "text": "Proven Ingredients"
+            "text": "Ingredients named on the labels"
           }
         }
       },
@@ -1426,9 +1434,9 @@
       ],
       "settings": {
         "eyebrow": "Trusted by [customers] Filipino men",
-        "heading": "Zenith Anti-Aging Tallow Cream",
+        "heading": "{{ section.settings.button_product.title }}",
         "heading_mobile": "",
-        "text": "<p>Short description about the final cta goes here</p>",
+        "text": "<p>One thin layer before bed. That is the&nbsp;<br/>whole night routine.</p>",
         "button_label": "Add to Cart",
         "button_link": "",
         "button_product": "zenith-anti-aging-tallow-cream",
