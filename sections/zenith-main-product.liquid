@@ -26,13 +26,13 @@
   assign question_blocks = section.blocks | where: 'type', 'question'
   assign app_blocks = section.blocks | where: 'type', '@app'
 
-  # Review strip source: global slots rv1…rv20 (Theme settings → Zenith · Results reviews) or this section's blocks.
+  # Review strip source: Judge.me reviews on the page, global slots rv1…rv30 (Theme settings → Zenith · Results reviews) or this section's blocks.
   # An app block (e.g. a Judge.me carousel) takes the strip's place.
   assign review_total = 0
   if app_blocks.size > 0
     # the app block replaces the strip
   elsif s.reviews_source == 'global'
-    for n in (1..20)
+    for n in (1..30)
       assign p = 'rv' | append: n | append: '_'
       assign k_image = p | append: 'image'
       assign k_quote = p | append: 'quote'
@@ -245,7 +245,7 @@
         {%- if review_total > 0 -%}
           <zenith-carousel class="zenith-mp__reviews-carousel"{% if s.review_autoplay > 0 %} data-autoplay="{{ s.review_autoplay }}"{% endif %}>
             <ul class="zenith-mp__reviews zenith-mp__bleed zenith-carousel__track" role="list">
-            {%- for n in (1..20) -%}
+            {%- for n in (1..30) -%}
               {%- liquid
                 if s.reviews_source == 'global'
                   assign p = 'rv' | append: n | append: '_'
@@ -281,6 +281,8 @@
                       | image_url: width: 200
                       | image_tag: loading: 'lazy', widths: '60, 100, 150, 200', sizes: '50px', alt: ''
                     }}
+                  {%- elsif rv_name != blank -%}
+                    <span class="zenith-mp__review-initial" aria-hidden="true">{{ rv_name | slice: 0 | upcase | escape }}</span>
                   {%- else -%}
                     {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
                   {%- endif -%}
@@ -302,6 +304,23 @@
             {%- endfor -%}
             </ul>
           </zenith-carousel>
+        {%- endif -%}
+
+        {%- if app_blocks.size == 0 and s.reviews_source == 'judgeme' -%}
+          {%- comment -%} zenith: filled by zenith-judgeme-strip.js from the Judge.me widget on this page {%- endcomment -%}
+          <div
+            class="zenith-mp__jdgm-strip"
+            data-zenith-judgeme-strip
+            data-min="{{ s.review_min_stars }}"
+            data-max="10"
+            {% if s.review_autoplay > 0 %}
+              data-autoplay="{{ s.review_autoplay }}"
+            {% endif %}
+            hidden
+          >
+            <template data-star>{% render 'zenith-icon', icon: 'star' %}</template>
+          </div>
+          <script src="{{ 'zenith-judgeme-strip.js' | asset_url }}" defer="defer"></script>
         {%- endif -%}
 
         {%- if app_blocks.size > 0 -%}
@@ -791,9 +810,10 @@
       "type": "select",
       "id": "reviews_source",
       "label": "Review strip",
-      "info": "Global = Theme settings → Zenith · Results reviews (edit once, same on every page).",
+      "info": "Judge.me = this product's real reviews, read from the Judge.me review widget on the page (add it below, e.g. Zenith · Reviews with the Judge.me block). Global = Theme settings → Zenith · Results reviews (edit once, same on every page).",
       "default": "global",
       "options": [
+        { "value": "judgeme", "label": "Judge.me reviews of this product" },
         { "value": "global", "label": "Theme settings → Zenith · Results reviews" },
         { "value": "blocks", "label": "This section's blocks" },
         { "value": "none", "label": "Hide" }
@@ -861,6 +881,7 @@
     { "type": "range", "id": "review_card_width", "label": "Review card width", "min": 140, "max": 320, "step": 4, "unit": "px", "default": 220 },
     { "type": "range", "id": "variant_card_min", "label": "Bundle card min width", "min": 100, "max": 240, "step": 5, "unit": "px", "default": 150 },
     { "type": "range", "id": "review_gap", "label": "Space between review cards", "min": 0, "max": 32, "step": 2, "unit": "px", "default": 12 },
+    { "type": "range", "id": "review_min_stars", "label": "Judge.me: lowest rating shown in the strip", "info": "The full Judge.me widget still shows every review.", "min": 1, "max": 5, "step": 1, "default": 4 },
     { "type": "range", "id": "review_autoplay", "label": "Review strip autoplay", "info": "Seconds between cards. 0 = off. Pauses on hover and with reduced motion.", "min": 0, "max": 12, "step": 1, "unit": "s", "default": 4 },
     { "type": "range", "id": "review_spacing", "label": "Space above review strip", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 38 },
     { "type": "range", "id": "review_photo_size", "label": "Review photo size", "min": 24, "max": 80, "step": 2, "unit": "px", "default": 48 },

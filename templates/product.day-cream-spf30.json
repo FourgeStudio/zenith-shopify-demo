@@ -239,7 +239,7 @@
         "delivery_text": "3 days Metro Manila, 3–7 days Visayas / Mindanao.",
         "show_thumbnails": true,
         "show_dots": true,
-        "reviews_source": "global",
+        "reviews_source": "judgeme",
         "content_max_width": 1080,
         "gap": 80,
         "content_gap": 12,
@@ -360,7 +360,8 @@
         "padding_top": 40,
         "padding_bottom": 48,
         "padding_top_mobile": 8,
-        "padding_bottom_mobile": 32
+        "padding_bottom_mobile": 32,
+        "review_min_stars": 4
       }
     },
     "videos": {
@@ -781,7 +782,21 @@
         "padding_bottom": 48,
         "padding_top_mobile": 20,
         "padding_bottom_mobile": 48
-      }
+      },
+      "blocks": {
+        "judge_me_reviews_review_widget_zn": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "real_data",
+            "max_width": 1200,
+            "show_shop_reviews": true,
+            "empty_state": "other_products_reviews"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_zn"
+      ]
     },
     "guarantee": {
       "type": "zenith-feature-columns",

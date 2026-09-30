@@ -191,6 +191,29 @@
   background: #dbdbdb;
 }
 
+/* No photo: the reviewer's initial on the brand gold instead of a grey box */
+.zenith-mp__review-initial {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading-family);
+  font-size: calc(var(--z-mp-rev-photo, 48px) * 0.5);
+  line-height: 1;
+  color: #121212;
+  background: linear-gradient(90deg, var(--z-dawn-gold, #eabe5f), var(--z-gold, #c59300));
+}
+
+/* Judge.me strip wrapper: invisible to layout, so the filled carousel sits exactly like the Liquid strip */
+.zenith-mp__jdgm-strip {
+  display: contents;
+}
+
+.zenith-mp__jdgm-strip[hidden] {
+  display: none;
+}
+
 .zenith-mp__review-body {
   min-width: 0;
 }
