@@ -7,7 +7,10 @@
 if (!customElements.get('zenith-cart-offers')) {
   const last = {};
   const POP_DELAY = 550; // ms into the 0.7s change slide
-  const OPEN_DELAY = 250; // ms: Dawn's drawer slide (--duration-default 200ms) plus a beat
+  // ms before the open fill starts: past Dawn's drawer slide (200ms) and, after an add, usually past the
+  // cart-drawer-items refetch (cart.js onCartUpdate) that swaps the panel out again.
+  const OPEN_DELAY = 500;
+  const REPLAY_WINDOW = 2000; // ms after opening in which a swapped-in panel restarts the open fill
   const MS_PER_PCT = 12; // open fill speed: the whole track in 1.2s
   const still = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const pctOf = (value) => parseFloat(value) || 0;
@@ -42,7 +45,10 @@ if (!customElements.get('zenith-cart-offers')) {
     let open = drawer.classList.contains('active');
     new MutationObserver(() => {
       const now = drawer.classList.contains('active');
-      if (now && !open) drawer.querySelectorAll('zenith-cart-offers').forEach(replay);
+      if (now && !open) {
+        drawer.zcoOpenedAt = Date.now();
+        drawer.querySelectorAll('zenith-cart-offers').forEach(replay);
+      }
       open = now;
     }).observe(drawer, { attributes: true, attributeFilter: ['class'] });
   };
@@ -63,6 +69,12 @@ if (!customElements.get('zenith-cart-offers')) {
         };
         const prev = last[key];
         last[key] = now;
+        // Swapped in right after the drawer opened (add to cart refetch): run the open fill on this panel.
+        if (drawer && drawer.classList.contains('active') && Date.now() - (drawer.zcoOpenedAt || 0) < REPLAY_WINDOW) {
+          drawer.zcoOpenedAt = 0; // once: later changes (qty +/-) slide as usual
+          replay(this);
+          return;
+        }
         // A closed drawer replays from 0 when it opens instead.
         if (!prev || prev.width === now.width || still() || (drawer && !drawer.classList.contains('active'))) return;
 
