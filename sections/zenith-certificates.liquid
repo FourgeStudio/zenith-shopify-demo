@@ -14,6 +14,11 @@
   endif
   if layout == 'beside'
     assign doc_sizes = '(min-width: 750px) ' | append: s.frame_width | append: 'px, ' | append: s.frame_width_mobile | append: 'px'
+    if cols >= 3
+      # Stacked on desktop: the document fills its column.
+      assign doc_w = s.content_max_width | divided_by: cols
+      assign doc_sizes = '(min-width: 990px) ' | append: doc_w | append: 'px, ' | append: doc_sizes
+    endif
   else
     assign doc_w = s.content_max_width | divided_by: cols
     assign doc_w_m = 100 | divided_by: cols_m
@@ -90,7 +95,7 @@
 
 <section
   id="Zenith-{{ section.id }}"
-  class="zenith-section zenith-cert zenith-cert--{{ layout }} zenith-cert--m-{{ s.heading_alignment_mobile }} color-{{ s.color_scheme }} gradient{% if s.background_fade and s.background_top != blank and s.background_bottom != blank %} zenith-cert--bg{% endif %}{% if s.label_uppercase %} zenith-cert--label-caps{% endif %}{% if section.index > 2 %} zenith-defer{% endif %}"
+  class="zenith-section zenith-cert zenith-cert--{{ layout }} zenith-cert--m-{{ s.heading_alignment_mobile }} color-{{ s.color_scheme }} gradient{% if s.background_fade and s.background_top != blank and s.background_bottom != blank %} zenith-cert--bg{% endif %}{% if layout == 'beside' and cols >= 3 %} zenith-cert--beside-stack{% endif %}{% if s.label_uppercase %} zenith-cert--label-caps{% endif %}{% if section.index > 2 %} zenith-defer{% endif %}"
 >
   <div class="page-width">
     {%- render 'zenith-section-heading',
@@ -469,6 +474,7 @@
       "type": "range",
       "id": "frame_width",
       "label": "Frame width (details beside layout)",
+      "info": "Desktop with 3 or 4 columns: each card stacks (document on top, details below) and the frame fills its column.",
       "min": 110,
       "max": 470,
       "step": 4,

@@ -414,4 +414,34 @@ a.zenith-cert__frame:hover .zenith-cert__doc > img {
   .zenith-cert__grid {
     grid-template-columns: repeat(var(--z-cert-cols, 2), minmax(0, 1fr));
   }
+
+  /* "Beside" with 3+ columns: a column is too narrow for frame + facts side by side (labels broke mid-word),
+     so each card stacks — document fills the column, thumbnail and facts sit in a row under it. */
+  .zenith-cert--beside-stack .zenith-cert__item {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--z-space-4);
+  }
+
+  .zenith-cert--beside-stack .zenith-cert__frame {
+    flex-basis: auto;
+    width: 100%;
+  }
+
+  .zenith-cert--beside-stack .zenith-cert__details {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--z-space-4);
+  }
+
+  .zenith-cert--beside-stack .zenith-cert__thumb {
+    flex: 0 0 auto;
+    width: min(var(--z-cert-thumb, 94px), 35%);
+    height: auto;
+    aspect-ratio: 1;
+  }
+
+  .zenith-cert--beside-stack .zenith-cert__facts {
+    margin-top: 0;
+  }
 }
