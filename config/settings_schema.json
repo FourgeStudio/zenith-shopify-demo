@@ -311,12 +311,12 @@
       {
         "type": "range",
         "id": "cart_upsell_max",
-        "label": "Products shown",
-        "min": 0,
-        "max": 4,
+        "label": "Most products shown",
+        "min": 1,
+        "max": 3,
         "step": 1,
-        "default": 2,
-        "info": "0 hides the list."
+        "default": 3,
+        "info": "Related products from the collections of what is in the cart, up to this many; at least 1 (from other collections when nothing related is left). Nothing when the cart is empty."
       },
       {
         "type": "text",

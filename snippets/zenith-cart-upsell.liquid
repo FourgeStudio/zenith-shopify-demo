@@ -2,14 +2,14 @@
   "Best used with" under the cart items (drawer + cart page), picked in Liquid so it re-renders with every cart change:
     1. products from the collections of the cart's products (newest cart line first), skipping catch-all collections
        (all / frontpage / a collection holding the whole catalogue);
-    2. when those are all in the cart already, products from the store's other collections.
-  Skips products already in the cart and sold-out ones; shows up to Theme settings → Zenith · Cart → Products shown.
+    2. only when none of those is left: products from the store's other collections (at least 1).
+  Skips products already in the cart and sold-out ones; shows up to Theme settings → Zenith · Cart → Most products shown (1–3).
   Empty cart: nothing is shown.
   In the drawer it must sit outside #CartDrawer-Form (each row is its own add-to-cart form).
   Accepts: context ('page' = cart page: rows use Shopify's /cart/add link, because they sit inside form#cart).
 {% endcomment %}
 {%- liquid
-  assign zcu_max = settings.cart_upsell_max | default: 2
+  assign zcu_max = settings.cart_upsell_max | default: 3
   assign zcu_in_cart = cart.items | map: 'product_id' | join: ','
   assign zcu_in_cart = ',' | append: zcu_in_cart | append: ','
   assign zcu_all_count = collections.all.products_count
@@ -44,8 +44,8 @@
         endfor
       endfor
 
-      # Pass 2: everything else in the store (other collections)
-      if zcu_count < zcu_max
+      # Pass 2 (only when nothing related is left): the store's other products, so there is always at least 1
+      if zcu_count == 0
         for p in collections.all.products
           if zcu_count >= zcu_max
             break
