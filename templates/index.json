@@ -17,6 +17,7 @@
         "text": "<p>Bundles and deals built for value. Here for a moment, then gone.</p>",
         "button_label": "Get This Exclusive Offer",
         "button_link": "",
+        "background_image": "shopify://shop_images/promo-img.png",
         "show_confetti": false,
         "countdown_label": "This Exclusive Offer Ends In",
         "end_date": "2026-12-31",
@@ -58,6 +59,7 @@
         "countdown_digit_color": "#ffffff",
         "confetti_opacity": 100,
         "heading_font_size": 48,
+        "heading_tag": "h1",
         "heading_uppercase": false,
         "subheading_font_size": 18,
         "button_font_size": 22,
@@ -87,8 +89,7 @@
         "padding_top": 32,
         "padding_bottom": 32,
         "padding_top_mobile": 0,
-        "padding_bottom_mobile": 0,
-        "heading_tag": "h1"
+        "padding_bottom_mobile": 0
       }
     },
     "hero": {
@@ -541,6 +542,7 @@
         "media_width": 50,
         "quote_lines": 4,
         "speed": 120,
+        "speed_mobile": 240,
         "alternate_direction": true,
         "pause_on_hover": true,
         "heading_max_width": 760,
@@ -600,8 +602,7 @@
         "padding_top": 32,
         "padding_bottom": 32,
         "padding_top_mobile": 20,
-        "padding_bottom_mobile": 20,
-        "speed_mobile": 240
+        "padding_bottom_mobile": 20
       }
     },
     "videos": {
@@ -789,6 +790,7 @@
         "subheading_mobile_only": false,
         "play_label": "Play video",
         "center_when_fits": true,
+        "start_slide": 3,
         "heading_alignment": "center",
         "slides_desktop": 4,
         "show_peek": true,
@@ -842,8 +844,7 @@
         "padding_top": 32,
         "padding_bottom": 32,
         "padding_top_mobile": 20,
-        "padding_bottom_mobile": 20,
-        "start_slide": 3
+        "padding_bottom_mobile": 20
       }
     },
     "categories": {
@@ -1299,6 +1300,8 @@
         "brand_logo_style": "wordmark",
         "eyebrow": "",
         "heading": "",
+        "shared_text": true,
+        "shared_columns": true,
         "text": "<p>Most skin and hair care on the shelf was made for other men and other weather. For Filipino men over 35, that meant a long routine nobody keeps, or an imported formula that feels heavy by lunchtime.</p><p>Zenith started with that gap. Five products, ingredients named on the label, and directions short enough to follow every day in Philippine heat.</p><p>Today, [customers] Filipino men have ordered from Zenith. We keep building for them.</p>",
         "button_label": "",
         "button_link": "",
@@ -1361,9 +1364,7 @@
         "padding_top": 64,
         "padding_bottom": 32,
         "padding_top_mobile": 20,
-        "padding_bottom_mobile": 20,
-        "shared_text": true,
-        "shared_columns": true
+        "padding_bottom_mobile": 20
       }
     },
     "collection": {
@@ -1444,6 +1445,7 @@
     "money_back": {
       "type": "zenith-guarantee-banner",
       "settings": {
+        "use_shared": true,
         "eyebrow": "",
         "heading": "Zenith Money-Back Guarantee",
         "text": "<p>We stand behind every Zenith product. Kung hindi para sa iyo,<br>ibabalik namin ang bayad mo. Full terms on our <a href=\"/policies/refund-policy\">Refunds and Returns</a> page.</p>",
@@ -1550,6 +1552,7 @@
         "store_ejQMhc"
       ],
       "settings": {
+        "content_source": "global",
         "heading": "Our Official Pages",
         "heading_mobile": "Join the #ZenithTribe",
         "text_mobile": "<p>Follow Zenith on Facebook and Instagram. Official pages only, listed on our Verify Zenith Products page.</p>",
@@ -1597,8 +1600,7 @@
         "padding_top": 32,
         "padding_bottom": 32,
         "padding_top_mobile": 20,
-        "padding_bottom_mobile": 20,
-        "content_source": "global"
+        "padding_bottom_mobile": 20
       }
     },
     "reviews": {
@@ -1827,6 +1829,8 @@
         "brand_logo_style": "wordmark",
         "eyebrow": "",
         "heading": "Made for the way Filipino men actually live.",
+        "shared_text": false,
+        "shared_columns": false,
         "text": "<p>Init, pawis, mahabang araw. Zenith is built around that, not around a routine you will skip by Wednesday.</p>",
         "button_label": "",
         "button_link": "",
@@ -2288,6 +2292,7 @@
         "countdown_digit_color": "#ffffff",
         "confetti_opacity": 100,
         "heading_font_size": 48,
+        "heading_tag": "h2",
         "heading_uppercase": false,
         "subheading_font_size": 18,
         "button_font_size": 22,
