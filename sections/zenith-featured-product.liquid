@@ -181,7 +181,12 @@
             {%- render 'zenith-carousel-controls', show_dots: true, show_arrows: false, label: 'image' -%}
           </zenith-carousel>
         {%- else -%}
-          <div class="zenith-media zenith-fp__media">
+          {%- comment -%} zenith: the image links to the selected product {%- endcomment -%}
+          {%- if fp_product != blank -%}
+            <a href="{{ fp_product.url }}" class="zenith-media zenith-fp__media zenith-fp__media--link" aria-label="{{ fp_product.title | escape }}">
+          {%- else -%}
+            <div class="zenith-media zenith-fp__media">
+          {%- endif -%}
             {%- if s.image != blank and s.image_mobile != blank -%}
               {%- render 'zenith-responsive-image',
                 image: s.image,
@@ -202,7 +207,7 @@
             {%- else -%}
               {{ 'product-2' | placeholder_svg_tag: 'placeholder-svg' }}
             {%- endif -%}
-          </div>
+          {%- if fp_product != blank -%}</a>{%- else -%}</div>{%- endif -%}
         {%- endif -%}
       </div>
     </div>
@@ -287,8 +292,8 @@
       "type": "checkbox",
       "id": "show_media_pager",
       "label": "Show all product images as a slider",
-      "info": "Used when no image is selected above and the product has more than one image",
-      "default": true
+      "info": "Off = only the product's main image, linked to the product page. Used when no image is selected above and the product has more than one image",
+      "default": false
     },
     {
       "type": "checkbox",

@@ -1214,7 +1214,7 @@
         "badge": "Featured Product",
         "button_label": "Add to Cart",
         "button_icon": "cart",
-        "show_media_pager": true,
+        "show_media_pager": false,
         "show_rating": false,
         "image_position": "right",
         "full_width": false,
