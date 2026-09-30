@@ -10,8 +10,14 @@
 {
   "current": {
     "customer_count": "100,000+",
+    "products_first": [
+      "zenith-anti-aging-tallow-cream",
+      "zenith-advanced-hair-density-shampoo"
+    ],
     "page_margin": 30,
     "page_margin_mobile": 20,
+    "social_lazada_link": "https://www.lazada.com.ph/shop/tryzenithph/",
+    "social_shopee_link": "https://shopee.ph/tryzenithph",
     "jdgm_custom_style": true,
     "cart_show_compare_price": true,
     "cart_tiers_on": true,
@@ -427,6 +433,7 @@
     "zg_logo5_image": "shopify://shop_images/vector-icons_2.png",
     "zg_logo5_name": "Ninja Van",
     "zg_logo5_scale": 100,
+    "zgb_image": "shopify://shop_images/vector-icons_7.png",
     "op_new_tab": true,
     "op1_icon": "facebook",
     "op1_handle": "Zenith PH",
@@ -673,12 +680,7 @@
           "shadow": "#000000"
         }
       }
-    },
-    "zgb_image": "shopify://shop_images/vector-icons_7.png",
-    "products_first": [
-      "zenith-anti-aging-tallow-cream",
-      "zenith-advanced-hair-density-shampoo"
-    ]
+    }
   },
   "presets": {
     "Dawn": {
