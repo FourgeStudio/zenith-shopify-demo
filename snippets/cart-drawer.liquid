@@ -171,6 +171,10 @@
                               modal_id: cart_disclosure_modal_id
                             -%}
                           </div>
+                          {%- comment -%}zenith: product type under the title ("Night cream"){%- endcomment -%}
+                          {%- if item.product.type != blank -%}
+                            <p class="zenith-cart-item__type">{{ item.product.type | escape }}</p>
+                          {%- endif -%}
 
                           {%- if item.original_price != item.final_price -%}
                             <div class="cart-item__discounted-prices">
@@ -528,6 +532,8 @@
           </div>
           <div id="CartDrawer-CartErrors" role="alert"></div>
         </form>
+        {%- comment -%}zenith: "Pairs well with" — outside the form because each row is its own add-to-cart form{%- endcomment -%}
+        {%- render 'zenith-cart-upsell' -%}
       </cart-drawer-items>
       <div class="drawer__footer">
         {%- if settings.show_cart_note -%}
@@ -635,10 +641,7 @@
             {{ 'sections.cart.checkout' | t }}
           </button>
         </div>
-        {%- comment -%}zenith: skip when the offers panel already lists these as perks (no promotion){%- endcomment -%}
-        {%- unless zenith_offers contains 'zenith-cart-offers__row-icon' -%}
-          {%- render 'zenith-cart-trust' -%}
-        {%- endunless -%}
+        {%- render 'zenith-cart-trust' -%}
       </div>
     </div>
   </div>
