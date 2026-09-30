@@ -836,7 +836,7 @@
         "gap_mobile": 24,
         "play_position_mobile": 57,
         "quote_align_mobile": "top",
-        "body_min_height_mobile": 232,
+        "body_min_height_mobile": 0,
         "thumb_size_mobile": 56,
         "text_font_size_mobile": 16,
         "title_font_size_mobile": 12,
