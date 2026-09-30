@@ -905,8 +905,10 @@ div.zenith-cart-ship__fill {
 }
 
 /* Labels sit above the track; top padding leaves room for two lines ("FREE / SHIPPING"). */
+/* overflow-x: clip keeps the end checkpoint's pop ring from giving the drawer a sideways scrollbar. */
 .zenith-cart-offers__steps {
   position: relative;
+  overflow-x: clip;
   margin-top: var(--z-space-4, 16px);
   padding-top: 3.4rem;
 }
@@ -954,7 +956,8 @@ div.zenith-cart-offers__fill {
   inset: -0.2rem;
   border-radius: 50%;
   border: 0.2rem solid var(--z-dawn-gold, #eabe5f);
-  animation: zenith-cart-dot-ring 0.8s ease-out forwards;
+  opacity: 0;
+  animation: zenith-cart-dot-ring 0.8s ease-out;
 }
 
 .zenith-cart-offers__step.is-pop:not(.is-end) .zenith-cart-offers__step-label {
