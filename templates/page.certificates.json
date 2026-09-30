@@ -15,6 +15,7 @@
         "logo_dti": {
           "type": "logo",
           "settings": {
+            "image": "shopify://shop_images/Vector.png",
             "name": "DTI Philippines",
             "link": "",
             "size": 100
@@ -23,6 +24,7 @@
         "logo_sec": {
           "type": "logo",
           "settings": {
+            "image": "shopify://shop_images/SEC.png",
             "name": "Securities and Exchange Commission",
             "link": "",
             "size": 100
@@ -31,6 +33,7 @@
         "logo_bir": {
           "type": "logo",
           "settings": {
+            "image": "shopify://shop_images/image_50.png",
             "name": "Bureau of Internal Revenue",
             "link": "",
             "size": 100
@@ -39,6 +42,7 @@
         "logo_fda": {
           "type": "logo",
           "settings": {
+            "image": "shopify://shop_images/1.png",
             "name": "Food and Drug Administration Philippines",
             "link": "",
             "size": 100
