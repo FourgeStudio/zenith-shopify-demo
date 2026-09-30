@@ -14,7 +14,7 @@
     "page_margin_mobile": 20,
     "jdgm_custom_style": true,
     "cart_show_compare_price": true,
-    "cart_tiers_on": false,
+    "cart_tiers_on": true,
     "cart_upsell_heading": "Best used with",
     "promo_enabled": true,
     "promo_auto_end": false,
