@@ -1,6 +1,6 @@
 /* Zenith: brand and policy names in visible text become links.
      "Amare Group" / "AmareGroup"                → https://amaregroup.ph/ (new tab)
-     "Zenith Money-Back Guarantee"               → /policies/refund-policy (titles included)
+     "Zenith Money-Back Guarantee"               → /policies/refund-policy (body text only, not titles)
      "Refunds and Returns", "Refund/Return(s) Policy" → /policies/refund-policy
      "Shipping Policy"                             → /policies/shipping-policy
      "Privacy Policy"                              → /policies/privacy-policy
@@ -15,7 +15,7 @@
 
   const RULES = [
     { re: /amare\s?group/i, href: 'https://amaregroup.ph/', cls: 'zenith-amare-link', external: true },
-    { re: /zenith\s+money[-\s]?back\s+guarantee/i, href: '/policies/refund-policy', cls: 'zenith-policy-link', anywhere: true },
+    { re: /zenith\s+money[-\s]?back\s+guarantee/i, href: '/policies/refund-policy', cls: 'zenith-policy-link' },
     { re: /refunds?\s+(?:and|&)\s+returns?|(?:refund|returns?)\s+policy/i, href: '/policies/refund-policy', cls: 'zenith-policy-link' },
     { re: /shipping\s+policy/i, href: '/policies/shipping-policy', cls: 'zenith-policy-link' },
     { re: /privacy\s+policy/i, href: '/policies/privacy-policy', cls: 'zenith-policy-link' },
@@ -43,7 +43,7 @@
     ANY.lastIndex = 0;
     for (let match; (match = ANY.exec(text)); ) {
       const rule = RULES[match.slice(1).findIndex((g) => g !== undefined)];
-      if (!rule.external && !rule.anywhere && !policyOk) continue;
+      if (!rule.external && !policyOk) continue;
       if (match.index > last) fragment.append(text.slice(last, match.index));
       const a = document.createElement('a');
       a.href = rule.href;
