@@ -128,8 +128,8 @@
     gap: var(--z-gap, 24px);
   }
 
-  /* Setting "Card width" > 0: fixed-width cards, at most "Columns" per row, row centred (or left like the heading).
-     Narrow screens wrap the extra cards onto the next row instead of squeezing them. */
+  /* Setting "Card width" > 0: cards up to that width, at most "Columns" per row, row centred (or left like the heading).
+     Narrower screens first shrink the cards to 180px, then wrap the extra cards onto the next row. */
   .zenith-store-links--fixed .zenith-store-links__grid {
     display: flex;
     flex-wrap: wrap;
@@ -140,7 +140,8 @@
   }
 
   .zenith-store-links--fixed .zenith-store-links__item {
-    flex: 0 1 var(--z-sl-cw);
+    flex: 1 1 min(var(--z-sl-cw), 180px);
+    max-width: var(--z-sl-cw);
   }
 
   .zenith-store-links__card {

@@ -2164,7 +2164,7 @@
         "heading_mobile": "Join the #ZenithTribe",
         "text_mobile": "<p>Follow Zenith on Facebook and Instagram. Official pages only, listed on our Verify Zenith Products page.</p>",
         "heading_alignment": "center",
-        "columns_desktop": 4,
+        "columns_desktop": 5,
         "card_layout": "stacked",
         "card_alignment": "left",
         "card_width": 216,
