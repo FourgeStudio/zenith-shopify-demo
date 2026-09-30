@@ -338,7 +338,7 @@
         "logo_gap": 20,
         "logo_spacing": 80,
         "content_max_width": 1024,
-        "columns_desktop": 2,
+        "columns_desktop": 3,
         "gap": 40,
         "row_gap": 40,
         "frame_ratio": 136,
