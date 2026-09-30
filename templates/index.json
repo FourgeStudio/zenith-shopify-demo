@@ -1361,7 +1361,9 @@
         "padding_top": 64,
         "padding_bottom": 32,
         "padding_top_mobile": 20,
-        "padding_bottom_mobile": 20
+        "padding_bottom_mobile": 20,
+        "shared_text": true,
+        "shared_columns": true
       }
     },
     "collection": {
