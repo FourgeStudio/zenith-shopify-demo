@@ -148,7 +148,7 @@ _Last updated: 2026-10-01. Keep this file current at the end of each work sessio
 ### Hero height = % of screen (2026-10-01)
 - Zenith · Hero → **Height**: *% of screen height* (new default, 65% desktop + 65% mobile, in `svh` so phone browser bars don't make it jump) or *Fixed (px)*. It is a minimum: longer text still fits. Set to 65% on the top heroes of Home, Shop All, Skin, Hair; closing CTAs, thank-you pages and 404 keep their fixed px heights (set explicitly).
 - Zenith · Promo banner → **Banner height (desktop)**: same choice (default Fixed); the `promo_hero` on those 4 pages is 65% so the promotion hero matches. Mobile promo stays stacked (photo height + content).
-- Featured product images follow the image's **focal point** (Shopify Admin → the image → *Focal point*) when *Image fit = Fill area* crops them; *Show whole image* shows the full image. Images with text baked in should be square-ish or use Show whole image.
+- Featured product images follow the image's **focal point** (Shopify Admin → the image → *Focal point*) when *Image fit = Fill area* crops them; *Show whole image* shows the full image. Images with text baked in should be square-ish or use Show whole image. Client decision 2026-10-01: homepage stays *Fill area*; uploads must fit the frame — **1216 × 1076 px** (frame 608 × 538 at 1440), key content centred (phones crop square). Spec is in the section's Image field hint.
 
 ### Zenith · Custom code (2026-09-29)
 - `sections/zenith-custom-code.liquid`: paste HTML / Liquid / app embed code (e.g. Judge.me widget code) on any page; heading + mobile heading, width (page / narrow / full), hide on mobile/desktop, paddings. Each instance is per template, so every page can hold different code.
