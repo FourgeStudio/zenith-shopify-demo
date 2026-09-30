@@ -278,6 +278,33 @@ zenith-video.is-playing .zenith-verify__play {
   height: auto;
 }
 
+/* Fallback row: separate logos from Theme settings → Zenith · Guarantee, same height, per-logo scale. */
+.zenith-verify__logo-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--z-space-2) var(--z-space-4);
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.zenith-verify__logo img {
+  display: block;
+  width: auto;
+  height: calc(2rem * var(--zv-logo-s, 1));
+  max-width: 10rem;
+  object-fit: contain;
+}
+
+@media screen and (min-width: 750px) {
+  .zenith-verify__logo img {
+    height: calc(2.4rem * var(--zv-logo-s, 1));
+  }
+}
+
 div.zenith-verify__logos-image--empty {
   position: relative;
   aspect-ratio: 16 / 1;

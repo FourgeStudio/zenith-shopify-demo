@@ -315,10 +315,36 @@
                           class: 'zenith-verify__logos-image',
                           alt: logos_alt
                       }}
-                    {%- elsif request.design_mode -%}
-                      <div class="zenith-media zenith-verify__logos-image zenith-verify__logos-image--empty">
-                        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-                      </div>
+                    {%- else -%}
+                      {%- comment -%} No combined image: the courier logos from Theme settings → Zenith · Guarantee (logo slots). {%- endcomment -%}
+                      {%- capture zv_logo_row -%}
+                        {%- for n in (1..8) -%}
+                          {%- liquid
+                            assign k = 'zg_logo' | append: n | append: '_image'
+                            assign zv_logo = settings[k]
+                            assign k = 'zg_logo' | append: n | append: '_name'
+                            assign zv_logo_name = settings[k]
+                            assign k = 'zg_logo' | append: n | append: '_scale'
+                            assign zv_logo_scale = settings[k] | default: 100
+                          -%}
+                          {%- if zv_logo != blank -%}
+                            <li class="zenith-verify__logo" style="--zv-logo-s: {{ zv_logo_scale | divided_by: 100.0 }};">
+                              {{
+                                zv_logo
+                                | image_url: width: 300
+                                | image_tag: loading: 'lazy', widths: '100, 200, 300', sizes: '120px', alt: zv_logo_name
+                              }}
+                            </li>
+                          {%- endif -%}
+                        {%- endfor -%}
+                      {%- endcapture -%}
+                      {%- if zv_logo_row != blank -%}
+                        <ul class="zenith-verify__logo-row" role="list">{{ zv_logo_row }}</ul>
+                      {%- elsif request.design_mode -%}
+                        <div class="zenith-media zenith-verify__logos-image zenith-verify__logos-image--empty">
+                          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                        </div>
+                      {%- endif -%}
                     {%- endif -%}
                     {%- if block.settings.caption != blank -%}
                       <p class="zenith-verify__caption">{{ block.settings.caption | escape | newline_to_br }}</p>
@@ -1262,7 +1288,7 @@
           "type": "image_picker",
           "id": "image",
           "label": "Logos image",
-          "info": "One image with all courier logos in a row, transparent background (about 1000 × 64 px)."
+          "info": "One image with all courier logos in a row, transparent background (about 1000 × 64 px). Empty = the courier logos from Theme settings → Zenith · Guarantee."
         },
         {
           "type": "textarea",
