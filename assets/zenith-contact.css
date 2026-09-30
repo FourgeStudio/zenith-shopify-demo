@@ -206,7 +206,7 @@
   color: rgb(var(--color-foreground));
   background: rgba(var(--color-foreground), var(--z-ct-field-a, 0.15));
   background-clip: padding-box;
-  border: 1px solid rgba(var(--color-foreground), 0.1);
+  border: 1px solid rgba(var(--color-foreground), 0.45); /* ≥3:1 against the section (WCAG 1.4.11) */
   border-radius: 0;
   box-shadow: none;
   appearance: none;
@@ -219,7 +219,7 @@
 }
 
 .zenith-contact__input:hover {
-  border-color: rgba(var(--color-foreground), 0.25);
+  border-color: rgba(var(--color-foreground), 0.7);
 }
 
 .zenith-contact__input:focus,

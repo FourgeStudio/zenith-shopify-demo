@@ -79,20 +79,21 @@
   pointer-events: none;
 }
 
+/* Dots carry 8px transparent side padding (24px targets, zenith-base.css): widths add 16px, the gap loses it */
 .zenith-mp__gallery .zenith-carousel__dots {
-  gap: var(--z-mp-dotg-m, 10px);
+  gap: max(0px, calc(var(--z-mp-dotg-m, 10px) - 16px));
   pointer-events: auto;
 }
 
 .zenith-mp__gallery .zenith-carousel__dot {
-  width: var(--z-mp-dot-m, 7px);
+  width: calc(var(--z-mp-dot-m, 7px) + 16px);
   height: var(--z-mp-dot-m, 7px);
-  background: var(--z-mp-dot-c, #c5c5c6);
+  background-color: var(--z-mp-dot-c, #c5c5c6);
 }
 
 .zenith-mp__gallery .zenith-carousel__dot[aria-current='true'] {
-  width: var(--z-mp-dotw-m, 60px);
-  background: var(--z-mp-dot-ac, #010101);
+  width: calc(var(--z-mp-dotw-m, 60px) + 16px);
+  background-color: var(--z-mp-dot-ac, #010101);
 }
 
 /* Thumbnails + review strip: scrolling rows that run to the screen edge on mobile */
@@ -212,6 +213,22 @@
 
 .zenith-mp__jdgm-strip[hidden] {
   display: none;
+}
+
+/* Until zenith-judgeme-strip.js fills (or removes) it, hold one card row so the buy box below doesn't jump:
+   strip margin + card padding (8px × 2) + the taller of the photo and name line + gap + two text lines */
+.zenith-mp__jdgm-strip.is-pending {
+  --z-mp-rev-card-h: calc(
+    16px + max(var(--z-mp-rev-photo, 48px), var(--z-mp-rev-nfs, 16px) * 1.2 + 4px + var(--z-mp-rev-fs, 13px) * 2.7)
+  );
+  display: block;
+  min-height: calc(var(--z-mp-rev-sp-m, 9px) + var(--z-mp-rev-card-h));
+}
+
+@media screen and (min-width: 750px) {
+  .zenith-mp__jdgm-strip.is-pending {
+    min-height: calc(var(--z-mp-rev-sp, 38px) + var(--z-mp-rev-card-h));
+  }
 }
 
 .zenith-mp__review-body {
@@ -904,16 +921,16 @@
   }
 
   .zenith-mp__gallery .zenith-carousel__dots {
-    gap: var(--z-mp-dotg, 4px);
+    gap: max(0px, calc(var(--z-mp-dotg, 4px) - 16px));
   }
 
   .zenith-mp__gallery .zenith-carousel__dot {
-    width: var(--z-mp-dot, 8px);
+    width: calc(var(--z-mp-dot, 8px) + 16px);
     height: var(--z-mp-dot, 8px);
   }
 
   .zenith-mp__gallery .zenith-carousel__dot[aria-current='true'] {
-    width: var(--z-mp-dotw, 40px);
+    width: calc(var(--z-mp-dotw, 40px) + 16px);
   }
 
   .zenith-mp__bleed {

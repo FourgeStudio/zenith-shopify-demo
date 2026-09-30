@@ -187,6 +187,10 @@
     {%- endif -%}
   {%- endif -%}
 
+  {%- comment -%} zenith: Shopify standard product view event, as Dawn's main-product (<product-component> is defined in theme.liquid) {%- endcomment -%}
+  {%- if mp_product != blank -%}
+    <product-component view-event-payload="{{ mp_product | standard_event_data: 'view', context: 'page' | escape }}">
+  {%- endif -%}
   <div class="page-width">
     <zenith-main-product class="zenith-mp__grid">
       {%- comment -%} ---------------- Gallery ---------------- {%- endcomment -%}
@@ -265,7 +269,7 @@
         {%- endif -%}
 
         {%- if review_total > 0 -%}
-          <zenith-carousel class="zenith-mp__reviews-carousel"{% if s.review_autoplay > 0 %} data-autoplay="{{ s.review_autoplay }}"{% endif %}>
+          <zenith-carousel class="zenith-mp__reviews-carousel" data-slide-label="Review"{% if s.review_autoplay > 0 %} data-autoplay="{{ s.review_autoplay }}"{% endif %}>
             <ul class="zenith-mp__reviews zenith-mp__bleed zenith-carousel__track" role="list">
             {%- for n in (1..30) -%}
               {%- liquid
@@ -329,16 +333,15 @@
         {%- endif -%}
 
         {%- if app_blocks.size == 0 and s.reviews_source == 'judgeme' -%}
-          {%- comment -%} zenith: filled by zenith-judgeme-strip.js from the Judge.me widget on this page {%- endcomment -%}
+          {%- comment -%} zenith: filled by zenith-judgeme-strip.js from the Judge.me widget on this page; .is-pending reserves one card row (no layout shift) until then {%- endcomment -%}
           <div
-            class="zenith-mp__jdgm-strip"
+            class="zenith-mp__jdgm-strip is-pending"
             data-zenith-judgeme-strip
             data-min="{{ s.review_min_stars }}"
             data-max="10"
             {% if s.review_autoplay > 0 %}
               data-autoplay="{{ s.review_autoplay }}"
             {% endif %}
-            hidden
           >
             <template data-star>{% render 'zenith-icon', icon: 'star' %}</template>
           </div>
@@ -453,11 +456,16 @@
                       {{
                         v_img
                         | image_url: width: 400
-                        | image_tag: loading: 'lazy', widths: '150, 300, 400', sizes: '160px', alt: variant.title
+                        | image_tag: loading: 'lazy', widths: '150, 300, 400', sizes: '160px', alt: ''
                       }}
                     {%- endif -%}
                   </span>
-                  <span class="zenith-mp__vcard-title">{{ variant.title | escape }}</span>
+                  <span class="zenith-mp__vcard-title">
+                    {{- variant.title | escape -}}
+                    {%- unless variant.available -%}
+                      <span class="visually-hidden"> – {{ 'products.product.sold_out' | t }}</span>
+                    {%- endunless -%}
+                  </span>
                   <span class="zenith-mp__vcard-prices">
                     <span class="zenith-mp__vcard-price">{{ variant.price | money_without_trailing_zeros }}</span>
                     {%- if variant.compare_at_price > variant.price -%}
@@ -475,6 +483,9 @@
               {%- else -%}
                 <label class="zenith-mp__variant" for="Variant-{{ section.id }}-{{ variant.id }}">
                   {{- variant.title -}}
+                  {%- unless variant.available -%}
+                    <span class="visually-hidden"> – {{ 'products.product.sold_out' | t }}</span>
+                  {%- endunless -%}
                 </label>
               {%- endif -%}
             {%- endfor -%}
@@ -701,6 +712,9 @@
       </div>
     </zenith-main-product>
   </div>
+  {%- if mp_product != blank -%}
+    </product-component>
+  {%- endif -%}
 </section>
 {%- endcapture -%}
 {%- render 'zenith-tokens', body: zenith_body -%}

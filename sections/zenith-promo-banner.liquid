@@ -49,6 +49,11 @@
     render 'zenith-promo-state', visibility: s.promo_visibility
   endcapture
 
+  # Hidden by the switch → no countdown (and no countdown CSS/JS ticking in a display: none section)
+  if promo_class != blank
+    assign show_countdown = false
+  endif
+
   # A visible banner at the top of the page (in the hero's place) loads its photo eagerly.
   assign img_loading = 'lazy'
   assign img_priority = 'auto'

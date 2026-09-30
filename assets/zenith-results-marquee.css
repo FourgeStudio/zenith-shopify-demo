@@ -45,6 +45,10 @@
 .zenith-results__track {
   display: flex;
   width: max-content;
+}
+
+/* Moves only once zenith-results-marquee.js has cloned the pass (no JS: a still row) */
+.zenith-results__track.is-ready {
   animation: zenith-marquee var(--z-speed-m, var(--z-speed)) linear infinite;
 }
 
@@ -53,7 +57,8 @@
 }
 
 .zenith-results--pause .zenith-results__row:hover .zenith-results__track,
-.zenith-results__row:focus-within .zenith-results__track {
+.zenith-results__row:focus-within .zenith-results__track,
+.zenith-results.is-paused .zenith-results__track {
   animation-play-state: paused;
 }
 
@@ -305,7 +310,7 @@ a.zenith-results__meta:focus-visible {
 }
 
 @media screen and (min-width: 750px) {
-  .zenith-results__track {
+  .zenith-results__track.is-ready {
     animation-duration: var(--z-speed);
   }
 
@@ -403,7 +408,8 @@ a.zenith-results__meta:focus-visible {
     animation: none;
   }
 
-  .zenith-results__group[aria-hidden='true'] {
+  .zenith-results__group[aria-hidden='true'],
+  .zenith-results__pause {
     display: none;
   }
 }

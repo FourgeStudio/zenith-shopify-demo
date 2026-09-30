@@ -1,7 +1,11 @@
 {%- comment -%} zenith: [customers] anywhere in this section shows Theme settings → Zenith → Customer count {%- endcomment -%}
 {%- capture zenith_body -%}
-{{ 'component-slideshow.css' | asset_url | stylesheet_tag }}
-{{ 'component-slider.css' | asset_url | stylesheet_tag }}
+{%- comment -%} zenith: slider CSS only for Dawn's slideshow (the only mode that renders <slideshow-component>) {%- endcomment -%}
+{%- assign ann_display = section.settings.zenith_display | default: 'row' -%}
+{%- if ann_display == 'slideshow' and section.blocks.size > 1 -%}
+  {{ 'component-slideshow.css' | asset_url | stylesheet_tag }}
+  {{ 'component-slider.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
 
 {%- liquid
   assign social_icons = true

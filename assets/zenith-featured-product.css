@@ -206,18 +206,18 @@
   pointer-events: none;
 }
 
+/* Dots: 24px-wide targets in zenith-base.css already space them 16px apart */
 .zenith-fp .zenith-carousel__dots {
-  gap: calc(var(--z-space-1) * 1.5);
   pointer-events: auto;
 }
 
 .zenith-fp .zenith-carousel__dot {
-  background: rgba(var(--z-pager-rgb, 41, 72, 80), 0.12);
+  background-color: rgba(var(--z-pager-rgb, 41, 72, 80), 0.45);
 }
 
 .zenith-fp .zenith-carousel__dot[aria-current='true'] {
-  width: calc(var(--z-space-6) + var(--z-space-2));
-  background: rgba(var(--z-pager-rgb, 41, 72, 80), 0.56);
+  width: calc(var(--z-space-6) + var(--z-space-2) + 16px);
+  background-color: rgba(var(--z-pager-rgb, 41, 72, 80), 0.8);
 }
 
 @media screen and (min-width: 750px) {

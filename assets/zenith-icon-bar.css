@@ -118,11 +118,33 @@
   }
 }
 
+/* Pause/play (snippets/zenith-pause-button.liquid): only while the mobile marquee moves */
+.zenith-icon-bar__pause {
+  display: none;
+}
+
 /* Full bleed only while animating (selector outranks the shared .page-width gutter rule). */
 @media screen and (max-width: 749px) and (prefers-reduced-motion: no-preference) {
   .zenith-icon-bar.zenith-icon-bar--m-marquee .zenith-icon-bar__viewport.page-width {
     padding-left: 0;
     padding-right: 0;
+  }
+
+  .zenith-icon-bar--m-marquee {
+    position: relative;
+  }
+
+  .zenith-icon-bar__pause {
+    display: inline-grid;
+    position: absolute;
+    top: 50%;
+    right: var(--z-space-2);
+    z-index: 1;
+    transform: translateY(-50%);
+  }
+
+  .zenith-icon-bar.is-paused .zenith-icon-bar__track {
+    animation-play-state: paused;
   }
 }
 

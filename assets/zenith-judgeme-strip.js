@@ -1,6 +1,6 @@
 /* Zenith: product page review strip filled from the Judge.me review widget on the same page.
    Judge.me renders its reviews (author, stars, text, photos) into the page HTML; this copies the ones at or
-   above the minimum rating into the strip's cards. No widget / no matching reviews → the strip stays hidden.
+   above the minimum rating into the strip's cards. No widget / no matching reviews → the strip (and the row it reserves) is removed.
    Markup matches the Liquid strip in sections/zenith-main-product.liquid (same classes, same CSS). */
 (() => {
   const esc = (s) => s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
@@ -36,11 +36,16 @@
           `</p><p class="zenith-mp__review-text">${esc(text)}</p></div></li>`
       );
     });
-    if (!cards.length) return;
+    // Nothing to show: drop the element and the row it reserved (.is-pending)
+    if (!cards.length) {
+      strip.remove();
+      return;
+    }
     const autoplay = strip.dataset.autoplay ? ` data-autoplay="${esc(strip.dataset.autoplay)}"` : '';
     strip.innerHTML =
-      `<zenith-carousel class="zenith-mp__reviews-carousel"${autoplay}>` +
+      `<zenith-carousel class="zenith-mp__reviews-carousel" data-slide-label="Review"${autoplay}>` +
       `<ul class="zenith-mp__reviews zenith-mp__bleed zenith-carousel__track" role="list">${cards.join('')}</ul></zenith-carousel>`;
+    strip.classList.remove('is-pending');
     strip.hidden = false;
   };
 

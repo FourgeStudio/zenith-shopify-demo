@@ -1,0 +1,24 @@
+{% comment %}
+  Pause/play toggle for moving content (WCAG 2.2.2). aria-pressed="true" = paused; the label stays the same.
+  Accepts:
+  - label {String}
+  - class {String} optional
+  - toggle {String} optional: selector of the ancestor that gets .is-paused (CSS pauses its animation).
+    With it the button works on its own (inline handler) and is visible; without it the button is
+    rendered hidden and the section's JS shows it and handles the click.
+  zenith-carousel.js builds the same markup for autoplaying carousels.
+{% endcomment %}
+<button
+  type="button"
+  class="zenith-pause{% if class != blank %} {{ class }}{% endif %}"
+  aria-pressed="false"
+  {% if toggle != blank %}
+    onclick="var p = this.getAttribute('aria-pressed') !== 'true'; this.setAttribute('aria-pressed', p); this.closest('{{ toggle }}').classList.toggle('is-paused', p);"
+  {% else %}
+    hidden
+  {% endif %}
+>
+  {%- render 'zenith-icon', icon: 'pause', class: 'zenith-pause__pause' -%}
+  {%- render 'zenith-icon', icon: 'play', class: 'zenith-pause__play' -%}
+  <span class="visually-hidden">{{ label | default: 'Pause animation' | escape }}</span>
+</button>

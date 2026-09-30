@@ -22,8 +22,39 @@ if (!customElements.get('zenith-carousel')) {
           this.addEventListener('mouseenter', () => this.stop());
           this.addEventListener('focusin', () => this.stop());
           this.addEventListener('mouseleave', () => this.start());
+          this.addPauseButton();
           this.start();
         }
+      }
+
+      // Pause/play for autoplay (WCAG 2.2.2), same markup as snippets/zenith-pause-button.liquid.
+      // Goes beside the arrows / in the controls row; carousels without controls get it under the track.
+      addPauseButton() {
+        if (this.pauseButton) return;
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'zenith-pause zenith-carousel__pause';
+        button.setAttribute('aria-pressed', 'false');
+        const label = `Pause ${(this.dataset.slideLabel || 'slide').toLowerCase()}s`;
+        button.innerHTML =
+          '<svg class="zenith-icon zenith-pause__pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M6.5 5h4v14h-4zM13.5 5h4v14h-4z"/></svg>' +
+          '<svg class="zenith-icon zenith-pause__play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M8 5.5v13l10.5-6.5z"/></svg>' +
+          `<span class="visually-hidden">${label}</span>`;
+        button.addEventListener('click', () => {
+          this.paused = button.getAttribute('aria-pressed') !== 'true';
+          button.setAttribute('aria-pressed', String(this.paused));
+          if (this.paused) this.stop();
+          else this.start();
+        });
+        const arrows = this.querySelector('.zenith-carousel__arrows');
+        const controls = this.querySelector('.zenith-carousel__controls');
+        if (arrows) arrows.prepend(button);
+        else if (controls) controls.append(button);
+        else {
+          button.classList.add('zenith-carousel__pause--solo');
+          this.append(button);
+        }
+        this.pauseButton = button;
       }
 
       disconnectedCallback() {
@@ -65,6 +96,7 @@ if (!customElements.get('zenith-carousel')) {
 
       start() {
         this.stop();
+        if (this.paused) return;
         this.timer = setInterval(() => this.go(1), this.autoplay * 1000);
       }
 

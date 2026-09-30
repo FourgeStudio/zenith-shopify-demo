@@ -66,6 +66,10 @@
       {%- endfor -%}
     </div>
   </div>
+  {%- if passes == 2 -%}
+    {%- comment -%} Pause/play for the mobile marquee (WCAG 2.2.2); CSS shows it only while the row moves {%- endcomment -%}
+    {%- render 'zenith-pause-button', class: 'zenith-icon-bar__pause', label: 'Pause scrolling', toggle: '.zenith-icon-bar' -%}
+  {%- endif -%}
 </div>
 {%- endcapture -%}
 {%- render 'zenith-tokens', body: zenith_body -%}

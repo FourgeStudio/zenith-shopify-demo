@@ -52,7 +52,7 @@
   line-height: 1.4;
   color: rgb(var(--z-nl-fg, 255, 255, 255));
   background: rgba(var(--z-nl-fg, 255, 255, 255), 0.15);
-  border: 1px solid rgba(var(--z-nl-fg, 255, 255, 255), 0.1);
+  border: 1px solid rgba(var(--z-nl-fg, 255, 255, 255), 0.45); /* ≥3:1 against the section (WCAG 1.4.11) */
   border-radius: 0;
   box-shadow: none;
   appearance: none;
@@ -65,7 +65,7 @@
 }
 
 .zenith-nl__input:hover {
-  border-color: rgba(var(--z-nl-fg, 255, 255, 255), 0.3);
+  border-color: rgba(var(--z-nl-fg, 255, 255, 255), 0.7);
 }
 
 .zenith-nl__input:focus,

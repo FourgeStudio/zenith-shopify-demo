@@ -7,9 +7,14 @@
   assign s = section.settings
 
   # Products: the chosen collection, or — left empty on a collection page — the collection being viewed.
+  # Showing the viewed collection on its own page → Shopify's standard collection view event (<collection-component>, theme.liquid).
   assign pg_collection = s.collection
+  assign pg_view_event = false
   if pg_collection == blank and collection != blank
     assign pg_collection = collection
+    if request.page_type == 'collection'
+      assign pg_view_event = true
+    endif
   endif
   assign pg_count = 0
   if pg_collection != blank
@@ -72,6 +77,12 @@
     id="Zenith-{{ section.id }}"
     class="zenith-section zenith-pg zenith-pg--{{ s.image_ratio }} color-{{ s.color_scheme }} gradient{% if section.index > 2 %} zenith-defer{% endif %}"
   >
+    {%- if pg_view_event -%}
+      <collection-component
+        view-event-payload="{{ collection | standard_event_data: 'view' | escape }}"
+        data-collection-id="{{ collection.id }}"
+      >
+    {%- endif -%}
     <div class="page-width">
       {%- render 'zenith-section-heading',
         eyebrow: s.eyebrow,
@@ -160,6 +171,9 @@
         {%- endif -%}
       </ul>
     </div>
+    {%- if pg_view_event -%}
+      </collection-component>
+    {%- endif -%}
   </section>
 {%- endif -%}
 {%- endcapture -%}

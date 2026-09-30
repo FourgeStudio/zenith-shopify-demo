@@ -232,10 +232,16 @@
 
               {%- if s.drawer_badge_image != blank -%}
                 {%- capture badge_sizes -%}{{ s.drawer_badge_width }}px{%- endcapture -%}
+                {%- assign badge_alt = s.drawer_badge_image.alt | default: 'An Amare Group brand' -%}
                 {{
                   s.drawer_badge_image
                   | image_url: width: 420
-                  | image_tag: loading: 'lazy', widths: '140, 280, 420', sizes: badge_sizes, class: 'zenith-drawer__badge'
+                  | image_tag:
+                    loading: 'lazy',
+                    widths: '140, 280, 420',
+                    sizes: badge_sizes,
+                    class: 'zenith-drawer__badge',
+                    alt: badge_alt
                 }}
               {%- endif -%}
             </div>

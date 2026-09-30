@@ -1,5 +1,6 @@
 /* Zenith: brand and policy names in visible text become links.
      "Amare Group" / "AmareGroup"                → https://amaregroup.ph/ (new tab)
+     "Zenith Money-Back Guarantee"               → /policies/refund-policy (titles included)
      "Refunds and Returns", "Refund/Return(s) Policy" → /policies/refund-policy
      "Shipping Policy"                             → /policies/shipping-policy
      "Privacy Policy"                              → /policies/privacy-policy
@@ -14,6 +15,7 @@
 
   const RULES = [
     { re: /amare\s?group/i, href: 'https://amaregroup.ph/', cls: 'zenith-amare-link', external: true },
+    { re: /zenith\s+money[-\s]?back\s+guarantee/i, href: '/policies/refund-policy', cls: 'zenith-policy-link', anywhere: true },
     { re: /refunds?\s+(?:and|&)\s+returns?|(?:refund|returns?)\s+policy/i, href: '/policies/refund-policy', cls: 'zenith-policy-link' },
     { re: /shipping\s+policy/i, href: '/policies/shipping-policy', cls: 'zenith-policy-link' },
     { re: /privacy\s+policy/i, href: '/policies/privacy-policy', cls: 'zenith-policy-link' },
@@ -22,23 +24,26 @@
 
   const ANY = new RegExp(RULES.map((r) => `(${r.re.source})`).join('|'), 'gi');
   const TEST = new RegExp(ANY.source, 'i');
-  const SKIP = 'a, button, script, style, noscript, textarea, input, select, option, code, pre, svg, [contenteditable]';
-  // Policy names are left as plain text in titles, FAQ questions (clicking would follow the link instead of opening
-  // the answer), menus and form labels.
-  const POLICY_SKIP = 'summary, h1, h2, h3, h4, h5, h6, nav, label, .zenith-doc__toc';
+  // Never inside FAQ questions / form labels (clicking would follow the link instead of opening the answer or
+  // ticking the box). Marquee copies (aria-hidden) get the same links, kept out of the tab order.
+  const SKIP =
+    'a, button, script, style, noscript, textarea, input, select, option, code, pre, svg, [contenteditable], summary, label';
+  // Policy names are also left as plain text in titles and menus.
+  const POLICY_SKIP = 'h1, h2, h3, h4, h5, h6, nav, .zenith-doc__toc';
 
   const linkify = (textNode) => {
     const text = textNode.nodeValue;
     const parent = textNode.parentElement;
     if (!parent || parent.closest(SKIP)) return;
     const policyOk = !parent.closest(POLICY_SKIP);
+    const hiddenCopy = parent.closest('[aria-hidden="true"]');
 
     const fragment = document.createDocumentFragment();
     let last = 0;
     ANY.lastIndex = 0;
     for (let match; (match = ANY.exec(text)); ) {
       const rule = RULES[match.slice(1).findIndex((g) => g !== undefined)];
-      if (!rule.external && !policyOk) continue;
+      if (!rule.external && !rule.anywhere && !policyOk) continue;
       if (match.index > last) fragment.append(text.slice(last, match.index));
       const a = document.createElement('a');
       a.href = rule.href;
@@ -47,6 +52,7 @@
         a.target = '_blank';
         a.rel = 'noopener';
       }
+      if (hiddenCopy) a.tabIndex = -1;
       a.textContent = match[0];
       fragment.append(a);
       last = match.index + match[0].length;
@@ -67,7 +73,9 @@
   };
 
   const start = () => {
-    scan(document.body);
+    // Initial pass off the critical path: when the main thread is idle
+    if ('requestIdleCallback' in window) requestIdleCallback(() => scan(document.body), { timeout: 2000 });
+    else setTimeout(() => scan(document.body), 200);
     let queued = new Set();
     let timer = null;
     new MutationObserver((mutations) => {

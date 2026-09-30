@@ -113,7 +113,6 @@
         assign row_key = r | append: ''
         assign item_count = 0
         assign row_cards = ''
-        assign row_clones = ''
       -%}
       {%- for n in (1..item_max) -%}
         {%- liquid
@@ -183,27 +182,6 @@
             overlay_style: section.settings.overlay_style
           -%}
         {%- endcapture -%}
-        {%- capture row_clones -%}
-          {{- row_clones -}}
-          {%- render 'zenith-results-card',
-            photo: c_photo,
-            review_product: c_product,
-            thumbnail: c_thumb,
-            rating: c_rating,
-            quote: c_quote,
-            author: c_author,
-            verified: c_verified,
-            avatar: c_avatar,
-            author_detail: c_detail,
-            show_avatar: section.settings.show_avatar,
-            attrs: '',
-            clone: true,
-            prefix: prefix,
-            verified_label: verified_label,
-            photo_sizes: photo_sizes,
-            overlay_style: section.settings.overlay_style
-          -%}
-        {%- endcapture -%}
       {%- endfor -%}
       {%- liquid
         if item_count == 0 and request.design_mode == false
@@ -213,72 +191,55 @@
         if r == 2 and section.settings.alternate_direction
           assign reverse = true
         endif
-        # The loop needs copies wider than the widest screen: 4 for short rows, 2 once a row has 8+ reviews (half the DOM)
-        assign passes = 4
-        if item_count >= 8
-          assign passes = 2
-        endif
       -%}
+      {%- comment -%} One pass of cards; zenith-results-marquee.js clones it near the viewport and only then starts the loop (.is-ready) {%- endcomment -%}
       <div class="zenith-results__row{% if reverse %} zenith-results__row--reverse{% endif %}">
-        <div
-          class="zenith-results__track"
-          {% if passes == 2 %}
-            style="--z-shift: -50%;"
-          {% endif %}
-        >
-          {%- for pass in (1..passes) -%}
-            <ul
-              class="zenith-results__group"
-              role="list"
-              {% if pass > 1 %}
-                aria-hidden="true"
-              {% endif %}
-            >
-              {%- if item_count > 0 -%}
-                {%- if pass == 1 -%}{{ row_cards }}{%- else -%}{{ row_clones }}{%- endif -%}
-              {%- else -%}
-                {%- for i in (1..4) -%}
-                  <li class="zenith-results__card">
-                    <div class="zenith-media zenith-results__media">
-                      {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-                      {%- render 'zenith-overlay', style: section.settings.overlay_style -%}
+        <div class="zenith-results__track">
+          <ul class="zenith-results__group" role="list">
+            {%- if item_count > 0 -%}
+              {{ row_cards }}
+            {%- else -%}
+              {%- for i in (1..4) -%}
+                <li class="zenith-results__card">
+                  <div class="zenith-media zenith-results__media">
+                    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                    {%- render 'zenith-overlay', style: section.settings.overlay_style -%}
+                  </div>
+                  <figure class="zenith-results__review">
+                    <div class="zenith-results__body">
+                      <blockquote class="zenith-results__quote">{{ empty_note }}</blockquote>
                     </div>
-                    <figure class="zenith-results__review">
-                      <div class="zenith-results__body">
-                        <blockquote class="zenith-results__quote">{{ empty_note }}</blockquote>
-                      </div>
-                    </figure>
-                  </li>
-                {%- endfor -%}
-              {%- endif -%}
-            </ul>
-          {%- endfor -%}
+                  </figure>
+                </li>
+              {%- endfor -%}
+            {%- endif -%}
+          </ul>
         </div>
       </div>
     {%- endfor -%}
   </div>
 
-  {%- if section.settings.disclaimer != blank or section.settings.link_label != blank -%}
-    <div class="page-width zenith-results__footer">
-      {%- if section.settings.disclaimer != blank -%}
-        <p class="zenith-results__disclaimer">
-          {{- section.settings.disclaimer | escape | replace: '[customers]', settings.customer_count -}}
-        </p>
-      {%- endif -%}
-      {%- if section.settings.link_label != blank -%}
-        <a
-          {% if section.settings.link != blank %}
-            href="{{ section.settings.link | escape }}"
-          {% else %}
-            role="link" aria-disabled="true"
-          {% endif %}
-          class="link underlined-link zenith-results__link"
-        >
-          {{- section.settings.link_label | escape -}}
-        </a>
-      {%- endif -%}
-    </div>
-  {%- endif -%}
+  <div class="page-width zenith-results__footer">
+    {%- comment -%} Pause/play for the moving rows (WCAG 2.2.2); shown by the JS once the loop runs {%- endcomment -%}
+    {%- render 'zenith-pause-button', class: 'zenith-results__pause', label: 'Pause reviews' -%}
+    {%- if section.settings.disclaimer != blank -%}
+      <p class="zenith-results__disclaimer">
+        {{- section.settings.disclaimer | escape | replace: '[customers]', settings.customer_count -}}
+      </p>
+    {%- endif -%}
+    {%- if section.settings.link_label != blank -%}
+      <a
+        {% if section.settings.link != blank %}
+          href="{{ section.settings.link | escape }}"
+        {% else %}
+          role="link" aria-disabled="true"
+        {% endif %}
+        class="link underlined-link zenith-results__link"
+      >
+        {{- section.settings.link_label | escape -}}
+      </a>
+    {%- endif -%}
+  </div>
 </section>
 {%- endif -%}
 {%- endcapture -%}

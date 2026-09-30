@@ -17,12 +17,25 @@ if (!customElements.get('zenith-countdown')) {
         }));
         this.tick = this.tick.bind(this);
         this.paint(true);
-        if (this.remaining() > 0) this.schedule();
-        else this.expire();
+        if (this.remaining() <= 0) {
+          this.expire();
+          return;
+        }
+        // Tick only while on screen; catch up without the roll when it comes back into view
+        this.observer?.disconnect();
+        this.observer = new IntersectionObserver(([entry]) => {
+          this.stop();
+          if (!entry.isIntersecting) return;
+          this.paint(true);
+          if (this.remaining() > 0) this.schedule();
+          else this.expire();
+        });
+        this.observer.observe(this);
       }
 
       disconnectedCallback() {
         this.stop();
+        this.observer?.disconnect();
       }
 
       stop() {
@@ -93,6 +106,7 @@ if (!customElements.get('zenith-countdown')) {
 
       expire() {
         this.stop();
+        this.observer?.disconnect();
         this.classList.add('is-expired');
         if (this.dataset.hideExpired === 'true') {
           this.closest('[data-countdown-wrapper]')?.setAttribute('hidden', '');

@@ -480,17 +480,20 @@ zenith-carousel.is-static .zenith-carousel__controls {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 10px;
+  gap: 0;
 }
 
-/* Design: active = 60×8 light pill, inactive = 8px dot */
+/* Design: active = 60×8 light pill, inactive = 8px dot. The 8px side padding is transparent (background-clip),
+   so each button is a 24px-wide target and dots sit 16px apart. Width = visual width + 16px; overrides set
+   background-color (the shorthand would reset the clip). */
 .zenith-carousel__dot {
-  width: 8px;
+  width: 24px;
   height: 8px;
-  padding: 0;
+  padding: 0 8px;
   border: 0;
   border-radius: 999px;
-  background: rgba(var(--color-foreground), 0.25);
+  background-color: rgba(var(--color-foreground), 0.45);
+  background-clip: content-box;
   cursor: pointer;
   position: relative;
   transition: width var(--duration-short) ease, background-color var(--duration-short) ease;
@@ -499,12 +502,12 @@ zenith-carousel.is-static .zenith-carousel__controls {
 .zenith-carousel__dot::after {
   content: '';
   position: absolute;
-  inset: -18px -2px;
+  inset: -18px 0;
 }
 
 .zenith-carousel__dot[aria-current='true'] {
-  background: rgba(var(--color-foreground), 0.7);
-  width: 60px;
+  background-color: rgba(var(--color-foreground), 0.7);
+  width: 76px;
 }
 
 .zenith-carousel__arrows {
@@ -538,6 +541,58 @@ zenith-carousel.is-static .zenith-carousel__controls {
 .zenith-carousel__arrow svg {
   width: 20px;
   height: 20px;
+}
+
+/* ---------- Pause / play (marquees + autoplaying carousels, WCAG 2.2.2) ---------- */
+/* Small version of the carousel arrow; aria-pressed="true" = paused (shows play) */
+.zenith-pause {
+  display: inline-grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  padding: 0;
+  border: 0;
+  background: #4d4d4d;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color var(--duration-short) ease;
+}
+
+.zenith-pause[hidden] {
+  display: none;
+}
+
+.zenith-pause:hover {
+  background: #666;
+}
+
+.zenith-pause .zenith-icon {
+  width: 14px;
+  height: 14px;
+}
+
+.zenith-pause .zenith-pause__play,
+.zenith-pause[aria-pressed='true'] .zenith-pause__pause {
+  display: none;
+}
+
+.zenith-pause[aria-pressed='true'] .zenith-pause__play {
+  display: block;
+}
+
+.zenith-carousel__arrows {
+  align-items: center;
+}
+
+/* Autoplaying carousel without controls (zenith-carousel.js): right-aligned under the track */
+.zenith-carousel__pause--solo {
+  display: grid;
+  margin: var(--z-space-3) 0 0 auto;
+}
+
+zenith-carousel.is-static .zenith-carousel__pause--solo {
+  display: none;
 }
 
 /* ---------- Product card ---------- */
@@ -1223,14 +1278,16 @@ div.zenith-overlay {
 }
 
 /* Text links (richtext in sections, policy/page content, "Amare Group" auto-links, map addresses):
-   the surrounding text colour, no underline until hovered — never the browser's default blue.
+   the surrounding text colour — never the browser's default blue — with a thin underline that is always there
+   (colour alone can't mark a link, WCAG 1.4.1) and turns full strength on hover.
    Inside a sentence or list item only, so linked blocks (cards, buttons) aren't touched. */
 .zenith-section :is(p a, li > a):not([class]),
 .zenith-rte a:not([class]),
 .rte a:not([class]),
 a.zenith-amare-link {
   color: inherit;
-  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, currentColor 60%, transparent);
   text-underline-offset: 0.15em;
   text-decoration-thickness: 1px;
 }
@@ -1239,12 +1296,12 @@ a.zenith-amare-link {
 .zenith-rte a:not([class]):hover,
 .rte a:not([class]):hover,
 a.zenith-amare-link:hover {
-  text-decoration: underline;
+  text-decoration-color: currentColor;
 }
 
 /* Policy links in text (Refunds and Returns, Shipping / Privacy Policy, Terms…): always underlined in brand gold.
    Plain text links only (menus and footer links carry a class); .zenith-policy-link = added by zenith-auto-links.js.
-   `html body` outranks the per-section "no underline until hover" link rules. */
+   `html body` outranks the per-section text link rules above. */
 html body a[href*='/policies/']:not([class]),
 a.zenith-policy-link {
   color: inherit;
