@@ -21,6 +21,27 @@
     if pc_collection != blank and pc_collection.products_count > 0
       assign pc_products = pc_collection.products
     endif
+
+    # Store-wide 'Products shown first' (Theme settings → Zenith): any of them in this list lead, in that order.
+    if settings.products_first != blank and pc_products != blank
+      assign zo_list = '' | split: ''
+      assign zo_keys = '|'
+      for zo_pin in settings.products_first
+        assign zo_hit = pc_products | where: 'id', zo_pin.id
+        if zo_hit.size > 0
+          assign zo_list = zo_list | concat: zo_hit
+          assign zo_keys = zo_keys | append: zo_pin.id | append: '|'
+        endif
+      endfor
+      for zo_p in pc_products
+        assign zo_key = '|' | append: zo_p.id | append: '|'
+        unless zo_keys contains zo_key
+          assign zo_hit = pc_products | where: 'id', zo_p.id
+          assign zo_list = zo_list | concat: zo_hit
+        endunless
+      endfor
+      assign pc_products = zo_list
+    endif
   endif
   assign mobile_vw = section.settings.mobile_slide_width
   if section.settings.mobile_layout == 'stack'

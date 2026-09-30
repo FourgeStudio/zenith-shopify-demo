@@ -674,7 +674,11 @@
         }
       }
     },
-    "zgb_image": "shopify://shop_images/vector-icons_7.png"
+    "zgb_image": "shopify://shop_images/vector-icons_7.png",
+    "products_first": [
+      "zenith-anti-aging-tallow-cream",
+      "zenith-advanced-hair-density-shampoo"
+    ]
   },
   "presets": {
     "Dawn": {

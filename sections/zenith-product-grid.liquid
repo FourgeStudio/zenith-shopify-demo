@@ -17,8 +17,30 @@
     endif
   endif
   assign pg_count = 0
+  assign pg_products = blank
   if pg_collection != blank
     assign pg_count = pg_collection.products_count | at_most: s.products_to_show
+    assign pg_products = pg_collection.products
+  endif
+  # Store-wide 'Products shown first' (Theme settings → Zenith): any of them in this list lead, in that order.
+  if settings.products_first != blank and pg_products != blank
+    assign zo_list = '' | split: ''
+    assign zo_keys = '|'
+    for zo_pin in settings.products_first
+      assign zo_hit = pg_products | where: 'id', zo_pin.id
+      if zo_hit.size > 0
+        assign zo_list = zo_list | concat: zo_hit
+        assign zo_keys = zo_keys | append: zo_pin.id | append: '|'
+      endif
+    endfor
+    for zo_p in pg_products
+      assign zo_key = '|' | append: zo_p.id | append: '|'
+      unless zo_keys contains zo_key
+        assign zo_hit = pg_products | where: 'id', zo_p.id
+        assign zo_list = zo_list | concat: zo_hit
+      endunless
+    endfor
+    assign pg_products = zo_list
   endif
 
   assign cols = s.columns_desktop
@@ -95,7 +117,7 @@
 
       <ul class="zenith-pg__grid" role="list">
         {%- if pg_count > 0 -%}
-          {%- for product in pg_collection.products limit: s.products_to_show -%}
+          {%- for product in pg_products limit: s.products_to_show -%}
             {%- liquid
               # One badge per card: sale badge (on sale, or every product when set) → product tag "badge:Your text"
               # → the section's first-product badge.
