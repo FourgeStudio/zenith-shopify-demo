@@ -59,6 +59,16 @@ footer.footer.zenith-footer {
   flex-basis: 100%;
 }
 
+/* Image block: its own full-width row (always on phones), so alignment has room to act.
+   Beats Dawn's section-footer.css, which centres every footer image below 750px. */
+.zenith-footer__block--image {
+  flex-basis: 100%;
+}
+
+.zenith-footer .footer-block-image.zenith-footer__img--m-left { justify-content: flex-start; }
+.zenith-footer .footer-block-image.zenith-footer__img--m-center { justify-content: center; }
+.zenith-footer .footer-block-image.zenith-footer__img--m-right { justify-content: flex-end; }
+
 .zenith-footer__heading {
   margin: 0 0 var(--z-space-4);
   font-size: var(--z-tfs-m, 1.4rem);
@@ -301,9 +311,18 @@ footer.footer.zenith-footer {
     row-gap: var(--z-cgap, 20px);
   }
 
-  .zenith-footer__block--full-m {
+  .zenith-footer__block--full-m,
+  .zenith-footer__block--image {
     flex-basis: auto;
   }
+
+  .zenith-footer__block--image.zenith-footer__block--row {
+    flex-basis: 100%;
+  }
+
+  .zenith-footer .footer-block-image.zenith-footer__img--left { justify-content: flex-start; }
+  .zenith-footer .footer-block-image.zenith-footer__img--center { justify-content: center; }
+  .zenith-footer .footer-block-image.zenith-footer__img--right { justify-content: flex-end; }
 
   .zenith-footer__heading,
   .zenith-footer__text,

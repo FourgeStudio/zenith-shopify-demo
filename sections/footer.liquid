@@ -131,7 +131,7 @@
         <div class="zenith-footer__menus">
           {%- for block in section.blocks -%}
             <div
-              class="zenith-footer__block zenith-footer__block--{{ block.type | handleize }}{% if block.settings.mobile_full_width %} zenith-footer__block--full-m{% endif %}"
+              class="zenith-footer__block zenith-footer__block--{{ block.type | handleize }}{% if block.settings.mobile_full_width %} zenith-footer__block--full-m{% endif %}{% if block.type == 'image' and block.settings.placement != 'inline' %} zenith-footer__block--row{% endif %}"
               {{ block.shopify_attributes }}
             >
               {%- if block.settings.heading != blank -%}
@@ -205,7 +205,7 @@
                     {%- endif -%}
                   </div>
                 {%- when 'image' -%}
-                  <div class="footer-block-image {{ block.settings.alignment }}">
+                  <div class="footer-block-image zenith-footer__img--{{ block.settings.alignment | default: 'left' }} zenith-footer__img--m-{{ block.settings.alignment_mobile | default: 'center' }}">
                     {%- if block.settings.image != blank -%}
                       {%- assign image_size_2x = block.settings.image_width | times: 2 | at_most: 5760 -%}
                       <div
@@ -543,9 +543,19 @@
         },
         {
           "type": "select",
+          "id": "placement",
+          "label": "Placement",
+          "options": [
+            { "value": "row", "label": "Own row, under the menus" },
+            { "value": "inline", "label": "Beside the menus" }
+          ],
+          "default": "row"
+        },
+        {
+          "type": "select",
           "id": "alignment",
           "label": "Alignment",
-          "info": "No visible effect in this footer: the block is only as wide as the image. Its place in the menus row decides where it sits.",
+          "visible_if": "{{ block.settings.placement != 'inline' }}",
           "options": [
             {
               "value": "",
@@ -559,6 +569,17 @@
               "value": "right",
               "label": "Right"
             }
+          ],
+          "default": "center"
+        },
+        {
+          "type": "select",
+          "id": "alignment_mobile",
+          "label": "Mobile alignment",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "center", "label": "Center" },
+            { "value": "right", "label": "Right" }
           ],
           "default": "center"
         }

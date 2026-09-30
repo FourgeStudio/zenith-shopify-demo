@@ -132,6 +132,12 @@
 }
 
 @media screen and (max-width: 749px) {
+  /* Mobile → Banner min height (background layout); 0 = content height */
+  .zenith-promo--background .zenith-promo__body {
+    min-height: var(--z-promo-mh-m, 0);
+    justify-content: center;
+  }
+
   .zenith-section.zenith-promo.zenith-promo--m-full .zenith-promo__container.zenith-promo__container {
     padding-left: 0;
     padding-right: 0;

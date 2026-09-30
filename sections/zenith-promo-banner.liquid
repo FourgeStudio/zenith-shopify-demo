@@ -81,8 +81,10 @@
   --z-promo-inset-m: {{ s.card_inset_mobile }}px;
   {%- if s.height_mode == 'screen' %}
   --z-promo-mh: {{ s.card_min_height_screen }}svh;
+  --z-promo-mh-m: {{ s.card_min_height_mobile_screen | default: 0 }}svh;
   {%- else %}
   --z-promo-mh: {{ s.card_min_height }}px;
+  --z-promo-mh-m: {{ s.card_min_height_mobile | default: 0 }}px;
   {%- endif %}
   --z-promo-tg: {{ s.text_spacing }}px;
   --z-promo-bgpos: {{ s.background_position }};
@@ -399,8 +401,8 @@
     {
       "type": "select",
       "id": "height_mode",
-      "label": "Banner height (desktop)",
-      "info": "% of screen height suits a promo in the hero spot. On phones the banner is as tall as its content (split layout: Mobile → Photo height).",
+      "label": "Banner height",
+      "info": "% of screen height suits a promo in the hero spot. Mobile heights are under Mobile (split layout: Mobile → Photo height).",
       "default": "px",
       "options": [
         { "value": "px", "label": "Fixed (px)" },
@@ -839,6 +841,30 @@
       "max": 400,
       "step": 10,
       "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "card_min_height_mobile",
+      "visible_if": "{{ section.settings.layout_style == 'background' and section.settings.height_mode == 'px' }}",
+      "label": "Banner min height (fixed)",
+      "info": "0 = as tall as the content. Taller content still fits; the text is centred in the extra space.",
+      "min": 0,
+      "max": 700,
+      "step": 20,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "card_min_height_mobile_screen",
+      "visible_if": "{{ section.settings.layout_style == 'background' and section.settings.height_mode == 'screen' }}",
+      "label": "Banner min height (% of screen)",
+      "info": "0 = as tall as the content. Taller content still fits; the text is centred in the extra space.",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
       "default": 0
     },
     {
