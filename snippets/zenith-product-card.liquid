@@ -15,6 +15,21 @@
 {%- liquid
   assign card_btn_style = button_style | default: 'gold'
   assign card_image = image | default: product.featured_media
+  # Hover image (mouse devices): the product's next photo, or its main photo when a custom card image is shown
+  assign card_hover = blank
+  if image != blank
+    assign card_hover = product.featured_media
+  else
+    for m in product.media
+      if forloop.first
+        continue
+      endif
+      if m.media_type == 'image'
+        assign card_hover = m
+        break
+      endif
+    endfor
+  endif
   assign card_btn_icon = button_icon | default: 'arrow_right'
   assign card_sizes = image_sizes | default: '(min-width: 990px) 25vw, (min-width: 750px) 33vw, 85vw'
   assign card_rating_style = rating_style | default: 'count'
@@ -66,6 +81,18 @@
             sizes: card_sizes,
             alt: card_alt
         }}
+        {%- if card_hover != blank -%}
+          {{
+            card_hover
+            | image_url: width: 900
+            | image_tag:
+              loading: 'lazy',
+              widths: '300, 400, 600, 900',
+              sizes: card_sizes,
+              alt: '',
+              class: 'zenith-card__img-hover'
+          }}
+        {%- endif -%}
       {%- else -%}
         {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
       {%- endif -%}

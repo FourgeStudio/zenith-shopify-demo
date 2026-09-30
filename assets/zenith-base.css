@@ -1387,3 +1387,44 @@ p, li, blockquote {
     overflow-x: clip;
   }
 }
+
+/* Hover (mouse devices only, motion allowed):
+   photo cards zoom their photo slowly; product cards fade to the product's second photo instead. */
+.zenith-card__img-hover {
+  display: none;
+}
+
+@media (hover: hover) {
+  .zenith-card__media > .zenith-card__img-hover {
+    display: block;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .zenith-card:hover .zenith-card__media > .zenith-card__img-hover {
+    opacity: 1;
+  }
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .zenith-results__media > img,
+  .zenith-ba__photo > img,
+  .zenith-rt__image > img,
+  .zenith-features__media > img,
+  .zenith-acard__media > img,
+  .zenith-fp__media > img,
+  .zenith-fp__media > picture > img {
+    transition: transform 0.6s ease;
+  }
+
+  .zenith-results__card:hover .zenith-results__media > img,
+  .zenith-video-card:hover .zenith-video-card__poster,
+  .zenith-ba__pair:hover .zenith-ba__photo > img,
+  .zenith-rt__step:hover .zenith-rt__image > img,
+  .zenith-features__item:hover .zenith-features__media > img,
+  .zenith-acard:hover .zenith-acard__media > img,
+  .zenith-fp__media--link:hover > img,
+  .zenith-fp__media--link:hover > picture > img {
+    transform: scale(1.04);
+  }
+}

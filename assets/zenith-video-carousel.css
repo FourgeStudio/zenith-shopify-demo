@@ -103,7 +103,7 @@
 
 .zenith-video-card__media > .zenith-video-card__poster {
   z-index: 1;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease, transform 0.6s ease; /* transform: hover zoom (zenith-base.css) */
 }
 
 .zenith-video-card__media > .zenith-overlay {
