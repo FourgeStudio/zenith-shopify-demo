@@ -1010,6 +1010,11 @@ div.zenith-cart-offers__fill {
   color: rgb(var(--color-background));
 }
 
+/* The JS holds back is-reached until the fill gets there on drawer open, so the tick waits with it. */
+.zenith-cart-offers__step:not(.is-reached) .zenith-cart-offers__step-dot svg {
+  display: none;
+}
+
 .zenith-cart-offers__step-dot svg {
   width: 1.2rem;
   height: 1.2rem;
@@ -1030,9 +1035,9 @@ div.zenith-cart-offers__fill {
   bottom: 1.4rem;
   left: 50%;
   transform: translateX(-50%);
-  width: 100%;
-  /* Never narrower than the longest word ("SHIPPING"); spills evenly both sides if the gap is tight. */
-  min-width: min-content;
+  /* One word per line, so every label is the same two-line block ("FREE / SHIPPING", "10% / OFF")
+     and neighbours never run into each other. */
+  width: min-content;
   font-size: 1.05rem;
   line-height: 1.15;
   letter-spacing: 0.02em;
