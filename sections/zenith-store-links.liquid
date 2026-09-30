@@ -50,14 +50,65 @@
       class: 'zenith-store-links__heading'
     -%}
 
-    {%- if section.blocks.size > 0 -%}
+    {%- liquid
+      # Cards: Theme settings → Zenith · Official pages (slots op1–op8, same on every page) or this section's blocks
+      assign use_global = false
+      if section.settings.content_source == 'global'
+        assign use_global = true
+        assign item_max = 8
+      else
+        assign item_max = section.blocks.size
+      endif
+      assign item_total = 0
+      if use_global
+        for n in (1..item_max)
+          assign k = 'op' | append: n | append: '_link'
+          assign k2 = 'op' | append: n | append: '_handle'
+          if settings[k] != blank or settings[k2] != blank
+            assign item_total = item_total | plus: 1
+          endif
+        endfor
+      else
+        assign item_total = item_max
+      endif
+    -%}
+    {%- if item_total > 0 -%}
       <ul class="zenith-store-links__grid" role="list">
-        {%- for block in section.blocks -%}
+        {%- for n in (1..item_max) -%}
           {%- liquid
-            assign b = block.settings
-            assign link = b.link
-            assign store_name = b.store_name
-            case b.icon
+            if use_global
+              assign p = 'op' | append: n | append: '_'
+              assign k = p | append: 'icon'
+              assign s_icon = settings[k]
+              assign k = p | append: 'custom_icon'
+              assign s_custom_icon = settings[k]
+              assign k = p | append: 'handle'
+              assign s_handle = settings[k]
+              assign k = p | append: 'stat'
+              assign s_stat = settings[k]
+              assign k = p | append: 'link'
+              assign s_link = settings[k]
+              assign k = p | append: 'store_name'
+              assign s_store_name = settings[k]
+              assign s_new_tab = settings.op_new_tab
+              assign s_attrs = ''
+              if s_link == blank and s_handle == blank
+                continue
+              endif
+            else
+              assign block = section.blocks[forloop.index0]
+              assign s_icon = block.settings.icon
+              assign s_custom_icon = block.settings.custom_icon
+              assign s_handle = block.settings.handle
+              assign s_stat = block.settings.stat
+              assign s_link = block.settings.link
+              assign s_store_name = block.settings.store_name
+              assign s_new_tab = block.settings.new_tab
+              assign s_attrs = 'id="Block-' | append: block.id | append: '" ' | append: block.shopify_attributes
+            endif
+            assign link = s_link
+            assign store_name = s_store_name
+            case s_icon
               when 'lazada'
                 if link == blank
                   assign link = settings.social_lazada_link
@@ -84,49 +135,49 @@
                 endif
                 assign store_name = store_name | default: 'Instagram'
             endcase
-            if b.icon == 'custom' and b.custom_icon != blank and store_name == blank
-              assign store_name = b.custom_icon.alt
+            if s_icon == 'custom' and s_custom_icon != blank and store_name == blank
+              assign store_name = s_custom_icon.alt
             endif
             assign card_tag = 'div'
             if link != blank
               assign card_tag = 'a'
             endif
           -%}
-          <li class="zenith-store-links__item" id="Block-{{ block.id }}" {{ block.shopify_attributes }}>
+          <li class="zenith-store-links__item" {{ s_attrs }}>
             <{{ card_tag }}
               class="zenith-store-links__card{% if link != blank %} zenith-store-links__card--link{% endif %}"
               {% if link != blank %}
                 href="{{ link | escape }}"
-                {% if b.new_tab %}
+                {% if s_new_tab %}
                   target="_blank" rel="noopener"
                 {% endif %}
               {% endif %}
             >
             <span class="zenith-store-links__glyph" aria-hidden="true">
-              {%- if b.icon == 'custom' -%}
-                {%- if b.custom_icon != blank -%}
+              {%- if s_icon == 'custom' -%}
+                {%- if s_custom_icon != blank -%}
                   {{
-                    b.custom_icon
+                    s_custom_icon
                     | image_url: width: 160
                     | image_tag: loading: 'lazy', widths: '48, 80, 120, 160', sizes: '48px', alt: ''
                   }}
                 {%- endif -%}
               {%- else -%}
-                {%- render 'zenith-icon', icon: b.icon, class: 'zenith-store-links__icon' -%}
+                {%- render 'zenith-icon', icon: s_icon, class: 'zenith-store-links__icon' -%}
               {%- endif -%}
             </span>
             {%- if store_name != blank -%}
               <span class="visually-hidden">{{ store_name | escape }}</span>
             {%- endif -%}
             <span class="zenith-store-links__text">
-              {%- if b.handle != blank -%}
-                <span class="zenith-store-links__handle">{{ b.handle | escape }}</span>
+              {%- if s_handle != blank -%}
+                <span class="zenith-store-links__handle">{{ s_handle | escape }}</span>
               {%- endif -%}
-              {%- if b.stat != blank -%}
-                <span class="zenith-store-links__stat">{{ b.stat | escape | replace: '[customers]', settings.customer_count }}</span>
+              {%- if s_stat != blank -%}
+                <span class="zenith-store-links__stat">{{ s_stat | escape | replace: '[customers]', settings.customer_count }}</span>
               {%- endif -%}
             </span>
-            {%- if link != blank and b.new_tab -%}
+            {%- if link != blank and s_new_tab -%}
               <span class="visually-hidden">{{ 'accessibility.link_messages.new_window' | t }}</span>
             {%- endif -%}
             </{{ card_tag }}>
@@ -152,6 +203,17 @@
     {
       "type": "header",
       "content": "Content"
+    },
+    {
+      "type": "select",
+      "id": "content_source",
+      "label": "Cards",
+      "info": "Official pages = Theme settings → Zenith · Official pages (edit once, same on every page). This section's cards = the Store blocks below.",
+      "default": "custom",
+      "options": [
+        { "value": "global", "label": "Official pages (Theme settings)" },
+        { "value": "custom", "label": "This section's cards" }
+      ]
     },
     {
       "type": "text",

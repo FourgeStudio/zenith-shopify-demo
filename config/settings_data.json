@@ -646,7 +646,33 @@
           "shadow": "#000000"
         }
       }
-    }
+    },
+    "op_new_tab": true,
+    "op1_icon": "facebook",
+    "op1_handle": "Zenith PH",
+    "op1_stat": "",
+    "op1_link": "https://www.facebook.com/tryzenithph",
+    "op1_store_name": "",
+    "op2_icon": "instagram",
+    "op2_handle": "Zenith PH",
+    "op2_stat": "",
+    "op2_link": "https://www.instagram.com/tryzenithph/",
+    "op2_store_name": "",
+    "op3_icon": "tiktok_shop",
+    "op3_handle": "Zenith PH",
+    "op3_stat": "",
+    "op3_link": "https://www.tiktok.com/@tryzenithph",
+    "op3_store_name": "",
+    "op4_icon": "shopee",
+    "op4_handle": "Zenith PH",
+    "op4_stat": "",
+    "op4_link": "https://shopee.ph/tryzenithph",
+    "op4_store_name": "",
+    "op5_icon": "lazada",
+    "op5_handle": "tryzenithph",
+    "op5_stat": "",
+    "op5_link": "https://www.lazada.com.ph/shop/tryzenithph/",
+    "op5_store_name": ""
   },
   "presets": {
     "Dawn": {

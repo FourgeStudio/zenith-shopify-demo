@@ -4620,6 +4620,533 @@
     ]
   },
   {
+    "name": "Zenith · Official pages",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "The cards of every \"Zenith · Store links\" section set to Cards = Official pages (home, About, Certificates, Verify…). Edit here once. A page with no name and no link is skipped."
+      },
+      {
+        "type": "checkbox",
+        "id": "op_new_tab",
+        "label": "Open links in a new tab",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Page 1"
+      },
+      {
+        "type": "select",
+        "id": "op1_icon",
+        "label": "Icon",
+        "options": [
+          {
+            "value": "facebook",
+            "label": "Facebook"
+          },
+          {
+            "value": "instagram",
+            "label": "Instagram"
+          },
+          {
+            "value": "tiktok_shop",
+            "label": "TikTok Shop"
+          },
+          {
+            "value": "shopee",
+            "label": "Shopee"
+          },
+          {
+            "value": "lazada",
+            "label": "Lazada"
+          },
+          {
+            "value": "custom",
+            "label": "Custom image"
+          }
+        ],
+        "default": "facebook"
+      },
+      {
+        "type": "image_picker",
+        "id": "op1_custom_icon",
+        "label": "Custom icon",
+        "info": "Used when Icon = Custom image"
+      },
+      {
+        "type": "text",
+        "id": "op1_handle",
+        "label": "Name / handle"
+      },
+      {
+        "type": "text",
+        "id": "op1_stat",
+        "label": "Second line",
+        "info": "Optional, e.g. a rating or follower count."
+      },
+      {
+        "type": "url",
+        "id": "op1_link",
+        "label": "Link"
+      },
+      {
+        "type": "text",
+        "id": "op1_store_name",
+        "label": "Store name for screen readers",
+        "info": "Empty = the icon's name (Facebook, Shopee…)."
+      },
+      {
+        "type": "header",
+        "content": "Page 2"
+      },
+      {
+        "type": "select",
+        "id": "op2_icon",
+        "label": "Icon",
+        "options": [
+          {
+            "value": "facebook",
+            "label": "Facebook"
+          },
+          {
+            "value": "instagram",
+            "label": "Instagram"
+          },
+          {
+            "value": "tiktok_shop",
+            "label": "TikTok Shop"
+          },
+          {
+            "value": "shopee",
+            "label": "Shopee"
+          },
+          {
+            "value": "lazada",
+            "label": "Lazada"
+          },
+          {
+            "value": "custom",
+            "label": "Custom image"
+          }
+        ],
+        "default": "facebook"
+      },
+      {
+        "type": "image_picker",
+        "id": "op2_custom_icon",
+        "label": "Custom icon",
+        "info": "Used when Icon = Custom image"
+      },
+      {
+        "type": "text",
+        "id": "op2_handle",
+        "label": "Name / handle"
+      },
+      {
+        "type": "text",
+        "id": "op2_stat",
+        "label": "Second line",
+        "info": "Optional, e.g. a rating or follower count."
+      },
+      {
+        "type": "url",
+        "id": "op2_link",
+        "label": "Link"
+      },
+      {
+        "type": "text",
+        "id": "op2_store_name",
+        "label": "Store name for screen readers",
+        "info": "Empty = the icon's name (Facebook, Shopee…)."
+      },
+      {
+        "type": "header",
+        "content": "Page 3"
+      },
+      {
+        "type": "select",
+        "id": "op3_icon",
+        "label": "Icon",
+        "options": [
+          {
+            "value": "facebook",
+            "label": "Facebook"
+          },
+          {
+            "value": "instagram",
+            "label": "Instagram"
+          },
+          {
+            "value": "tiktok_shop",
+            "label": "TikTok Shop"
+          },
+          {
+            "value": "shopee",
+            "label": "Shopee"
+          },
+          {
+            "value": "lazada",
+            "label": "Lazada"
+          },
+          {
+            "value": "custom",
+            "label": "Custom image"
+          }
+        ],
+        "default": "facebook"
+      },
+      {
+        "type": "image_picker",
+        "id": "op3_custom_icon",
+        "label": "Custom icon",
+        "info": "Used when Icon = Custom image"
+      },
+      {
+        "type": "text",
+        "id": "op3_handle",
+        "label": "Name / handle"
+      },
+      {
+        "type": "text",
+        "id": "op3_stat",
+        "label": "Second line",
+        "info": "Optional, e.g. a rating or follower count."
+      },
+      {
+        "type": "url",
+        "id": "op3_link",
+        "label": "Link"
+      },
+      {
+        "type": "text",
+        "id": "op3_store_name",
+        "label": "Store name for screen readers",
+        "info": "Empty = the icon's name (Facebook, Shopee…)."
+      },
+      {
+        "type": "header",
+        "content": "Page 4"
+      },
+      {
+        "type": "select",
+        "id": "op4_icon",
+        "label": "Icon",
+        "options": [
+          {
+            "value": "facebook",
+            "label": "Facebook"
+          },
+          {
+            "value": "instagram",
+            "label": "Instagram"
+          },
+          {
+            "value": "tiktok_shop",
+            "label": "TikTok Shop"
+          },
+          {
+            "value": "shopee",
+            "label": "Shopee"
+          },
+          {
+            "value": "lazada",
+            "label": "Lazada"
+          },
+          {
+            "value": "custom",
+            "label": "Custom image"
+          }
+        ],
+        "default": "facebook"
+      },
+      {
+        "type": "image_picker",
+        "id": "op4_custom_icon",
+        "label": "Custom icon",
+        "info": "Used when Icon = Custom image"
+      },
+      {
+        "type": "text",
+        "id": "op4_handle",
+        "label": "Name / handle"
+      },
+      {
+        "type": "text",
+        "id": "op4_stat",
+        "label": "Second line",
+        "info": "Optional, e.g. a rating or follower count."
+      },
+      {
+        "type": "url",
+        "id": "op4_link",
+        "label": "Link"
+      },
+      {
+        "type": "text",
+        "id": "op4_store_name",
+        "label": "Store name for screen readers",
+        "info": "Empty = the icon's name (Facebook, Shopee…)."
+      },
+      {
+        "type": "header",
+        "content": "Page 5"
+      },
+      {
+        "type": "select",
+        "id": "op5_icon",
+        "label": "Icon",
+        "options": [
+          {
+            "value": "facebook",
+            "label": "Facebook"
+          },
+          {
+            "value": "instagram",
+            "label": "Instagram"
+          },
+          {
+            "value": "tiktok_shop",
+            "label": "TikTok Shop"
+          },
+          {
+            "value": "shopee",
+            "label": "Shopee"
+          },
+          {
+            "value": "lazada",
+            "label": "Lazada"
+          },
+          {
+            "value": "custom",
+            "label": "Custom image"
+          }
+        ],
+        "default": "facebook"
+      },
+      {
+        "type": "image_picker",
+        "id": "op5_custom_icon",
+        "label": "Custom icon",
+        "info": "Used when Icon = Custom image"
+      },
+      {
+        "type": "text",
+        "id": "op5_handle",
+        "label": "Name / handle"
+      },
+      {
+        "type": "text",
+        "id": "op5_stat",
+        "label": "Second line",
+        "info": "Optional, e.g. a rating or follower count."
+      },
+      {
+        "type": "url",
+        "id": "op5_link",
+        "label": "Link"
+      },
+      {
+        "type": "text",
+        "id": "op5_store_name",
+        "label": "Store name for screen readers",
+        "info": "Empty = the icon's name (Facebook, Shopee…)."
+      },
+      {
+        "type": "header",
+        "content": "Page 6"
+      },
+      {
+        "type": "select",
+        "id": "op6_icon",
+        "label": "Icon",
+        "options": [
+          {
+            "value": "facebook",
+            "label": "Facebook"
+          },
+          {
+            "value": "instagram",
+            "label": "Instagram"
+          },
+          {
+            "value": "tiktok_shop",
+            "label": "TikTok Shop"
+          },
+          {
+            "value": "shopee",
+            "label": "Shopee"
+          },
+          {
+            "value": "lazada",
+            "label": "Lazada"
+          },
+          {
+            "value": "custom",
+            "label": "Custom image"
+          }
+        ],
+        "default": "facebook"
+      },
+      {
+        "type": "image_picker",
+        "id": "op6_custom_icon",
+        "label": "Custom icon",
+        "info": "Used when Icon = Custom image"
+      },
+      {
+        "type": "text",
+        "id": "op6_handle",
+        "label": "Name / handle"
+      },
+      {
+        "type": "text",
+        "id": "op6_stat",
+        "label": "Second line",
+        "info": "Optional, e.g. a rating or follower count."
+      },
+      {
+        "type": "url",
+        "id": "op6_link",
+        "label": "Link"
+      },
+      {
+        "type": "text",
+        "id": "op6_store_name",
+        "label": "Store name for screen readers",
+        "info": "Empty = the icon's name (Facebook, Shopee…)."
+      },
+      {
+        "type": "header",
+        "content": "Page 7"
+      },
+      {
+        "type": "select",
+        "id": "op7_icon",
+        "label": "Icon",
+        "options": [
+          {
+            "value": "facebook",
+            "label": "Facebook"
+          },
+          {
+            "value": "instagram",
+            "label": "Instagram"
+          },
+          {
+            "value": "tiktok_shop",
+            "label": "TikTok Shop"
+          },
+          {
+            "value": "shopee",
+            "label": "Shopee"
+          },
+          {
+            "value": "lazada",
+            "label": "Lazada"
+          },
+          {
+            "value": "custom",
+            "label": "Custom image"
+          }
+        ],
+        "default": "facebook"
+      },
+      {
+        "type": "image_picker",
+        "id": "op7_custom_icon",
+        "label": "Custom icon",
+        "info": "Used when Icon = Custom image"
+      },
+      {
+        "type": "text",
+        "id": "op7_handle",
+        "label": "Name / handle"
+      },
+      {
+        "type": "text",
+        "id": "op7_stat",
+        "label": "Second line",
+        "info": "Optional, e.g. a rating or follower count."
+      },
+      {
+        "type": "url",
+        "id": "op7_link",
+        "label": "Link"
+      },
+      {
+        "type": "text",
+        "id": "op7_store_name",
+        "label": "Store name for screen readers",
+        "info": "Empty = the icon's name (Facebook, Shopee…)."
+      },
+      {
+        "type": "header",
+        "content": "Page 8"
+      },
+      {
+        "type": "select",
+        "id": "op8_icon",
+        "label": "Icon",
+        "options": [
+          {
+            "value": "facebook",
+            "label": "Facebook"
+          },
+          {
+            "value": "instagram",
+            "label": "Instagram"
+          },
+          {
+            "value": "tiktok_shop",
+            "label": "TikTok Shop"
+          },
+          {
+            "value": "shopee",
+            "label": "Shopee"
+          },
+          {
+            "value": "lazada",
+            "label": "Lazada"
+          },
+          {
+            "value": "custom",
+            "label": "Custom image"
+          }
+        ],
+        "default": "facebook"
+      },
+      {
+        "type": "image_picker",
+        "id": "op8_custom_icon",
+        "label": "Custom icon",
+        "info": "Used when Icon = Custom image"
+      },
+      {
+        "type": "text",
+        "id": "op8_handle",
+        "label": "Name / handle"
+      },
+      {
+        "type": "text",
+        "id": "op8_stat",
+        "label": "Second line",
+        "info": "Optional, e.g. a rating or follower count."
+      },
+      {
+        "type": "url",
+        "id": "op8_link",
+        "label": "Link"
+      },
+      {
+        "type": "text",
+        "id": "op8_store_name",
+        "label": "Store name for screen readers",
+        "info": "Empty = the icon's name (Facebook, Shopee…)."
+      }
+    ]
+  },
+  {
     "name": "Zenith · Policy pages",
     "settings": [
       {
