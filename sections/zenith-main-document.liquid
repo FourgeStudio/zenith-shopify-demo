@@ -1,5 +1,6 @@
 {%- comment -%}
-  zenith: text page in the policy look (Disclaimer). Title = page title, text = page content (Online Store → Pages).
+  zenith: text page in the policy look (Disclaimer). Title / text = the section's Title / Text when filled (the Disclaimer
+  template carries its own), otherwise the page's title and content (Online Store → Pages).
   Start the content with "Last updated: …" to show it under the title. Same layout as policy pages (snippets/zenith-doc.liquid).
 {%- endcomment -%}
 {%- liquid
@@ -35,9 +36,13 @@
   --z-doc-pb: {{ s.padding_bottom }}px;
   --z-doc-pb-m: {{ s.padding_bottom_mobile }}px;
 {%- endcapture -%}
+{%- liquid
+  assign doc_title = s.title | default: page.title
+  assign doc_body = s.text | default: page.content
+-%}
 {%- render 'zenith-doc',
-  title: page.title,
-  body: page.content,
+  title: doc_title,
+  body: doc_body,
   id: section.id,
   show_toc: s.show_toc,
   toc_heading: s.toc_heading,
@@ -60,7 +65,17 @@
     },
     {
       "type": "paragraph",
-      "content": "Title and text come from the page (Online Store → Pages). Start the text with \"Last updated: …\" to show it under the title."
+      "content": "Title and text below are shown when filled; leave them empty to use the page's own title and content (Online Store → Pages). Start the text with \"Last updated: …\" to show it under the title."
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text"
     },
     {
       "type": "checkbox",
