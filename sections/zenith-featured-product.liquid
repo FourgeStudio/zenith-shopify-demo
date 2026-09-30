@@ -88,12 +88,12 @@
 
           <p class="zenith-fp__price">
             {%- if fp_product != blank -%}
-              {{ fp_product.price | money }}
+              {{ fp_product.price | money_without_trailing_zeros }}
               {%- if fp_product.compare_at_price > fp_product.price -%}
-                <s>{{ fp_product.compare_at_price | money }}</s>
+                <s>{{ fp_product.compare_at_price | money_without_trailing_zeros }}</s>
               {%- endif -%}
             {%- else -%}
-              {{ 89900 | money }}
+              {{ 89900 | money_without_trailing_zeros }}
             {%- endif -%}
           </p>
 

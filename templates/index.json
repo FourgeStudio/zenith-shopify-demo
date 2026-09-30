@@ -372,8 +372,7 @@
         "padding_bottom": 24,
         "padding_top_mobile": 24,
         "padding_bottom_mobile": 24
-      },
-      "disabled": true
+      }
     },
     "results": {
       "type": "zenith-results-marquee",
@@ -519,9 +518,9 @@
       "settings": {
         "content_source": "global",
         "eyebrow": "Used by [customers] Filipino men",
-        "heading": "Built for Filipino men. In their words.",
-        "heading_mobile": "Built for Filipino men.\nIn their words.",
-        "subheading": "",
+        "heading": "Real Men. Real Results.",
+        "heading_mobile": "Built for Filipino men over 35",
+        "subheading": "<p>See the difference a proper regimen makes.</p><p>From clearer skin to thicker hair, every transformation here comes from verified Zenith customers putting in the consistent work.</p>",
         "product_prefix": "Used",
         "verified_label": "Verified buyer",
         "disclaimer": "Individual results may vary.*",
@@ -536,8 +535,8 @@
         "speed": 120,
         "alternate_direction": true,
         "pause_on_hover": true,
-        "heading_max_width": 460,
-        "heading_gap": 10,
+        "heading_max_width": 760,
+        "heading_gap": 8,
         "heading_spacing": 32,
         "gap": 20,
         "content_padding": 16,
@@ -570,7 +569,7 @@
         "name_font_size": 15,
         "detail_font_size": 12,
         "disclaimer_font_size": 12,
-        "heading_alignment_mobile": "center",
+        "heading_alignment_mobile": "left",
         "mobile_card_width": 420,
         "card_height_mobile": 220,
         "media_width_mobile": 50,
@@ -775,7 +774,7 @@
         "product_filter": "all",
         "filter_products": [],
         "eyebrow": "",
-        "heading": "Clinically Proven. The Complete Regimen.",
+        "heading": "A Complete Routine, Built for Men.",
         "heading_mobile": "A Complete Routine,\nBuilt for Men.",
         "subheading": "<p>Hear from the men who use Zenith every day.</p>",
         "subheading_mobile_only": false,
@@ -787,7 +786,7 @@
         "show_dots": true,
         "show_arrows": true,
         "autoplay": 0,
-        "heading_max_width": 760,
+        "heading_max_width": 400,
         "heading_gap": 4,
         "heading_spacing": 32,
         "gap": 24,
@@ -835,8 +834,7 @@
         "padding_bottom": 32,
         "padding_top_mobile": 20,
         "padding_bottom_mobile": 20
-      },
-      "disabled": true
+      }
     },
     "guarantee": {
       "type": "zenith-feature-columns",
@@ -848,7 +846,7 @@
             "icon": "phone",
             "icon_text": "",
             "title": "",
-            "text": "<p>Our local team will text or call to verify your details, ensuring your order gets exactly where it needs to go.</p>"
+            "text": "<p>Our team texts or calls to confirm your details, so your order goes to the right place.</p>"
           }
         },
         "column_2": {
@@ -858,7 +856,7 @@
             "icon": "qr",
             "icon_text": "",
             "title": "",
-            "text": "<p>Every box features a unique, tamper-proof QR code. Scan it upon arrival to instantly verify your gear is 100% authentic.</p>"
+            "text": "<p>Every box has its own QR code. Scan it when it arrives to check it is a real Zenith product.</p>"
           }
         },
         "column_4": {
@@ -868,7 +866,7 @@
             "icon": "badge_check",
             "icon_text": "",
             "title": "",
-            "text": "<p>Pay only when the product is in your hands with our nationwide Cash on Delivery.</p>"
+            "text": "<p>Pay when it is in your hands, with nationwide Cash on Delivery.</p>"
           }
         },
         "logo_gogo": {
@@ -928,12 +926,12 @@
         "logo_ninjavan"
       ],
       "settings": {
-        "content_source": "global",
+        "content_source": "custom",
         "eyebrow": "",
-        "heading": "The Zenith Guarantee",
+        "heading": "What happens after you order",
         "subheading": "",
         "show_payment_icons": false,
-        "footer_text": "<p>Delivered by LBC, J&T, Gogo Express, Ninja Van, and Amare Group's own rider fleet.</p>",
+        "footer_text": "<p>Delivered by LBC, J&T, Gogo Express, Ninja Van and Amare Group's own riders.</p>",
         "heading_alignment": "center",
         "columns_desktop": 3,
         "show_media": true,
@@ -1011,8 +1009,7 @@
         "padding_bottom": 56,
         "padding_top_mobile": 20,
         "padding_bottom_mobile": 28
-      },
-      "disabled": true
+      }
     },
     "categories": {
       "type": "zenith-category-cards",
@@ -1023,7 +1020,7 @@
             "collection": "skin",
             "media_type": "featured",
             "youtube_url": "",
-            "title": "The tallow cream that repairs and restores your skin",
+            "title": "Beef tallow skin care that stays light in the heat",
             "button_label": "Shop Skin Products",
             "link": "",
             "product": "",
@@ -1037,7 +1034,7 @@
             "collection": "hair",
             "media_type": "featured",
             "youtube_url": "",
-            "title": "Hair density without the itch or the dryness on your scalp",
+            "title": "Fuller-looking hair in a 30-second night step",
             "button_label": "Shop Hair Products",
             "link": "",
             "product": "",
@@ -1057,7 +1054,8 @@
             "product": "zenith-anti-aging-tallow-day-cream-spf30",
             "button_full_width": true,
             "hide_on_mobile": true
-          }
+          },
+          "disabled": true
         },
         "card_4": {
           "type": "card",
@@ -1071,7 +1069,8 @@
             "product": "zenith-advanced-hair-density-shampoo",
             "button_full_width": true,
             "hide_on_mobile": true
-          }
+          },
+          "disabled": true
         }
       },
       "block_order": [
@@ -1126,8 +1125,7 @@
         "padding_bottom": 48,
         "padding_top_mobile": 24,
         "padding_bottom_mobile": 32
-      },
-      "disabled": true
+      }
     },
     "featured_product": {
       "type": "zenith-featured-product",
@@ -1135,13 +1133,13 @@
         "benefit_1": {
           "type": "benefit",
           "settings": {
-            "text": "Fights aging and smooths lines with zero irritation."
+            "text": "Fights aging and smooths lines while helping buffer irritation."
           }
         },
         "benefit_2": {
           "type": "benefit",
           "settings": {
-            "text": "Reduces acne and dark spots while smoothing fine lines"
+            "text": "Night cream with 0.2% retinol on a beef tallow base."
           }
         },
         "benefit_3": {
@@ -1180,7 +1178,7 @@
           "type": "trust",
           "settings": {
             "icon": "badge_check",
-            "text": "FDA-Notified"
+            "text": "Philippine FDA Notified"
           }
         },
         "trust_9": {
@@ -1257,8 +1255,7 @@
         "padding_bottom": 0,
         "padding_top_mobile": 20,
         "padding_bottom_mobile": 20
-      },
-      "disabled": true
+      }
     },
     "brand_story": {
       "type": "zenith-image-story",
@@ -1371,7 +1368,8 @@
         "column_text_opacity": 80,
         "icon_size": 24,
         "icon_size_mobile": 22
-      }
+      },
+      "disabled": true
     },
     "money_back": {
       "type": "zenith-guarantee-banner",
@@ -1844,7 +1842,8 @@
         "padding_bottom": 48,
         "padding_top_mobile": 20,
         "padding_bottom_mobile": 20
-      }
+      },
+      "disabled": true
     },
     "reviews": {
       "type": "zenith-reviews",
@@ -1863,8 +1862,8 @@
       ],
       "settings": {
         "eyebrow": "",
-        "heading": "[customers] Filipino men have ordered from Zenith.",
-        "subheading": "<p>Real Filipino men using Zenith.</p>",
+        "heading": "[customers] Filipino Men Trust Zenith Products",
+        "subheading": "<p>Men in Manila using the cream.</p>",
         "heading_alignment": "center",
         "heading_max_width": 900,
         "subheading_spacing": 28,
@@ -2002,7 +2001,8 @@
         "padding_bottom": 80,
         "padding_top_mobile": 20,
         "padding_bottom_mobile": 0
-      }
+      },
+      "disabled": true
     },
     "shelf": {
       "type": "zenith-product-carousel",
@@ -2083,7 +2083,8 @@
         ],
         "view_all_link": "shopify://collections/all",
         "card_image_gradient": "linear-gradient(180deg, rgba(32, 57, 64, 1), rgba(255, 255, 255, 1) 100%)"
-      }
+      },
+      "disabled": true
     },
     "social": {
       "type": "zenith-store-links",
@@ -2189,27 +2190,115 @@
         "padding_top_mobile": 20,
         "padding_bottom_mobile": 20
       }
+    },
+    "story": {
+      "type": "zenith-image-story",
+      "blocks": {
+        "column_1": {
+          "type": "column",
+          "settings": {
+            "title": "Mission",
+            "text": "<p>To make simple, well-made self-care for mature Filipino men, and make it easy to get.</p>"
+          }
+        },
+        "column_2": {
+          "type": "column",
+          "settings": {
+            "title": "Vision",
+            "text": "<p>To empower mature Filipino men to always feel in their prime.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "column_1",
+        "column_2"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/Team_Photo.jpg",
+        "use_brand_logo": true,
+        "brand_logo_style": "wordmark",
+        "eyebrow": "",
+        "heading": "",
+        "text": "<p>Most skin and hair care on the shelf was made for other men and other weather. For Filipino men over 35, that meant a long routine nobody keeps, or an imported formula that feels heavy by lunchtime.</p><p>Zenith started with that gap. Five products, ingredients named on the label, and directions short enough to follow every day in Philippine heat.</p><p>Today, [customers] Filipino men have ordered from Zenith. We keep building for them.</p>",
+        "button_label": "",
+        "button_link": "",
+        "image_position": "left",
+        "image_ratio": "adapt",
+        "media_min_height": 720,
+        "content_align": "top",
+        "content_padding": 44,
+        "gap": 64,
+        "content_gap": 20,
+        "heading_spacing": 20,
+        "content_max_width": 1000,
+        "hide_heading_desktop": false,
+        "logo_width": 200,
+        "columns_spacing": 40,
+        "columns_gap": 32,
+        "column_title_spacing": 14,
+        "color_scheme": "scheme-1",
+        "heading_color": "",
+        "column_title_color": "#eabe5f",
+        "text_opacity": 70,
+        "button_style": "gold",
+        "overlay_style": "none",
+        "overlay_color": "#121212",
+        "overlay_opacity": 30,
+        "overlay_coverage": 60,
+        "heading_tag": "h2",
+        "heading_font_size": 44,
+        "heading_line_height": 110,
+        "heading_uppercase": false,
+        "eyebrow_font_size": 14,
+        "text_font_size": 16,
+        "title_font_size": 32,
+        "button_font_size": 22,
+        "image_ratio_mobile": "landscape",
+        "media_height_mobile": 348,
+        "image_full_bleed_mobile": false,
+        "image_fade_mobile": 0,
+        "heading_position_mobile": "below",
+        "content_overlap_mobile": 0,
+        "heading_font_size_mobile": 32,
+        "heading_line_height_mobile": 110,
+        "text_font_size_mobile": 16,
+        "title_font_size_mobile": 32,
+        "button_font_size_mobile": 20,
+        "button_label_mobile": "",
+        "gap_mobile": 20,
+        "content_gap_mobile": 20,
+        "heading_spacing_mobile": 20,
+        "content_max_width_mobile": 800,
+        "columns_spacing_mobile": 16,
+        "columns_mobile": "1",
+        "columns_gap_mobile": 16,
+        "padding_top": 64,
+        "padding_bottom": 32,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20
+      }
     }
   },
   "order": [
     "promo_hero",
     "hero",
     "trust_bar",
+    "press",
+    "results",
+    "videos",
+    "categories",
+    "guarantee",
+    "featured_product",
+    "story",
+    "collection",
+    "money_back",
+    "social",
+    "reviews",
+    "faq",
     "brand_story",
     "routine",
     "shelf",
-    "results",
     "compare",
-    "money_back",
-    "social",
-    "collection",
-    "faq",
-    "reviews",
-    "press",
-    "videos",
-    "guarantee",
-    "categories",
-    "featured_product",
     "1790629529cb985278",
     "promo_bottom"
   ]
