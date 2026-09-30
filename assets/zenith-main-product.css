@@ -1094,3 +1094,9 @@
     margin-left: 0;
   }
 }
+
+/* Review strip: no pause/play button (zenith-carousel adds one to autoplaying carousels). The strip still
+   pauses while hovered or focused, and doesn't autoplay with reduced motion. */
+.zenith-mp__reviews-carousel .zenith-carousel__pause {
+  display: none;
+}
