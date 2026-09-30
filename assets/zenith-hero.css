@@ -416,10 +416,13 @@
     background: rgb(var(--z-ov-rgb, 18, 18, 18));
   }
 
+  /* Panel colour behind the photo + 1px overlap into the text panel: no light seam where they meet. */
   .zenith-hero--m-stacked .zenith-hero__media {
     position: relative;
     inset: auto;
     height: var(--z-hero-sih-m, 30rem);
+    margin-bottom: -1px;
+    background: rgb(var(--z-ov-rgb, 18, 18, 18));
   }
 
   .zenith-hero--m-stacked .zenith-hero__media::after {
@@ -427,7 +430,7 @@
     position: absolute;
     inset: 0;
     z-index: 1;
-    background: linear-gradient(to bottom, rgba(var(--z-ov-rgb, 18, 18, 18), 0) 45%, rgb(var(--z-ov-rgb, 18, 18, 18)) 100%);
+    background: linear-gradient(to bottom, rgba(var(--z-ov-rgb, 18, 18, 18), 0) 45%, rgb(var(--z-ov-rgb, 18, 18, 18)) calc(100% - 2px));
     pointer-events: none;
   }
 
