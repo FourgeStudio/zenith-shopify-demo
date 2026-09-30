@@ -1122,9 +1122,10 @@ cart-drawer .zenith-cart-upsell__title { font-size: 1.3rem; }
 cart-drawer .zenith-cart-upsell__meta { font-size: 1.15rem; }
 cart-drawer .zenith-cart-upsell__add { min-height: 3.6rem; padding: 0 var(--z-space-3, 12px); font-size: 1.2rem; }
 
-cart-drawer .zenith-cart-sum { gap: 0.6rem; font-size: 1.3rem; }
-cart-drawer .zenith-cart-sum__total { font-size: 1.8rem; }
-cart-drawer .cart-drawer .drawer__footer { padding: 1.2rem 0; }
+/* Totals keep the design's breathing room (rows 10px apart, Total set off, 16px before Check out). */
+cart-drawer .zenith-cart-sum { gap: 1rem; margin-bottom: var(--z-space-4, 16px); font-size: 1.4rem; }
+cart-drawer .zenith-cart-sum__total { font-size: 1.9rem; }
+cart-drawer .cart-drawer .drawer__footer { padding: var(--z-space-4, 16px) 0; }
 cart-drawer .cart-drawer .cart__checkout-button { min-height: 4.4rem; }
 
 /* ---------- Cart drawer + cart page: totals (snippets/zenith-cart-summary.liquid) ---------- */
@@ -1170,10 +1171,10 @@ cart-drawer .cart-drawer .cart__checkout-button { min-height: 4.4rem; }
   vertical-align: middle;
 }
 
+/* Body font bold, as in the design (the condensed heading font read cramped next to the figures). */
 .zenith-cart-sum__total {
-  padding-top: var(--z-space-1, 4px);
-  font-family: var(--font-heading-family);
-  font-weight: var(--font-heading-weight);
+  padding-top: var(--z-space-2, 8px);
+  font-weight: 700;
   font-size: 2rem;
 }
 
