@@ -20,7 +20,7 @@
     "intro": {
       "type": "zenith-image-story",
       "settings": {
-        "image": "shopify://shop_images/zenith-advanced-hair-density-shampoo_4.jpg",
+        "image": "shopify://shop_images/about-story-man-applying-cream-1-desktop.webp",
         "use_brand_logo": false,
         "brand_logo_style": "tagline",
         "eyebrow": "",
@@ -81,7 +81,8 @@
         "padding_top": 48,
         "padding_bottom": 40,
         "padding_top_mobile": 0,
-        "padding_bottom_mobile": 24
+        "padding_bottom_mobile": 24,
+        "image_mobile": "shopify://shop_images/about-story-man-applying-cream-1-mobile.webp"
       }
     },
     "story": {
@@ -107,7 +108,7 @@
         "column_2"
       ],
       "settings": {
-        "image": "shopify://shop_images/Team_Photo.jpg",
+        "image": "shopify://shop_images/about-story-zenith-team-1-desktop.webp",
         "use_brand_logo": true,
         "brand_logo_style": "wordmark",
         "eyebrow": "",
@@ -168,7 +169,8 @@
         "padding_top": 40,
         "padding_bottom": 36,
         "padding_top_mobile": 20,
-        "padding_bottom_mobile": 20
+        "padding_bottom_mobile": 20,
+        "image_mobile": "shopify://shop_images/about-story-zenith-team-1-mobile.webp"
       }
     },
     "believe": {
@@ -302,7 +304,7 @@
     "care": {
       "type": "zenith-image-story",
       "settings": {
-        "image": "shopify://shop_images/Team_Photo.jpg",
+        "image": "shopify://shop_images/about-story-man-holding-products-1-desktop.webp",
         "use_brand_logo": false,
         "brand_logo_style": "tagline",
         "eyebrow": "",
@@ -363,7 +365,8 @@
         "padding_top": 32,
         "padding_bottom": 32,
         "padding_top_mobile": 20,
-        "padding_bottom_mobile": 16
+        "padding_bottom_mobile": 16,
+        "image_mobile": "shopify://shop_images/about-story-man-holding-products-1-mobile.webp"
       }
     },
     "stores": {
@@ -556,7 +559,7 @@
         "button_product": "",
         "button_label_mobile": "",
         "button_link_mobile": "",
-        "image": "shopify://shop_images/zenith-advanced-hair-density-shampoo_6.jpg",
+        "image": "shopify://shop_images/about-hero-product-range-on-table-1-desktop.webp",
         "show_confetti": false,
         "ribbon_text": "",
         "highlight_title": "",
@@ -630,7 +633,8 @@
         "padding_bottom": 0,
         "padding_top_mobile": 0,
         "padding_bottom_mobile": 0,
-        "height_mode": "px"
+        "height_mode": "px",
+        "mobile_image": "shopify://shop_images/about-cta-product-lineup-on-bench-1-mobile.webp"
       }
     }
   },

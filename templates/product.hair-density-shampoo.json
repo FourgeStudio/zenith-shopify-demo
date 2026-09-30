@@ -441,7 +441,8 @@
             "title": "Amino acid cleansing base",
             "text": "<p>Removes sweat and oil without that stripped, squeaky feel.</p>",
             "title_mobile": "",
-            "text_mobile": ""
+            "text_mobile": "",
+            "image": "shopify://shop_images/shampoo-ingredients-oil-bottle-rosemary-1-desktop.webp"
           }
         },
         "ingredient-2": {
@@ -450,7 +451,8 @@
             "title": "CABROXIL Technology",
             "text": "<p>Caffeine, Rosemary Oil, Diaminopyrimidine Oxide and Biotin, in every wash.</p>",
             "title_mobile": "",
-            "text_mobile": ""
+            "text_mobile": "",
+            "image": "shopify://shop_images/shampoo-ingredients-amber-molecule-1-desktop.webp"
           }
         },
         "ingredient-3": {
@@ -459,7 +461,8 @@
             "title": "The 2-minute lather",
             "text": "<p>Leave it on for 2 minutes. Wash your face or body while it sits.</p>",
             "title_mobile": "",
-            "text_mobile": ""
+            "text_mobile": "",
+            "image": "shopify://shop_images/shampoo-ingredients-clear-gel-droplets-1-desktop.webp"
           }
         }
       },
@@ -531,7 +534,8 @@
         "padding_top": 64,
         "padding_bottom": 64,
         "padding_top_mobile": 20,
-        "padding_bottom_mobile": 20
+        "padding_bottom_mobile": 20,
+        "image": "shopify://shop_images/shampoo-ingredients-blue-cabroxil-molecules-1-desktop.webp"
       }
     },
     "routine": {
@@ -541,21 +545,24 @@
           "type": "step",
           "settings": {
             "title": "",
-            "text": "Massage in for 60 seconds"
+            "text": "Massage in for 60 seconds",
+            "image": "shopify://shop_images/shampoo-steps-step-1-shampooing-wet-hair-1-desktop.webp"
           }
         },
         "step_2": {
           "type": "step",
           "settings": {
             "title": "",
-            "text": "Leave the lather on for 2 minutes"
+            "text": "Leave the lather on for 2 minutes",
+            "image": "shopify://shop_images/shampoo-steps-step-2-massaging-lather-1-desktop.webp"
           }
         },
         "step_3": {
           "type": "step",
           "settings": {
             "title": "",
-            "text": "Rinse well"
+            "text": "Rinse well",
+            "image": "shopify://shop_images/shampoo-steps-step-3-rinsing-1-desktop.webp"
           }
         }
       },
@@ -959,7 +966,7 @@
         "text": "<p>We stand behind every Zenith product. Kung hindi para sa iyo, ibabalik namin ang bayad mo. Full terms on our <a href=\"/policies/refund-policy\">Refunds and Returns</a> page.</p>",
         "button_label": "",
         "button_link": "",
-        "image": "shopify://shop_images/vector-icons_7.png",
+        "image": "shopify://shop_images/shampoo-guarantee-money-back-seal-1-desktop.webp",
         "desktop_layout": "band",
         "image_position": "right",
         "image_width": 290,
@@ -1238,7 +1245,9 @@
         "padding_bottom": 48,
         "padding_top_mobile": 0,
         "padding_bottom_mobile": 0,
-        "height_mode": "px"
+        "height_mode": "px",
+        "image": "shopify://shop_images/shampoo-cta-wet-hands-holding-shampoo-1-desktop.webp",
+        "mobile_image": "shopify://shop_images/shampoo-cta-wet-hands-holding-shampoo-1-mobile.webp"
       }
     }
   },

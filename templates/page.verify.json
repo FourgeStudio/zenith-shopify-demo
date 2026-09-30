@@ -16,21 +16,24 @@
           "type": "step",
           "settings": {
             "title": "Locate Tamper-proof QR Code",
-            "text": "Each box is equipped with a unique, tamper-proof QR code."
+            "text": "Each box is equipped with a unique, tamper-proof QR code.",
+            "image": "shopify://shop_images/verify-products-steps-step-1-qr-code-on-box-1-desktop.webp"
           }
         },
         "step_2": {
           "type": "step",
           "settings": {
             "title": "Scan with Camera/QR Scanner",
-            "text": "Use your camera or QR scanner app to verify."
+            "text": "Use your camera or QR scanner app to verify.",
+            "image": "shopify://shop_images/verify-products-steps-step-2-scanning-qr-1-desktop.webp"
           }
         },
         "step_3": {
           "type": "step",
           "settings": {
             "title": "Confirm Verification",
-            "text": "The page shows the unique serial number and the product it belongs to."
+            "text": "The page shows the unique serial number and the product it belongs to.",
+            "image": "shopify://shop_images/verify-products-steps-step-3-genuine-confirmation-1-desktop.webp"
           }
         },
         "seal": {
@@ -141,7 +144,8 @@
         "padding_top": 50,
         "padding_bottom": 48,
         "padding_top_mobile": 32,
-        "padding_bottom_mobile": 20
+        "padding_bottom_mobile": 20,
+        "cover_image": "shopify://shop_images/verify-products-how-it-works-hands-scanning-box-qr-1-desktop.webp"
       }
     },
     "trust_bar": {
@@ -548,7 +552,8 @@
             "icon": "box",
             "icon_text": "",
             "title": "Fulfillment Center & Manila Office",
-            "text": "<p><a href=\"https://maps.app.goo.gl/kytWPJfQjtJEA89g8\" target=\"_blank\">1208 Pablo Ocampo, Cor. Alfonso St. Vito Cruz, Brgy 757, Manila, Metro Manila 1017 Philippines</a></p>"
+            "text": "<p><a href=\"https://maps.app.goo.gl/kytWPJfQjtJEA89g8\" target=\"_blank\">1208 Pablo Ocampo, Cor. Alfonso St. Vito Cruz, Brgy 757, Manila, Metro Manila 1017 Philippines</a></p>",
+            "image": "shopify://shop_images/verify-products-locations-manila-fulfillment-team-1-desktop.webp"
           }
         },
         "location_cebu": {
@@ -557,7 +562,8 @@
             "icon": "pin",
             "icon_text": "",
             "title": "Corporate Head Office",
-            "text": "<p><a href=\"https://maps.app.goo.gl/sSiDuTjqH5DBzZCo9\" target=\"_blank\">MIT Bldg 2 Unit #3B-3, 117 Gorordo Ave., Cor. Sanjercasville Rd. Lahug, Cebu City, Cebu 6000 Philippines</a></p>"
+            "text": "<p><a href=\"https://maps.app.goo.gl/sSiDuTjqH5DBzZCo9\" target=\"_blank\">MIT Bldg 2 Unit #3B-3, 117 Gorordo Ave., Cor. Sanjercasville Rd. Lahug, Cebu City, Cebu 6000 Philippines</a></p>",
+            "image": "shopify://shop_images/verify-products-locations-cebu-head-office-team-1-desktop.webp"
           }
         }
       },
@@ -995,7 +1001,8 @@
         "padding_top": 48,
         "padding_bottom": 48,
         "padding_top_mobile": 20,
-        "padding_bottom_mobile": 48
+        "padding_bottom_mobile": 48,
+        "image": "shopify://shop_images/verify-products-cta-fda-notification-certificates-1-desktop.webp"
       }
     },
     "faq": {

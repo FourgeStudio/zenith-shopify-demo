@@ -441,7 +441,8 @@
             "title": "Broad-spectrum SPF 30",
             "text": "<p>Six modern UV filters. No white cast.</p>",
             "title_mobile": "",
-            "text_mobile": ""
+            "text_mobile": "",
+            "image": "shopify://shop_images/day-cream-ingredients-creamy-tallow-texture-close-up-1-desktop.webp"
           }
         },
         "ingredient-2": {
@@ -450,7 +451,8 @@
             "title": "Bakuchiol and Niacinamide",
             "text": "<p>Day-safe, so they go on in the morning with your SPF.</p>",
             "title_mobile": "",
-            "text_mobile": ""
+            "text_mobile": "",
+            "image": "shopify://shop_images/day-cream-ingredients-molecule-model-over-dark-mineral-texture-1-desktop.webp"
           }
         },
         "ingredient-3": {
@@ -459,7 +461,8 @@
             "title": "Zinc PCA and silica",
             "text": "<p>Keep the finish matte in Philippine heat.</p>",
             "title_mobile": "",
-            "text_mobile": ""
+            "text_mobile": "",
+            "image": "shopify://shop_images/day-cream-ingredients-golden-oil-bubbles-close-up-1-desktop.webp"
           }
         }
       },
@@ -531,7 +534,8 @@
         "padding_top": 52,
         "padding_bottom": 64,
         "padding_top_mobile": 20,
-        "padding_bottom_mobile": 20
+        "padding_bottom_mobile": 20,
+        "image_mobile": "shopify://shop_images/day-cream-ingredients-close-up-of-zenith-day-cream-1-mobile.webp"
       }
     },
     "routine": {
@@ -541,21 +545,24 @@
           "type": "step",
           "settings": {
             "title": "",
-            "text": "Wash with the Cleanser"
+            "text": "Wash with the Cleanser",
+            "image": "shopify://shop_images/day-cream-how-to-use-step-1-man-washing-his-face-1-mobile.webp"
           }
         },
         "step_2": {
           "type": "step",
           "settings": {
             "title": "",
-            "text": "Quarter teaspoon, face and neck"
+            "text": "Quarter teaspoon, face and neck",
+            "image": "shopify://shop_images/day-cream-how-to-use-step-2-man-applying-day-cream-1-mobile.webp"
           }
         },
         "step_3": {
           "type": "step",
           "settings": {
             "title": "",
-            "text": "Reapply every 2 hours outdoors"
+            "text": "Reapply every 2 hours outdoors",
+            "image": "shopify://shop_images/day-cream-how-to-use-step-3-smiling-man-ready-for-1-mobile.webp"
           }
         }
       },
@@ -959,7 +966,7 @@
         "text": "<p>We stand behind every Zenith product. Kung hindi para sa iyo, ibabalik namin ang bayad mo. Full terms on our <a href=\"/policies/refund-policy\">Refunds and Returns</a> page.</p>",
         "button_label": "",
         "button_link": "",
-        "image": "shopify://shop_images/vector-icons_7.png",
+        "image": "shopify://shop_images/day-cream-guarantee-gold-zenith-money-back-guarantee-badge-1-desktop.webp",
         "desktop_layout": "band",
         "image_position": "right",
         "image_width": 290,
@@ -1246,7 +1253,9 @@
         "padding_bottom": 48,
         "padding_top_mobile": 0,
         "padding_bottom_mobile": 0,
-        "height_mode": "px"
+        "height_mode": "px",
+        "image": "shopify://shop_images/day-cream-cta-older-filipino-man-applying-day-cream-1-desktop.webp",
+        "mobile_image": "shopify://shop_images/day-cream-bottom-banner-older-filipino-man-applying-day-cream-1-mobile.webp"
       }
     }
   },

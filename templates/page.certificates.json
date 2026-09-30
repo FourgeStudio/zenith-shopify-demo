@@ -50,7 +50,8 @@
             "title": "Certificate of Incorporation",
             "number": "2025030193474-03",
             "link": "",
-            "pending": false
+            "pending": false,
+            "image": "shopify://shop_images/certificates-business-certificates-sec-certificate-of-incorporation-1-desktop.webp"
           }
         },
         "cert_registration": {
@@ -59,7 +60,8 @@
             "title": "Certificate of Registration",
             "number": "2025030193474-03",
             "link": "",
-            "pending": false
+            "pending": false,
+            "image": "shopify://shop_images/certificates-business-certificates-bir-certificate-of-registration-1-desktop.webp"
           }
         },
         "cert_lto": {
@@ -68,7 +70,8 @@
             "title": "FDA License To Operate",
             "number": "LTO-3000014773834",
             "link": "",
-            "pending": false
+            "pending": false,
+            "image": "shopify://shop_images/certificates-business-certificates-fda-license-to-operate-1-desktop.webp"
           }
         },
         "cert_trustmark": {
@@ -77,7 +80,8 @@
             "title": "DTI Trustmark",
             "number": "250917-09570611",
             "link": "",
-            "pending": false
+            "pending": false,
+            "image": "shopify://shop_images/certificates-business-certificates-dti-ecommerce-trustmark-1-desktop.webp"
           }
         }
       },
@@ -180,7 +184,9 @@
             "link": "",
             "title_label": "",
             "number_label": "",
-            "pending": false
+            "pending": false,
+            "image": "shopify://shop_images/certificates-fda-notified-products-notification-tallow-cream-1-desktop.webp",
+            "product": "zenith-anti-aging-tallow-cream"
           }
         },
         "nn_day_cream": {
@@ -191,7 +197,9 @@
             "link": "",
             "title_label": "",
             "number_label": "",
-            "pending": false
+            "pending": false,
+            "image": "shopify://shop_images/certificates-fda-notified-products-notification-day-cream-1-desktop.webp",
+            "product": "zenith-anti-aging-tallow-day-cream-spf30"
           }
         },
         "nn_cleanser": {
@@ -202,7 +210,9 @@
             "link": "",
             "title_label": "",
             "number_label": "",
-            "pending": false
+            "pending": false,
+            "image": "shopify://shop_images/certificates-fda-notified-products-notification-cleanser-1-desktop.webp",
+            "product": "zenith-anti-aging-tallow-cleanser"
           }
         },
         "nn_hair_spray": {
@@ -213,7 +223,8 @@
             "link": "",
             "title_label": "",
             "number_label": "",
-            "pending": false
+            "pending": false,
+            "product": "zenith-advanced-hair-density-spray"
           }
         },
         "nn_hair_shampoo": {
@@ -224,7 +235,8 @@
             "link": "",
             "title_label": "",
             "number_label": "",
-            "pending": false
+            "pending": false,
+            "product_image": "shopify://shop_images/certificates-fda-notified-products-product-hair-density-shampoo-and-spray-1-desktop.webp"
           }
         },
         "nn_teeth_whitening": {

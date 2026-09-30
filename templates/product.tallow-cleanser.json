@@ -441,7 +441,8 @@
             "title": "Amino acid cleansing base",
             "text": "<p>Cleans off sweat and oil without that squeaky, tight feeling.</p>",
             "title_mobile": "",
-            "text_mobile": ""
+            "text_mobile": "",
+            "image": "shopify://shop_images/cleanser-ingredients-bakuchiol-flower-close-up-1-desktop.webp"
           }
         },
         "ingredient-2": {
@@ -450,7 +451,8 @@
             "title": "Beef tallow",
             "text": "<p>Conditions as you wash.</p>",
             "title_mobile": "",
-            "text_mobile": ""
+            "text_mobile": "",
+            "image": "shopify://shop_images/cleanser-ingredients-clear-gel-cleanser-texture-with-water-1-desktop.webp"
           }
         },
         "ingredient-3": {
@@ -459,7 +461,8 @@
             "title": "Bakuchiol and Niacinamide",
             "text": "<p>Bakuchiol, a plant-based retinol alternative. Niacinamide for tone and oil balance.</p>",
             "title_mobile": "",
-            "text_mobile": ""
+            "text_mobile": "",
+            "image": "shopify://shop_images/cleanser-ingredients-creamy-tallow-texture-close-up-1-desktop.webp"
           }
         }
       },
@@ -531,7 +534,8 @@
         "padding_top": 52,
         "padding_bottom": 64,
         "padding_top_mobile": 24,
-        "padding_bottom_mobile": 20
+        "padding_bottom_mobile": 20,
+        "image_mobile": "shopify://shop_images/cleanser-ingredients-close-up-of-zenith-tallow-cleanser-1-mobile.webp"
       }
     },
     "routine": {
@@ -541,21 +545,24 @@
           "type": "step",
           "settings": {
             "title": "",
-            "text": "Wet your face"
+            "text": "Wet your face",
+            "image": "shopify://shop_images/cleanser-how-to-use-step-1-man-splashing-water-on-1-mobile.webp"
           }
         },
         "step_2": {
           "type": "step",
           "settings": {
             "title": "",
-            "text": "Lather and massage, 30 to 60 seconds"
+            "text": "Lather and massage, 30 to 60 seconds",
+            "image": "shopify://shop_images/cleanser-how-to-use-step-2-man-lathering-cleanser-on-1-mobile.webp"
           }
         },
         "step_3": {
           "type": "step",
           "settings": {
             "title": "",
-            "text": "Rinse and pat dry"
+            "text": "Rinse and pat dry",
+            "image": "shopify://shop_images/cleanser-how-to-use-step-3-man-rinsing-his-face-1-mobile.webp"
           }
         }
       },
@@ -959,7 +966,7 @@
         "text": "<p>We stand behind every Zenith product. Kung hindi para sa iyo, ibabalik namin ang bayad mo. Full terms on our <a href=\"/policies/refund-policy\">Refunds and Returns</a> page.</p>",
         "button_label": "",
         "button_link": "",
-        "image": "shopify://shop_images/vector-icons_7.png",
+        "image": "shopify://shop_images/cleanser-guarantee-gold-zenith-money-back-guarantee-badge-1-desktop.webp",
         "desktop_layout": "band",
         "image_position": "right",
         "image_width": 290,
@@ -1246,7 +1253,8 @@
         "padding_bottom": 48,
         "padding_top_mobile": 0,
         "padding_bottom_mobile": 0,
-        "height_mode": "px"
+        "height_mode": "px",
+        "mobile_image": "shopify://shop_images/cleanser-bottom-banner-older-filipino-man-touching-his-cheek-1-mobile.webp"
       }
     }
   },
