@@ -181,7 +181,7 @@
           "settings": {
             "title": "Delivery and returns",
             "content_source": "custom",
-            "text": "<p>Nationwide delivery, with Cash on Delivery available. Every order carries the Zenith Money-Back Guarantee. Full terms on our <a href=\"https://tryzenith.ph/policies/refund-policy\" target=\"_blank\" title=\"https://tryzenith.ph/policies/refund-policy\"><span style=\"text-decoration:underline\">Refunds and Returns</span></a> page.</p>",
+            "text": "<p>Nationwide delivery, with Cash on Delivery available. Every order carries the Zenith Money-Back Guarantee. Full terms on our <a href=\"/policies/refund-policy\">Refunds and Returns</a> page.</p>",
             "open": false,
             "hide_on_mobile": false,
             "hide_on_desktop": false
@@ -192,7 +192,7 @@
           "settings": {
             "title": "FAQs",
             "content_source": "questions",
-            "text": "<h3>Will the retinol make my skin peel?</h3><p>0.2% is a gentle retinol level, and the tallow base buffers it. New to retinol? Start 2 to 3 nights a week for the first two weeks, then go nightly. If anything feels wrong, stop and message us.</p><h3>Is it greasy with beef tallow in it?</h3><p>No. It absorbs fast and finishes light. No shine, no residue on the pillow.</p><h3>Does it smell like beef?</h3><p>No. The cream has a light, neutral scent.</p><h3>Do I still need sunscreen?</h3><p>Yes. Retinol makes skin more sensitive to the sun, so wear SPF 30 every morning. The Zenith Anti-Aging Tallow Day Cream SPF 30 is made for that.</p><h3>Can I use it with the Cleanser and the Day Cream?</h3><p>Yes. Cleanser morning and night, Day Cream SPF 30 in the morning, Tallow Cream at night. The directions are on every label.</p><h3>Paano kung hindi ako hiyang?</h3><p>Every order carries the Zenith Money-Back Guarantee. Skin products are covered for 30 days, counted from delivery.&nbsp;<br/><br/>Message us on Facebook or email <a href=\"mailto:hello@tryzenith.ph\" target=\"_blank\" title=\"mailto:hello@tryzenith.ph\">hello@tryzenith.ph</a> with your order number and a photo of the product. Full terms on our <a href=\"https://tryzenith.ph/policies/refund-policy\" target=\"_blank\" title=\"Refunds and Returns\"><span style=\"text-decoration:underline\">Refunds and Returns</span></a> page.</p><p></p>",
+            "text": "<h3>Will the retinol make my skin peel?</h3><p>0.2% is a gentle retinol level, and the tallow base buffers it. New to retinol? Start 2 to 3 nights a week for the first two weeks, then go nightly. If anything feels wrong, stop and message us.</p><h3>Is it greasy with beef tallow in it?</h3><p>No. It absorbs fast and finishes light. No shine, no residue on the pillow.</p><h3>Does it smell like beef?</h3><p>No. The cream has a light, neutral scent.</p><h3>Do I still need sunscreen?</h3><p>Yes. Retinol makes skin more sensitive to the sun, so wear SPF 30 every morning. The Zenith Anti-Aging Tallow Day Cream SPF 30 is made for that.</p><h3>Can I use it with the Cleanser and the Day Cream?</h3><p>Yes. Cleanser morning and night, Day Cream SPF 30 in the morning, Tallow Cream at night. The directions are on every label.</p><h3>Paano kung hindi ako hiyang?</h3><p>Every order carries the Zenith Money-Back Guarantee. Skin products are covered for 30 days, counted from delivery.&nbsp;<br/><br/>Message us on Facebook or email <a href=\"mailto:hello@tryzenith.ph\" target=\"_blank\" title=\"mailto:hello@tryzenith.ph\">hello@tryzenith.ph</a> with your order number and a photo of the product. Full terms on our <a href=\"/policies/refund-policy\" title=\"Refunds and Returns\">Refunds and Returns</a> page.</p><p></p>",
             "open": false,
             "hide_on_mobile": false,
             "hide_on_desktop": false
@@ -1278,7 +1278,7 @@
       "settings": {
         "eyebrow": "",
         "heading": "The Zenith Money-Back Guarantee",
-        "text": "<p>We stand behind every Zenith product. Kung hindi para sa iyo, ibabalik namin ang bayad mo. Full terms on our <a href=\"https://tryzenith.ph/policies/refund-policy\" target=\"_blank\" title=\"Refunds and Returns\"><span style=\"text-decoration:underline\">Refunds and Returns</span></a> page.</p>",
+        "text": "<p>We stand behind every Zenith product. Kung hindi para sa iyo, ibabalik namin ang bayad mo. Full terms on our <a href=\"/policies/refund-policy\" title=\"Refunds and Returns\">Refunds and Returns</a> page.</p>",
         "button_label": "",
         "button_link": "",
         "image": "shopify://shop_images/vector-icons_7.png",
@@ -1390,7 +1390,7 @@
         "subheading_font_size": 18,
         "subheading_opacity": 100,
         "eyebrow_font_size": 14,
-        "title_font_size": 24,
+        "title_font_size": 17,
         "text_font_size": 16,
         "icon_size": 20,
         "heading_alignment_mobile": "left",
@@ -1398,7 +1398,7 @@
         "subheading_font_size_mobile": 18,
         "subheading_opacity_mobile": 100,
         "heading_spacing_mobile": 32,
-        "title_font_size_mobile": 24,
+        "title_font_size_mobile": 17,
         "text_font_size_mobile": 16,
         "item_padding_mobile": 10,
         "content_gap_mobile": 24,

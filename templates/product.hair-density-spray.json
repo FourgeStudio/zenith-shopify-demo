@@ -187,7 +187,7 @@
           "type": "question",
           "settings": {
             "question": "Paano kung hindi ako hiyang?",
-            "answer": "<p>Every order carries the Zenith Money-Back Guarantee. Hair products are covered for 60 days, counted from delivery.</p><p>Message us on Facebook or email <a href=\"mailto:hello@tryzenith.ph\">hello@tryzenith.ph</a> with your order number and a photo of the product. Full terms on our Refunds and Returns page.</p>",
+            "answer": "<p>Every order carries the Zenith Money-Back Guarantee. Hair products are covered for 60 days, counted from delivery.</p><p>Message us on Facebook or email <a href=\"mailto:hello@tryzenith.ph\">hello@tryzenith.ph</a> with your order number and a photo of the product. Full terms on our <a href=\"/policies/refund-policy\">Refunds and Returns</a> page.</p>",
             "open": false
           }
         }
@@ -1035,7 +1035,7 @@
           "type": "question",
           "settings": {
             "question": "Paano kung hindi ako hiyang?",
-            "answer": "<p>Every order carries the Zenith Money-Back Guarantee. Hair products are covered for 60 days, counted from delivery.</p><p>Message us on Facebook or email <a href=\"mailto:hello@tryzenith.ph\">hello@tryzenith.ph</a> with your order number and a photo of the product. Full terms on our Refunds and Returns page.</p>"
+            "answer": "<p>Every order carries the Zenith Money-Back Guarantee. Hair products are covered for 60 days, counted from delivery.</p><p>Message us on Facebook or email <a href=\"mailto:hello@tryzenith.ph\">hello@tryzenith.ph</a> with your order number and a photo of the product. Full terms on our <a href=\"/policies/refund-policy\">Refunds and Returns</a> page.</p>"
           }
         }
       },
@@ -1067,7 +1067,7 @@
         "subheading_font_size": 18,
         "subheading_opacity": 100,
         "eyebrow_font_size": 14,
-        "title_font_size": 24,
+        "title_font_size": 17,
         "text_font_size": 16,
         "icon_size": 20,
         "heading_alignment_mobile": "left",
@@ -1075,7 +1075,7 @@
         "subheading_font_size_mobile": 18,
         "subheading_opacity_mobile": 100,
         "heading_spacing_mobile": 32,
-        "title_font_size_mobile": 24,
+        "title_font_size_mobile": 17,
         "text_font_size_mobile": 16,
         "item_padding_mobile": 10,
         "content_gap_mobile": 24,

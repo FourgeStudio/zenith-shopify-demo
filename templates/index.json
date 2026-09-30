@@ -1534,7 +1534,7 @@
           "type": "question",
           "settings": {
             "question": "How long should I use Zenith before I judge it?",
-            "answer": "<p>Use it as directed every day and give one full product a fair run before you decide. Skin care and hair care both take time. Full guarantee terms are on the Refunds and Returns page.</p>"
+            "answer": "<p>Use it as directed every day and give one full product a fair run before you decide. Skin care and hair care both take time. Full guarantee terms are on the <a href=\"/policies/refund-policy\">Refunds and Returns</a> page.</p>"
           }
         },
         "question_4": {
@@ -1576,7 +1576,7 @@
           "type": "question",
           "settings": {
             "question": "What is your return policy?",
-            "answer": "<p>Every order carries the Zenith Money-Back Guarantee. Skin products are covered for 30 days and hair products for 60 days. Full terms on our Refunds and Returns page.</p>"
+            "answer": "<p>Every order carries the Zenith Money-Back Guarantee. Skin products are covered for 30 days and hair products for 60 days. Full terms on our <a href=\"/policies/refund-policy\">Refunds and Returns</a> page.</p>"
           }
         }
       },

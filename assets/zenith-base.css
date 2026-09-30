@@ -1242,6 +1242,23 @@ a.zenith-amare-link:hover {
   text-decoration: underline;
 }
 
+/* Policy links in text (Refunds and Returns, Shipping / Privacy Policy, Terms…): always underlined in brand gold.
+   Plain text links only (menus and footer links carry a class); .zenith-policy-link = added by zenith-auto-links.js.
+   `html body` outranks the per-section "no underline until hover" link rules. */
+html body a[href*='/policies/']:not([class]),
+a.zenith-policy-link {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--z-dawn-gold, #eabe5f);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+html body a[href*='/policies/']:not([class]):hover,
+a.zenith-policy-link:hover {
+  color: var(--z-dawn-gold, #eabe5f);
+}
+
 /* Product cards (Zenith cards, Dawn collection / search / related-product cards): no underline, hover included */
 .zenith-card a,
 .zenith-card a:hover,
