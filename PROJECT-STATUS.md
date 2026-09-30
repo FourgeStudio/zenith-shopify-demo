@@ -1,6 +1,6 @@
 # Zenith Shopify — project status
 
-_Last updated: 2026-09-30. Keep this file current at the end of each work session; it is the handoff doc._
+_Last updated: 2026-10-01. Keep this file current at the end of each work session; it is the handoff doc._
 
 ## Where things stand
 - Theme: Dawn 16.0.0 + custom `zenith-*` sections. Store `tryzenith.ph` (Zenith Philippines).
@@ -133,6 +133,14 @@ _Last updated: 2026-09-30. Keep this file current at the end of each work sessio
 - Rebuilt below the hero to `design/homepage/revisions/homepagev2/` (map in `design/README.md`). v1-only sections kept but **disabled** (re-enable in the editor if wanted). Verified by schema checks, theme check and static mocks — **not on the store yet**.
 - New section options (defaults keep every other page unchanged): image-story *Text columns layout* = list + per-item icon; routine mobile note (+ show on desktop); product carousel hand-picked *Products*, description (metafield `custom.short_description` → else description), *View product* button, hide price, gradient image background, `custom.card_image` image source, stacked mobile layout; compare *Table lines* outlined + mobile single table + max width; store-links mobile heading/text + Instagram icon; hero *Button minimum width*; FAQ *Open all questions*; results mobile card width up to 440. New icons: sparkles, book_open, instagram. `snippets/zenith-product-card.liquid` takes optional description / show_price / button_action / image.
 - Client: upload the intro photo (man on sofa), 3 routine step photos, promo image (Theme settings → Zenith · Promo); create product metafields `custom.short_description` (text) and `custom.card_image` (transparent PNG) for the shelf cards; paste the 3 Facebook page URLs into the Official Pages cards and fix Theme settings → Social media (Instagram currently points to facebook.com); confirm hero **Shop Now → all products** (was add-to-cart Tallow Cream). Results cards: v2 mixes quote-only / photo-only cards — content in the global review slots.
+
+### Homepage v3 (2026-10-01, `templates/index.json`)
+- `design/homepage/revisions/homepagev3/` (desktop only) = v1 sections re-enabled in a new order with v3 copy; v2 hero, trust bar, collection, money-back, official pages, reviews, FAQ kept. Map in `design/README.md`. No new sections. Mobile = each section's existing mobile settings (no v3 mobile export).
+- v2 sections **disabled, not deleted**: brand_story (intro), routine, shelf, compare. The team-photo brand story is back as key `story` (restored from the v1 template, new copy).
+- "What happens after you order" (guarantee) now uses **its own columns** (v3 copy) instead of the global Zenith · Guarantee, so product pages keep their copy.
+- Featured product: price without trailing zeros (₱899), semibold; categories show 2 cards (cards 3–4 disabled).
+- FAQ: v3 questions are placeholders (repeated answer, a row called "Question") → the 9 real v2 questions stay. Client to confirm or send final v3 answers.
+- Verified by schema checks, setting-id check and theme check — **not on the store yet**. Ask for a v3 mobile export if the phone layout should change.
 
 ### Zenith · Custom code (2026-09-29)
 - `sections/zenith-custom-code.liquid`: paste HTML / Liquid / app embed code (e.g. Judge.me widget code) on any page; heading + mobile heading, width (page / narrow / full), hide on mobile/desktop, paddings. Each instance is per template, so every page can hold different code.
