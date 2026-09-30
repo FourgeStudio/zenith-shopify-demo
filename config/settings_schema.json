@@ -153,25 +153,11 @@
         "content": "Panel at the top of the cart drawer and cart page: a box with what is unlocked and how far the next goal is, then a checkpoint per goal (free shipping, then each tier). Display only: create one automatic discount per tier in Discounts (Amount off products, minimum purchase amount, combines with shipping discounts only) with the same % and minimum so checkout applies it. Themes cannot read discounts, so the % is typed here; once a discount applies, the cart summary chip shows the % Shopify actually gave."
       },
       {
-        "type": "select",
-        "id": "cart_tiers_show",
+        "type": "checkbox",
+        "id": "cart_tiers_on",
         "label": "Show the % off tiers",
-        "options": [
-          {
-            "value": "off",
-            "label": "Off (free shipping only)"
-          },
-          {
-            "value": "always",
-            "label": "Always"
-          },
-          {
-            "value": "promo",
-            "label": "Only while a promotion runs"
-          }
-        ],
-        "default": "promo",
-        "info": "\"Only while a promotion runs\" follows Zenith · Promo → Promotion is running. Leave a tier's % at 0 to hide that tier. Keep tiers in ascending order, above the free shipping amount."
+        "default": true,
+        "info": "On its own switch — does not depend on Zenith · Promo. Off = the panel tracks free shipping only. Leave a tier's % at 0 to hide that tier. Keep tiers in ascending order, above the free shipping amount."
       },
       {
         "type": "number",
