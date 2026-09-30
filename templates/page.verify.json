@@ -290,7 +290,7 @@
         "heading_opacity": 70,
         "text_font_size": 14,
         "heading_uppercase": false,
-        "mobile_layout": "marquee",
+        "mobile_layout": "scroll",
         "logo_height_mobile": 24,
         "gap_mobile": 40,
         "content_gap_mobile": 12,

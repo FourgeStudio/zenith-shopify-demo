@@ -8,6 +8,7 @@
   --z-card-h: {{ section.settings.card_height }}px;
   --z-card-h-m: {{ section.settings.card_height_mobile }}px;
   --z-speed: {{ section.settings.speed }}s;
+  --z-speed-m: {{ section.settings.speed_mobile | default: section.settings.speed }}s;
   --z-hgap: {{ section.settings.heading_gap }}px;
   --z-hgap-m: {{ section.settings.heading_gap_mobile }}px;
   --z-thumb: {{ section.settings.thumb_size }}px;
@@ -469,6 +470,17 @@
       "step": 5,
       "unit": "s",
       "default": 120
+    },
+    {
+      "type": "range",
+      "id": "speed_mobile",
+      "label": "Scroll duration on mobile",
+      "info": "Seconds for one full loop on phones. Higher is slower.",
+      "min": 10,
+      "max": 400,
+      "step": 10,
+      "unit": "s",
+      "default": 240
     },
     {
       "type": "checkbox",

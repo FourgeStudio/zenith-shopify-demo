@@ -908,7 +908,8 @@
         "padding_top": 32,
         "padding_bottom": 32,
         "padding_top_mobile": 20,
-        "padding_bottom_mobile": 20
+        "padding_bottom_mobile": 20,
+        "speed_mobile": 240
       }
     },
     "guarantee": {

@@ -45,7 +45,7 @@
 .zenith-results__track {
   display: flex;
   width: max-content;
-  animation: zenith-marquee var(--z-speed) linear infinite;
+  animation: zenith-marquee var(--z-speed-m, var(--z-speed)) linear infinite;
 }
 
 .zenith-results__row--reverse .zenith-results__track {
@@ -305,6 +305,10 @@ a.zenith-results__meta:focus-visible {
 }
 
 @media screen and (min-width: 750px) {
+  .zenith-results__track {
+    animation-duration: var(--z-speed);
+  }
+
   .zenith-results .zenith-heading {
     gap: var(--z-hgap, var(--z-space-2));
   }
