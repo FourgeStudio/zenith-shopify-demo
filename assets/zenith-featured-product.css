@@ -69,7 +69,7 @@
   margin: 0;
   font-family: var(--font-body-family);
   font-size: var(--z-pfs-m, 2.2rem);
-  font-weight: 400;
+  font-weight: 600;
   line-height: 1.2;
   letter-spacing: 0;
   color: var(--z-price, var(--z-dawn-gold));
