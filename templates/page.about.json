@@ -469,7 +469,7 @@
         "item_fda": {
           "type": "item",
           "settings": {
-            "text": "FDA Notified (LTO-**********)",
+            "text": "FDA Notified (LTO-3000014773834)",
             "icon": "check_filled"
           }
         },
