@@ -1058,7 +1058,7 @@
         "enable_schema": true,
         "heading_alignment": "center",
         "max_width": 720,
-        "open_first": true,
+        "open_first": false,
         "heading_spacing": 32,
         "item_padding": 10,
         "content_gap": 24,
@@ -1087,7 +1087,8 @@
         "padding_top": 64,
         "padding_bottom": 64,
         "padding_top_mobile": 20,
-        "padding_bottom_mobile": 20
+        "padding_bottom_mobile": 20,
+        "open_all": false
       }
     },
     "reviews": {
