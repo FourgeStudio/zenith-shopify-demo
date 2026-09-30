@@ -264,6 +264,7 @@
         "review_card_width": 220,
         "variant_card_min": 150,
         "review_gap": 12,
+        "review_min_stars": 4,
         "review_autoplay": 4,
         "review_spacing": 38,
         "review_photo_size": 48,
@@ -336,6 +337,7 @@
         "content_gap_mobile": 12,
         "variant_card_min_mobile": 88,
         "gallery_ratio_mobile": 100,
+        "gallery_start_mobile": 2,
         "slide_width_mobile": 70,
         "slide_gap_mobile": 30,
         "dot_size_mobile": 7,
@@ -373,8 +375,7 @@
         "padding_top": 40,
         "padding_bottom": 64,
         "padding_top_mobile": 8,
-        "padding_bottom_mobile": 32,
-        "review_min_stars": 4
+        "padding_bottom_mobile": 32
       }
     },
     "videos": {
@@ -562,6 +563,7 @@
         "subheading_mobile_only": false,
         "play_label": "Play video",
         "center_when_fits": true,
+        "start_slide": 1,
         "heading_alignment": "center",
         "slides_desktop": 4,
         "show_peek": true,
@@ -662,6 +664,7 @@
         "heading": "What's in the jar",
         "subheading": "<p>Three ingredients, named on the label.</p>",
         "image": "shopify://shop_images/night-cream-ingredients-four-close-ups-of-a-cream-1-desktop.webp",
+        "image_mobile": "shopify://shop_images/night-cream-ingredients-four-close-ups-of-a-cream-1-mobile.webp",
         "open_first": true,
         "show_list": true,
         "list_title": "View Full Ingredient List",
@@ -721,8 +724,7 @@
         "padding_top": 64,
         "padding_bottom": 64,
         "padding_top_mobile": 20,
-        "padding_bottom_mobile": 20,
-        "image_mobile": "shopify://shop_images/night-cream-ingredients-four-close-ups-of-a-cream-1-mobile.webp"
+        "padding_bottom_mobile": 20
       }
     },
     "difference": {
@@ -1048,7 +1050,7 @@
           "settings": {
             "review_data": "real_data",
             "max_width": 1200,
-            "show_shop_reviews": true,
+            "show_shop_reviews": false,
             "empty_state": "other_products_reviews"
           }
         }
@@ -1278,6 +1280,7 @@
     "money_back": {
       "type": "zenith-guarantee-banner",
       "settings": {
+        "use_shared": true,
         "eyebrow": "",
         "heading": "The Zenith Money-Back Guarantee",
         "text": "<p>We stand behind every Zenith product. Kung hindi para sa iyo, ibabalik namin ang bayad mo. Full terms on our <a href=\"/policies/refund-policy\" title=\"Refunds and Returns\">Refunds and Returns</a> page.</p>",
@@ -1482,6 +1485,8 @@
         "media_width": 50,
         "content_position": "center",
         "content_vertical": "middle",
+        "height_mode": "px",
+        "height_screen": 65,
         "height": 560,
         "content_max_width": 440,
         "vertical_padding": 64,
@@ -1534,11 +1539,14 @@
         "text_font_size": 16,
         "countdown_font_size": 18,
         "countdown_label_font_size": 14,
+        "mobile_layout": "stacked",
+        "mobile_image_height": 300,
         "mobile_text_alignment": "center",
         "mobile_alignment": "bottom",
         "mobile_button_bottom": false,
         "mobile_button_full": true,
         "mobile_hide_button": false,
+        "mobile_height_screen": 65,
         "mobile_height": 520,
         "mobile_overlay_style": "bottom",
         "mobile_overlay_coverage": 70,
@@ -1564,10 +1572,7 @@
         "padding_top": 24,
         "padding_bottom": 48,
         "padding_top_mobile": 0,
-        "padding_bottom_mobile": 0,
-        "height_mode": "px",
-        "mobile_layout": "stacked",
-        "mobile_image_height": 300
+        "padding_bottom_mobile": 0
       }
     }
   },
