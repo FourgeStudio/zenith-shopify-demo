@@ -23,8 +23,9 @@
     assign p_text = settings.promo_text
     assign p_button_label = settings.promo_button_label
     assign p_button_link = settings.promo_button_link
-    assign p_background = settings.promo_background_image
-    assign p_image = settings.promo_image
+    # Photos picked on this section win over the global ones (the fields show either way, so a pick must work).
+    assign p_background = s.background_image | default: settings.promo_background_image
+    assign p_image = s.image | default: settings.promo_image
     assign p_cd_label = settings.promo_countdown_label
     assign p_end_date = settings.promo_end_date
     assign p_end_time = settings.promo_end_time
@@ -42,6 +43,10 @@
   if s.layout_style == 'split'
     assign is_split = true
     assign split_photo = p_image | default: p_background
+    # No photo on the live store: drop the empty half, the text panel takes the full width.
+    if split_photo == blank and request.design_mode == false
+      assign is_split = false
+    endif
   endif
 
   # Store-wide promotion switch (Theme settings → Zenith · Promo → "Promotion is running").
@@ -162,7 +167,7 @@
                   widths: '400, 600, 800, 1100, 1600',
                   sizes: '(min-width: 750px) 50vw, 100vw'
               }}
-            {%- else -%}
+            {%- elsif request.design_mode -%}
               {{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
             {%- endif -%}
           </div>
@@ -174,7 +179,7 @@
               | image_tag: loading: 'lazy', widths: '400, 600, 800, 1200', sizes: '(min-width: 750px) 45vw, 90vw'
             }}
           </div>
-        {%- elsif p_background == blank -%}
+        {%- elsif p_background == blank and request.design_mode -%}
           <div class="zenith-promo__image">
             {{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
           </div>
@@ -225,7 +230,7 @@
         { "value": "global", "label": "Global promo (Theme settings → Zenith · Promo)" },
         { "value": "custom", "label": "This section only" }
       ],
-      "info": "Global: edit the promo once in Theme settings → Zenith · Promo and every banner set to Global updates. The content and countdown fields below are only used with \"This section only\"."
+      "info": "Global: edit the promo once in Theme settings → Zenith · Promo and every banner set to Global updates. The text and countdown fields below are only used with \"This section only\"; a Background or Product image picked here is used either way (instead of the global one)."
     },
     {
       "type": "text",
