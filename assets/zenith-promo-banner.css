@@ -160,7 +160,9 @@
   }
 
   /* Theme settings → "Full-width buttons on mobile" (body.zenith-m-btn-full) must not override this section's own switch when it is off. */
-  .zenith-m-btn-full .zenith-promo:not(.zenith-promo--m-btn-full) .zenith-promo__content > .zenith-promo__button {
+  .zenith-m-btn-full .zenith-promo:not(.zenith-promo--m-btn-full) .zenith-promo__content > .zenith-promo__button,
+  .zenith-m-btn-full .zenith-promo:not(.zenith-promo--m-btn-full) .zenith-promo__content > product-form,
+  .zenith-m-btn-full .zenith-promo:not(.zenith-promo--m-btn-full) .zenith-promo__button.zenith-atc {
     align-self: auto;
     width: auto;
   }

@@ -33,6 +33,17 @@
     assign p_hide_expired = settings.promo_hide_when_expired
   endif
 
+  # Button product: a pick on this section wins over the global one (shown in both modes, like the photos).
+  assign p_product = s.button_product
+  assign p_action = s.button_action
+  if p_product == blank and s.content_source != 'custom'
+    assign p_product = settings.promo_button_product
+    assign p_action = settings.promo_button_action
+  endif
+  if p_product != blank and p_action == 'product'
+    assign p_button_link = p_product.url
+  endif
+
   assign show_countdown = false
   if p_end_date != blank
     assign show_countdown = true
@@ -74,6 +85,9 @@
 {%- if show_countdown -%}
   {{ 'zenith-countdown.css' | asset_url | stylesheet_tag }}
   <script src="{{ 'zenith-countdown.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+{%- if p_product != blank and p_action != 'product' -%}
+  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
 {%- endif -%}
 
 {%- capture extra -%}
@@ -149,12 +163,24 @@
             tag: p_tag,
             class: 'zenith-promo__heading'
           -%}
-          {%- render 'zenith-button',
-            label: p_button_label,
-            link: p_button_link,
-            style: s.button_style,
-            class: 'zenith-promo__button'
-          -%}
+          {%- if p_product != blank and p_action != 'product' and p_button_label != blank -%}
+            {%- assign form_id = 'ZenithPromoATC-' | append: section.id -%}
+            {%- render 'zenith-add-to-cart',
+              product: p_product,
+              form_id: form_id,
+              label: p_button_label,
+              style: s.button_style,
+              icon: 'arrow_right',
+              class: 'zenith-promo__button'
+            -%}
+          {%- else -%}
+            {%- render 'zenith-button',
+              label: p_button_label,
+              link: p_button_link,
+              style: s.button_style,
+              class: 'zenith-promo__button'
+            -%}
+          {%- endif -%}
         </div>
 
         {%- if is_split -%}
@@ -260,6 +286,22 @@
       "id": "button_link",
       "visible_if": "{{ section.settings.content_source == 'custom' }}",
       "label": "Button link"
+    },
+    {
+      "type": "product",
+      "id": "button_product",
+      "label": "Button product",
+      "info": "Optional. Used with Global content too (instead of the global product). When set, the button adds this product to the cart or opens its page, instead of the Button link."
+    },
+    {
+      "type": "select",
+      "id": "button_action",
+      "label": "Button product action",
+      "default": "cart",
+      "options": [
+        { "value": "cart", "label": "Add to cart" },
+        { "value": "product", "label": "Open product page" }
+      ]
     },
     {
       "type": "image_picker",

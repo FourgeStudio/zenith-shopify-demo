@@ -427,6 +427,22 @@
         "label": "Button link"
       },
       {
+        "type": "product",
+        "id": "promo_button_product",
+        "label": "Button product",
+        "info": "Optional. When set, the button adds this product to the cart or opens its page, instead of the Button link. A product picked on a banner section wins over this one."
+      },
+      {
+        "type": "select",
+        "id": "promo_button_action",
+        "label": "Button product action",
+        "default": "cart",
+        "options": [
+          { "value": "cart", "label": "Add to cart" },
+          { "value": "product", "label": "Open product page" }
+        ]
+      },
+      {
         "type": "image_picker",
         "id": "promo_background_image",
         "label": "Background image",
