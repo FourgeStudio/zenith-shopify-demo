@@ -170,7 +170,7 @@
           "settings": {
             "title": "Ingredients",
             "content_source": "custom",
-            "text": "<p>Key ingredients: Retinol 0.2%, beef tallow, Ectoin, Stephania Tetrandra Extract, Vitamin E, Sodium Hyaluronate, Glycerin, Jojoba Seed Oil, Shea Butter.<br/><br/>Full ingredient list: [SLOT: copy word for word from the label]</p>",
+            "text": "<p>Key ingredients: Retinol 0.2%, beef tallow, Ectoin, Stephania Tetrandra Extract, Vitamin E, Sodium Hyaluronate, Glycerin, Jojoba Seed Oil, Shea Butter.<br/><br/>Full ingredient list:</p><p>Water, Glycerin, Adeps Bovis (Tallow), Simmondsia Chinensis (Jojoba) Seed Oil, Butyrospermum Parkii (Shea Butter), Cyclopentasiloxane, Dimethicone, Butylene Glycol, Cetyl Ethylhexanoate, Ceteth-20 Phosphate, Cetearyl Alcohol, Ceteth-20, Glyceryl Stearate, PEG-100 Stearate, Hydroxyacetophenone, 1,2-Hexanediol, Stephania Tetrandra Extract, Taraxacum Officinale (Dandelion) Leaf Extract, Saururus Chinensis Leaf/Root Extract, Allantoin, Tocopherol (Vitamin E), Carbomer, Arginine, Sodium Hyaluronate, Retinol, Ectoin.</p>",
             "open": false,
             "hide_on_mobile": false,
             "hide_on_desktop": false
@@ -192,7 +192,7 @@
           "settings": {
             "title": "FAQs",
             "content_source": "questions",
-            "text": "<p>0.2% is a gentle retinol level, and the tallow base buffers it. New to retinol? Start 2 to 3 nights a week for the first two weeks, then go nightly. If anything feels wrong, stop and message us.</p>",
+            "text": "<h3>Will the retinol make my skin peel?</h3><p>0.2% is a gentle retinol level, and the tallow base buffers it. New to retinol? Start 2 to 3 nights a week for the first two weeks, then go nightly. If anything feels wrong, stop and message us.</p><h3>Is it greasy with beef tallow in it?</h3><p>No. It absorbs fast and finishes light. No shine, no residue on the pillow.</p><h3>Does it smell like beef?</h3><p>No. The cream has a light, neutral scent.</p><h3>Do I still need sunscreen?</h3><p>Yes. Retinol makes skin more sensitive to the sun, so wear SPF 30 every morning. The Zenith Anti-Aging Tallow Day Cream SPF 30 is made for that.</p><h3>Can I use it with the Cleanser and the Day Cream?</h3><p>Yes. Cleanser morning and night, Day Cream SPF 30 in the morning, Tallow Cream at night. The directions are on every label.</p><h3>Paano kung hindi ako hiyang?</h3><p>Every order carries the Zenith Money-Back Guarantee. Skin products are covered for 30 days, counted from delivery.&nbsp;<br/><br/>Message us on Facebook or email <a href=\"mailto:hello@tryzenith.ph\" target=\"_blank\" title=\"mailto:hello@tryzenith.ph\">hello@tryzenith.ph</a> with your order number and a photo of the product. Full terms on our <a href=\"https://tryzenith.ph/policies/refund-policy\" target=\"_blank\" title=\"Refunds and Returns\"><span style=\"text-decoration:underline\">Refunds and Returns</span></a> page.</p><p></p>",
             "open": false,
             "hide_on_mobile": false,
             "hide_on_desktop": false
@@ -555,8 +555,8 @@
         "product_filter": "page",
         "filter_products": [],
         "eyebrow": "",
-        "heading": "Clinically Proven. The Complete Regimen.",
-        "heading_mobile": "A Complete Routine,\nBuilt for Men.",
+        "heading": "A Complete Routine,  Built for Men.",
+        "heading_mobile": "Hear from the men who use Zenith every day.",
         "subheading": "<p>Hear from the men who use Zenith every day.</p>",
         "subheading_mobile_only": false,
         "play_label": "Play video",
@@ -623,8 +623,9 @@
         "ingredient-1": {
           "type": "ingredient",
           "settings": {
-            "title": "Premium Tallow",
-            "text": "<p>Our formula combines time-tested tallow with proven active ingredients, delivering real anti-aging results through nature's closest molecular match to human skin.</p>",
+            "image": "shopify://shop_images/Retinol_0.2.png",
+            "title": "Retinol 0.2%",
+            "text": "<p>The only percentage on the label. Gentle enough for nightly use.</p>",
             "title_mobile": "Premium beef tallow rebuilds the barrier",
             "text_mobile": ""
           }
@@ -632,8 +633,9 @@
         "ingredient-2": {
           "type": "ingredient",
           "settings": {
-            "title": "Stephania Root Extract",
-            "text": "<p>A calming botanical used to steady skin that reacts to heat and pollution, so the actives can do their work without the sting.</p>",
+            "image": "shopify://shop_images/Beef_Tallow.png",
+            "title": "Beef tallow",
+            "text": "<p>The base of the cream. It buffers the retinol and absorbs fast, no grease.</p>",
             "title_mobile": "",
             "text_mobile": ""
           }
@@ -641,18 +643,10 @@
         "ingredient-3": {
           "type": "ingredient",
           "settings": {
-            "title": "Retinol (Vitamin A)",
-            "text": "<p>The heavy lifter for anti-aging. It smooths out rough texture, evens your skin tone, and reduces the appearance of fine lines over time. Real, visible results without the complicated routine.</p>",
+            "image": "shopify://shop_images/Ectoin_and_Stephanie.png",
+            "title": "Ectoin and Stephanie",
+            "text": "<p>Added to keep skin calm when you use retinol every night.</p>",
             "title_mobile": "Retinol 0.2% for lines, tone and texture",
-            "text_mobile": ""
-          }
-        },
-        "ingredient-4": {
-          "type": "ingredient",
-          "settings": {
-            "title": "Hyaluronate + Ectoin Shield",
-            "text": "<p>Your daily defense against the elements. Hyaluronate pulls in moisture to keep your skin hydrated, while Ectoin acts like an invisible shield against heat, dust, and pollution.</p>",
-            "title_mobile": "Ectoin and Stephania keep skin calm",
             "text_mobile": ""
           }
         }
@@ -660,13 +654,13 @@
       "block_order": [
         "ingredient-1",
         "ingredient-2",
-        "ingredient-3",
-        "ingredient-4"
+        "ingredient-3"
       ],
       "settings": {
         "eyebrow": "",
-        "heading": "Why it works differently",
-        "subheading": "<p>Our unique formula combines time-tested tallow used for centuries with clinically proven retinol, delivering powerful anti-aging results through nature's perfect molecular match to human skin.</p>",
+        "heading": "What's in the jar",
+        "subheading": "<p>Three ingredients, named on the label.</p>",
+        "image": "{{ product.featured_image }}",
         "open_first": true,
         "show_list": true,
         "list_title": "View Full Ingredient List",
@@ -829,22 +823,25 @@
         "step_1": {
           "type": "step",
           "settings": {
-            "title": "",
-            "text": "At night, on a clean, dry face, take a pea-sized amount."
+            "image": "shopify://shop_images/Night_Cream_Step_1.png",
+            "title": "Clean, dry face",
+            "text": ""
           }
         },
         "step_2": {
           "type": "step",
           "settings": {
-            "title": "",
-            "text": "Dot it on forehead, cheeks and chin, then massage upward into the face and neck until absorbed."
+            "image": "shopify://shop_images/Night_Cream_Step_2.png",
+            "title": "Pea-sized amount, massaged upward",
+            "text": ""
           }
         },
         "step_3": {
           "type": "step",
           "settings": {
-            "title": "",
-            "text": "New to retinol? Use it 2 to 3 nights a week for the first two weeks, then move to nightly. Always wear SPF 30 in the morning."
+            "image": "shopify://shop_images/Night_Cream_Step_3.png",
+            "title": "SPF 30 the next morning",
+            "text": ""
           }
         }
       },
@@ -928,41 +925,41 @@
         "row-1": {
           "type": "row",
           "settings": {
-            "label": "Clinical Anti-Aging",
-            "zenith_value": "0.2% Retinol",
-            "value_1": "None",
-            "value_2": "Trace amounts",
-            "value_3": "Yes"
+            "label": "Retinol in the formula",
+            "zenith_value": "Yes",
+            "value_1": "Yes",
+            "value_2": "No",
+            "value_3": ""
           }
         },
         "row-2": {
           "type": "row",
           "settings": {
-            "label": "Barrier Support",
-            "zenith_value": "5% Tallow",
-            "value_1": "Minimal",
-            "value_2": "Synthetic",
-            "value_3": "Yes"
+            "label": "Beef tallow base",
+            "zenith_value": "Yes",
+            "value_1": "No",
+            "value_2": "No",
+            "value_3": ""
           }
         },
         "row-3": {
           "type": "row",
           "settings": {
-            "label": "Built for PH humidity",
+            "label": "Made for nightly use",
             "zenith_value": "Yes",
             "value_1": "No",
-            "value_2": "No",
-            "value_3": "No"
+            "value_2": "Yes",
+            "value_3": ""
           }
         },
         "row-4": {
           "type": "row",
           "settings": {
-            "label": "Sticky / Heavy Finish",
-            "zenith_value": "No",
-            "value_1": "Yes",
-            "value_2": "Yes (from layering)",
-            "value_3": "Often too thick"
+            "label": "Light in humidity",
+            "zenith_value": "Yes",
+            "value_1": "No",
+            "value_2": "Yes",
+            "value_3": ""
           }
         }
       },
@@ -978,12 +975,12 @@
         "subheading": "<p>Built specifically for the Filipino climate and lifestyle.</p>",
         "zenith_label": "Zenith",
         "zenith_caption": "",
-        "column_1_title": "Mass-Market Creams",
-        "column_1_note": "(Nivea Men, Master, Ponds)",
-        "column_2_title": "Multi-Step / K-Beauty Sets",
-        "column_2_note": "(Various Korean Brands)",
-        "column_3_title": "Premium Western Imports",
-        "column_3_note": "(Kiehl's, Clinique for Men)",
+        "column_1_title": "Other Product",
+        "column_1_note": "Ordinary hair oils, Single oils like coconut or castor",
+        "column_2_title": "Other Product",
+        "column_2_note": "Regular conditioner, Rinse-out conditioner",
+        "column_3_title": "",
+        "column_3_note": "",
         "heading_alignment": "center",
         "heading_spacing": 52,
         "heading_max_width": 760,
@@ -1045,7 +1042,7 @@
       "settings": {
         "eyebrow": "",
         "heading": "[customers] Filipino Men Trust Zenith Products",
-        "subheading": "<p>Men in Manila using the cream. Unedited and verified.</p>",
+        "subheading": "<p>Reviews from customers who bought the Zenith Anti-Aging Tallow Cream, shown as they wrote them.</p>",
         "heading_alignment": "center",
         "heading_max_width": 760,
         "subheading_spacing": 28,
@@ -1053,8 +1050,8 @@
         "jdgm_masonry": true,
         "columns_desktop": 4,
         "gap": 20,
-        "content_padding": 12,
-        "card_radius": 4,
+        "content_padding": 10,
+        "card_radius": 0,
         "color_scheme": "scheme-1",
         "card_color": "#202020",
         "card_border_color": "",
@@ -1266,7 +1263,7 @@
       "settings": {
         "eyebrow": "",
         "heading": "The Zenith Money-Back Guarantee",
-        "text": "<p>We stand behind every Zenith formula with complete confidence. Every order carries the Zenith Money-Back Guarantee, so you can try it on your own terms.</p><p>Not happy with your purchase? Simply contact us and we'll refund it. No hassle. Just show us proof. Full terms on our Refunds and Returns page.</p>",
+        "text": "<p>We stand behind every Zenith product. Kung hindi para sa iyo, ibabalik namin ang bayad mo. Full terms on our <a href=\"https://tryzenith.ph/policies/refund-policy\" target=\"_blank\" title=\"Refunds and Returns\"><span style=\"text-decoration:underline\">Refunds and Returns</span></a> page.</p>",
         "button_label": "",
         "button_link": "",
         "image": "shopify://shop_images/vector-icons_7.png",
