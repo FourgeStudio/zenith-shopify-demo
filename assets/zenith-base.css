@@ -1102,6 +1102,11 @@ cart-drawer-items {
   padding-inline: 1.2rem;
 }
 
+/* The goal box at the top stays full width. */
+cart-drawer-items .zenith-cart-offers__box {
+  margin-inline: calc(var(--zcd-inset) * -1);
+}
+
 /* ---------- Cart lines: product type under the title (cart-drawer + main-cart-items) ---------- */
 .zenith-cart-item__type {
   margin: var(--z-space-1, 4px) 0 0;
