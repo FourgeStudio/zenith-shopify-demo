@@ -246,7 +246,7 @@
         "show_thumbnails": true,
         "show_dots": true,
         "reviews_source": "global",
-        "variant_style": "cards",
+        "variant_style": "pills",
         "variant_card_badge": "[percent]% OFF",
         "variant_card_ship_free": "FREE SHIPPING",
         "variant_card_ship_fee": "+[amount] Shipping",
