@@ -229,6 +229,7 @@
         },
         "nn_hair_spray": {
           "type": "certificate",
+          "disabled": true,
           "settings": {
             "title": "Advanced Hair Density Spray",
             "number": "NN-1000015050639",
@@ -241,6 +242,7 @@
         },
         "nn_hair_shampoo": {
           "type": "certificate",
+          "disabled": true,
           "settings": {
             "title": "Advanced Hair Density Shampoo",
             "number": "NN-1000015997846",
@@ -254,6 +256,7 @@
         },
         "nn_teeth_whitening": {
           "type": "certificate",
+          "disabled": true,
           "settings": {
             "title": "Teeth Whitening",
             "number": "NN-00000000000",
@@ -266,6 +269,7 @@
         },
         "nn_body_wash": {
           "type": "certificate",
+          "disabled": true,
           "settings": {
             "title": "Body Wash",
             "number": "NN-00000000000",
@@ -278,6 +282,7 @@
         },
         "nn_body_lotion": {
           "type": "certificate",
+          "disabled": true,
           "settings": {
             "title": "Body Lotion",
             "number": "NN-00000000000",
@@ -290,6 +295,7 @@
         },
         "nn_deodorant": {
           "type": "certificate",
+          "disabled": true,
           "settings": {
             "title": "Deodorant",
             "number": "NN-00000000000",
