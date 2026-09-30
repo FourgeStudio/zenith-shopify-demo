@@ -12,7 +12,8 @@
   discounts, combinable with shipping discounts). Until those exist the drawer shows the estimate from
   the tier settings and checkout charges full price.
   Dawn re-renders .drawer__inner (drawer) and main-cart-items .js-contents (cart page) on every cart
-  change, so this updates with no JS. Accepts: context ('page' = cart page spacing).
+  change, so this updates with no JS; zenith-cart-offers.js only animates the change (the fill slides from
+  the old width, newly reached checkpoints pop). Accepts: context ('page' = cart page spacing).
 {% endcomment %}
 {%- capture zco_on -%}{%- render 'zenith-cart-tiers-on' -%}{%- endcapture -%}
 {%- capture zco_goal -%}{%- render 'zenith-shipping-goal' -%}{%- endcapture -%}
@@ -158,7 +159,10 @@
     endif
     assign zco_fill = zco_fill | round: 1
   -%}
-  <div class="zenith-cart-offers{% if context == 'page' %} zenith-cart-offers--page{% endif %}">
+  <zenith-cart-offers
+    class="zenith-cart-offers{% if context == 'page' %} zenith-cart-offers--page{% endif %}"
+    data-context="{{ context | default: 'drawer' }}"
+  >
     <div class="zenith-cart-offers__box">
       <svg
         class="zenith-cart-offers__van"
@@ -171,7 +175,7 @@
         aria-hidden="true"
         focusable="false"
       >
-        <g><path d="M9 5h13v13H9zM22 9h4.5l3.5 4v5h-8"/><path d="M24 9.5v3.5h5"/></g>
+        <g class="zenith-cart-offers__van-body"><path d="M9 5h13v13H9zM22 9h4.5l3.5 4v5h-8"/><path d="M24 9.5v3.5h5"/></g>
         <g class="zenith-cart-offers__van-speed"><path d="M1 8h5M3 12h4M1 16h5"/></g>
         <circle class="zenith-cart-offers__van-wheel" cx="13" cy="18.5" r="2.2"/>
         <circle class="zenith-cart-offers__van-wheel" cx="26" cy="18.5" r="2.2"/>
@@ -193,7 +197,7 @@
     {%- assign zco_gap = 100.0 | divided_by: zco_units | round: 2 -%}
     <div class="zenith-cart-offers__steps" style="--zco-gap: {{ zco_gap }}%" aria-hidden="true">
       <div class="zenith-cart-offers__track">
-        <div class="zenith-cart-offers__fill" style="width: {{ zco_fill }}%"></div>
+        <div class="zenith-cart-offers__fill" style="width: {{ zco_fill }}%"><i class="zenith-cart-offers__shine"></i></div>
       </div>
       {%- for zco_amt in zco_amts -%}
         {%- assign zco_i = forloop.index0 -%}
@@ -211,5 +215,5 @@
         </span>
       {%- endfor -%}
     </div>
-  </div>
+  </zenith-cart-offers>
 {%- endif -%}

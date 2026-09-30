@@ -833,6 +833,7 @@ div.zenith-cart-ship__fill {
   --zco-panel: color-mix(in srgb, rgb(var(--color-foreground)) 5%, rgb(var(--color-background)));
   --zco-dot: 1.4rem;
   --zco-check: 1.8rem;
+  display: block;
   padding: var(--z-space-4, 16px) 0 var(--z-space-5, 24px);
   border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.15);
 }
@@ -863,13 +864,23 @@ div.zenith-cart-ship__fill {
   fill: var(--zco-panel);
 }
 
-.zenith-cart-offers__van-speed {
-  animation: zenith-cart-van 1.2s ease-in-out 3;
+/* Van drives on the spot: the body bobs, the speed lines stream backwards. */
+.zenith-cart-offers__van-body {
+  animation: zenith-cart-van-bob 0.5s ease-in-out infinite alternate;
 }
 
-@keyframes zenith-cart-van {
-  0%, 100% { transform: translateX(0); opacity: 1; }
-  50% { transform: translateX(-0.2rem); opacity: 0.4; }
+.zenith-cart-offers__van-speed {
+  animation: zenith-cart-van-speed 0.8s linear infinite;
+}
+
+@keyframes zenith-cart-van-bob {
+  to { transform: translateY(-1px); }
+}
+
+@keyframes zenith-cart-van-speed {
+  0% { transform: translateX(3px); opacity: 0; }
+  40% { opacity: 1; }
+  100% { transform: translateX(-3px); opacity: 0; }
 }
 
 .zenith-cart-offers__box-text {
@@ -907,13 +918,60 @@ div.zenith-cart-ship__fill {
   background: rgba(var(--color-foreground), 0.15);
 }
 
-/* The fill is an empty div, so it needs div.* to beat Dawn's div:empty { display: none } in base.css. */
+/* zenith-cart-offers.js starts the fill at the previous width after a cart change, so it slides to the new one. */
 div.zenith-cart-offers__fill {
+  position: relative;
   display: block;
   height: 100%;
+  overflow: hidden;
   border-radius: inherit;
   background: linear-gradient(90deg, var(--z-dawn-gold, #eabe5f) 0%, var(--z-gold, #c59300) 100%);
-  transition: width 0.4s ease;
+  transition: width 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* A light sweep across the fill every couple of seconds. */
+.zenith-cart-offers__shine {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, 0.47) 50%, transparent 70%);
+  transform: translateX(-100%);
+  animation: zenith-cart-shine 2.2s ease-in-out infinite;
+}
+
+@keyframes zenith-cart-shine {
+  60%, 100% { transform: translateX(100%); }
+}
+
+/* Checkpoint reached by the last cart change (class added by the JS as the fill arrives): dot pops, a ring
+   spreads out, the label hops. Individual scale/translate props so the existing transforms stay intact. */
+.zenith-cart-offers__step.is-pop .zenith-cart-offers__step-dot {
+  animation: zenith-cart-dot-pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.zenith-cart-offers__step.is-pop .zenith-cart-offers__step-dot::after {
+  content: '';
+  position: absolute;
+  inset: -0.2rem;
+  border-radius: 50%;
+  border: 0.2rem solid var(--z-dawn-gold, #eabe5f);
+  animation: zenith-cart-dot-ring 0.8s ease-out forwards;
+}
+
+.zenith-cart-offers__step.is-pop:not(.is-end) .zenith-cart-offers__step-label {
+  animation: zenith-cart-label-pop 0.6s ease-out;
+}
+
+@keyframes zenith-cart-dot-pop {
+  40% { scale: 1.7; }
+}
+
+@keyframes zenith-cart-dot-ring {
+  from { scale: 1; opacity: 1; }
+  to { scale: 3; opacity: 0; }
+}
+
+@keyframes zenith-cart-label-pop {
+  40% { translate: 0 -0.4rem; scale: 1.15; }
 }
 
 /* Each checkpoint is one gap wide (--zco-gap = the spacing between checkpoints, set inline) and centred
@@ -1009,7 +1067,13 @@ div.zenith-cart-offers__fill {
 
 @media (prefers-reduced-motion: reduce) {
   div.zenith-cart-offers__fill { transition: none; }
-  .zenith-cart-offers__van-speed { animation: none; }
+  .zenith-cart-offers__van-body,
+  .zenith-cart-offers__van-speed,
+  .zenith-cart-offers__shine,
+  .zenith-cart-offers__step.is-pop .zenith-cart-offers__step-dot,
+  .zenith-cart-offers__step.is-pop .zenith-cart-offers__step-dot::after,
+  .zenith-cart-offers__step.is-pop .zenith-cart-offers__step-label { animation: none; }
+  .zenith-cart-offers__step.is-pop .zenith-cart-offers__step-dot::after { opacity: 0; }
 }
 
 /* ---------- Cart lines: product type under the title (cart-drawer + main-cart-items) ---------- */
