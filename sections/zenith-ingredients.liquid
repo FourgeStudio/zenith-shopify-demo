@@ -130,9 +130,16 @@
 
       <div class="zenith-ingredients__col zenith-ingredients__col--media">
         <div class="zenith-ingredients__media zenith-media">
-          {%- if section.settings.image != blank or section.settings.image_mobile != blank -%}
+          {%- comment -%} zenith: no photo picked → the product's main image (product pages) {%- endcomment -%}
+          {%- liquid
+            assign ing_image = section.settings.image
+            if ing_image == blank and section.settings.image_mobile == blank and product != blank
+              assign ing_image = product.featured_image
+            endif
+          -%}
+          {%- if ing_image != blank or section.settings.image_mobile != blank -%}
             {%- render 'zenith-responsive-image',
-              image: section.settings.image,
+              image: ing_image,
               mobile_image: section.settings.image_mobile,
               widths: '400, 600, 800, 1000, 1200, 1400',
               sizes: '(min-width: 750px) 48vw, 100vw'
@@ -185,7 +192,8 @@
     {
       "type": "image_picker",
       "id": "image",
-      "label": "Product photo"
+      "label": "Product photo",
+      "info": "Empty = the product's main image."
     },
     {
       "type": "image_picker",
