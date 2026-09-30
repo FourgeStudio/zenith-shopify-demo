@@ -1087,11 +1087,19 @@ div.zenith-cart-offers__fill {
 /* ---------- Cart drawer: scrollbar off the content ----------
    The item list scrolls; its thin scrollbar sat flush against the prices and the last checkpoint label.
    The list reaches 1rem into the drawer's side padding and gives it back as padding, so the bar runs in the
-   margin with a gap; the gutter is reserved so nothing shifts when the scrollbar appears. */
+   margin with a gap; the gutter is reserved so nothing shifts when the scrollbar appears.
+   Body inset (--zcd-inset): the list and the summary sit in from the drawer edges; header and the
+   Check out button keep the full width. */
 cart-drawer-items {
+  --zcd-inset: 1.2rem;
   margin-right: -1rem;
-  padding-right: 1rem;
+  padding-left: var(--zcd-inset);
+  padding-right: calc(1rem + var(--zcd-inset));
   scrollbar-gutter: stable;
+}
+
+.cart-drawer__footer {
+  padding-inline: 1.2rem;
 }
 
 /* ---------- Cart lines: product type under the title (cart-drawer + main-cart-items) ---------- */
