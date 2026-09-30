@@ -1,0 +1,21 @@
+{% comment %}
+  Are the "spend more, save more" tiers switched on right now? Echoes 1 when they are, nothing when not.
+  Theme settings → Zenith · Cart → Show the % off tiers: Off / Always / Only while a promotion runs.
+  Read by zenith-cart-tier-pct, zenith-cart-offers and zenith-cart-summary, so they cannot disagree.
+  Usage:
+    {%- capture tiers_on -%}{%- render 'zenith-cart-tiers-on' -%}{%- endcapture -%}
+    {%- if tiers_on != blank -%}…{%- endif -%}
+{% endcomment %}
+{%- liquid
+  case settings.cart_tiers_show
+    when 'always'
+      echo 1
+    when 'promo'
+      capture zcto_promo
+        render 'zenith-promo-on'
+      endcapture
+      if zcto_promo != blank
+        echo 1
+      endif
+  endcase
+-%}

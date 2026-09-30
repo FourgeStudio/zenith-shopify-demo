@@ -150,13 +150,28 @@
       },
       {
         "type": "paragraph",
-        "content": "Panel at the top of the cart drawer and cart page. The tiers (savings box, % dots, offer list) show only while Zenith · Promo → \"Promotion is running\" is on; otherwise it only tracks free shipping. Display only: create one automatic discount per tier in Discounts (Amount off products, minimum purchase amount, combines with shipping discounts only) so checkout applies it."
+        "content": "Panel at the top of the cart drawer and cart page: a box with what is unlocked and how far the next goal is, then a checkpoint per goal (free shipping, then each tier). Display only: create one automatic discount per tier in Discounts (Amount off products, minimum purchase amount, combines with shipping discounts only) with the same % and minimum so checkout applies it. Themes cannot read discounts, so the % is typed here; once a discount applies, the cart summary chip shows the % Shopify actually gave."
       },
       {
-        "type": "checkbox",
-        "id": "cart_tiers_enabled",
-        "label": "Show tiers during a promotion",
-        "default": true
+        "type": "select",
+        "id": "cart_tiers_show",
+        "label": "Show the % off tiers",
+        "options": [
+          {
+            "value": "off",
+            "label": "Off (free shipping only)"
+          },
+          {
+            "value": "always",
+            "label": "Always"
+          },
+          {
+            "value": "promo",
+            "label": "Only while a promotion runs"
+          }
+        ],
+        "default": "promo",
+        "info": "\"Only while a promotion runs\" follows Zenith · Promo → Promotion is running. Leave a tier's % at 0 to hide that tier. Keep tiers in ascending order, above the free shipping amount."
       },
       {
         "type": "number",
@@ -197,129 +212,86 @@
       },
       {
         "type": "text",
-        "id": "cart_offers_heading",
-        "label": "List heading",
-        "default": "Spend more, save more"
-      },
-      {
-        "type": "text",
         "id": "cart_offers_tier_label",
         "label": "Tier name",
         "default": "[percent]% off",
-        "info": "[percent] is the tier's number."
+        "info": "[percent] = the tier %. Used on the checkpoints, in the message and on the summary chip."
       },
       {
         "type": "text",
         "id": "cart_offers_ship_label",
         "label": "Free shipping name",
-        "default": "free shipping",
+        "default": "Free Shipping",
         "info": "Lower case: it is used mid-sentence. The list capitalises it."
       },
       {
         "type": "text",
         "id": "cart_offers_ship_short",
-        "label": "Free shipping — bar label",
-        "default": "Free ship"
+        "label": "Free shipping — checkpoint label",
+        "default": "Free shipping"
+      },
+      {
+        "type": "text",
+        "id": "cart_offers_title_next",
+        "label": "Title — nothing unlocked yet",
+        "default": "Unlock [offer]",
+        "info": "[offer] = the next goal."
+      },
+      {
+        "type": "text",
+        "id": "cart_offers_title_done",
+        "label": "Title — something unlocked",
+        "default": "[offer] Unlocked!",
+        "info": "[offer] = everything unlocked so far, e.g. \"Free Shipping + 10% Off\"."
       },
       {
         "type": "text",
         "id": "cart_offers_next",
         "label": "Message — next goal",
-        "default": "Add [amount] more to get [offer]"
+        "default": "You are [amount] away from [offer].",
+        "info": "[amount] = what is left to spend, [offer] = the next goal."
       },
       {
         "type": "text",
         "id": "cart_offers_done",
-        "label": "Message — everything reached",
-        "default": "You've unlocked [offer]"
+        "label": "Message — everything unlocked",
+        "default": "You've unlocked the best deal."
       },
       {
-        "type": "text",
-        "id": "cart_offers_saving",
-        "label": "Box — saving",
-        "default": "You're saving [amount]"
-      },
-      {
-        "type": "text",
-        "id": "cart_offers_plus_ship",
-        "label": "Box — with free shipping",
-        "default": "Plus free shipping"
-      },
-      {
-        "type": "text",
-        "id": "cart_offers_no_saving",
-        "label": "Box — nothing yet",
-        "default": "No savings yet"
-      },
-      {
-        "type": "text",
-        "id": "cart_offers_unlocked",
-        "label": "Row — unlocked",
-        "default": "Unlocked"
-      },
-      {
-        "type": "text",
-        "id": "cart_offers_add",
-        "label": "Row — still short",
-        "default": "Add [amount]"
-      },
-      {
-        "type": "text",
-        "id": "cart_offers_saving_row",
-        "label": "Row — in use",
-        "default": "Saving [amount]"
-      },
-      {
-        "type": "text",
-        "id": "cart_offers_replaced",
-        "label": "Row — beaten by a higher tier",
-        "default": "Replaced by a better deal"
-      },
-      {
-        "type": "text",
-        "id": "cart_offers_save_est",
-        "label": "Row — not reached",
-        "default": "Save ~[amount]"
+        "type": "header",
+        "content": "Pairs well with"
       },
       {
         "type": "paragraph",
-        "content": "No promotion running: the box shows the sale saving (compare-at price) or free shipping, and the list shows free shipping plus the three Checkout reassurance lines below. [threshold] = free shipping minimum, [fee] = flat fee."
+        "content": "Products suggested under the cart items, skipping anything already in the cart. First each cart product's complementary products (Search & Discovery app → Product recommendations), then the list below."
       },
       {
         "type": "text",
-        "id": "cart_offers_perks_heading",
-        "label": "List heading (no promotion)",
-        "default": "Every order includes"
+        "id": "cart_upsell_heading",
+        "label": "Heading",
+        "default": "Pairs well with"
+      },
+      {
+        "type": "product_list",
+        "id": "cart_upsell_products",
+        "label": "Products",
+        "limit": 10
+      },
+      {
+        "type": "range",
+        "id": "cart_upsell_max",
+        "label": "Products shown",
+        "min": 0,
+        "max": 4,
+        "step": 1,
+        "default": 2,
+        "info": "0 hides the list."
       },
       {
         "type": "text",
-        "id": "cart_offers_perk_status",
-        "label": "Perk row status",
-        "default": "Included"
-      },
-      {
-        "type": "text",
-        "id": "cart_offers_ship_title",
-        "label": "Box — free shipping not reached",
-        "default": "Free shipping on orders [threshold]+"
-      },
-      {
-        "type": "text",
-        "id": "cart_offers_ship_sub",
-        "label": "Box — under it (not reached)",
-        "default": "Flat [fee] shipping below that"
-      },
-      {
-        "type": "text",
-        "id": "cart_offers_ship_sub_on",
-        "label": "Box — under it (reached)",
-        "default": "Your order ships free"
-      },
-      {
-        "type": "text",
-        "id": "cart_offers_sale_sub",
-        "label": "Box — under a sale saving",
-        "default": "Off the regular price"
+        "id": "cart_upsell_button",
+        "label": "Button label",
+        "default": "+ Add"
       },
       {
         "type": "header",
@@ -327,19 +299,7 @@
       },
       {
         "type": "paragraph",
-        "content": "Replaces Estimated total in the cart drawer and on the cart page. Purchase discount shows during a promotion, or whenever a discount code applies. Regular price and Sale discount appear only when a product has a compare-at price."
-      },
-      {
-        "type": "text",
-        "id": "cart_summary_regular",
-        "label": "Regular price",
-        "default": "Regular price"
-      },
-      {
-        "type": "text",
-        "id": "cart_summary_sale",
-        "label": "Sale discount",
-        "default": "Sale discount"
+        "content": "Replaces Estimated total in the cart drawer and on the cart page. Purchase discount shows while the tiers are on, or whenever a discount applies. Below the free shipping amount, Shipping shows the flat fee and Total includes it."
       },
       {
         "type": "text",
@@ -357,14 +317,8 @@
         "type": "text",
         "id": "cart_summary_shipping",
         "label": "Shipping",
-        "default": "Free shipping promo",
+        "default": "Shipping",
         "info": "While a promotion runs."
-      },
-      {
-        "type": "text",
-        "id": "cart_summary_shipping_regular",
-        "label": "Shipping (no promotion)",
-        "default": "Shipping"
       },
       {
         "type": "text",
@@ -375,7 +329,7 @@
       {
         "type": "text",
         "id": "cart_summary_ship_later",
-        "label": "Shipping — not reached",
+        "label": "Shipping — not reached, no flat fee",
         "default": "Calculated at checkout"
       },
       {
@@ -383,13 +337,6 @@
         "id": "cart_summary_total",
         "label": "Total",
         "default": "Total"
-      },
-      {
-        "type": "text",
-        "id": "cart_summary_all",
-        "label": "Total savings bar",
-        "default": "Total savings [amount] ([percent]% off regular price)",
-        "info": "[amount] = regular price minus total; [percent] = that as a share of the regular price. \"+ free shipping\" is added once reached. Blank hides the bar."
       },
       {
         "type": "header",

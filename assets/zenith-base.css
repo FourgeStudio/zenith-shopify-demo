@@ -764,13 +764,14 @@ div.zenith-cart-ship__fill {
   div.zenith-cart-ship__fill { transition: none; }
 }
 
-/* ---------- Cart drawer: spend more, save more (snippets/zenith-cart-offers.liquid) ----------
-   Top of the scrolling item list, so a tall panel never pins the items off a phone screen. */
+/* ---------- Cart drawer + cart page: goal panel (snippets/zenith-cart-offers.liquid) ----------
+   Top of the scrolling item list, so the panel never pins the items off a phone screen. */
 .zenith-cart-offers {
+  --zco-panel: color-mix(in srgb, rgb(var(--color-foreground)) 5%, rgb(var(--color-background)));
+  --zco-dot: 1.4rem;
+  --zco-check: 1.8rem;
   padding: var(--z-space-4, 16px) 0 var(--z-space-5, 24px);
   border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.15);
-  /* The end label and dot sit near the edge; never let them make the item list scroll sideways. */
-  overflow-x: clip;
 }
 
 .zenith-cart-offers p {
@@ -781,72 +782,69 @@ div.zenith-cart-ship__fill {
   display: flex;
   align-items: center;
   gap: var(--z-space-4, 16px);
-  padding: var(--z-space-4, 16px) var(--z-space-5, 24px);
-  background: rgba(var(--color-foreground), 0.06);
+  padding: var(--z-space-4, 16px);
+  background: var(--zco-panel);
   border: 0.1rem solid rgba(var(--color-foreground), 0.12);
 }
 
-.zenith-cart-offers__box--on {
-  background: rgba(197, 147, 0, 0.35);
-  border-color: rgba(234, 190, 95, 0.35);
-}
-
-.zenith-cart-offers__big {
+.zenith-cart-offers__van {
   flex: 0 0 auto;
-  font-family: var(--font-heading-family);
-  font-weight: var(--font-heading-weight);
-  font-size: 3.6rem;
-  line-height: 1;
-  color: var(--z-dawn-gold, #eabe5f);
-}
-
-.zenith-cart-offers__big-icon {
   width: 3.6rem;
-  height: 3.6rem;
+  height: 2.7rem;
+  color: var(--z-dawn-gold, #eabe5f);
+  overflow: visible;
 }
 
-.zenith-cart-offers__box-title {
-  font-size: 1.6rem;
-  font-weight: 700;
-  line-height: 1.25;
+/* Wheels are filled with the panel colour so the body lines stop at the tyre. */
+.zenith-cart-offers__van-wheel {
+  fill: var(--zco-panel);
 }
 
-.zenith-cart-offers__box-sub {
-  font-size: 1.3rem;
-  opacity: 0.7;
+.zenith-cart-offers__van-speed {
+  animation: zenith-cart-van 1.2s ease-in-out 3;
 }
 
-.zenith-cart-offers__msg {
-  margin-top: 0;
-  font-size: 1.5rem;
+@keyframes zenith-cart-van {
+  0%, 100% { transform: translateX(0); opacity: 1; }
+  50% { transform: translateX(-0.2rem); opacity: 0.4; }
+}
+
+.zenith-cart-offers__box-text {
+  min-width: 0;
+}
+
+.zenith-cart-offers__title {
+  font-size: 1.7rem;
   font-weight: 700;
   line-height: 1.3;
 }
 
-/* Only spaced when the promo savings box sits above it. */
-.zenith-cart-offers .zenith-cart-offers__box + .zenith-cart-offers__msg {
-  margin-top: var(--z-space-5, 24px);
+.zenith-cart-offers__msg {
+  margin-top: var(--z-space-1, 4px);
+  font-size: 1.3rem;
+  line-height: 1.4;
+  color: rgba(var(--color-foreground), 0.75);
 }
 
 .zenith-cart-offers__msg strong {
   color: var(--z-dawn-gold, #eabe5f);
 }
 
-/* Labels sit above the track; top padding leaves them room. */
-.zenith-cart-offers__bar {
+/* Labels sit above the track; top padding leaves room for two lines ("FREE / SHIPPING"). */
+.zenith-cart-offers__steps {
   position: relative;
-  margin: var(--z-space-3, 12px) var(--z-space-2, 8px) 0;
-  padding-top: 2.6rem;
+  margin-top: var(--z-space-4, 16px);
+  padding-top: 3.4rem;
 }
 
 .zenith-cart-offers__track {
-  height: 0.6rem;
-  border-radius: 0.6rem;
+  height: 0.4rem;
+  border-radius: 0.4rem;
   overflow: hidden;
   background: rgba(var(--color-foreground), 0.15);
 }
 
-/* div.* beats Dawn's div:empty { display: none }, same as the shipping bar fill. */
+/* The fill is an empty div, so it needs div.* to beat Dawn's div:empty { display: none } in base.css. */
 div.zenith-cart-offers__fill {
   display: block;
   height: 100%;
@@ -855,156 +853,222 @@ div.zenith-cart-offers__fill {
   transition: width 0.4s ease;
 }
 
-.zenith-cart-offers__dot {
+/* Zero-width anchor on the checkpoint's position; the dot and label centre on it. */
+.zenith-cart-offers__step {
   position: absolute;
-  bottom: -0.3rem;
-  width: 1.2rem;
-  height: 1.2rem;
-  margin-left: -0.6rem;
+  bottom: 0.2rem;
+  width: 0;
+}
+
+.zenith-cart-offers__step-dot {
+  position: absolute;
+  bottom: calc(var(--zco-dot) / -2);
+  left: calc(var(--zco-dot) / -2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--zco-dot);
+  height: var(--zco-dot);
   border-radius: 50%;
   background: rgb(var(--color-background));
-  border: 0.2rem solid rgba(var(--color-foreground), 0.45);
+  border: 0.2rem solid rgba(var(--color-foreground), 0.35);
 }
 
-.zenith-cart-offers__dot.is-reached {
+.zenith-cart-offers__step.is-reached .zenith-cart-offers__step-dot {
+  bottom: calc(var(--zco-check) / -2);
+  left: calc(var(--zco-check) / -2);
+  width: var(--zco-check);
+  height: var(--zco-check);
   background: var(--z-dawn-gold, #eabe5f);
   border-color: var(--z-dawn-gold, #eabe5f);
+  color: rgb(var(--color-background));
 }
 
-.zenith-cart-offers__dot-label {
+.zenith-cart-offers__step-dot svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+/* The last checkpoint sits on the track's end, so its dot and label hug the right edge instead of hanging off it. */
+.zenith-cart-offers__step.is-end .zenith-cart-offers__step-dot {
+  left: auto;
+  right: 0;
+}
+
+.zenith-cart-offers__step-label {
   position: absolute;
-  bottom: 1.8rem;
-  left: 50%;
+  bottom: 1.4rem;
+  left: 0;
   transform: translateX(-50%);
-  white-space: nowrap;
-  font-size: 1.1rem;
-  line-height: 1;
-  opacity: 0.7;
+  width: 7rem;
+  font-size: 1.05rem;
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  text-align: center;
+  text-transform: uppercase;
+  color: rgba(var(--color-foreground), 0.6);
 }
 
-.zenith-cart-offers__dot.is-end .zenith-cart-offers__dot-label {
+.zenith-cart-offers__step.is-end .zenith-cart-offers__step-label {
   left: auto;
   right: 0;
   transform: none;
-}
-
-.zenith-cart-offers__dot.is-reached .zenith-cart-offers__dot-label {
-  color: var(--z-dawn-gold, #eabe5f);
-  font-weight: 700;
-  opacity: 1;
-}
-
-.zenith-cart-offers__list {
-  margin-top: var(--z-space-5, 24px);
-  border: 0.1rem solid rgba(var(--color-foreground), 0.15);
-}
-
-.zenith-cart-offers__heading {
-  padding: var(--z-space-3, 12px) var(--z-space-4, 16px);
-  font-size: 1.2rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  opacity: 0.7;
-}
-
-.zenith-cart-offers__rows {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.zenith-cart-offers__row {
-  display: flex;
-  align-items: center;
-  gap: var(--z-space-3, 12px);
-  padding: var(--z-space-3, 12px) var(--z-space-4, 16px);
-  border-top: 0.1rem solid rgba(var(--color-foreground), 0.15);
-  font-size: 1.4rem;
-  line-height: 1.3;
-  color: rgba(var(--color-foreground), 0.55);
-}
-
-.zenith-cart-offers__row.is-reached {
-  color: rgb(var(--color-foreground));
-}
-
-.zenith-cart-offers__row.is-active {
-  background: rgba(var(--color-foreground), 0.06);
-}
-
-.zenith-cart-offers__row-dot {
-  flex: 0 0 auto;
-  width: 1rem;
-  height: 1rem;
-  border-radius: 50%;
-  border: 0.1rem solid rgba(var(--color-foreground), 0.45);
-}
-
-span.zenith-cart-offers__row-dot:empty {
-  display: block;
-}
-
-.zenith-cart-offers__row.is-reached .zenith-cart-offers__row-dot {
-  background: var(--z-dawn-gold, #eabe5f);
-  border-color: var(--z-dawn-gold, #eabe5f);
-}
-
-/* Perk rows (no promotion) use the reassurance icon in place of the dot. */
-.zenith-cart-offers__row-icon {
-  flex: 0 0 auto;
-  width: 1.6rem;
-  height: 1.6rem;
-  margin: 0 -0.3rem;
-  color: var(--z-dawn-gold, #eabe5f);
-}
-
-.zenith-cart-offers__row-name {
-  flex: 1 1 auto;
-  min-width: 0;
-}
-
-.zenith-cart-offers__row-status {
-  flex: 0 0 auto;
+  width: 5rem;
   text-align: right;
 }
 
-.zenith-cart-offers__row.is-reached .zenith-cart-offers__row-status {
-  font-weight: 600;
+.zenith-cart-offers__step.is-reached .zenith-cart-offers__step-label {
+  color: var(--z-dawn-gold, #eabe5f);
+  font-weight: 700;
 }
 
-/* Cart page: same panel above the item table; box, message and bar left, offer list right on desktop. */
 .zenith-cart-offers--page {
   padding-top: 0;
   margin-bottom: var(--z-space-5, 24px);
 }
 
 @media screen and (min-width: 990px) {
-  .zenith-cart-offers--page {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    grid-template-rows: auto auto 1fr;
-    column-gap: var(--z-space-7, 48px);
-    align-items: start;
-  }
-
-  .zenith-cart-offers--page .zenith-cart-offers__list {
-    grid-column: 2;
-    grid-row: 1 / span 3;
-    margin-top: 0;
-  }
+  .zenith-cart-offers--page .zenith-cart-offers__box { padding: var(--z-space-4, 16px) var(--z-space-5, 24px); }
 }
 
 @media screen and (max-width: 375px) {
-  .zenith-cart-offers__box { padding: var(--z-space-3, 12px) var(--z-space-4, 16px); }
-  .zenith-cart-offers__big { font-size: 3rem; }
-  .zenith-cart-offers__row { font-size: 1.3rem; padding-inline: var(--z-space-3, 12px); }
+  .zenith-cart-offers__box { gap: var(--z-space-3, 12px); padding: var(--z-space-3, 12px); }
+  .zenith-cart-offers__title { font-size: 1.5rem; }
+  .zenith-cart-offers__step-label { width: 5.6rem; font-size: 0.95rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   div.zenith-cart-offers__fill { transition: none; }
+  .zenith-cart-offers__van-speed { animation: none; }
 }
 
-/* ---------- Cart drawer: savings summary (snippets/zenith-cart-summary.liquid) ---------- */
+/* ---------- Cart lines: product type under the title (cart-drawer + main-cart-items) ---------- */
+.zenith-cart-item__type {
+  margin: var(--z-space-1, 4px) 0 0;
+  font-size: 1.3rem;
+  line-height: 1.3;
+  color: rgba(var(--color-foreground), 0.65);
+}
+
+/* ---------- Cart drawer + cart page: pairs well with (snippets/zenith-cart-upsell.liquid) ---------- */
+.zenith-cart-upsell {
+  padding: var(--z-space-4, 16px) 0;
+  border-top: 0.1rem solid rgba(var(--color-foreground), 0.15);
+  border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.15);
+}
+
+.zenith-cart-upsell--page {
+  margin-top: var(--z-space-5, 24px);
+}
+
+.zenith-cart-upsell__heading {
+  margin: 0 0 var(--z-space-3, 12px);
+  font-size: 1.1rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(var(--color-foreground), 0.6);
+}
+
+.zenith-cart-upsell__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--z-space-3, 12px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.zenith-cart-upsell__item {
+  display: flex;
+  align-items: center;
+  gap: var(--z-space-3, 12px);
+}
+
+.zenith-cart-upsell__media {
+  flex: 0 0 auto;
+  display: block;
+  width: 5.2rem;
+  height: 5.2rem;
+  background: #f3f1ea;
+  overflow: hidden;
+}
+
+.zenith-cart-upsell__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.zenith-cart-upsell__info {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.zenith-cart-upsell__title {
+  display: block;
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: rgb(var(--color-foreground));
+  text-decoration: none;
+}
+
+.zenith-cart-upsell__title:hover {
+  text-decoration: underline;
+}
+
+.zenith-cart-upsell__meta {
+  margin: 0.2rem 0 0;
+  font-size: 1.2rem;
+  line-height: 1.3;
+  color: rgba(var(--color-foreground), 0.65);
+}
+
+.zenith-cart-upsell__form {
+  flex: 0 0 auto;
+}
+
+.zenith-cart-upsell__add {
+  position: relative;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 4rem;
+  padding: 0 var(--z-space-3, 12px);
+  border: 0.1rem solid var(--z-dawn-gold, #eabe5f);
+  background: transparent;
+  color: var(--z-dawn-gold, #eabe5f);
+  font: inherit;
+  font-size: 1.3rem;
+  font-weight: 700;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.zenith-cart-upsell__add:hover,
+.zenith-cart-upsell__add:focus-visible {
+  background: var(--z-dawn-gold, #eabe5f);
+  color: rgb(var(--color-background));
+}
+
+/* product-form.js adds .loading while the add request runs. */
+.zenith-cart-upsell__add.loading > span:first-child {
+  visibility: hidden;
+}
+
+.zenith-cart-upsell__add .loading__spinner {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+/* ---------- Cart drawer + cart page: totals (snippets/zenith-cart-summary.liquid) ---------- */
 .zenith-cart-sum {
   display: flex;
   flex-direction: column;
@@ -1021,14 +1085,9 @@ span.zenith-cart-offers__row-dot:empty {
   gap: var(--z-space-3, 12px);
 }
 
-.zenith-cart-sum__row > span:last-child,
-.zenith-cart-sum__row > s {
+.zenith-cart-sum__row > span:last-child {
   font-variant-numeric: tabular-nums;
   text-align: right;
-}
-
-.zenith-cart-sum__row--muted s {
-  color: rgba(var(--color-foreground), 0.55);
 }
 
 .zenith-cart-sum__gold {
@@ -1057,16 +1116,6 @@ span.zenith-cart-offers__row-dot:empty {
   font-family: var(--font-heading-family);
   font-weight: var(--font-heading-weight);
   font-size: 2rem;
-}
-
-.zenith-cart-sum__all {
-  margin: var(--z-space-1, 4px) 0 0;
-  padding: var(--z-space-2, 8px) var(--z-space-3, 12px);
-  background: rgba(var(--z-gold-rgb), 0.3);
-  color: var(--z-dawn-gold, #eabe5f);
-  font-weight: 600;
-  font-size: 1.3rem;
-  text-align: center;
 }
 
 /* ---------- Cart drawer: reassurance under Checkout (snippets/zenith-cart-trust.liquid) ---------- */

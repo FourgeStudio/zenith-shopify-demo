@@ -125,6 +125,10 @@
                           modal_id: cart_disclosure_modal_id
                         -%}
                       </div>
+                      {%- comment -%}zenith: product type under the title (matches the cart drawer){%- endcomment -%}
+                      {%- if item.product.type != blank -%}
+                        <p class="zenith-cart-item__type">{{ item.product.type | escape }}</p>
+                      {%- endif -%}
 
                       {%- if item.original_price != item.final_price -%}
                         <div class="cart-item__discounted-prices">
@@ -467,6 +471,8 @@
                 {%- endfor -%}
               </tbody>
             </table>
+            {%- comment -%}zenith: "Pairs well with" (links, not forms — this sits inside form#cart){%- endcomment -%}
+            {%- render 'zenith-cart-upsell', context: 'page' -%}
           {%- endif -%}
         </div>
       </div>
