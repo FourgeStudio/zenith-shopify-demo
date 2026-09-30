@@ -1241,7 +1241,7 @@
         "mobile_text_alignment": "center",
         "mobile_alignment": "bottom",
         "mobile_button_bottom": false,
-        "mobile_button_full": false,
+        "mobile_button_full": true,
         "mobile_hide_button": false,
         "mobile_height": 520,
         "mobile_overlay_style": "bottom",
@@ -1270,7 +1270,9 @@
         "padding_top_mobile": 0,
         "padding_bottom_mobile": 0,
         "height_mode": "px",
-        "mobile_image": "shopify://shop_images/cleanser-bottom-banner-older-filipino-man-touching-his-cheek-1-mobile.webp"
+        "mobile_image": "shopify://shop_images/cleanser-bottom-banner-older-filipino-man-touching-his-cheek-1-mobile.webp",
+        "mobile_layout": "stacked",
+        "mobile_image_height": 300
       }
     }
   },

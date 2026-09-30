@@ -126,12 +126,13 @@
     --z-hero-d2: {{ s.display_color_2 }};
   {%- endif -%}
   {%- render 'zenith-overlay-vars', settings: s -%}
+  --z-hero-sih-m: {{ s.mobile_image_height | default: 300 }}px;
 {%- endcapture -%}
 {%- render 'zenith-section-style', section: section, extra: extra -%}
 
 <section
   id="Zenith-{{ section.id }}"
-  class="zenith-section zenith-hero color-{{ s.color_scheme }} gradient zenith-hero--{{ s.content_position }} zenith-hero--v-{{ s.content_vertical }} zenith-hero--m-{{ s.mobile_alignment }} zenith-hero--m-text-{{ s.mobile_text_alignment }}{% if s.mobile_button_bottom %} zenith-hero--m-pin{% endif %}{% if s.mobile_button_full %} zenith-hero--m-full{% endif %}{% if s.desktop_layout == 'image_beside' %} zenith-hero--split{% endif %}{% if s.panel_width == 'page' %} zenith-hero--framed{% endif %}{% if s.button_full %} zenith-hero--btn-full{% endif %}{{ promo_class }}"
+  class="zenith-section zenith-hero color-{{ s.color_scheme }} gradient zenith-hero--{{ s.content_position }} zenith-hero--v-{{ s.content_vertical }} zenith-hero--m-{{ s.mobile_alignment }} zenith-hero--m-text-{{ s.mobile_text_alignment }}{% if s.mobile_button_bottom %} zenith-hero--m-pin{% endif %}{% if s.mobile_button_full %} zenith-hero--m-full{% endif %}{% if s.desktop_layout == 'image_beside' %} zenith-hero--split{% endif %}{% if s.panel_width == 'page' %} zenith-hero--framed{% endif %}{% if s.button_full %} zenith-hero--btn-full{% endif %}{% if s.mobile_layout == 'stacked' %} zenith-hero--m-stacked{% endif %}{{ promo_class }}"
   {%- render 'zenith-promo-state', visibility: s.promo_visibility, output: 'attrs' %}
 >
   <div class="zenith-hero__inner">
@@ -1111,6 +1112,28 @@
     {
       "type": "header",
       "content": "Mobile"
+    },
+    {
+      "type": "select",
+      "id": "mobile_layout",
+      "label": "Mobile layout",
+      "default": "overlay",
+      "options": [
+        { "value": "overlay", "label": "Text over the image" },
+        { "value": "stacked", "label": "Image on top, text below" }
+      ],
+      "info": "Image on top: the photo fades into the overlay colour (Colors → Overlay color) and the text sits below it. Mobile height and overlay settings are then not used."
+    },
+    {
+      "type": "range",
+      "id": "mobile_image_height",
+      "visible_if": "{{ section.settings.mobile_layout == 'stacked' }}",
+      "label": "Mobile image height",
+      "min": 160,
+      "max": 600,
+      "step": 10,
+      "unit": "px",
+      "default": 300
     },
     {
       "type": "select",

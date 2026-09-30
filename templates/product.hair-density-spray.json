@@ -1262,7 +1262,9 @@
         "padding_top_mobile": 0,
         "padding_bottom_mobile": 0,
         "height_mode": "px",
-        "mobile_image": "shopify://shop_images/hair-spray-cta-silver-haired-man-spraying-1-mobile.webp"
+        "mobile_image": "shopify://shop_images/hair-spray-cta-silver-haired-man-spraying-1-mobile.webp",
+        "mobile_layout": "stacked",
+        "mobile_image_height": 300
       }
     }
   },
