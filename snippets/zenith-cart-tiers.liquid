@@ -1,0 +1,9 @@
+{% comment %}
+  The "spend more, save more" tiers, in code on purpose: they must match the automatic discounts in
+  Admin → Discounts, which a theme cannot read, so they are not a theme setting. Change them here
+  whenever the Admin discounts change. Format: spend in pesos : % off, comma separated, ascending,
+  every tier above the free shipping amount.
+  Read by zenith-cart-tier-pct and zenith-cart-offers. Shown only while Theme settings → Zenith · Cart
+  → Show the % off tiers is on (zenith-cart-tiers-on).
+{% endcomment %}
+{%- echo '2000:10,3000:20,4000:30' -%}
