@@ -141,6 +141,7 @@
     {
       "type": "range",
       "id": "excerpt_words",
+      "visible_if": "{{ section.settings.show_excerpt }}",
       "label": "Excerpt length",
       "min": 10,
       "max": 60,
@@ -157,6 +158,7 @@
     {
       "type": "select",
       "id": "date_format",
+      "visible_if": "{{ section.settings.show_date }}",
       "label": "Date format",
       "default": "%-d %b %Y",
       "options": [
@@ -272,6 +274,7 @@
     {
       "type": "range",
       "id": "excerpt_opacity",
+      "visible_if": "{{ section.settings.show_excerpt or section.settings.show_date }}",
       "label": "Excerpt and date opacity",
       "min": 40,
       "max": 100,
@@ -317,6 +320,7 @@
     {
       "type": "range",
       "id": "text_font_size",
+      "visible_if": "{{ section.settings.show_excerpt }}",
       "label": "Excerpt size",
       "min": 12,
       "max": 24,
@@ -401,6 +405,7 @@
     {
       "type": "range",
       "id": "text_font_size_mobile",
+      "visible_if": "{{ section.settings.show_excerpt }}",
       "label": "Excerpt size",
       "min": 12,
       "max": 24,

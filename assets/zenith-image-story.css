@@ -82,6 +82,19 @@
   margin-bottom: 0;
 }
 
+/* Heading above the image (stacked only): "Space below heading" = distance to the image, net of the grid gap */
+@media screen and (max-width: 989px) {
+  .zenith-story__heading--top.zenith-heading {
+    margin-bottom: calc(var(--z-hsp-m, var(--z-gap-m, var(--z-space-5))) - var(--z-gap-m, var(--z-space-5)));
+  }
+}
+
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .zenith-story__heading--top.zenith-heading {
+    margin-bottom: calc(var(--z-hsp, var(--z-gap-m, var(--z-space-5))) - var(--z-gap-m, var(--z-space-5)));
+  }
+}
+
 .zenith-story__content > .zenith-story__heading.zenith-heading:not(:last-child) {
   margin-bottom: calc(var(--z-hsp-m, var(--z-cgap-m, 20px)) - var(--z-cgap-m, 20px));
 }

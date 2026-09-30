@@ -340,18 +340,21 @@
       "type": "image_picker",
       "id": "footer_image",
       "label": "Footer image",
+      "visible_if": "{{ section.settings.content_source == 'custom' }}",
       "info": "All logos in one image. To upload logos one by one (each with its own size), use Add block → Footer logo."
     },
     {
       "type": "checkbox",
       "id": "show_payment_icons",
       "label": "Show store payment icons",
+      "visible_if": "{{ section.settings.content_source == 'custom' }}",
       "default": false
     },
     {
       "type": "richtext",
       "id": "footer_text",
       "label": "Footer text",
+      "visible_if": "{{ section.settings.content_source == 'custom' }}",
       "default": "<p>Delivered by LBC, J&T, Gogo Express, Ninja Van, and Amare Group's own rider fleet.</p>"
     },
     {
@@ -378,6 +381,7 @@
       "type": "range",
       "id": "columns_desktop",
       "label": "Columns on desktop",
+      "info": "From 990px wide. Tablets (750–989px) use the mobile column count.",
       "min": 2,
       "max": 4,
       "step": 1,
@@ -394,6 +398,7 @@
       "type": "select",
       "id": "media_position",
       "label": "Image position",
+      "visible_if": "{{ section.settings.show_media }}",
       "default": "left",
       "options": [
         {
@@ -410,6 +415,7 @@
       "type": "select",
       "id": "image_ratio",
       "label": "Image shape",
+      "visible_if": "{{ section.settings.show_media }}",
       "default": "square",
       "options": [
         {
@@ -430,6 +436,7 @@
       "type": "range",
       "id": "image_size",
       "label": "Image width (beside text)",
+      "visible_if": "{{ section.settings.show_media and section.settings.media_position == 'left' }}",
       "min": 80,
       "max": 300,
       "step": 4,
@@ -473,6 +480,7 @@
       "type": "select",
       "id": "vertical_alignment",
       "label": "Text position next to image",
+      "visible_if": "{{ section.settings.show_media and section.settings.media_position == 'left' }}",
       "default": "top",
       "options": [
         {
@@ -519,6 +527,7 @@
       "type": "range",
       "id": "content_gap",
       "label": "Space between image and text",
+      "visible_if": "{{ section.settings.show_media }}",
       "min": 0,
       "max": 64,
       "step": 4,
@@ -870,6 +879,7 @@
       "type": "select",
       "id": "columns_mobile",
       "label": "Columns on mobile",
+      "info": "Also used on tablets (750–989px).",
       "default": "1",
       "options": [
         {
@@ -886,6 +896,7 @@
       "type": "select",
       "id": "vertical_alignment_mobile",
       "label": "Text position next to image",
+      "visible_if": "{{ section.settings.show_media and section.settings.media_position == 'left' }}",
       "default": "center",
       "options": [
         {
@@ -938,6 +949,7 @@
       "type": "range",
       "id": "image_size_mobile",
       "label": "Image width (beside text)",
+      "visible_if": "{{ section.settings.show_media and section.settings.media_position == 'left' }}",
       "min": 64,
       "max": 240,
       "step": 4,
@@ -988,6 +1000,7 @@
       "type": "range",
       "id": "content_gap_mobile",
       "label": "Space between image and text",
+      "visible_if": "{{ section.settings.show_media }}",
       "min": 0,
       "max": 48,
       "step": 4,

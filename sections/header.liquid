@@ -242,9 +242,11 @@
         {%- if settings.logo != blank -%}
           <div class="header__heading-logo-wrapper">
             {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
-            {%- assign logo_height = settings.logo_width | divided_by: settings.logo.aspect_ratio -%}
-            {% capture sizes %}(max-width: {{ settings.logo_width | times: 2 }}px) 50vw, {{ settings.logo_width }}px{% endcapture %}
-            {% capture widths %}{{ settings.logo_width }}, {{ settings.logo_width | times: 1.5 | round }}, {{ settings.logo_width | times: 2 }}{% endcapture %}
+            {%- comment -%} zenith: sized from this section's Logo width settings (zenith-header.css sets the rendered width) {%- endcomment -%}
+            {%- assign z_logo_w = section.settings.zenith_logo_width | at_least: section.settings.zenith_logo_width_mobile -%}
+            {%- assign logo_height = z_logo_w | divided_by: settings.logo.aspect_ratio | round -%}
+            {% capture sizes %}(min-width: 750px) {{ section.settings.zenith_logo_width }}px, {{ section.settings.zenith_logo_width_mobile }}px{% endcapture %}
+            {% capture widths %}{{ z_logo_w }}, {{ z_logo_w | times: 1.5 | round }}, {{ z_logo_w | times: 2 }}{% endcapture %}
             {{
               settings.logo
               | image_url: width: 600
@@ -252,7 +254,7 @@
                 class: 'header__heading-logo motion-reduce',
                 widths: widths,
                 height: logo_height,
-                width: settings.logo_width,
+                width: z_logo_w,
                 alt: logo_alt,
                 sizes: sizes,
                 preload: true
@@ -294,9 +296,11 @@
         {%- if settings.logo != blank -%}
           <div class="header__heading-logo-wrapper">
             {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
-            {%- assign logo_height = settings.logo_width | divided_by: settings.logo.aspect_ratio -%}
-            {% capture sizes %}(min-width: 750px) {{ settings.logo_width }}px, 50vw{% endcapture %}
-            {% capture widths %}{{ settings.logo_width }}, {{ settings.logo_width | times: 1.5 | round }}, {{ settings.logo_width | times: 2 }}{% endcapture %}
+            {%- comment -%} zenith: sized from this section's Logo width settings (zenith-header.css sets the rendered width) {%- endcomment -%}
+            {%- assign z_logo_w = section.settings.zenith_logo_width | at_least: section.settings.zenith_logo_width_mobile -%}
+            {%- assign logo_height = z_logo_w | divided_by: settings.logo.aspect_ratio | round -%}
+            {% capture sizes %}(min-width: 750px) {{ section.settings.zenith_logo_width }}px, {{ section.settings.zenith_logo_width_mobile }}px{% endcapture %}
+            {% capture widths %}{{ z_logo_w }}, {{ z_logo_w | times: 1.5 | round }}, {{ z_logo_w | times: 2 }}{% endcapture %}
             {{
               settings.logo
               | image_url: width: 600
@@ -304,7 +308,7 @@
                 class: 'header__heading-logo',
                 widths: widths,
                 height: logo_height,
-                width: settings.logo_width,
+                width: z_logo_w,
                 alt: logo_alt,
                 sizes: sizes,
                 preload: true
@@ -701,6 +705,7 @@
       "type": "range",
       "id": "zenith_padding_x",
       "label": "Side padding",
+      "visible_if": "{{ section.settings.zenith_align_to_page == false }}",
       "min": 0,
       "max": 100,
       "step": 1,
@@ -824,6 +829,7 @@
       "type": "range",
       "id": "zenith_padding_x_mobile",
       "label": "Side padding",
+      "visible_if": "{{ section.settings.zenith_align_to_page == false }}",
       "min": 0,
       "max": 40,
       "step": 1,
@@ -977,6 +983,7 @@
       "type": "range",
       "id": "drawer_payment_width",
       "label": "Payment logos width",
+      "info": "Shrinks to fit beside the badge (about 205px on a 375px phone, 260px on desktop).",
       "min": 120,
       "max": 320,
       "step": 2,

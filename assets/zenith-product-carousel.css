@@ -128,9 +128,7 @@
   min-height: var(--z-pc-btnh-m, 44px);
   padding-top: 0;
   padding-bottom: 0;
-}
-
-.zenith-pc .zenith-card .button.zenith-atc.zenith-btn {
+  /* On the button itself, not only .zenith-btn: the 'scheme' style has no .zenith-btn class */
   font-size: var(--z-pc-atcfs-m, 2.2rem);
 }
 
@@ -175,9 +173,6 @@
 
   .zenith-pc .zenith-card .button.zenith-atc {
     min-height: var(--z-pc-btnh, 38px);
-  }
-
-  .zenith-pc .zenith-card .button.zenith-atc.zenith-btn {
     font-size: var(--z-pc-atcfs, 2.2rem);
   }
 }

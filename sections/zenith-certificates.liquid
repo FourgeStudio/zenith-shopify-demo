@@ -7,6 +7,10 @@
   assign layout = s.card_layout
   assign cols = s.columns_desktop
   assign cols_m = s.columns_mobile
+  # Details beside the frame: one card per row on phones (the frame is a fixed width, so a second column overflowed).
+  if layout == 'beside'
+    assign cols_m = 1
+  endif
   # Tablet (750–989px): at most 2 columns; the details-beside layout needs a full row per item.
   assign cols_t = cols | at_most: 2
   if s.card_layout == 'beside'
@@ -296,6 +300,7 @@
     {
       "type": "text",
       "id": "title_label",
+      "visible_if": "{{ section.settings.card_layout == 'beside' }}",
       "label": "Name label",
       "info": "Shown above each name in the \"details beside the frame\" layout. Blocks can override it.",
       "default": "Product name"
@@ -303,6 +308,7 @@
     {
       "type": "text",
       "id": "number_label",
+      "visible_if": "{{ section.settings.card_layout == 'beside' }}",
       "label": "Number label",
       "info": "Shown above each number in the \"details beside the frame\" layout. Blocks can override it.",
       "default": "Notification number"
@@ -473,6 +479,7 @@
     {
       "type": "range",
       "id": "frame_width",
+      "visible_if": "{{ section.settings.card_layout == 'beside' }}",
       "label": "Frame width (details beside layout)",
       "info": "Desktop with 3 or 4 columns: each card stacks (document on top, details below) and the frame fills its column.",
       "min": 110,
@@ -484,6 +491,8 @@
     {
       "type": "range",
       "id": "details_gap",
+      "visible_if": "{{ section.settings.card_layout == 'beside' }}",
+      "info": "Not used on desktop with 3 or 4 columns (cards stack there).",
       "label": "Space between frame and details (details beside layout)",
       "min": 0,
       "max": 80,
@@ -494,6 +503,7 @@
     {
       "type": "range",
       "id": "caption_spacing",
+      "visible_if": "{{ section.settings.card_layout == 'below' }}",
       "label": "Space between frame and title bars",
       "min": 0,
       "max": 40,
@@ -510,6 +520,7 @@
     {
       "type": "range",
       "id": "screw_size",
+      "visible_if": "{{ section.settings.show_screws }}",
       "label": "Screw size",
       "min": 4,
       "max": 20,
@@ -520,6 +531,7 @@
     {
       "type": "range",
       "id": "thumb_size",
+      "visible_if": "{{ section.settings.card_layout == 'beside' }}",
       "label": "Product thumbnail size",
       "min": 40,
       "max": 200,
@@ -530,6 +542,7 @@
     {
       "type": "range",
       "id": "thumb_radius",
+      "visible_if": "{{ section.settings.card_layout == 'beside' }}",
       "label": "Product thumbnail corner radius",
       "min": 0,
       "max": 20,
@@ -557,12 +570,14 @@
     {
       "type": "color",
       "id": "background_top",
+      "visible_if": "{{ section.settings.background_fade }}",
       "label": "Background fade: top",
       "default": "#1A1A1A"
     },
     {
       "type": "color",
       "id": "background_bottom",
+      "visible_if": "{{ section.settings.background_fade }}",
       "label": "Background fade: bottom",
       "default": "#0E0E0E"
     },
@@ -591,6 +606,7 @@
     {
       "type": "color",
       "id": "screw_color",
+      "visible_if": "{{ section.settings.show_screws }}",
       "label": "Screws",
       "default": "#ECECEC"
     },
@@ -603,48 +619,56 @@
     {
       "type": "color",
       "id": "title_bar_color",
+      "visible_if": "{{ section.settings.card_layout == 'below' }}",
       "label": "Title bar",
       "default": "#FFFFFF"
     },
     {
       "type": "color",
       "id": "title_bar_text_color",
+      "visible_if": "{{ section.settings.card_layout == 'below' }}",
       "label": "Title bar text",
       "default": "#131313"
     },
     {
       "type": "color",
       "id": "number_bar_color",
+      "visible_if": "{{ section.settings.card_layout == 'below' }}",
       "label": "Number bar",
       "default": "#131313"
     },
     {
       "type": "color",
       "id": "number_bar_text_color",
+      "visible_if": "{{ section.settings.card_layout == 'below' }}",
       "label": "Number bar text",
       "default": "#E7E7E7"
     },
     {
       "type": "color",
       "id": "number_bar_border_color",
+      "visible_if": "{{ section.settings.card_layout == 'below' }}",
       "label": "Number bar border",
       "default": "#4E4E4E"
     },
     {
       "type": "color",
       "id": "label_color",
+      "visible_if": "{{ section.settings.card_layout == 'beside' }}",
       "label": "Labels (details beside layout)",
       "default": "#777777"
     },
     {
       "type": "color",
       "id": "value_color",
+      "visible_if": "{{ section.settings.card_layout == 'beside' }}",
       "label": "Name and number (details beside layout)",
       "default": "#E7E7E7"
     },
     {
       "type": "color",
       "id": "thumb_background",
+      "visible_if": "{{ section.settings.card_layout == 'beside' }}",
       "label": "Product thumbnail background",
       "default": "#FFFFFF"
     },
@@ -705,6 +729,7 @@
     {
       "type": "range",
       "id": "label_font_size",
+      "visible_if": "{{ section.settings.card_layout == 'beside' }}",
       "label": "Label size",
       "min": 8,
       "max": 20,
@@ -715,12 +740,14 @@
     {
       "type": "checkbox",
       "id": "label_uppercase",
+      "visible_if": "{{ section.settings.card_layout == 'beside' }}",
       "label": "Uppercase labels",
       "default": true
     },
     {
       "type": "range",
       "id": "bar_height",
+      "visible_if": "{{ section.settings.card_layout == 'below' }}",
       "label": "Title / number bar height",
       "min": 16,
       "max": 60,
@@ -805,6 +832,7 @@
     {
       "type": "range",
       "id": "columns_mobile",
+      "visible_if": "{{ section.settings.card_layout == 'below' }}",
       "label": "Columns",
       "min": 1,
       "max": 3,
@@ -844,6 +872,7 @@
     {
       "type": "range",
       "id": "frame_width_mobile",
+      "visible_if": "{{ section.settings.card_layout == 'beside' }}",
       "label": "Frame width (details beside layout)",
       "min": 80,
       "max": 280,
@@ -854,6 +883,7 @@
     {
       "type": "range",
       "id": "details_gap_mobile",
+      "visible_if": "{{ section.settings.card_layout == 'beside' }}",
       "label": "Space between frame and details (details beside layout)",
       "min": 0,
       "max": 60,
@@ -864,6 +894,7 @@
     {
       "type": "range",
       "id": "screw_size_mobile",
+      "visible_if": "{{ section.settings.show_screws }}",
       "label": "Screw size",
       "min": 4,
       "max": 20,
@@ -874,6 +905,7 @@
     {
       "type": "range",
       "id": "thumb_size_mobile",
+      "visible_if": "{{ section.settings.card_layout == 'beside' }}",
       "label": "Product thumbnail size",
       "min": 40,
       "max": 160,
@@ -904,6 +936,7 @@
     {
       "type": "range",
       "id": "label_font_size_mobile",
+      "visible_if": "{{ section.settings.card_layout == 'beside' }}",
       "label": "Label size",
       "min": 8,
       "max": 20,
@@ -914,6 +947,7 @@
     {
       "type": "range",
       "id": "bar_height_mobile",
+      "visible_if": "{{ section.settings.card_layout == 'below' }}",
       "label": "Title / number bar height",
       "min": 16,
       "max": 60,

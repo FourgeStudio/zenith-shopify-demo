@@ -92,6 +92,8 @@
   width: auto;
   max-width: 100%;
   padding: 0 calc(var(--z-space-4) + var(--z-space-1));
+  /* button_font_size also for the 'scheme' add-to-cart button, which has no .zenith-btn class */
+  font-size: var(--z-btnfs-m, 2rem);
 }
 
 .zenith-cats__overlay-link {
@@ -149,7 +151,7 @@
   }
 
   .zenith-cats--m-grid .zenith-cats__content {
-    gap: var(--z-space-2);
+    gap: var(--z-cgap-m, var(--z-space-2));
   }
 }
 
@@ -181,6 +183,10 @@
 
   .zenith-cats__title {
     font-size: var(--z-ttfs, 2rem);
+  }
+
+  .zenith-cats__actions .button.zenith-cats__button {
+    font-size: var(--z-btnfs, 2.2rem);
   }
 
   .zenith-cats__actions--full {

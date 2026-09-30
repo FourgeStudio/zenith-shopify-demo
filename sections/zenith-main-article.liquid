@@ -619,6 +619,7 @@
         {
           "type": "text",
           "id": "author_prefix",
+          "visible_if": "{{ block.settings.show_author }}",
           "label": "Text before the author",
           "default": "by"
         },
@@ -706,6 +707,7 @@
         {
           "type": "range",
           "id": "image_height",
+          "visible_if": "{{ block.settings.image_adapt == false }}",
           "label": "Image height",
           "info": "Percent of the image width. The photo is cropped to fit.",
           "min": 20,
@@ -727,6 +729,7 @@
         {
           "type": "range",
           "id": "image_height_mobile",
+          "visible_if": "{{ block.settings.image_adapt == false }}",
           "label": "Image height",
           "min": 20,
           "max": 120,
@@ -1013,6 +1016,7 @@
         {
           "type": "range",
           "id": "content_max_width",
+          "info": "Can't be wider than the section's Column width.",
           "label": "Box max width",
           "min": 400,
           "max": 1440,
@@ -1406,6 +1410,7 @@
         {
           "type": "text",
           "id": "copied_message",
+          "visible_if": "{{ block.settings.show_copy }}",
           "label": "Message after copying the link",
           "default": "Link copied"
         },

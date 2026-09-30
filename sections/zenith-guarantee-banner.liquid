@@ -112,33 +112,39 @@
     {
       "type": "text",
       "id": "eyebrow",
+      "visible_if": "{{ section.settings.use_shared == false }}",
       "label": "Eyebrow"
     },
     {
       "type": "text",
       "id": "heading",
+      "visible_if": "{{ section.settings.use_shared == false }}",
       "label": "Heading",
       "default": "The Zenith Money-Back Guarantee"
     },
     {
       "type": "richtext",
       "id": "text",
+      "visible_if": "{{ section.settings.use_shared == false }}",
       "label": "Text",
       "default": "<p>We stand behind every Zenith formula with complete confidence. Every order carries the Zenith Money-Back Guarantee, so you can try it on your own terms.</p><p>Not happy with your purchase? Simply contact us and we'll refund it. No hassle. Just show us proof. Full terms on our <a href=\"/policies/refund-policy\">Refunds and Returns</a> page.</p>"
     },
     {
       "type": "text",
       "id": "button_label",
+      "visible_if": "{{ section.settings.use_shared == false }}",
       "label": "Button label"
     },
     {
       "type": "url",
       "id": "button_link",
+      "visible_if": "{{ section.settings.use_shared == false }}",
       "label": "Button link"
     },
     {
       "type": "image_picker",
       "id": "image",
+      "visible_if": "{{ section.settings.use_shared == false }}",
       "label": "Badge image",
       "info": "Transparent PNG of the guarantee seal"
     },
@@ -179,6 +185,7 @@
     {
       "type": "range",
       "id": "badge_inset",
+      "visible_if": "{{ section.settings.desktop_layout == 'band' }}",
       "label": "Space around badge",
       "info": "Band height is at least badge width plus this space on both sides.",
       "min": 0,
@@ -190,6 +197,7 @@
     {
       "type": "range",
       "id": "band_overhang",
+      "visible_if": "{{ section.settings.desktop_layout == 'band' }}",
       "label": "Band extends past page width",
       "info": "Band layout: how far the rounded end reaches beyond the page width.",
       "min": 0,
@@ -226,7 +234,8 @@
       "max": 120,
       "step": 4,
       "unit": "px",
-      "default": 48
+      "default": 48,
+      "info": "Band layout: the text keeps at least this far from the band edge, so values below \"Space around badge\" change nothing."
     },
     {
       "type": "header",

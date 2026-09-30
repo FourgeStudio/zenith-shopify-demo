@@ -440,7 +440,9 @@
   left: auto !important;
   transform: none !important;
   width: auto !important;
-  margin: 0 0 var(--z-gap-m, var(--z-space-5));
+  /* !important: the Dark Judge.me review style (assets/zenith-judgeme.css) fixes this margin at 16px, which left
+     the vertical spacing ignoring Card spacing */
+  margin: 0 0 var(--z-gap-m, var(--z-space-5)) !important;
   break-inside: avoid;
   page-break-inside: avoid;
 }
@@ -470,7 +472,7 @@
   }
 
   .zenith-reviews--masonry .zenith-reviews__apps .jdgm-rev-widg__reviews .jdgm-rev {
-    margin-bottom: var(--z-gap, var(--z-space-5));
+    margin-bottom: var(--z-gap, var(--z-space-5)) !important;
   }
 }
 

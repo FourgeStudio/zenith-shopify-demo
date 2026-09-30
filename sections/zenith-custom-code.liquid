@@ -70,7 +70,7 @@
         { "value": "full", "label": "Full screen" }
       ]
     },
-    { "type": "range", "id": "content_max_width", "label": "Max width (Narrow)", "min": 400, "max": 1400, "step": 20, "unit": "px", "default": 800 },
+    { "type": "range", "id": "content_max_width", "visible_if": "{{ section.settings.width == 'narrow' }}", "label": "Max width (Narrow)", "min": 400, "max": 1400, "step": 20, "unit": "px", "default": 800 },
     {
       "type": "select",
       "id": "heading_alignment",

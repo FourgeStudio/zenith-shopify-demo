@@ -235,24 +235,28 @@
     {
       "type": "text",
       "id": "heading",
+      "visible_if": "{{ section.settings.content_source == 'custom' }}",
       "label": "Heading",
       "default": "Exclusive Offers for this Season"
     },
     {
       "type": "richtext",
       "id": "text",
+      "visible_if": "{{ section.settings.content_source == 'custom' }}",
       "label": "Text",
       "default": "<p>Bundles and deals built for value. Here for a moment, then gone.</p>"
     },
     {
       "type": "text",
       "id": "button_label",
+      "visible_if": "{{ section.settings.content_source == 'custom' }}",
       "label": "Button label",
       "default": "Get This Exclusive Offer"
     },
     {
       "type": "url",
       "id": "button_link",
+      "visible_if": "{{ section.settings.content_source == 'custom' }}",
       "label": "Button link"
     },
     {
@@ -277,6 +281,7 @@
     {
       "type": "image_picker",
       "id": "confetti_image",
+      "visible_if": "{{ section.settings.show_confetti }}",
       "label": "Custom confetti image",
       "info": "Optional transparent PNG. Leave empty for the built-in gold confetti."
     },
@@ -287,12 +292,14 @@
     {
       "type": "text",
       "id": "countdown_label",
+      "visible_if": "{{ section.settings.content_source == 'custom' }}",
       "label": "Countdown label",
       "default": "This Exclusive Offer Ends In"
     },
     {
       "type": "text",
       "id": "end_date",
+      "visible_if": "{{ section.settings.content_source == 'custom' }}",
       "label": "End date",
       "info": "Format YYYY-MM-DD, e.g. 2026-12-31. Leave empty to hide the countdown.",
       "default": "2026-12-31"
@@ -300,6 +307,7 @@
     {
       "type": "text",
       "id": "end_time",
+      "visible_if": "{{ section.settings.content_source == 'custom' }}",
       "label": "End time",
       "info": "24-hour HH:MM",
       "default": "23:59"
@@ -307,6 +315,7 @@
     {
       "type": "select",
       "id": "timezone",
+      "visible_if": "{{ section.settings.content_source == 'custom' }}",
       "label": "Timezone",
       "default": "+08:00",
       "options": [
@@ -317,6 +326,7 @@
     {
       "type": "checkbox",
       "id": "hide_when_expired",
+      "visible_if": "{{ section.settings.content_source == 'custom' }}",
       "label": "Hide countdown when it ends",
       "default": true
     },
@@ -356,6 +366,7 @@
     {
       "type": "range",
       "id": "split_image_width",
+      "visible_if": "{{ section.settings.layout_style == 'split' }}",
       "label": "Photo width (split, desktop)",
       "min": 30,
       "max": 70,
@@ -376,6 +387,7 @@
     {
       "type": "range",
       "id": "card_inset",
+      "visible_if": "{{ section.settings.card_width == 'inset' }}",
       "label": "Side margin",
       "info": "Used with \"Full width with side margin\"",
       "min": 0,
@@ -388,7 +400,7 @@
       "type": "select",
       "id": "height_mode",
       "label": "Banner height (desktop)",
-      "info": "% of screen height suits a promo in the hero spot.",
+      "info": "% of screen height suits a promo in the hero spot. On phones the banner is as tall as its content (split layout: Mobile → Photo height).",
       "default": "px",
       "options": [
         { "value": "px", "label": "Fixed (px)" },
@@ -399,7 +411,7 @@
       "type": "range",
       "id": "card_min_height_screen",
       "visible_if": "{{ section.settings.height_mode == 'screen' }}",
-      "label": "Banner min height (% of screen)",
+      "label": "Banner min height (desktop, % of screen)",
       "min": 30,
       "max": 100,
       "step": 5,
@@ -431,6 +443,7 @@
     {
       "type": "select",
       "id": "background_position",
+      "visible_if": "{{ section.settings.layout_style == 'background' }}",
       "label": "Background image focus",
       "info": "Part of the background kept in view on narrower screens",
       "default": "right center",
@@ -443,6 +456,7 @@
     {
       "type": "range",
       "id": "content_max_width",
+      "visible_if": "{{ section.settings.layout_style == 'background' }}",
       "label": "Content max width",
       "min": 300,
       "max": 900,
@@ -483,6 +497,7 @@
     {
       "type": "range",
       "id": "image_max_width",
+      "visible_if": "{{ section.settings.layout_style == 'background' }}",
       "label": "Product image max width",
       "min": 120,
       "max": 900,
@@ -493,6 +508,7 @@
     {
       "type": "range",
       "id": "image_max_height",
+      "visible_if": "{{ section.settings.layout_style == 'background' }}",
       "label": "Product image max height",
       "min": 120,
       "max": 700,
@@ -509,6 +525,7 @@
     {
       "type": "select",
       "id": "confetti_align",
+      "visible_if": "{{ section.settings.show_confetti }}",
       "label": "Confetti position",
       "default": "left",
       "options": [
@@ -533,6 +550,7 @@
     {
       "type": "range",
       "id": "confetti_width",
+      "visible_if": "{{ section.settings.show_confetti and section.settings.confetti_align != 'stretch' }}",
       "label": "Confetti width (desktop)",
       "min": 400,
       "max": 1400,
@@ -559,6 +577,7 @@
     {
       "type": "color",
       "id": "panel_color",
+      "visible_if": "{{ section.settings.layout_style == 'split' }}",
       "label": "Panel colour",
       "info": "Optional flat colour behind the text (split layout), instead of the banner color scheme background.",
       "default": "#112328"
@@ -589,6 +608,7 @@
     {
       "type": "select",
       "id": "overlay_style",
+      "visible_if": "{{ section.settings.layout_style == 'background' }}",
       "label": "Background overlay",
       "default": "none",
       "options": [
@@ -603,12 +623,14 @@
     {
       "type": "color",
       "id": "overlay_color",
+      "visible_if": "{{ section.settings.layout_style == 'background' and section.settings.overlay_style != 'none' }}",
       "label": "Overlay color",
       "default": "#121212"
     },
     {
       "type": "range",
       "id": "overlay_opacity",
+      "visible_if": "{{ section.settings.layout_style == 'background' and section.settings.overlay_style != 'none' }}",
       "label": "Overlay opacity",
       "min": 0,
       "max": 100,
@@ -619,6 +641,7 @@
     {
       "type": "range",
       "id": "overlay_coverage",
+      "visible_if": "{{ section.settings.layout_style == 'background' and section.settings.overlay_style != 'none' and section.settings.overlay_style != 'solid' }}",
       "label": "Gradient length",
       "info": "How far the gradient reaches across the image",
       "min": 20,
@@ -654,6 +677,7 @@
     {
       "type": "range",
       "id": "confetti_opacity",
+      "visible_if": "{{ section.settings.show_confetti }}",
       "label": "Confetti opacity",
       "min": 10,
       "max": 100,
@@ -715,7 +739,7 @@
     {
       "type": "range",
       "id": "text_font_size",
-      "label": "Countdown label size",
+      "label": "Countdown text size",
       "min": 10,
       "max": 24,
       "step": 1,
@@ -735,7 +759,8 @@
     {
       "type": "range",
       "id": "countdown_label_font_size",
-      "label": "Countdown label size",
+      "visible_if": "{{ section.settings.countdown_show_labels }}",
+      "label": "Countdown unit label size",
       "min": 10,
       "max": 24,
       "step": 1,
@@ -761,6 +786,7 @@
     {
       "type": "range",
       "id": "card_inset_mobile",
+      "visible_if": "{{ section.settings.card_width == 'inset' and section.settings.full_width_mobile == false }}",
       "label": "Side margin",
       "min": 0,
       "max": 48,
@@ -779,11 +805,13 @@
       "type": "checkbox",
       "id": "button_full_mobile",
       "label": "Full-width button",
-      "default": false
+      "default": false,
+      "info": "Overrides Theme settings → Full-width buttons on mobile for this section."
     },
     {
       "type": "range",
       "id": "content_padding_y_mobile",
+      "visible_if": "{{ section.settings.layout_style == 'split' }}",
       "label": "Text panel top/bottom padding",
       "min": 8,
       "max": 64,
@@ -816,6 +844,7 @@
     {
       "type": "range",
       "id": "split_image_height_mobile",
+      "visible_if": "{{ section.settings.layout_style == 'split' }}",
       "label": "Photo height (split)",
       "min": 160,
       "max": 600,
@@ -886,6 +915,7 @@
     {
       "type": "range",
       "id": "image_max_height_mobile",
+      "visible_if": "{{ section.settings.layout_style == 'background' }}",
       "label": "Product image max height",
       "min": 120,
       "max": 500,
@@ -896,7 +926,7 @@
     {
       "type": "range",
       "id": "text_font_size_mobile",
-      "label": "Countdown label size",
+      "label": "Countdown text size",
       "min": 10,
       "max": 20,
       "step": 1,
@@ -916,7 +946,8 @@
     {
       "type": "range",
       "id": "countdown_label_font_size_mobile",
-      "label": "Countdown label size",
+      "visible_if": "{{ section.settings.countdown_show_labels }}",
+      "label": "Countdown unit label size",
       "min": 10,
       "max": 20,
       "step": 1,
@@ -926,6 +957,7 @@
     {
       "type": "range",
       "id": "confetti_width_mobile",
+      "visible_if": "{{ section.settings.show_confetti and section.settings.confetti_align != 'stretch' }}",
       "label": "Confetti width (mobile)",
       "min": 30,
       "max": 100,

@@ -76,6 +76,11 @@
   width: var(--zh-logo-m, 11.4rem);
 }
 
+/* Fill the wrapper: otherwise the <img> stays at its width attribute and Logo width can't go above it */
+.zenith-header .header__heading-logo {
+  width: 100%;
+}
+
 .scrolled-past-header [data-sticky-type='reduce-logo-size'] .zenith-header .header__heading-logo-wrapper {
   width: calc(var(--zh-logo-m, 11.4rem) * 0.75);
 }

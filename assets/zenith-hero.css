@@ -409,10 +409,10 @@
 }
 
 /* Mobile layout "Image on top, text below": the photo sits in the flow and fades into the overlay colour,
-   which also fills the panel behind the text. The regular overlay is not used. */
+   which also fills the panel behind the text. The regular overlay is not used.
+   Mobile height = photo + text panel together; spare height goes to the panel, where "Mobile content position" places the text. */
 @media screen and (max-width: 749px) {
   .zenith-hero--m-stacked .zenith-hero__inner {
-    min-height: 0;
     background: rgb(var(--z-ov-rgb, 18, 18, 18));
   }
 
@@ -421,6 +421,7 @@
   .zenith-hero--m-stacked .zenith-hero__media {
     position: relative;
     inset: auto;
+    flex: 0 0 auto;
     height: var(--z-hero-sih-m, 30rem);
     background: rgb(var(--z-ov-rgb, 18, 18, 18));
   }
@@ -435,9 +436,17 @@
   .zenith-hero--m-stacked .zenith-overlay {
     display: none;
   }
+}
 
-  .zenith-hero--m-stacked .zenith-hero__content-wrap {
-    flex: 0 0 auto;
-    justify-content: flex-start;
+/* The theme-wide "Full-width buttons on mobile" switch (body.zenith-m-btn-full) would otherwise override
+   this section's own Mobile → Full-width button setting when it is unticked. */
+@media screen and (max-width: 749px) {
+  .zenith-m-btn-full .zenith-hero:not(.zenith-hero--m-full) .zenith-hero__actions {
+    align-self: auto;
+    width: auto;
+  }
+
+  .zenith-m-btn-full .zenith-hero:not(.zenith-hero--m-full) .button.zenith-btn {
+    width: auto;
   }
 }

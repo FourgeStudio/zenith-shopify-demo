@@ -261,6 +261,7 @@
     {
       "type": "product_list",
       "id": "filter_products",
+      "visible_if": "{{ section.settings.product_filter == 'selected' }}",
       "label": "Products",
       "info": "Used with \"Only the products below\"",
       "limit": 20
@@ -316,6 +317,7 @@
     {
       "type": "range",
       "id": "start_slide",
+      "visible_if": "{{ section.settings.content_source == 'custom' }}",
       "label": "Start at video",
       "info": "The carousel opens scrolled to this card (1 = first). With Videos = Global this comes from Theme settings → Zenith · Video testimonials instead.",
       "min": 1,
@@ -422,6 +424,7 @@
     {
       "type": "range",
       "id": "controls_spacing",
+      "visible_if": "{{ section.settings.show_dots or section.settings.show_arrows }}",
       "label": "Space above dots and arrows",
       "min": 0,
       "max": 64,
@@ -580,6 +583,7 @@
     {
       "type": "color",
       "id": "overlay_color",
+      "visible_if": "{{ section.settings.overlay_style != 'none' }}",
       "label": "Overlay color",
       "info": "Match the card background for a seamless fade",
       "default": "#112328"
@@ -587,6 +591,7 @@
     {
       "type": "range",
       "id": "overlay_opacity",
+      "visible_if": "{{ section.settings.overlay_style != 'none' }}",
       "label": "Overlay opacity",
       "min": 0,
       "max": 100,
@@ -597,6 +602,7 @@
     {
       "type": "range",
       "id": "overlay_coverage",
+      "visible_if": "{{ section.settings.overlay_style != 'none' and section.settings.overlay_style != 'solid' }}",
       "label": "Gradient length",
       "info": "How far the gradient reaches across the image",
       "min": 20,

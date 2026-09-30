@@ -210,6 +210,7 @@
     {
       "type": "range",
       "id": "columns_desktop",
+      "visible_if": "{{ section.settings.jdgm_masonry }}",
       "label": "Columns",
       "min": 1,
       "max": 5,
@@ -219,6 +220,7 @@
     {
       "type": "range",
       "id": "gap",
+      "visible_if": "{{ section.settings.jdgm_masonry }}",
       "label": "Card spacing",
       "min": 0,
       "max": 48,
@@ -240,6 +242,7 @@
       "type": "range",
       "id": "card_radius",
       "label": "Card corner radius",
+      "info": "Review cards keep 16px corners while Theme settings → Zenith → Dark Judge.me review style is on.",
       "min": 0,
       "max": 24,
       "step": 1,
@@ -249,6 +252,10 @@
     {
       "type": "header",
       "content": "Colors"
+    },
+    {
+      "type": "paragraph",
+      "content": "While Theme settings → Zenith → Dark Judge.me review style is on, that style sets the review cards' background and border, the stars inside the widget and the buttons' colors. Turn it off to use the card, border, star and button settings below."
     },
     {
       "type": "color_scheme",
@@ -382,6 +389,7 @@
     {
       "type": "range",
       "id": "button_font_size",
+      "visible_if": "{{ section.settings.button_style != 'scheme' }}",
       "label": "Button text size",
       "min": 12,
       "max": 32,
@@ -448,6 +456,7 @@
     {
       "type": "range",
       "id": "columns_mobile",
+      "visible_if": "{{ section.settings.jdgm_masonry }}",
       "label": "Columns",
       "min": 1,
       "max": 3,
@@ -457,6 +466,7 @@
     {
       "type": "range",
       "id": "gap_mobile",
+      "visible_if": "{{ section.settings.jdgm_masonry }}",
       "label": "Card spacing",
       "min": 0,
       "max": 40,
@@ -487,6 +497,7 @@
     {
       "type": "range",
       "id": "button_font_size_mobile",
+      "visible_if": "{{ section.settings.button_style != 'scheme' }}",
       "label": "Button text size",
       "min": 12,
       "max": 28,

@@ -22,19 +22,22 @@ if (!customElements.get('zenith-main-product')) {
 
       /* ---------- Gallery ---------- */
       initGallery() {
-        if (!this.track || this.thumbs.length === 0) return;
+        if (!this.track) return;
 
-        this.thumbs.forEach((thumb) => {
-          thumb.addEventListener('click', () => this.goToSlide(Number(thumb.dataset.thumb) || 0));
-        });
+        if (this.thumbs.length > 0) {
+          this.thumbs.forEach((thumb) => {
+            thumb.addEventListener('click', () => this.goToSlide(Number(thumb.dataset.thumb) || 0));
+          });
 
-        this.onScroll = () => {
-          cancelAnimationFrame(this.frame);
-          this.frame = requestAnimationFrame(() => this.setActiveThumb(this.currentIndex()));
-        };
-        this.track.addEventListener('scroll', this.onScroll, { passive: true });
+          this.onScroll = () => {
+            cancelAnimationFrame(this.frame);
+            this.frame = requestAnimationFrame(() => this.setActiveThumb(this.currentIndex()));
+          };
+          this.track.addEventListener('scroll', this.onScroll, { passive: true });
+        }
 
         // Phones: open on the "Start at image" slide (section setting), once the track has a size.
+        // Runs with or without thumbnails (it used to be skipped when "Show image thumbnails" was off).
         const start = (Number(this.dataset.startMobile) || 1) - 1;
         if (start > 0 && start < this.track.children.length && window.matchMedia('(max-width: 749px)').matches) {
           const apply = () => {

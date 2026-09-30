@@ -298,6 +298,7 @@
     {
       "type": "select",
       "id": "brand_logo_style",
+      "visible_if": "{{ section.settings.use_brand_logo }}",
       "label": "Theme logo version",
       "default": "tagline",
       "options": [
@@ -332,6 +333,7 @@
     {
       "type": "richtext",
       "id": "text",
+      "visible_if": "{{ section.settings.shared_text == false }}",
       "label": "Text",
       "info": "[customers] shows the customer count from Theme settings → Zenith.",
       "default": "<p>Filipino men over 35 have been underserved for too long. Forced to choose between overly complicated routines or generic imported products not built for the climate, Zenith was built to fix that.</p><p>The brand wasn't created to be just another skincare line focused on aesthetics or flashy packaging. Instead, Zenith is committed to building high-performance personal care gear designed for real conditions, real needs, and real lives.</p><p>No hype and no shortcuts. Just straightforward, highly effective products that solve real, everyday problems for men who just want things that actually work.</p><p>Fast forward to today, and [customers] men have made Zenith a part of their daily routine. But looking back on this growth, this milestone isn't really about the company or its logos. It is a testament to the customers who truly built the brand.</p>"
@@ -374,6 +376,7 @@
     {
       "type": "range",
       "id": "media_min_height",
+      "visible_if": "{{ section.settings.image_ratio == 'adapt' }}",
       "label": "Desktop image min height",
       "min": 240,
       "max": 1000,
@@ -592,12 +595,14 @@
     {
       "type": "color",
       "id": "overlay_color",
+      "visible_if": "{{ section.settings.overlay_style != 'none' }}",
       "label": "Overlay color",
       "default": "#121212"
     },
     {
       "type": "range",
       "id": "overlay_opacity",
+      "visible_if": "{{ section.settings.overlay_style != 'none' }}",
       "label": "Overlay opacity",
       "min": 0,
       "max": 100,
@@ -608,6 +613,7 @@
     {
       "type": "range",
       "id": "overlay_coverage",
+      "visible_if": "{{ section.settings.overlay_style != 'none' and section.settings.overlay_style != 'solid' }}",
       "label": "Gradient length",
       "info": "How far the gradient reaches across the image",
       "min": 20,
@@ -730,6 +736,7 @@
     {
       "type": "range",
       "id": "media_height_mobile",
+      "visible_if": "{{ section.settings.image_ratio_mobile == 'fixed' }}",
       "label": "Image height",
       "info": "Used when image shape is \"Fixed height\".",
       "min": 200,
@@ -897,6 +904,7 @@
     {
       "type": "select",
       "id": "columns_mobile",
+      "visible_if": "{{ section.settings.columns_layout == 'columns' }}",
       "label": "Text columns per row",
       "default": "1",
       "options": [

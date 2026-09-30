@@ -788,11 +788,12 @@
     },
     { "type": "checkbox", "id": "quantity_pad", "label": "Show quantity as 01, 02…", "default": true },
     { "type": "checkbox", "id": "show_cod", "label": "Show Cash on Delivery chip", "default": true },
-    { "type": "text", "id": "cod_label", "label": "Cash on Delivery label", "default": "Cash on Delivery" },
+    { "type": "text", "id": "cod_label", "label": "Cash on Delivery label", "default": "Cash on Delivery", "visible_if": "{{ section.settings.show_cod }}" },
     {
       "type": "select",
       "id": "cod_icon",
       "label": "Cash on Delivery icon",
+      "visible_if": "{{ section.settings.show_cod }}",
       "default": "cash",
       "options": [
         { "value": "cash", "label": "Cash" },
@@ -817,7 +818,8 @@
       "type": "image_picker",
       "id": "payment_image",
       "label": "Payment icons image",
-      "info": "Used when Payment icons is set to Custom image."
+      "info": "Used when Payment icons is set to Custom image.",
+      "visible_if": "{{ section.settings.payment_icons == 'image' }}"
     },
     { "type": "checkbox", "id": "show_delivery", "label": "Show delivery box", "default": true },
     {
@@ -875,6 +877,7 @@
       "type": "text",
       "id": "variant_card_badge",
       "label": "Discount badge",
+      "visible_if": "{{ section.settings.variant_style == 'cards' }}",
       "info": "[percent] becomes the number only, so write the % yourself. Worked out from the compare-at price. Blank hides the badge.",
       "default": "[percent]% OFF"
     },
@@ -882,6 +885,7 @@
       "type": "text",
       "id": "variant_card_ship_free",
       "label": "Free shipping ribbon",
+      "visible_if": "{{ section.settings.variant_style == 'cards' }}",
       "info": "At or above the free-shipping threshold in Theme settings → Zenith · Cart. The promotion figure takes over while a promotion runs.",
       "default": "FREE SHIPPING"
     },
@@ -889,6 +893,7 @@
       "type": "text",
       "id": "variant_card_ship_fee",
       "label": "Paid shipping ribbon",
+      "visible_if": "{{ section.settings.variant_style == 'cards' }}",
       "info": "Below that threshold. [amount] is Theme settings → Zenith · Cart → Flat shipping fee.",
       "default": "+[amount] Shipping"
     },
@@ -898,6 +903,7 @@
       "type": "range",
       "id": "content_max_width",
       "label": "Content width",
+      "info": "Never wider than Theme settings → Layout → Page width (minus its side padding).",
       "min": 800,
       "max": 1400,
       "step": 20,
@@ -915,9 +921,9 @@
     { "type": "range", "id": "thumb_gap", "label": "Space between thumbnails", "min": 0, "max": 24, "step": 1, "unit": "px", "default": 8 },
     { "type": "range", "id": "thumb_spacing", "label": "Space above thumbnails", "min": 0, "max": 40, "step": 1, "unit": "px", "default": 8 },
     { "type": "range", "id": "review_card_width", "label": "Review card width", "min": 140, "max": 320, "step": 4, "unit": "px", "default": 220 },
-    { "type": "range", "id": "variant_card_min", "label": "Bundle card min width", "min": 100, "max": 240, "step": 5, "unit": "px", "default": 150 },
+    { "type": "range", "id": "variant_card_min", "label": "Bundle card min width", "visible_if": "{{ section.settings.variant_style == 'cards' }}", "min": 100, "max": 240, "step": 5, "unit": "px", "default": 150 },
     { "type": "range", "id": "review_gap", "label": "Space between review cards", "min": 0, "max": 32, "step": 2, "unit": "px", "default": 12 },
-    { "type": "range", "id": "review_min_stars", "label": "Judge.me: lowest rating shown in the strip", "info": "The full Judge.me widget still shows every review.", "min": 1, "max": 5, "step": 1, "default": 4 },
+    { "type": "range", "id": "review_min_stars", "label": "Judge.me: lowest rating shown in the strip", "info": "The full Judge.me widget still shows every review.", "visible_if": "{{ section.settings.reviews_source == 'judgeme' }}", "min": 1, "max": 5, "step": 1, "default": 4 },
     { "type": "range", "id": "review_autoplay", "label": "Review strip autoplay", "info": "Seconds between cards. 0 = off. Pauses on hover and with reduced motion.", "min": 0, "max": 12, "step": 1, "unit": "s", "default": 4 },
     { "type": "range", "id": "review_spacing", "label": "Space above review strip", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 38 },
     { "type": "range", "id": "review_photo_size", "label": "Review photo size", "min": 24, "max": 80, "step": 2, "unit": "px", "default": 48 },
@@ -945,7 +951,8 @@
       "type": "range",
       "id": "badge_spacing",
       "label": "Space before the price badge",
-      "info": "Desktop only. On mobile the badge sits at the end of the row.",
+      "info": "Desktop only (990px and wider). Tablets keep the badge next to the price; phones put it at the end of the row.",
+      "visible_if": "{{ section.settings.badge_align == 'after' }}",
       "min": 0,
       "max": 80,
       "step": 2,
@@ -1043,7 +1050,7 @@
     { "type": "checkbox", "id": "subtitle_mobile", "label": "Show short description on mobile", "default": true },
     { "type": "range", "id": "gap_mobile", "label": "Space between gallery and buy box", "min": 0, "max": 60, "step": 2, "unit": "px", "default": 18 },
     { "type": "range", "id": "content_gap_mobile", "label": "Space between buy box items", "min": 4, "max": 40, "step": 2, "unit": "px", "default": 12 },
-    { "type": "range", "id": "variant_card_min_mobile", "label": "Bundle card min width", "info": "Lower it if three bundles do not fit across a phone.", "min": 70, "max": 180, "step": 2, "unit": "px", "default": 88 },
+    { "type": "range", "id": "variant_card_min_mobile", "label": "Bundle card min width", "info": "Lower it if three bundles do not fit across a phone.", "visible_if": "{{ section.settings.variant_style == 'cards' }}", "min": 70, "max": 180, "step": 2, "unit": "px", "default": 88 },
     { "type": "range", "id": "gallery_ratio_mobile", "label": "Image height", "min": 60, "max": 160, "step": 2, "unit": "%", "default": 100 },
     { "type": "range", "id": "gallery_start_mobile", "label": "Start at image", "info": "Phones only: the gallery opens on this image (1 = first). Desktop always starts at the first.", "min": 1, "max": 10, "step": 1, "default": 2 },
     { "type": "range", "id": "slide_width_mobile", "label": "Slide width", "min": 50, "max": 100, "step": 1, "unit": "%", "default": 70 },

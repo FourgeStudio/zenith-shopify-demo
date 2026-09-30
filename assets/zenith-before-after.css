@@ -114,6 +114,19 @@
   color: var(--z-ba-fcolor, #d6b356);
 }
 
+.zenith-ba__note {
+  margin: var(--z-ba-nsp, 32px) 0 0;
+  font-size: var(--z-ba-cfs-m, 1.4rem);
+  line-height: 1.5;
+  text-align: center;
+  color: rgba(var(--color-foreground), var(--z-ba-cap-o, 0.7));
+}
+
+/* Under a note the footnote sits close to it (footnote_spacing applies when there is no note) */
+.zenith-ba__note + .zenith-ba__footnote {
+  margin-top: var(--z-space-2);
+}
+
 @media screen and (min-width: 750px) {
   .zenith-ba__heading.zenith-heading {
     gap: var(--z-space-2);
@@ -137,7 +150,8 @@
     font-size: var(--z-ba-lfs, 1.2rem);
   }
 
-  .zenith-ba__caption {
+  .zenith-ba__caption,
+  .zenith-ba__note {
     font-size: var(--z-ba-cfs, 1.4rem);
   }
 }
@@ -146,16 +160,4 @@
   .zenith-ba__grid {
     grid-template-columns: repeat(var(--z-ba-cols, 3), minmax(0, 1fr));
   }
-}
-
-.zenith-ba__note {
-  margin: var(--z-ba-nsp, 32px) 0 0;
-  font-size: var(--z-ba-cfs-m, 1.4rem);
-  line-height: 1.5;
-  text-align: center;
-  color: rgba(var(--color-foreground), var(--z-ba-cap-o, 0.7));
-}
-
-.zenith-ba__note + .zenith-ba__footnote {
-  margin-top: var(--z-space-2);
 }

@@ -115,7 +115,10 @@
   font-weight: 600;
 }
 
-.zenith-article__content a {
+/* Second selector outranks zenith-base's text-link rule (.zenith-section p a:not([class]) → color: inherit),
+   which would otherwise hide the Links colour setting for every link inside a paragraph or list item. */
+.zenith-article__content a,
+.zenith-article .zenith-article__content a:not([class]) {
   color: var(--z-ar-link, #eabe5f);
   text-decoration: none;
   text-underline-offset: 0.15em;

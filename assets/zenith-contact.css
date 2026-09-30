@@ -166,15 +166,14 @@
   content: ' ';
 }
 
-.zenith-contact__form-card .zenith-subheading a {
+/* .zenith-contact prefix outranks the shared text-link rule in zenith-base.css (0,2,2), which otherwise
+   replaced the "Form text link underline" colour. Underline stays on (WCAG 1.4.1, matches the design). */
+.zenith-contact .zenith-contact__form-card .zenith-subheading a {
   color: inherit;
-  text-decoration: none;
-  text-decoration-color: var(--z-ct-link-line, var(--z-gold));
-  text-underline-offset: 3px;
-}
-
-.zenith-contact__form-card .zenith-subheading a:hover {
   text-decoration: underline;
+  text-decoration-color: var(--z-ct-link-line, var(--z-gold));
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
 }
 
 /* ---------- Fields ---------- */
@@ -420,6 +419,14 @@ input.zenith-contact__checkbox[type='checkbox']:checked {
 
   .zenith-contact__faq {
     max-width: var(--z-ct-faq-w, 480px);
+  }
+}
+
+/* The 6vw cap keeps small laptops from squeezing the details column; from 1200px the setting applies in full
+   (the cap made every value above ~86px do nothing at 1440). */
+@media screen and (min-width: 1200px) {
+  .zenith-contact__grid {
+    column-gap: var(--z-ct-col-gap, 120px);
   }
 }
 

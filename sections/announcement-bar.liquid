@@ -265,12 +265,14 @@
     {
       "type": "checkbox",
       "id": "auto_rotate",
+      "visible_if": "{{ section.settings.zenith_display == 'slideshow' }}",
       "label": "t:sections.announcement-bar.settings.auto_rotate.label",
       "default": false
     },
     {
       "type": "range",
       "id": "change_slides_speed",
+      "visible_if": "{{ section.settings.zenith_display == 'slideshow' or section.settings.zenith_overflow == 'rotate' }}",
       "min": 3,
       "max": 10,
       "step": 1,
@@ -305,6 +307,7 @@
       "type": "range",
       "id": "zenith_height",
       "label": "Bar height",
+      "info": "Minimum height. With \"One at a time with arrows\" the arrows keep it at least 38px (44px below 990px).",
       "min": 24,
       "max": 80,
       "step": 1,
@@ -335,6 +338,7 @@
     {
       "type": "select",
       "id": "zenith_separator",
+      "visible_if": "{{ section.settings.zenith_display != 'slideshow' }}",
       "label": "Separator between messages",
       "default": "dot",
       "options": [
@@ -355,6 +359,7 @@
     {
       "type": "range",
       "id": "zenith_gap",
+      "visible_if": "{{ section.settings.zenith_display != 'slideshow' }}",
       "label": "Space between messages",
       "min": 8,
       "max": 64,
@@ -365,6 +370,7 @@
     {
       "type": "select",
       "id": "zenith_overflow",
+      "visible_if": "{{ section.settings.zenith_display == 'row' }}",
       "label": "When the row doesn't fit",
       "info": "\"All in one row\" on narrow screens (e.g. phones). One at a time uses \"Change slides every\".",
       "default": "rotate",
@@ -386,6 +392,7 @@
     {
       "type": "range",
       "id": "zenith_marquee_speed",
+      "visible_if": "{{ section.settings.zenith_display == 'marquee' or section.settings.zenith_overflow == 'marquee' }}",
       "label": "Marquee speed",
       "info": "Pixels per second. Higher is faster.",
       "min": 10,
@@ -461,6 +468,7 @@
       "type": "range",
       "id": "zenith_height_mobile",
       "label": "Bar height",
+      "info": "Minimum height. With \"One at a time with arrows\" the arrows keep it at least 44px.",
       "min": 24,
       "max": 80,
       "step": 1,
@@ -480,6 +488,7 @@
     {
       "type": "range",
       "id": "zenith_gap_mobile",
+      "visible_if": "{{ section.settings.zenith_display != 'slideshow' }}",
       "label": "Space between messages",
       "min": 8,
       "max": 48,

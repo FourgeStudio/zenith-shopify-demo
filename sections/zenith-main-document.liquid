@@ -87,6 +87,7 @@
     {
       "type": "text",
       "id": "toc_heading",
+      "visible_if": "{{ section.settings.show_toc }}",
       "label": "Table of Contents heading",
       "default": "Table of Contents"
     },
@@ -117,6 +118,7 @@
     {
       "type": "range",
       "id": "text_max_width",
+      "info": "Limited by Column width (and the contents column when shown).",
       "label": "Text max width",
       "min": 480,
       "max": 1000,
@@ -127,6 +129,8 @@
     {
       "type": "range",
       "id": "toc_width",
+      "info": "Beside the text from 990px wide; above it on smaller screens.",
+      "visible_if": "{{ section.settings.show_toc }}",
       "label": "Table of Contents width",
       "min": 240,
       "max": 480,
@@ -137,6 +141,7 @@
     {
       "type": "range",
       "id": "gap",
+      "visible_if": "{{ section.settings.show_toc }}",
       "label": "Space between contents and text",
       "min": 16,
       "max": 120,
@@ -287,6 +292,7 @@
     {
       "type": "range",
       "id": "gap_mobile",
+      "visible_if": "{{ section.settings.show_toc }}",
       "label": "Space between contents and text",
       "min": 16,
       "max": 96,

@@ -183,6 +183,7 @@
     {
       "type": "range",
       "id": "marquee_speed",
+      "visible_if": "{{ section.settings.mobile_layout == 'marquee' }}",
       "label": "Auto-scroll speed",
       "info": "Seconds for one full loop. Higher = slower. Pauses on hover and for visitors who prefer reduced motion.",
       "min": 10,

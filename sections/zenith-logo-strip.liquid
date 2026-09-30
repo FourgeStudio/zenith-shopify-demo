@@ -195,6 +195,7 @@
       "type": "range",
       "id": "speed",
       "label": "Marquee duration",
+      "visible_if": "{{ section.settings.layout == 'marquee' or section.settings.mobile_layout == 'marquee' }}",
       "info": "Seconds for one full loop. Higher is slower.",
       "min": 10,
       "max": 120,

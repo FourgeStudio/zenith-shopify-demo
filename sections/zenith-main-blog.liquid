@@ -203,12 +203,14 @@
     {
       "type": "text",
       "id": "featured_link_label",
+      "visible_if": "{{ section.settings.show_featured }}",
       "label": "Latest article link",
       "default": "Read Article"
     },
     {
       "type": "text",
       "id": "featured_link_label_mobile",
+      "visible_if": "{{ section.settings.show_featured }}",
       "label": "Latest article link on mobile",
       "info": "Leave empty to use the desktop text.",
       "default": "Read More"
@@ -216,12 +218,14 @@
     {
       "type": "checkbox",
       "id": "show_excerpt",
+      "visible_if": "{{ section.settings.show_featured }}",
       "label": "Show the latest article's excerpt",
       "default": true
     },
     {
       "type": "range",
       "id": "excerpt_words",
+      "visible_if": "{{ section.settings.show_featured and section.settings.show_excerpt }}",
       "label": "Excerpt length",
       "min": 10,
       "max": 60,
@@ -238,6 +242,7 @@
     {
       "type": "text",
       "id": "more_heading",
+      "visible_if": "{{ section.settings.show_featured }}",
       "label": "\"More articles\" heading",
       "info": "Shown on mobile above the articles after the latest one.",
       "default": "More Articles"
@@ -245,6 +250,7 @@
     {
       "type": "checkbox",
       "id": "show_more_heading_desktop",
+      "visible_if": "{{ section.settings.show_featured }}",
       "label": "Show that heading on desktop above older articles",
       "default": true
     },
@@ -257,6 +263,7 @@
     {
       "type": "select",
       "id": "date_format",
+      "visible_if": "{{ section.settings.show_date }}",
       "label": "Date format",
       "default": "%-d %b %Y",
       "options": [
@@ -295,6 +302,7 @@
     {
       "type": "range",
       "id": "side_count",
+      "visible_if": "{{ section.settings.show_featured }}",
       "label": "Articles beside the latest one",
       "min": 0,
       "max": 6,
@@ -304,6 +312,7 @@
     {
       "type": "range",
       "id": "featured_width",
+      "visible_if": "{{ section.settings.show_featured }}",
       "label": "Latest article column width",
       "min": 30,
       "max": 70,
@@ -314,6 +323,7 @@
     {
       "type": "range",
       "id": "gap",
+      "visible_if": "{{ section.settings.show_featured }}",
       "label": "Space between the columns",
       "min": 0,
       "max": 100,
@@ -334,6 +344,7 @@
     {
       "type": "range",
       "id": "featured_image_height",
+      "visible_if": "{{ section.settings.show_featured }}",
       "label": "Latest article photo height",
       "info": "Percent of the photo's width.",
       "min": 30,
@@ -345,6 +356,7 @@
     {
       "type": "range",
       "id": "featured_title_spacing",
+      "visible_if": "{{ section.settings.show_featured }}",
       "label": "Latest article: space above title",
       "min": 0,
       "max": 60,
@@ -355,6 +367,7 @@
     {
       "type": "range",
       "id": "excerpt_spacing",
+      "visible_if": "{{ section.settings.show_featured and section.settings.show_excerpt }}",
       "label": "Latest article: space above excerpt",
       "min": 0,
       "max": 40,
@@ -365,6 +378,7 @@
     {
       "type": "range",
       "id": "excerpt_max_width",
+      "visible_if": "{{ section.settings.show_featured and section.settings.show_excerpt }}",
       "label": "Latest article: excerpt max width",
       "min": 200,
       "max": 800,
@@ -375,6 +389,7 @@
     {
       "type": "range",
       "id": "featured_link_spacing",
+      "visible_if": "{{ section.settings.show_featured }}",
       "label": "Latest article: space above link",
       "min": 0,
       "max": 60,
@@ -385,6 +400,7 @@
     {
       "type": "range",
       "id": "side_image_width",
+      "visible_if": "{{ section.settings.show_featured and section.settings.side_count > 0 }}",
       "label": "Side list: photo width",
       "info": "Percent of the side column.",
       "min": 30,
@@ -396,6 +412,7 @@
     {
       "type": "range",
       "id": "side_text_gap",
+      "visible_if": "{{ section.settings.show_featured and section.settings.side_count > 0 }}",
       "label": "Side list: space between photo and text",
       "min": 0,
       "max": 60,
@@ -406,6 +423,7 @@
     {
       "type": "range",
       "id": "side_gap",
+      "visible_if": "{{ section.settings.show_featured and section.settings.side_count > 0 }}",
       "label": "Side list: space between articles",
       "min": 0,
       "max": 80,
@@ -486,6 +504,7 @@
     {
       "type": "range",
       "id": "more_heading_spacing",
+      "visible_if": "{{ section.settings.show_featured }}",
       "label": "Space below \"More articles\" heading",
       "min": 0,
       "max": 80,
@@ -512,6 +531,7 @@
     {
       "type": "range",
       "id": "excerpt_opacity",
+      "visible_if": "{{ section.settings.show_excerpt or section.settings.show_date }}",
       "label": "Excerpt opacity",
       "min": 40,
       "max": 100,
@@ -536,6 +556,7 @@
     {
       "type": "range",
       "id": "featured_title_size",
+      "visible_if": "{{ section.settings.show_featured }}",
       "label": "Latest article title size",
       "min": 20,
       "max": 80,
@@ -546,6 +567,7 @@
     {
       "type": "range",
       "id": "text_font_size",
+      "visible_if": "{{ section.settings.show_featured and section.settings.show_excerpt }}",
       "label": "Excerpt size",
       "min": 12,
       "max": 24,
@@ -576,6 +598,7 @@
     {
       "type": "range",
       "id": "more_heading_size",
+      "visible_if": "{{ section.settings.show_featured }}",
       "label": "\"More articles\" heading size",
       "min": 20,
       "max": 64,
@@ -610,6 +633,7 @@
     {
       "type": "range",
       "id": "featured_image_height_mobile",
+      "visible_if": "{{ section.settings.show_featured }}",
       "label": "Latest article photo height",
       "min": 30,
       "max": 120,
@@ -620,6 +644,7 @@
     {
       "type": "range",
       "id": "featured_title_size_mobile",
+      "visible_if": "{{ section.settings.show_featured }}",
       "label": "Latest article title size",
       "min": 18,
       "max": 56,
@@ -630,6 +655,7 @@
     {
       "type": "range",
       "id": "featured_title_spacing_mobile",
+      "visible_if": "{{ section.settings.show_featured }}",
       "label": "Latest article: space above title",
       "min": 0,
       "max": 60,
@@ -640,6 +666,7 @@
     {
       "type": "range",
       "id": "text_font_size_mobile",
+      "visible_if": "{{ section.settings.show_featured and section.settings.show_excerpt }}",
       "label": "Excerpt size",
       "min": 12,
       "max": 24,
@@ -650,6 +677,7 @@
     {
       "type": "range",
       "id": "excerpt_lines_mobile",
+      "visible_if": "{{ section.settings.show_featured and section.settings.show_excerpt }}",
       "label": "Excerpt lines",
       "info": "Longer excerpts end with \"…\". 0 = show all.",
       "min": 0,
@@ -660,6 +688,7 @@
     {
       "type": "range",
       "id": "more_spacing_mobile",
+      "visible_if": "{{ section.settings.show_featured }}",
       "label": "Space above \"More articles\"",
       "min": 0,
       "max": 120,
@@ -670,6 +699,7 @@
     {
       "type": "range",
       "id": "more_heading_size_mobile",
+      "visible_if": "{{ section.settings.show_featured }}",
       "label": "\"More articles\" heading size",
       "min": 20,
       "max": 64,
@@ -680,6 +710,7 @@
     {
       "type": "range",
       "id": "more_heading_spacing_mobile",
+      "visible_if": "{{ section.settings.show_featured }}",
       "label": "Space below \"More articles\" heading",
       "min": 0,
       "max": 80,

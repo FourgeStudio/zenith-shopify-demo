@@ -460,6 +460,7 @@
       "type": "text",
       "id": "phone_label",
       "label": "Phone placeholder",
+      "visible_if": "{{ section.settings.show_phone }}",
       "default": "Phone number"
     },
     {
@@ -508,6 +509,7 @@
       "type": "range",
       "id": "form_width",
       "label": "Form card width (desktop)",
+      "info": "From 990px wide; never more than half the content width.",
       "min": 400,
       "max": 720,
       "step": 10,
@@ -518,6 +520,7 @@
       "type": "range",
       "id": "column_gap",
       "label": "Space between columns",
+      "info": "From 990px wide. Between 990 and 1199px it is capped at 6% of the screen width.",
       "min": 40,
       "max": 200,
       "step": 4,
@@ -528,6 +531,7 @@
       "type": "range",
       "id": "card_padding",
       "label": "Form card padding",
+      "info": "Tablet and desktop. On mobile the card (when shown) uses 20px.",
       "min": 0,
       "max": 80,
       "step": 4,
@@ -832,6 +836,7 @@
       "type": "checkbox",
       "id": "form_first_mobile",
       "label": "Show form first",
+      "info": "Also on tablets (750–989px), where the columns stack.",
       "default": true
     },
     {
@@ -858,6 +863,7 @@
       "type": "range",
       "id": "stack_gap_mobile",
       "label": "Space between form and contact details",
+      "info": "Also on tablets (750–989px).",
       "min": 0,
       "max": 120,
       "step": 4,

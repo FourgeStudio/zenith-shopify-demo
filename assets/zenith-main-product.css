@@ -79,10 +79,15 @@
   pointer-events: none;
 }
 
-/* Dots carry 8px transparent side padding (24px targets, zenith-base.css): widths add 16px, the gap loses it */
+/* Dots carry 8px transparent side padding (24px targets, zenith-base.css): widths add 16px, the spacing loses it.
+   A margin, not gap (which can't go below 0), so settings under 16px overlap the transparent padding and still show. */
 .zenith-mp__gallery .zenith-carousel__dots {
-  gap: max(0px, calc(var(--z-mp-dotg-m, 10px) - 16px));
+  gap: 0;
   pointer-events: auto;
+}
+
+.zenith-mp__gallery .zenith-carousel__dot + .zenith-carousel__dot {
+  margin-left: calc(var(--z-mp-dotg-m, 10px) - 16px);
 }
 
 .zenith-mp__gallery .zenith-carousel__dot {
@@ -270,9 +275,11 @@
 
 /* ---------- Buy box ---------- */
 .zenith-mp__buy {
+  /* resolved here, so .zenith-mp__rows (which redefines --z-cgap* for the FAQ styles) still reads the buy box gap */
+  --z-mp-buy-gap: var(--z-cgap-m, 12px);
   display: flex;
   flex-direction: column;
-  gap: var(--z-cgap-m, 12px);
+  gap: var(--z-mp-buy-gap);
   min-width: 0;
 }
 
@@ -776,8 +783,8 @@
 
 /* Accordion rows — assets/zenith-faq.css does the work; these vars retarget it */
 .zenith-mp__rows {
-  /* the flex gap already provides --z-cgap-m, so only add the remainder */
-  margin-top: calc(var(--z-mp-rows-sp-m, 40px) - var(--z-cgap-m, 12px));
+  /* the flex gap already provides the buy box gap, so only add the remainder */
+  margin-top: calc(var(--z-mp-rows-sp-m, 40px) - var(--z-mp-buy-gap, 12px));
   --z-tfs: var(--z-mp-row-tfs, 16px);
   --z-tfs-m: var(--z-mp-row-tfs-m, 15px);
   --z-cgap: 16px;
@@ -920,8 +927,8 @@
     bottom: var(--z-mp-dotb, 21px);
   }
 
-  .zenith-mp__gallery .zenith-carousel__dots {
-    gap: max(0px, calc(var(--z-mp-dotg, 4px) - 16px));
+  .zenith-mp__gallery .zenith-carousel__dot + .zenith-carousel__dot {
+    margin-left: calc(var(--z-mp-dotg, 4px) - 16px);
   }
 
   .zenith-mp__gallery .zenith-carousel__dot {
@@ -958,7 +965,7 @@
   }
 
   .zenith-mp__buy {
-    gap: var(--z-cgap, 12px);
+    --z-mp-buy-gap: var(--z-cgap, 12px);
   }
 
   /* desktop follows the same order as phones: quantity + Add to cart, FDA bar, checklist */
@@ -1057,7 +1064,7 @@
 
 @media screen and (min-width: 750px) {
   .zenith-mp__rows {
-    margin-top: calc(var(--z-mp-rows-sp, 18px) - var(--z-cgap, 12px));
+    margin-top: calc(var(--z-mp-rows-sp, 18px) - var(--z-mp-buy-gap, 12px));
   }
 
   .zenith-mp__questions {

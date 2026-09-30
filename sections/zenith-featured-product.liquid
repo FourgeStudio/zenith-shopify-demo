@@ -341,6 +341,7 @@
       "type": "range",
       "id": "media_min_height",
       "label": "Minimum height",
+      "info": "Desktop. The image grows to match the text panel when that is taller.",
       "min": 240,
       "max": 1000,
       "step": 20,
@@ -396,6 +397,7 @@
     {
       "type": "range",
       "id": "image_padding",
+      "visible_if": "{{ section.settings.image_fit == 'contain' }}",
       "label": "Image padding",
       "info": "Used when Image fit is Show whole image",
       "min": 0,
@@ -510,6 +512,7 @@
     {
       "type": "color",
       "id": "pager_color",
+      "visible_if": "{{ section.settings.show_media_pager }}",
       "label": "Image slider dots",
       "default": "#294850"
     },
@@ -576,6 +579,7 @@
     {
       "type": "range",
       "id": "button_font_size",
+      "visible_if": "{{ section.settings.button_style != 'scheme' }}",
       "label": "Button text size",
       "min": 12,
       "max": 40,
@@ -636,6 +640,7 @@
     {
       "type": "range",
       "id": "media_height_mobile",
+      "visible_if": "{{ section.settings.media_ratio_mobile == 'fixed' }}",
       "label": "Image height",
       "info": "Used when Image shape is Fixed height",
       "min": 200,
@@ -727,6 +732,7 @@
     {
       "type": "range",
       "id": "button_font_size_mobile",
+      "visible_if": "{{ section.settings.button_style != 'scheme' }}",
       "label": "Button text size",
       "min": 12,
       "max": 32,
