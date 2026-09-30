@@ -238,7 +238,7 @@
         "show_cod": true,
         "cod_label": "Cash on Delivery",
         "cod_icon": "cash",
-        "payment_icons": "shop",
+        "payment_icons": "zenith",
         "show_delivery": true,
         "delivery_icon": "truck",
         "delivery_title": "Nationwide Delivery",

@@ -613,6 +613,14 @@
                   class: 'zenith-mp__pay-image',
                   alt: 'sections.footer.payment' | t
               }}
+            {%- elsif s.payment_icons == 'zenith' -%}
+              {%- comment -%} Brand tiles in assets/zenith-pay-*.png (30×20, dark tile included) {%- endcomment -%}
+              <ul class="zenith-mp__pay list-unstyled" role="list" aria-label="{{ 'sections.footer.payment' | t | escape }}">
+                {%- if s.pay_gcash -%}<li><img src="{{ 'zenith-pay-gcash.png' | asset_url }}" alt="GCash" width="30" height="20" loading="lazy" class="zenith-mp__pay-image"></li>{%- endif -%}
+                {%- if s.pay_maya -%}<li><img src="{{ 'zenith-pay-maya.png' | asset_url }}" alt="Maya" width="30" height="20" loading="lazy" class="zenith-mp__pay-image"></li>{%- endif -%}
+                {%- if s.pay_visa -%}<li><img src="{{ 'zenith-pay-visa.png' | asset_url }}" alt="Visa" width="30" height="20" loading="lazy" class="zenith-mp__pay-image"></li>{%- endif -%}
+                {%- if s.pay_mastercard -%}<li><img src="{{ 'zenith-pay-mastercard.png' | asset_url }}" alt="Mastercard" width="30" height="20" loading="lazy" class="zenith-mp__pay-image"></li>{%- endif -%}
+              </ul>
             {%- elsif s.payment_icons == 'shop' and shop.enabled_payment_types.size > 0 -%}
               <ul class="zenith-mp__pay list-unstyled" role="list" aria-label="{{ 'sections.footer.payment' | t | escape }}">
                 {%- for type in shop.enabled_payment_types -%}
@@ -807,8 +815,9 @@
       "id": "payment_icons",
       "label": "Payment icons",
       "info": "Store payment icons come from Settings → Payments.",
-      "default": "shop",
+      "default": "zenith",
       "options": [
+        { "value": "zenith", "label": "Zenith icons (GCash, Maya, Visa, Mastercard)" },
         { "value": "shop", "label": "Store payment icons" },
         { "value": "image", "label": "Custom image" },
         { "value": "none", "label": "None" }
@@ -821,6 +830,10 @@
       "info": "Used when Payment icons is set to Custom image.",
       "visible_if": "{{ section.settings.payment_icons == 'image' }}"
     },
+    { "type": "checkbox", "id": "pay_gcash", "label": "Show GCash", "default": true, "visible_if": "{{ section.settings.payment_icons == 'zenith' }}" },
+    { "type": "checkbox", "id": "pay_maya", "label": "Show Maya", "default": true, "visible_if": "{{ section.settings.payment_icons == 'zenith' }}" },
+    { "type": "checkbox", "id": "pay_visa", "label": "Show Visa", "default": true, "visible_if": "{{ section.settings.payment_icons == 'zenith' }}" },
+    { "type": "checkbox", "id": "pay_mastercard", "label": "Show Mastercard", "default": true, "visible_if": "{{ section.settings.payment_icons == 'zenith' }}" },
     { "type": "checkbox", "id": "show_delivery", "label": "Show delivery box", "default": true },
     {
       "type": "select",
