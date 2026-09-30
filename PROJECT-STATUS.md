@@ -148,6 +148,11 @@ _Last updated: 2026-10-01. Keep this file current at the end of each work sessio
 ### Transparent product photo background (2026-10-01)
 - Theme settings → Zenith → **Product images**: *Background behind transparent product photos* (on) + gradient (default teal #203940 → white, same as the v2 shelf cards). Any product image whose file is a **.png** gets it on product cards (grids, carousels, Dawn cards), featured product, product page gallery + thumbnails + bundle cards, cart lines and Pairs well with. Rule at the end of `assets/zenith-base.css` (background on the `<img>`, so opaque photos hide it); JPG photos unchanged. Upload cut-outs as PNG to get the effect.
 
+### Cart drawer: empty state + sizes (2026-10-01)
+- Empty cart keeps the drawer layout: header, offers panel from ₱0 (`zenith-cart-offers` no longer needs items), "Your cart is empty" + Continue shopping where the items go, suggestions, summary at ₱0 (no shipping fee on an empty cart), Check out disabled. Dawn's separate empty screen removed from `snippets/cart-drawer.liquid`; Dawn's `is-empty` hiding rules overridden in `zenith-base.css`; `cart-drawer.js` always traps focus in #CartDrawer.
+- "Pairs well with" → **Best used with**. Empty drawer suggestions = Theme settings → Zenith · Cart → *Suggestions when the cart is empty* (product list, else the first store products).
+- The compact "zoom out" drawer scale was removed on request (original Dawn/zenith sizes).
+
 ### Official pages = global (2026-10-01)
 - Theme settings → **Zenith · Official pages**: 8 slots (icon, custom icon, name, second line, link, screen-reader name) + open in new tab. "Zenith · Store links" → *Cards* = Official pages (Theme settings) / This section's cards. Home, About, Certificates, Verify (`stores`) use the global cards (Facebook, Instagram, TikTok, Shopee, Lazada from the homepage), heading "Our Official Pages", homepage layout. Verify's second section (`pages`, 4 Facebook pages) keeps its own cards. Blocks kept as backup.
 - Hover: every image box zooms on hover (`.zenith-media`, mouse + motion allowed), except product cards (second photo fades in) and the product page gallery.

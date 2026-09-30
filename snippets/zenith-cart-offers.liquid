@@ -74,7 +74,7 @@
   assign zco_hits = zco_hits | split: '|'
   assign zco_n = zco_amts.size
 -%}
-{%- if cart != empty and zco_n > 0 -%}
+{%- if zco_n > 0 -%}
   {%- liquid
     # Nearest goal still ahead: free shipping by what is paid, a tier by the full-price subtotal.
     assign zco_next_left = 0

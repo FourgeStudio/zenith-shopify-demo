@@ -296,7 +296,7 @@
       },
       {
         "type": "header",
-        "content": "Pairs well with"
+        "content": "Best used with"
       },
       {
         "type": "paragraph",
@@ -306,7 +306,7 @@
         "type": "text",
         "id": "cart_upsell_heading",
         "label": "Heading",
-        "default": "Pairs well with"
+        "default": "Best used with"
       },
       {
         "type": "range",
@@ -317,6 +317,13 @@
         "step": 1,
         "default": 2,
         "info": "0 hides the list."
+      },
+      {
+        "type": "product_list",
+        "id": "cart_upsell_empty_products",
+        "label": "Suggestions when the cart is empty",
+        "info": "Shown in the empty cart drawer (up to Products shown). Empty = the first products of the store.",
+        "limit": 4
       },
       {
         "type": "text",

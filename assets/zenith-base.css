@@ -1143,69 +1143,6 @@ div.zenith-cart-offers__fill {
   height: 1.6rem;
 }
 
-/* ---------- Cart drawer: compact scale (client asked to "zoom out" the drawer, 2026-09-30) ----------
-   component-cart-drawer.css loads after this file, so Dawn rules are out-specified with the
-   cart-drawer element prefix. Cart page keeps the full sizes. */
-/* The item list's 3px scrollbar used to sit flush against the prices. Stretch the scroll area into the
-   drawer's right padding (.drawer__inner: 0 1.5rem) and pad it back: with no scrollbar the content lines
-   up with the header and footer as before; with one, the bar sits at the drawer edge with a gap before it. */
-cart-drawer cart-drawer-items {
-  margin-right: -1.5rem;
-  padding-right: 1.5rem;
-}
-
-cart-drawer .zenith-cart-offers { padding: var(--z-space-3, 12px) 0 var(--z-space-4, 16px); }
-cart-drawer .zenith-cart-offers__box { gap: var(--z-space-3, 12px); padding: var(--z-space-3, 12px); }
-cart-drawer .zenith-cart-offers__van { width: 3rem; height: 2.3rem; }
-cart-drawer .zenith-cart-offers__title { font-size: 1.5rem; }
-cart-drawer .zenith-cart-offers__msg { margin-top: 0.2rem; font-size: 1.2rem; }
-cart-drawer .zenith-cart-offers__steps { margin-top: var(--z-space-3, 12px); padding-top: 3rem; }
-cart-drawer .zenith-cart-offers__step-label { font-size: 0.95rem; }
-
-cart-drawer .cart-drawer .cart-item {
-  grid-template-columns: 8.4rem repeat(3, minmax(0, 1fr));
-  gap: 0.8rem 1.2rem;
-}
-/* component-cart-items.css gives the image cell a fixed width: 10rem at ≥750px (meant for the cart
-   page table), which is wider than this column, so the image covered the title. Pin the cell and the
-   image to the column. */
-cart-drawer .cart-drawer .cart-item__media {
-  width: auto;
-  min-width: 0;
-}
-cart-drawer .cart-drawer .cart-item__image {
-  width: 100%;
-  max-width: 100%;
-}
-/* The grid gap does the spacing; Dawn's extra left padding on every cell after the image doubled it. */
-cart-drawer .cart-drawer .cart-item > td + td { padding-left: 0; }
-cart-drawer .cart-drawer .cart-items td { padding-top: 1.2rem; }
-cart-drawer .cart-drawer .cart-item__name { font-size: 1.6rem; }
-cart-drawer .cart-drawer .cart-item .product-option,
-cart-drawer .cart-drawer .cart-item__details dl,
-cart-drawer .cart-drawer .cart-item__totals .price { font-size: 1.3rem; }
-cart-drawer .cart-drawer .zenith-cart-item__type { font-size: 1.2rem; }
-cart-drawer .cart-drawer .quantity {
-  width: 10.4rem;
-  min-height: 3.6rem;
-}
-cart-drawer .cart-drawer .quantity__button { width: 3.4rem; }
-cart-drawer .cart-drawer .quantity__input { font-size: 1.4rem; }
-
-cart-drawer .zenith-cart-upsell { padding: var(--z-space-3, 12px) 0; }
-cart-drawer .zenith-cart-upsell__heading { margin-bottom: var(--z-space-2, 8px); font-size: 1rem; }
-cart-drawer .zenith-cart-upsell__list { gap: var(--z-space-2, 8px); }
-cart-drawer .zenith-cart-upsell__media { width: 4.4rem; height: 4.4rem; }
-cart-drawer .zenith-cart-upsell__title { font-size: 1.3rem; }
-cart-drawer .zenith-cart-upsell__meta { font-size: 1.15rem; }
-cart-drawer .zenith-cart-upsell__add { min-height: 3.6rem; padding: 0 var(--z-space-3, 12px); font-size: 1.2rem; }
-
-/* Totals keep the design's breathing room (rows 10px apart, Total set off, 16px before Check out). */
-cart-drawer .zenith-cart-sum { gap: 1rem; margin-bottom: var(--z-space-4, 16px); font-size: 1.4rem; }
-cart-drawer .zenith-cart-sum__total { font-size: 1.9rem; }
-cart-drawer .cart-drawer .drawer__footer { padding: var(--z-space-4, 16px) 0; }
-cart-drawer .cart-drawer .cart__checkout-button { min-height: 4.4rem; }
-
 /* ---------- Cart drawer + cart page: totals (snippets/zenith-cart-summary.liquid) ---------- */
 .zenith-cart-sum {
   display: flex;
@@ -1440,4 +1377,47 @@ p, li, blockquote {
   .zenith-media:not(.zenith-card__media, .zenith-mp__media, .zenith-mp__review-photo):hover > picture > img {
     transform: scale(1.04);
   }
+}
+
+/* ---------- Cart drawer: empty cart keeps the full layout ----------
+   Dawn swaps in a separate "empty" screen (cart-drawer.is-empty / cart-drawer-items.is-empty, toggled by cart.js);
+   the drawer instead shows the offers panel from ₱0, an empty message, suggestions and ₱0 totals. */
+body cart-drawer.is-empty .drawer__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0 1.5rem;
+}
+
+body cart-drawer.is-empty .drawer__header {
+  display: flex;
+}
+
+body cart-drawer .is-empty .cart__contents.cart-drawer__form {
+  display: flex;
+}
+
+body cart-drawer cart-drawer-items.is-empty + .drawer__footer {
+  display: block;
+}
+
+.zenith-cart-empty {
+  width: 100%;
+  padding: var(--z-space-6) 0;
+  text-align: center;
+  border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.12);
+}
+
+.zenith-cart-empty__title {
+  margin: 0 0 var(--z-space-2);
+  font-family: var(--font-heading-family);
+  font-size: 2.2rem;
+  line-height: 1.2;
+}
+
+.zenith-cart-empty__link {
+  font-size: 1.4rem;
+  color: var(--z-dawn-gold, #eabe5f);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
 }

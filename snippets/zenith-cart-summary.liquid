@@ -38,7 +38,7 @@
 
   assign zcsum_fee = 0
   assign zcsum_ship_on = false
-  if zcsum_goal > 0
+  if zcsum_goal > 0 and cart.item_count > 0
     if zcsum_paid >= zcsum_goal
       assign zcsum_ship_on = true
     else
