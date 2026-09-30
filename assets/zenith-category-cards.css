@@ -137,17 +137,37 @@
     grid-template-columns: 1fr;
   }
 
+  /* Two-up grid as a centred wrap, so an odd last card sits in the middle. */
+  .zenith-cats--m-grid .zenith-cats__grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .zenith-cats--m-grid .zenith-cats__grid > .zenith-cats__item {
+    flex: 0 0 calc((100% - var(--z-gap-m, var(--z-space-3))) / 2);
+  }
+
   .zenith-cats--m-grid .zenith-cats__content {
     gap: var(--z-space-2);
   }
 }
 
+/* Tablet/desktop: a centred wrap instead of a grid, so fewer cards than columns (or a short last row)
+   sit in the middle rather than hugging the left. Card width = one column of --zc-cols. */
 @media screen and (min-width: 750px) {
   .zenith-cats__grid.zenith-carousel__track {
-    display: grid;
+    --zc-cols: 2;
+    --zc-gap: var(--z-gap, var(--z-space-5));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     overflow: visible;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--z-gap, var(--z-space-5));
+    gap: var(--zc-gap);
+  }
+
+  .zenith-cats__grid.zenith-carousel__track > .zenith-cats__item {
+    flex: 0 0 calc((100% - (var(--zc-cols) - 1) * var(--zc-gap)) / var(--zc-cols));
   }
 
   .zenith-cats--fixed .zenith-cats__media {
@@ -180,6 +200,6 @@
 
 @media screen and (min-width: 990px) {
   .zenith-cats__grid.zenith-carousel__track {
-    grid-template-columns: repeat(var(--z-cols), minmax(0, 1fr));
+    --zc-cols: var(--z-cols);
   }
 }
