@@ -1,110 +1,30 @@
 {% comment %}
-  "Pairs well with" list under the cart items (drawer + cart page). Up to N products that are not in
-  the cart yet and can be bought, picked in this order:
-    1. each cart product's complementary products (Search & Discovery app → Product recommendations);
-    2. Theme settings → Zenith · Cart → Pairs well with → Products (the fallback list).
-  Every add re-renders the cart, so the list refills with the next product each time.
-  Accepts: context ('page' = cart page). The drawer adds with Dawn's <product-form> (product-form.js,
-  loaded in theme.liquid) so the drawer re-renders in place; it must sit outside #CartDrawer-Form
-  (forms cannot nest). The cart page uses Shopify's /cart/add?id= link, which adds and reloads /cart.
+  "Pairs well with" under the cart items (drawer + cart page). Automatic: assets/zenith-cart-upsell.js
+  asks Shopify's product recommendations for the newest cart product (then the next ones until the list
+  is full) — complementary products from the Search & Discovery app first, then Shopify's automatic
+  "related" picks — skips anything already in the cart and shows up to Theme settings → Zenith · Cart →
+  Pairs well with → Products shown. Every cart change re-renders this, so it refills with the next
+  product after each add. Answers are cached per product for the page view, so re-renders do not refetch.
+  In the drawer it must sit outside #CartDrawer-Form (each row is its own add-to-cart form).
+  Accepts: context ('page' = cart page; the rows then post normally and reload /cart).
 {% endcomment %}
 {%- liquid
   assign zcu_max = settings.cart_upsell_max | default: 2
-  if cart == empty
-    assign zcu_max = 0
-  endif
-
-  assign zcu_skip = ','
-  for item in cart.items
-    assign zcu_skip = zcu_skip | append: item.product_id | append: ','
-  endfor
-
-  assign zcu_count = 0
-  assign zcu_seen = ','
+  assign zcu_ids = cart.items | map: 'product_id' | uniq | join: ','
 -%}
-{%- capture zcu_rows -%}
-  {%- for zcu_pass in (1..2) -%}
-    {%- liquid
-      if zcu_count >= zcu_max
-        break
-      endif
-      if zcu_pass == 1
-        assign zcu_lists = cart.items
-      else
-        assign zcu_lists = '1' | split: ','
-      endif
-    -%}
-    {%- for zcu_src in zcu_lists -%}
-      {%- liquid
-        if zcu_pass == 1
-          assign zcu_list = zcu_src.product.metafields['shopify--discovery--product_recommendation'].complementary_products.value
-        else
-          assign zcu_list = settings.cart_upsell_products
-        endif
-      -%}
-      {%- for zcu_product in zcu_list -%}
-        {%- liquid
-          if zcu_count >= zcu_max
-            break
-          endif
-          assign zcu_key = ',' | append: zcu_product.id | append: ','
-          if zcu_skip contains zcu_key or zcu_seen contains zcu_key or zcu_product.available == false
-            continue
-          endif
-          assign zcu_seen = zcu_seen | append: zcu_product.id | append: ','
-          assign zcu_count = zcu_count | plus: 1
-          assign zcu_variant = zcu_product.selected_or_first_available_variant
-          assign zcu_image = zcu_variant.featured_image | default: zcu_product.featured_image
-          assign zcu_form_id = 'ZenithUpsell-' | append: context | append: '-' | append: zcu_product.id
-        -%}
-        <li class="zenith-cart-upsell__item">
-          <a href="{{ zcu_product.url }}" class="zenith-cart-upsell__media" tabindex="-1" aria-hidden="true">
-            {%- if zcu_image != blank -%}
-              {{
-                zcu_image
-                | image_url: width: 160
-                | image_tag: loading: 'lazy', widths: '80, 160', sizes: '64px', alt: '', class: 'zenith-cart-upsell__img'
-              }}
-            {%- endif -%}
-          </a>
-          <div class="zenith-cart-upsell__info">
-            <a href="{{ zcu_product.url }}" class="zenith-cart-upsell__title">{{ zcu_product.title | escape }}</a>
-            <p class="zenith-cart-upsell__meta">
-              {%- if zcu_product.type != blank -%}{{ zcu_product.type | escape }} · {% endif -%}
-              {{- zcu_variant.price | money -}}
-            </p>
-          </div>
-          {%- capture zcu_label -%}
-            <span>{{ settings.cart_upsell_button | default: '+ Add' | escape }}</span>
-            <span class="visually-hidden">{{ zcu_product.title | escape }}</span>
-          {%- endcapture -%}
-          {%- if context == 'page' -%}
-            <a href="{{ routes.cart_add_url }}?id={{ zcu_variant.id }}&quantity=1" class="zenith-cart-upsell__add">
-              {{- zcu_label -}}
-            </a>
-          {%- else -%}
-            <product-form data-section-id="cart-drawer" data-hide-errors="true" class="zenith-cart-upsell__form">
-              {%- form 'product', zcu_product, id: zcu_form_id, novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
-                <input type="hidden" name="id" value="{{ zcu_variant.id }}" class="product-variant-id">
-                <button id="{{ zcu_form_id }}-submit" type="submit" name="add" class="zenith-cart-upsell__add">
-                  {{- zcu_label -}}
-                  {%- render 'loading-spinner' -%}
-                </button>
-              {%- endform -%}
-            </product-form>
-          {%- endif -%}
-        </li>
-      {%- endfor -%}
-    {%- endfor -%}
-  {%- endfor -%}
-{%- endcapture -%}
-{%- if zcu_count > 0 -%}
-  <div class="zenith-cart-upsell{% if context == 'page' %} zenith-cart-upsell--page{% endif %}">
+{%- if cart != empty and zcu_max > 0 -%}
+  <zenith-cart-upsell
+    class="zenith-cart-upsell{% if context == 'page' %} zenith-cart-upsell--page{% endif %}"
+    data-product-ids="{{ zcu_ids }}"
+    data-max="{{ zcu_max }}"
+    {% if context == 'page' %}
+      data-context="page"
+    {% endif %}
+    hidden
+  >
     {%- if settings.cart_upsell_heading != blank -%}
       <p class="zenith-cart-upsell__heading">{{ settings.cart_upsell_heading | escape }}</p>
     {%- endif -%}
-    <ul class="zenith-cart-upsell__list" role="list">
-      {{- zcu_rows -}}
-    </ul>
-  </div>
+    <ul class="zenith-cart-upsell__list" role="list"></ul>
+  </zenith-cart-upsell>
 {%- endif -%}

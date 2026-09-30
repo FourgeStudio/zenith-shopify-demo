@@ -476,5 +476,7 @@
       {%- comment -%}zenith: the drawer's "Pairs well with" add buttons use <product-form> on every page{%- endcomment -%}
       <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
+    {%- comment -%}zenith: "Pairs well with" in the cart drawer + cart page (automatic recommendations){%- endcomment -%}
+    <script src="{{ 'zenith-cart-upsell.js' | asset_url }}" defer="defer"></script>
   </body>
 </html>
