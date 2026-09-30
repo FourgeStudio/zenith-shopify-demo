@@ -25,8 +25,21 @@
   if quote_raw != blank and q_first != '"' and q_first != '“'
     assign quote_text = '“' | append: quote_text | append: '”'
   endif
+
+  # A slot with only a photo = photo card; only a review = text card (half width); both = full card.
+  assign has_review = false
+  if quote_raw != blank or author_text != blank
+    assign has_review = true
+  endif
+  assign card_mod = ''
+  if photo == blank and has_review
+    assign card_mod = ' zenith-results__card--text'
+  elsif has_review == false
+    assign card_mod = ' zenith-results__card--photo'
+  endif
 -%}
-<li class="zenith-results__card" {{ attrs }}>
+<li class="zenith-results__card{{ card_mod }}" {{ attrs }}>
+  {%- unless card_mod contains '--text' -%}
   <div class="zenith-media zenith-results__media">
     {%- if photo != blank -%}
       {{
@@ -60,7 +73,9 @@
       </a>
     {%- endif -%}
   </div>
+  {%- endunless -%}
 
+  {%- if has_review -%}
   <figure class="zenith-results__review">
     <div class="zenith-results__body">
       {%- if stars > 0 -%}
@@ -104,4 +119,5 @@
       </figcaption>
     {%- endif -%}
   </figure>
+  {%- endif -%}
 </li>

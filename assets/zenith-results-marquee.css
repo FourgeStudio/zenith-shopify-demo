@@ -82,6 +82,16 @@
   flex: 0 0 var(--z-mw-m, 50%);
 }
 
+/* Photo-only (no review text) and text-only (no photo) cards: half a card, as in the design */
+.zenith-results__card--photo,
+.zenith-results__card--text {
+  width: calc(var(--z-card-w-m) / 2);
+}
+
+.zenith-results__card--photo .zenith-results__media {
+  flex-basis: 100%;
+}
+
 /* Product used, on the photo: thumbnail + "Used" + product name */
 .zenith-results__meta {
   position: absolute;
@@ -315,6 +325,15 @@ a.zenith-results__meta:focus-visible {
 
   .zenith-results__media {
     flex-basis: var(--z-mw, 50%);
+  }
+
+  .zenith-results__card--photo,
+  .zenith-results__card--text {
+    width: calc(var(--z-card-w) / 2);
+  }
+
+  .zenith-results__card--photo .zenith-results__media {
+    flex-basis: 100%;
   }
 
   .zenith-results__meta {
