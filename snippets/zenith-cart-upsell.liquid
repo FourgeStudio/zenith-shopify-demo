@@ -1,53 +1,96 @@
 {% comment %}
-  "Best used with" under the cart items (drawer + cart page). Automatic: assets/zenith-cart-upsell.js
-  asks Shopify's product recommendations for the newest cart product (then the next ones until the list
-  is full) — complementary products from the Search & Discovery app first, then Shopify's automatic
-  "related" picks — skips anything already in the cart and shows up to Theme settings → Zenith · Cart →
-  Best used with → Products shown. Every cart change re-renders this, so it refills with the next
-  product after each add. Answers are cached per product for the page view, so re-renders do not refetch.
+  "Best used with" under the cart items (drawer + cart page), picked in Liquid so it re-renders with every cart change:
+    1. products from the collections of the cart's products (newest cart line first), skipping catch-all collections
+       (all / frontpage / a collection holding the whole catalogue);
+    2. when those are all in the cart already, products from the store's other collections.
+  Skips products already in the cart and sold-out ones; shows up to Theme settings → Zenith · Cart → Products shown.
+  Empty cart: Theme settings → Zenith · Cart → Suggestions when the cart is empty (else the first store products).
   In the drawer it must sit outside #CartDrawer-Form (each row is its own add-to-cart form).
-  Accepts: context ('page' = cart page; the rows then post normally and reload /cart).
+  Accepts: context ('page' = cart page: rows use Shopify's /cart/add link, because they sit inside form#cart).
 {% endcomment %}
 {%- liquid
   assign zcu_max = settings.cart_upsell_max | default: 2
-  assign zcu_ids = cart.items | map: 'product_id' | uniq | join: ','
--%}
-{%- if cart == empty and zcu_max > 0 and context != 'page' -%}
-  {%- comment -%}
-    Empty drawer: nothing to base recommendations on → Theme settings → Zenith · Cart → Suggestions when the cart
-    is empty (else the first products of the store), rendered here with the same rows.
-  {%- endcomment -%}
-  {%- liquid
-    assign zcu_list = settings.cart_upsell_empty_products
-    if zcu_list == blank or zcu_list.count == 0
-      assign zcu_list = collections.all.products
+  assign zcu_in_cart = cart.items | map: 'product_id' | join: ','
+  assign zcu_in_cart = ',' | append: zcu_in_cart | append: ','
+  assign zcu_all_count = collections.all.products_count
+  assign zcu_picked = ','
+  assign zcu_count = 0
+
+  if zcu_max > 0
+    if cart == empty
+      if context != 'page'
+        assign zcu_list = settings.cart_upsell_empty_products
+        if zcu_list == blank or zcu_list.count == 0
+          assign zcu_list = collections.all.products
+        endif
+        for p in zcu_list
+          if zcu_count >= zcu_max
+            break
+          endif
+          if p.available
+            assign zcu_picked = zcu_picked | append: p.handle | append: ','
+            assign zcu_count = zcu_count | plus: 1
+          endif
+        endfor
+      endif
+    else
+      # Pass 1: the cart products' own collections, newest line first
+      assign zcu_lines = cart.items | reverse
+      for line in zcu_lines
+        for c in line.product.collections
+          if zcu_count >= zcu_max
+            break
+          endif
+          if c.handle == 'all' or c.handle == 'frontpage' or c.products_count >= zcu_all_count
+            continue
+          endif
+          for p in c.products
+            if zcu_count >= zcu_max
+              break
+            endif
+            assign zcu_key = ',' | append: p.id | append: ','
+            assign zcu_hkey = ',' | append: p.handle | append: ','
+            unless zcu_in_cart contains zcu_key or zcu_picked contains zcu_hkey
+              if p.available
+                assign zcu_picked = zcu_picked | append: p.handle | append: ','
+                assign zcu_count = zcu_count | plus: 1
+              endif
+            endunless
+          endfor
+        endfor
+      endfor
+
+      # Pass 2: everything else in the store (other collections)
+      if zcu_count < zcu_max
+        for p in collections.all.products
+          if zcu_count >= zcu_max
+            break
+          endif
+          assign zcu_key = ',' | append: p.id | append: ','
+          assign zcu_hkey = ',' | append: p.handle | append: ','
+          unless zcu_in_cart contains zcu_key or zcu_picked contains zcu_hkey
+            if p.available
+              assign zcu_picked = zcu_picked | append: p.handle | append: ','
+              assign zcu_count = zcu_count | plus: 1
+            endif
+          endunless
+        endfor
+      endif
     endif
-  -%}
-  <div class="zenith-cart-upsell zenith-cart-upsell--empty">
+  endif
+-%}
+{%- if zcu_count > 0 -%}
+  <div class="zenith-cart-upsell{% if context == 'page' %} zenith-cart-upsell--page{% endif %}">
     {%- if settings.cart_upsell_heading != blank -%}
       <p class="zenith-cart-upsell__heading">{{ settings.cart_upsell_heading | escape }}</p>
     {%- endif -%}
     <ul class="zenith-cart-upsell__list" role="list">
-      {%- for zcu_product in zcu_list limit: zcu_max -%}
-        {%- if zcu_product.available -%}
-          {%- render 'zenith-cart-upsell-item', product: zcu_product -%}
+      {%- assign zcu_handles = zcu_picked | split: ',' -%}
+      {%- for zcu_handle in zcu_handles -%}
+        {%- if zcu_handle != blank -%}
+          {%- render 'zenith-cart-upsell-item', product: all_products[zcu_handle], context: context -%}
         {%- endif -%}
       {%- endfor -%}
     </ul>
   </div>
-{%- elsif cart != empty and zcu_max > 0 -%}
-  <zenith-cart-upsell
-    class="zenith-cart-upsell{% if context == 'page' %} zenith-cart-upsell--page{% endif %}"
-    data-product-ids="{{ zcu_ids }}"
-    data-max="{{ zcu_max }}"
-    {% if context == 'page' %}
-      data-context="page"
-    {% endif %}
-    hidden
-  >
-    {%- if settings.cart_upsell_heading != blank -%}
-      <p class="zenith-cart-upsell__heading">{{ settings.cart_upsell_heading | escape }}</p>
-    {%- endif -%}
-    <ul class="zenith-cart-upsell__list" role="list"></ul>
-  </zenith-cart-upsell>
 {%- endif -%}

@@ -3,7 +3,7 @@
   sections/zenith-cart-upsell.liquid (Shopify's product recommendations). The add button is Dawn's
   <product-form>, so the cart drawer re-renders in place; on the cart page zenith-cart-upsell.js lets the
   form post normally (/cart/add → back to /cart) instead.
-  Accepts: product {Object}
+  Accepts: product {Object}, context {String} optional ('page' = cart page → add link instead of a form)
 {% endcomment %}
 {%- liquid
   assign zcui_variant = product.selected_or_first_available_variant
@@ -27,14 +27,22 @@
       {{- zcui_variant.price | money -}}
     </p>
   </div>
-  <product-form data-section-id="cart-drawer" data-hide-errors="true" class="zenith-cart-upsell__form">
-    {%- form 'product', product, id: zcui_form_id, novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
-      <input type="hidden" name="id" value="{{ zcui_variant.id }}" class="product-variant-id">
-      <button id="{{ zcui_form_id }}-submit" type="submit" name="add" class="zenith-cart-upsell__add">
-        <span>{{ settings.cart_upsell_button | default: '+ Add' | escape }}</span>
-        <span class="visually-hidden">{{ product.title | escape }}</span>
-        {%- render 'loading-spinner' -%}
-      </button>
-    {%- endform -%}
-  </product-form>
+  {%- if context == 'page' -%}
+    {%- comment -%} Cart page: the list sits inside form#cart, so no nested form — Shopify's add link adds and returns to /cart {%- endcomment -%}
+    <a href="{{ routes.cart_add_url }}?id={{ zcui_variant.id }}&quantity=1" class="zenith-cart-upsell__add">
+      <span>{{ settings.cart_upsell_button | default: '+ Add' | escape }}</span>
+      <span class="visually-hidden">{{ product.title | escape }}</span>
+    </a>
+  {%- else -%}
+    <product-form data-section-id="cart-drawer" data-hide-errors="true" class="zenith-cart-upsell__form">
+      {%- form 'product', product, id: zcui_form_id, novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+        <input type="hidden" name="id" value="{{ zcui_variant.id }}" class="product-variant-id">
+        <button id="{{ zcui_form_id }}-submit" type="submit" name="add" class="zenith-cart-upsell__add">
+          <span>{{ settings.cart_upsell_button | default: '+ Add' | escape }}</span>
+          <span class="visually-hidden">{{ product.title | escape }}</span>
+          {%- render 'loading-spinner' -%}
+        </button>
+      {%- endform -%}
+    </product-form>
+  {%- endif -%}
 </li>
