@@ -387,6 +387,7 @@
     {
       "type": "range",
       "id": "card_min_height_screen",
+      "visible_if": "{{ section.settings.height_mode == 'screen' }}",
       "label": "Banner min height (% of screen)",
       "min": 30,
       "max": 100,
@@ -397,6 +398,7 @@
     {
       "type": "range",
       "id": "card_min_height",
+      "visible_if": "{{ section.settings.height_mode == 'px' }}",
       "label": "Banner min height (desktop, fixed)",
       "info": "Height of the image area, excluding the countdown bar",
       "min": 0,

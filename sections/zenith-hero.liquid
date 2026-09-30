@@ -609,6 +609,7 @@
     {
       "type": "range",
       "id": "height_screen",
+      "visible_if": "{{ section.settings.height_mode == 'screen' }}",
       "label": "Desktop height (% of screen)",
       "min": 30,
       "max": 100,
@@ -619,6 +620,7 @@
     {
       "type": "range",
       "id": "height",
+      "visible_if": "{{ section.settings.height_mode == 'px' }}",
       "label": "Desktop height (fixed)",
       "min": 360,
       "max": 900,
@@ -1152,6 +1154,7 @@
     {
       "type": "range",
       "id": "mobile_height_screen",
+      "visible_if": "{{ section.settings.height_mode == 'screen' }}",
       "label": "Mobile height (% of screen)",
       "min": 30,
       "max": 100,
@@ -1162,6 +1165,7 @@
     {
       "type": "range",
       "id": "mobile_height",
+      "visible_if": "{{ section.settings.height_mode == 'px' }}",
       "label": "Mobile height (fixed)",
       "min": 360,
       "max": 800,

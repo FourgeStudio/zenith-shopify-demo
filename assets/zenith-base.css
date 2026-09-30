@@ -1285,3 +1285,13 @@ a.zenith-policy-link:hover {
 ) img:is([src*='.png' i]) {
   background: var(--z-png-bg, none);
 }
+
+/* Nicer line breaks: headings balanced, text avoids a lone last word (balance = fallback where pretty is unsupported) */
+h1, h2, h3, h4 {
+  text-wrap: balance;
+}
+
+p, li, blockquote {
+  text-wrap: balance;
+  text-wrap: pretty;
+}

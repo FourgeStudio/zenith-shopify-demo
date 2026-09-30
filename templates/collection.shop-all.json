@@ -1090,7 +1090,7 @@
         "text": "<p>We stand behind every Zenith formula with complete confidence. Every order carries the Zenith Money-Back Guarantee, so you can try it on your own terms.</p><p>Not happy with your purchase? Simply contact us and we'll refund it. No hassle. Just show us proof. Full terms on our <a href=\"/policies/refund-policy\">Refunds and Returns</a> page.</p>",
         "button_label": "",
         "button_link": "",
-        "image": "shopify://shop_images/shop-all-guarantee-seal-money-back-guarantee-gold-seal-1-desktop.webp",
+        "image": "shopify://shop_images/vector-icons_7.png",
         "desktop_layout": "band",
         "image_position": "right",
         "image_width": 290,
@@ -1222,7 +1222,7 @@
         "enable_schema": true,
         "heading_alignment": "center",
         "max_width": 720,
-        "open_first": true,
+        "open_first": false,
         "heading_spacing": 32,
         "item_padding": 10,
         "content_gap": 24,
@@ -1251,7 +1251,8 @@
         "padding_top": 64,
         "padding_bottom": 64,
         "padding_top_mobile": 20,
-        "padding_bottom_mobile": 20
+        "padding_bottom_mobile": 20,
+        "open_all": false
       }
     },
     "cta": {
