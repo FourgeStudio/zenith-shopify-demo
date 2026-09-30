@@ -319,13 +319,6 @@
         "info": "0 hides the list."
       },
       {
-        "type": "product_list",
-        "id": "cart_upsell_empty_products",
-        "label": "Suggestions when the cart is empty",
-        "info": "Shown in the empty cart drawer (up to Products shown). Empty = the first products of the store.",
-        "limit": 4
-      },
-      {
         "type": "text",
         "id": "cart_upsell_button",
         "label": "Button label",

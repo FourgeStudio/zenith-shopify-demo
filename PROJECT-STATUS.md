@@ -150,7 +150,7 @@ _Last updated: 2026-10-01. Keep this file current at the end of each work sessio
 
 ### Cart drawer: empty state + sizes (2026-10-01)
 - Empty cart keeps the drawer layout: header, offers panel from ₱0 (`zenith-cart-offers` no longer needs items), "Your cart is empty" + Continue shopping where the items go, suggestions, summary at ₱0 (no shipping fee on an empty cart), Check out disabled. Dawn's separate empty screen removed from `snippets/cart-drawer.liquid`; Dawn's `is-empty` hiding rules overridden in `zenith-base.css`; `cart-drawer.js` always traps focus in #CartDrawer.
-- "Pairs well with" → **Best used with**. Empty drawer suggestions = Theme settings → Zenith · Cart → *Suggestions when the cart is empty* (product list, else the first store products). With items: picked in Liquid (`snippets/zenith-cart-upsell.liquid`) — products from the cart products' own collections (newest line first; catch-all collections skipped), then the rest of the store; never in-cart or sold-out items. Recommendations JS + section removed. Tested with liquidjs (cream → cleanser, day cream; all skin → shampoo, spray).
+- "Pairs well with" → **Best used with**. Empty cart: no suggestions (client request). With items: picked in Liquid (`snippets/zenith-cart-upsell.liquid`) — products from the cart products' own collections (newest line first; catch-all collections skipped), then the rest of the store; never in-cart or sold-out items. Recommendations JS + section removed. Tested with liquidjs (cream → cleanser, day cream; all skin → shampoo, spray).
 - The compact "zoom out" drawer scale was removed on request (original Dawn/zenith sizes).
 
 ### Official pages = global (2026-10-01)

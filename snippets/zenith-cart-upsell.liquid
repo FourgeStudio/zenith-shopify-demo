@@ -4,7 +4,7 @@
        (all / frontpage / a collection holding the whole catalogue);
     2. when those are all in the cart already, products from the store's other collections.
   Skips products already in the cart and sold-out ones; shows up to Theme settings → Zenith · Cart → Products shown.
-  Empty cart: Theme settings → Zenith · Cart → Suggestions when the cart is empty (else the first store products).
+  Empty cart: nothing is shown.
   In the drawer it must sit outside #CartDrawer-Form (each row is its own add-to-cart form).
   Accepts: context ('page' = cart page: rows use Shopify's /cart/add link, because they sit inside form#cart).
 {% endcomment %}
@@ -17,23 +17,7 @@
   assign zcu_count = 0
 
   if zcu_max > 0
-    if cart == empty
-      if context != 'page'
-        assign zcu_list = settings.cart_upsell_empty_products
-        if zcu_list == blank or zcu_list.count == 0
-          assign zcu_list = collections.all.products
-        endif
-        for p in zcu_list
-          if zcu_count >= zcu_max
-            break
-          endif
-          if p.available
-            assign zcu_picked = zcu_picked | append: p.handle | append: ','
-            assign zcu_count = zcu_count | plus: 1
-          endif
-        endfor
-      endif
-    else
+    if cart != empty
       # Pass 1: the cart products' own collections, newest line first
       assign zcu_lines = cart.items | reverse
       for line in zcu_lines
