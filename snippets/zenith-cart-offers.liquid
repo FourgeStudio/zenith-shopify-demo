@@ -17,9 +17,11 @@
 {%- capture zco_on -%}{%- render 'zenith-cart-tiers-on' -%}{%- endcapture -%}
 {%- capture zco_goal -%}{%- render 'zenith-shipping-goal' -%}{%- endcapture -%}
 {%- capture zco_pct -%}{%- render 'zenith-cart-tier-pct' -%}{%- endcapture -%}
+{%- capture zco_tiers -%}{%- render 'zenith-cart-tiers' -%}{%- endcapture -%}
 {%- liquid
   assign zco_goal = zco_goal | plus: 0
   assign zco_pct = zco_pct | plus: 0
+  assign zco_tiers = zco_tiers | strip | split: ','
 
   # Subtotal before any discount (the tiers are spend goals on the full price).
   assign zco_sub = 0
@@ -52,11 +54,10 @@
     assign zco_hits = zco_ship_on | append: '|'
   endif
   if zco_on != blank
-    for i in (1..3)
-      assign zco_kmin = 'cart_tier_' | append: i | append: '_min'
-      assign zco_kpct = 'cart_tier_' | append: i | append: '_percent'
-      assign zco_tmin = settings[zco_kmin] | times: 100
-      assign zco_tpct = settings[zco_kpct] | plus: 0
+    for zco_tier in zco_tiers
+      assign zco_parts = zco_tier | split: ':'
+      assign zco_tmin = zco_parts[0] | times: 100
+      assign zco_tpct = zco_parts[1] | plus: 0
       if zco_tmin > 0 and zco_tpct > 0
         assign zco_hit = false
         if zco_sub >= zco_tmin
@@ -83,11 +84,10 @@
       assign zco_next_offer = zco_ship_label
     endif
     if zco_on != blank
-      for i in (1..3)
-        assign zco_kmin = 'cart_tier_' | append: i | append: '_min'
-        assign zco_kpct = 'cart_tier_' | append: i | append: '_percent'
-        assign zco_tmin = settings[zco_kmin] | times: 100
-        assign zco_tpct = settings[zco_kpct] | plus: 0
+      for zco_tier in zco_tiers
+        assign zco_parts = zco_tier | split: ':'
+        assign zco_tmin = zco_parts[0] | times: 100
+        assign zco_tpct = zco_parts[1] | plus: 0
         if zco_tmin > 0 and zco_tpct > zco_pct and zco_sub < zco_tmin
           assign zco_left = zco_tmin | minus: zco_sub
           if zco_next_left == 0 or zco_left < zco_next_left
