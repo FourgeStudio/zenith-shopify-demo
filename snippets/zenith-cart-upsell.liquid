@@ -17,7 +17,7 @@
   assign zcu_count = 0
 
   if zcu_max > 0
-    if cart != empty
+    if cart.item_count > 0
       # Pass 1: the cart products' own collections, newest line first
       assign zcu_lines = cart.items | reverse
       for line in zcu_lines
