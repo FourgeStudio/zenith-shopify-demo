@@ -175,7 +175,8 @@
   height: var(--z-mh-m, 36rem);
 }
 
-.zenith-fp--fit-contain .zenith-fp__media > img {
+.zenith-fp--fit-contain .zenith-fp__media > img,
+.zenith-fp--fit-contain .zenith-fp__media > picture > img {
   object-fit: contain;
   padding: var(--z-ipd, 0);
 }

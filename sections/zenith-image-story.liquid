@@ -96,16 +96,15 @@
       {%- endif -%}
 
       <div class="zenith-media zenith-story__media">
-        {%- if section.settings.image != blank -%}
-          {{
-            section.settings.image
-            | image_url: width: 1600
-            | image_tag:
-              loading: image_loading,
-              fetchpriority: image_priority,
-              widths: '400, 550, 750, 1100, 1600',
-              sizes: image_sizes
-          }}
+        {%- if section.settings.image != blank or section.settings.image_mobile != blank -%}
+          {%- render 'zenith-responsive-image',
+            image: section.settings.image,
+            mobile_image: section.settings.image_mobile,
+            widths: '400, 550, 750, 1100, 1600',
+            sizes: image_sizes,
+            loading: image_loading,
+            fetchpriority: image_priority
+          -%}
         {%- else -%}
           {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
         {%- endif -%}
@@ -243,6 +242,12 @@
       "type": "image_picker",
       "id": "image",
       "label": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Mobile image",
+      "info": "Optional. A different crop for phones; empty = the image above."
     },
     {
       "type": "image_picker",
