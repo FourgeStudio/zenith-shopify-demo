@@ -1251,3 +1251,20 @@ a.zenith-amare-link:hover {
 .card-wrapper .full-unstyled-link:hover {
   text-decoration: none !important;
 }
+
+/* Transparent PNG product photos sit on --z-png-bg (Theme settings → Zenith → Product images).
+   The background is on the <img> itself, so it fills the image box and opaque JPGs hide it. */
+:is(
+  .zenith-card__media,
+  .zenith-fp__media,
+  .zenith-mp__media,
+  .zenith-mp__thumb-item,
+  .zenith-mp__vcard-media,
+  .zenith-cart-upsell__media,
+  .product-card-wrapper .card__media,
+  .product__media,
+  .cart-item__media,
+  .cart-item__image-container
+) img:is([src*='.png' i]) {
+  background: var(--z-png-bg, none);
+}

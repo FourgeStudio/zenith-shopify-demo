@@ -152,6 +152,10 @@
         /* zenith: page side margins (Theme settings → Zenith → Layout) */
         --z-gutter-d: {{ settings.page_margin }}px;
         --z-gutter-m: {{ settings.page_margin_mobile }}px;
+        {%- if settings.png_image_bg_on and settings.png_image_bg != blank %}
+        /* zenith: background behind transparent PNG product photos (Theme settings → Zenith → Product images) */
+        --z-png-bg: {{ settings.png_image_bg }};
+        {%- endif %}
 
         --product-card-image-padding: {{ settings.card_image_padding | divided_by: 10.0 }}rem;
         --product-card-corner-radius: {{ settings.card_corner_radius | divided_by: 10.0 }}rem;

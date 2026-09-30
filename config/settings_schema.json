@@ -41,6 +41,23 @@
         "info": "Space between the screen/page frame edge and the content. Header icons line up with it."
       },
       {
+        "type": "header",
+        "content": "Product images"
+      },
+      {
+        "type": "checkbox",
+        "id": "png_image_bg_on",
+        "label": "Background behind transparent product photos",
+        "info": "PNG product photos (e.g. a cut-out jar) sit on the background below on product cards, the product page, the featured product and the cart. JPG photos are not affected.",
+        "default": true
+      },
+      {
+        "type": "color_background",
+        "id": "png_image_bg",
+        "label": "Transparent photo background",
+        "default": "linear-gradient(180deg, rgba(32, 57, 64, 1), rgba(255, 255, 255, 1) 100%)"
+      },
+      {
         "type": "range",
         "id": "page_margin_mobile",
         "label": "Page side margin (mobile)",
