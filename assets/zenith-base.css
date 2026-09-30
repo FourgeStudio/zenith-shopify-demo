@@ -1295,3 +1295,20 @@ p, li, blockquote {
   text-wrap: balance;
   text-wrap: pretty;
 }
+
+/* Theme settings → Zenith → Buttons → Full-width buttons on mobile */
+@media screen and (max-width: 749px) {
+  .zenith-m-btn-full .button.zenith-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .zenith-m-btn-full :is(.zenith-hero__actions, .zenith-story__actions, .zenith-guarantee__actions),
+  .zenith-m-btn-full .zenith-promo__content > .zenith-btn,
+  .zenith-m-btn-full .zenith-cats__actions,
+  .zenith-m-btn-full .zenith-cats__actions product-form,
+  .zenith-m-btn-full .zenith-cats__actions .zenith-card__form {
+    align-self: stretch;
+    width: 100%;
+  }
+}

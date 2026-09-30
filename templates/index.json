@@ -87,7 +87,8 @@
         "padding_top": 32,
         "padding_bottom": 32,
         "padding_top_mobile": 0,
-        "padding_bottom_mobile": 0
+        "padding_bottom_mobile": 0,
+        "heading_tag": "h1"
       }
     },
     "hero": {
@@ -178,7 +179,7 @@
         "display_color_2": "#c6950f",
         "icon_size": 104,
         "display_font_size": 288,
-        "heading_tag": "h2",
+        "heading_tag": "h1",
         "heading_font_size": 56,
         "heading_uppercase": false,
         "subheading_font_size": 18,

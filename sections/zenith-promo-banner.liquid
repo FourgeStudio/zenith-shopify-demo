@@ -128,12 +128,13 @@
         {%- render 'zenith-confetti', settings: s -%}
 
         <div class="zenith-promo__content">
+          {%- assign p_tag = s.heading_tag | default: 'h2' -%}
           {%- render 'zenith-section-heading',
             heading: p_heading,
             subheading: p_text,
             alignment: 'left',
             uppercase: s.heading_uppercase,
-            tag: 'h2',
+            tag: p_tag,
             class: 'zenith-promo__heading'
           -%}
           {%- render 'zenith-button',
@@ -663,6 +664,17 @@
       "step": 2,
       "unit": "px",
       "default": 56
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading tag",
+      "info": "H1 when this banner is the first thing on the page (e.g. it replaces the hero during a promotion).",
+      "default": "h2",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" }
+      ]
     },
     {
       "type": "checkbox",

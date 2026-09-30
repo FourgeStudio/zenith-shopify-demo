@@ -48,6 +48,11 @@
   white-space: nowrap;
 }
 
+/* The image is a link to the product: block so the media box keeps its size */
+.zenith-fp__media--link {
+  display: block;
+}
+
 .zenith-fp__badge--media {
   position: absolute;
   top: var(--z-space-3);

@@ -6,14 +6,16 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="">
     <link rel="canonical" href="{{ canonical_url }}">
+    {%- comment -%} zenith: post-conversion pages stay out of search results {%- endcomment -%}
+    {%- if template.suffix contains 'thank-you' -%}
+      <meta name="robots" content="noindex, follow">
+    {%- endif -%}
 
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
     {%- endif -%}
 
-    {%- unless settings.type_header_font.system? and settings.type_body_font.system? -%}
-      <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
-    {%- endunless -%}
+    {%- comment -%} zenith: no fonts.shopifycdn.com preconnect — brand fonts are self-hosted (zenith-base.css) {%- endcomment -%}
 
     <title>
       {{ page_title }}
@@ -290,7 +292,7 @@
     {%- comment -%} zenith: brand layer (fonts, tokens, shared components) {%- endcomment -%}
     {{ 'zenith-special-gothic-condensed-one-400.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
     {{ 'zenith-base.css' | asset_url | stylesheet_tag }}
-    {%- if settings.jdgm_custom_style -%}{{ 'zenith-judgeme.css' | asset_url | stylesheet_tag }}{%- endif -%}
+    {%- if settings.jdgm_custom_style -%}<link rel="stylesheet" href="{{ 'zenith-judgeme.css' | asset_url }}" media="print" onload="this.media='all'">{%- endif -%}
     <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
 
     {%- if settings.cart_type == 'drawer' -%}
@@ -324,7 +326,7 @@
     </script>
   </head>
 
-  <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
+  <body class="gradient{% if settings.mobile_buttons_full %} zenith-m-btn-full{% endif %}{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
       {{ 'accessibility.skip_to_text' | t }}
     </a>

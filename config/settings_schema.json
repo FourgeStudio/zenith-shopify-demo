@@ -42,6 +42,17 @@
       },
       {
         "type": "header",
+        "content": "Buttons"
+      },
+      {
+        "type": "checkbox",
+        "id": "mobile_buttons_full",
+        "label": "Full-width buttons on mobile",
+        "info": "Every Zenith button (hero, banners, category cards, product cards…) spans the full width on phones.",
+        "default": true
+      },
+      {
+        "type": "header",
         "content": "Product images"
       },
       {

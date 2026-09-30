@@ -87,7 +87,8 @@
         "padding_top_mobile": 0,
         "padding_bottom_mobile": 0,
         "height_mode": "screen",
-        "card_min_height_screen": 65
+        "card_min_height_screen": 65,
+        "heading_tag": "h1"
       }
     },
     "hero": {
