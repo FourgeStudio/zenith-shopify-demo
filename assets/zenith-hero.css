@@ -407,3 +407,36 @@
     width: 100%;
   }
 }
+
+/* Mobile layout "Image on top, text below": the photo sits in the flow and fades into the overlay colour,
+   which also fills the panel behind the text. The regular overlay is not used. */
+@media screen and (max-width: 749px) {
+  .zenith-hero--m-stacked .zenith-hero__inner {
+    min-height: 0;
+    background: rgb(var(--z-ov-rgb, 18, 18, 18));
+  }
+
+  .zenith-hero--m-stacked .zenith-hero__media {
+    position: relative;
+    inset: auto;
+    height: var(--z-hero-sih-m, 30rem);
+  }
+
+  .zenith-hero--m-stacked .zenith-hero__media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(to bottom, rgba(var(--z-ov-rgb, 18, 18, 18), 0) 45%, rgb(var(--z-ov-rgb, 18, 18, 18)) 100%);
+    pointer-events: none;
+  }
+
+  .zenith-hero--m-stacked .zenith-overlay {
+    display: none;
+  }
+
+  .zenith-hero--m-stacked .zenith-hero__content-wrap {
+    flex: 0 0 auto;
+    justify-content: flex-start;
+  }
+}
