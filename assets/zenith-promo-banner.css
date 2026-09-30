@@ -52,11 +52,6 @@
   max-width: var(--z-cmw, 72rem);
 }
 
-/* Button product → add-to-cart form: cancel the product-card "push to bottom" margin (.zenith-card__form) */
-.zenith-promo__content > product-form {
-  margin-top: 0;
-}
-
 .zenith-promo__heading {
   gap: 0;
   margin-bottom: 0;

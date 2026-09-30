@@ -650,7 +650,7 @@ zenith-carousel.is-static .zenith-carousel__pause--solo {
   margin-left: var(--z-space-2);
 }
 
-.zenith-card__form {
+.zenith-card .zenith-card__form {
   margin-top: auto;
 }
 
