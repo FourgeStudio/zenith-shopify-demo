@@ -152,6 +152,10 @@
       assign zco_prev_amt = zco_amt
       assign zco_prev_pos = zco_pos
     endfor
+    # The bar always shows a start (10%), empty cart included
+    if zco_fill < 10
+      assign zco_fill = 10
+    endif
     assign zco_fill = zco_fill | round: 1
   -%}
   <div class="zenith-cart-offers{% if context == 'page' %} zenith-cart-offers--page{% endif %}">
