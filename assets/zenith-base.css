@@ -1084,6 +1084,16 @@ div.zenith-cart-offers__fill {
   .zenith-cart-offers__step.is-pop .zenith-cart-offers__step-dot::after { opacity: 0; }
 }
 
+/* ---------- Cart drawer: scrollbar off the content ----------
+   The item list scrolls; its thin scrollbar sat flush against the prices and the last checkpoint label.
+   The list reaches 1rem into the drawer's side padding and gives it back as padding, so the bar runs in the
+   margin with a gap; the gutter is reserved so nothing shifts when the scrollbar appears. */
+cart-drawer-items {
+  margin-right: -1rem;
+  padding-right: 1rem;
+  scrollbar-gutter: stable;
+}
+
 /* ---------- Cart lines: product type under the title (cart-drawer + main-cart-items) ---------- */
 .zenith-cart-item__type {
   margin: var(--z-space-1, 4px) 0 0;
