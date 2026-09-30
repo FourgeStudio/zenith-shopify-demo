@@ -33,6 +33,23 @@ if (!customElements.get('zenith-main-product')) {
           this.frame = requestAnimationFrame(() => this.setActiveThumb(this.currentIndex()));
         };
         this.track.addEventListener('scroll', this.onScroll, { passive: true });
+
+        // Phones: open on the "Start at image" slide (section setting), once the track has a size.
+        const start = (Number(this.dataset.startMobile) || 1) - 1;
+        if (start > 0 && start < this.track.children.length && window.matchMedia('(max-width: 749px)').matches) {
+          const apply = () => {
+            if (!this.track.clientWidth) return false;
+            this.track.scrollTo({ left: start * this.step, behavior: 'instant' });
+            this.setActiveThumb(start);
+            return true;
+          };
+          if (!apply()) {
+            const observer = new ResizeObserver(() => {
+              if (apply()) observer.disconnect();
+            });
+            observer.observe(this.track);
+          }
+        }
       }
 
       get step() {
