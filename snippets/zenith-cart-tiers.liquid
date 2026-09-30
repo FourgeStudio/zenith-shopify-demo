@@ -1,9 +1,22 @@
 {% comment %}
-  The "spend more, save more" tiers, in code on purpose: they must match the automatic discounts in
-  Admin → Discounts, which a theme cannot read, so they are not a theme setting. Change them here
-  whenever the Admin discounts change. Format: spend in pesos : % off, comma separated, ascending,
-  every tier above the free shipping amount.
-  Read by zenith-cart-tier-pct and zenith-cart-offers. Shown only while Theme settings → Zenith · Cart
-  → Show the % off tiers is on (zenith-cart-tiers-on).
+  The "spend more, save more" tiers as "spend:percent" pairs (spend in pesos), comma separated, in
+  the order entered. Source: Theme settings → Zenith · Cart → Tier 1–5. A tier needs both a spend and a %;
+  otherwise it is skipped. Must match the automatic discounts in Admin → Discounts (a theme cannot read
+  those). Read by zenith-cart-tier-pct and zenith-cart-offers.
 {% endcomment %}
-{%- echo '2000:10,3000:20,4000:30' -%}
+{%- liquid
+  assign zcts_out = ''
+  for i in (1..5)
+    assign zcts_kmin = 'cart_tier_' | append: i | append: '_min'
+    assign zcts_kpct = 'cart_tier_' | append: i | append: '_percent'
+    assign zcts_min = settings[zcts_kmin] | plus: 0
+    assign zcts_pct = settings[zcts_kpct] | plus: 0
+    if zcts_min > 0 and zcts_pct > 0
+      if zcts_out != ''
+        assign zcts_out = zcts_out | append: ','
+      endif
+      assign zcts_out = zcts_out | append: zcts_min | append: ':' | append: zcts_pct
+    endif
+  endfor
+  echo zcts_out
+-%}

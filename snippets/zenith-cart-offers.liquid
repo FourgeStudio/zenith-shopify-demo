@@ -186,7 +186,8 @@
       </div>
     </div>
 
-    <div class="zenith-cart-offers__steps" aria-hidden="true">
+    {%- assign zco_gap = 100.0 | divided_by: zco_units | round: 2 -%}
+    <div class="zenith-cart-offers__steps" style="--zco-gap: {{ zco_gap }}%" aria-hidden="true">
       <div class="zenith-cart-offers__track">
         <div class="zenith-cart-offers__fill" style="width: {{ zco_fill }}%"></div>
       </div>

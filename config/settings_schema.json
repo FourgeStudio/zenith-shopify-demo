@@ -157,7 +157,67 @@
         "id": "cart_tiers_on",
         "label": "Show the % off tiers",
         "default": true,
-        "info": "Turn off when the Admin tier discounts are paused or deleted — the theme cannot see that on its own. The tiers themselves (₱2,000 / 10%, ₱3,000 / 20%, ₱4,000 / 30%) are set in code to match Admin → Discounts; ask the developer to change them."
+        "info": "Turn off when the tier discounts in Admin → Discounts are paused or ended — the theme cannot see that on its own."
+      },
+      {
+        "type": "paragraph",
+        "content": "Up to 5 tiers. Enter the same spend and % as each automatic discount in Admin → Discounts (e.g. a new 50% promo → change the % here too). Leave a tier empty or 0 to hide it. Keep them in ascending spend order, above the free shipping amount."
+      },
+      {
+        "type": "number",
+        "id": "cart_tier_1_min",
+        "label": "Tier 1 — spend at least (₱)",
+        "default": 2000
+      },
+      {
+        "type": "number",
+        "id": "cart_tier_1_percent",
+        "label": "Tier 1 — % off",
+        "default": 10
+      },
+      {
+        "type": "number",
+        "id": "cart_tier_2_min",
+        "label": "Tier 2 — spend at least (₱)",
+        "default": 3000
+      },
+      {
+        "type": "number",
+        "id": "cart_tier_2_percent",
+        "label": "Tier 2 — % off",
+        "default": 20
+      },
+      {
+        "type": "number",
+        "id": "cart_tier_3_min",
+        "label": "Tier 3 — spend at least (₱)",
+        "default": 4000
+      },
+      {
+        "type": "number",
+        "id": "cart_tier_3_percent",
+        "label": "Tier 3 — % off",
+        "default": 30
+      },
+      {
+        "type": "number",
+        "id": "cart_tier_4_min",
+        "label": "Tier 4 — spend at least (₱)"
+      },
+      {
+        "type": "number",
+        "id": "cart_tier_4_percent",
+        "label": "Tier 4 — % off"
+      },
+      {
+        "type": "number",
+        "id": "cart_tier_5_min",
+        "label": "Tier 5 — spend at least (₱)"
+      },
+      {
+        "type": "number",
+        "id": "cart_tier_5_percent",
+        "label": "Tier 5 — % off"
       },
       {
         "type": "text",
