@@ -416,22 +416,18 @@
     background: rgb(var(--z-ov-rgb, 18, 18, 18));
   }
 
-  /* Panel colour behind the photo + 1px overlap into the text panel: no light seam where they meet. */
+  /* The photo itself fades out (mask) over the panel colour. A colour layer on top of the photo left the
+     photo's light bottom row peeking out as a line at some zoom levels; a mask can't. */
   .zenith-hero--m-stacked .zenith-hero__media {
     position: relative;
     inset: auto;
     height: var(--z-hero-sih-m, 30rem);
-    margin-bottom: -1px;
     background: rgb(var(--z-ov-rgb, 18, 18, 18));
   }
 
-  .zenith-hero--m-stacked .zenith-hero__media::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background: linear-gradient(to bottom, rgba(var(--z-ov-rgb, 18, 18, 18), 0) 45%, rgb(var(--z-ov-rgb, 18, 18, 18)) calc(100% - 2px));
-    pointer-events: none;
+  .zenith-hero--m-stacked .zenith-hero__media > * {
+    -webkit-mask-image: linear-gradient(to bottom, #000 45%, transparent calc(100% - 4px));
+    mask-image: linear-gradient(to bottom, #000 45%, transparent calc(100% - 4px));
   }
 
   .zenith-hero--m-stacked .zenith-overlay {
