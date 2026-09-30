@@ -425,7 +425,9 @@
     background: rgb(var(--z-ov-rgb, 18, 18, 18));
   }
 
-  .zenith-hero--m-stacked .zenith-hero__media > * {
+  .zenith-hero--m-stacked .zenith-hero__media img,
+  .zenith-hero--m-stacked .zenith-hero__media video,
+  .zenith-hero--m-stacked .zenith-hero__media > .placeholder-svg {
     -webkit-mask-image: linear-gradient(to bottom, #000 45%, transparent calc(100% - 4px));
     mask-image: linear-gradient(to bottom, #000 45%, transparent calc(100% - 4px));
   }
