@@ -163,12 +163,16 @@
             <ul class="zenith-carousel__track zenith-fp__track" role="list">
               {%- for media in product_images -%}
                 {%- assign media_alt = media.alt | default: fp_product.title -%}
+                {%- assign fp_focus = '' -%}
+                {%- if media.preview_image.presentation.focal_point != blank -%}
+                  {%- assign fp_focus = 'object-position: ' | append: media.preview_image.presentation.focal_point -%}
+                {%- endif -%}
                 <li class="zenith-carousel__slide zenith-fp__slide">
                   <div class="zenith-media zenith-fp__media">
                     {{
                       media.preview_image
                       | image_url: width: 1600
-                      | image_tag: loading: 'lazy', widths: '400, 600, 800, 1100, 1600', sizes: media_sizes, alt: media_alt
+                      | image_tag: loading: 'lazy', widths: '400, 600, 800, 1100, 1600', sizes: media_sizes, alt: media_alt, style: fp_focus
                     }}
                   </div>
                 </li>
@@ -179,10 +183,14 @@
         {%- else -%}
           <div class="zenith-media zenith-fp__media">
             {%- if single != blank -%}
+              {%- assign fp_focus = '' -%}
+              {%- if single.presentation.focal_point != blank -%}
+                {%- assign fp_focus = 'object-position: ' | append: single.presentation.focal_point -%}
+              {%- endif -%}
               {{
                 single
                 | image_url: width: 1600
-                | image_tag: loading: 'lazy', widths: '400, 600, 800, 1100, 1600', sizes: media_sizes
+                | image_tag: loading: 'lazy', widths: '400, 600, 800, 1100, 1600', sizes: media_sizes, style: fp_focus
               }}
             {%- else -%}
               {{ 'product-2' | placeholder_svg_tag: 'placeholder-svg' }}
@@ -359,7 +367,7 @@
       "options": [
         {
           "value": "cover",
-          "label": "Fill area"
+          "label": "Fill area (crops around the image's focal point)"
         },
         {
           "value": "contain",

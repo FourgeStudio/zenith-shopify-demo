@@ -105,7 +105,8 @@
         "icon": "none",
         "text_max_width": 460,
         "paragraph_spacing": 0,
-        "content_max_width_mobile": 270
+        "content_max_width_mobile": 270,
+        "height_mode": "px"
       }
     }
   },

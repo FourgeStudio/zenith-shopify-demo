@@ -112,7 +112,8 @@
         "display_color_2": "#c6950f",
         "text_max_width": 500,
         "paragraph_spacing": 0,
-        "content_max_width_mobile": 1000
+        "content_max_width_mobile": 1000,
+        "height_mode": "px"
       }
     }
   },

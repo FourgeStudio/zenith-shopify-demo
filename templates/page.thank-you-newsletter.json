@@ -109,7 +109,8 @@
         "icon_spacing_mobile": 8,
         "text_max_width": 400,
         "paragraph_spacing": 24,
-        "content_max_width_mobile": 320
+        "content_max_width_mobile": 320,
+        "height_mode": "px"
       }
     }
   },

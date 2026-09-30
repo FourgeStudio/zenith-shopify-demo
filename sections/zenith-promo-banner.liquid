@@ -69,7 +69,11 @@
 {%- capture extra -%}
   --z-promo-inset: {{ s.card_inset }}px;
   --z-promo-inset-m: {{ s.card_inset_mobile }}px;
+  {%- if s.height_mode == 'screen' %}
+  --z-promo-mh: {{ s.card_min_height_screen }}svh;
+  {%- else %}
   --z-promo-mh: {{ s.card_min_height }}px;
+  {%- endif %}
   --z-promo-tg: {{ s.text_spacing }}px;
   --z-promo-bgpos: {{ s.background_position }};
   --z-promo-ta: {{ s.text_opacity | divided_by: 100.0 }};
@@ -370,9 +374,30 @@
       "default": 32
     },
     {
+      "type": "select",
+      "id": "height_mode",
+      "label": "Banner height (desktop)",
+      "info": "% of screen height suits a promo in the hero spot.",
+      "default": "px",
+      "options": [
+        { "value": "px", "label": "Fixed (px)" },
+        { "value": "screen", "label": "% of screen height" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "card_min_height_screen",
+      "label": "Banner min height (% of screen)",
+      "min": 30,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 65
+    },
+    {
       "type": "range",
       "id": "card_min_height",
-      "label": "Banner min height (desktop)",
+      "label": "Banner min height (desktop, fixed)",
       "info": "Height of the image area, excluding the countdown bar",
       "min": 0,
       "max": 700,

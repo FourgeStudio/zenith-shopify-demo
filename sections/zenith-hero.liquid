@@ -70,8 +70,14 @@
 {%- endif -%}
 
 {%- capture extra -%}
+  {%- comment -%} svh = height with the phone's browser bars showing, so the hero doesn't jump while scrolling {%- endcomment -%}
+  {%- if s.height_mode == 'px' %}
   --z-hero-h: {{ s.height }}px;
   --z-hero-h-m: {{ s.mobile_height }}px;
+  {%- else %}
+  --z-hero-h: {{ s.height_screen }}svh;
+  --z-hero-h-m: {{ s.mobile_height_screen }}svh;
+  {%- endif %}
   --z-hero-py: {{ s.vertical_padding }}px;
   --z-hero-btn-minw: {{ s.button_min_width | default: 0 }}px;
   --z-hero-py-m: {{ s.vertical_padding_mobile }}px;
@@ -590,9 +596,30 @@
       ]
     },
     {
+      "type": "select",
+      "id": "height_mode",
+      "label": "Height",
+      "info": "Minimum height; taller content still fits. Applies to desktop and mobile.",
+      "default": "screen",
+      "options": [
+        { "value": "screen", "label": "% of screen height" },
+        { "value": "px", "label": "Fixed (px)" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "height_screen",
+      "label": "Desktop height (% of screen)",
+      "min": 30,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 65
+    },
+    {
       "type": "range",
       "id": "height",
-      "label": "Desktop height",
+      "label": "Desktop height (fixed)",
       "min": 360,
       "max": 900,
       "step": 20,
@@ -1124,8 +1151,18 @@
     },
     {
       "type": "range",
+      "id": "mobile_height_screen",
+      "label": "Mobile height (% of screen)",
+      "min": 30,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 65
+    },
+    {
+      "type": "range",
       "id": "mobile_height",
-      "label": "Mobile height",
+      "label": "Mobile height (fixed)",
       "min": 360,
       "max": 800,
       "step": 20,

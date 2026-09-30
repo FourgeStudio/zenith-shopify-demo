@@ -85,7 +85,9 @@
         "padding_top": 32,
         "padding_bottom": 32,
         "padding_top_mobile": 0,
-        "padding_bottom_mobile": 0
+        "padding_bottom_mobile": 0,
+        "height_mode": "screen",
+        "card_min_height_screen": 65
       }
     },
     "hero": {
@@ -205,7 +207,10 @@
         "padding_bottom": 0,
         "padding_top_mobile": 0,
         "padding_bottom_mobile": 0,
-        "button_min_width": 280
+        "button_min_width": 280,
+        "height_mode": "screen",
+        "height_screen": 65,
+        "mobile_height_screen": 65
       },
       "blocks": {
         "trust_note": {

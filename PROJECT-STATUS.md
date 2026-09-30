@@ -145,6 +145,11 @@ _Last updated: 2026-10-01. Keep this file current at the end of each work sessio
 ### Transparent product photo background (2026-10-01)
 - Theme settings → Zenith → **Product images**: *Background behind transparent product photos* (on) + gradient (default teal #203940 → white, same as the v2 shelf cards). Any product image whose file is a **.png** gets it on product cards (grids, carousels, Dawn cards), featured product, product page gallery + thumbnails + bundle cards, cart lines and Pairs well with. Rule at the end of `assets/zenith-base.css` (background on the `<img>`, so opaque photos hide it); JPG photos unchanged. Upload cut-outs as PNG to get the effect.
 
+### Hero height = % of screen (2026-10-01)
+- Zenith · Hero → **Height**: *% of screen height* (new default, 65% desktop + 65% mobile, in `svh` so phone browser bars don't make it jump) or *Fixed (px)*. It is a minimum: longer text still fits. Set to 65% on the top heroes of Home, Shop All, Skin, Hair; closing CTAs, thank-you pages and 404 keep their fixed px heights (set explicitly).
+- Zenith · Promo banner → **Banner height (desktop)**: same choice (default Fixed); the `promo_hero` on those 4 pages is 65% so the promotion hero matches. Mobile promo stays stacked (photo height + content).
+- Featured product images follow the image's **focal point** (Shopify Admin → the image → *Focal point*) when *Image fit = Fill area* crops them; *Show whole image* shows the full image. Images with text baked in should be square-ish or use Show whole image.
+
 ### Zenith · Custom code (2026-09-29)
 - `sections/zenith-custom-code.liquid`: paste HTML / Liquid / app embed code (e.g. Judge.me widget code) on any page; heading + mobile heading, width (page / narrow / full), hide on mobile/desktop, paddings. Each instance is per template, so every page can hold different code.
 
