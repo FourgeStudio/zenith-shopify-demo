@@ -489,14 +489,23 @@ zenith-carousel.is-static .zenith-carousel__controls {
 .zenith-carousel__dot {
   width: 24px;
   height: 8px;
-  padding: 0 8px;
+  padding: 0;
   border: 0;
-  border-radius: 999px;
-  background-color: rgba(var(--color-foreground), 0.45);
-  background-clip: content-box;
+  background: none;
   cursor: pointer;
   position: relative;
-  transition: width var(--duration-short) ease, background-color var(--duration-short) ease;
+  --z-dot-c: rgba(var(--color-foreground), 0.45);
+  transition: width var(--duration-short) ease;
+}
+
+/* The visible dot: a rounded pill inside the 24px-wide tap target (8px transparent each side) */
+.zenith-carousel__dot::before {
+  content: '';
+  position: absolute;
+  inset: 0 8px;
+  border-radius: 999px;
+  background: var(--z-dot-c);
+  transition: background-color var(--duration-short) ease;
 }
 
 .zenith-carousel__dot::after {
@@ -506,7 +515,7 @@ zenith-carousel.is-static .zenith-carousel__controls {
 }
 
 .zenith-carousel__dot[aria-current='true'] {
-  background-color: rgba(var(--color-foreground), 0.7);
+  --z-dot-c: rgba(var(--color-foreground), 0.7);
   width: 76px;
 }
 
@@ -1367,5 +1376,14 @@ p, li, blockquote {
   .zenith-m-btn-full .zenith-cats__actions .zenith-card__form {
     align-self: stretch;
     width: 100%;
+  }
+}
+
+/* Phones: nothing may widen the page sideways (bleeding carousels/marquees stay inside the screen).
+   clip, not hidden, so the sticky header keeps working. */
+@media screen and (max-width: 749px) {
+  html,
+  body {
+    overflow-x: clip;
   }
 }

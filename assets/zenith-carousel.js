@@ -110,6 +110,14 @@ if (!customElements.get('zenith-carousel')) {
       }
 
       update() {
+        // data-start: open scrolled to that slide (1-based), once, as soon as the track has a size
+        if (!this.startApplied && this.track.clientWidth) {
+          this.startApplied = true;
+          const start = (Number(this.dataset.start) || 1) - 1;
+          if (start > 0 && this.track.scrollWidth > this.track.clientWidth + 2) {
+            this.track.scrollTo({ left: Math.min(start, this.pageCount - 1) * this.step, behavior: 'instant' });
+          }
+        }
         // All slides fit: .is-static hides the controls (sections can also center the slides)
         this.classList.toggle('is-static', this.track.scrollWidth <= this.track.clientWidth + 2);
         if (this.dotsWrap) {

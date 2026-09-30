@@ -178,7 +178,7 @@
     {%- if card_count == 0 -%}
       <p class="zenith-videos__empty">No videos match this section's product filter, so it's hidden on the live store.</p>
     {%- else -%}
-      <zenith-carousel data-autoplay="{{ section.settings.autoplay }}" data-slide-label="Video">
+      <zenith-carousel data-autoplay="{{ section.settings.autoplay }}" data-slide-label="Video" data-start="{{ section.settings.start_slide | default: 1 }}">
         <ul class="zenith-carousel__track" role="list">
           {{- cards -}}
         </ul>
@@ -305,6 +305,16 @@
       "label": "Center the cards when they all fit",
       "info": "No arrows or dots then. When they don't fit on the screen (more cards, or a smaller screen), it's a carousel.",
       "default": true
+    },
+    {
+      "type": "range",
+      "id": "start_slide",
+      "label": "Start at video",
+      "info": "The carousel opens scrolled to this card (1 = first).",
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "default": 1
     },
     {
       "type": "select",

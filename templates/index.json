@@ -842,7 +842,8 @@
         "padding_top": 32,
         "padding_bottom": 32,
         "padding_top_mobile": 20,
-        "padding_bottom_mobile": 20
+        "padding_bottom_mobile": 20,
+        "start_slide": 3
       }
     },
     "categories": {
@@ -874,7 +875,7 @@
             "button_label": "Shop Hair Products",
             "link": "",
             "product": "",
-            "button_full_width": true,
+            "button_full_width": false,
             "hide_on_mobile": false
           }
         },
@@ -889,7 +890,7 @@
             "button_label": "Add to Cart",
             "link": "",
             "product": "zenith-anti-aging-tallow-day-cream-spf30",
-            "button_full_width": true,
+            "button_full_width": false,
             "hide_on_mobile": true
           }
         },
@@ -904,7 +905,7 @@
             "button_label": "Add to Cart",
             "link": "",
             "product": "zenith-advanced-hair-density-shampoo",
-            "button_full_width": true,
+            "button_full_width": false,
             "hide_on_mobile": true
           }
         }
