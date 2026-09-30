@@ -853,17 +853,19 @@ div.zenith-cart-offers__fill {
   transition: width 0.4s ease;
 }
 
-/* Zero-width anchor on the checkpoint's position; the dot and label centre on it. */
+/* Each checkpoint is one gap wide (--zco-gap = the spacing between checkpoints, set inline) and centred
+   on its position, so labels share the room evenly however many tiers there are (up to 5 + free shipping). */
 .zenith-cart-offers__step {
   position: absolute;
   bottom: 0.2rem;
-  width: 0;
+  width: var(--zco-gap, 20%);
+  margin-left: calc(var(--zco-gap, 20%) / -2);
 }
 
 .zenith-cart-offers__step-dot {
   position: absolute;
   bottom: calc(var(--zco-dot) / -2);
-  left: calc(var(--zco-dot) / -2);
+  left: calc(50% - var(--zco-dot) / 2);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -876,7 +878,7 @@ div.zenith-cart-offers__fill {
 
 .zenith-cart-offers__step.is-reached .zenith-cart-offers__step-dot {
   bottom: calc(var(--zco-check) / -2);
-  left: calc(var(--zco-check) / -2);
+  left: calc(50% - var(--zco-check) / 2);
   width: var(--zco-check);
   height: var(--zco-check);
   background: var(--z-dawn-gold, #eabe5f);
@@ -890,6 +892,10 @@ div.zenith-cart-offers__fill {
 }
 
 /* The last checkpoint sits on the track's end, so its dot and label hug the right edge instead of hanging off it. */
+.zenith-cart-offers__step.is-end {
+  margin-left: calc(var(--zco-gap, 20%) * -1);
+}
+
 .zenith-cart-offers__step.is-end .zenith-cart-offers__step-dot {
   left: auto;
   right: 0;
@@ -898,9 +904,11 @@ div.zenith-cart-offers__fill {
 .zenith-cart-offers__step-label {
   position: absolute;
   bottom: 1.4rem;
-  left: 0;
+  left: 50%;
   transform: translateX(-50%);
-  width: 7rem;
+  width: 100%;
+  /* Never narrower than the longest word ("SHIPPING"); spills evenly both sides if the gap is tight. */
+  min-width: min-content;
   font-size: 1.05rem;
   line-height: 1.15;
   letter-spacing: 0.02em;
@@ -913,7 +921,6 @@ div.zenith-cart-offers__fill {
   left: auto;
   right: 0;
   transform: none;
-  width: 5rem;
   text-align: right;
 }
 
@@ -934,7 +941,7 @@ div.zenith-cart-offers__fill {
 @media screen and (max-width: 375px) {
   .zenith-cart-offers__box { gap: var(--z-space-3, 12px); padding: var(--z-space-3, 12px); }
   .zenith-cart-offers__title { font-size: 1.5rem; }
-  .zenith-cart-offers__step-label { width: 5.6rem; font-size: 0.95rem; }
+  .zenith-cart-offers__step-label { font-size: 0.95rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1089,8 +1096,7 @@ cart-drawer .zenith-cart-offers__van { width: 3rem; height: 2.3rem; }
 cart-drawer .zenith-cart-offers__title { font-size: 1.5rem; }
 cart-drawer .zenith-cart-offers__msg { margin-top: 0.2rem; font-size: 1.2rem; }
 cart-drawer .zenith-cart-offers__steps { margin-top: var(--z-space-3, 12px); padding-top: 3rem; }
-cart-drawer .zenith-cart-offers__step-label { width: 6rem; font-size: 0.95rem; }
-cart-drawer .zenith-cart-offers__step.is-end .zenith-cart-offers__step-label { width: 4.4rem; }
+cart-drawer .zenith-cart-offers__step-label { font-size: 0.95rem; }
 
 cart-drawer .cart-drawer .cart-item {
   grid-template-columns: 8.4rem repeat(3, minmax(0, 1fr));
