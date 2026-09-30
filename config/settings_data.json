@@ -673,7 +673,8 @@
           "shadow": "#000000"
         }
       }
-    }
+    },
+    "zgb_image": "shopify://shop_images/vector-icons_7.png"
   },
   "presets": {
     "Dawn": {

@@ -4620,6 +4620,97 @@
     ]
   },
   {
+    "name": "Zenith · Guarantee banner",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Shared by every \"Zenith · Guarantee banner\" section with Use shared content ticked (home, product and collection pages). Layout, sizes and colors stay in each section."
+      },
+      {
+        "type": "text",
+        "id": "zgb_eyebrow",
+        "label": "Eyebrow"
+      },
+      {
+        "type": "text",
+        "id": "zgb_heading",
+        "label": "Heading",
+        "default": "Zenith Money-Back Guarantee"
+      },
+      {
+        "type": "richtext",
+        "id": "zgb_text",
+        "label": "Text",
+        "default": "<p>We stand behind every Zenith product. Kung hindi para sa iyo,<br>ibabalik namin ang bayad mo. Full terms on our <a href=\"/policies/refund-policy\">Refunds and Returns</a> page.</p>",
+        "info": "[customers] shows the customer count from Theme settings → Zenith."
+      },
+      {
+        "type": "text",
+        "id": "zgb_button_label",
+        "label": "Button label"
+      },
+      {
+        "type": "url",
+        "id": "zgb_button_link",
+        "label": "Button link"
+      },
+      {
+        "type": "image_picker",
+        "id": "zgb_image",
+        "label": "Badge image",
+        "info": "Transparent PNG of the guarantee seal"
+      }
+    ]
+  },
+  {
+    "name": "Zenith · Brand story",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Shared by \"Zenith · Brand story\" sections that tick Use shared story text and/or Use shared Mission / Vision (home and About). Image, heading and styling stay in each section."
+      },
+      {
+        "type": "richtext",
+        "id": "zbs_text",
+        "label": "Story text",
+        "default": "<p>Most skin and hair care on the shelf was made for other men and other weather. For Filipino men over 35, that meant a long routine nobody keeps, or an imported formula that feels heavy by lunchtime.</p><p>Zenith started with that gap. Five products, ingredients named on the label, and directions short enough to follow every day in Philippine heat.</p><p>Today, [customers] Filipino men have ordered from Zenith. We keep building for them.</p>",
+        "info": "[customers] shows the customer count from Theme settings → Zenith."
+      },
+      {
+        "type": "header",
+        "content": "Column 1"
+      },
+      {
+        "type": "text",
+        "id": "zbs_col1_title",
+        "label": "Title",
+        "default": "Mission"
+      },
+      {
+        "type": "richtext",
+        "id": "zbs_col1_text",
+        "label": "Text",
+        "default": "<p>To make simple, well-made self-care for mature Filipino men, and make it easy to get.</p>"
+      },
+      {
+        "type": "header",
+        "content": "Column 2"
+      },
+      {
+        "type": "text",
+        "id": "zbs_col2_title",
+        "label": "Title",
+        "default": "Vision"
+      },
+      {
+        "type": "richtext",
+        "id": "zbs_col2_text",
+        "label": "Text",
+        "default": "<p>To empower mature Filipino men to always feel in their prime.</p>"
+      }
+    ]
+  },
+  {
     "name": "Zenith · Official pages",
     "settings": [
       {

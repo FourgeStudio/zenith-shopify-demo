@@ -158,13 +158,47 @@
           -%}
         {%- endunless -%}
 
-        {%- if section.settings.text != blank -%}
+        {%- liquid
+          # Shared copy: Theme settings → Zenith · Brand story, when the section opts in.
+          assign story_text = section.settings.text
+          if section.settings.shared_text
+            assign story_text = settings.zbs_text
+          endif
+        -%}
+        {%- if story_text != blank -%}
           <div class="zenith-story__text zenith-rte">
-            {{- section.settings.text | replace: '[customers]', settings.customer_count -}}
+            {{- story_text | replace: '[customers]', settings.customer_count -}}
           </div>
         {%- endif -%}
 
-        {%- if section.blocks.size > 0 -%}
+        {%- if section.settings.shared_columns -%}
+          <div class="zenith-story__columns">
+            {%- for i in (1..2) -%}
+              {%- liquid
+                assign col_title_key = 'zbs_col' | append: i | append: '_title'
+                assign col_text_key = 'zbs_col' | append: i | append: '_text'
+                assign col_title = settings[col_title_key]
+                assign col_text = settings[col_text_key]
+              -%}
+              {%- if col_title != blank or col_text != blank -%}
+                <div class="zenith-story__column">
+                  <div class="zenith-story__column-body">
+                    {%- if col_title != blank -%}
+                      <h3 class="zenith-story__column-title">
+                        {{- col_title | escape | replace: '[customers]', settings.customer_count -}}
+                      </h3>
+                    {%- endif -%}
+                    {%- if col_text != blank -%}
+                      <div class="zenith-story__column-text zenith-rte">
+                        {{- col_text | replace: '[customers]', settings.customer_count -}}
+                      </div>
+                    {%- endif -%}
+                  </div>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- elsif section.blocks.size > 0 -%}
           <div class="zenith-story__columns">
             {%- for block in section.blocks -%}
               {%- assign column_icon = block.settings.icon | default: 'none' -%}
@@ -280,6 +314,20 @@
       "type": "text",
       "id": "heading",
       "label": "Heading"
+    },
+    {
+      "type": "checkbox",
+      "id": "shared_text",
+      "label": "Use shared story text",
+      "default": false,
+      "info": "Text comes from Theme settings → Zenith · Brand story, the same on every page that ticks this. The Text field below is then ignored."
+    },
+    {
+      "type": "checkbox",
+      "id": "shared_columns",
+      "label": "Use shared Mission / Vision",
+      "default": false,
+      "info": "Columns come from Theme settings → Zenith · Brand story instead of this section's column blocks."
     },
     {
       "type": "richtext",

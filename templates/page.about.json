@@ -170,7 +170,9 @@
         "padding_bottom": 36,
         "padding_top_mobile": 20,
         "padding_bottom_mobile": 20,
-        "image_mobile": "shopify://shop_images/about-story-zenith-team-1-mobile.webp"
+        "image_mobile": "shopify://shop_images/about-story-zenith-team-1-mobile.webp",
+        "shared_text": true,
+        "shared_columns": true
       }
     },
     "believe": {

@@ -13,6 +13,25 @@
 {%- endcapture -%}
 {%- render 'zenith-section-style', section: section, extra: extra -%}
 
+{%- liquid
+  # Copy and badge: Theme settings → Zenith · Guarantee banner (same everywhere) unless the section opts out.
+  if section.settings.use_shared
+    assign gb_eyebrow = settings.zgb_eyebrow
+    assign gb_heading = settings.zgb_heading
+    assign gb_text = settings.zgb_text
+    assign gb_button_label = settings.zgb_button_label
+    assign gb_button_link = settings.zgb_button_link
+    assign gb_image = settings.zgb_image
+  else
+    assign gb_eyebrow = section.settings.eyebrow
+    assign gb_heading = section.settings.heading
+    assign gb_text = section.settings.text
+    assign gb_button_label = section.settings.button_label
+    assign gb_button_link = section.settings.button_link
+    assign gb_image = section.settings.image
+  endif
+-%}
+
 <section
   id="Zenith-{{ section.id }}"
   class="zenith-section zenith-guarantee color-{{ section.settings.color_scheme }} gradient zenith-guarantee--{{ section.settings.desktop_layout }}{% if section.settings.image_position == 'left' %} zenith-guarantee--image-left{% endif %} zenith-guarantee--m-badge-{{ section.settings.badge_align_mobile }}"
@@ -20,16 +39,16 @@
   <div class="page-width">
     <div class="zenith-guarantee__band color-{{ section.settings.band_color_scheme }}">
       <div class="zenith-guarantee__badge">
-        {%- if section.settings.image != blank -%}
+        {%- if gb_image != blank -%}
           {%- comment -%} Seal repeats the heading, so it is decorative unless the image has its own alt text {%- endcomment -%}
           {{
-            section.settings.image
+            gb_image
             | image_url: width: 800
             | image_tag:
               loading: 'lazy',
               widths: '160, 240, 320, 480, 600, 800',
               sizes: '(min-width: 750px) 400px, 160px',
-              alt: section.settings.image.alt
+              alt: gb_image.alt
           }}
         {%- else -%}
           <div class="zenith-guarantee__badge-placeholder" aria-hidden="true">
@@ -42,23 +61,23 @@
 
       <div class="zenith-guarantee__content">
         {%- render 'zenith-section-heading',
-          eyebrow: section.settings.eyebrow,
-          heading: section.settings.heading,
+          eyebrow: gb_eyebrow,
+          heading: gb_heading,
           subheading: blank,
           alignment: 'left',
           uppercase: section.settings.heading_uppercase,
           class: 'zenith-guarantee__heading'
         -%}
-        {%- if section.settings.text != blank -%}
+        {%- if gb_text != blank -%}
           <div class="zenith-guarantee__text zenith-rte">
-            {{- section.settings.text | replace: '[customers]', settings.customer_count -}}
+            {{- gb_text | replace: '[customers]', settings.customer_count -}}
           </div>
         {%- endif -%}
-        {%- if section.settings.button_label != blank -%}
+        {%- if gb_button_label != blank -%}
           <div class="zenith-guarantee__actions">
             {%- render 'zenith-button',
-              label: section.settings.button_label,
-              link: section.settings.button_link,
+              label: gb_button_label,
+              link: gb_button_link,
               style: section.settings.button_style
             -%}
           </div>
@@ -82,6 +101,13 @@
     {
       "type": "header",
       "content": "Content"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_shared",
+      "label": "Use shared content",
+      "default": true,
+      "info": "Eyebrow, heading, text, button and badge come from Theme settings → Zenith · Guarantee banner, the same on every page. Untick to use the fields below on this page only."
     },
     {
       "type": "text",
