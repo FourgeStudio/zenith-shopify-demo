@@ -52,7 +52,7 @@
         "email": "hello@tryzenith.ph",
         "payment_image": "shopify://shop_images/Payment_Options.png",
         "payment_enable": true,
-        "seal_image": "shopify://shop_images/amare-group-badge.png",
+        "seal_image": "shopify://shop_images/Vector.svg",
         "seal_link": "",
         "bottom_text": "TryZenith PH",
         "copyright_text": "© [year] Amare Group Inc. All rights reserved.",

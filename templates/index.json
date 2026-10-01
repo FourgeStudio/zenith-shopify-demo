@@ -33,7 +33,7 @@
         "card_width": "page",
         "card_inset": 32,
         "height_mode": "screen",
-        "card_min_height_screen": 65,
+        "card_min_height_screen": 50,
         "card_min_height": 320,
         "image_position": "right",
         "background_position": "right center",
