@@ -669,14 +669,14 @@
         "item_fda": {
           "type": "item",
           "settings": {
-            "text": "FDA Notified (LTO-3000014773834)",
+            "text": "Philippine FDA Notified",
             "icon": "check_filled"
           }
         },
         "item_clinical": {
           "type": "item",
           "settings": {
-            "text": "Clinically-Backed Active Ingredients",
+            "text": "Ingredients named on the label",
             "icon": "check_filled"
           }
         },
