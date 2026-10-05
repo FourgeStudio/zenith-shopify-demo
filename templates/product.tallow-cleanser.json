@@ -236,7 +236,7 @@
         "show_delivery": true,
         "delivery_icon": "truck",
         "delivery_title": "Nationwide Delivery",
-        "delivery_text": "3–5 days Metro Manila, 5–7 days Visayas / Mindanao.",
+        "delivery_text": "3 days Metro Manila, 3–7 days Visayas / Mindanao.",
         "show_thumbnails": true,
         "show_dots": true,
         "reviews_source": "judgeme",
@@ -1145,7 +1145,7 @@
           "type": "trust",
           "settings": {
             "icon": "dropper",
-            "text": "Ingredients named on the labels"
+            "text": "Ingredients named on the label"
           }
         }
       },

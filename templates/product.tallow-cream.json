@@ -85,7 +85,7 @@
           "type": "trust",
           "settings": {
             "icon": "dropper",
-            "text": "Proven Ingredients"
+            "text": "Ingredients named on the label"
           }
         },
         "row_1": {
@@ -242,7 +242,7 @@
         "show_delivery": true,
         "delivery_icon": "truck",
         "delivery_title": "Nationwide Delivery",
-        "delivery_text": "3–5 days Metro Manila, 5–7 days Visayas / Mindanao.",
+        "delivery_text": "3 days Metro Manila, 3–7 days Visayas / Mindanao.",
         "show_thumbnails": true,
         "show_dots": true,
         "reviews_source": "judgeme",
@@ -629,7 +629,7 @@
             "image": "shopify://shop_images/night-cream-ingredients-magnifying-glass-over-golden-tallow-cream-1-desktop.webp",
             "title": "Retinol 0.2%",
             "text": "<p>The only percentage on the label. Gentle enough for nightly use.</p>",
-            "title_mobile": "Premium beef tallow rebuilds the barrier",
+            "title_mobile": "Retinol 0.2% for lines, tone and texture",
             "text_mobile": ""
           }
         },
@@ -639,7 +639,7 @@
             "image": "shopify://shop_images/night-cream-ingredients-golden-retinol-molecule-model-1-desktop.webp",
             "title": "Beef tallow",
             "text": "<p>The base of the cream. It buffers the retinol and absorbs fast, no grease.</p>",
-            "title_mobile": "",
+            "title_mobile": "Premium beef tallow rebuilds the barrier",
             "text_mobile": ""
           }
         },
@@ -647,9 +647,9 @@
           "type": "ingredient",
           "settings": {
             "image": "shopify://shop_images/night-cream-ingredients-green-leaves-beside-golden-oil-droplets-1-desktop.webp",
-            "title": "Ectoin and Stephanie",
+            "title": "Ectoin and Stephania",
             "text": "<p>Added to keep skin calm when you use retinol every night.</p>",
-            "title_mobile": "Retinol 0.2% for lines, tone and texture",
+            "title_mobile": "",
             "text_mobile": ""
           }
         }
@@ -1362,7 +1362,7 @@
           "type": "question",
           "settings": {
             "question": "How long will it take for the product to ship to me?",
-            "answer": "<p>We ship within 1 business day using GoGoXpress, NinjaVan, and SPX.<br/><br/>Delivery typically takes 3-5 business days for Metro Manila and 5-7 business days for Visayas and Mindanao regions.</p>"
+            "answer": "<p>We ship within 1 business day using GoGoXpress, NinjaVan, and SPX.<br/><br/>Delivery typically takes 3 business days for Metro Manila and 3-7 business days for Visayas and Mindanao regions.</p>"
           }
         }
       },
@@ -1442,7 +1442,7 @@
           "type": "trust",
           "settings": {
             "icon": "dropper",
-            "text": "Ingredients named on the labels"
+            "text": "Ingredients named on the label"
           }
         }
       },

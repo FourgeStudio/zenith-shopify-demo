@@ -91,18 +91,19 @@
           "type": "faq",
           "settings": {
             "question": "Are your products safe for sensitive skin?",
-            "answer": "<p>[Add answer]</p>"
+            "answer": "<p>Check the full ingredient list on the product page first. Start with a small amount. If anything feels wrong, stop and message us.</p>"
           }
         },
         "faq_shipping": {
           "type": "faq",
           "settings": {
             "question": "How long does shipping take?",
-            "answer": "<p>[Add answer]</p>"
+            "answer": "<p>Metro Manila orders arrive in about 3 days. Visayas and Mindanao in 3 to 7 days.</p>"
           }
         },
         "faq_international": {
           "type": "faq",
+          "disabled": true,
           "settings": {
             "question": "Can I use Zenith products if I'm outside the Philippines?",
             "answer": "<p>[Add answer]</p>"

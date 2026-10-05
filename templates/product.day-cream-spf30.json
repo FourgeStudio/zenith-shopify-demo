@@ -976,6 +976,7 @@
     "money_back": {
       "type": "zenith-guarantee-banner",
       "settings": {
+        "text_mobile": "<p>Kung hindi ka masaya sa resulta, message mo lang kami. Full refund. Walang hassle. Proof lang. Full terms on our <a href=\"/policies/refund-policy\">Refunds and Returns</a> page.</p>",
         "eyebrow": "",
         "heading": "Zenith Money-Back Guarantee",
         "text": "<p>We stand behind every Zenith product. Kung hindi para sa iyo, ibabalik namin ang bayad mo. Full terms on our <a href=\"/policies/refund-policy\">Refunds and Returns</a> page.</p>",
@@ -1145,7 +1146,7 @@
           "type": "trust",
           "settings": {
             "icon": "dropper",
-            "text": "Ingredients named on the labels"
+            "text": "Ingredients named on the label"
           }
         }
       },

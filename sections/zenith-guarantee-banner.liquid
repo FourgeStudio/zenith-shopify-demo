@@ -69,8 +69,14 @@
           class: 'zenith-guarantee__heading'
         -%}
         {%- if gb_text != blank -%}
-          <div class="zenith-guarantee__text zenith-rte">
+          <div class="zenith-guarantee__text zenith-rte{% if section.settings.text_mobile != blank %} zenith-hide-mobile{% endif %}">
             {{- gb_text | replace: '[customers]', settings.customer_count -}}
+          </div>
+        {%- endif -%}
+        {%- comment -%} zenith: per-page mobile copy, used even when the rest comes from shared content {%- endcomment -%}
+        {%- if section.settings.text_mobile != blank -%}
+          <div class="zenith-guarantee__text zenith-rte zenith-hide-desktop">
+            {{- section.settings.text_mobile | replace: '[customers]', settings.customer_count -}}
           </div>
         {%- endif -%}
         {%- if gb_button_label != blank -%}
@@ -335,6 +341,12 @@
     {
       "type": "header",
       "content": "Mobile"
+    },
+    {
+      "type": "richtext",
+      "id": "text_mobile",
+      "label": "Mobile text",
+      "info": "This page only, phones only. Blank = same text as desktop. Works with shared content on."
     },
     {
       "type": "range",

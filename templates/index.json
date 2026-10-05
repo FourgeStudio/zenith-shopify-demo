@@ -111,14 +111,14 @@
         "trust_note"
       ],
       "settings": {
-        "eyebrow": "FDA-notified · Made for Filipino men",
-        "heading": "Skin and hair care built for Filipino men.",
+        "eyebrow": "Trusted by [customers] Filipino men",
+        "heading": "The Maintenance System Built for Filipino Men",
         "heading_mobile": "",
-        "text": "<p>Simple routines for Philippine heat. One cream at night. One wash in the shower. Walang kailangang i-memorize.</p>",
+        "text": "<p>Everything you need to stay in your prime.</p>",
         "button_label": "Shop Now",
         "button_link": "shopify://collections/all",
         "button_product": "",
-        "button_label_mobile": "",
+        "button_label_mobile": "Shop Zenith Products",
         "button_link_mobile": "",
         "image": "shopify://shop_images/home-hero-products-on-shelf-by-marble-1-desktop.webp",
         "mobile_image": "shopify://shop_images/home-hero-products-on-bench-by-window-1-mobile.webp",
@@ -257,7 +257,7 @@
           "type": "item",
           "settings": {
             "icon": "certificate",
-            "text": "Philippine FDA Notified",
+            "text": "FDA-Notified Products",
             "link": ""
           }
         },
@@ -265,7 +265,7 @@
           "type": "item",
           "settings": {
             "icon": "farm",
-            "text": "100% Beef Tallow",
+            "text": "100% Grass-Fed Beef Tallow",
             "link": ""
           }
         },
@@ -863,7 +863,7 @@
             "media_type": "image",
             "image": "shopify://shop_images/home-categories-hands-holding-skin-care-1-desktop.webp",
             "youtube_url": "",
-            "title": "Beef tallow skin care that stays light in the heat",
+            "title": "The tallow cream that repairs and restores your skin",
             "button_label": "Shop Skin Products",
             "link": "",
             "product": "",
@@ -878,7 +878,7 @@
             "media_type": "image",
             "image": "shopify://shop_images/home-categories-hand-holding-hair-care-1-desktop.webp",
             "youtube_url": "",
-            "title": "Fuller-looking hair in a 30-second night step",
+            "title": "Hair density without the itch or the dryness on your scalp",
             "button_label": "Shop Hair Products",
             "link": "",
             "product": "",
@@ -1152,13 +1152,13 @@
         "benefit_1": {
           "type": "benefit",
           "settings": {
-            "text": "Fights aging and smooths lines while helping buffer irritation."
+            "text": "Fights aging and smooths lines with zero irritation."
           }
         },
         "benefit_2": {
           "type": "benefit",
           "settings": {
-            "text": "Night cream with 0.2% retinol on a beef tallow base."
+            "text": "Reduces acne and dark spots while smoothing fine lines"
           }
         },
         "benefit_3": {
@@ -1197,7 +1197,7 @@
           "type": "trust",
           "settings": {
             "icon": "badge_check",
-            "text": "Philippine FDA Notified"
+            "text": "FDA-Notified"
           }
         },
         "trust_9": {
@@ -1378,7 +1378,7 @@
       "settings": {
         "eyebrow": "All Products",
         "heading": "The Zenith Grooming Collection",
-        "subheading": "<p>The products men come back for. Simple routines, named ingredients.</p>",
+        "subheading": "<p>The products men come back for. Simple. Effective. Proven.</p>",
         "collection": "all",
         "product_list": [],
         "products_to_show": 10,
@@ -1627,7 +1627,7 @@
       "settings": {
         "eyebrow": "",
         "heading": "[customers] Filipino Men Trust Zenith Products",
-        "subheading": "<p>Men in Manila using the cream.</p>",
+        "subheading": "<p>Men in Manila using the cream. Unedited and verified.</p>",
         "heading_alignment": "center",
         "heading_max_width": 900,
         "subheading_spacing": 28,
@@ -1652,7 +1652,7 @@
         "icon_size": 14,
         "button_font_size": 20,
         "heading_mobile": "[customers] Filipino Men Trust Zenith Products",
-        "subheading_mobile": "",
+        "subheading_mobile": "<p>Real Filipino men using Zenith. Unedited and verified.</p>",
         "heading_font_size_mobile": 36,
         "subheading_font_size_mobile": 16,
         "subheading_opacity_mobile": 70,
@@ -2343,8 +2343,8 @@
     "press",
     "results",
     "videos",
-    "categories",
     "guarantee",
+    "categories",
     "featured_product",
     "story",
     "collection",

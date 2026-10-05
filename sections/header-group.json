@@ -44,7 +44,7 @@
         "drawer_button_icon": "chevron_right",
         "drawer_show_social": true,
         "drawer_email": "hello@tryzenith.ph",
-        "drawer_show_payment_icons": false,
+        "drawer_show_payment_icons": true,
         "drawer_copyright": "An Amare Group Brand © [year] TryZenith PH",
         "drawer_show_dividers": true,
         "drawer_uppercase": true,
