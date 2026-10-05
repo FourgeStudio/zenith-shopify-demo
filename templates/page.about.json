@@ -442,8 +442,8 @@
         "store_tiktok"
       ],
       "settings": {
-        "content_source": "custom",
-        "heading": "Our Official Stores",
+        "content_source": "global",
+        "heading": "Our Official Pages",
         "heading_mobile": "",
         "text_mobile": "",
         "heading_alignment": "center",
