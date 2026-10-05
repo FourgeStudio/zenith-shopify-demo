@@ -161,7 +161,8 @@ _Last updated: 2026-10-01. Keep this file current at the end of each work sessio
 - Shared copy changed in `settings_data.json`: `zg_col*_text`/`zg_footer_text` (short version), `zbs_text` + `zbs_col1_text` (Figma story + mission, home + About), video authors vt4–vt14.
 - Guarantee banner has a per-page **Mobile text** (used on Day Cream, Hair Spray).
 - Store cards left on global "Our Official Pages" (decision above wins over the 09-19 Figma "Our Official Stores").
-- Still open: Day Cream FDA number, Shampoo full ingredient list (`[SLOT…]`), Shop All New Arrivals / Hygiene need a hygiene collection, Verify FDA logo image, Contact desktop vs mobile address conflict, section defaults in `zenith-main-product.liquid` (delivery text, badge 4) still old (file had unrelated uncommitted edits), Night Cream ingredient images 1/2 may be swapped.
+- Verify FDA logo = Files `1.png` (green FDA PH mark).
+- Still open: Day Cream FDA number, Shampoo full ingredient list (`[SLOT…]`), Shop All New Arrivals / Hygiene need a hygiene collection, Contact desktop vs mobile address conflict, section defaults in `zenith-main-product.liquid` (delivery text, badge 4) still old (file had unrelated uncommitted edits), Night Cream ingredient images 1/2 may be swapped.
 
 ### Official pages = global (2026-10-01)
 - Theme settings → **Zenith · Official pages**: 8 slots (icon, custom icon, name, second line, link, screen-reader name) + open in new tab. "Zenith · Store links" → *Cards* = Official pages (Theme settings) / This section's cards. Home, About, Certificates, Verify (`stores`) use the global cards (Facebook, Instagram, TikTok, Shopee, Lazada from the homepage), heading "Our Official Pages", homepage layout. Verify's second section (`pages`, 4 Facebook pages) keeps its own cards. Blocks kept as backup.

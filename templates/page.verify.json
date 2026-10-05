@@ -874,6 +874,7 @@
         "content_max_width": 420,
         "text_max_width": 1000,
         "hide_heading_desktop": false,
+        "logo": "shopify://shop_images/1.png",
         "logo_width": 110,
         "columns_layout": "columns",
         "columns_spacing": 40,
