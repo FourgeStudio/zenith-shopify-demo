@@ -310,6 +310,13 @@
         "content": "Automatic: Shopify recommends products for what is in the cart (complementary products from the Search & Discovery app first, then Shopify's own picks), skipping anything already in the cart. Recommendations need some store traffic/orders before Shopify has data; complementary products can be set by hand in the Search & Discovery app."
       },
       {
+        "type": "checkbox",
+        "id": "cart_upsell_enable",
+        "label": "Show \"Best used with\"",
+        "default": true,
+        "info": "Shows in the cart drawer and on the cart page."
+      },
+      {
         "type": "text",
         "id": "cart_upsell_heading",
         "label": "Heading",
