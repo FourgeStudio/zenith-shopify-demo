@@ -1034,7 +1034,7 @@
         "card_1": {
           "type": "card",
           "settings": {
-            "collection": "skin",
+            "collection": "skin-products",
             "media_type": "image",
             "image": "shopify://shop_images/home-categories-hands-holding-skin-care-1-desktop.webp",
             "youtube_url": "",
@@ -1049,7 +1049,7 @@
         "card_2": {
           "type": "card",
           "settings": {
-            "collection": "hair",
+            "collection": "hair-products",
             "media_type": "image",
             "image": "shopify://shop_images/home-categories-hand-holding-hair-care-1-desktop.webp",
             "youtube_url": "",
