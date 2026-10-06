@@ -655,6 +655,7 @@
     },
     "hygiene": {
       "type": "zenith-product-grid",
+      "disabled": true,
       "settings": {
         "eyebrow": "Hygiene Products",
         "heading": "Everything you need for your hygiene routine",
@@ -1305,6 +1306,7 @@
     },
     "cta": {
       "type": "zenith-hero",
+      "disabled": true,
       "settings": {
         "eyebrow": "Trusted by [customers] Filipino men",
         "heading": "The Maintenance System Built for Filipino Men",
