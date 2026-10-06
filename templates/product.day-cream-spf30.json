@@ -233,6 +233,10 @@
         "cod_label": "Cash on Delivery",
         "cod_icon": "cash",
         "payment_icons": "zenith",
+        "pay_gcash": true,
+        "pay_maya": true,
+        "pay_visa": true,
+        "pay_mastercard": true,
         "show_delivery": true,
         "delivery_icon": "truck",
         "delivery_title": "Nationwide Delivery",
@@ -240,6 +244,10 @@
         "show_thumbnails": true,
         "show_dots": true,
         "reviews_source": "judgeme",
+        "variant_style": "cards",
+        "variant_card_badge": "[percent]% OFF",
+        "variant_card_ship_free": "FREE SHIPPING",
+        "variant_card_ship_fee": "+[amount] Shipping",
         "content_max_width": 1080,
         "gap": 80,
         "content_gap": 12,
@@ -252,7 +260,9 @@
         "thumb_gap": 8,
         "thumb_spacing": 8,
         "review_card_width": 220,
+        "variant_card_min": 150,
         "review_gap": 12,
+        "review_min_stars": 4,
         "review_autoplay": 4,
         "review_spacing": 38,
         "review_photo_size": 48,
@@ -260,6 +270,7 @@
         "check_gap": 12,
         "fda_height": 30,
         "fda_logo_height": 15,
+        "fda_radius": 4,
         "qty_width": 106,
         "button_height": 46,
         "form_gap": 13,
@@ -322,7 +333,9 @@
         "subtitle_mobile": true,
         "gap_mobile": 18,
         "content_gap_mobile": 12,
+        "variant_card_min_mobile": 88,
         "gallery_ratio_mobile": 100,
+        "gallery_start_mobile": 2,
         "slide_width_mobile": 70,
         "slide_gap_mobile": 30,
         "dot_size_mobile": 7,
@@ -360,8 +373,7 @@
         "padding_top": 40,
         "padding_bottom": 48,
         "padding_top_mobile": 8,
-        "padding_bottom_mobile": 32,
-        "review_min_stars": 4
+        "padding_bottom_mobile": 32
       }
     },
     "videos": {
@@ -377,6 +389,7 @@
         "subheading_mobile_only": false,
         "play_label": "Play video",
         "center_when_fits": true,
+        "start_slide": 1,
         "heading_alignment": "center",
         "slides_desktop": 4,
         "show_peek": true,
@@ -439,31 +452,31 @@
         "ingredient-1": {
           "type": "ingredient",
           "settings": {
+            "image": "shopify://shop_images/day-cream-ingredients-creamy-tallow-texture-close-up-1-desktop.webp",
             "title": "Broad-spectrum SPF 30",
             "text": "<p>Six modern UV filters. No white cast.</p>",
             "title_mobile": "",
-            "text_mobile": "",
-            "image": "shopify://shop_images/day-cream-ingredients-creamy-tallow-texture-close-up-1-desktop.webp"
+            "text_mobile": ""
           }
         },
         "ingredient-2": {
           "type": "ingredient",
           "settings": {
+            "image": "shopify://shop_images/day-cream-ingredients-molecule-model-over-dark-mineral-texture-1-desktop.webp",
             "title": "Bakuchiol and Niacinamide",
             "text": "<p>Day-safe, so they go on in the morning with your SPF.</p>",
             "title_mobile": "",
-            "text_mobile": "",
-            "image": "shopify://shop_images/day-cream-ingredients-molecule-model-over-dark-mineral-texture-1-desktop.webp"
+            "text_mobile": ""
           }
         },
         "ingredient-3": {
           "type": "ingredient",
           "settings": {
+            "image": "shopify://shop_images/day-cream-ingredients-golden-oil-bubbles-close-up-1-desktop.webp",
             "title": "Zinc PCA and silica",
             "text": "<p>Keep the finish matte in Philippine heat.</p>",
             "title_mobile": "",
-            "text_mobile": "",
-            "image": "shopify://shop_images/day-cream-ingredients-golden-oil-bubbles-close-up-1-desktop.webp"
+            "text_mobile": ""
           }
         }
       },
@@ -476,6 +489,8 @@
         "eyebrow": "",
         "heading": "What's in the tube",
         "subheading": "<p>Three things, named on the label.</p>",
+        "image": "{{ product.featured_image }}",
+        "image_mobile": "{{ product.featured_image }}",
         "open_first": true,
         "show_list": true,
         "list_title": "View Full Ingredient List",
@@ -535,8 +550,7 @@
         "padding_top": 52,
         "padding_bottom": 64,
         "padding_top_mobile": 20,
-        "padding_bottom_mobile": 20,
-        "image_mobile": "shopify://shop_images/day-cream-ingredients-close-up-of-zenith-day-cream-1-mobile.webp"
+        "padding_bottom_mobile": 20
       }
     },
     "routine": {
@@ -545,25 +559,25 @@
         "step_1": {
           "type": "step",
           "settings": {
+            "image": "shopify://shop_images/day-cream-how-to-use-step-1-man-washing-his-face-1-mobile.webp",
             "title": "",
-            "text": "Wash with the Cleanser",
-            "image": "shopify://shop_images/day-cream-how-to-use-step-1-man-washing-his-face-1-mobile.webp"
+            "text": "Wash with the Cleanser"
           }
         },
         "step_2": {
           "type": "step",
           "settings": {
+            "image": "shopify://shop_images/day-cream-how-to-use-step-2-man-applying-day-cream-1-mobile.webp",
             "title": "",
-            "text": "Quarter teaspoon, face and neck",
-            "image": "shopify://shop_images/day-cream-how-to-use-step-2-man-applying-day-cream-1-mobile.webp"
+            "text": "Quarter teaspoon, face and neck"
           }
         },
         "step_3": {
           "type": "step",
           "settings": {
+            "image": "shopify://shop_images/day-cream-how-to-use-step-3-smiling-man-ready-for-1-mobile.webp",
             "title": "",
-            "text": "Reapply every 2 hours outdoors",
-            "image": "shopify://shop_images/day-cream-how-to-use-step-3-smiling-man-ready-for-1-mobile.webp"
+            "text": "Reapply every 2 hours outdoors"
           }
         }
       },
@@ -578,6 +592,7 @@
         "subheading": "<p>One morning step, then reapply when you are out.</p>",
         "products": [],
         "used_text": "",
+        "note": "",
         "show_number": true,
         "show_divider": true,
         "divider_breakpoint": "mobile",
@@ -592,6 +607,8 @@
         "step_title_spacing": 20,
         "used_spacing": 40,
         "used_width": 520,
+        "show_note_desktop": false,
+        "note_spacing": 24,
         "divider_spacing": 56,
         "color_scheme": "scheme-1",
         "title_color": "#d6b356",
@@ -610,10 +627,13 @@
         "number_size": 28,
         "number_font_size": 14,
         "text_font_size": 15,
+        "text_line_height": 160,
+        "note_font_size": 14,
         "used_font_size": 16,
         "thumb_size": 80,
         "heading_alignment_mobile": "center",
         "heading_font_size_mobile": 36,
+        "heading_max_width_mobile": 800,
         "subheading_font_size_mobile": 16,
         "heading_spacing_mobile": 28,
         "image_width_mobile": 116,
@@ -622,6 +642,9 @@
         "gap_mobile": 12,
         "title_font_size_mobile": 16,
         "text_font_size_mobile": 14,
+        "text_line_height_mobile": 160,
+        "note_font_size_mobile": 13,
+        "note_spacing_mobile": 20,
         "used_font_size_mobile": 12,
         "thumb_size_mobile": 52,
         "used_spacing_mobile": 20,
@@ -696,10 +719,14 @@
         "column_3_note": "",
         "heading_alignment": "center",
         "heading_spacing": 52,
+        "heading_max_width": 760,
+        "table_style": "divided",
+        "table_max_width": 0,
         "label_column_width": 25,
         "header_height": 108,
         "row_height": 49,
         "cell_padding": 12,
+        "cell_padding_y": 8,
         "logo_width": 104,
         "color_scheme": "scheme-1",
         "zenith_header_background": "#203940",
@@ -707,7 +734,9 @@
         "row_background": "#202020",
         "row_background_alt": "#202020",
         "divider_color": "#0e0e0e",
+        "divider_color_zenith": "",
         "note_opacity": 70,
+        "value_opacity": 100,
         "subheading_opacity": 70,
         "heading_font_size": 40,
         "heading_uppercase": false,
@@ -716,6 +745,9 @@
         "title_font_size": 16,
         "note_font_size": 14,
         "text_font_size": 16,
+        "zenith_text_font_size": 0,
+        "row_line_height": 140,
+        "mobile_layout": "stacked",
         "heading_alignment_mobile": "left",
         "divider_color_mobile": "#363636",
         "heading_font_size_mobile": 24,
@@ -726,12 +758,15 @@
         "header_height_mobile": 32,
         "row_height_mobile": 38,
         "cell_padding_mobile": 8,
+        "cell_padding_y_mobile": 4,
         "logo_width_mobile": 60,
         "table_gap_mobile": 24,
         "group_title_gap_mobile": 8,
         "title_font_size_mobile": 20,
         "note_font_size_mobile": 14,
         "text_font_size_mobile": 14,
+        "zenith_text_font_size_mobile": 0,
+        "row_line_height_mobile": 140,
         "padding_top": 48,
         "padding_bottom": 32,
         "padding_top_mobile": 20,
@@ -740,6 +775,20 @@
     },
     "reviews": {
       "type": "zenith-reviews",
+      "blocks": {
+        "judge_me_reviews_review_widget_zn": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "real_data",
+            "max_width": 1200,
+            "show_shop_reviews": true,
+            "empty_state": "other_products_reviews"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_zn"
+      ],
       "settings": {
         "eyebrow": "",
         "heading": "What Filipino men say about the Day Cream SPF 30",
@@ -782,21 +831,7 @@
         "padding_bottom": 48,
         "padding_top_mobile": 20,
         "padding_bottom_mobile": 48
-      },
-      "blocks": {
-        "judge_me_reviews_review_widget_zn": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-            "review_data": "real_data",
-            "max_width": 1200,
-            "show_shop_reviews": true,
-            "empty_state": "other_products_reviews"
-          }
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_review_widget_zn"
-      ]
+      }
     },
     "guarantee": {
       "type": "zenith-feature-columns",
@@ -976,7 +1011,7 @@
     "money_back": {
       "type": "zenith-guarantee-banner",
       "settings": {
-        "text_mobile": "<p>Kung hindi ka masaya sa resulta, message mo lang kami. Full refund. Walang hassle. Proof lang. Full terms on our <a href=\"/policies/refund-policy\">Refunds and Returns</a> page.</p>",
+        "use_shared": true,
         "eyebrow": "",
         "heading": "Zenith Money-Back Guarantee",
         "text": "<p>We stand behind every Zenith product. Kung hindi para sa iyo, ibabalik namin ang bayad mo. Full terms on our <a href=\"/policies/refund-policy\">Refunds and Returns</a> page.</p>",
@@ -1001,6 +1036,7 @@
         "eyebrow_font_size": 14,
         "text_font_size": 18,
         "button_font_size": 22,
+        "text_mobile": "<p>Kung hindi ka masaya sa resulta, message mo lang kami. Full refund. Walang hassle. Proof lang. Full terms on our <a href=\"/policies/refund-policy\">Refunds and Returns</a> page.</p>",
         "heading_font_size_mobile": 32,
         "text_font_size_mobile": 18,
         "text_opacity_mobile": 70,
@@ -1086,6 +1122,7 @@
         "heading_alignment": "center",
         "max_width": 720,
         "open_first": false,
+        "open_all": false,
         "heading_spacing": 32,
         "item_padding": 10,
         "content_gap": 24,
@@ -1114,8 +1151,7 @@
         "padding_top": 72,
         "padding_bottom": 100,
         "padding_top_mobile": 28,
-        "padding_bottom_mobile": 44,
-        "open_all": false
+        "padding_bottom_mobile": 44
       }
     },
     "cta": {
@@ -1166,6 +1202,8 @@
         "button_product": "zenith-anti-aging-tallow-day-cream-spf30",
         "button_label_mobile": "",
         "button_link_mobile": "",
+        "image": "shopify://shop_images/day-cream-cta-older-filipino-man-applying-day-cream-1-desktop.webp",
+        "mobile_image": "shopify://shop_images/day-cream-bottom-banner-older-filipino-man-applying-day-cream-1-mobile.webp",
         "show_image": true,
         "icon": "none",
         "display_text": "",
@@ -1182,11 +1220,14 @@
         "countdown_show_labels": false,
         "promo_visibility": "always",
         "button_full": true,
+        "button_min_width": 0,
         "desktop_layout": "image_beside",
         "panel_width": "page",
         "media_width": 50,
         "content_position": "center",
         "content_vertical": "middle",
+        "height_mode": "px",
+        "height_screen": 65,
         "height": 560,
         "content_max_width": 440,
         "vertical_padding": 64,
@@ -1239,11 +1280,14 @@
         "text_font_size": 16,
         "countdown_font_size": 18,
         "countdown_label_font_size": 14,
+        "mobile_layout": "stacked",
+        "mobile_image_height": 300,
         "mobile_text_alignment": "center",
         "mobile_alignment": "bottom",
         "mobile_button_bottom": false,
         "mobile_button_full": true,
         "mobile_hide_button": false,
+        "mobile_height_screen": 65,
         "mobile_height": 520,
         "mobile_overlay_style": "bottom",
         "mobile_overlay_coverage": 70,
@@ -1269,12 +1313,7 @@
         "padding_top": 40,
         "padding_bottom": 48,
         "padding_top_mobile": 0,
-        "padding_bottom_mobile": 0,
-        "height_mode": "px",
-        "image": "shopify://shop_images/day-cream-cta-older-filipino-man-applying-day-cream-1-desktop.webp",
-        "mobile_image": "shopify://shop_images/day-cream-bottom-banner-older-filipino-man-applying-day-cream-1-mobile.webp",
-        "mobile_layout": "stacked",
-        "mobile_image_height": 300
+        "padding_bottom_mobile": 0
       }
     }
   },
