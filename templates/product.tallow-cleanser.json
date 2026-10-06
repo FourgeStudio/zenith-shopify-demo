@@ -381,7 +381,10 @@
       "settings": {
         "content_source": "global",
         "product_filter": "page",
-        "filter_products": [],
+        "filter_products": [
+          "zenith-anti-aging-tallow-cleanser",
+          "zenith-advanced-hair-density-spray"
+        ],
         "eyebrow": "",
         "heading": "A Complete Routine, Built for Men.",
         "heading_mobile": "A Complete Routine,\nBuilt for Men.",
@@ -713,7 +716,7 @@
         "zenith_caption": "Zenith Anti-Aging Tallow Cleanser",
         "column_1_title": "Other Product",
         "column_1_note": "(Harsh deep-clean washes, Strong foaming face washes)",
-        "column_2_title": "Other Product",
+        "column_2_title": "Other Products",
         "column_2_note": "(Gentle washes, Basic mild cleansers)",
         "column_3_title": "",
         "column_3_note": "",
