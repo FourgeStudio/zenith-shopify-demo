@@ -99,6 +99,11 @@
   line-height: var(--z-ftlh-m, 1.1);
 }
 
+/* Title with no text under it: no trailing space (cards would get uneven bottom padding) */
+.zenith-features__text > .zenith-features__title:last-child {
+  margin-bottom: 0;
+}
+
 .zenith-features--title-color .zenith-features__title {
   color: var(--z-ft-color);
 }
@@ -226,6 +231,11 @@
   .zenith-features--micon-left .zenith-features__body {
     grid-column: 2;
   }
+
+  /* Column without an icon: the empty icon track would still leave the gap and indent the text */
+  .zenith-features--micon-left .zenith-features__text:not(:has(> .zenith-features__icon)) {
+    column-gap: 0;
+  }
 }
 
 @media screen and (min-width: 750px) {
@@ -288,6 +298,10 @@
   .zenith-features--icon-left .zenith-features__title,
   .zenith-features--icon-left .zenith-features__body {
     grid-column: 2;
+  }
+
+  .zenith-features--icon-left .zenith-features__text:not(:has(> .zenith-features__icon)) {
+    column-gap: 0;
   }
 
   .zenith-features__body {

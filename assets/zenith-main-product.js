@@ -155,6 +155,8 @@ if (!customElements.get('zenith-main-product')) {
               const label = submit.querySelector('span:not(.sold-out-message)');
               const soldOut = submit.querySelector('.sold-out-message');
               if (label) label.classList.toggle('hidden', !available);
+              // A sold-out variant opened by ?variant= renders "Sold out" in the label span; restore the real label.
+              if (label && available && this.dataset.atcLabel) label.textContent = this.dataset.atcLabel;
               if (soldOut) soldOut.classList.toggle('hidden', available);
             }
           });

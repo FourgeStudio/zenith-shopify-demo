@@ -41,13 +41,20 @@
   class="zenith-section zenith-store-links color-{{ s.color_scheme }} gradient zenith-store-links--{{ s.card_layout }} zenith-store-links--align-{{ s.card_alignment }} zenith-store-links--m-{{ s.card_layout_mobile }} zenith-store-links--m-align-{{ s.card_alignment_mobile }} zenith-store-links--m-heading-{{ s.heading_alignment_mobile }}{% if s.card_width > 0 %} zenith-store-links--fixed{% endif %}"
 >
   <div class="page-width">
+    {%- liquid
+      # Desktop shows only the heading (mobile heading + text are mobile only): no heading → hide the wrapper so its margin leaves no gap
+      assign heading_class = 'zenith-store-links__heading'
+      if s.heading == blank
+        assign heading_class = heading_class | append: ' zenith-hide-desktop'
+      endif
+    -%}
     {%- render 'zenith-section-heading',
       eyebrow: blank,
       heading: s.heading,
       heading_mobile: s.heading_mobile,
       subheading: s.text_mobile,
       alignment: s.heading_alignment,
-      class: 'zenith-store-links__heading'
+      class: heading_class
     -%}
 
     {%- liquid
@@ -153,19 +160,20 @@
                 {% endif %}
               {% endif %}
             >
+            {%- comment -%} "Custom" with no image uploaded: no glyph box, so the text doesn't sit after an empty gap {%- endcomment -%}
+            {%- unless s_icon == 'custom' and s_custom_icon == blank -%}
             <span class="zenith-store-links__glyph" aria-hidden="true">
               {%- if s_icon == 'custom' -%}
-                {%- if s_custom_icon != blank -%}
-                  {{
-                    s_custom_icon
-                    | image_url: width: 160
-                    | image_tag: loading: 'lazy', widths: '48, 80, 120, 160', sizes: '48px', alt: ''
-                  }}
-                {%- endif -%}
+                {{
+                  s_custom_icon
+                  | image_url: width: 160
+                  | image_tag: loading: 'lazy', widths: '48, 80, 120, 160', sizes: '48px', alt: ''
+                }}
               {%- else -%}
                 {%- render 'zenith-icon', icon: s_icon, class: 'zenith-store-links__icon' -%}
               {%- endif -%}
             </span>
+            {%- endunless -%}
             {%- if store_name != blank -%}
               <span class="visually-hidden">{{ store_name | escape }}</span>
             {%- endif -%}

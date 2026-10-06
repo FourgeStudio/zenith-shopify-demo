@@ -48,6 +48,11 @@
   min-width: 0;
 }
 
+/* Icon "None" on some items only: keep their text in line with the items that have an icon */
+.zenith-trust__list:has(.zenith-trust__icon) .zenith-trust__item:not(:has(.zenith-trust__icon)) {
+  padding-left: calc(var(--z-tr-icon) + var(--z-tr-igap-m, 8px));
+}
+
 .zenith-trust__item-text a {
   color: inherit;
   text-underline-offset: 0.3rem;
@@ -164,6 +169,15 @@
 
   .zenith-trust--card-left .zenith-trust__card {
     order: -1;
+  }
+
+  /* No heading and no items (Dawn hides the empty column): the card takes the full row instead of half of it */
+  .zenith-trust__content:empty + .zenith-trust__card {
+    flex: 1 1 0;
+  }
+
+  .zenith-trust__list:has(.zenith-trust__icon) .zenith-trust__item:not(:has(.zenith-trust__icon)) {
+    padding-left: calc(var(--z-tr-icon) + var(--z-tr-igap, 12px));
   }
 
   .zenith-trust__heading.zenith-heading {

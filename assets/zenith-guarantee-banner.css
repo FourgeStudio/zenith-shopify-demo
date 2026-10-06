@@ -34,6 +34,7 @@
   flex-direction: column;
   align-items: flex-start;
   gap: var(--z-cgap-m, var(--z-space-5));
+  align-self: stretch;
   max-width: var(--z-cmw, 70rem);
   min-width: 0;
 }
@@ -107,6 +108,7 @@
 
   .zenith-guarantee__content {
     flex: 0 1 var(--z-cmw, 70rem);
+    align-self: auto;
     gap: var(--z-cgap, var(--z-space-5));
   }
 

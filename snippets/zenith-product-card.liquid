@@ -64,6 +64,9 @@
       {%- else -%}
         {%- render 'zenith-stars', rating: card_rating_value, count: card_rating_count -%}
       {%- endif -%}
+    {%- elsif card_rating_style == 'score' -%}
+      {%- comment -%} No reviews yet: keep the row's height so this title lines up with its rated neighbours {%- endcomment -%}
+      <div class="zenith-card__rating zenith-card__rating--empty" aria-hidden="true"></div>
     {%- endif -%}
   {%- endif -%}
 {%- endcapture -%}

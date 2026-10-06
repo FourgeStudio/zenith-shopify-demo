@@ -66,6 +66,11 @@
   color: rgba(var(--color-foreground), var(--z-rt-text-o, 0.7));
 }
 
+/* Step without a title: the text starts at the top (keeps it centred beside the photo) */
+.zenith-rt__text:first-child {
+  margin-top: 0;
+}
+
 /* ---------- Note under the steps (phones; desktop with show_note_desktop) ---------- */
 .zenith-rt__note {
   margin: var(--z-rt-nsp-m, 20px) 0 0;
@@ -147,8 +152,11 @@
     gap: var(--z-space-3);
   }
 
+  /* Columns never grow past a third of the content width: one or two steps stay step-sized and centred
+     instead of stretching the photo across the page; four or more still share the width equally. */
   .zenith-rt__steps {
-    grid-auto-columns: minmax(0, 1fr);
+    grid-auto-columns: minmax(0, calc((var(--z-cmw, 1020px) - 2 * var(--z-gap, 32px)) / 3));
+    justify-content: center;
     grid-auto-flow: column;
     gap: var(--z-gap, 32px);
     max-width: var(--z-cmw, 1020px);

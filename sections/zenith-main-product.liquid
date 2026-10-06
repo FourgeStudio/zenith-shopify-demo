@@ -192,7 +192,13 @@
     <product-component view-event-payload="{{ mp_product | standard_event_data: 'view', context: 'page' | escape }}">
   {%- endif -%}
   <div class="page-width">
-    <zenith-main-product class="zenith-mp__grid" data-start-mobile="{{ s.gallery_start_mobile | default: 1 }}">
+    {%- liquid
+      assign atc_label = s.button_label
+      if atc_label == blank
+        assign atc_label = 'products.product.add_to_cart' | t
+      endif
+    -%}
+    <zenith-main-product class="zenith-mp__grid" data-start-mobile="{{ s.gallery_start_mobile | default: 1 }}" data-atc-label="{{ atc_label | escape }}">
       {%- comment -%} ---------------- Gallery ---------------- {%- endcomment -%}
       <div class="zenith-mp__gallery">
         <zenith-carousel class="zenith-mp__carousel" data-slide-label="Image">
@@ -450,7 +456,6 @@
                       {%- endif -%}
                     </span>
                   {%- endif -%}
-                  {%- render 'zenith-icon', icon: 'check_filled', class: 'zenith-mp__vcard-check' -%}
                   <span class="zenith-mp__vcard-media">
                     {%- if v_img != blank -%}
                       {{
@@ -459,6 +464,8 @@
                         | image_tag: loading: 'lazy', widths: '150, 300, 400', sizes: '160px', alt: ''
                       }}
                     {%- endif -%}
+                    {%- comment -%} zenith: on the image corner, not the card corner, so it can't cover the shipping ribbon text {%- endcomment -%}
+                    {%- render 'zenith-icon', icon: 'check_filled', class: 'zenith-mp__vcard-check' -%}
                   </span>
                   <span class="zenith-mp__vcard-title">
                     {{- variant.title | escape -}}

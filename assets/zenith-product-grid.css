@@ -56,6 +56,12 @@
   margin-bottom: var(--z-pg-ttsp, 4px);
 }
 
+/* Unrated product: empty rating row, as tall as stars + score (display beats Dawn's div:empty rule) */
+.zenith-pg .zenith-card__rating--empty {
+  display: block;
+  height: max(var(--z-pg-star-m, 11px), var(--z-card-rfs-m, 1.4rem));
+}
+
 .zenith-pg .zenith-stars__icons {
   color: var(--z-pg-star-c, var(--z-dawn-gold));
 }
@@ -105,6 +111,12 @@
   .zenith-pg .zenith-card__price {
     margin-top: auto;
   }
+
+  /* Two-up cards are ~160px wide at 375: the brand 24px side padding wrapped "Add to Cart" + icon onto two lines */
+  .zenith-pg .zenith-card .button.zenith-atc {
+    padding-left: var(--z-space-3);
+    padding-right: var(--z-space-3);
+  }
 }
 
 @media screen and (min-width: 750px) {
@@ -121,6 +133,10 @@
   .zenith-pg .zenith-stars__icons svg {
     width: var(--z-pg-star, 14px);
     height: var(--z-pg-star, 14px);
+  }
+
+  .zenith-pg .zenith-card__rating--empty {
+    height: max(var(--z-pg-star, 14px), var(--z-card-rfs, 1.6rem));
   }
 
   .zenith-pg .zenith-card__title {

@@ -1,15 +1,6 @@
 {%- comment -%} zenith: [customers] anywhere in this section shows Theme settings → Zenith → Customer count {%- endcomment -%}
 {%- capture zenith_body -%}
 {{ 'zenith-logo-strip.css' | asset_url | stylesheet_tag }}
-{%- capture extra -%}
-  --z-logo-h: {{ section.settings.logo_height }}px;
-  --z-logo-h-m: {{ section.settings.logo_height_mobile }}px;
-  --z-logo-opacity: {{ section.settings.logo_opacity | divided_by: 100.0 }};
-  --z-label-opacity: {{ section.settings.heading_opacity | divided_by: 100.0 }};
-  --z-speed: {{ section.settings.speed }}s;
-{%- endcapture -%}
-{%- render 'zenith-section-style', section: section, extra: extra -%}
-
 {%- liquid
   assign desktop_marquee = false
   if section.settings.layout == 'marquee'
@@ -19,11 +10,22 @@
   if section.settings.mobile_layout == 'marquee'
     assign mobile_marquee = true
   endif
+  # Marquee copies: enough to fill a wide screen with few logos (4 copies of 2 logos left the right side empty)
   assign passes = 1
   if desktop_marquee or mobile_marquee
-    assign passes = 4
+    assign logo_count = section.blocks.size | at_least: 1
+    assign passes = 20 | divided_by: logo_count | plus: 2 | at_least: 4
   endif
 -%}
+{%- capture extra -%}
+  --z-logo-h: {{ section.settings.logo_height }}px;
+  --z-logo-h-m: {{ section.settings.logo_height_mobile }}px;
+  --z-logo-opacity: {{ section.settings.logo_opacity | divided_by: 100.0 }};
+  --z-label-opacity: {{ section.settings.heading_opacity | divided_by: 100.0 }};
+  --z-speed: {{ section.settings.speed }}s;
+  --z-passes: {{ passes }};
+{%- endcapture -%}
+{%- render 'zenith-section-style', section: section, extra: extra -%}
 
 <div
   id="Zenith-{{ section.id }}"

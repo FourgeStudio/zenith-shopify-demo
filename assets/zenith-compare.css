@@ -25,6 +25,7 @@
 .zenith-compare__logo {
   display: block;
   width: var(--z-cmp-logow-m, 60px);
+  max-width: 100%;
   height: auto;
   margin: 0 auto;
 }
@@ -270,8 +271,11 @@
 
 /* ---------- Mobile layout "One table, all columns": the desktop table with the mobile settings ---------- */
 @media screen and (max-width: 749px) {
+  /* --z-cmp-lw-mt = label width capped by the section so every value column keeps ~17%: with 2–3 competitors
+     the 63% default otherwise left ~3rem columns and the logo/titles spilled into their neighbours.
+     (A CSS min() with % is ignored on table cells, hence the Liquid cap.) */
   .zenith-compare__table .zenith-compare__corner {
-    width: var(--z-cmp-lw-m, 63%);
+    width: var(--z-cmp-lw-mt, var(--z-cmp-lw-m, 63%));
   }
 
   .zenith-compare__table .zenith-compare__head {
@@ -279,6 +283,7 @@
     padding: var(--z-space-1) var(--z-cmp-cpad-m, 8px);
     font-size: var(--z-ttfs-m, 1.4rem);
     border-left-color: var(--z-cmp-div-m, #363636);
+    overflow-wrap: break-word;
   }
 
   .zenith-compare__table .zenith-compare__head-note {

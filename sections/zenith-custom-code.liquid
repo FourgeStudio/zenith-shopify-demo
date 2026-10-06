@@ -4,10 +4,15 @@
   [customers] in the heading texts shows Theme settings → Zenith → Customer count.
 {%- endcomment -%}
 {%- capture zenith_body -%}
+{%- liquid
+  assign s = section.settings
+  # No code → nothing on the storefront (not an empty padded band or a lone heading); the editor shows the placeholder
+  assign code_out = s.code | strip
+-%}
+{%- if code_out != blank or request.design_mode -%}
 {{ 'zenith-custom-code.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
-  assign s = section.settings
   assign root_class = 'zenith-section zenith-cc zenith-cc--' | append: s.width
   if s.hide_on_mobile
     assign root_class = root_class | append: ' zenith-hide-mobile'
@@ -29,13 +34,14 @@
       alignment: s.heading_alignment
     -%}
 
-    {%- if s.code != blank -%}
+    {%- if code_out != blank -%}
       <div class="zenith-cc__code">{{ s.code }}</div>
     {%- elsif request.design_mode -%}
       <p class="zenith-cc__placeholder">Paste HTML, Liquid or an app's embed code in "Code". Only visible in the theme editor.</p>
     {%- endif -%}
   </div>
 </section>
+{%- endif -%}
 {%- endcapture -%}
 {{- zenith_body | replace: '[customers]', settings.customer_count -}}
 

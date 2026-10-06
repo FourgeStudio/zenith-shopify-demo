@@ -35,7 +35,7 @@
       </span>
     </summary>
     <div class="zenith-faq__answer zenith-rte" role="region" aria-labelledby="FaqQuestion-{{ block.id }}-{{ section_id }}">
-      {{ block.settings.answer | replace: '[customers]', settings.customer_count }}
+      {{- block.settings.answer | replace: '[customers]', settings.customer_count -}}
     </div>
   </details>
 {%- endfor -%}

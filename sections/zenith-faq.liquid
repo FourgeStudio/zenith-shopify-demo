@@ -1,5 +1,7 @@
 {%- comment -%} zenith: [customers] anywhere in this section shows Theme settings → Zenith → Customer count {%- endcomment -%}
 {%- capture zenith_body -%}
+{%- comment -%} No questions → skip the section on the storefront (a lone heading over nothing); the editor keeps it {%- endcomment -%}
+{%- if section.blocks.size > 0 or request.design_mode -%}
 {{ 'zenith-faq.css' | asset_url | stylesheet_tag }}
 {%- capture extra -%}
   --z-faq-w: {{ section.settings.max_width }}px;
@@ -37,6 +39,7 @@
     </div>
   </div>
 </section>
+{%- endif -%}
 {%- endcapture -%}
 {%- render 'zenith-tokens', body: zenith_body -%}
 

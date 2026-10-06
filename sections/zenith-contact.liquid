@@ -21,6 +21,18 @@
   if settings.social_facebook_link != blank or settings.social_instagram_link != blank or settings.social_tiktok_link != blank or settings.social_lazada_link != blank or settings.social_shopee_link != blank
     assign has_social = true
   endif
+
+  # Details column only when something shows in it: an empty column left the stack gap above the form on phones
+  assign has_info = false
+  if s.heading != blank or s.subheading != blank or has_faq or s.show_social and has_social
+    assign has_info = true
+  endif
+  for block in section.blocks
+    if block.type == 'office' or block.type == 'line'
+      assign has_info = true
+      break
+    endif
+  endfor
 -%}
 
 {%- capture extra -%}
@@ -67,6 +79,7 @@
   class="zenith-section zenith-contact color-{{ s.color_scheme }}{% if s.form_first_mobile %} zenith-contact--m-form-first{% endif %}{% unless s.form_card_mobile %} zenith-contact--m-flat{% endunless %}{% if s.form_text_inline_mobile %} zenith-contact--m-inline-text{% endif %}"
 >
   <div class="page-width zenith-contact__grid">
+    {%- if has_info -%}
     <div class="zenith-contact__info">
       {%- render 'zenith-section-heading',
         heading: s.heading,
@@ -193,6 +206,7 @@
         </div>
       {%- endif -%}
     </div>
+    {%- endif -%}
 
     <div class="zenith-contact__form-card">
       {%- render 'zenith-section-heading',

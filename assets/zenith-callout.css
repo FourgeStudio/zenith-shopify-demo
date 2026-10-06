@@ -53,6 +53,17 @@
   color: rgba(var(--z-co-text, var(--color-foreground)), var(--z-co-small-a, 0.8));
 }
 
+/* Pieces left empty: no spacing left over at the box edge, and no doubled gap when Text is empty */
+.zenith-co__box > :last-child {
+  margin-bottom: 0;
+}
+
+.zenith-co__small:first-child,
+.zenith-co__logo + .zenith-co__small,
+.zenith-co__heading + .zenith-co__small {
+  margin-top: 0;
+}
+
 .zenith-co__text p,
 .zenith-co__small p {
   margin: 0;

@@ -97,7 +97,7 @@
         {%- endif -%}
 
         {%- if show_featured -%}
-          <div class="zenith-blog__top">
+          <div class="zenith-blog__top{% if side_shown == 0 %} zenith-blog__top--solo{% endif %}">
             {%- for article in blog.articles limit: 1 -%}
               {%- render 'zenith-article-card',
                 article: article,

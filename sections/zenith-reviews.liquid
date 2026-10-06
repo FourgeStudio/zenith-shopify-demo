@@ -30,7 +30,9 @@
   assign subheading = section.settings.subheading
   if section.settings.subheading_mobile != blank
     capture subheading
-      echo '<div class="zenith-hide-mobile">' | append: section.settings.subheading | append: '</div>'
+      if section.settings.subheading != blank
+        echo '<div class="zenith-hide-mobile">' | append: section.settings.subheading | append: '</div>'
+      endif
       echo '<div class="zenith-hide-desktop">' | append: section.settings.subheading_mobile | append: '</div>'
     endcapture
   endif

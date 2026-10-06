@@ -654,6 +654,24 @@ zenith-carousel.is-static .zenith-carousel__pause--solo {
   margin-top: auto;
 }
 
+/* 'Color scheme button' card style has no .zenith-btn: same type, gap and icon size as the brand styles
+   (and as zenith-button's scheme style), so its label doesn't wrap where theirs fits and every card button lines up. */
+.zenith-card .button.zenith-atc:not(.zenith-btn) {
+  font-family: var(--font-heading-family);
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  line-height: 1;
+  gap: var(--z-space-3);
+  padding-left: var(--z-space-5);
+  padding-right: var(--z-space-5);
+}
+
+.zenith-card .zenith-atc:not(.zenith-btn) .zenith-btn__icon {
+  width: 1em;
+  height: 1em;
+  stroke-width: 1.75;
+}
+
 /* Badge on the card image ("Selling Fast", tag badges, red "On Sale"). Sizes come from the section (--z-pg-*). */
 .zenith-card__badge {
   position: absolute;

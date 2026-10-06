@@ -5,6 +5,17 @@
   margin-inline: auto;
 }
 
+/* Narrow + left heading: start the heading where the centred code column starts */
+.zenith-cc--narrow .zenith-heading--left {
+  max-width: min(var(--z-hmw, 76rem), var(--z-cmw, 800px));
+  margin-left: max(0px, (100% - var(--z-cmw, 800px)) / 2);
+}
+
+/* Full screen: the code runs edge to edge, the heading keeps the page gutters */
+.zenith-cc--full .zenith-heading {
+  padding-inline: var(--z-gutter);
+}
+
 .zenith-cc__code {
   min-width: 0;
   overflow-wrap: anywhere;

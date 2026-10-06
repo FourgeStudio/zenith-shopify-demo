@@ -114,7 +114,7 @@
     transform: translateX(0);
   }
   to {
-    transform: translateX(-50%);
+    transform: translateX(calc(-100% / var(--z-ib-passes, 2))); /* one list width (track = list + copies) */
   }
 }
 

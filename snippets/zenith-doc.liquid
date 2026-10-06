@@ -171,6 +171,8 @@
       </div>
     </div>
   </div>
+  {%- comment -%} Empty content → no text band (its top padding would hang under the title as a gap) {%- endcomment -%}
+  {%- if doc_body != blank -%}
   <div class="page-width">
     <div class="zenith-doc__frame zenith-doc__layout">
       {%- if toc_items != blank -%}
@@ -188,6 +190,7 @@
       </div>
     </div>
   </div>
+  {%- endif -%}
 </div>
 {%- if toc_items != blank -%}
   <script src="{{ 'zenith-doc.js' | asset_url }}" defer="defer"></script>

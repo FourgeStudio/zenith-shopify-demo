@@ -96,6 +96,30 @@
   font-size: var(--z-btnfs-m, 2rem);
 }
 
+/* 'Color scheme button' style: the link button (zenith-button) keeps .zenith-btn, the add-to-cart button doesn't —
+   give it the same type, height, icon size and gap so a product card matches its collection neighbours. */
+.zenith-cats__actions .button.zenith-cats__button:not(.zenith-btn) {
+  font-family: var(--font-heading-family);
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  line-height: 1;
+  gap: var(--z-space-3);
+  min-height: 4.6rem;
+}
+
+.zenith-cats__actions .zenith-cats__button:not(.zenith-btn) .zenith-btn__icon {
+  width: 1em;
+  height: 1em;
+  stroke-width: 1.75;
+}
+
+/* Theme settings → Full-width buttons on mobile: the button itself too (width: auto above outranks the base rule) */
+@media screen and (max-width: 749px) {
+  .zenith-m-btn-full .zenith-cats__actions .button.zenith-cats__button {
+    width: 100%;
+  }
+}
+
 .zenith-cats__overlay-link {
   position: absolute;
   inset: 0;

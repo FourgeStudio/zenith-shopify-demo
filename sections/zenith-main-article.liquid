@@ -204,6 +204,10 @@
             <hr id="Block-{{ block.id }}" class="zenith-article__block zenith-article__divider" {{ block.shopify_attributes }}>
 
           {%- when 'share' -%}
+            {%- comment -%} Every network off → no block (not a lone "Share" label) {%- endcomment -%}
+            {%- unless b.show_copy or b.show_linkedin or b.show_x or b.show_facebook -%}
+              {%- continue -%}
+            {%- endunless -%}
             {%- liquid
               assign share_url = request.origin | append: article.url
               assign share_url_enc = share_url | url_encode

@@ -31,6 +31,11 @@
   color: rgba(var(--z-nl-fg, 255, 255, 255), var(--z-nl-to, 0.8));
 }
 
+/* No heading above: no gap to separate it from */
+.zenith-nl__text:first-child {
+  margin-top: 0;
+}
+
 .zenith-nl__text p {
   margin: 0 0 0.5em;
 }

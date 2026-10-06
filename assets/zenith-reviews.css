@@ -104,9 +104,16 @@
     color: rgba(var(--color-foreground), var(--z-sub-a, 1));
   }
 
-  /* subheading_spacing = total heading→subheading distance; the shared heading gap is --z-space-3. */
-  .zenith-reviews .zenith-heading__title + .zenith-subheading {
+  /* subheading_spacing = total heading→subheading distance; the shared heading gap is --z-space-3.
+     Only after a heading shown on desktop (a mobile-only heading alone left the subheading pushed down). */
+  .zenith-reviews .zenith-heading__title:not(.zenith-hide-desktop) + .zenith-subheading,
+  .zenith-reviews .zenith-heading__title.zenith-hide-mobile + .zenith-heading__title + .zenith-subheading {
     margin-top: calc(var(--z-sub-sp, var(--z-space-3)) - var(--z-space-3));
+  }
+
+  /* Mobile subheading only: nothing to show on desktop, so no empty row (and gap) under the heading */
+  .zenith-reviews .zenith-subheading:has(> .zenith-hide-desktop:only-child) {
+    display: none;
   }
 
   .zenith-reviews__skeleton {

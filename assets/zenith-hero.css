@@ -166,6 +166,15 @@
   padding-top: var(--z-cgap-m, var(--z-space-5));
 }
 
+/* Nothing above (heading/text/icon left empty): no gap to separate it from */
+.zenith-hero__actions:first-child {
+  padding-top: 0;
+}
+
+.zenith-hero__trust:first-child {
+  margin-top: 0;
+}
+
 .zenith-hero__atc product-form {
   display: block;
 }

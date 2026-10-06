@@ -48,6 +48,12 @@
 
   /* Heading shown above the image → hide the copy inside the text column */
   .zenith-story .zenith-story__heading--below { display: none; }
+
+  /* ...and if that copy was all the column held, drop the column so it leaves no grid gap under the image */
+  .zenith-story__content:not(:has(> :not(.zenith-story__heading--below))) { display: none; }
+
+  /* Columns straight after the hidden copy are the first thing shown: no "space above columns" offset */
+  .zenith-story__content > .zenith-story__heading--below:first-child + .zenith-story__columns { margin-top: 0; }
 }
 
 /* Spacing inside the text column = flex gap (hidden items leave no gap);
@@ -143,6 +149,11 @@
   line-height: 1.05;
   text-transform: uppercase;
   color: var(--z-story-title-color, var(--z-dawn-gold));
+}
+
+/* Title with no text under it: no trailing space */
+.zenith-story__column-title:last-child {
+  margin-bottom: 0;
 }
 
 .zenith-story__column-text {

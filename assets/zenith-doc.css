@@ -222,6 +222,12 @@
 
 /* Contents beside the text from tablet landscape up; stays in view while reading */
 @media screen and (min-width: 990px) {
+  /* Column width = the text column: the contents column + gap are added beside it (otherwise the default 780px
+     column left the text 364px wide). Policies set no column width → the calc is invalid → no limit, as before. */
+  .zenith-doc--toc .zenith-doc__frame {
+    max-width: calc(var(--z-doc-mw) + var(--z-doc-toc-w, 36.4rem) + var(--z-doc-gap, 5.2rem));
+  }
+
   .zenith-doc--toc .zenith-doc__layout {
     display: grid;
     grid-template-columns: var(--z-doc-toc-w, 36.4rem) minmax(0, 1fr);

@@ -130,7 +130,7 @@
 
 <div
   id="Zenith-{{ section.id }}"
-  class="zenith-section zenith-promo color-{{ s.color_scheme }} gradient zenith-promo--{{ s.card_width }} zenith-promo--{{ s.layout_style }}{% if is_split and s.panel_color != blank %} zenith-promo--panel{% endif %}{% if s.full_width_mobile %} zenith-promo--m-full{% endif %}{% if s.button_full_mobile %} zenith-promo--m-btn-full{% endif %}{% if s.hide_on_mobile %} zenith-hide-mobile{% endif %}{% if s.hide_on_desktop %} zenith-hide-desktop{% endif %}{{ promo_class }}"
+  class="zenith-section zenith-promo color-{{ s.color_scheme }} gradient zenith-promo--{{ s.card_width }} zenith-promo--{{ s.layout_style }}{% if s.layout_style == 'split' and s.panel_color != blank %} zenith-promo--panel{% endif %}{% if s.full_width_mobile %} zenith-promo--m-full{% endif %}{% if s.button_full_mobile %} zenith-promo--m-btn-full{% endif %}{% if s.hide_on_mobile %} zenith-hide-mobile{% endif %}{% if s.hide_on_desktop %} zenith-hide-desktop{% endif %}{{ promo_class }}"
   {%- render 'zenith-promo-state', visibility: s.promo_visibility, output: 'attrs' %}
 >
   <div class="zenith-promo__container{% if s.card_width == 'page' %} page-width{% endif %}">
@@ -165,13 +165,14 @@
           -%}
           {%- if p_product != blank and p_action != 'product' and p_button_label != blank -%}
             {%- assign form_id = 'ZenithPromoATC-' | append: section.id -%}
+            {%- comment -%} zenith-btn: keeps the brand button font/size for "Color scheme button" too, like the link button {%- endcomment -%}
             {%- render 'zenith-add-to-cart',
               product: p_product,
               form_id: form_id,
               label: p_button_label,
               style: s.button_style,
               icon: 'arrow_right',
-              class: 'zenith-promo__button'
+              class: 'zenith-promo__button zenith-btn'
             -%}
           {%- else -%}
             {%- render 'zenith-button',

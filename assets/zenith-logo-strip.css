@@ -74,10 +74,11 @@
   padding: 0 var(--z-gutter, 2rem);
 }
 
-/* ---------- Marquee (built once, switched on per breakpoint) ---------- */
+/* ---------- Marquee (built once, switched on per breakpoint) ----------
+   The track holds --z-passes copies of the list (more copies for fewer logos); it moves by one copy per loop. */
 @keyframes zenith-logos-marquee {
   from { transform: translateX(0); }
-  to { transform: translateX(-25%); }
+  to { transform: translateX(calc(-100% / var(--z-passes, 4))); }
 }
 
 @media screen and (max-width: 749px) {

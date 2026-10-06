@@ -20,6 +20,12 @@
   color: rgba(var(--color-foreground), 0.7);
 }
 
+/* No heading (or no heading and no text): nothing above to space from, so no gap under the section's top padding */
+.zenith-ba__text:first-child,
+.zenith-ba .zenith-ba__grid:first-child {
+  margin-top: 0;
+}
+
 .zenith-ba__text p {
   margin: 0;
 }

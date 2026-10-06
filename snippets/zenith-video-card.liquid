@@ -132,6 +132,8 @@
       {%- endif -%}
     </zenith-video>
 
+    {%- comment -%} Video-only card (no quote, no meta): no text panel, so body_min_height leaves no empty band {%- endcomment -%}
+    {%- if quote != blank or thumb != blank or title != blank or handle != blank -%}
     <div class="zenith-video-card__body">
       <div class="zenith-video-card__quote-wrap">
         {%- if quote != blank -%}
@@ -169,5 +171,6 @@
         </div>
       {%- endif -%}
     </div>
+    {%- endif -%}
   </article>
 </li>

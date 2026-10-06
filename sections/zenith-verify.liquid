@@ -214,7 +214,8 @@
         {%- endif -%}
       </div>
 
-      {%- comment -%} Right: heading, steps, seal card, delivery logos (blocks, in editor order) {%- endcomment -%}
+      {%- comment -%} Right: heading, steps, seal card, delivery logos (blocks, in editor order). Skipped when empty: an empty column added the grid row gap under the video on phones. {%- endcomment -%}
+      {%- if s.steps_heading != blank or s.steps_subheading != blank or section.blocks.size > 0 -%}
       <div class="zenith-verify__side zenith-verify__side--m-{{ s.steps_heading_alignment_mobile }}">
         {%- render 'zenith-section-heading',
           heading: s.steps_heading,
@@ -358,6 +359,7 @@
           {%- endif -%}
         </div>
       </div>
+      {%- endif -%}
     </div>
   </div>
 </section>

@@ -1,17 +1,19 @@
 {%- comment -%} zenith: [customers] anywhere in this section shows Theme settings → Zenith → Customer count {%- endcomment -%}
 {%- capture zenith_body -%}
 {{ 'zenith-icon-bar.css' | asset_url | stylesheet_tag }}
-{%- capture extra -%}
-  --z-ib-speed: {{ section.settings.marquee_speed | default: 25 }}s;
-{%- endcapture -%}
-{%- render 'zenith-section-style', section: section, extra: extra -%}
-
 {%- liquid
+  # Mobile marquee: list + copies; fewer items get more copies so the moving row never shows an empty end
   assign passes = 1
   if section.settings.mobile_layout == 'marquee'
-    assign passes = 2
+    assign item_count = section.blocks.size | at_least: 1
+    assign passes = 6 | divided_by: item_count | plus: 1 | at_least: 2
   endif
 -%}
+{%- capture extra -%}
+  --z-ib-speed: {{ section.settings.marquee_speed | default: 25 }}s;
+  --z-ib-passes: {{ passes }};
+{%- endcapture -%}
+{%- render 'zenith-section-style', section: section, extra: extra -%}
 
 <div
   id="Zenith-{{ section.id }}"
@@ -22,7 +24,7 @@
       {%- for pass in (1..passes) -%}
         {%- liquid
           assign clone = false
-          if pass == 2
+          if pass > 1
             assign clone = true
           endif
         -%}
@@ -66,7 +68,7 @@
       {%- endfor -%}
     </div>
   </div>
-  {%- if passes == 2 -%}
+  {%- if passes > 1 and section.blocks.size > 0 -%}
     {%- comment -%} Pause/play for the mobile marquee (WCAG 2.2.2); CSS shows it only while the row moves {%- endcomment -%}
     {%- render 'zenith-pause-button', class: 'zenith-icon-bar__pause', label: 'Pause scrolling', toggle: '.zenith-icon-bar' -%}
   {%- endif -%}

@@ -298,6 +298,23 @@ a.zenith-acard__media {
     gap: var(--z-bl-sgap, 32px);
   }
 
+  /* No side list (one article, or Side articles = 0): the featured card's own text fills the right column
+     instead of leaving it empty */
+  .zenith-blog__top--solo {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .zenith-blog__top--solo .zenith-acard--featured {
+    display: grid;
+    grid-template-columns: minmax(0, var(--z-bl-fw, 47%)) minmax(0, 1fr);
+    align-items: center;
+    column-gap: var(--z-gap, 52px);
+  }
+
+  .zenith-blog__top--solo .zenith-acard--featured .zenith-acard__title {
+    margin-top: 0;
+  }
+
   /* Side list: photo left, text right, vertically centred */
   .zenith-acard--row {
     display: grid;

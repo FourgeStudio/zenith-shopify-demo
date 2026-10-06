@@ -229,13 +229,14 @@
               {%- if s.button_product != blank -%}
                 {%- assign form_id = 'ZenithHeroATC-' | append: section.id -%}
                 <div class="zenith-hero__atc{{ desktop_hide }}">
+                  {%- comment -%} zenith-btn: keeps the brand button font/size for "Color scheme button" too, like the link button {%- endcomment -%}
                   {%- render 'zenith-add-to-cart',
                     product: s.button_product,
                     form_id: form_id,
                     label: s.button_label,
                     style: btn_style,
                     icon: btn_icon,
-                    class: 'zenith-hero__button'
+                    class: 'zenith-hero__button zenith-btn'
                   -%}
                 </div>
               {%- else -%}

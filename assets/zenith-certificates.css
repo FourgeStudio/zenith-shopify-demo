@@ -247,6 +247,11 @@ a.zenith-cert__frame:hover .zenith-cert__doc > img {
   border-top: 0;
 }
 
+/* No title bar above it (title left blank): close the box */
+.zenith-cert__number:first-child {
+  border-top: 1px solid var(--z-cert-nbar-b, #4e4e4e);
+}
+
 /* ---------- Layout "beside": frame | thumbnail + labelled facts ---------- */
 .zenith-cert--beside .zenith-cert__item {
   display: flex;

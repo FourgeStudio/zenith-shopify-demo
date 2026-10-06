@@ -471,9 +471,10 @@
   flex: 0 0 auto;
 }
 
-/* Selected tick, top-right over the ribbon */
+/* Selected tick, top-right of the image (inside .zenith-mp__vcard-media). On the card corner it covered the end of the ribbon text. */
 .zenith-mp__vcard-check {
   position: absolute;
+  z-index: 1;
   top: 4px;
   right: 4px;
   width: 1.4rem;
