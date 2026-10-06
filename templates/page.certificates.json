@@ -233,6 +233,7 @@
         },
         "nn_hair_spray": {
           "type": "certificate",
+          "disabled": true,
           "settings": {
             "title": "Advanced Hair Density Spray",
             "number": "NN-1000015050639",
@@ -245,6 +246,7 @@
         },
         "nn_hair_shampoo": {
           "type": "certificate",
+          "disabled": true,
           "settings": {
             "title": "Advanced Hair Density Shampoo",
             "number": "NN-1000015997846",
