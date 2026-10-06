@@ -42,7 +42,7 @@
         "seal": {
           "type": "seal",
           "settings": {
-            "image": "shopify://shop_images/seal.png",
+            "image": "shopify://shop_images/Vector.svg",
             "title": "Amare Seal of Authenticity",
             "text": "The parent group's mark, on every Zenith product."
           }
@@ -854,6 +854,7 @@
       "type": "zenith-image-story",
       "settings": {
         "image": "shopify://shop_images/verify-products-cta-fda-notification-certificates-1-desktop.webp",
+        "logo": "shopify://shop_images/1.png",
         "use_brand_logo": false,
         "brand_logo_style": "tagline",
         "eyebrow": "",
@@ -874,7 +875,6 @@
         "content_max_width": 420,
         "text_max_width": 1000,
         "hide_heading_desktop": false,
-        "logo": "shopify://shop_images/1.png",
         "logo_width": 110,
         "columns_layout": "columns",
         "columns_spacing": 40,
