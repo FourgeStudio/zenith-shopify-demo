@@ -99,6 +99,7 @@
       "type": "zenith-hero",
       "settings": {
         "eyebrow": "Trusted by [customers] Filipino men",
+        "use_collection_content": false,
         "heading": "Everything you need to stay in your prime.",
         "heading_mobile": "",
         "text": "<p>Everything you need to look sharp, feel confident, and stay in your prime.</p>",
@@ -452,6 +453,7 @@
         "image_mobile": "shopify://shop_images/shop-all-featured-night-cream-jar-its-box-1-mobile.webp",
         "show_media_pager": false,
         "show_rating": false,
+        "below_price": "checklist",
         "image_position": "right",
         "full_width": false,
         "media_width": 48,
@@ -744,6 +746,10 @@
             "verified": true,
             "avatar": "shopify://shop_images/rinse.jpg",
             "author_detail": "",
+            "card_type": "auto",
+            "show_prefix": true,
+            "show_product": true,
+            "show_detail_product": true,
             "row": "1"
           }
         },
@@ -758,6 +764,10 @@
             "verified": true,
             "avatar": "shopify://shop_images/rinse.jpg",
             "author_detail": "",
+            "card_type": "auto",
+            "show_prefix": true,
+            "show_product": true,
+            "show_detail_product": true,
             "row": "1"
           }
         },
@@ -772,6 +782,10 @@
             "verified": true,
             "avatar": "shopify://shop_images/rinse.jpg",
             "author_detail": "",
+            "card_type": "auto",
+            "show_prefix": true,
+            "show_product": true,
+            "show_detail_product": true,
             "row": "1"
           }
         },
@@ -786,6 +800,10 @@
             "verified": true,
             "avatar": "shopify://shop_images/rinse.jpg",
             "author_detail": "",
+            "card_type": "auto",
+            "show_prefix": true,
+            "show_product": true,
+            "show_detail_product": true,
             "row": "1"
           }
         },
@@ -800,6 +818,10 @@
             "verified": true,
             "avatar": "shopify://shop_images/rinse.jpg",
             "author_detail": "",
+            "card_type": "auto",
+            "show_prefix": true,
+            "show_product": true,
+            "show_detail_product": true,
             "row": "1"
           }
         },
@@ -814,6 +836,10 @@
             "verified": true,
             "avatar": "shopify://shop_images/rinse.jpg",
             "author_detail": "",
+            "card_type": "auto",
+            "show_prefix": true,
+            "show_product": true,
+            "show_detail_product": true,
             "row": "2"
           }
         },
@@ -828,6 +854,10 @@
             "verified": true,
             "avatar": "shopify://shop_images/rinse.jpg",
             "author_detail": "",
+            "card_type": "auto",
+            "show_prefix": true,
+            "show_product": true,
+            "show_detail_product": true,
             "row": "2"
           }
         },
@@ -842,6 +872,10 @@
             "verified": true,
             "avatar": "shopify://shop_images/rinse.jpg",
             "author_detail": "",
+            "card_type": "auto",
+            "show_prefix": true,
+            "show_product": true,
+            "show_detail_product": true,
             "row": "2"
           }
         },
@@ -856,6 +890,10 @@
             "verified": true,
             "avatar": "shopify://shop_images/rinse.jpg",
             "author_detail": "",
+            "card_type": "auto",
+            "show_prefix": true,
+            "show_product": true,
+            "show_detail_product": true,
             "row": "2"
           }
         }
@@ -1172,10 +1210,10 @@
         "padding_bottom_mobile": 20
       }
     },
-    "zenith_reviews_4URhRq": {
+    "zenith_reviews_kL4rHp": {
       "type": "zenith-reviews",
       "blocks": {
-        "judge_me_reviews_review_widget_homepage_AYxWNH": {
+        "judge_me_reviews_review_widget_homepage_p6zCbj": {
           "type": "shopify://apps/judge-me-reviews/blocks/review_widget_homepage/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "settings": {
             "product": "zenith-anti-aging-tallow-cream",
@@ -1185,7 +1223,7 @@
         }
       },
       "block_order": [
-        "judge_me_reviews_review_widget_homepage_AYxWNH"
+        "judge_me_reviews_review_widget_homepage_p6zCbj"
       ],
       "settings": {
         "eyebrow": "",
@@ -1323,6 +1361,7 @@
       "disabled": true,
       "settings": {
         "eyebrow": "Trusted by [customers] Filipino men",
+        "use_collection_content": false,
         "heading": "The Maintenance System Built for Filipino Men",
         "heading_mobile": "",
         "text": "<p>Everything you need to stay in your prime.</p>",
@@ -1457,7 +1496,7 @@
     "results",
     "guarantee",
     "money_back",
-    "zenith_reviews_4URhRq",
+    "zenith_reviews_kL4rHp",
     "faq",
     "cta"
   ]
