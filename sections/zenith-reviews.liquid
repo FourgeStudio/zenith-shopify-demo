@@ -4,7 +4,8 @@
   Hosts the Judge.me app block. Storefront: renders nothing until an app block is added.
   Theme editor: shows a styled preview so the empty section looks intentional.
 {%- endcomment -%}
-{%- if section.blocks.size > 0 or request.design_mode -%}
+{%- assign jdgm_product = section.settings.jdgm_product -%}
+{%- if section.blocks.size > 0 or jdgm_product != blank or request.design_mode -%}
 {{ 'zenith-reviews.css' | asset_url | stylesheet_tag }}
 {%- liquid
   assign card_border = section.settings.card_border_color
@@ -60,13 +61,40 @@
       uppercase: section.settings.heading_uppercase
     -%}
 
-    {%- if section.blocks.size > 0 -%}
+    {%- liquid
+      # An app block that isn't allowed on this template renders nothing → fall through to the product widget below.
+      assign app_out = ''
+      for block in section.blocks
+        capture app_html
+          render block
+        endcapture
+        if app_html != blank
+          capture app_out
+            echo app_out
+            echo '<div id="Block-' | append: block.id | append: '" class="zenith-reviews__app" ' | append: block.shopify_attributes | append: '>'
+            echo app_html
+            echo '</div>'
+          endcapture
+        endif
+      endfor
+    -%}
+    {%- if app_out != blank -%}
+      <div class="zenith-reviews__apps">{{ app_out }}</div>
+    {%- elsif jdgm_product != blank -%}
+      {%- comment -%}
+        zenith: Judge.me's manual-install review widget for one product, for pages where its app blocks are not
+        offered (the homepage widget block only renders on the home page). Filled in by the Judge.me app embed.
+      {%- endcomment -%}
       <div class="zenith-reviews__apps">
-        {%- for block in section.blocks -%}
-          <div id="Block-{{ block.id }}" class="zenith-reviews__app" {{ block.shopify_attributes }}>
-            {%- render block -%}
+        <div class="zenith-reviews__app">
+          <div
+            class="jdgm-widget jdgm-review-widget jdgm-outside-widget"
+            data-id="{{ jdgm_product.id }}"
+            data-product-title="{{ jdgm_product.title | escape }}"
+          >
+            {{- jdgm_product.metafields.judgeme.widget -}}
           </div>
-        {%- endfor -%}
+        </div>
       </div>
     {%- else -%}
       {%- comment -%} Editor-only preview of the card style the Judge.me widget will get. {%- endcomment -%}
@@ -132,6 +160,12 @@
     {
       "type": "paragraph",
       "content": "Add the Judge.me reviews widget with \"Add block\" → Apps. Until an app block is added the section is hidden on the storefront and shows a preview in the editor."
+    },
+    {
+      "type": "product",
+      "id": "jdgm_product",
+      "label": "Judge.me reviews of (pages without the app block)",
+      "info": "For pages where Judge.me's homepage widget block doesn't show (collection pages, other pages): pick the product whose reviews to show. Only this section on this page. Ignored when an app block is added. Needs the Judge.me app embed on."
     },
     {
       "type": "text",
