@@ -13,16 +13,12 @@
     assign footer_image = settings.zg_footer_image
     assign show_payments = settings.zg_payment_icons
     assign footer_text = settings.zg_footer_text
-    assign courier_image = settings.zg_courier_image
-    assign courier_alt = settings.zg_courier_image_alt
   else
     assign col_max = section.blocks.size
     assign logo_max = section.blocks.size
     assign footer_image = section.settings.footer_image
     assign show_payments = section.settings.show_payment_icons
     assign footer_text = section.settings.footer_text
-    assign courier_image = section.settings.courier_image
-    assign courier_alt = section.settings.courier_image_alt
   endif
 -%}
 {%- if show_payments -%}{{ 'component-list-payment.css' | asset_url | stylesheet_tag }}{%- endif -%}
@@ -49,8 +45,6 @@
   --z-flgap: {{ section.settings.logo_gap }}px;
   --z-flgap-m: {{ section.settings.logo_gap_mobile }}px;
   --z-flo: {{ section.settings.logo_opacity | divided_by: 100.0 }};
-  --z-fciw: {{ section.settings.courier_image_width | default: 560 }}px;
-  --z-fciw-m: {{ section.settings.courier_image_width_mobile | default: 320 }}px;
   {%- if section.settings.icon_color != blank %}
   --z-icon-color: {{ section.settings.icon_color }};
   {%- endif %}
@@ -189,10 +183,10 @@
     </ul>
 
     {%- liquid
-      # zenith: one "Courier logos image" replaces the individual logos; logos stay as fallback when it is empty
+      # zenith: the Footer image (all courier logos in one image) replaces the individual logos; logos are the fallback when it is empty
       assign has_logos = false
-      if courier_image != blank
-        assign has_logos = true
+      if footer_image != blank
+        assign has_logos = false
       elsif use_global
         for n in (1..logo_max)
           assign p = 'zg_logo' | append: n | append: '_'
@@ -222,22 +216,7 @@
             | image_tag: loading: 'lazy', widths: '350, 700, 1050, 1400', sizes: footer_sizes, class: 'zenith-features__footer-image'
           }}
         {%- endif -%}
-        {%- if courier_image != blank -%}
-          {%- assign courier_sizes = '(min-width: 750px) ' | append: section.settings.courier_image_width | append: 'px, ' | append: section.settings.courier_image_width_mobile | append: 'px' -%}
-          {%- assign courier_alt = courier_alt | default: '' -%}
-          <div class="zenith-features__courier zenith-features__courier--{{ section.settings.logo_style }}">
-            {{
-              courier_image
-              | image_url: width: 2000
-              | image_tag:
-                loading: 'lazy',
-                widths: '320, 480, 640, 960, 1280, 1600, 2000',
-                sizes: courier_sizes,
-                alt: courier_alt,
-                class: 'zenith-features__courier-image'
-            }}
-          </div>
-        {%- elsif has_logos -%}
+        {%- if has_logos -%}
           {%- assign logo_sizes = section.settings.logo_max_width | append: 'px' -%}
           <ul class="zenith-features__logos zenith-features__logos--{{ section.settings.logo_style }}" role="list">
             {%- for n in (1..logo_max) -%}
@@ -365,21 +344,7 @@
       "id": "footer_image",
       "label": "Footer image",
       "visible_if": "{{ section.settings.content_source == 'custom' }}",
-      "info": "All logos in one image. To upload logos one by one (each with its own size), use Add block → Footer logo."
-    },
-    {
-      "type": "image_picker",
-      "id": "courier_image",
-      "label": "Courier logos image",
-      "visible_if": "{{ section.settings.content_source == 'custom' }}",
-      "info": "One image with all courier logos (GOGO, SPX, LBC, J&T, Ninja Van). Replaces the Footer logo blocks. Leave empty to show the blocks."
-    },
-    {
-      "type": "text",
-      "id": "courier_image_alt",
-      "label": "Courier logos image alt text",
-      "visible_if": "{{ section.settings.content_source == 'custom' }}",
-      "info": "e.g. Couriers: GOGO, SPX, LBC, J&T, Ninja Van. Leave empty if the footer text already names them."
+      "info": "One image with all courier logos (GOGO, SPX, LBC, J&T, Ninja Van). When set it replaces the Footer logo blocks; leave empty to use the blocks. Alt text = the image's alt in Content → Files."
     },
     {
       "type": "checkbox",
@@ -643,17 +608,6 @@
       "step": 8,
       "unit": "px",
       "default": 336
-    },
-    {
-      "type": "range",
-      "id": "courier_image_width",
-      "label": "Courier logos image max width",
-      "info": "Used when a Courier logos image is set (here or in Theme settings → Zenith · Guarantee).",
-      "min": 120,
-      "max": 1000,
-      "step": 10,
-      "unit": "px",
-      "default": 560
     },
     {
       "type": "range",
@@ -1185,16 +1139,6 @@
       "step": 8,
       "unit": "px",
       "default": 336
-    },
-    {
-      "type": "range",
-      "id": "courier_image_width_mobile",
-      "label": "Courier logos image max width",
-      "min": 120,
-      "max": 400,
-      "step": 8,
-      "unit": "px",
-      "default": 320
     },
     {
       "type": "range",

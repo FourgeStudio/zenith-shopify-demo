@@ -135,22 +135,6 @@
   justify-content: center;
 }
 
-/* Courier logos image: one image replacing the individual footer logos */
-.zenith-features__courier {
-  width: 100%;
-  max-width: var(--z-fciw-m, 32rem);
-}
-
-.zenith-features__courier-image {
-  display: block;
-  width: 100%;
-  height: auto;
-  opacity: var(--z-flo, 1);
-}
-
-.zenith-features__courier--white .zenith-features__courier-image { filter: brightness(0) invert(1); }
-.zenith-features__courier--black .zenith-features__courier-image { filter: brightness(0); }
-.zenith-features__courier--grayscale .zenith-features__courier-image { filter: grayscale(1); }
 
 /* Footer logos (blocks "Footer logo"): one row, each logo scaled from the section's logo height */
 .zenith-features__logos {
@@ -332,10 +316,6 @@
 
   .zenith-features__footer-image {
     max-width: var(--z-fiw, 33.6rem);
-  }
-
-  .zenith-features__courier {
-    max-width: var(--z-fciw, 56rem);
   }
 
   .zenith-features__logos {
