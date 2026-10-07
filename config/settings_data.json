@@ -39,6 +39,8 @@
     "jdgm_custom_style": true,
     "cart_show_compare_price": true,
     "cart_shipping_fee": 100,
+    "cart_shipping_province": "Metro Manila",
+    "cart_shipping_zip": "1000",
     "cart_tiers_on": true,
     "cart_upsell_enable": false,
     "cart_upsell_heading": "Best used with",

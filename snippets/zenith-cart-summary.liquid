@@ -51,7 +51,8 @@
   endif
   assign zcsum_total = zcsum_paid | plus: zcsum_fee
   assign zcsum_live = false
-  if settings.cart_shipping_source != 'theme' and cart.item_count > 0
+  # Free-shipping goal reached → plain FREE, no rate lookup (the lookup could only make it worse: "Calculated at checkout").
+  if settings.cart_shipping_source != 'theme' and cart.item_count > 0 and zcsum_ship_on == false
     assign zcsum_live = true
   endif
 -%}
