@@ -13,8 +13,7 @@ _Last updated: 2026-10-01. Keep this file current at the end of each work sessio
 - Security pass 2026-09-21: whole repo + full git history audited (no secrets, no third-party JS, every fetch same-origin, all `<script>`/JSON-LD output goes through `| json`, all forms are native `{% form %}`). Hardening applied: every merchant-entered link is now `{{ ... | escape }}`, `current_tags` escaped in the `<title>`, and every `target="_blank"` carries `rel="noopener"`.
 - Brand tokens, colors, fonts, logos: see `.claude/brand.md`.
 
-## Branch flow (three branches)
-- `demo` (created 2026-10-08 from `main`) — connect to the **Zenith Demo** dev store (Fourge Studio) so the client can review before go-live. Receives `main` after every release (`main` → `demo`). Never merge `demo` back wholesale; port wanted demo-editor edits by hand. Demo store must have the same product/collection handles and Files names (see Remaining work → Demo store) or sections show blanks.
+## Branch flow (two branches only)
 - `staging` — all work is committed here and pushed.
 - `main` — production; updated by merging `staging` when a piece of work is done.
 - No feature branches unless explicitly asked; delete them after merge.
@@ -210,7 +209,7 @@ _Last updated: 2026-10-01. Keep this file current at the end of each work sessio
 - `sections/zenith-custom-code.liquid`: paste HTML / Liquid / app embed code (e.g. Judge.me widget code) on any page; heading + mobile heading, width (page / narrow / full), hide on mobile/desktop, paddings. Each instance is per template, so every page can hold different code.
 
 ### Demo store setup (2026-10-08, client/admin)
-- Admin → Online Store → Themes → Add theme → Connect from GitHub → zenithph/zenith-shopify, branch **demo**.
+- No `demo` branch (created and deleted 2026-10-08: the Shopify GitHub dialog on the demo store only listed `main`). Theme goes in as a zip: `git archive --format=zip -o zenith-theme-demo.zip main assets config layout locales sections snippets templates` → Themes → Add theme → Upload zip file. Not synced — re-zip after changes; client edits there stay on the demo store.
 - Products with the SAME handles: zenith-anti-aging-tallow-cream, -tallow-cleanser, -tallow-day-cream-spf30, zenith-advanced-hair-density-shampoo, -spray (Products → Export CSV on the live store → Import on demo; images come with it). Metafields custom.short_description / custom.card_image definitions.
 - Collections with the same handles: all (automatic), shop-all, skin-products, hair-products, hair.
 - Content → Files: upload `design/Zenith PH Shopify/_upload-to-shopify-files/` with the SAME file names (276 `shopify://shop_images/<name>` refs resolve by name per store) + any files uploaded later (seals, courier strip, FDA 1.png, payments).

@@ -5,18 +5,16 @@ description: Conventions for editing this Dawn 16 Shopify theme — git branchin
 
 # Dawn customization playbook
 
-## 1. Git — three branches (staging, main, demo)
+## 1. Git — two branches only
 | Branch | Purpose | Shopify theme (GitHub integration) |
 |---|---|---|
 | `staging` | all work happens here | connect as unpublished preview theme |
 | `main` | production | "zenith-shopify/main" theme (publish when ready) |
-| `demo` | client review copy of `main` | theme on the **Zenith Demo** dev store (client clicks around before go-live) |
 
 Flow:
 - Start every session: `git checkout staging; git pull`.
 - Commit to `staging` directly, one logical change per commit: `feat(zenith-hero): add section`. Push after each commit.
-- Release: `git checkout main; git pull; git merge staging; git push; git checkout demo; git pull; git merge main; git push; git checkout staging`.
-- `demo` gets the client's editor saves from the demo store. Never merge `demo` into `main`/`staging` wholesale (demo content may differ); port wanted edits by hand. On JSON conflicts when merging `main` → `demo`, keep `main`'s version unless the demo edit is wanted.
+- Release: `git checkout main; git pull; git merge staging; git push; git checkout staging`.
 - Feature branches only when the user asks for one; delete after merging.
 - Shopify's GitHub integration commits theme-editor changes (`config/settings_data.json`, `templates/*.json`) back to the connected branch → always `git pull` before starting; after editor sessions on `main`, merge `main` back into `staging`. On JSON conflicts keep the editor's content values, re-apply only structural changes.
 - Never force-push.
