@@ -202,6 +202,7 @@ _Last updated: 2026-10-01. Keep this file current at the end of each work sessio
 - **Default collection** (`collection.json`): promo hero + hero (new `use_collection_content` → collection title/description) + zenith-product-grid (current collection, max 50, no pagination/filters) + guarantee banner.
 - **Cart shipping**: `assets/zenith-cart-shipping.js` reads Shopify's real rates (`/cart/prepare_shipping_rates.json` → `async_shipping_rates.json`) for a fixed address (Zenith · Cart → country PH + region "Metro Manila" + postal code "1000" — **PH needs region AND postal code or the API returns an error**, verified against the store 2026-10-08: ₱100 below ₱1,200, "FREE Shipping Over ₱1,200" above). Goal reached (theme threshold) → plain FREE, no lookup. Flat fee shown dimmed until it answers. `cart_shipping_source` = legacy flat fee switch. Free-shipping **threshold** still a theme setting (progress bar, ribbons).
 - Judge.me mobile spacing roughly halved (`zenith-judgeme.css`, ≤749px).
+- **Judge.me off the homepage**: the `review_widget_homepage` app block renders nothing outside the home page (Shop All showed the editor skeleton with the block present). Zenith · Reviews → *Judge.me reviews of* (`jdgm_product`) outputs Judge.me's manual widget (`.jdgm-widget.jdgm-review-widget` + `metafields.judgeme.widget`) when no app block produced output; set to tallow cream on Shop All, Certificates, Verify. **Untested on the store.**
 - Open: seals/icons as SVG need vector sources (Figma export) — no conversion done.
 
 ### Zenith · Custom code (2026-09-29)
