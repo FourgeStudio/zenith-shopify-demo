@@ -1172,17 +1172,30 @@
         "padding_bottom_mobile": 20
       }
     },
-    "reviews": {
+    "zenith_reviews_4URhRq": {
       "type": "zenith-reviews",
+      "blocks": {
+        "judge_me_reviews_review_widget_homepage_AYxWNH": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget_homepage/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "product": "zenith-anti-aging-tallow-cream",
+            "review_data": "real_data",
+            "max_width": 1200
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_homepage_AYxWNH"
+      ],
       "settings": {
         "eyebrow": "",
         "heading": "[customers] Filipino Men Trust Zenith Products",
         "subheading": "<p>Men in Manila using the cream. Unedited and verified.</p>",
         "heading_alignment": "center",
-        "heading_max_width": 760,
+        "heading_max_width": 900,
         "subheading_spacing": 28,
         "heading_spacing": 48,
-        "jdgm_masonry": true,
+        "jdgm_masonry": false,
         "columns_desktop": 4,
         "gap": 20,
         "content_padding": 12,
@@ -1201,8 +1214,8 @@
         "text_font_size": 14,
         "icon_size": 14,
         "button_font_size": 20,
-        "heading_mobile": "What Zenith men are saying",
-        "subheading_mobile": "<p>Men across the Philippines using the cream. Unedited and verified.</p>",
+        "heading_mobile": "[customers] Filipino Men Trust Zenith Products",
+        "subheading_mobile": "<p>Real Filipino men using Zenith. Unedited and verified.</p>",
         "heading_font_size_mobile": 36,
         "subheading_font_size_mobile": 16,
         "subheading_opacity_mobile": 70,
@@ -1212,10 +1225,10 @@
         "content_padding_mobile": 12,
         "text_font_size_mobile": 14,
         "button_font_size_mobile": 20,
-        "padding_top": 52,
+        "padding_top": 72,
         "padding_bottom": 48,
-        "padding_top_mobile": 20,
-        "padding_bottom_mobile": 8
+        "padding_top_mobile": 32,
+        "padding_bottom_mobile": 20
       }
     },
     "faq": {
@@ -1443,7 +1456,7 @@
     "results",
     "guarantee",
     "money_back",
-    "reviews",
+    "zenith_reviews_4URhRq",
     "faq",
     "cta"
   ]
