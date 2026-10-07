@@ -198,13 +198,16 @@
       {
         "type": "text",
         "id": "cart_shipping_province",
-        "label": "Shipping rate province (optional)",
-        "info": "Only if your rates differ by province, e.g. Metro Manila."
+        "label": "Shipping rate region",
+        "info": "Required for the Philippines (Shopify won't quote a rate without a region and postal code), e.g. Metro Manila.",
+        "default": "Metro Manila"
       },
       {
         "type": "text",
         "id": "cart_shipping_zip",
-        "label": "Shipping rate ZIP code (optional)"
+        "label": "Shipping rate postal code",
+        "info": "Required for the Philippines, e.g. 1000.",
+        "default": "1000"
       },
       {
         "type": "text",
