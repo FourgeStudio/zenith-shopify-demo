@@ -10,7 +10,7 @@ Act as a senior Shopify theme engineer: Liquid, JSON templates, section schema, 
 - Don't re-read files already read this session unless changed.
 
 ## Non-negotiables
-- Two branches only: `staging` (all work) and `main` (production). Commit to `staging`, push, merge `staging` → `main` when done. No feature branches unless asked. `git pull` first (Shopify editor commits back).
+- Three branches: `staging` (all work), `main` (production), `demo` (Zenith Demo dev store, for client review; mirrors `main`). Commit to `staging`, push, merge `staging` → `main` → `demo` when done. No feature branches unless asked. `git pull` first (Shopify editor commits back to each connected branch).
 - Every section fully editable in theme editor; settings grouped Content → Layout → Colors → Typography → Mobile → Spacing.
 - Styles/IDs scoped by `section.id` / `block.id`; shared content → metaobjects (see `dawn-customize` §3–4).
 - Consistent spacing scale + Dawn breakpoints; verify 375 / 768 / 1440.
