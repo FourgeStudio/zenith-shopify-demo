@@ -301,13 +301,15 @@
 
                 {%- when 'logos' -%}
                   <div id="Block-{{ block.id }}" class="zenith-verify__logos" {{ block.shopify_attributes }}>
-                    {%- if block.settings.image != blank -%}
+                    {%- comment -%} zenith: block image → shared courier image (Theme settings → Zenith · Guarantee → Footer image) → logo slots {%- endcomment -%}
+                    {%- assign logos_image = block.settings.image | default: settings.zg_footer_image -%}
+                    {%- if logos_image != blank -%}
                       {%- liquid
-                        assign logos_alt = block.settings.image.alt | default: block.settings.caption
+                        assign logos_alt = logos_image.alt | default: block.settings.caption
                         assign logos_sizes = '(min-width: 750px) ' | append: block.settings.logo_width | append: 'px, ' | append: block.settings.logo_width_mobile | append: 'px'
                       -%}
                       {{
-                        block.settings.image
+                        logos_image
                         | image_url: width: 1200
                         | image_tag:
                           loading: 'lazy',
@@ -1293,7 +1295,7 @@
           "type": "image_picker",
           "id": "image",
           "label": "Logos image",
-          "info": "One image with all courier logos in a row, transparent background (about 1000 × 64 px). Empty = the courier logos from Theme settings → Zenith · Guarantee."
+          "info": "One image with all courier logos in a row, transparent background (about 1000 × 64 px). Empty = Theme settings → Zenith · Guarantee → Footer image (shared with the homepage), then its logo slots."
         },
         {
           "type": "textarea",
