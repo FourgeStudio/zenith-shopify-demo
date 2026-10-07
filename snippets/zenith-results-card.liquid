@@ -7,6 +7,7 @@
   - attrs: id + editor attributes (first copy only)
   - clone: true = link out of tab order (the marquee now clones in zenith-results-marquee.js and always passes false)
   - prefix, verified_label, photo_sizes, overlay_style, show_avatar: section settings (avatar/initial beside the name only when show_avatar)
+  - card_type: auto (default) / full / text / photo — forces the card layout
   - show_prefix, show_product, show_detail_product: per-card toggles; only an explicit false hides (nil = shown)
     show_prefix = "Used" word on the photo, show_product = product name on the photo (thumbnail stays),
     show_detail_product = product name under the reviewer when "Text under the name" is empty
@@ -52,6 +53,20 @@
   elsif has_review == false
     assign card_mod = ' zenith-results__card--photo'
   endif
+  # card_type (Card type setting) overrides the auto choice: full / text / photo.
+  case card_type
+    when 'full'
+      if photo != blank and has_review
+        assign card_mod = ''
+      endif
+    when 'text'
+      if has_review
+        assign card_mod = ' zenith-results__card--text'
+      endif
+    when 'photo'
+      assign card_mod = ' zenith-results__card--photo'
+      assign has_review = false
+  endcase
 -%}
 <li class="zenith-results__card{{ card_mod }}" {{ attrs }}>
   {%- unless card_mod contains '--text' -%}

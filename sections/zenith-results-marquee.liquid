@@ -161,6 +161,8 @@
             assign c_avatar = settings[k]
             assign k = p | append: 'detail'
             assign c_detail = settings[k]
+            assign k = p | append: 'card_type'
+            assign c_card_type = settings[k]
             assign k = p | append: 'show_prefix'
             assign c_show_prefix = settings[k]
             assign k = p | append: 'show_product'
@@ -171,6 +173,7 @@
           else
             assign block_index = n | minus: 1
             assign block = section.blocks[block_index]
+            assign c_card_type = block.settings.card_type
             assign c_show_prefix = block.settings.show_prefix
             assign c_show_product = block.settings.show_product
             assign c_show_detail_product = block.settings.show_detail_product
@@ -203,6 +206,7 @@
             verified: c_verified,
             avatar: c_avatar,
             author_detail: c_detail,
+            card_type: c_card_type,
             show_prefix: c_show_prefix,
             show_product: c_show_product,
             show_detail_product: c_show_detail_product,
@@ -1141,6 +1145,31 @@
           "id": "author_detail",
           "label": "Text under the name",
           "info": "Leave empty to show the product's name"
+        },
+        {
+          "type": "select",
+          "id": "card_type",
+          "label": "Card type",
+          "info": "Auto = from what is filled in (photo + review = full card, review only = text card, photo only = photo card).",
+          "options": [
+            {
+              "value": "auto",
+              "label": "Auto"
+            },
+            {
+              "value": "full",
+              "label": "Photo + review"
+            },
+            {
+              "value": "text",
+              "label": "Review only (text card)"
+            },
+            {
+              "value": "photo",
+              "label": "Photo only (with Used + product)"
+            }
+          ],
+          "default": "auto"
         },
         {
           "type": "checkbox",

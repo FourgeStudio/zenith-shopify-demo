@@ -1697,6 +1697,31 @@
         "info": "Leave empty to show the product's name"
       },
       {
+        "type": "select",
+        "id": "rv1_card_type",
+        "label": "Card type",
+        "info": "Auto = from what is filled in (photo + review = full card, review only = text card, photo only = photo card).",
+        "options": [
+          {
+            "value": "auto",
+            "label": "Auto"
+          },
+          {
+            "value": "full",
+            "label": "Photo + review"
+          },
+          {
+            "value": "text",
+            "label": "Review only (text card)"
+          },
+          {
+            "value": "photo",
+            "label": "Photo only (with Used + product)"
+          }
+        ],
+        "default": "auto"
+      },
+      {
         "type": "checkbox",
         "id": "rv1_show_prefix",
         "label": "Show the word before the product name",
@@ -1800,6 +1825,31 @@
         "id": "rv2_detail",
         "label": "Text under the name",
         "info": "Leave empty to show the product's name"
+      },
+      {
+        "type": "select",
+        "id": "rv2_card_type",
+        "label": "Card type",
+        "info": "Auto = from what is filled in (photo + review = full card, review only = text card, photo only = photo card).",
+        "options": [
+          {
+            "value": "auto",
+            "label": "Auto"
+          },
+          {
+            "value": "full",
+            "label": "Photo + review"
+          },
+          {
+            "value": "text",
+            "label": "Review only (text card)"
+          },
+          {
+            "value": "photo",
+            "label": "Photo only (with Used + product)"
+          }
+        ],
+        "default": "auto"
       },
       {
         "type": "checkbox",
@@ -1907,6 +1957,31 @@
         "info": "Leave empty to show the product's name"
       },
       {
+        "type": "select",
+        "id": "rv3_card_type",
+        "label": "Card type",
+        "info": "Auto = from what is filled in (photo + review = full card, review only = text card, photo only = photo card).",
+        "options": [
+          {
+            "value": "auto",
+            "label": "Auto"
+          },
+          {
+            "value": "full",
+            "label": "Photo + review"
+          },
+          {
+            "value": "text",
+            "label": "Review only (text card)"
+          },
+          {
+            "value": "photo",
+            "label": "Photo only (with Used + product)"
+          }
+        ],
+        "default": "auto"
+      },
+      {
         "type": "checkbox",
         "id": "rv3_show_prefix",
         "label": "Show the word before the product name",
@@ -2010,6 +2085,31 @@
         "id": "rv4_detail",
         "label": "Text under the name",
         "info": "Leave empty to show the product's name"
+      },
+      {
+        "type": "select",
+        "id": "rv4_card_type",
+        "label": "Card type",
+        "info": "Auto = from what is filled in (photo + review = full card, review only = text card, photo only = photo card).",
+        "options": [
+          {
+            "value": "auto",
+            "label": "Auto"
+          },
+          {
+            "value": "full",
+            "label": "Photo + review"
+          },
+          {
+            "value": "text",
+            "label": "Review only (text card)"
+          },
+          {
+            "value": "photo",
+            "label": "Photo only (with Used + product)"
+          }
+        ],
+        "default": "auto"
       },
       {
         "type": "checkbox",
@@ -2117,6 +2217,31 @@
         "info": "Leave empty to show the product's name"
       },
       {
+        "type": "select",
+        "id": "rv5_card_type",
+        "label": "Card type",
+        "info": "Auto = from what is filled in (photo + review = full card, review only = text card, photo only = photo card).",
+        "options": [
+          {
+            "value": "auto",
+            "label": "Auto"
+          },
+          {
+            "value": "full",
+            "label": "Photo + review"
+          },
+          {
+            "value": "text",
+            "label": "Review only (text card)"
+          },
+          {
+            "value": "photo",
+            "label": "Photo only (with Used + product)"
+          }
+        ],
+        "default": "auto"
+      },
+      {
         "type": "checkbox",
         "id": "rv5_show_prefix",
         "label": "Show the word before the product name",
@@ -2220,6 +2345,31 @@
         "id": "rv6_detail",
         "label": "Text under the name",
         "info": "Leave empty to show the product's name"
+      },
+      {
+        "type": "select",
+        "id": "rv6_card_type",
+        "label": "Card type",
+        "info": "Auto = from what is filled in (photo + review = full card, review only = text card, photo only = photo card).",
+        "options": [
+          {
+            "value": "auto",
+            "label": "Auto"
+          },
+          {
+            "value": "full",
+            "label": "Photo + review"
+          },
+          {
+            "value": "text",
+            "label": "Review only (text card)"
+          },
+          {
+            "value": "photo",
+            "label": "Photo only (with Used + product)"
+          }
+        ],
+        "default": "auto"
       },
       {
         "type": "checkbox",
@@ -2327,6 +2477,31 @@
         "info": "Leave empty to show the product's name"
       },
       {
+        "type": "select",
+        "id": "rv7_card_type",
+        "label": "Card type",
+        "info": "Auto = from what is filled in (photo + review = full card, review only = text card, photo only = photo card).",
+        "options": [
+          {
+            "value": "auto",
+            "label": "Auto"
+          },
+          {
+            "value": "full",
+            "label": "Photo + review"
+          },
+          {
+            "value": "text",
+            "label": "Review only (text card)"
+          },
+          {
+            "value": "photo",
+            "label": "Photo only (with Used + product)"
+          }
+        ],
+        "default": "auto"
+      },
+      {
         "type": "checkbox",
         "id": "rv7_show_prefix",
         "label": "Show the word before the product name",
@@ -2430,6 +2605,31 @@
         "id": "rv8_detail",
         "label": "Text under the name",
         "info": "Leave empty to show the product's name"
+      },
+      {
+        "type": "select",
+        "id": "rv8_card_type",
+        "label": "Card type",
+        "info": "Auto = from what is filled in (photo + review = full card, review only = text card, photo only = photo card).",
+        "options": [
+          {
+            "value": "auto",
+            "label": "Auto"
+          },
+          {
+            "value": "full",
+            "label": "Photo + review"
+          },
+          {
+            "value": "text",
+            "label": "Review only (text card)"
+          },
+          {
+            "value": "photo",
+            "label": "Photo only (with Used + product)"
+          }
+        ],
+        "default": "auto"
       },
       {
         "type": "checkbox",
@@ -2537,6 +2737,31 @@
         "info": "Leave empty to show the product's name"
       },
       {
+        "type": "select",
+        "id": "rv9_card_type",
+        "label": "Card type",
+        "info": "Auto = from what is filled in (photo + review = full card, review only = text card, photo only = photo card).",
+        "options": [
+          {
+            "value": "auto",
+            "label": "Auto"
+          },
+          {
+            "value": "full",
+            "label": "Photo + review"
+          },
+          {
+            "value": "text",
+            "label": "Review only (text card)"
+          },
+          {
+            "value": "photo",
+            "label": "Photo only (with Used + product)"
+          }
+        ],
+        "default": "auto"
+      },
+      {
         "type": "checkbox",
         "id": "rv9_show_prefix",
         "label": "Show the word before the product name",
@@ -2640,6 +2865,31 @@
         "id": "rv10_detail",
         "label": "Text under the name",
         "info": "Leave empty to show the product's name"
+      },
+      {
+        "type": "select",
+        "id": "rv10_card_type",
+        "label": "Card type",
+        "info": "Auto = from what is filled in (photo + review = full card, review only = text card, photo only = photo card).",
+        "options": [
+          {
+            "value": "auto",
+            "label": "Auto"
+          },
+          {
+            "value": "full",
+            "label": "Photo + review"
+          },
+          {
+            "value": "text",
+            "label": "Review only (text card)"
+          },
+          {
+            "value": "photo",
+            "label": "Photo only (with Used + product)"
+          }
+        ],
+        "default": "auto"
       },
       {
         "type": "checkbox",
@@ -2747,6 +2997,31 @@
         "info": "Leave empty to show the product's name"
       },
       {
+        "type": "select",
+        "id": "rv11_card_type",
+        "label": "Card type",
+        "info": "Auto = from what is filled in (photo + review = full card, review only = text card, photo only = photo card).",
+        "options": [
+          {
+            "value": "auto",
+            "label": "Auto"
+          },
+          {
+            "value": "full",
+            "label": "Photo + review"
+          },
+          {
+            "value": "text",
+            "label": "Review only (text card)"
+          },
+          {
+            "value": "photo",
+            "label": "Photo only (with Used + product)"
+          }
+        ],
+        "default": "auto"
+      },
+      {
         "type": "checkbox",
         "id": "rv11_show_prefix",
         "label": "Show the word before the product name",
@@ -2850,6 +3125,31 @@
         "id": "rv12_detail",
         "label": "Text under the name",
         "info": "Leave empty to show the product's name"
+      },
+      {
+        "type": "select",
+        "id": "rv12_card_type",
+        "label": "Card type",
+        "info": "Auto = from what is filled in (photo + review = full card, review only = text card, photo only = photo card).",
+        "options": [
+          {
+            "value": "auto",
+            "label": "Auto"
+          },
+          {
+            "value": "full",
+            "label": "Photo + review"
+          },
+          {
+            "value": "text",
+            "label": "Review only (text card)"
+          },
+          {
+            "value": "photo",
+            "label": "Photo only (with Used + product)"
+          }
+        ],
+        "default": "auto"
       },
       {
         "type": "checkbox",
@@ -2957,6 +3257,31 @@
         "info": "Leave empty to show the product's name"
       },
       {
+        "type": "select",
+        "id": "rv13_card_type",
+        "label": "Card type",
+        "info": "Auto = from what is filled in (photo + review = full card, review only = text card, photo only = photo card).",
+        "options": [
+          {
+            "value": "auto",
+            "label": "Auto"
+          },
+          {
+            "value": "full",
+            "label": "Photo + review"
+          },
+          {
+            "value": "text",
+            "label": "Review only (text card)"
+          },
+          {
+            "value": "photo",
+            "label": "Photo only (with Used + product)"
+          }
+        ],
+        "default": "auto"
+      },
+      {
         "type": "checkbox",
         "id": "rv13_show_prefix",
         "label": "Show the word before the product name",
@@ -3060,6 +3385,31 @@
         "id": "rv14_detail",
         "label": "Text under the name",
         "info": "Leave empty to show the product's name"
+      },
+      {
+        "type": "select",
+        "id": "rv14_card_type",
+        "label": "Card type",
+        "info": "Auto = from what is filled in (photo + review = full card, review only = text card, photo only = photo card).",
+        "options": [
+          {
+            "value": "auto",
+            "label": "Auto"
+          },
+          {
+            "value": "full",
+            "label": "Photo + review"
+          },
+          {
+            "value": "text",
+            "label": "Review only (text card)"
+          },
+          {
+            "value": "photo",
+            "label": "Photo only (with Used + product)"
+          }
+        ],
+        "default": "auto"
       },
       {
         "type": "checkbox",
@@ -3167,6 +3517,31 @@
         "info": "Leave empty to show the product's name"
       },
       {
+        "type": "select",
+        "id": "rv15_card_type",
+        "label": "Card type",
+        "info": "Auto = from what is filled in (photo + review = full card, review only = text card, photo only = photo card).",
+        "options": [
+          {
+            "value": "auto",
+            "label": "Auto"
+          },
+          {
+            "value": "full",
+            "label": "Photo + review"
+          },
+          {
+            "value": "text",
+            "label": "Review only (text card)"
+          },
+          {
+            "value": "photo",
+            "label": "Photo only (with Used + product)"
+          }
+        ],
+        "default": "auto"
+      },
+      {
         "type": "checkbox",
         "id": "rv15_show_prefix",
         "label": "Show the word before the product name",
@@ -3270,6 +3645,31 @@
         "id": "rv16_detail",
         "label": "Text under the name",
         "info": "Leave empty to show the product's name"
+      },
+      {
+        "type": "select",
+        "id": "rv16_card_type",
+        "label": "Card type",
+        "info": "Auto = from what is filled in (photo + review = full card, review only = text card, photo only = photo card).",
+        "options": [
+          {
+            "value": "auto",
+            "label": "Auto"
+          },
+          {
+            "value": "full",
+            "label": "Photo + review"
+          },
+          {
+            "value": "text",
+            "label": "Review only (text card)"
+          },
+          {
+            "value": "photo",
+            "label": "Photo only (with Used + product)"
+          }
+        ],
+        "default": "auto"
       },
       {
         "type": "checkbox",
@@ -3377,6 +3777,31 @@
         "info": "Leave empty to show the product's name"
       },
       {
+        "type": "select",
+        "id": "rv17_card_type",
+        "label": "Card type",
+        "info": "Auto = from what is filled in (photo + review = full card, review only = text card, photo only = photo card).",
+        "options": [
+          {
+            "value": "auto",
+            "label": "Auto"
+          },
+          {
+            "value": "full",
+            "label": "Photo + review"
+          },
+          {
+            "value": "text",
+            "label": "Review only (text card)"
+          },
+          {
+            "value": "photo",
+            "label": "Photo only (with Used + product)"
+          }
+        ],
+        "default": "auto"
+      },
+      {
         "type": "checkbox",
         "id": "rv17_show_prefix",
         "label": "Show the word before the product name",
@@ -3480,6 +3905,31 @@
         "id": "rv18_detail",
         "label": "Text under the name",
         "info": "Leave empty to show the product's name"
+      },
+      {
+        "type": "select",
+        "id": "rv18_card_type",
+        "label": "Card type",
+        "info": "Auto = from what is filled in (photo + review = full card, review only = text card, photo only = photo card).",
+        "options": [
+          {
+            "value": "auto",
+            "label": "Auto"
+          },
+          {
+            "value": "full",
+            "label": "Photo + review"
+          },
+          {
+            "value": "text",
+            "label": "Review only (text card)"
+          },
+          {
+            "value": "photo",
+            "label": "Photo only (with Used + product)"
+          }
+        ],
+        "default": "auto"
       },
       {
         "type": "checkbox",
@@ -3587,6 +4037,31 @@
         "info": "Leave empty to show the product's name"
       },
       {
+        "type": "select",
+        "id": "rv19_card_type",
+        "label": "Card type",
+        "info": "Auto = from what is filled in (photo + review = full card, review only = text card, photo only = photo card).",
+        "options": [
+          {
+            "value": "auto",
+            "label": "Auto"
+          },
+          {
+            "value": "full",
+            "label": "Photo + review"
+          },
+          {
+            "value": "text",
+            "label": "Review only (text card)"
+          },
+          {
+            "value": "photo",
+            "label": "Photo only (with Used + product)"
+          }
+        ],
+        "default": "auto"
+      },
+      {
         "type": "checkbox",
         "id": "rv19_show_prefix",
         "label": "Show the word before the product name",
@@ -3690,6 +4165,31 @@
         "id": "rv20_detail",
         "label": "Text under the name",
         "info": "Leave empty to show the product's name"
+      },
+      {
+        "type": "select",
+        "id": "rv20_card_type",
+        "label": "Card type",
+        "info": "Auto = from what is filled in (photo + review = full card, review only = text card, photo only = photo card).",
+        "options": [
+          {
+            "value": "auto",
+            "label": "Auto"
+          },
+          {
+            "value": "full",
+            "label": "Photo + review"
+          },
+          {
+            "value": "text",
+            "label": "Review only (text card)"
+          },
+          {
+            "value": "photo",
+            "label": "Photo only (with Used + product)"
+          }
+        ],
+        "default": "auto"
       },
       {
         "type": "checkbox",
@@ -3797,6 +4297,31 @@
         "info": "Leave empty to show the product's name"
       },
       {
+        "type": "select",
+        "id": "rv21_card_type",
+        "label": "Card type",
+        "info": "Auto = from what is filled in (photo + review = full card, review only = text card, photo only = photo card).",
+        "options": [
+          {
+            "value": "auto",
+            "label": "Auto"
+          },
+          {
+            "value": "full",
+            "label": "Photo + review"
+          },
+          {
+            "value": "text",
+            "label": "Review only (text card)"
+          },
+          {
+            "value": "photo",
+            "label": "Photo only (with Used + product)"
+          }
+        ],
+        "default": "auto"
+      },
+      {
         "type": "checkbox",
         "id": "rv21_show_prefix",
         "label": "Show the word before the product name",
@@ -3900,6 +4425,31 @@
         "id": "rv22_detail",
         "label": "Text under the name",
         "info": "Leave empty to show the product's name"
+      },
+      {
+        "type": "select",
+        "id": "rv22_card_type",
+        "label": "Card type",
+        "info": "Auto = from what is filled in (photo + review = full card, review only = text card, photo only = photo card).",
+        "options": [
+          {
+            "value": "auto",
+            "label": "Auto"
+          },
+          {
+            "value": "full",
+            "label": "Photo + review"
+          },
+          {
+            "value": "text",
+            "label": "Review only (text card)"
+          },
+          {
+            "value": "photo",
+            "label": "Photo only (with Used + product)"
+          }
+        ],
+        "default": "auto"
       },
       {
         "type": "checkbox",
@@ -4007,6 +4557,31 @@
         "info": "Leave empty to show the product's name"
       },
       {
+        "type": "select",
+        "id": "rv23_card_type",
+        "label": "Card type",
+        "info": "Auto = from what is filled in (photo + review = full card, review only = text card, photo only = photo card).",
+        "options": [
+          {
+            "value": "auto",
+            "label": "Auto"
+          },
+          {
+            "value": "full",
+            "label": "Photo + review"
+          },
+          {
+            "value": "text",
+            "label": "Review only (text card)"
+          },
+          {
+            "value": "photo",
+            "label": "Photo only (with Used + product)"
+          }
+        ],
+        "default": "auto"
+      },
+      {
         "type": "checkbox",
         "id": "rv23_show_prefix",
         "label": "Show the word before the product name",
@@ -4110,6 +4685,31 @@
         "id": "rv24_detail",
         "label": "Text under the name",
         "info": "Leave empty to show the product's name"
+      },
+      {
+        "type": "select",
+        "id": "rv24_card_type",
+        "label": "Card type",
+        "info": "Auto = from what is filled in (photo + review = full card, review only = text card, photo only = photo card).",
+        "options": [
+          {
+            "value": "auto",
+            "label": "Auto"
+          },
+          {
+            "value": "full",
+            "label": "Photo + review"
+          },
+          {
+            "value": "text",
+            "label": "Review only (text card)"
+          },
+          {
+            "value": "photo",
+            "label": "Photo only (with Used + product)"
+          }
+        ],
+        "default": "auto"
       },
       {
         "type": "checkbox",
@@ -4217,6 +4817,31 @@
         "info": "Leave empty to show the product's name"
       },
       {
+        "type": "select",
+        "id": "rv25_card_type",
+        "label": "Card type",
+        "info": "Auto = from what is filled in (photo + review = full card, review only = text card, photo only = photo card).",
+        "options": [
+          {
+            "value": "auto",
+            "label": "Auto"
+          },
+          {
+            "value": "full",
+            "label": "Photo + review"
+          },
+          {
+            "value": "text",
+            "label": "Review only (text card)"
+          },
+          {
+            "value": "photo",
+            "label": "Photo only (with Used + product)"
+          }
+        ],
+        "default": "auto"
+      },
+      {
         "type": "checkbox",
         "id": "rv25_show_prefix",
         "label": "Show the word before the product name",
@@ -4320,6 +4945,31 @@
         "id": "rv26_detail",
         "label": "Text under the name",
         "info": "Leave empty to show the product's name"
+      },
+      {
+        "type": "select",
+        "id": "rv26_card_type",
+        "label": "Card type",
+        "info": "Auto = from what is filled in (photo + review = full card, review only = text card, photo only = photo card).",
+        "options": [
+          {
+            "value": "auto",
+            "label": "Auto"
+          },
+          {
+            "value": "full",
+            "label": "Photo + review"
+          },
+          {
+            "value": "text",
+            "label": "Review only (text card)"
+          },
+          {
+            "value": "photo",
+            "label": "Photo only (with Used + product)"
+          }
+        ],
+        "default": "auto"
       },
       {
         "type": "checkbox",
@@ -4427,6 +5077,31 @@
         "info": "Leave empty to show the product's name"
       },
       {
+        "type": "select",
+        "id": "rv27_card_type",
+        "label": "Card type",
+        "info": "Auto = from what is filled in (photo + review = full card, review only = text card, photo only = photo card).",
+        "options": [
+          {
+            "value": "auto",
+            "label": "Auto"
+          },
+          {
+            "value": "full",
+            "label": "Photo + review"
+          },
+          {
+            "value": "text",
+            "label": "Review only (text card)"
+          },
+          {
+            "value": "photo",
+            "label": "Photo only (with Used + product)"
+          }
+        ],
+        "default": "auto"
+      },
+      {
         "type": "checkbox",
         "id": "rv27_show_prefix",
         "label": "Show the word before the product name",
@@ -4530,6 +5205,31 @@
         "id": "rv28_detail",
         "label": "Text under the name",
         "info": "Leave empty to show the product's name"
+      },
+      {
+        "type": "select",
+        "id": "rv28_card_type",
+        "label": "Card type",
+        "info": "Auto = from what is filled in (photo + review = full card, review only = text card, photo only = photo card).",
+        "options": [
+          {
+            "value": "auto",
+            "label": "Auto"
+          },
+          {
+            "value": "full",
+            "label": "Photo + review"
+          },
+          {
+            "value": "text",
+            "label": "Review only (text card)"
+          },
+          {
+            "value": "photo",
+            "label": "Photo only (with Used + product)"
+          }
+        ],
+        "default": "auto"
       },
       {
         "type": "checkbox",
@@ -4637,6 +5337,31 @@
         "info": "Leave empty to show the product's name"
       },
       {
+        "type": "select",
+        "id": "rv29_card_type",
+        "label": "Card type",
+        "info": "Auto = from what is filled in (photo + review = full card, review only = text card, photo only = photo card).",
+        "options": [
+          {
+            "value": "auto",
+            "label": "Auto"
+          },
+          {
+            "value": "full",
+            "label": "Photo + review"
+          },
+          {
+            "value": "text",
+            "label": "Review only (text card)"
+          },
+          {
+            "value": "photo",
+            "label": "Photo only (with Used + product)"
+          }
+        ],
+        "default": "auto"
+      },
+      {
         "type": "checkbox",
         "id": "rv29_show_prefix",
         "label": "Show the word before the product name",
@@ -4740,6 +5465,31 @@
         "id": "rv30_detail",
         "label": "Text under the name",
         "info": "Leave empty to show the product's name"
+      },
+      {
+        "type": "select",
+        "id": "rv30_card_type",
+        "label": "Card type",
+        "info": "Auto = from what is filled in (photo + review = full card, review only = text card, photo only = photo card).",
+        "options": [
+          {
+            "value": "auto",
+            "label": "Auto"
+          },
+          {
+            "value": "full",
+            "label": "Photo + review"
+          },
+          {
+            "value": "text",
+            "label": "Review only (text card)"
+          },
+          {
+            "value": "photo",
+            "label": "Photo only (with Used + product)"
+          }
+        ],
+        "default": "auto"
       },
       {
         "type": "checkbox",
