@@ -112,6 +112,7 @@
       ],
       "settings": {
         "eyebrow": "Trusted by [customers] Filipino men",
+        "use_collection_content": false,
         "heading": "The Maintenance System Built for Filipino Men",
         "heading_mobile": "",
         "text": "<p>Everything you need to stay in your prime.</p>",
@@ -402,6 +403,10 @@
             "verified": true,
             "avatar": "shopify://shop_images/rinse.jpg",
             "author_detail": "",
+            "card_type": "auto",
+            "show_prefix": true,
+            "show_product": true,
+            "show_detail_product": true,
             "row": "1"
           }
         },
@@ -416,6 +421,10 @@
             "verified": true,
             "avatar": "shopify://shop_images/rinse.jpg",
             "author_detail": "",
+            "card_type": "auto",
+            "show_prefix": true,
+            "show_product": true,
+            "show_detail_product": true,
             "row": "1"
           }
         },
@@ -430,6 +439,10 @@
             "verified": true,
             "avatar": "shopify://shop_images/rinse.jpg",
             "author_detail": "",
+            "card_type": "auto",
+            "show_prefix": true,
+            "show_product": true,
+            "show_detail_product": true,
             "row": "1"
           }
         },
@@ -444,6 +457,10 @@
             "verified": true,
             "avatar": "shopify://shop_images/rinse.jpg",
             "author_detail": "",
+            "card_type": "auto",
+            "show_prefix": true,
+            "show_product": true,
+            "show_detail_product": true,
             "row": "1"
           }
         },
@@ -458,6 +475,10 @@
             "verified": true,
             "avatar": "shopify://shop_images/rinse.jpg",
             "author_detail": "",
+            "card_type": "auto",
+            "show_prefix": true,
+            "show_product": true,
+            "show_detail_product": true,
             "row": "1"
           }
         },
@@ -472,6 +493,10 @@
             "verified": true,
             "avatar": "shopify://shop_images/rinse.jpg",
             "author_detail": "",
+            "card_type": "auto",
+            "show_prefix": true,
+            "show_product": true,
+            "show_detail_product": true,
             "row": "2"
           }
         },
@@ -486,6 +511,10 @@
             "verified": true,
             "avatar": "shopify://shop_images/rinse.jpg",
             "author_detail": "",
+            "card_type": "auto",
+            "show_prefix": true,
+            "show_product": true,
+            "show_detail_product": true,
             "row": "2"
           }
         },
@@ -500,6 +529,10 @@
             "verified": true,
             "avatar": "shopify://shop_images/rinse.jpg",
             "author_detail": "",
+            "card_type": "auto",
+            "show_prefix": true,
+            "show_product": true,
+            "show_detail_product": true,
             "row": "2"
           }
         },
@@ -514,6 +547,10 @@
             "verified": true,
             "avatar": "shopify://shop_images/rinse.jpg",
             "author_detail": "",
+            "card_type": "auto",
+            "show_prefix": true,
+            "show_product": true,
+            "show_detail_product": true,
             "row": "2"
           }
         }
@@ -885,68 +922,20 @@
             "title": "",
             "text": "<p>Pay when it is in your hands, with nationwide Cash on Delivery.</p>"
           }
-        },
-        "logo_gogo": {
-          "type": "logo",
-          "settings": {
-            "logo": "shopify://shop_images/vector-icons_4.png",
-            "name": "GOGO Xpress",
-            "link": "",
-            "logo_scale": 100
-          }
-        },
-        "logo_spx": {
-          "type": "logo",
-          "settings": {
-            "logo": "shopify://shop_images/vector-icons_5.png",
-            "name": "SPX Express",
-            "link": "",
-            "logo_scale": 100
-          }
-        },
-        "logo_lbc": {
-          "type": "logo",
-          "settings": {
-            "logo": "shopify://shop_images/vector-icons_6.png",
-            "name": "LBC",
-            "link": "",
-            "logo_scale": 100
-          }
-        },
-        "logo_jnt": {
-          "type": "logo",
-          "settings": {
-            "logo": "shopify://shop_images/vector-icons_3.png",
-            "name": "J&T Express",
-            "link": "",
-            "logo_scale": 100
-          }
-        },
-        "logo_ninjavan": {
-          "type": "logo",
-          "settings": {
-            "logo": "shopify://shop_images/vector-icons_2.png",
-            "name": "Ninja Van",
-            "link": "",
-            "logo_scale": 100
-          }
         }
       },
       "block_order": [
         "column_1",
         "column_2",
-        "column_4",
-        "logo_gogo",
-        "logo_spx",
-        "logo_lbc",
-        "logo_jnt",
-        "logo_ninjavan"
+        "column_4"
       ],
       "settings": {
         "content_source": "custom",
         "eyebrow": "",
         "heading": "What happens after you order",
         "subheading": "",
+        "footer_image": "shopify://shop_images/payments.svg",
+        "courier_image_alt": "",
         "show_payment_icons": false,
         "footer_text": "<p>Delivered by LBC, J&T, Gogo Express, Ninja Van and Amare Group's own riders.</p>",
         "heading_alignment": "center",
@@ -969,6 +958,7 @@
         "text_max_width": 0,
         "footer_spacing": 32,
         "footer_image_width": 336,
+        "courier_image_width": 560,
         "logo_height": 24,
         "logo_max_width": 120,
         "logo_gap": 18,
@@ -1018,6 +1008,7 @@
         "text_line_height_mobile": 130,
         "footer_spacing_mobile": 32,
         "footer_image_width_mobile": 336,
+        "courier_image_width_mobile": 320,
         "logo_height_mobile": 20,
         "logo_gap_mobile": 12,
         "footer_text_size_mobile": 10,
@@ -1943,6 +1934,7 @@
         "eyebrow": "",
         "heading": "The whole routine, in under five minutes.",
         "subheading": "",
+        "show_used": true,
         "products": [],
         "used_text": "",
         "note": "<p>Pick one product or run the full set.</p><p>Pareho lang ang directions, nasa label.</p>",
