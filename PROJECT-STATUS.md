@@ -194,7 +194,7 @@ _Last updated: 2026-10-01. Keep this file current at the end of each work sessio
 
 ### Client change round (2026-10-08)
 - **Results cards**: per slot (rv1–30) + per block: *Card type* (Auto / Photo + review / Review only / Photo only — section blocks can be any of the 3 components and dragged), *Show "Used"*, *Show product name* (photo), *Show product name under the reviewer name*; global slots get **Position** (sorted within the row, blank = slot order).
-- **Courier logos**: one *Courier logos image* (Zenith · Guarantee `zg_courier_image` + section `courier_image`) replaces the individual logos when set. The older *Footer image* still shows above — use one, not both.
+- **Courier logos**: the existing *Footer image* (section `footer_image` / global `zg_footer_image`) now REPLACES the individual logos when set (logos = fallback). The short-lived separate "Courier logos image" setting was removed as redundant.
 - **Product pages**: *Show bundle picker* (`show_variant_picker`) off on all 5 templates (ATC uses first available variant). Nested FAQ chevron fixed (zenith-faq.css rotate rule was winning). Ingredients *Ingredient items* = Always open on all 5; only the full list collapses. Routine *Show the note under the steps* (`show_used`).
 - **Compare-at prices**: hidden everywhere except cart page/drawer — Theme settings → Zenith → `show_compare_price` (off). "% OFF" badges unchanged. **Sale badge** on cards only while the promotion is on.
 - **Featured product**: *Text under the price* = Product description on the homepage.

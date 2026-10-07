@@ -5988,19 +5988,7 @@
         "type": "image_picker",
         "id": "zg_footer_image",
         "label": "Footer image",
-        "info": "All logos in one image. To upload logos one by one (each with its own size), use the Logo slots below."
-      },
-      {
-        "type": "image_picker",
-        "id": "zg_courier_image",
-        "label": "Courier logos image",
-        "info": "One image with all courier logos (GOGO, SPX, LBC, J&T, Ninja Van). Replaces the Logo slots below; leave empty to show them. Max width is set in each section (Layout / Mobile)."
-      },
-      {
-        "type": "text",
-        "id": "zg_courier_image_alt",
-        "label": "Courier logos image alt text",
-        "info": "e.g. Couriers: GOGO, SPX, LBC, J&T, Ninja Van. Leave empty if the footer text already names them."
+        "info": "One image with all courier logos (GOGO, SPX, LBC, J&T, Ninja Van). When set it replaces the Logo slots below; leave empty to use the slots. Alt text = the image's alt in Content → Files."
       },
       {
         "type": "checkbox",
