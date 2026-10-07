@@ -491,7 +491,9 @@
         "eyebrow": "Day Routine",
         "heading": "Matte & Protected",
         "subheading": "<p>Get Complete Protection + Anti-Aging + Brightening In 3 Steps</p>",
-        "products": [],
+        "products": [
+          "zenith-anti-aging-tallow-cream"
+        ],
         "used_text": "Used Zenith Anti-Aging Tallow Cleanser and Day Cream",
         "note": "",
         "show_number": false,
