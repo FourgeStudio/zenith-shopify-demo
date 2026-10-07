@@ -102,6 +102,20 @@
   color: rgb(var(--color-foreground));
 }
 
+.zenith-fp__desc {
+  max-width: 60ch;
+  margin: var(--z-space-1) 0 0;
+  font-size: var(--z-tfs-m, 1.4rem);
+  line-height: 1.6;
+  color: rgba(var(--color-foreground), 0.85);
+}
+
+.zenith-fp__desc > :first-child { margin-top: 0; }
+.zenith-fp__desc > :last-child { margin-bottom: 0; }
+.zenith-fp__desc p { margin: 0 0 var(--z-space-3); }
+.zenith-fp__desc ul,
+.zenith-fp__desc ol { margin: 0 0 var(--z-space-3); padding-left: var(--z-space-5); }
+
 .zenith-fp__benefit {
   display: flex;
   align-items: flex-start;
@@ -266,7 +280,8 @@
     font-size: var(--z-pfs, 2.2rem);
   }
 
-  .zenith-fp__benefits {
+  .zenith-fp__benefits,
+  .zenith-fp__desc {
     font-size: var(--z-tfs, 1.4rem);
   }
 

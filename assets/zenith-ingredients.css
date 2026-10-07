@@ -83,8 +83,15 @@
 }
 
 /* Open: the gap to the text replaces the summary's bottom padding (matches the design's auto-layout). */
-.zenith-ingredients__item[open] > .zenith-ingredients__summary {
+.zenith-ingredients__item[open] > .zenith-ingredients__summary,
+.zenith-ingredients__item--static > .zenith-ingredients__summary {
   padding-bottom: var(--z-ing-atop-m, 12px);
+}
+
+/* Always-open items (setting item_display): a plain row, not a toggle */
+.zenith-ingredients .zenith-ingredients__summary--static {
+  justify-content: flex-start;
+  cursor: auto;
 }
 
 .zenith-ingredients__lead {
@@ -185,7 +192,8 @@
     font-size: var(--z-ing-ltfs, 1.8rem);
   }
 
-  .zenith-ingredients__item[open] > .zenith-ingredients__summary {
+  .zenith-ingredients__item[open] > .zenith-ingredients__summary,
+  .zenith-ingredients__item--static > .zenith-ingredients__summary {
     padding-bottom: var(--z-ing-atop, 12px);
   }
 

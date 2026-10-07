@@ -229,6 +229,86 @@
   .jdgm-rev-widg .jdgm-rev-widg__reviews { column-count: 2; }
 }
 
+/* ---------- Phones: tighter widget (2026-10-08 client request) ----------
+   Roughly half the spacing of the app + rules above; desktop untouched. Buttons keep a 44px hit area. */
+@media screen and (max-width: 749px) {
+  .jdgm-rev-widg.jdgm-rev-widg {
+    padding: var(--z-space-2, 8px) 0 !important;
+  }
+
+  .jdgm-rev-widg .jdgm-rev-widg__header {
+    padding: var(--z-space-3, 12px) var(--z-space-2, 8px) !important;
+    margin-bottom: var(--z-space-2, 8px) !important;
+  }
+
+  .jdgm-rev-widg .jdgm-rev-widg__title {
+    margin-bottom: var(--z-space-2, 8px) !important;
+  }
+
+  .jdgm-rev-widg .jdgm-rev-widg__summary,
+  .jdgm-rev-widg .jdgm-histogram {
+    margin-top: 0 !important;
+    margin-bottom: var(--z-space-2, 8px) !important;
+  }
+
+  .jdgm-rev-widg .jdgm-histogram__row {
+    margin-bottom: var(--z-space-1, 4px) !important;
+  }
+
+  .jdgm-rev-widg .jdgm-rev-widg__actions,
+  .jdgm-rev-widg .jdgm-rev-widg__sort-wrapper {
+    padding: var(--z-space-2, 8px) !important;
+    margin: 0 0 var(--z-space-2, 8px) !important;
+  }
+
+  .jdgm-rev-widg__reviews .jdgm-divider-top {
+    padding: 10px !important;
+    margin-bottom: 6px !important;
+  }
+
+  .jdgm-rev-widg .jdgm-rev-list {
+    gap: var(--z-space-2, 8px) !important;
+  }
+
+  .jdgm-rev-widg .jdgm-rev-widg__reviews {
+    column-gap: var(--z-space-2, 8px);
+  }
+
+  .jdgm-rev-widg .jdgm-rev-widg__reviews .jdgm-rev {
+    margin-bottom: var(--z-space-2, 8px) !important;
+  }
+
+  .jdgm-rev-widg .jdgm-rev__content,
+  .jdgm-rev-widg .jdgm-rev__header,
+  .jdgm-rev-widg .jdgm-rev__pics,
+  .jdgm-rev-widg .jdgm-rev__actions {
+    padding-left: var(--z-space-2, 8px) !important;
+    padding-right: var(--z-space-2, 8px) !important;
+  }
+
+  .jdgm-rev-widg .jdgm-rev__header {
+    margin-bottom: var(--z-space-1, 4px) !important;
+  }
+
+  .jdgm-rev-widg .jdgm-rev__content,
+  .jdgm-rev-widg .jdgm-rev__pics {
+    margin-top: var(--z-space-1, 4px) !important;
+  }
+
+  .jdgm-rev-widg .jdgm-btn,
+  .jdgm-rev-widg .jdgm-write-rev-link {
+    min-height: 44px;
+    padding: 8px 12px !important;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .jdgm-rev-widg .jdgm-paginate {
+    margin-top: var(--z-space-3, 12px) !important;
+  }
+}
+
 /* Whatever the app does, never let the widget paint outside its section */
 .zenith-reviews .zenith-reviews__apps,
 .shopify-app-block:has(.jdgm-rev-widg) {

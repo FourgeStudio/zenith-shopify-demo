@@ -89,7 +89,7 @@
           <p class="zenith-fp__price">
             {%- if fp_product != blank -%}
               {{ fp_product.price | money_without_trailing_zeros }}
-              {%- if fp_product.compare_at_price > fp_product.price -%}
+              {%- if fp_product.compare_at_price > fp_product.price and settings.show_compare_price -%}
                 <s>{{ fp_product.compare_at_price | money_without_trailing_zeros }}</s>
               {%- endif -%}
             {%- else -%}
@@ -98,7 +98,11 @@
           </p>
 
           {%- assign benefits = section.blocks | where: 'type', 'benefit' -%}
-          {%- if benefits.size > 0 -%}
+          {%- if s.below_price == 'description' -%}
+            {%- if fp_product.description != blank -%}
+              <div class="zenith-fp__desc rte">{{ fp_product.description }}</div>
+            {%- endif -%}
+          {%- elsif benefits.size > 0 -%}
             <ul class="zenith-fp__benefits" role="list">
               {%- for block in benefits -%}
                 <li class="zenith-fp__benefit" id="Block-{{ block.id }}" {{ block.shopify_attributes }}>
@@ -300,6 +304,23 @@
       "id": "show_rating",
       "label": "Show product rating",
       "default": false
+    },
+    {
+      "type": "select",
+      "id": "below_price",
+      "label": "Text under the price",
+      "default": "checklist",
+      "options": [
+        {
+          "value": "checklist",
+          "label": "Checklist"
+        },
+        {
+          "value": "description",
+          "label": "Product description"
+        }
+      ],
+      "info": "Checklist = the Benefit blocks with gold checks. Product description = the selected product's description (uses Text size and the color scheme)."
     },
     {
       "type": "header",

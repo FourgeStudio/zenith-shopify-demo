@@ -313,7 +313,7 @@
                           {%- if product.selected_or_first_available_variant.quantity_price_breaks.size > 0 -%}
                             {%- assign variant_price_compare = product.selected_or_first_available_variant.compare_at_price -%}
                             <div class="price-per-item">
-                              {%- if variant_price_compare -%}
+                              {%- if variant_price_compare and settings.show_compare_price -%}
                                 <dl class="price-per-item--current">
                                   <dt class="visually-hidden">
                                     {{ 'products.product.price.regular_price' | t }}
@@ -353,7 +353,7 @@
                             -%}
                             {%- assign variant_price_compare = product.selected_or_first_available_variant.compare_at_price -%}
                             <div class="price-per-item">
-                              {%- if variant_price_compare -%}
+                              {%- if variant_price_compare and settings.show_compare_price -%}
                                 <dl class="price-per-item--current">
                                   <dt class="visually-hidden">
                                     {{ 'products.product.price.regular_price' | t }}

@@ -7,10 +7,67 @@
     open_first {Boolean} open the first item; open_all {Boolean} open every item
     schema {Boolean} output FAQPage structured data
     section_id {String} section.id — keeps element ids unique when two sections share block ids
+    shared {Boolean} ignore blocks; render Theme settings → Zenith · FAQ (faq1..15_question/_answer, empty slots skipped)
   [customers] in questions/answers is replaced by Theme settings → Zenith → Customer count.
 {% endcomment %}
 <script src="{{ 'zenith-faq.js' | asset_url }}" defer="defer"></script>
 {%- assign faq_count = 0 -%}
+{%- if shared -%}
+  {%- for i in (1..15) -%}
+    {%- assign q_key = 'faq' | append: i | append: '_question' -%}
+    {%- assign a_key = 'faq' | append: i | append: '_answer' -%}
+    {%- if settings[q_key] == blank -%}
+      {%- continue -%}
+    {%- endif -%}
+    {%- assign faq_count = faq_count | plus: 1 -%}
+    <details
+      class="zenith-faq__item"
+      id="Faq-{{ i }}-{{ section_id }}"
+      {% if open_all or faq_count == 1 and open_first %}
+        open
+      {% endif %}
+    >
+      <summary class="zenith-faq__question" id="FaqQuestion-{{ i }}-{{ section_id }}">
+        <span class="zenith-faq__question-text">
+          {{- settings[q_key] | escape | replace: '[customers]', settings.customer_count -}}
+        </span>
+        <span class="zenith-faq__icon" aria-hidden="true">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" focusable="false">
+            <path d="M10 1v18M1 10h18"/>
+          </svg>
+        </span>
+      </summary>
+      <div class="zenith-faq__answer zenith-rte" role="region" aria-labelledby="FaqQuestion-{{ i }}-{{ section_id }}">
+        {{- settings[a_key] | replace: '[customers]', settings.customer_count -}}
+      </div>
+    </details>
+  {%- endfor -%}
+
+  {%- if schema and faq_count > 0 -%}
+    {%- assign faq_seen = 0 -%}
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {%- for i in (1..15) -%}
+            {%- assign q_key = 'faq' | append: i | append: '_question' -%}
+            {%- assign a_key = 'faq' | append: i | append: '_answer' -%}
+            {%- if settings[q_key] == blank -%}
+              {%- continue -%}
+            {%- endif -%}
+            {%- assign faq_seen = faq_seen | plus: 1 -%}
+            {
+              "@type": "Question",
+              "name": {{ settings[q_key] | replace: '[customers]', settings.customer_count | json }},
+              "acceptedAnswer": { "@type": "Answer", "text": {{ settings[a_key] | replace: '[customers]', settings.customer_count | strip_html | json }} }
+            }{% if faq_seen < faq_count %},{% endif %}
+          {%- endfor -%}
+        ]
+      }
+    </script>
+  {%- endif -%}
+{%- else -%}
 {%- for block in blocks -%}
   {%- if type != blank and block.type != type -%}
     {%- continue -%}
@@ -61,4 +118,5 @@
       ]
     }
   </script>
+{%- endif -%}
 {%- endif -%}

@@ -1227,6 +1227,7 @@
         "button_icon": "cart",
         "show_media_pager": false,
         "show_rating": false,
+        "below_price": "description",
         "image_position": "right",
         "full_width": false,
         "media_width": 48,
@@ -1748,6 +1749,7 @@
         "question_9"
       ],
       "settings": {
+        "content_source": "global",
         "eyebrow": "",
         "heading": "Frequently Asked Questions",
         "subheading": "<p>No-nonsense answers about your daily essentials.</p>",

@@ -192,6 +192,18 @@ _Last updated: 2026-10-01. Keep this file current at the end of each work sessio
 - Zenith · Promo banner → **Banner height (desktop)**: same choice (default Fixed); the `promo_hero` on those 4 pages is 65% so the promotion hero matches. Mobile promo stays stacked (photo height + content).
 - Featured product images follow the image's **focal point** (Shopify Admin → the image → *Focal point*) when *Image fit = Fill area* crops them; *Show whole image* shows the full image. Images with text baked in should be square-ish or use Show whole image. Client decision 2026-10-01: homepage stays *Fill area*; uploads must fit the frame — **1216 × 1076 px** (frame 608 × 538 at 1440), key content centred (phones crop square). Spec is in the section's Image field hint.
 
+### Client change round (2026-10-08)
+- **Results cards**: per slot (rv1–30) + per block: *Show "Used"*, *Show product name* (photo), *Show product name under the reviewer name*; global slots get **Position** (sorted within the row, blank = slot order).
+- **Courier logos**: one *Courier logos image* (Zenith · Guarantee `zg_courier_image` + section `courier_image`) replaces the individual logos when set. The older *Footer image* still shows above — use one, not both.
+- **Product pages**: *Show bundle picker* (`show_variant_picker`) off on all 5 templates (ATC uses first available variant). Nested FAQ chevron fixed (zenith-faq.css rotate rule was winning). Ingredients *Ingredient items* = Always open on all 5; only the full list collapses. Routine *Show the note under the steps* (`show_used`).
+- **Compare-at prices**: hidden everywhere except cart page/drawer — Theme settings → Zenith → `show_compare_price` (off). "% OFF" badges unchanged. **Sale badge** on cards only while the promotion is on.
+- **Featured product**: *Text under the price* = Product description on the homepage.
+- **Shared FAQ**: Theme settings → **Zenith · FAQ** (15 slots, 1–9 = homepage). zenith-faq *Questions* = Shared on index, Shop All, Skin, Hair, Certificates, Verify. Product pages + contact keep their own.
+- **Default collection** (`collection.json`): promo hero + hero (new `use_collection_content` → collection title/description) + zenith-product-grid (current collection, max 50, no pagination/filters) + guarantee banner.
+- **Cart shipping**: `assets/zenith-cart-shipping.js` reads Shopify's real rates (`/cart/prepare_shipping_rates.json` → `async_shipping_rates.json`) for a fixed address (Zenith · Cart → country PH, optional province/zip); flat fee shown dimmed until it answers. `cart_shipping_source` = legacy flat fee switch. Free-shipping **threshold** still a theme setting (progress bar, ribbons). **Untested on the store** — check the rate appears in the drawer.
+- Judge.me mobile spacing roughly halved (`zenith-judgeme.css`, ≤749px).
+- Open: seals/icons as SVG need vector sources (Figma export) — no conversion done.
+
 ### Zenith · Custom code (2026-09-29)
 - `sections/zenith-custom-code.liquid`: paste HTML / Liquid / app embed code (e.g. Judge.me widget code) on any page; heading + mobile heading, width (page / narrow / full), hide on mobile/desktop, paddings. Each instance is per template, so every page can hold different code.
 

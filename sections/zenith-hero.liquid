@@ -44,6 +44,18 @@
     assign split_buttons = true
   endif
 
+  # Collection pages can take the heading/text from the collection being viewed (default collection template).
+  assign hero_heading = s.heading
+  assign hero_heading_mobile = s.heading_mobile
+  assign hero_text = s.text
+  if s.use_collection_content and collection != blank
+    assign hero_heading = collection.title
+    assign hero_heading_mobile = blank
+    if collection.description != blank
+      assign hero_text = collection.description
+    endif
+  endif
+
   # Store-wide promotion switch (Theme settings → Zenith · Promo) can hide this hero, e.g. while a promo banner takes its place.
   capture promo_class
     render 'zenith-promo-state', visibility: s.promo_visibility
@@ -186,11 +198,11 @@
           </div>
         {%- endif -%}
 
-        {%- if s.heading_mobile != blank -%}
+        {%- if hero_heading_mobile != blank -%}
           {%- render 'zenith-section-heading',
             eyebrow: s.eyebrow,
-            heading: s.heading,
-            subheading: s.text,
+            heading: hero_heading,
+            subheading: hero_text,
             alignment: s.content_position,
             uppercase: s.heading_uppercase,
             tag: s.heading_tag,
@@ -198,8 +210,8 @@
           -%}
           {%- render 'zenith-section-heading',
             eyebrow: s.eyebrow,
-            heading: s.heading_mobile,
-            subheading: s.text,
+            heading: hero_heading_mobile,
+            subheading: hero_text,
             alignment: s.content_position,
             uppercase: s.heading_uppercase,
             tag: s.heading_tag,
@@ -208,8 +220,8 @@
         {%- else -%}
           {%- render 'zenith-section-heading',
             eyebrow: s.eyebrow,
-            heading: s.heading,
-            subheading: s.text,
+            heading: hero_heading,
+            subheading: hero_text,
             alignment: s.content_position,
             uppercase: s.heading_uppercase,
             tag: s.heading_tag,
@@ -320,6 +332,13 @@
       "label": "Eyebrow",
       "default": "Trusted by [customers] Filipino men",
       "info": "[customers] shows the number set in Theme settings → Zenith → Customer count."
+    },
+    {
+      "type": "checkbox",
+      "id": "use_collection_content",
+      "label": "Use collection title/description on collection pages",
+      "info": "Replaces the heading (and text, when the collection has a description) with the collection being viewed.",
+      "default": false
     },
     {
       "type": "text",

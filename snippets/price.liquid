@@ -60,7 +60,8 @@
       {%- endcomment -%}
       <div class="price__regular">
         {%- if product.quantity_price_breaks_configured? -%}
-          {%- if show_compare_at_price and compare_at_price -%}
+          {%- comment -%} zenith: compare-at hidden outside the cart unless settings.show_compare_price {%- endcomment -%}
+          {%- if show_compare_at_price and compare_at_price and settings.show_compare_price -%}
             {%- unless product.price_varies == false and product.compare_at_price_varies %}
               <span class="visually-hidden visually-hidden--inline">
                 {{- 'products.product.price.regular_price' | t -}}
@@ -91,7 +92,17 @@
         {%- endif -%}
       </div>
       <div class="price__sale">
-        {%- unless product.price_varies == false and product.compare_at_price_varies %}
+        {%- liquid
+          # zenith: compare-at hidden outside the cart unless settings.show_compare_price
+          assign z_hide_compare = true
+          if settings.show_compare_price
+            assign z_hide_compare = false
+            if product.price_varies == false and product.compare_at_price_varies
+              assign z_hide_compare = true
+            endif
+          endif
+        -%}
+        {%- unless z_hide_compare %}
           <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.regular_price' | t }}</span>
           <span>
             <s class="price-item price-item--regular">

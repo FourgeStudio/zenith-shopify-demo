@@ -1288,6 +1288,12 @@ cart-drawer-items .zenith-cart-offers__box {
   font-weight: 600;
 }
 
+/* Flat-fee estimate while zenith-cart-shipping.js fetches the Shopify rate: dimmed, no size change. */
+.zenith-cart-sum__est {
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
 .zenith-cart-sum__tag {
   display: inline-block;
   margin-left: var(--z-space-2, 8px);

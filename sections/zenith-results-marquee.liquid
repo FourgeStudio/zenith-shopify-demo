@@ -60,6 +60,9 @@
     assign use_global = true
   endif
   assign total_count = 0
+  # Card order: keys "PPPP-NN" (position, slot/block number), sorted as text. Slots with no Position get 9999,
+  # so positioned slots come first (lowest first) and the rest keep slot order. Blocks keep editor (drag) order.
+  assign order_keys = ''
   if use_global
     assign item_max = 30
     assign empty_note = 'Add reviews in Theme settings → Zenith · Results reviews'
@@ -70,13 +73,26 @@
       assign k_author = p | append: 'author'
       if settings[k_image] != blank or settings[k_quote] != blank or settings[k_author] != blank
         assign total_count = total_count | plus: 1
+        assign k_pos = p | append: 'position'
+        assign pos = settings[k_pos] | plus: 0 | floor
+        if pos < 1 or pos > 9998
+          assign pos = 9999
+        endif
+        assign pos_key = pos | prepend: '0000' | slice: -4, 4
+        assign n_key = n | prepend: '00' | slice: -2, 2
+        assign order_keys = order_keys | append: pos_key | append: '-' | append: n_key | append: ','
       endif
     endfor
   else
     assign item_max = section.blocks.size
     assign total_count = item_max
     assign empty_note = 'Add a review in the theme editor'
+    for n in (1..item_max)
+      assign n_key = n | prepend: '00' | slice: -2, 2
+      assign order_keys = order_keys | append: '9999-' | append: n_key | append: ','
+    endfor
   endif
+  assign card_order = order_keys | split: ',' | sort
 -%}
 
 {%- if total_count > 0 or request.design_mode -%}
@@ -114,8 +130,12 @@
         assign item_count = 0
         assign row_cards = ''
       -%}
-      {%- for n in (1..item_max) -%}
+      {%- for order_key in card_order -%}
         {%- liquid
+          if order_key == blank
+            continue
+          endif
+          assign n = order_key | split: '-' | last | plus: 0
           if use_global
             assign p = 'rv' | append: n | append: '_'
             assign k = p | append: 'image'
@@ -141,9 +161,19 @@
             assign c_avatar = settings[k]
             assign k = p | append: 'detail'
             assign c_detail = settings[k]
+            assign k = p | append: 'show_prefix'
+            assign c_show_prefix = settings[k]
+            assign k = p | append: 'show_product'
+            assign c_show_product = settings[k]
+            assign k = p | append: 'show_detail_product'
+            assign c_show_detail_product = settings[k]
             assign c_attrs = ''
           else
-            assign block = section.blocks[forloop.index0]
+            assign block_index = n | minus: 1
+            assign block = section.blocks[block_index]
+            assign c_show_prefix = block.settings.show_prefix
+            assign c_show_product = block.settings.show_product
+            assign c_show_detail_product = block.settings.show_detail_product
             assign c_photo = block.settings.image
             assign c_quote = block.settings.quote
             assign c_author = block.settings.author
@@ -173,6 +203,9 @@
             verified: c_verified,
             avatar: c_avatar,
             author_detail: c_detail,
+            show_prefix: c_show_prefix,
+            show_product: c_show_product,
+            show_detail_product: c_show_detail_product,
             show_avatar: section.settings.show_avatar,
             attrs: c_attrs,
             clone: false,
@@ -1108,6 +1141,27 @@
           "id": "author_detail",
           "label": "Text under the name",
           "info": "Leave empty to show the product's name"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_prefix",
+          "label": "Show the word before the product name",
+          "info": "The word on the photo (\"Used\" by default, set in the section's settings)",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_product",
+          "label": "Show product name",
+          "info": "The product name on the photo. The thumbnail stays.",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_detail_product",
+          "label": "Show product name under the reviewer name",
+          "info": "Only used when \"Text under the name\" is empty",
+          "default": true
         },
         {
           "type": "header",

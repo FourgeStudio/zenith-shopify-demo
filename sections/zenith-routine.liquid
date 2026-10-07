@@ -97,7 +97,8 @@
       {%- endfor -%}
     </ol>
 
-    {%- if used_text != blank or s.products != blank -%}
+    {%- comment -%} zenith: Liquid reads and/or right to left → show_used and (text or products) {%- endcomment -%}
+    {%- if s.show_used != false and used_text != blank or s.products != blank -%}
       <div class="zenith-rt__used">
         {%- if used_text != blank -%}
           <p class="zenith-rt__used-text">{{ used_text | escape }}</p>
@@ -174,6 +175,13 @@
       "default": "<p>Get Complete Protection + Anti-Aging + Brightening In 3 Steps</p>"
     },
     {
+      "type": "checkbox",
+      "id": "show_used",
+      "label": "Show the note under the steps",
+      "info": "The \"Used …\" bar with the product thumbnails, on desktop and phones.",
+      "default": true
+    },
+    {
       "type": "product_list",
       "id": "products",
       "label": "Products used",
@@ -184,6 +192,7 @@
       "type": "text",
       "id": "used_text",
       "label": "Products used text",
+      "visible_if": "{{ section.settings.show_used }}",
       "info": "Leave empty for \"Used\" + the product names.",
       "default": "Used Zenith Anti-Aging Tallow Cleanser and Day Cream"
     },

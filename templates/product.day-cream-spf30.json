@@ -217,6 +217,7 @@
       ],
       "settings": {
         "placeholder_title": "Zenith Anti-Aging Tallow Day Cream SPF 30",
+        "show_variant_picker": false,
         "show_rating": true,
         "rating_value": "4.69",
         "rating_count": "2,158",
@@ -492,6 +493,7 @@
         "image": "{{ product.featured_image }}",
         "image_mobile": "{{ product.featured_image }}",
         "open_first": true,
+        "item_display": "open",
         "show_list": true,
         "list_title": "View Full Ingredient List",
         "list_text": "<p>Water, Isohexadecane, Methylene Bis-Benzotriazolyl Tetramethylbutylphenol, Ethylhexyl Salicylate, Phenylbenzimidazole Sulfonic Acid, Ethylhexyl Triazone, Butylene Glycol, Homosalate, Cetearyl Olivate, C12-15 Alkyl Benzoate, Bis-Ethylhexyloxyphenol Methoxyphenyl Triazine, Niacinamide, Aminomethyl Propanol, Adeps Bovis, Polysorbate 60, Cetearyl Glucoside, Silica, Dimethicone/Vinyl Dimethicone Crosspolymer, Bakuchiol, Zinc PCA, Hydroxyacetophenone, 1,2-Hexanediol, Oryza Sativa Extract, Phragmites Communis Extract, Zea Mays Silk Extract, Malva Sylvestris Extract, Aloe Barbadensis Extract, Stephania Tetrandra Extract, Taraxacum Officinale Extract, Saururus Chinensis Extract, Xanthan Gum, Sodium Hyaluronate, Disodium EDTA.</p>",

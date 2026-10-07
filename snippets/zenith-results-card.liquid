@@ -7,6 +7,9 @@
   - attrs: id + editor attributes (first copy only)
   - clone: true = link out of tab order (the marquee now clones in zenith-results-marquee.js and always passes false)
   - prefix, verified_label, photo_sizes, overlay_style, show_avatar: section settings (avatar/initial beside the name only when show_avatar)
+  - show_prefix, show_product, show_detail_product: per-card toggles; only an explicit false hides (nil = shown)
+    show_prefix = "Used" word on the photo, show_product = product name on the photo (thumbnail stays),
+    show_detail_product = product name under the reviewer when "Text under the name" is empty
 {%- endcomment -%}
 {%- liquid
   assign thumb = thumbnail
@@ -16,8 +19,20 @@
   assign author_text = author | escape
   assign photo_alt = photo.alt | default: author | escape
   assign stars = rating | plus: 0
-  assign detail = author_detail | default: review_product.title | escape
+  assign detail = author_detail | escape
+  if detail == blank and show_detail_product != false and review_product != blank
+    assign detail = review_product.title | escape
+  endif
   assign avatar_img = avatar | default: photo
+
+  assign used_prefix = prefix
+  if show_prefix == false
+    assign used_prefix = ''
+  endif
+  assign used_name = true
+  if show_product == false
+    assign used_name = false
+  endif
 
   assign quote_raw = quote | strip
   assign quote_text = quote_raw | escape | newline_to_br
@@ -52,25 +67,34 @@
     {%- endif -%}
     {%- render 'zenith-overlay', style: overlay_style -%}
     {%- if review_product != blank -%}
-      <a
-        href="{{ review_product.url }}"
-        class="zenith-results__meta"
-        {% if clone %}
-          tabindex="-1"
-        {% endif %}
-      >
-        {%- if thumb != blank -%}
-          <span class="zenith-results__thumb">
-            {{ thumb | image_url: width: 160 | image_tag: loading: 'lazy', widths: '80, 120, 160', sizes: '40px', alt: '' }}
-          </span>
-        {%- endif -%}
-        <span class="zenith-results__used">
-          {%- if prefix != blank -%}
-            <span>{{ prefix }}</span>
+      {%- if thumb != blank or used_prefix != blank or used_name -%}
+        <a
+          href="{{ review_product.url }}"
+          class="zenith-results__meta"
+          {% unless used_name %}
+            aria-label="{{ review_product.title | escape }}"
+          {% endunless %}
+          {% if clone %}
+            tabindex="-1"
+          {% endif %}
+        >
+          {%- if thumb != blank -%}
+            <span class="zenith-results__thumb">
+              {{ thumb | image_url: width: 160 | image_tag: loading: 'lazy', widths: '80, 120, 160', sizes: '40px', alt: '' }}
+            </span>
           {%- endif -%}
-          <span class="zenith-results__product">{{ review_product.title | escape }}</span>
-        </span>
-      </a>
+          {%- if used_prefix != blank or used_name -%}
+            <span class="zenith-results__used">
+              {%- if used_prefix != blank -%}
+                <span>{{ used_prefix }}</span>
+              {%- endif -%}
+              {%- if used_name -%}
+                <span class="zenith-results__product">{{ review_product.title | escape }}</span>
+              {%- endif -%}
+            </span>
+          {%- endif -%}
+        </a>
+      {%- endif -%}
     {%- endif -%}
   </div>
   {%- endunless -%}

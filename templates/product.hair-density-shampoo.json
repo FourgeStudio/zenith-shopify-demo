@@ -217,6 +217,7 @@
       ],
       "settings": {
         "placeholder_title": "Zenith Advanced Hair Density Shampoo",
+        "show_variant_picker": false,
         "show_rating": true,
         "rating_value": "4.69",
         "rating_count": "2,158",
@@ -477,6 +478,7 @@
         "heading": "What's in the bottle",
         "subheading": "<p>A sulfate-free wash with four actives.</p>",
         "open_first": true,
+        "item_display": "open",
         "show_list": false,
         "list_title": "View Full Ingredient List",
         "list_text": "",

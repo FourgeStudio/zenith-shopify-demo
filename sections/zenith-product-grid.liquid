@@ -115,16 +115,17 @@
         class: 'zenith-pg__heading'
       -%}
 
+      {%- capture promo_on -%}{%- render 'zenith-promo-on' -%}{%- endcapture -%}
       <ul class="zenith-pg__grid" role="list">
         {%- if pg_count > 0 -%}
           {%- for product in pg_products limit: s.products_to_show -%}
             {%- liquid
               # One badge per card: sale badge (on sale, or every product when set) → product tag "badge:Your text"
-              # → the section's first-product badge.
+              # → the section's first-product badge. Sale badge only while the promotion runs.
               assign card_badge = ''
               assign card_badge_style = 'default'
               assign card_badge_icon = s.badge_icon
-              if s.sale_badge != blank
+              if s.sale_badge != blank and promo_on != blank
                 if s.sale_badge_scope == 'all' or product.compare_at_price > product.price
                   assign card_badge = s.sale_badge
                   assign card_badge_style = 'sale'

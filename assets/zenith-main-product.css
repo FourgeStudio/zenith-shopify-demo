@@ -814,6 +814,7 @@
    The row's own [open] rule rotates every .zenith-faq__icon inside it, so the chevron resets first. */
 .zenith-mp__questions {
   margin-bottom: calc(var(--z-cgap-m, 14px) * -1);
+  padding-left: var(--z-space-3);
 }
 
 
@@ -825,11 +826,19 @@
   gap: 24px;
 }
 
-.zenith-mp__row[open] .zenith-mp__q-icon {
+/* zenith-faq.css loads after this file and its `.zenith-faq__item[open] .zenith-faq__icon { rotate(45deg) }` tied the
+   old reset, turning the chevron into a "└" corner — the extra .zenith-mp__rows keeps these rules ahead. */
+.zenith-mp__rows .zenith-mp__q-icon {
+  width: 18px;
+  height: 18px;
+  margin-left: auto;
+}
+
+.zenith-mp__rows .zenith-mp__row[open] .zenith-mp__q-icon {
   transform: none;
 }
 
-.zenith-mp__row .zenith-mp__q[open] > summary .zenith-mp__q-icon {
+.zenith-mp__rows .zenith-mp__q[open]:not(.is-closing) > summary .zenith-mp__q-icon {
   transform: rotate(180deg);
 }
 
@@ -1070,6 +1079,7 @@
 
   .zenith-mp__questions {
     margin-bottom: calc(var(--z-cgap, 16px) * -1);
+    padding-left: var(--z-space-4);
   }
 
 

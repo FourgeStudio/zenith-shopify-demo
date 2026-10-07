@@ -5,6 +5,10 @@
   exist, and its chip reads the % Shopify applied; until then both come from the tier settings, so the
   total here can be lower than what checkout charges. Shipping adds the flat fee below the free-shipping
   goal (zenith-shipping-goal), so Total = what the customer should expect to pay.
+  Shipping amount source (Zenith · Cart): "shopify" (default) prints the flat-fee estimate first, then
+  assets/zenith-cart-shipping.js swaps in the cheapest rate Shopify Admin → Shipping quotes for this cart
+  (Ajax shipping rates API) and fixes Total; "theme" = legacy flat fee only. The free-shipping bar's
+  threshold stays a theme setting either way.
 {% endcomment %}
 {%- capture zcsum_pct -%}{%- render 'zenith-cart-tier-pct' -%}{%- endcapture -%}
 {%- capture zcsum_goal -%}{%- render 'zenith-shipping-goal' -%}{%- endcapture -%}
@@ -46,8 +50,25 @@
     endif
   endif
   assign zcsum_total = zcsum_paid | plus: zcsum_fee
+  assign zcsum_live = false
+  if settings.cart_shipping_source != 'theme' and cart.item_count > 0
+    assign zcsum_live = true
+  endif
 -%}
-<div class="zenith-cart-sum" role="status">
+<div
+  class="zenith-cart-sum"
+  role="status"
+  {%- if zcsum_live %}
+    data-zcship="{{ settings.cart_shipping_country | default: 'PH' | escape }}"
+    data-zcship-province="{{ settings.cart_shipping_province | escape }}"
+    data-zcship-zip="{{ settings.cart_shipping_zip | escape }}"
+    data-zcship-key="{{ cart.total_price }}-{{ cart.item_count }}-{{ cart.total_weight }}"
+    data-zcship-paid="{{ zcsum_paid }}"
+    data-zcship-free="{{ settings.cart_summary_free | escape }}"
+    data-zcship-later="{{ settings.cart_summary_ship_later | escape }}"
+    data-zcship-format="{{ shop.money_format | strip_html | escape }}"
+  {%- endif %}
+>
   <div class="zenith-cart-sum__row">
     <span>{{ settings.cart_summary_subtotal | escape }}</span>
     <span>{{ zcsum_sub | money }}</span>
@@ -67,10 +88,20 @@
       </span>
     </div>
   {%- endif -%}
-  {%- if zcsum_goal > 0 -%}
+  {%- if zcsum_goal > 0 or zcsum_live -%}
     <div class="zenith-cart-sum__row">
       <span>{{ settings.cart_summary_shipping | escape }}</span>
-      {%- if zcsum_ship_on -%}
+      {%- if zcsum_live -%}
+        <span data-zcship-value class="zenith-cart-sum__est{% if zcsum_ship_on %} zenith-cart-sum__ok{% endif %}">
+          {%- if zcsum_ship_on -%}
+            {{ settings.cart_summary_free | escape }}
+          {%- elsif zcsum_fee > 0 -%}
+            {{ zcsum_fee | money }}
+          {%- else -%}
+            {{ settings.cart_summary_ship_later | escape }}
+          {%- endif -%}
+        </span>
+      {%- elsif zcsum_ship_on -%}
         <span class="zenith-cart-sum__ok">{{ settings.cart_summary_free | escape }}</span>
       {%- elsif zcsum_fee > 0 -%}
         <span>{{ zcsum_fee | money }}</span>
@@ -81,6 +112,6 @@
   {%- endif -%}
   <div class="zenith-cart-sum__row zenith-cart-sum__total">
     <span>{{ settings.cart_summary_total | escape }}</span>
-    <span>{{ zcsum_total | money }}</span>
+    <span{% if zcsum_live %} data-zcship-total class="zenith-cart-sum__est"{% endif %}>{{ zcsum_total | money }}</span>
   </div>
 </div>

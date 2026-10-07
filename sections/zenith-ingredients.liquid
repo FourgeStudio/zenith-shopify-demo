@@ -56,17 +56,16 @@
     <div class="zenith-ingredients__grid">
       <div class="zenith-ingredients__col">
         {%- if section.blocks.size > 0 -%}
+          {%- comment -%} zenith: item_display 'open' = plain divs, no toggle/icon (zenith-faq.js ignores non-summary rows) {%- endcomment -%}
+          {%- liquid
+            assign ing_static = false
+            if section.settings.item_display == 'open'
+              assign ing_static = true
+            endif
+          -%}
           <div class="zenith-ingredients__card">
             {%- for block in section.blocks -%}
-              <details
-                class="zenith-faq__item zenith-ingredients__item"
-                id="Block-{{ block.id }}-{{ section.id }}"
-                {% if forloop.first and section.settings.open_first %}
-                  open
-                {% endif %}
-                {{ block.shopify_attributes }}
-              >
-                <summary class="zenith-faq__question zenith-ingredients__summary">
+              {%- capture ing_lead -%}
                   <span class="zenith-ingredients__lead">
                     <span class="zenith-ingredients__thumb zenith-media">
                       {%- if block.settings.image != blank -%}
@@ -92,10 +91,8 @@
                       {%- endif -%}
                     </span>
                   </span>
-                  <span class="zenith-faq__icon zenith-ingredients__icon" aria-hidden="true">
-                    {%- render 'zenith-icon', icon: 'plus' -%}
-                  </span>
-                </summary>
+              {%- endcapture -%}
+              {%- capture ing_answer -%}
                 <div class="zenith-faq__answer zenith-ingredients__answer zenith-rte">
                   {%- if block.settings.text_mobile != blank -%}
                     <div class="zenith-hide-mobile">{{ block.settings.text }}</div>
@@ -104,7 +101,36 @@
                     {{- block.settings.text -}}
                   {%- endif -%}
                 </div>
-              </details>
+              {%- endcapture -%}
+              {%- if ing_static -%}
+                <div
+                  class="zenith-faq__item zenith-ingredients__item zenith-ingredients__item--static"
+                  id="Block-{{ block.id }}-{{ section.id }}"
+                  {{ block.shopify_attributes }}
+                >
+                  <div class="zenith-faq__question zenith-ingredients__summary zenith-ingredients__summary--static">
+                    {{- ing_lead -}}
+                  </div>
+                  {{- ing_answer -}}
+                </div>
+              {%- else -%}
+                <details
+                  class="zenith-faq__item zenith-ingredients__item"
+                  id="Block-{{ block.id }}-{{ section.id }}"
+                  {% if forloop.first and section.settings.open_first %}
+                    open
+                  {% endif %}
+                  {{ block.shopify_attributes }}
+                >
+                  <summary class="zenith-faq__question zenith-ingredients__summary">
+                    {{- ing_lead -}}
+                    <span class="zenith-faq__icon zenith-ingredients__icon" aria-hidden="true">
+                      {%- render 'zenith-icon', icon: 'plus' -%}
+                    </span>
+                  </summary>
+                  {{- ing_answer -}}
+                </details>
+              {%- endif -%}
             {%- endfor -%}
           </div>
         {%- endif -%}
@@ -202,9 +228,27 @@
       "info": "Optional. A different crop for phones; empty = the photo above."
     },
     {
+      "type": "select",
+      "id": "item_display",
+      "label": "Ingredient items",
+      "info": "Always open shows every thumbnail, title and text with no toggle. The full ingredient list stays collapsible.",
+      "default": "accordion",
+      "options": [
+        {
+          "value": "accordion",
+          "label": "Collapsible (accordion)"
+        },
+        {
+          "value": "open",
+          "label": "Always open"
+        }
+      ]
+    },
+    {
       "type": "checkbox",
       "id": "open_first",
       "label": "Open the first item",
+      "visible_if": "{{ section.settings.item_display != 'open' }}",
       "default": true
     },
     {

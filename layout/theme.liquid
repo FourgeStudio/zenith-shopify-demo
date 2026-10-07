@@ -57,6 +57,9 @@
     <script src="{{ 'zenith-auto-links.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'zenith-card-link.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'zenith-cart-offers.js' | asset_url }}" defer="defer"></script>
+    {%- if settings.cart_shipping_source != 'theme' -%}
+      <script src="{{ 'zenith-cart-shipping.js' | asset_url }}" defer="defer"></script>
+    {%- endif -%}
     <script src="{{ 'cart-disclosure-modal.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'cart-disclosure-tooltip.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>

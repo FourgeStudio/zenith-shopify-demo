@@ -217,6 +217,7 @@
       ],
       "settings": {
         "placeholder_title": "Zenith Anti-Aging Tallow Cleanser",
+        "show_variant_picker": false,
         "show_rating": true,
         "rating_value": "4.69",
         "rating_count": "2,158",
@@ -495,6 +496,7 @@
         "image": "{{ product.featured_image }}",
         "image_mobile": "shopify://shop_images/cleanser-ingredients-close-up-of-zenith-tallow-cleanser-1-mobile.webp",
         "open_first": true,
+        "item_display": "open",
         "show_list": true,
         "list_title": "View Full Ingredient List",
         "list_text": "<p>Water, Sodium Cocoyl Glycinate, Cocamidopropyl Betaine, Glycerin, Adeps Bovis (Tallow), Polyquaternium-7, Sodium Chloride, Lauryl Glucoside, Cocamide MEA, Sodium Lauroyl Sarcosinate, Aloe Barbadensis Extract, Centella Asiatica Extract, Colloidal Oatmeal, Panthenol, Niacinamide, Tocopherol, Bakuchiol, Hydroxyacetophenone, 1,2-Hexanediol, Phenoxyethanol, Parfum, Disodium EDTA, PEG-75 Lanolin, Citric Acid, Ethylhexylglycerin, Sodium Hyaluronate.</p>",

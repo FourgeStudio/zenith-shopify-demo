@@ -34,8 +34,11 @@
   assign card_sizes = image_sizes | default: '(min-width: 990px) 25vw, (min-width: 750px) 33vw, 85vw'
   assign card_rating_style = rating_style | default: 'count'
 -%}
+{%- capture promo_on -%}{%- render 'zenith-promo-on' -%}{%- endcapture -%}
 {%- capture card_badge -%}
-  {%- if badge != blank -%}
+  {%- comment -%} Sale-style badges only while the promotion runs; other badges always. {%- endcomment -%}
+  {%- if badge != blank and badge_style == 'sale' and promo_on == blank -%}
+  {%- elsif badge != blank -%}
     <span class="zenith-card__badge{% if badge_style == 'sale' %} zenith-card__badge--sale{% endif %}">
       {%- if badge_icon != blank and badge_icon != 'none' -%}
         {%- render 'zenith-icon', icon: badge_icon, class: 'zenith-card__badge-icon' -%}
@@ -112,7 +115,7 @@
       {%- endif -%}
       {%- unless show_price == false -%}
       <div class="zenith-card__price">
-        {%- if product.compare_at_price > product.price -%}
+        {%- if product.compare_at_price > product.price and settings.show_compare_price -%}
           <span class="visually-hidden">{{ 'products.product.price.sale_price' | t }}</span>
           <span class="zenith-card__price-current">{{ product.price | money }}</span>
           <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
@@ -162,7 +165,7 @@
       {%- unless show_price == false -%}
         <div class="zenith-card__price">
           <span class="zenith-card__price-current">{{ 179800 | money }}</span>
-          <s class="zenith-card__price-compare">{{ 239800 | money }}</s>
+          {%- if settings.show_compare_price -%}<s class="zenith-card__price-compare">{{ 239800 | money }}</s>{%- endif -%}
         </div>
       {%- endunless -%}
     </div>

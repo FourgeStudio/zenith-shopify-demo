@@ -396,8 +396,9 @@
               {{- 179800 | money_without_trailing_zeros -}}
             {%- endif -%}
           </span>
-          <s class="zenith-mp__price-compare{% unless mp_product.compare_at_price > mp_product.price %} zenith-mp__price-compare--hidden{% endunless %}" data-compare>
-            {%- if mp_product.compare_at_price > mp_product.price -%}
+          {%- comment -%} zenith: compare-at only with Theme settings → Zenith → Show compare-at prices (cart always shows it) {%- endcomment -%}
+          <s class="zenith-mp__price-compare{% unless mp_product.compare_at_price > mp_product.price and settings.show_compare_price %} zenith-mp__price-compare--hidden{% endunless %}" data-compare>
+            {%- if mp_product.compare_at_price > mp_product.price and settings.show_compare_price -%}
               {{- mp_product.compare_at_price | money_without_trailing_zeros -}}
             {%- endif -%}
           </s>
@@ -406,7 +407,8 @@
           {%- endif -%}
         </div>
 
-        {%- if has_variants -%}
+        {%- comment -%} zenith: hidden picker leaves the add-to-cart id input on selected_or_first_available_variant {%- endcomment -%}
+        {%- if has_variants and s.show_variant_picker != false -%}
           {%- capture v_ship_goal_raw -%}{%- render 'zenith-shipping-goal' -%}{%- endcapture -%}
           {%- liquid
             assign v_style = s.variant_style | default: 'cards'
@@ -428,7 +430,7 @@
                 name="Variant-{{ section.id }}"
                 value="{{ variant.id }}"
                 data-price="{{ variant.price | money_without_trailing_zeros }}"
-                data-compare="{% if variant.compare_at_price > variant.price %}{{ variant.compare_at_price | money_without_trailing_zeros }}{% endif %}"
+                data-compare="{% if variant.compare_at_price > variant.price and settings.show_compare_price %}{{ variant.compare_at_price | money_without_trailing_zeros }}{% endif %}"
                 data-available="{{ variant.available }}"
                 {% if variant.id == current_variant.id %}
                   checked
@@ -475,7 +477,7 @@
                   </span>
                   <span class="zenith-mp__vcard-prices">
                     <span class="zenith-mp__vcard-price">{{ variant.price | money_without_trailing_zeros }}</span>
-                    {%- if variant.compare_at_price > variant.price -%}
+                    {%- if variant.compare_at_price > variant.price and settings.show_compare_price -%}
                       <s class="zenith-mp__vcard-was">
                         {{- variant.compare_at_price | money_without_trailing_zeros -}}
                       </s>
@@ -879,6 +881,13 @@
     },
 
     { "type": "header", "content": "Bundle picker" },
+    {
+      "type": "checkbox",
+      "id": "show_variant_picker",
+      "label": "Show bundle picker",
+      "info": "Off hides the variant cards/pills; Add to cart then adds the selected or first available variant.",
+      "default": true
+    },
     {
       "type": "paragraph",
       "content": "How the product's variants are shown. Cards read the variant image, price and compare-at price straight from the product."

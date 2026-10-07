@@ -10,6 +10,24 @@
 {
   "current": {
     "customer_count": "100,000+",
+    "faq1_question": "What makes Zenith different from other men’s grooming brands?",
+    "faq1_answer": "<p>Zenith is made for Filipino men and Philippine weather. Every product is FDA-notified, the ingredients are named on the label, and the routine is short enough to keep.</p>",
+    "faq2_question": "Who is Zenith for?",
+    "faq2_answer": "<p>Men who want a short routine that works with heat and sweat. Most Zenith customers are Filipino men over 35.</p>",
+    "faq3_question": "How long should I use Zenith before I judge it?",
+    "faq3_answer": "<p>Use it as directed every day and give one full product a fair run before you decide. Skin care and hair care both take time. Full guarantee terms are on the <a href=\"/policies/refund-policy\">Refunds and Returns</a> page.</p>",
+    "faq4_question": "Can I use Zenith products together?",
+    "faq4_answer": "<p>Yes. Cleanser and day cream in the morning, tallow cream at night, shampoo in the shower, spray on a clean dry scalp before bed. The directions are on every label.</p>",
+    "faq5_question": "Can I use Zenith if my skin is sensitive?",
+    "faq5_answer": "<p>Check the full ingredient list on the product page first. Start with a small amount. If anything feels wrong, stop and message us.</p>",
+    "faq6_question": "What is beef tallow and why is it in your skincare?",
+    "faq6_answer": "<p>Beef tallow is rendered beef fat. It is the base of the Zenith Anti-Aging Tallow Cream, Cleanser and Day Cream SPF 30. The full ingredient list is on every product page.</p>",
+    "faq7_question": "Do you offer free shipping?",
+    "faq7_answer": "<p>Shipping fees vary by location and promotion. Check the product page or your cart for the latest.</p>",
+    "faq8_question": "How long is delivery?",
+    "faq8_answer": "<p>Metro Manila orders arrive in about 3 days. Visayas and Mindanao in 3 to 7 days.</p>",
+    "faq9_question": "What is your return policy?",
+    "faq9_answer": "<p>Every order carries the Zenith Money-Back Guarantee. Skin products are covered for 30 days and hair products for 60 days. Full terms on our <a href=\"/policies/refund-policy\">Refunds and Returns</a> page.</p>",
     "products_first": [
       "zenith-anti-aging-tallow-cream",
       "zenith-advanced-hair-density-spray"

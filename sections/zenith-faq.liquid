@@ -1,7 +1,25 @@
 {%- comment -%} zenith: [customers] anywhere in this section shows Theme settings → Zenith → Customer count {%- endcomment -%}
 {%- capture zenith_body -%}
 {%- comment -%} No questions → skip the section on the storefront (a lone heading over nothing); the editor keeps it {%- endcomment -%}
-{%- if section.blocks.size > 0 or request.design_mode -%}
+{%- liquid
+  assign faq_shared = false
+  if section.settings.content_source == 'global'
+    assign faq_shared = true
+  endif
+  assign faq_has_items = false
+  if faq_shared
+    for i in (1..15)
+      assign q_key = 'faq' | append: i | append: '_question'
+      if settings[q_key] != blank
+        assign faq_has_items = true
+        break
+      endif
+    endfor
+  elsif section.blocks.size > 0
+    assign faq_has_items = true
+  endif
+-%}
+{%- if faq_has_items or request.design_mode -%}
 {{ 'zenith-faq.css' | asset_url | stylesheet_tag }}
 {%- capture extra -%}
   --z-faq-w: {{ section.settings.max_width }}px;
@@ -33,7 +51,8 @@
           open_first: section.settings.open_first,
           open_all: section.settings.open_all,
           schema: section.settings.enable_schema,
-          section_id: section.id
+          section_id: section.id,
+          shared: faq_shared
         -%}
       </div>
     </div>
@@ -59,6 +78,23 @@
     {
       "type": "header",
       "content": "Content"
+    },
+    {
+      "type": "select",
+      "id": "content_source",
+      "label": "Questions",
+      "info": "Shared FAQ = the questions in Theme settings → Zenith · FAQ (edit once, same on every page). This section's questions = the Question blocks below.",
+      "default": "custom",
+      "options": [
+        {
+          "value": "global",
+          "label": "Shared FAQ (Theme settings)"
+        },
+        {
+          "value": "custom",
+          "label": "This section's questions"
+        }
+      ]
     },
     {
       "type": "text",

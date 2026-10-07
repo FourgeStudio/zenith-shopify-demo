@@ -11,7 +11,8 @@
 
   document.addEventListener('click', (event) => {
     const summary = event.target.closest('.zenith-faq__question');
-    if (!summary || reduceMotion.matches) return;
+    // Only real <summary> rows toggle (zenith-ingredients "Always open" reuses the class on a plain div)
+    if (!summary || summary.tagName !== 'SUMMARY' || reduceMotion.matches) return;
     const item = summary.parentElement;
     const answer = item && item.querySelector('.zenith-faq__answer');
     if (!answer) return;
