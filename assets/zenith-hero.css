@@ -151,7 +151,7 @@
 
 .zenith-hero__badge {
   padding: 0 var(--z-space-3);
-  border-radius: 2px;
+  border-radius: 4px;
   background: var(--z-badge-bg, #007941);
   color: var(--z-badge-fg, #ffffff);
   font-size: var(--z-badge-fs-m, 1.4rem);

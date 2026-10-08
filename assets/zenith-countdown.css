@@ -21,7 +21,7 @@
   min-width: 2.2ch;
   height: var(--z-cd-line);
   padding: 0 var(--z-space-1);
-  border-radius: 2px;
+  border-radius: 4px;
   background: var(--z-cd-box, #4e3a05);
   color: var(--z-cd-digit, #ffffff);
   font-family: var(--font-heading-family);

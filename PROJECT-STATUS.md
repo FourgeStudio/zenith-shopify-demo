@@ -199,6 +199,7 @@ _Last updated: 2026-10-01. Keep this file current at the end of each work sessio
 - Universal eyebrow: `.zenith-eyebrow` (heading font 16px / 1.5 / 0.06em / uppercase / summit-light); per-section eyebrow size settings no longer apply (info text says so); Verify step labels use it.
 - Buttons: zenith-button gains `secondary` (#343434 dark / #F2F2F2 light via per-scheme vars in theme.liquid) and `text` styles, `size: 'small'`, `icon_position: 'left'`, `icon_only: true`. Added to section button_style selects.
 - Icons: zenith-icon.liquid generic icons replaced by the library SVGs (mapping table in the snippet comment), wrapper stroke kept 1.5; header icons (cart both files, account, hamburger, close, search, carets) swapped inline. Dawn assets/icon-*.svg untouched (cart drawer, filters still Dawn).
+- Figma page 2368-52 (Style Guide) read via Chrome extract: radius = square by default, only 4px (small) / 8px (2-3 col) → off values (2/5/6/10px, 0.5rem) moved to 4/8 (Judge.me untouched); accordions use a chevron that flips (FAQ, product rows, ingredients; was + → ×); eyebrow = "Eyebrow Extended" 6% (the 4% label in Figma is a typo per the extract); comment #1956600871 (dark-mode button icons) already met — icons are currentColor.
 - OPEN (client): scheme-1 bg #0E0E0E vs spec #121212; --z-gold #C59300 vs #C5930E; border opacity 10%→15%; off-spec divider colours; Figma comment #1956600871 + node 2368-52 unread.
 
 ### Homepage + mobile cart review (2026-10-09, Loom 'Ayusin ang Navigation, Cart, at FAQ')

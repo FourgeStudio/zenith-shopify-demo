@@ -32,9 +32,7 @@
           {{- settings[q_key] | escape | replace: '[customers]', settings.customer_count -}}
         </span>
         <span class="zenith-faq__icon" aria-hidden="true">
-          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" focusable="false">
-            <path d="M10 1v18M1 10h18"/>
-          </svg>
+          {%- render 'zenith-icon', icon: 'chevron_down' -%}
         </span>
       </summary>
       <div class="zenith-faq__answer zenith-rte" role="region" aria-labelledby="FaqQuestion-{{ i }}-{{ section_id }}">
@@ -86,9 +84,7 @@
         {{- block.settings.question | escape | replace: '[customers]', settings.customer_count -}}
       </span>
       <span class="zenith-faq__icon" aria-hidden="true">
-        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" focusable="false">
-          <path d="M10 1v18M1 10h18"/>
-        </svg>
+        {%- render 'zenith-icon', icon: 'chevron_down' -%}
       </span>
     </summary>
     <div class="zenith-faq__answer zenith-rte" role="region" aria-labelledby="FaqQuestion-{{ block.id }}-{{ section_id }}">

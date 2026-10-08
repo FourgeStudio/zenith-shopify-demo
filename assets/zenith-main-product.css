@@ -495,7 +495,7 @@
   margin: 5px 5px 0;
   aspect-ratio: 1 / 1;
   overflow: hidden;
-  border-radius: 5px;
+  border-radius: 4px;
   background: var(--z-mp-media-bg, #fff);
 }
 
@@ -855,7 +855,7 @@
   }
 
   .zenith-mp__vcard {
-    border-radius: 10px;
+    border-radius: 8px; /* zenith: style guide radius (4 / 8px only) */
   }
 
   .zenith-mp__vcard-ship {
@@ -880,7 +880,7 @@
   .zenith-mp__vcard-media {
     width: calc(100% - 16px);
     margin: 8px 8px 0;
-    border-radius: 6px;
+    border-radius: 4px;
   }
 
   .zenith-mp__vcard-title {

@@ -889,7 +889,7 @@ html.js menu-drawer > details > summary::before {
 
 .zenith-cart-ship__track {
   height: 0.5rem;
-  border-radius: 0.5rem;
+  border-radius: 4px;
   overflow: hidden;
   background: rgba(var(--color-foreground), 0.15);
 }

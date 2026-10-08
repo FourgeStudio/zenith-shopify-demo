@@ -94,7 +94,7 @@
 }
 
 .zenith-faq__item[open] .zenith-faq__icon {
-  transform: rotate(45deg);
+  transform: rotate(180deg); /* zenith: style guide accordion = chevron that flips when open */
 }
 
 .zenith-faq__answer {
