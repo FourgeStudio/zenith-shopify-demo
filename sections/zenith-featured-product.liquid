@@ -8,10 +8,6 @@
   # zenith: content is global (Theme settings → Zenith · Featured product), so every page shows the same block;
   # the section only sets layout, colours and spacing.
   assign fp_product = settings.zfp_product
-  # Product settings have no default: until one is chosen (or if a store drops settings_data), show the Tallow Cream
-  if fp_product == blank
-    assign fp_product = all_products['zenith-anti-aging-tallow-cream']
-  endif
   assign fp_badge = settings.zfp_badge
   assign fp_image = settings.zfp_image
   assign fp_image_mobile = settings.zfp_image_mobile
