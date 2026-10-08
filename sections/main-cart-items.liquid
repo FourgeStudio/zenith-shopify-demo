@@ -190,7 +190,7 @@
                       <ul class="discounts list-unstyled" role="list" aria-label="{{ 'customer.order.discount' | t }}">
                         {%- for discount in item.line_level_discount_allocations -%}
                           <li class="discounts__discount">
-                            {{- 'icon-discount.svg' | inline_asset_content -}}
+                            {%- render 'zenith-cart-icon', icon: 'tag' -%}
                             {{ discount.discount_application.title | escape }}
                           </li>
                         {%- endfor -%}
@@ -279,9 +279,7 @@
                                 <span class="visually-hidden">
                                   {{- 'products.product.quantity.decrease' | t: product: item.product.title | escape -}}
                                 </span>
-                                <span class="svg-wrapper">
-                                  {{- 'icon-minus.svg' | inline_asset_content -}}
-                                </span>
+                                {%- render 'zenith-cart-icon', icon: 'minus' -%}
                               </button>
                               <input
                                 class="quantity__input"
@@ -317,9 +315,7 @@
                                 <span class="visually-hidden">
                                   {{- 'products.product.quantity.increase' | t: product: item.product.title | escape -}}
                                 </span>
-                                <span class="svg-wrapper">
-                                  {{- 'icon-plus.svg' | inline_asset_content -}}
-                                </span>
+                                {%- render 'zenith-cart-icon', icon: 'plus' -%}
                               </button>
                             </quantity-input>
                           </div>
@@ -336,9 +332,7 @@
                               class="button button--tertiary"
                               aria-label="{{ 'sections.cart.remove_title' | t: title: item.title | escape }}"
                             >
-                              <span class="svg-wrapper">
-                                {{- 'icon-remove.svg' | inline_asset_content -}}
-                              </span>
+                              {%- render 'zenith-cart-icon', icon: 'trash' -%}
                             </a>
                           </cart-remove-button>
                         </div>

@@ -10,9 +10,16 @@
   assign play_alpha = section.settings.play_opacity | divided_by: 100.0
 -%}
 {%- capture extra -%}
-  --z-slide: calc((100cqi - {{ gap_count }} * var(--z-gap, 24px)) / {{ cols }});
-  --z-slide-m: calc({{ section.settings.mobile_slide_width }} * 1cqi);
+{%- liquid
+    # zenith: "Maximum video height" caps the card width so the video (kept in its shape) is at most that share of the screen height
+    assign vr = section.settings.video_ratio | split: '-'
+    assign vmh = section.settings.video_max_height | default: 0
+    assign vmh_m = section.settings.video_max_height_mobile | default: 0
+  -%}
+  --z-slide: {% if vmh > 0 %}min(calc((100cqi - {{ gap_count }} * var(--z-gap, 24px)) / {{ cols }}), calc({{ vmh }}svh * {{ vr[0] }} / {{ vr[1] }})){% else %}calc((100cqi - {{ gap_count }} * var(--z-gap, 24px)) / {{ cols }}){% endif %};
+  --z-slide-m: {% if vmh_m > 0 %}min(calc({{ section.settings.mobile_slide_width }} * 1cqi), calc({{ vmh_m }}svh * {{ vr[0] }} / {{ vr[1] }})){% else %}calc({{ section.settings.mobile_slide_width }} * 1cqi){% endif %};
   --z-hgap: {{ section.settings.heading_gap }}px;
+  --z-vsub-a: {{ section.settings.subheading_opacity | default: 70 | divided_by: 100.0 }};
   --z-hgap-m: {{ section.settings.heading_gap_mobile }}px;
   --z-ctrl-sp: {{ section.settings.controls_spacing }}px;
   --z-card-border: {{ section.settings.card_border_color }};
@@ -432,6 +439,17 @@
       "default": 32
     },
     {
+      "type": "range",
+      "id": "video_max_height",
+      "label": "Maximum video height",
+      "info": "Percent of the screen height; cards get narrower so the video keeps its shape. 0 = no limit.",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 0
+    },
+    {
       "type": "select",
       "id": "video_ratio",
       "label": "Video shape",
@@ -534,6 +552,16 @@
       "label": "Card color scheme",
       "info": "Card uses the scheme's flat background color",
       "default": "scheme-6"
+    },
+    {
+      "type": "range",
+      "id": "subheading_opacity",
+      "label": "Subheading opacity",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 70
     },
     {
       "type": "color",
@@ -666,6 +694,7 @@
       "type": "range",
       "id": "eyebrow_font_size",
       "label": "Eyebrow size",
+      "info": "No longer applies: eyebrows use the universal style (.zenith-eyebrow in zenith-base.css, 16px).",
       "min": 10,
       "max": 20,
       "step": 1,
@@ -721,6 +750,17 @@
           "label": "Center"
         }
       ]
+    },
+    {
+      "type": "range",
+      "id": "video_max_height_mobile",
+      "label": "Maximum video height",
+      "info": "Percent of the screen height; cards get narrower so the video keeps its shape. 0 = no limit.",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 0
     },
     {
       "type": "range",

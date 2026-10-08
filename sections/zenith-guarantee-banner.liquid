@@ -70,13 +70,13 @@
         -%}
         {%- if gb_text != blank -%}
           <div class="zenith-guarantee__text zenith-rte{% if section.settings.text_mobile != blank %} zenith-hide-mobile{% endif %}">
-            {{- gb_text | replace: '[customers]', settings.customer_count -}}
+            {{- gb_text | replace: '[customers]', settings.customer_count | replace: 'Money-Back', '<span class="zenith-nowrap">Money-Back</span>' | replace: 'Money-back', '<span class="zenith-nowrap">Money-back</span>' -}}
           </div>
         {%- endif -%}
         {%- comment -%} zenith: per-page mobile copy, used even when the rest comes from shared content {%- endcomment -%}
         {%- if section.settings.text_mobile != blank -%}
           <div class="zenith-guarantee__text zenith-rte zenith-hide-desktop">
-            {{- section.settings.text_mobile | replace: '[customers]', settings.customer_count -}}
+            {{- section.settings.text_mobile | replace: '[customers]', settings.customer_count | replace: 'Money-Back', '<span class="zenith-nowrap">Money-Back</span>' | replace: 'Money-back', '<span class="zenith-nowrap">Money-back</span>' -}}
           </div>
         {%- endif -%}
         {%- if gb_button_label != blank -%}
@@ -285,7 +285,9 @@
         { "value": "dark", "label": "Dark" },
         { "value": "outline", "label": "Outline" },
         { "value": "light", "label": "Light" },
-        { "value": "scheme", "label": "Color scheme button" }
+        { "value": "scheme", "label": "Color scheme button" },
+        { "value": "secondary", "label": "Secondary (gray)" },
+        { "value": "text", "label": "Text link" }
       ]
     },
     {
@@ -312,6 +314,7 @@
       "type": "range",
       "id": "eyebrow_font_size",
       "label": "Eyebrow size",
+      "info": "No longer applies: eyebrows use the universal style (.zenith-eyebrow in zenith-base.css, 16px).",
       "min": 10,
       "max": 20,
       "step": 1,

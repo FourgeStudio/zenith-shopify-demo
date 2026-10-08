@@ -10,6 +10,10 @@
   letter-spacing: 0;
 }
 
+.zenith-videos .zenith-subheading {
+  color: rgba(var(--color-foreground), var(--z-vsub-a, 0.7));
+}
+
 .zenith-videos .zenith-subheading p + p {
   margin-top: 1.5em;
 }

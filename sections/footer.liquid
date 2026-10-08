@@ -37,6 +37,10 @@
   assign divider_color_mobile = s.divider_color_mobile | default: divider_color
 
   assign logo = s.logo | default: settings.brand_image
+  # zenith: vector lockup (assets/zenith-logo-tagline.svg, from the style guide) unless turned off
+  if s.use_svg_logo != false
+    assign logo = nil
+  endif
   assign logo_alt = logo.alt | default: shop.name
   assign seal_alt = s.seal_image.alt | default: shop.name
   assign payment_alt = s.payment_image.alt
@@ -116,7 +120,7 @@
           {%- else -%}
             {%- comment -%} zenith: bundled lockup until a logo is chosen here or in Theme settings > Brand information {%- endcomment -%}
             <img
-              src="{{ 'footer-logo.png' | asset_url }}"
+              src="{{ 'zenith-logo-tagline.svg' | asset_url }}"
               alt="{{ shop.name | escape }}"
               width="204"
               height="80"
@@ -173,9 +177,20 @@
                         {%- if links_menu != blank -%}
                           <ul class="zenith-footer__links list-unstyled{{ links_class }}" role="list">
                             {%- for link in links_menu.links -%}
+                              {%- liquid
+                                # zenith: per-theme link override — menus are shared with the live theme, so a link can be changed here instead
+                                assign link_url = link.url
+                                if block.settings.override_title != blank and block.settings.override_url != blank
+                                  assign override_title = block.settings.override_title | strip | downcase
+                                  assign link_title = link.title | strip | downcase
+                                  if link_title == override_title
+                                    assign link_url = block.settings.override_url | strip
+                                  endif
+                                endif
+                              -%}
                               <li>
                                 <a
-                                  href="{{ link.url }}"
+                                  href="{{ link_url }}"
                                   class="zenith-footer__link{% if link.active %} zenith-footer__link--active{% endif %}"
                                   {% if link.current %}
                                     aria-current="page"
@@ -484,6 +499,22 @@
           "label": "Full width on mobile",
           "info": "Puts this menu on its own row on mobile.",
           "default": false
+        },
+        {
+          "type": "header",
+          "content": "Link override (this theme only)"
+        },
+        {
+          "type": "text",
+          "id": "override_title",
+          "label": "Menu item name",
+          "info": "Menus are shared by all themes. Name an item here (e.g. Disclaimer) to give it a different link in this theme only."
+        },
+        {
+          "type": "text",
+          "id": "override_url",
+          "label": "Link for that item",
+          "info": "e.g. /pages/disclaimer"
         }
       ]
     },
@@ -596,6 +627,13 @@
       "id": "logo",
       "label": "Logo",
       "info": "Logo with tagline. Empty = Theme settings > Brand information image, then the bundled Zenith lockup."
+    },
+    {
+      "type": "checkbox",
+      "id": "use_svg_logo",
+      "label": "Use the vector logo",
+      "info": "Sharp SVG lockup from the style guide. Turn off to use the image above.",
+      "default": true
     },
     {
       "type": "checkbox",

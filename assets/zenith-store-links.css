@@ -196,3 +196,10 @@
     transition: none;
   }
 }
+
+/* zenith: "Brighten linked cards on hover" off (Certificates page) */
+.zenith-store-links--no-hover .zenith-store-links__card--link,
+.zenith-store-links--no-hover .zenith-store-links__card--link:hover {
+  filter: none;
+  transition: none;
+}

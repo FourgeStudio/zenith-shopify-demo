@@ -55,7 +55,7 @@
 
 <section
   id="Zenith-{{ section.id }}"
-  class="zenith-section zenith-rt zenith-rt--m-{{ s.heading_alignment_mobile }} zenith-rt--d-{{ s.step_layout | default: 'stacked' }} zenith-rt--div-{{ s.divider_breakpoint | default: 'all' }}{% if s.show_note_desktop %} zenith-rt--note-d{% endif %} color-{{ s.color_scheme }} gradient{% if section.index > 2 %} zenith-defer{% endif %}"
+  class="zenith-section zenith-rt zenith-rt--m-{{ s.heading_alignment_mobile }} zenith-rt--d-{{ s.step_layout | default: 'stacked' }} zenith-rt--div-{{ s.divider_breakpoint | default: 'all' }}{% if s.show_note_desktop %} zenith-rt--note-d{% endif %}{% if s.title_heading_font %} zenith-rt--title-heading{% endif %} color-{{ s.color_scheme }} gradient{% if section.index > 2 %} zenith-defer{% endif %}"
 >
   <div class="page-width">
     {%- render 'zenith-section-heading',
@@ -85,6 +85,9 @@
           <div class="zenith-rt__body">
             {%- if s.show_number -%}
               <span class="zenith-rt__num" aria-hidden="true">{{ forloop.index }}</span>
+            {%- endif -%}
+            {%- if s.step_label != blank -%}
+              <p class="zenith-eyebrow zenith-rt__label">{{ s.step_label | escape }} {{ forloop.index }}</p>
             {%- endif -%}
             {%- if block.settings.title != blank -%}
               <h3 class="zenith-rt__title">{{ block.settings.title | escape }}</h3>
@@ -208,6 +211,12 @@
       "label": "Number the steps",
       "info": "Gold circle with 1, 2, 3 … above the step text.",
       "default": false
+    },
+    {
+      "type": "text",
+      "id": "step_label",
+      "label": "Step label",
+      "info": "e.g. Step → STEP 1, STEP 2 … above each title in the universal eyebrow style (Verify page step cards). Empty = none."
     },
     {
       "type": "checkbox",
@@ -390,11 +399,18 @@
       "default": "#D6B356"
     },
     {
+      "type": "checkbox",
+      "id": "title_heading_font",
+      "label": "Step title in the heading font",
+      "info": "Verify page step card style.",
+      "default": false
+    },
+    {
       "type": "color",
       "id": "number_background",
       "label": "Step number circle",
       "visible_if": "{{ section.settings.show_number }}",
-      "default": "#C59300"
+      "default": "#C5930E"
     },
     {
       "type": "color",
@@ -462,6 +478,7 @@
       "type": "range",
       "id": "eyebrow_font_size",
       "label": "Eyebrow size",
+      "info": "No longer applies: eyebrows use the universal style (.zenith-eyebrow in zenith-base.css, 16px).",
       "min": 10,
       "max": 20,
       "step": 1,

@@ -218,7 +218,7 @@
   width: var(--z-rt-num-m, 28px);
   height: var(--z-rt-num-m, 28px);
   border-radius: 50%;
-  background: var(--z-rt-num-bg, #c59300);
+  background: var(--z-rt-num-bg, #c5930e);
   color: var(--z-rt-num-fg, #121212);
   font-family: var(--font-body-family);
   font-size: var(--z-rt-numfs-m, 1.4rem);
@@ -265,5 +265,23 @@
 @media screen and (max-width: 749px) {
   .zenith-rt--div-desktop .zenith-rt__divider {
     display: none;
+  }
+}
+
+/* zenith: Verify page step-card style — "STEP 1" eyebrow (type/colour from .zenith-eyebrow) and heading-font titles */
+.zenith-rt__label {
+  margin: 0 0 var(--z-space-1);
+}
+
+.zenith-rt--title-heading .zenith-rt__title {
+  font-family: var(--font-heading-family);
+  font-weight: var(--font-heading-weight, 400);
+  line-height: 1.2;
+}
+
+/* Desktop, three step cards side by side: photos line up at the top even when the texts differ in length */
+@media screen and (min-width: 990px) {
+  .zenith-rt--title-heading.zenith-rt--d-beside .zenith-rt__step {
+    align-items: start;
   }
 }

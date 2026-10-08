@@ -20,7 +20,7 @@
 - Wordmark "ZEN▲TH": the I is replaced by a gold mountain peak + sun dot (Summit Gold).
 - Variants: black wordmark on white/light · white wordmark on Obsidian Black · lockup with tagline "ALWAYS IN YOUR PRIME" (dark + light).
 - Mark alone (gold peak + dot) = favicon/social avatar.
-- Files in `assets/`: `header-logo.png`, `footer-logo.png` — white wordmark + gold mark, transparent PNG (~216px wide) → for dark header/footer. Upload the same file in Theme settings → Logo (theme editor `image_picker`; asset files aren't selectable there).
+- Files in `assets/`: `zenith-logo.svg` (wordmark) and `zenith-logo-tagline.svg` (lockup) for dark backgrounds, `zenith-logo-light.svg` / `zenith-logo-tagline-light.svg` for light — vector, from the style guide (2026-10-09). Header + footer use them by default (*Use the vector logo*). Old `header-logo.png` / `footer-logo.png` kept but unused. Upload the same file in Theme settings → Logo (theme editor `image_picker`; asset files aren't selectable there).
 - Missing (TBD): black wordmark for light backgrounds, tagline lockups, standalone mark/favicon, SVG or ≥2x PNG for retina.
 - Logo on light backgrounds uses black wordmark; on dark uses white. Never recolor the mark.
 
@@ -29,7 +29,7 @@
 |---|---|---|
 | Obsidian Black | #121212 | primary dark bg, primary text, primary button |
 | White Rock | #E7E7E7 | light surface, text on dark |
-| Summit Gold | #C59300 | brand accent, CTA on dark, sale/highlight, icons |
+| Summit Gold | #C5930E | brand accent, CTA on dark, sale/highlight, icons |
 | Basalt | #202020 | secondary dark surface, cards on black |
 | Granite | #8E8C8C | muted text, borders on dark |
 | Dawn Gold | #EABE5F | light gold, gradient start, hover on gold |
@@ -40,17 +40,17 @@ Neutral scale: #010101 · #1A1A1A · #4D4D4D · #808080 · #B2B2B2 · #D8D8D8 ·
 
 Gradients:
 - Altitude: Horizon Blue → White `linear-gradient(90deg, #294850, #FFFFFF)`
-- Summit: Dawn Gold → Summit Gold `linear-gradient(90deg, #EABE5F, #C59300)`
+- Summit: Dawn Gold → Summit Gold `linear-gradient(90deg, #EABE5F, #C5930E)`
 
 ### Dawn color schemes (live in config/settings_data.json)
 | Scheme | Use | Background | Text | Button / label |
 |---|---|---|---|---|
-| scheme-1 Obsidian (site default) | page, most sections | #0E0E0E (design page bg) | #FFFFFF | #C59300 / #121212 |
+| scheme-1 Obsidian (site default) | page, most sections | #121212 (style guide Obsidian) | #FFFFFF | #C5930E / #121212 |
 | scheme-2 White | promo banner card | #FFFFFF | #121212 | #121212 / #FFFFFF |
 | scheme-3 Rock | product image backgrounds | #E7E7E7 | #121212 | #121212 / #FFFFFF |
-| scheme-4 Basalt | trust bar, money-back band, review cards | #202020 | #FFFFFF | #C59300 / #121212 |
-| scheme-5 Gold | announcement bar, badges | #C59300 | #121212 | #121212 / #FFFFFF |
-| scheme-6 Horizon | featured product panel (gradient #112328 to #294850) | #112328 | #FFFFFF | #C59300 / #121212 |
+| scheme-4 Basalt | trust bar, money-back band, review cards | #202020 | #FFFFFF | #C5930E / #121212 |
+| scheme-5 Gold | announcement bar, badges | #C5930E | #121212 | #121212 / #FFFFFF |
+| scheme-6 Horizon | featured product panel (gradient #112328 to #294850) | #112328 | #FFFFFF | #C5930E / #121212 |
 | scheme-7 Obsidian / white button | alt dark with white CTA | #121212 | #FFFFFF | #FFFFFF / #121212 |
 
 ## Typography
@@ -67,7 +67,7 @@ Gradients:
 
 ## UI
 - Corners: square (radius 0) on buttons, cards, media, inputs — per brand application.
-- Buttons (per homepage design): label in the HEADING font (~22px) + arrow/cart icon, square. Styles via `snippets/zenith-button.liquid`: gold = Summit gradient #EABE5F→#C59300 with dark text (default CTA); dark = #112328 with white text (on light promo cards); outline = 1px #EABE5F border, white text ("Shop All Products").
+- Buttons (per homepage design): label in the HEADING font (~22px) + arrow/cart icon, square. Styles via `snippets/zenith-button.liquid`: gold = Summit gradient #EABE5F→#C5930E with dark text (default CTA); dark = #112328 with white text (on light promo cards); outline = 1px #EABE5F border, white text ("Shop All Products").
 - Announcement bar: Summit Gold background, dark text.
 - Header: pure black #000, hamburger (desktop too), centered logo, account + cart right; announcement bar BELOW it, gold gradient.
 - Page width: max 1440px frame incl. side margins (Theme settings → Page width = 1440). Side margins = Theme settings → Zenith → Page side margin: 30px desktop / 20px mobile (client request; design showed 80). Header icons align to the same margin.

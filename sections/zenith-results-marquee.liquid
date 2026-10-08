@@ -258,7 +258,9 @@
 
   <div class="page-width zenith-results__footer">
     {%- comment -%} Pause/play for the moving rows (WCAG 2.2.2); shown by the JS once the loop runs {%- endcomment -%}
-    {%- render 'zenith-pause-button', class: 'zenith-results__pause', label: 'Pause reviews' -%}
+    {%- if section.settings.show_pause_button -%}
+      {%- render 'zenith-pause-button', class: 'zenith-results__pause', label: 'Pause reviews' -%}
+    {%- endif -%}
     {%- if section.settings.disclaimer != blank -%}
       <p class="zenith-results__disclaimer">
         {{- section.settings.disclaimer | escape | replace: '[customers]', settings.customer_count -}}
@@ -492,6 +494,13 @@
       "id": "pause_on_hover",
       "label": "Pause on hover",
       "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_pause_button",
+      "label": "Show pause button",
+      "info": "Pause/play button under the reviews. Off by default (client request: on Safari it made the rows jump back to the start); turn on for full WCAG 2.2.2 support.",
+      "default": false
     },
     {
       "type": "range",
@@ -755,6 +764,7 @@
       "type": "range",
       "id": "eyebrow_font_size",
       "label": "Eyebrow size",
+      "info": "No longer applies: eyebrows use the universal style (.zenith-eyebrow in zenith-base.css, 16px).",
       "min": 10,
       "max": 20,
       "step": 1,

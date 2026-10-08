@@ -16,7 +16,16 @@
     const base = parseFloat(cs.getPropertyValue(mobile ? '--z-speed-m' : '--z-speed')) || parseFloat(cs.getPropertyValue('--z-speed')) || 120;
     if (!longest) return;
     tracks.forEach((t, i) => {
-      if (widths[i]) t.style.animationDuration = `${((base * widths[i]) / longest).toFixed(2)}s`;
+      if (!widths[i]) return;
+      const next = `${((base * widths[i]) / longest).toFixed(2)}s`;
+      if (t.style.animationDuration === next) return;
+      // zenith: a new duration on a running animation moves the row (progress = time / duration); keep it where it is
+      const anim = t.getAnimations?.()[0];
+      const oldMs = anim && Number(anim.effect?.getTiming().duration);
+      const progress = oldMs > 0 && anim.currentTime != null ? (anim.currentTime % oldMs) / oldMs : null;
+      t.style.animationDuration = next;
+      const fresh = t.getAnimations?.()[0];
+      if (fresh && progress != null) fresh.currentTime = progress * parseFloat(next) * 1000;
     });
   };
 

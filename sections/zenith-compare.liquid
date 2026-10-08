@@ -93,7 +93,7 @@
       {%- else -%}
         {%- comment -%} zenith: bundled wordmark until Theme settings → Zenith column logo is set (same fallback as the header) {%- endcomment -%}
         <img
-          src="{{ 'header-logo.png' | asset_url }}"
+          src="{{ 'zenith-logo.svg' | asset_url }}"
           alt="{{ zenith_label | escape }}"
           width="104"
           height="28"
@@ -469,7 +469,7 @@
       "type": "color",
       "id": "divider_color",
       "label": "Divider",
-      "default": "#0E0E0E"
+      "default": "#121212"
     },
     {
       "type": "color",
@@ -542,6 +542,7 @@
       "type": "range",
       "id": "eyebrow_font_size",
       "label": "Eyebrow size",
+      "info": "No longer applies: eyebrows use the universal style (.zenith-eyebrow in zenith-base.css, 16px).",
       "min": 10,
       "max": 20,
       "step": 1,

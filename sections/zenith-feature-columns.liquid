@@ -172,10 +172,10 @@
               <span class="zenith-features__icon">{%- render 'zenith-icon', icon: col_icon -%}</span>
             {%- endif -%}
             {%- if col_title != blank -%}
-              <h3 class="zenith-features__title">{{ col_title | escape | replace: '[customers]', settings.customer_count }}</h3>
+              <h3 class="zenith-features__title">{{ col_title | escape | replace: '[customers]', settings.customer_count | replace: 'Money-Back', '<span class="zenith-nowrap">Money-Back</span>' | replace: 'Money-back', '<span class="zenith-nowrap">Money-back</span>' }}</h3>
             {%- endif -%}
             {%- if col_text != blank -%}
-              <div class="zenith-features__body zenith-rte">{{ col_text | replace: '[customers]', settings.customer_count }}</div>
+              <div class="zenith-features__body zenith-rte">{{ col_text | replace: '[customers]', settings.customer_count | replace: 'Money-Back', '<span class="zenith-nowrap">Money-Back</span>' | replace: 'Money-back', '<span class="zenith-nowrap">Money-back</span>' }}</div>
             {%- endif -%}
           </div>
         </li>
@@ -280,7 +280,7 @@
           </ul>
         {%- endif -%}
         {%- if footer_text != blank -%}
-          <div class="zenith-features__footer-text zenith-rte">{{ footer_text | replace: '[customers]', settings.customer_count }}</div>
+          <div class="zenith-features__footer-text zenith-rte">{{ footer_text | replace: '[customers]', settings.customer_count | replace: 'Money-Back', '<span class="zenith-nowrap">Money-Back</span>' | replace: 'Money-back', '<span class="zenith-nowrap">Money-back</span>' }}</div>
         {%- endif -%}
       </div>
     {%- endif -%}
@@ -764,6 +764,7 @@
       "type": "range",
       "id": "eyebrow_font_size",
       "label": "Eyebrow size",
+      "info": "No longer applies: eyebrows use the universal style (.zenith-eyebrow in zenith-base.css, 16px).",
       "min": 10,
       "max": 20,
       "step": 1,

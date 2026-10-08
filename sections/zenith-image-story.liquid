@@ -121,7 +121,7 @@
         {%- elsif section.settings.use_brand_logo -%}
           {%- if section.settings.brand_logo_style == 'wordmark' -%}
             <img
-              src="{{ 'header-logo.png' | asset_url }}"
+              src="{{ 'zenith-logo.svg' | asset_url }}"
               alt="{{ shop.name | escape }}"
               width="223"
               height="60"
@@ -130,7 +130,7 @@
             >
           {%- else -%}
             <img
-              src="{{ 'footer-logo.png' | asset_url }}"
+              src="{{ 'zenith-logo-tagline.svg' | asset_url }}"
               alt="{{ shop.name | escape }}"
               width="204"
               height="80"
@@ -575,7 +575,9 @@
         { "value": "dark", "label": "Dark" },
         { "value": "outline", "label": "Outline" },
         { "value": "light", "label": "Light" },
-        { "value": "scheme", "label": "Color scheme button" }
+        { "value": "scheme", "label": "Color scheme button" },
+        { "value": "secondary", "label": "Secondary (gray)" },
+        { "value": "text", "label": "Text link" }
       ]
     },
     {
@@ -668,6 +670,7 @@
       "type": "range",
       "id": "eyebrow_font_size",
       "label": "Eyebrow size",
+      "info": "No longer applies: eyebrows use the universal style (.zenith-eyebrow in zenith-base.css, 16px).",
       "min": 10,
       "max": 20,
       "step": 1,

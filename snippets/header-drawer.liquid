@@ -16,8 +16,8 @@
       aria-label="{{ 'sections.header.menu' | t }}"
     >
       <span>
-        {{- 'icon-hamburger.svg' | inline_asset_content -}}
-        {{- 'icon-close.svg' | inline_asset_content -}}
+        {%- comment -%} zenith: client icon library (icon-hamburger) {%- endcomment -%}<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-hamburger" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 12H21M3 6H21M3 18H21"/></svg>
+        {%- comment -%} zenith: client icon library (icon-close) {%- endcomment -%}<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 6L6 18M6 6L18 18"/></svg>
       </span>
     </summary>
     <div id="menu-drawer" class="gradient menu-drawer motion-reduce color-{{ section.settings.menu_color_scheme }}">
@@ -35,10 +35,10 @@
                       >
                         {{ link.title | escape }}
                         <span class="svg-wrapper">
-                          {{- 'icon-arrow.svg' | inline_asset_content -}}
+                          {%- comment -%} zenith: client icon library (icon-arrow) {%- endcomment -%}<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-arrow" viewBox="3 5 18 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 12H20M20 12L14 6M20 12L14 18"/></svg>
                         </span>
                         <span class="svg-wrapper">
-                          {{- 'icon-caret.svg' | inline_asset_content -}}
+                          {%- comment -%} zenith: client icon library (icon-caret) {%- endcomment -%}<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-caret" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 9L12 15L18 9"/></svg>
                         </span>
                       </summary>
                       <div
@@ -49,7 +49,7 @@
                         <div class="menu-drawer__inner-submenu">
                           <button class="menu-drawer__close-button link link--text focus-inset" aria-expanded="true">
                             <span class="svg-wrapper">
-                              {{- 'icon-arrow.svg' | inline_asset_content -}}
+                              {%- comment -%} zenith: client icon library (icon-arrow) {%- endcomment -%}<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-arrow" viewBox="3 5 18 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 12H20M20 12L14 6M20 12L14 18"/></svg>
                             </span>
                             {{ link.title | escape }}
                           </button>
@@ -75,10 +75,10 @@
                                     >
                                       {{ childlink.title | escape }}
                                       <span class="svg-wrapper">
-                                        {{- 'icon-arrow.svg' | inline_asset_content -}}
+                                        {%- comment -%} zenith: client icon library (icon-arrow) {%- endcomment -%}<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-arrow" viewBox="3 5 18 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 12H20M20 12L14 6M20 12L14 18"/></svg>
                                       </span>
                                       <span class="svg-wrapper">
-                                        {{- 'icon-caret.svg' | inline_asset_content -}}
+                                        {%- comment -%} zenith: client icon library (icon-caret) {%- endcomment -%}<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-caret" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 9L12 15L18 9"/></svg>
                                       </span>
                                     </summary>
                                     <div
@@ -90,7 +90,7 @@
                                         aria-expanded="true"
                                       >
                                         <span class="svg-wrapper">
-                                          {{- 'icon-arrow.svg' | inline_asset_content -}}
+                                          {%- comment -%} zenith: client icon library (icon-arrow) {%- endcomment -%}<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-arrow" viewBox="3 5 18 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 12H20M20 12L14 6M20 12L14 18"/></svg>
                                         </span>
                                         {{ childlink.title | escape }}
                                       </button>

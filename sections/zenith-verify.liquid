@@ -94,7 +94,14 @@
   --zv-seal-sp-m: {{ s.seal_spacing_mobile }}px;
   --zv-seal-img: {{ s.seal_image_size }}px;
   --zv-seal-pad: {{ s.seal_padding }}px;
+  --zv-seal-pad-m: {{ s.seal_padding_mobile | default: s.seal_padding }}px;
+  --zv-seal-gap: {{ s.seal_gap | default: s.seal_padding }}px;
+  --zv-seal-gap-m: {{ s.seal_gap_mobile | default: s.seal_padding }}px;
+  --zv-seal-tgap: {{ s.seal_text_gap | default: 0 }}px;
   --zv-card: {{ s.card_color }};
+  {%- if s.seal_border_color != blank %}
+  --zv-seal-border: 1px solid {{ s.seal_border_color }};
+  {%- endif %}
   --zv-stfs: {{ s.seal_title_font_size }}px;
   --zv-stfs-m: {{ s.seal_title_font_size_mobile }}px;
   --zv-sxfs: {{ s.seal_text_font_size }}px;
@@ -254,7 +261,7 @@
                 </div>
                 <div class="zenith-verify__step-body">
                   {%- if step_label != blank -%}
-                    <p class="zenith-verify__label">{{ step_label | escape }}</p>
+                    <p class="zenith-eyebrow zenith-verify__label">{{ step_label | escape }}</p>
                   {%- endif -%}
                   {%- if block.settings.title != blank -%}
                     <{{ item_tag }} class="zenith-verify__step-title">{{ block.settings.title | escape }}</{{ item_tag }}>
@@ -672,6 +679,26 @@
     },
     {
       "type": "range",
+      "id": "seal_gap",
+      "label": "Seal card: space between seal and text",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "seal_text_gap",
+      "label": "Seal card: space between title and text",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
       "id": "logos_spacing",
       "label": "Space above delivery logos",
       "min": 0,
@@ -714,6 +741,7 @@
       "type": "color",
       "id": "label_color",
       "label": "Step label",
+      "info": "No longer applies: step labels use the universal eyebrow style (.zenith-eyebrow in zenith-base.css).",
       "default": "#EABE5F"
     },
     {
@@ -745,6 +773,12 @@
     },
     {
       "type": "color",
+      "id": "seal_border_color",
+      "label": "Seal card border",
+      "info": "Empty = no border. #363636 = white 15% on Obsidian, like the Official Pages and trust cards."
+    },
+    {
+      "type": "color",
       "id": "border_color",
       "label": "Video border",
       "default": "#454545"
@@ -770,7 +804,7 @@
       "id": "play_icon_color",
       "label": "Play icon",
       "info": "Used by the Solid play icon style.",
-      "default": "#0E0E0E"
+      "default": "#121212"
     },
     {
       "type": "header",
@@ -832,6 +866,7 @@
       "type": "range",
       "id": "label_font_size",
       "label": "Step label size",
+      "info": "No longer applies: step labels use the universal eyebrow style (16px).",
       "min": 10,
       "max": 28,
       "step": 1,
@@ -1087,6 +1122,7 @@
       "type": "range",
       "id": "label_font_size_mobile",
       "label": "Step label size",
+      "info": "No longer applies: step labels use the universal eyebrow style (16px).",
       "min": 10,
       "max": 24,
       "step": 1,
@@ -1122,6 +1158,26 @@
       "step": 2,
       "unit": "px",
       "default": 20
+    },
+    {
+      "type": "range",
+      "id": "seal_padding_mobile",
+      "label": "Seal card padding",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "seal_gap_mobile",
+      "label": "Seal card: space between seal and text",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 12
     },
     {
       "type": "range",

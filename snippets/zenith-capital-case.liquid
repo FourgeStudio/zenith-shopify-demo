@@ -1,0 +1,35 @@
+{%- comment -%}
+  Capital case: "ACCURACY OF BILLING AND ACCOUNT INFORMATION" → "Accuracy of Billing and Account Information".
+  Small words stay lower case unless first; hyphenated words get each part capitalised ("Third-Party").
+  Accepts: text {String} plain text. Outputs the converted text (not escaped).
+{%- endcomment -%}
+{%- liquid
+  assign small_words = ' a an and as at but by for in nor of on or per the to vs via with '
+  assign out = ''
+  assign words = text | strip | split: ' '
+  for word in words
+    if word == blank
+      continue
+    endif
+    assign lower = word | downcase
+    assign probe = lower | remove: ',' | remove: ';' | remove: ':' | remove: '.'
+    assign probe = ' ' | append: probe | append: ' '
+    if forloop.first == false and small_words contains probe
+      assign out = out | append: ' ' | append: lower
+    else
+      assign parts = lower | split: '-'
+      assign cased = ''
+      for part in parts
+        assign first_letter = part | slice: 0 | upcase
+        assign rest_letters = part | slice: 1, 200
+        if forloop.first
+          assign cased = first_letter | append: rest_letters
+        else
+          assign cased = cased | append: '-' | append: first_letter | append: rest_letters
+        endif
+      endfor
+      assign out = out | append: ' ' | append: cased
+    endif
+  endfor
+  echo out | strip
+-%}

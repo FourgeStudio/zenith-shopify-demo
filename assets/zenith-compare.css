@@ -146,7 +146,7 @@
   color: rgb(var(--color-foreground));
   text-align: center;
   vertical-align: middle;
-  border-left: 1px solid var(--z-cmp-div, #0e0e0e);
+  border-left: 1px solid var(--z-cmp-div, #121212);
 }
 
 .zenith-compare__table .zenith-compare__head--zenith {
@@ -187,7 +187,7 @@
 }
 
 .zenith-compare__table tbody tr {
-  border-top: 1px solid var(--z-cmp-div, #0e0e0e);
+  border-top: 1px solid var(--z-cmp-div, #121212);
 }
 
 .zenith-compare__table tbody th,
@@ -202,7 +202,7 @@
   color: rgb(var(--color-foreground));
   text-align: center;
   vertical-align: middle;
-  border-left: 1px solid var(--z-cmp-div, #0e0e0e);
+  border-left: 1px solid var(--z-cmp-div, #121212);
 }
 
 .zenith-compare__table tbody tr:nth-child(even) th,

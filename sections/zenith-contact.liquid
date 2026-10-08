@@ -244,7 +244,7 @@
 
         <div class="zenith-contact__fields">
           <div class="zenith-contact__field zenith-contact__field--half">
-            <label class="visually-hidden" for="{{ form_id }}-first">{{ s.first_name_label | escape }}</label>
+            <label class="zenith-field-label" for="{{ form_id }}-first">{{ s.first_name_label | escape }}</label>
             <input
               class="zenith-contact__input"
               type="text"
@@ -256,7 +256,7 @@
             >
           </div>
           <div class="zenith-contact__field zenith-contact__field--half">
-            <label class="visually-hidden" for="{{ form_id }}-last">{{ s.last_name_label | escape }}</label>
+            <label class="zenith-field-label" for="{{ form_id }}-last">{{ s.last_name_label | escape }}</label>
             <input
               class="zenith-contact__input"
               type="text"
@@ -268,7 +268,7 @@
             >
           </div>
           <div class="zenith-contact__field{% if s.show_phone %} zenith-contact__field--half-desktop{% endif %}">
-            <label class="visually-hidden" for="{{ form_id }}-email">{{ s.email_label | escape }}</label>
+            <label class="zenith-field-label" for="{{ form_id }}-email">{{ s.email_label | escape }}</label>
             <input
               class="zenith-contact__input"
               type="email"
@@ -283,12 +283,18 @@
               placeholder="{{ s.email_label | escape }}"
               {% if form.errors contains 'email' %}
                 aria-invalid="true"
+                aria-describedby="{{ form_id }}-email-error"
               {% endif %}
             >
+            {%- if form.errors contains 'email' -%}
+              <p class="zenith-field-error" id="{{ form_id }}-email-error">
+                {{- form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email -}}
+              </p>
+            {%- endif -%}
           </div>
           {%- if s.show_phone -%}
             <div class="zenith-contact__field zenith-contact__field--half-desktop">
-              <label class="visually-hidden" for="{{ form_id }}-phone">{{ s.phone_label | escape }}</label>
+              <label class="zenith-field-label" for="{{ form_id }}-phone">{{ s.phone_label | escape }}</label>
               <input
                 class="zenith-contact__input"
                 type="tel"
@@ -303,7 +309,7 @@
           {%- endif -%}
           {%- if s.topics != blank -%}
             <div class="zenith-contact__field zenith-contact__field--select">
-              <label class="visually-hidden" for="{{ form_id }}-topic">{{ s.topic_label | escape }}</label>
+              <label class="zenith-field-label" for="{{ form_id }}-topic">{{ s.topic_label | escape }}</label>
               <select class="zenith-contact__input zenith-contact__select" id="{{ form_id }}-topic" name="contact[Topic]">
                 <option value="" selected disabled>{{ s.topic_label | escape }}</option>
                 {%- for topic in topics -%}
@@ -317,7 +323,7 @@
             </div>
           {%- endif -%}
           <div class="zenith-contact__field">
-            <label class="visually-hidden" for="{{ form_id }}-body">{{ s.message_label | escape }}</label>
+            <label class="zenith-field-label" for="{{ form_id }}-body">{{ s.message_label | escape }}</label>
             <textarea
               class="zenith-contact__input zenith-contact__textarea"
               id="{{ form_id }}-body"
@@ -669,7 +675,7 @@
       "type": "color",
       "id": "background_bottom",
       "label": "Background bottom",
-      "default": "#0E0E0E"
+      "default": "#121212"
     },
     {
       "type": "range",
@@ -745,7 +751,8 @@
         { "value": "dark", "label": "Dark" },
         { "value": "outline", "label": "Outline" },
         { "value": "light", "label": "Light" },
-        { "value": "scheme", "label": "Color scheme button" }
+        { "value": "scheme", "label": "Color scheme button" },
+        { "value": "secondary", "label": "Secondary (gray)" }
       ]
     },
     {

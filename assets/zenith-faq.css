@@ -34,7 +34,7 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--z-space-4);
-  min-height: 44px;
+  min-height: 56px; /* UI states: the whole row is the control, ≥56px tall */
   padding: var(--z-ipad-m, var(--z-space-3)) 0;
   font-family: var(--font-heading-family);
   font-weight: var(--font-heading-weight, 400);
@@ -54,9 +54,27 @@
   content: '';
 }
 
-.zenith-faq__question:focus-visible {
-  outline: 2px solid rgb(var(--color-foreground));
-  outline-offset: 2px;
+/* UI states (Figma "UI States · WCAG 2.2 AA"): hover = Basalt row. The fill reaches --z-faq-hover-x past the text on
+   both sides (box-shadow, no layout shift) so the text stays aligned with the heading. Focus ring = zenith-base.css. */
+.zenith-faq__question {
+  --z-faq-hover-x: var(--z-space-3);
+  transition: background-color var(--duration-short, 0.1s) ease, box-shadow var(--duration-short, 0.1s) ease;
+}
+
+.zenith-faq__question:not(.zenith-ingredients__summary--static):hover {
+  background-color: var(--z-basalt);
+  box-shadow: calc(-1 * var(--z-faq-hover-x)) 0 0 var(--z-basalt), var(--z-faq-hover-x) 0 0 var(--z-basalt);
+}
+
+/* Light schemes: rows are Obsidian blocks (design), so hover/answer text stays light on dark. */
+:is(.color-scheme-2, .color-scheme-3, .color-scheme-5) .zenith-faq__item:not(.zenith-mp__row, .zenith-mp__q, .zenith-ingredients__item) {
+  margin-bottom: var(--z-space-2);
+  padding: 0 var(--z-space-4);
+  border-top: 0;
+  background: var(--z-obsidian);
+  --color-foreground: 255, 255, 255;
+  --z-ring: var(--z-focus-ring);
+  --z-ring-gap: var(--z-obsidian);
 }
 
 /* One "+" glyph; rotated 45° it becomes the gold "×" of the open state. */
@@ -76,7 +94,7 @@
 }
 
 .zenith-faq__item[open] .zenith-faq__icon {
-  transform: rotate(45deg);
+  transform: rotate(180deg); /* zenith: style guide accordion = chevron that flips when open */
 }
 
 .zenith-faq__answer {

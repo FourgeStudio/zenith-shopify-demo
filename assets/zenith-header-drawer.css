@@ -6,6 +6,13 @@
   background: var(--zd-bg, rgb(var(--color-background)));
 }
 
+/* Slide: a little longer than Dawn's 200ms with an ease-out curve (global.js removes [open] 400ms after close).
+   Reduced motion: the drawer's .motion-reduce class turns transitions off (base.css). */
+.js details[open] > .menu-drawer.zenith-drawer,
+.js .zenith-drawer details[open] > .menu-drawer__submenu {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.3s;
+}
+
 .zenith-drawer .menu-drawer__navigation-container {
   grid-template-rows: 1fr auto;
 }
@@ -35,7 +42,7 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--z-space-3);
-  min-height: var(--zd-item-h, 4.7rem);
+  min-height: max(4.4rem, var(--zd-item-h, 4.7rem)); /* UI states: ≥44px tap target */
   padding: 0;
   font-family: var(--font-body-family);
   font-size: var(--zd-fs, 1.6rem);
@@ -87,7 +94,7 @@
   align-items: center;
   gap: var(--z-space-2);
   width: 100%;
-  min-height: var(--zd-item-h, 4.7rem);
+  min-height: max(4.4rem, var(--zd-item-h, 4.7rem)); /* UI states: ≥44px tap target */
   margin: 0;
   padding: 0;
   font-family: var(--font-body-family);
@@ -280,8 +287,8 @@
   .section-header.menu-open .zenith-header .header__heading-link {
     position: absolute;
     top: calc(50% + var(--zh-logo-y, 0px));
-    /* header-logo.png has ~0.8rem transparent padding: the Z lines up with the menu text, as on mobile */
-    left: calc(var(--zd-px, 2rem) - 0.8rem);
+    /* zenith-logo.svg has no transparent padding (the old header-logo.png had ~0.8rem): the Z lines up with the menu text */
+    left: var(--zd-px, 2rem);
     transform: translateY(-50%);
   }
 }

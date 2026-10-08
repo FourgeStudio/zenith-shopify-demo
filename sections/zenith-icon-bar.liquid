@@ -3,8 +3,21 @@
 {{ 'zenith-icon-bar.css' | asset_url | stylesheet_tag }}
 {%- liquid
   # Mobile marquee: list + copies; fewer items get more copies so the moving row never shows an empty end
+  # zenith: Display = Single image → the image replaces the row; until one is uploaded the row shows static on one line
+  assign image_mode = false
+  if section.settings.display == 'image'
+    assign image_mode = true
+  endif
+  assign show_image = false
+  if image_mode and section.settings.image != blank
+    assign show_image = true
+  endif
+  assign mobile_layout = section.settings.mobile_layout
+  if image_mode
+    assign mobile_layout = 'scroll'
+  endif
   assign passes = 1
-  if section.settings.mobile_layout == 'marquee'
+  if mobile_layout == 'marquee'
     assign item_count = section.blocks.size | at_least: 1
     assign passes = 6 | divided_by: item_count | plus: 1 | at_least: 2
   endif
@@ -17,8 +30,34 @@
 
 <div
   id="Zenith-{{ section.id }}"
-  class="zenith-section zenith-icon-bar color-{{ section.settings.color_scheme }} gradient zenith-icon-bar--m-{{ section.settings.mobile_layout }} zenith-icon-bar--icon-{{ section.settings.icon_color }}{% if section.settings.show_border %} zenith-icon-bar--border{% endif %}{% if section.settings.hide_on_mobile %} zenith-hide-mobile{% endif %}"
+  class="zenith-section zenith-icon-bar color-{{ section.settings.color_scheme }} gradient zenith-icon-bar--m-{{ mobile_layout }}{% if image_mode %} zenith-icon-bar--static{% endif %}{% if show_image %} zenith-icon-bar--has-image{% endif %} zenith-icon-bar--icon-{{ section.settings.icon_color }}{% if section.settings.show_border %} zenith-icon-bar--border{% endif %}{% if section.settings.hide_on_mobile %} zenith-hide-mobile{% endif %}"
 >
+  {%- if show_image -%}
+    {%- liquid
+      assign img_alt = section.settings.image.alt
+      if img_alt == blank
+        assign img_alt = section.blocks | map: 'settings' | map: 'text' | join: ', ' | replace: '[customers]', settings.customer_count
+      endif
+    -%}
+    <div class="page-width zenith-icon-bar__picture">
+      <picture>
+        {%- if section.settings.mobile_image != blank -%}
+          <source
+            media="(max-width: 749px)"
+            srcset="{{ section.settings.mobile_image | image_url: width: 750 }} 750w, {{ section.settings.mobile_image | image_url: width: 1125 }} 1125w, {{ section.settings.mobile_image | image_url: width: 1500 }} 1500w"
+            sizes="100vw"
+            width="{{ section.settings.mobile_image.width }}"
+            height="{{ section.settings.mobile_image.height }}"
+          >
+        {%- endif -%}
+        {{
+          section.settings.image
+          | image_url: width: 2880
+          | image_tag: widths: '750, 1100, 1500, 2200, 2880', sizes: '100vw', loading: 'lazy', alt: img_alt, class: 'zenith-icon-bar__image'
+        }}
+      </picture>
+    </div>
+  {%- else -%}
   <div class="page-width zenith-icon-bar__viewport">
     <div class="zenith-icon-bar__track">
       {%- for pass in (1..passes) -%}
@@ -68,7 +107,8 @@
       {%- endfor -%}
     </div>
   </div>
-  {%- if passes > 1 and section.blocks.size > 0 -%}
+  {%- endif -%}
+  {%- if passes > 1 and show_image == false and section.blocks.size > 0 and section.settings.show_pause_button -%}
     {%- comment -%} Pause/play for the mobile marquee (WCAG 2.2.2); CSS shows it only while the row moves {%- endcomment -%}
     {%- render 'zenith-pause-button', class: 'zenith-icon-bar__pause', label: 'Pause scrolling', toggle: '.zenith-icon-bar' -%}
   {%- endif -%}
@@ -88,7 +128,43 @@
   "settings": [
     {
       "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "select",
+      "id": "display",
+      "label": "Display",
+      "default": "icons",
+      "options": [
+        { "value": "icons", "label": "Icon row" },
+        { "value": "image", "label": "Single image" }
+      ],
+      "info": "Single image replaces the row. Until an image is chosen, the row shows on one line without moving."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "visible_if": "{{ section.settings.display == 'image' }}",
+      "info": "Full page width, e.g. 2760 × 96 px. Alt text: the image's own, else the item texts."
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile image",
+      "visible_if": "{{ section.settings.display == 'image' }}",
+      "info": "Optional, for phones (e.g. 750 × 120 px). Empty = the image above."
+    },
+    {
+      "type": "header",
       "content": "Layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_pause_button",
+      "label": "Show pause button",
+      "info": "Pause/play button for the moving row on phones. Off by default (client request); turn on for full WCAG 2.2.2 support.",
+      "default": false
     },
     {
       "type": "select",

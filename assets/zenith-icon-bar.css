@@ -103,9 +103,15 @@
     display: flex;
   }
 
-  .zenith-icon-bar--m-marquee .zenith-icon-bar__viewport:hover .zenith-icon-bar__track,
+  /* zenith: no hover-pause on touch (sticky :hover on iPhone made Safari jump the row back to the start) */
   .zenith-icon-bar--m-marquee .zenith-icon-bar__viewport:focus-within .zenith-icon-bar__track {
     animation-play-state: paused;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .zenith-icon-bar--m-marquee .zenith-icon-bar__viewport:hover .zenith-icon-bar__track {
+      animation-play-state: paused;
+    }
   }
 }
 
@@ -191,4 +197,23 @@
   .zenith-icon-bar__list--center {
     justify-content: center;
   }
+}
+
+/* zenith: Display = Single image */
+.zenith-icon-bar__picture picture,
+.zenith-icon-bar__image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Single image mode before an image is chosen: the row stays on one line and doesn't move (swipe if it doesn't fit). */
+.zenith-icon-bar--static .zenith-icon-bar__list {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.zenith-icon-bar--static .zenith-icon-bar__list::-webkit-scrollbar {
+  display: none;
 }

@@ -425,6 +425,50 @@
         "id": "cart_summary_total",
         "label": "Total",
         "default": "Total"
+      },
+      {
+        "type": "header",
+        "content": "Icons"
+      },
+      {
+        "type": "paragraph",
+        "content": "Cart drawer and cart page. Off: − / + show as plain characters and the bin as the word \"Remove\", so the buttons keep working."
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_icon_minus",
+        "label": "Minus icon (quantity)",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_icon_plus",
+        "label": "Plus icon (quantity)",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_icon_remove",
+        "label": "Bin icon (remove)",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_icon_van",
+        "label": "Delivery van (free shipping box)",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_icon_checkpoint",
+        "label": "Ticks on reached goals (progress bar)",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_icon_discount",
+        "label": "Tag icon on discounts",
+        "default": true
       }
     ]
   },
@@ -6941,6 +6985,20 @@
       {
         "type": "header",
         "content": "Content"
+      },
+      {
+        "type": "text",
+        "id": "policy_eyebrow",
+        "label": "Eyebrow above the title",
+        "info": "Universal eyebrow style. Empty = none.",
+        "default": "Legal"
+      },
+      {
+        "type": "checkbox",
+        "id": "policy_split_caps_headings",
+        "label": "Tidy ALL-CAPS headings",
+        "info": "\"SECTION 1 - ONLINE STORE TERMS\" shows as the eyebrow \"Section 1\" + the heading \"Online Store Terms\"; \"OVERVIEW\" → \"Overview\". The policy text itself is not changed.",
+        "default": true
       },
       {
         "type": "checkbox",

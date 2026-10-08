@@ -123,6 +123,30 @@
         --color-badge-background: {{ scheme.settings.background.red }},{{ scheme.settings.background.green }},{{ scheme.settings.background.blue }};
         --color-badge-border: {{ scheme.settings.text.red }},{{ scheme.settings.text.green }},{{ scheme.settings.text.blue }};
         --payment-terms-background-color: rgb({{ scheme.settings.background.rgb }});
+        {%- comment -%} zenith: Secondary button (Figma UI Elements) — dark gray on dark schemes, light gray on light ones {%- endcomment -%}
+        {%- if background_color_brightness <= 128 %}
+        --z-btn-secondary-bg: #343434;
+        --z-btn-secondary-text: #ffffff;
+        {%- else %}
+        --z-btn-secondary-bg: #f2f2f2;
+        --z-btn-secondary-text: #121212;
+        {%- endif %}
+        {%- comment -%} zenith: style guide dark scheme — card/popup/drawer borders white 15%; light schemes keep the theme settings {%- endcomment -%}
+        {%- if background_color_brightness <= 128 %}
+        --product-card-border-opacity: 0.15;
+        --collection-card-border-opacity: 0.15;
+        --blog-card-border-opacity: 0.15;
+        --text-boxes-border-opacity: 0.15;
+        --popup-border-opacity: 0.15;
+        --drawer-border-opacity: 0.15;
+        {%- else %}
+        --product-card-border-opacity: {{ settings.card_border_opacity | divided_by: 100.0 }};
+        --collection-card-border-opacity: {{ settings.collection_card_border_opacity | divided_by: 100.0 }};
+        --blog-card-border-opacity: {{ settings.blog_card_border_opacity | divided_by: 100.0 }};
+        --text-boxes-border-opacity: {{ settings.text_boxes_border_opacity | divided_by: 100.0 }};
+        --popup-border-opacity: {{ settings.popup_border_opacity | divided_by: 100.0 }};
+        --drawer-border-opacity: {{ settings.drawer_border_opacity | divided_by: 100.0 }};
+        {%- endif %}
       }
       {% endfor %}
 
@@ -393,10 +417,14 @@
           body: zenith_policy.body,
           id: zenith_policy_handle,
           titlecase: true,
+          eyebrow: settings.policy_eyebrow,
+          split_caps: settings.policy_split_caps_headings,
+          class: 'zenith-doc--policy',
           show_toc: settings.policy_show_toc,
           toc_heading: settings.policy_toc_heading,
           vars: zenith_policy_vars
         -%}
+        <script src="{{ 'zenith-policy.js' | asset_url }}" defer="defer"></script>
       {%- endif -%}
       {%- comment -%}
         zenith: [customers] in any page content → Theme settings → Zenith → Customer count.
