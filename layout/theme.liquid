@@ -131,6 +131,22 @@
         --z-btn-secondary-bg: #f2f2f2;
         --z-btn-secondary-text: #121212;
         {%- endif %}
+        {%- comment -%} zenith: style guide dark scheme — card/popup/drawer borders white 15%; light schemes keep the theme settings {%- endcomment -%}
+        {%- if background_color_brightness <= 128 %}
+        --product-card-border-opacity: 0.15;
+        --collection-card-border-opacity: 0.15;
+        --blog-card-border-opacity: 0.15;
+        --text-boxes-border-opacity: 0.15;
+        --popup-border-opacity: 0.15;
+        --drawer-border-opacity: 0.15;
+        {%- else %}
+        --product-card-border-opacity: {{ settings.card_border_opacity | divided_by: 100.0 }};
+        --collection-card-border-opacity: {{ settings.collection_card_border_opacity | divided_by: 100.0 }};
+        --blog-card-border-opacity: {{ settings.blog_card_border_opacity | divided_by: 100.0 }};
+        --text-boxes-border-opacity: {{ settings.text_boxes_border_opacity | divided_by: 100.0 }};
+        --popup-border-opacity: {{ settings.popup_border_opacity | divided_by: 100.0 }};
+        --drawer-border-opacity: {{ settings.drawer_border_opacity | divided_by: 100.0 }};
+        {%- endif %}
       }
       {% endfor %}
 

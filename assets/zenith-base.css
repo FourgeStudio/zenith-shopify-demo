@@ -30,8 +30,8 @@
   --z-basalt: #202020;
   --z-rock: #e7e7e7;
   --z-granite: #8e8c8c;
-  --z-gold: #c59300;
-  --z-gold-rgb: 197, 147, 0;
+  --z-gold: #c5930e;
+  --z-gold-rgb: 197, 147, 14;
   --z-dawn-gold: #eabe5f;
   --z-horizon: #294850;
   --z-obsidian-blue: #112328;
@@ -901,7 +901,7 @@ div.zenith-cart-ship__fill {
   display: block;
   height: 100%;
   border-radius: inherit;
-  background: linear-gradient(90deg, var(--z-dawn-gold, #eabe5f) 0%, var(--z-gold, #c59300) 100%);
+  background: linear-gradient(90deg, var(--z-dawn-gold, #eabe5f) 0%, var(--z-gold, #c5930e) 100%);
   transition: width 0.4s ease;
 }
 
@@ -1013,7 +1013,7 @@ div.zenith-cart-offers__fill {
   height: 100%;
   overflow: hidden;
   border-radius: inherit;
-  background: linear-gradient(90deg, var(--z-dawn-gold, #eabe5f) 0%, var(--z-gold, #c59300) 100%);
+  background: linear-gradient(90deg, var(--z-dawn-gold, #eabe5f) 0%, var(--z-gold, #c5930e) 100%);
   transition: width 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
 

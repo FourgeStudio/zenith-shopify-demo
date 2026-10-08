@@ -136,7 +136,7 @@
 }
 
 .zenith-verify__play-icon {
-  fill: var(--zv-play-fg, #0e0e0e);
+  fill: var(--zv-play-fg, #121212);
 }
 
 .zenith-verify--play-cutout .zenith-verify__play-icon {

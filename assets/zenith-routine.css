@@ -218,7 +218,7 @@
   width: var(--z-rt-num-m, 28px);
   height: var(--z-rt-num-m, 28px);
   border-radius: 50%;
-  background: var(--z-rt-num-bg, #c59300);
+  background: var(--z-rt-num-bg, #c5930e);
   color: var(--z-rt-num-fg, #121212);
   font-family: var(--font-body-family);
   font-size: var(--z-rt-numfs-m, 1.4rem);

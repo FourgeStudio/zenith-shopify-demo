@@ -2,7 +2,7 @@
    FAQ items reuse assets/zenith-faq.css (snippets/zenith-faq-items.liquid). */
 
 .zenith-contact {
-  background: linear-gradient(180deg, var(--z-ct-bg-top, #191919) 0, var(--z-ct-bg-bottom, #0e0e0e) var(--z-ct-bg-len-m, 690px));
+  background: linear-gradient(180deg, var(--z-ct-bg-top, #191919) 0, var(--z-ct-bg-bottom, #121212) var(--z-ct-bg-len-m, 690px));
 }
 
 .zenith-contact .zenith-heading {
@@ -345,7 +345,7 @@ input.zenith-contact__checkbox[type='checkbox']:checked {
   }
 
   .zenith-contact {
-    background: linear-gradient(180deg, var(--z-ct-bg-top, #191919) 0, var(--z-ct-bg-bottom, #0e0e0e) var(--z-ct-bg-len, 1100px));
+    background: linear-gradient(180deg, var(--z-ct-bg-top, #191919) 0, var(--z-ct-bg-bottom, #121212) var(--z-ct-bg-len, 1100px));
   }
 
   .zenith-contact__intro .zenith-subheading br {
