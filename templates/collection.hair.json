@@ -860,15 +860,15 @@
         "autoplay": 0,
         "heading_max_width": 400,
         "heading_gap": 4,
-        "heading_spacing": 32,
+        "heading_spacing": 24,
         "gap": 24,
-        "controls_spacing": 32,
+        "controls_spacing": 24,
         "video_ratio": "13-18",
         "play_size": 80,
         "play_position": 53,
         "show_play_without_video": true,
         "quote_align": "center",
-        "body_min_height": 200,
+        "body_min_height": 160,
         "thumb_size": 56,
         "color_scheme": "scheme-1",
         "card_color_scheme": "scheme-6",
@@ -906,8 +906,8 @@
         "padding_bottom": 32,
         "padding_top_mobile": 20,
         "padding_bottom_mobile": 20,
-        "video_max_height": 40,
-        "video_max_height_mobile": 40
+        "video_max_height": 35,
+        "video_max_height_mobile": 32
       }
     },
     "guarantee": {
