@@ -450,3 +450,80 @@ a.zenith-cert__frame:hover .zenith-cert__doc > img {
     margin-top: 0;
   }
 }
+
+/* Lightbox (assets/zenith-certificates.js): certificate image shown large over a dark backdrop */
+.zenith-lightbox {
+  width: 100vw;
+  max-width: 100vw;
+  height: 100dvh;
+  max-height: 100dvh;
+  margin: 0;
+  padding: var(--z-space-7) var(--z-space-4);
+  border: 0;
+  background: transparent;
+  overflow: auto;
+}
+
+.zenith-lightbox::backdrop {
+  background: rgba(0, 0, 0, 0.88);
+}
+
+.zenith-lightbox[open] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.zenith-lightbox__img {
+  display: block;
+  max-width: min(100%, 120rem);
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.zenith-lightbox__close {
+  position: fixed;
+  top: var(--z-space-3);
+  right: var(--z-space-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.4rem;
+  height: 4.4rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  cursor: pointer;
+}
+
+.zenith-lightbox__close:focus-visible {
+  outline: 2px solid #eabe5f;
+  outline-offset: 2px;
+}
+
+html.zenith-lightbox-open {
+  overflow: hidden;
+}
+
+@media screen and (min-width: 750px) {
+  .zenith-lightbox {
+    padding: var(--z-space-8);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .zenith-lightbox[open] {
+    animation: zenith-lightbox-in 0.2s ease-out;
+  }
+
+  @keyframes zenith-lightbox-in {
+    from {
+      opacity: 0;
+    }
+  }
+}

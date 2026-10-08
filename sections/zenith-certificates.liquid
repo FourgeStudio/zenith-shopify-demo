@@ -1,6 +1,7 @@
 {%- comment -%} zenith: [customers] anywhere in this section shows Theme settings → Zenith → Customer count {%- endcomment -%}
 {%- capture zenith_body -%}
 {{ 'zenith-certificates.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'zenith-certificates.js' | asset_url }}" defer="defer"></script>
 
 {%- liquid
   assign s = section.settings
@@ -159,9 +160,12 @@
             assign doc_alt = title | append: ' ' | append: b.number | strip
           endif
 
+          # zenith: no custom link → the certificate image opens in a lightbox (zenith-certificates.js); a custom link still opens in a new tab
           assign full_link = b.link
+          assign is_lightbox = false
           if full_link == blank and b.image != blank
-            assign full_link = b.image | image_url: width: 3000
+            assign full_link = b.image | image_url: width: 2400
+            assign is_lightbox = true
           endif
 
           assign doc_loading = 'lazy'
@@ -187,7 +191,11 @@
           {{ block.shopify_attributes }}
         >
           {%- if full_link != blank -%}
-            <a href="{{ full_link | escape }}" class="zenith-cert__frame" target="_blank" rel="noopener">
+            {%- if is_lightbox -%}
+              <a href="{{ full_link | escape }}" class="zenith-cert__frame" data-zenith-lightbox data-alt="{{ doc_alt | escape }}">
+            {%- else -%}
+              <a href="{{ full_link | escape }}" class="zenith-cert__frame" target="_blank" rel="noopener">
+            {%- endif -%}
           {%- else -%}
             <div class="zenith-cert__frame">
           {%- endif -%}
@@ -209,7 +217,7 @@
                 <span class="zenith-cert__screw zenith-cert__screw--br" aria-hidden="true"></span>
               {%- endif -%}
           {%- if full_link != blank -%}
-              <span class="visually-hidden">{% if b.image == blank %}{{ doc_alt | escape }}. {% endif %}{{ new_window }}</span>
+              <span class="visually-hidden">{% if b.image == blank %}{{ doc_alt | escape }}. {% endif %}{% if is_lightbox %}Enlarge image{% else %}{{ new_window }}{% endif %}</span>
             </a>
           {%- else -%}
             </div>

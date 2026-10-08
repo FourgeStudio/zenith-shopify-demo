@@ -571,6 +571,9 @@ class HeaderDrawer extends MenuDrawer {
     this.header.classList.add('menu-open');
 
     setTimeout(() => {
+      // zenith: flush the closed (off-screen) style first; otherwise the browser often batches the <details> open
+      // and `menu-opening` into one style pass and the drawer pops in with no slide.
+      this.mainDetailsToggle.querySelector('.menu-drawer')?.getBoundingClientRect();
       this.mainDetailsToggle.classList.add('menu-opening');
     });
 

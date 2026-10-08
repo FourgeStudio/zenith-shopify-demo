@@ -6,6 +6,13 @@
   background: var(--zd-bg, rgb(var(--color-background)));
 }
 
+/* Slide: a little longer than Dawn's 200ms with an ease-out curve (global.js removes [open] 400ms after close).
+   Reduced motion: the drawer's .motion-reduce class turns transitions off (base.css). */
+.js details[open] > .menu-drawer.zenith-drawer,
+.js .zenith-drawer details[open] > .menu-drawer__submenu {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.3s;
+}
+
 .zenith-drawer .menu-drawer__navigation-container {
   grid-template-rows: 1fr auto;
 }

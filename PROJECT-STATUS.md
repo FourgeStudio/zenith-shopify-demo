@@ -192,6 +192,15 @@ _Last updated: 2026-10-01. Keep this file current at the end of each work sessio
 - Zenith · Promo banner → **Banner height (desktop)**: same choice (default Fixed); the `promo_hero` on those 4 pages is 65% so the promotion hero matches. Mobile promo stays stacked (photo height + content).
 - Featured product images follow the image's **focal point** (Shopify Admin → the image → *Focal point*) when *Image fit = Fill area* crops them; *Show whole image* shows the full image. Images with text baked in should be square-ish or use Show whole image. Client decision 2026-10-01: homepage stays *Fill area*; uploads must fit the frame — **1216 × 1076 px** (frame 608 × 538 at 1440), key content centred (phones crop square). Spec is in the section's Image field hint.
 
+### Homepage + mobile cart review (2026-10-09, Loom 'Ayusin ang Navigation, Cart, at FAQ')
+- Promo off (client, editor) → regular hero, no Sale badges, free-shipping goal back to ₱1,200. % off tiers off ( false).
+- Phone menu vanishing after scroll:  (zenith-base ≤749) made Dawn's body scroll-lock turn body into its own scroller → sticky header jumped off screen. Lock moved to . Drawer slide forced to animate (global.js reflow, marked zenith:) + 0.3s ease-out (zenith-header-drawer.css).
+- Mobile cart drawer (zenith-base ≤749): 100vw, header 48px, compact goal box (van 28×21, title 15px one line), qty stepper 98×34, trash 32px. Top of drawer → first line 245 → 198px.
+- Pause/play removed from results marquee + icon bar (new *Show pause button*, default off; Safari jumped the rows to the start on pause). Hover/focus pause unchanged.
+- Shared FAQ question padding 10 → 20 (desktop + mobile) on index, Shop All, Skin, Hair, Certificates, Verify.
+- Certificates: image opens in a lightbox (, native <dialog>); a custom Link still opens in a new tab.
+- Client/Chrome: delete Grooming + Body from the footer  menu; homepage link audit (Henson). Not verified on a device yet.
+
 ### Client change round (2026-10-08)
 - **Results cards**: per slot (rv1–30) + per block: *Card type* (Auto / Photo + review / Review only / Photo only — section blocks can be any of the 3 components and dragged), *Show "Used"*, *Show product name* (photo), *Show product name under the reviewer name*; global slots get **Position** (sorted within the row, blank = slot order).
 - **Courier logos**: the existing *Footer image* (section `footer_image` / global `zg_footer_image`) now REPLACES the individual logos when set (logos = fallback). The short-lived separate "Courier logos image" setting was removed as redundant. Verify page Delivery logos block: own image → `zg_footer_image` → logo slots (only zenith-feature-columns + zenith-verify render couriers).

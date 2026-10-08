@@ -1125,6 +1125,77 @@ cart-drawer-items .zenith-cart-offers__box {
   margin-inline: calc(var(--zcd-inset) * -1);
 }
 
+/* ---------- Cart drawer on phones (client feedback 2026-10-08) ----------
+   Full screen width, tighter header / goal panel, smaller van and a compact quantity stepper so more lines
+   fit. Desktop unchanged. component-cart-drawer.css and component-cart-items.css load after this file,
+   hence the element-qualified selectors. */
+@media screen and (max-width: 749px) {
+  body cart-drawer .drawer__inner {
+    width: 100vw;
+    max-width: 100vw;
+    border: 0;
+  }
+
+  cart-drawer .drawer__header {
+    min-height: 4.8rem;
+    padding: 0;
+  }
+
+  cart-drawer .drawer__heading {
+    margin: 0;
+  }
+
+  cart-drawer .drawer__close {
+    top: 0.2rem;
+  }
+
+  cart-drawer-items .zenith-cart-offers {
+    padding: var(--z-space-2) 0 var(--z-space-4);
+  }
+
+  cart-drawer-items .zenith-cart-offers__box {
+    gap: var(--z-space-3);
+    padding: var(--z-space-2) var(--z-space-3);
+  }
+
+  cart-drawer-items .zenith-cart-offers__van {
+    width: 2.8rem;
+    height: 2.1rem;
+  }
+
+  cart-drawer-items .zenith-cart-offers__title {
+    font-size: 1.5rem;
+  }
+
+  cart-drawer-items .zenith-cart-offers__steps {
+    margin-top: var(--z-space-3);
+  }
+
+  /* Stepper 96 × 32 (Dawn 142 × 47); each button is still a 32 × 32 target. */
+  .cart-drawer .quantity {
+    width: calc(9.6rem + var(--inputs-border-width) * 2);
+    min-height: calc(3.2rem + var(--inputs-border-width) * 2);
+  }
+
+  .cart-drawer .quantity__button {
+    width: 3.2rem;
+  }
+
+  .cart-drawer .quantity__button .svg-wrapper {
+    width: 0.8rem;
+  }
+
+  .cart-drawer .quantity__input {
+    padding: 0;
+    font-size: 1.4rem;
+  }
+
+  cart-drawer cart-remove-button .button {
+    min-width: 3.2rem;
+    min-height: 3.2rem;
+  }
+}
+
 /* ---------- Cart lines: product type under the title (cart-drawer + main-cart-items) ---------- */
 .zenith-cart-item__type {
   margin: var(--z-space-1, 4px) 0 0;
@@ -1442,6 +1513,19 @@ p, li, blockquote {
   html,
   body {
     overflow-x: clip;
+  }
+
+  /* Scroll lock for drawers/modals goes on <html>, not <body>. With html's overflow set (clip above), body's
+     overflow no longer reaches the viewport: Dawn's body.overflow-hidden* turned <body> into its own scroll box,
+     so the sticky header (and the menu drawer inside it) snapped back to the top of the page — off screen
+     whenever the page was scrolled. */
+  body:is(.overflow-hidden, .overflow-hidden-mobile, .overflow-hidden-tablet, .overflow-hidden-desktop) {
+    overflow: visible;
+    overflow-x: clip;
+  }
+
+  html:has(> body:is(.overflow-hidden, .overflow-hidden-mobile, .overflow-hidden-tablet, .overflow-hidden-desktop)) {
+    overflow: hidden;
   }
 }
 
