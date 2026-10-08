@@ -20,7 +20,7 @@
 - Wordmark "ZEN▲TH": the I is replaced by a gold mountain peak + sun dot (Summit Gold).
 - Variants: black wordmark on white/light · white wordmark on Obsidian Black · lockup with tagline "ALWAYS IN YOUR PRIME" (dark + light).
 - Mark alone (gold peak + dot) = favicon/social avatar.
-- Files in `assets/`: `header-logo.png`, `footer-logo.png` — white wordmark + gold mark, transparent PNG (~216px wide) → for dark header/footer. Upload the same file in Theme settings → Logo (theme editor `image_picker`; asset files aren't selectable there).
+- Files in `assets/`: `zenith-logo.svg` (wordmark) and `zenith-logo-tagline.svg` (lockup) for dark backgrounds, `zenith-logo-light.svg` / `zenith-logo-tagline-light.svg` for light — vector, from the style guide (2026-10-09). Header + footer use them by default (*Use the vector logo*). Old `header-logo.png` / `footer-logo.png` kept but unused. Upload the same file in Theme settings → Logo (theme editor `image_picker`; asset files aren't selectable there).
 - Missing (TBD): black wordmark for light backgrounds, tagline lockups, standalone mark/favicon, SVG or ≥2x PNG for retina.
 - Logo on light backgrounds uses black wordmark; on dark uses white. Never recolor the mark.
 

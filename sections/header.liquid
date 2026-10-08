@@ -239,7 +239,7 @@
         <div class="header__heading">
       {%- endif -%}
       <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
-        {%- if settings.logo != blank -%}
+        {%- if settings.logo != blank and section.settings.use_svg_logo == false -%}
           <div class="header__heading-logo-wrapper">
             {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
             {%- comment -%} zenith: sized from this section's Logo width settings (zenith-header.css sets the rendered width) {%- endcomment -%}
@@ -264,10 +264,10 @@
           {%- comment -%} zenith: fallback to bundled logo until Theme settings > Logo is set {%- endcomment -%}
           <div class="header__heading-logo-wrapper">
             <img
-              src="{{ 'header-logo.png' | asset_url }}"
+              src="{{ 'zenith-logo.svg' | asset_url }}"
               alt="{{ shop.name | escape }}"
               width="{{ settings.logo_width }}"
-              height="{{ settings.logo_width | times: 60 | divided_by: 223 }}"
+              height="{{ settings.logo_width | times: 51 | divided_by: 188 }}"
               class="header__heading-logo"
             >
           </div>
@@ -293,7 +293,7 @@
         <div class="header__heading">
       {%- endif -%}
       <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
-        {%- if settings.logo != blank -%}
+        {%- if settings.logo != blank and section.settings.use_svg_logo == false -%}
           <div class="header__heading-logo-wrapper">
             {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
             {%- comment -%} zenith: sized from this section's Logo width settings (zenith-header.css sets the rendered width) {%- endcomment -%}
@@ -318,10 +318,10 @@
           {%- comment -%} zenith: fallback to bundled logo until Theme settings > Logo is set {%- endcomment -%}
           <div class="header__heading-logo-wrapper">
             <img
-              src="{{ 'header-logo.png' | asset_url }}"
+              src="{{ 'zenith-logo.svg' | asset_url }}"
               alt="{{ shop.name | escape }}"
               width="{{ settings.logo_width }}"
-              height="{{ settings.logo_width | times: 60 | divided_by: 223 }}"
+              height="{{ settings.logo_width | times: 51 | divided_by: 188 }}"
               class="header__heading-logo"
             >
           </div>
@@ -577,6 +577,13 @@
   "class": "section-header",
   "max_blocks": 3,
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "use_svg_logo",
+      "label": "Use the vector logo",
+      "info": "zenith: sharp SVG wordmark from the style guide (assets/zenith-logo.svg). Turn off to use Theme settings > Logo.",
+      "default": true
+    },
     {
       "type": "select",
       "id": "logo_position",

@@ -101,7 +101,7 @@ _Last updated: 2026-10-01. Keep this file current at the end of each work sessio
 - Verified with static mocks at 1440 and 401 against the design crops, then against the store preview (2026-09-21).
 - **Newer desktop frame (2026-09-21, from a screenshot — the `…Regularv2.png` export is byte-identical to v1, so a fresh export is still needed):** quantity + Add to cart sit above the FDA bar and the checklist on desktop too, the short description shows on desktop, all 6 checklist items show, the price badge sits at the right edge (new *Price badge position*), and the desktop accordion is Description / How to use / What's inside / Zenith guarantee / FAQs (the five product questions are kept as blocks but hidden). Open question for the client: the gap between the price row and the Add to cart row, and whether the description belongs above or below the price on desktop.
 - Review strip = autoplaying `<zenith-carousel>` (*Review strip autoplay*, seconds, 0 = off; pauses on hover, off with reduced motion).
-- Comparison table: the Zenith column logo falls back to Theme settings → Logo, then to the bundled `assets/header-logo.png` wordmark.
+- Comparison table: the Zenith column logo falls back to Theme settings → Logo, then to the bundled `assets/zenith-logo.svg` wordmark.
 - Closing CTA: 48px above the footer on desktop (the design), none on phones.
 - Fixed after the first store preview: the product JSON-LD printed as visible text (it needed a `<script type="application/ld+json">` wrapper).
 - Client:
@@ -240,7 +240,7 @@ _Last updated: 2026-10-01. Keep this file current at the end of each work sessio
 - Tablet (750–989) was not designed — check it looks sane.
 
 ### 2. Content the client must add (theme editor / admin)
-- [ ] Theme settings → Logo (or leave the bundled `header-logo.png` fallback), favicon; Social media links (Facebook, Instagram, TikTok).
+- [ ] Theme settings → Logo (or header + footer now use the bundled vector logos (`zenith-logo*.svg`) by default), favicon; Social media links (Facebook, Instagram, TikTok).
 - [ ] Images: hero desktop (2880×1080) + mobile (1206×1620); promo backgrounds (≈2752×640); press logos (white/transparent); review cards in Theme settings → Zenith · Results reviews (photo, product used, stars, review, name, optional reviewer photo — slots 1–9 show the "Norman V." sample until edited); video files or covers + product per card; guarantee photos (3) + courier logos in Theme settings → Zenith · Guarantee (logo slots 1–5 = GOGO, SPX, LBC, J&T, Ninja Van; transparent PNG/SVG, cropped tight; per-logo size %, section logo height/gap/colour); category cards: pick a Collection on cards 1–2 (featured image used automatically) and a product on 3–4, or set Media to image/GIF/video/YouTube; brand story photo + wordmark logo without tagline; money-back seal (transparent PNG); footer + drawer payment-badges strip and Amare seal.
 - [ ] Products: featured product (`zenith-anti-aging-tallow-cream` must exist, 4 images for the slider); collection carousel uses "all"; category card links (1–2) and products (3–4); hero button product (optional real add-to-cart).
 - [ ] Promo: Theme settings → Zenith · Promo → Product image (the split-layout photo, ≈1400×700), button link, real end date (default 2026-12-31). "Promotion is running" is ON in the preview theme.
