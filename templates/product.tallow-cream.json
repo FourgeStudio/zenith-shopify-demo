@@ -192,10 +192,58 @@
           "settings": {
             "title": "FAQs",
             "content_source": "questions",
-            "text": "<h3>Will the retinol make my skin peel?</h3><p>0.2% is a gentle retinol level, and the tallow base buffers it. New to retinol? Start 2 to 3 nights a week for the first two weeks, then go nightly. If anything feels wrong, stop and message us.</p><h3>Is it greasy with beef tallow in it?</h3><p>No. It absorbs fast and finishes light. No shine, no residue on the pillow.</p><h3>Does it smell like beef?</h3><p>No. The cream has a light, neutral scent.</p><h3>Do I still need sunscreen?</h3><p>Yes. Retinol makes skin more sensitive to the sun, so wear SPF 30 every morning. The Zenith Anti-Aging Tallow Day Cream SPF 30 is made for that.</p><h3>Can I use it with the Cleanser and the Day Cream?</h3><p>Yes. Cleanser morning and night, Day Cream SPF 30 in the morning, Tallow Cream at night. The directions are on every label.</p><h3>Paano kung hindi ako hiyang?</h3><p>Every order carries the Zenith Money-Back Guarantee. Skin products are covered for 30 days, counted from delivery.&nbsp;<br/><br/>Message us on Facebook or email <a href=\"mailto:hello@tryzenith.ph\" target=\"_blank\" title=\"mailto:hello@tryzenith.ph\">hello@tryzenith.ph</a> with your order number and a photo of the product. Full terms on our <a href=\"/policies/refund-policy\" title=\"Refunds and Returns\">Refunds and Returns</a> page.</p><p></p>",
+            "text": "",
             "open": false,
             "hide_on_mobile": false,
             "hide_on_desktop": false
+          }
+        },
+        "question_1": {
+          "type": "question",
+          "settings": {
+            "question": "Will the retinol make my skin peel?",
+            "answer": "<p>0.2% is a gentle retinol level, and the tallow base buffers it. New to retinol? Start 2 to 3 nights a week for the first two weeks, then go nightly. If anything feels wrong, stop and message us.</p>",
+            "open": false
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "Is it greasy with beef tallow in it?",
+            "answer": "<p>No. It absorbs fast and finishes light. No shine, no residue on the pillow.</p>",
+            "open": false
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "Does it smell like beef?",
+            "answer": "<p>No. The cream has a light, neutral scent.</p>",
+            "open": false
+          }
+        },
+        "question_4": {
+          "type": "question",
+          "settings": {
+            "question": "Do I still need sunscreen?",
+            "answer": "<p>Yes. Retinol makes skin more sensitive to the sun, so wear SPF 30 every morning. The Zenith Anti-Aging Tallow Day Cream SPF 30 is made for that.</p>",
+            "open": false
+          }
+        },
+        "question_5": {
+          "type": "question",
+          "settings": {
+            "question": "Can I use it with the Cleanser and the Day Cream?",
+            "answer": "<p>Yes. Cleanser morning and night, Day Cream SPF 30 in the morning, Tallow Cream at night. The directions are on every label.</p>",
+            "open": false
+          }
+        },
+        "question_6": {
+          "type": "question",
+          "settings": {
+            "question": "Paano kung hindi ako hiyang?",
+            "answer": "<p>Every order carries the Zenith Money-Back Guarantee. Skin products are covered for 30 days, counted from delivery.&nbsp;<br/><br/>Message us on Facebook or email <a href=\"mailto:hello@tryzenith.ph\" target=\"_blank\" title=\"mailto:hello@tryzenith.ph\">hello@tryzenith.ph</a> with your order number and a photo of the product. Full terms on our <a href=\"/policies/refund-policy\" title=\"Refunds and Returns\">Refunds and Returns</a> page.</p>",
+            "open": false
           }
         }
       },
@@ -219,7 +267,13 @@
         "row_7",
         "row_8",
         "row_9",
-        "row_10"
+        "row_10",
+        "question_1",
+        "question_2",
+        "question_3",
+        "question_4",
+        "question_5",
+        "question_6"
       ],
       "settings": {
         "placeholder_title": "Zenith Anti-Aging Tallow Cream",
@@ -634,7 +688,6 @@
             "image": "shopify://shop_images/night-cream-ingredients-magnifying-glass-over-golden-tallow-cream-1-desktop.webp",
             "title": "Retinol 0.2%",
             "text": "<p>The only percentage on the label. Gentle enough for nightly use.</p>",
-            "title_mobile": "Retinol 0.2% for lines, tone and texture",
             "text_mobile": ""
           }
         },
@@ -644,7 +697,6 @@
             "image": "shopify://shop_images/night-cream-ingredients-golden-retinol-molecule-model-1-desktop.webp",
             "title": "Beef tallow",
             "text": "<p>The base of the cream. It buffers the retinol and absorbs fast, no grease.</p>",
-            "title_mobile": "Premium beef tallow rebuilds the barrier",
             "text_mobile": ""
           }
         },
@@ -654,7 +706,6 @@
             "image": "shopify://shop_images/night-cream-ingredients-green-leaves-beside-golden-oil-droplets-1-desktop.webp",
             "title": "Ectoin and Stephania",
             "text": "<p>Added to keep skin calm when you use retinol every night.</p>",
-            "title_mobile": "",
             "text_mobile": ""
           }
         }
@@ -668,8 +719,8 @@
         "eyebrow": "",
         "heading": "What's in the jar",
         "subheading": "<p>Three ingredients, named on the label.</p>",
-        "image": "shopify://shop_images/night-cream-ingredients-four-close-ups-of-a-cream-1-desktop.webp",
-        "image_mobile": "shopify://shop_images/night-cream-ingredients-four-close-ups-of-a-cream-1-mobile.webp",
+        "image": "shopify://shop_images/shop-all-featured-night-cream-jar-its-box-1-desktop.webp",
+        "image_mobile": "shopify://shop_images/shop-all-featured-night-cream-jar-its-box-1-mobile.webp",
         "open_first": true,
         "item_display": "open",
         "show_list": true,
@@ -678,13 +729,13 @@
         "heading_alignment": "center",
         "image_position": "right",
         "heading_max_width": 800,
-        "media_width": 48,
-        "media_min_height": 600,
+        "media_width": 46,
+        "media_min_height": 640,
         "gap": 52,
         "card_gap": 20,
         "content_padding": 20,
         "item_padding": 20,
-        "thumb_size": 52,
+        "thumb_size": 104,
         "thumb_gap": 16,
         "answer_spacing": 12,
         "content_gap": 20,
@@ -701,9 +752,9 @@
         "subheading_font_size": 18,
         "eyebrow_font_size": 14,
         "heading_spacing": 80,
-        "title_font_size": 22,
-        "text_font_size": 16,
-        "list_title_font_size": 18,
+        "title_font_size": 20,
+        "text_font_size": 14,
+        "list_title_font_size": 14,
         "list_text_font_size": 14,
         "icon_size": 24,
         "heading_alignment_mobile": "center",
@@ -717,20 +768,22 @@
         "card_gap_mobile": 20,
         "content_padding_mobile": 12,
         "item_padding_mobile": 12,
-        "thumb_size_mobile": 52,
+        "thumb_size_mobile": 104,
         "answer_spacing_mobile": 12,
         "content_gap_mobile": 12,
         "list_padding_mobile": 12,
         "list_content_gap_mobile": 12,
         "title_font_size_mobile": 18,
         "text_font_size_mobile": 14,
-        "list_title_font_size_mobile": 18,
+        "list_title_font_size_mobile": 14,
         "list_text_font_size_mobile": 14,
         "icon_size_mobile": 24,
         "padding_top": 64,
         "padding_bottom": 64,
         "padding_top_mobile": 20,
-        "padding_bottom_mobile": 20
+        "padding_bottom_mobile": 20,
+        "item_style": "cards",
+        "item_gap": 8
       }
     },
     "difference": {
@@ -1597,4 +1650,3 @@
     "cta"
   ]
 }
-
