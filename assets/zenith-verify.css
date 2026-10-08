@@ -218,8 +218,8 @@ zenith-video.is-playing .zenith-verify__play {
 .zenith-verify__seal {
   display: flex;
   align-items: center;
-  gap: var(--zv-seal-pad, 12px);
-  padding: var(--zv-seal-pad, 12px);
+  gap: var(--zv-seal-gap-m, 12px);
+  padding: var(--zv-seal-pad-m, 12px);
   background: var(--zv-card, #202020);
 }
 
@@ -240,6 +240,9 @@ zenith-video.is-playing .zenith-verify__play {
 }
 
 .zenith-verify__seal-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--zv-seal-tgap, 0);
   min-width: 0;
 }
 
@@ -385,6 +388,11 @@ div.zenith-verify__logos-image--empty {
     margin-top: 6px; /* design: 32px between label, title and text baselines */
     font-size: var(--z-tfs, 1.6rem);
     line-height: 1.5;
+  }
+
+  .zenith-verify__seal {
+    gap: var(--zv-seal-gap, 12px);
+    padding: var(--zv-seal-pad, 12px);
   }
 
   .zenith-verify__seal-title {

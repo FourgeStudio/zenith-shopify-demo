@@ -119,7 +119,7 @@
   line-height: 1.2;
   letter-spacing: 0;
   color: var(--z-doc-accent);
-  scroll-margin-top: calc(var(--header-height, 7.2rem) + var(--z-space-5));
+  scroll-margin-top: calc(var(--header-height, 7.2rem) + var(--z-ann-h, 0px) + var(--z-space-5));
 }
 
 .zenith-doc__body :is(h1, h2) {
@@ -236,8 +236,8 @@
 
   .zenith-doc__toc {
     position: sticky;
-    top: calc(var(--header-height, 7.2rem) + var(--z-space-5));
-    max-height: calc(100vh - var(--header-height, 7.2rem) - var(--z-space-7));
+    top: calc(var(--header-height, 7.2rem) + var(--z-ann-h, 0px) + var(--z-space-5));
+    max-height: calc(100vh - var(--header-height, 7.2rem) - var(--z-ann-h, 0px) - var(--z-space-7));
     overflow-y: auto;
     scrollbar-width: thin;
   }

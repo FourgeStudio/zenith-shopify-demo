@@ -92,13 +92,41 @@ function checkSchema(where, schema) {
   }
 }
 
+const sectionSchemas = {};
 for (const f of fs.readdirSync(path.join(repo, 'sections')).filter((f) => f.endsWith('.liquid'))) {
   const src = fs.readFileSync(path.join(repo, 'sections', f), 'utf8');
   const m = src.match(/\{%-?\s*schema\s*-?%\}([\s\S]*?)\{%-?\s*endschema\s*-?%\}/);
   if (!m) continue;
   let schema;
   try { schema = JSON.parse(m[1]); } catch (e) { err(`sections/${f}`, 'schema is not valid JSON: ' + e.message); continue; }
+  sectionSchemas[f.replace(/\.liquid$/, '')] = schema;
   checkSchema(`sections/${f}`, schema);
+}
+
+// Template values: a range value off its min/max/step (e.g. 32 with step 5) makes Shopify silently reject the whole template.
+function checkValues(where, settings, defs) {
+  for (const [id, v] of Object.entries(settings || {})) {
+    const d = (defs || []).find((x) => x.id === id);
+    if (!d || d.type !== 'range' || typeof v !== 'number') continue;
+    const steps = (v - d.min) / d.step;
+    if (v < d.min || v > d.max || Math.abs(steps - Math.round(steps)) > 1e-9)
+      err(where, `${id} = ${v} is outside range ${d.min}–${d.max} step ${d.step}`);
+  }
+}
+for (const dir of ['templates', 'sections']) {
+  for (const f of fs.readdirSync(path.join(repo, dir)).filter((f) => f.endsWith('.json'))) {
+    let j;
+    try { j = JSON.parse(fs.readFileSync(path.join(repo, dir, f), 'utf8').replace(/^\/\*[\s\S]*?\*\/\s*/, '')); } catch (e) { continue; }
+    for (const [key, sec] of Object.entries(j.sections || {})) {
+      const schema = sectionSchemas[sec.type];
+      if (!schema) continue;
+      checkValues(`${dir}/${f} › ${key}`, sec.settings, schema.settings);
+      for (const [bk, b] of Object.entries(sec.blocks || {})) {
+        const bd = (schema.blocks || []).find((x) => x.type === b.type);
+        if (bd) checkValues(`${dir}/${f} › ${key} › ${bk}`, b.settings, bd.settings);
+      }
+    }
+  }
 }
 
 const ts = JSON.parse(fs.readFileSync(path.join(repo, 'config/settings_schema.json'), 'utf8'));

@@ -94,6 +94,10 @@
   --zv-seal-sp-m: {{ s.seal_spacing_mobile }}px;
   --zv-seal-img: {{ s.seal_image_size }}px;
   --zv-seal-pad: {{ s.seal_padding }}px;
+  --zv-seal-pad-m: {{ s.seal_padding_mobile | default: s.seal_padding }}px;
+  --zv-seal-gap: {{ s.seal_gap | default: s.seal_padding }}px;
+  --zv-seal-gap-m: {{ s.seal_gap_mobile | default: s.seal_padding }}px;
+  --zv-seal-tgap: {{ s.seal_text_gap | default: 0 }}px;
   --zv-card: {{ s.card_color }};
   --zv-stfs: {{ s.seal_title_font_size }}px;
   --zv-stfs-m: {{ s.seal_title_font_size_mobile }}px;
@@ -672,6 +676,26 @@
     },
     {
       "type": "range",
+      "id": "seal_gap",
+      "label": "Seal card: space between seal and text",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "seal_text_gap",
+      "label": "Seal card: space between title and text",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
       "id": "logos_spacing",
       "label": "Space above delivery logos",
       "min": 0,
@@ -1125,6 +1149,26 @@
       "step": 2,
       "unit": "px",
       "default": 20
+    },
+    {
+      "type": "range",
+      "id": "seal_padding_mobile",
+      "label": "Seal card padding",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "seal_gap_mobile",
+      "label": "Seal card: space between seal and text",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 12
     },
     {
       "type": "range",

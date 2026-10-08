@@ -253,6 +253,16 @@
 {%- endcapture -%}
 {%- render 'zenith-tokens', body: zenith_body -%}
 
+{%- comment -%} zenith: bar height for things that stick below header + bar (policy contents list) {%- endcomment -%}
+<script>
+  (function () {
+    var bar = document.currentScript.closest('.announcement-bar-section');
+    if (!bar || !window.ResizeObserver) return;
+    new ResizeObserver(function () {
+      document.documentElement.style.setProperty('--z-ann-h', bar.offsetHeight + 'px');
+    }).observe(bar);
+  })();
+</script>
 {% schema %}
 {
   "name": "t:sections.announcement-bar.name",

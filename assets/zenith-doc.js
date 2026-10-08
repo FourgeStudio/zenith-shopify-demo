@@ -24,7 +24,8 @@ if (!customElements.get('zenith-doc-toc')) {
       }
 
       update() {
-        const header = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-height'), 10) || 72;
+        const rootStyle = getComputedStyle(document.documentElement);
+        const header = (parseInt(rootStyle.getPropertyValue('--header-height'), 10) || 72) + (parseInt(rootStyle.getPropertyValue('--z-ann-h'), 10) || 0);
         const line = header + window.innerHeight * 0.25;
         let active = 0;
         this.targets.forEach((target, i) => {

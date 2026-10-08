@@ -19,6 +19,7 @@
   --z-slide: {% if vmh > 0 %}min(calc((100cqi - {{ gap_count }} * var(--z-gap, 24px)) / {{ cols }}), calc({{ vmh }}svh * {{ vr[0] }} / {{ vr[1] }})){% else %}calc((100cqi - {{ gap_count }} * var(--z-gap, 24px)) / {{ cols }}){% endif %};
   --z-slide-m: {% if vmh_m > 0 %}min(calc({{ section.settings.mobile_slide_width }} * 1cqi), calc({{ vmh_m }}svh * {{ vr[0] }} / {{ vr[1] }})){% else %}calc({{ section.settings.mobile_slide_width }} * 1cqi){% endif %};
   --z-hgap: {{ section.settings.heading_gap }}px;
+  --z-vsub-a: {{ section.settings.subheading_opacity | default: 70 | divided_by: 100.0 }};
   --z-hgap-m: {{ section.settings.heading_gap_mobile }}px;
   --z-ctrl-sp: {{ section.settings.controls_spacing }}px;
   --z-card-border: {{ section.settings.card_border_color }};
@@ -551,6 +552,16 @@
       "label": "Card color scheme",
       "info": "Card uses the scheme's flat background color",
       "default": "scheme-6"
+    },
+    {
+      "type": "range",
+      "id": "subheading_opacity",
+      "label": "Subheading opacity",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 70
     },
     {
       "type": "color",
