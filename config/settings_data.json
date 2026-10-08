@@ -27,7 +27,7 @@
     "cart_upsell_enable": false,
     "cart_upsell_heading": "Best used with",
     "cart_upsell_button": "Add",
-    "promo_enabled": true,
+    "promo_enabled": false,
     "promo_auto_end": true,
     "promo_heading": "Exclusive Offers for this Season",
     "promo_text": "<p>Bundles and deals built for value. Here for a moment, then gone.</p>",
