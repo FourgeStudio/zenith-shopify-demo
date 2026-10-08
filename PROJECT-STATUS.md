@@ -205,7 +205,7 @@ _Last updated: 2026-10-01. Keep this file current at the end of each work sessio
 ### Skin + Hair collection review (2026-10-08, Basecamp "Product Collections")
 - promo_hero disabled in skin/hair (was already 0px via the global promo switch). Shop All promo left as is.
 - Routine "Used …" bar off on skin/hair (existing *Show the note under the steps* / show_used; no usage card exists in the product grid).
-- Video carousel: new *Maximum video height* (desktop + mobile, % of screen; caps card width so the video keeps its shape). Skin/hair 35% / 32%, card text min 160, tighter spacing. Fits 1920x1080 with the header; 1440x900, laptops ≤768 tall and phones are still taller than the screen (the quote + heading alone take ~450px).
+- Video carousel: new *Maximum video height* (desktop + mobile, % of screen; caps card width so the video keeps its shape). Skin/hair 35% / 30% (a value off the range step, e.g. 32 with step 5, makes Shopify silently reject the whole template), card text min 160, tighter spacing. Fits 1920x1080 with the header; 1440x900, laptops ≤768 tall and phones are still taller than the screen (the quote + heading alone take ~450px).
 - Icon bar: new *Display* = Icon row / Single image (+ Image, Mobile image). Single image without an image = the row on one line, static (no marquee). Skin, Hair, Shop All set to Single image; waiting on the final image.
 - "Money-Back" wrapped in .zenith-nowrap in section headings, guarantee banner text, feature column titles/text (all pages).
 - FAQ: content_gap = item_padding (20) on skin/hair/shop-all, so the open answer ends with the same space as above the question (earlier round only fixed question padding 10→20).

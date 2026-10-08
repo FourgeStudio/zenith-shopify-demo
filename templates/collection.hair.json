@@ -907,7 +907,7 @@
         "padding_top_mobile": 20,
         "padding_bottom_mobile": 20,
         "video_max_height": 35,
-        "video_max_height_mobile": 32
+        "video_max_height_mobile": 30
       }
     },
     "guarantee": {
