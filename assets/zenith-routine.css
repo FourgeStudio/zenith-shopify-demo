@@ -267,3 +267,14 @@
     display: none;
   }
 }
+
+/* zenith: Verify page step-card style — "STEP 1" eyebrow (type/colour from .zenith-eyebrow) and heading-font titles */
+.zenith-rt__label {
+  margin: 0 0 var(--z-space-1);
+}
+
+.zenith-rt--title-heading .zenith-rt__title {
+  font-family: var(--font-heading-family);
+  font-weight: var(--font-heading-weight, 400);
+  line-height: 1.2;
+}

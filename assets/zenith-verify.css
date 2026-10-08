@@ -221,6 +221,7 @@ zenith-video.is-playing .zenith-verify__play {
   gap: var(--zv-seal-gap-m, 12px);
   padding: var(--zv-seal-pad-m, 12px);
   background: var(--zv-card, #202020);
+  border: var(--zv-seal-border, 0);
 }
 
 .zenith-verify__seal-image {

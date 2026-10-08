@@ -155,7 +155,8 @@
         "seal_gap": 20,
         "seal_text_gap": 6,
         "seal_padding_mobile": 20,
-        "seal_gap_mobile": 16
+        "seal_gap_mobile": 16,
+        "seal_border_color": "#363636"
       }
     },
     "trust_bar": {

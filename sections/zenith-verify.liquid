@@ -99,6 +99,9 @@
   --zv-seal-gap-m: {{ s.seal_gap_mobile | default: s.seal_padding }}px;
   --zv-seal-tgap: {{ s.seal_text_gap | default: 0 }}px;
   --zv-card: {{ s.card_color }};
+  {%- if s.seal_border_color != blank %}
+  --zv-seal-border: 1px solid {{ s.seal_border_color }};
+  {%- endif %}
   --zv-stfs: {{ s.seal_title_font_size }}px;
   --zv-stfs-m: {{ s.seal_title_font_size_mobile }}px;
   --zv-sxfs: {{ s.seal_text_font_size }}px;
@@ -767,6 +770,12 @@
       "id": "card_color",
       "label": "Seal card",
       "default": "#202020"
+    },
+    {
+      "type": "color",
+      "id": "seal_border_color",
+      "label": "Seal card border",
+      "info": "Empty = no border. #363636 = white 15% on Obsidian, like the Official Pages and trust cards."
     },
     {
       "type": "color",
