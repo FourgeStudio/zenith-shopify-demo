@@ -199,6 +199,8 @@ _Last updated: 2026-10-01. Keep this file current at the end of each work sessio
 - Pause/play removed from results marquee + icon bar (new *Show pause button*, default off; Safari jumped the rows to the start on pause). Hover/focus pause unchanged.
 - Shared FAQ question padding 10 → 20 (desktop + mobile) on index, Shop All, Skin, Hair, Certificates, Verify.
 - Certificates: image opens in a lightbox (`assets/zenith-certificates.js`, native <dialog>); a custom Link still opens in a new tab.
+- Safari mobile marquee jump (follow-up): hover-pause on results marquee / icon bar / logo strip now only under `@media (hover: hover) and (pointer: fine)` (a tap on iPhone = sticky :hover → pause/resume, the action Henson saw jump); results JS keeps the row's progress when it re-measures the speed (`getAnimations()[0].currentTime`). Playwright WebKit (iPhone 13) on the draft preview: no carousel lost position before or after (page scroll, far scroll for content-visibility, 664↔750 height) — desktop WebKit can't reproduce the iPhone bug, so real-iPhone check still needed. Test scripts were in scratchpad (carousels.js / verify.js pattern: Playwright webkit + devices['iPhone 13']).
+- Shopify **minifies theme CSS/JS** on the CDN: to check a push reached the theme, grep the served file for a minified marker (e.g. `pointer:fine`), not a hash or formatted text.
 - Client/Chrome: delete Grooming + Body from the footer `collections` menu; homepage link audit (Henson). Not verified on a device yet.
 
 ### Client change round (2026-10-08)
