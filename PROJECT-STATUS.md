@@ -202,6 +202,16 @@ _Last updated: 2026-10-01. Keep this file current at the end of each work sessio
 - Figma page 2368-52 (Style Guide) read via Chrome extract: radius = square by default, only 4px (small) / 8px (2-3 col) → off values (2/5/6/10px, 0.5rem) moved to 4/8 (Judge.me untouched); accordions use a chevron that flips (FAQ, product rows, ingredients; was + → ×); eyebrow = "Eyebrow Extended" 6% (the 4% label in Figma is a typo per the extract); comment #1956600871 (dark-mode button icons) already met — icons are currentColor.
 - Applied 2026-10-08 (style guide wins): Obsidian #121212 everywhere (was #0E0E0E), Summit Gold #C5930E (was #C59300, --z-gold-rgb 197,147,14), dark schemes (bg brightness ≤128) get 15% card/popup/drawer/text-box borders via the scheme loop in layout/theme.liquid (light schemes keep the theme settings). Eyebrow stays 6% (Eyebrow Extended style); 56/44px rows kept (WCAG). OPEN: off-spec divider colours.
 
+### Skin + Hair collection review (2026-10-08, Basecamp "Product Collections")
+- promo_hero disabled in skin/hair (was already 0px via the global promo switch). Shop All promo left as is.
+- Routine "Used …" bar off on skin/hair (existing *Show the note under the steps* / show_used; no usage card exists in the product grid).
+- Video carousel: new *Maximum video height* (desktop + mobile, % of screen; caps card width so the video keeps its shape). Skin/hair 35% / 32%, card text min 160, tighter spacing. Fits 1920x1080 with the header; 1440x900, laptops ≤768 tall and phones are still taller than the screen (the quote + heading alone take ~450px).
+- Icon bar: new *Display* = Icon row / Single image (+ Image, Mobile image). Single image without an image = the row on one line, static (no marquee). Skin, Hair, Shop All set to Single image; waiting on the final image.
+- "Money-Back" wrapped in .zenith-nowrap in section headings, guarantee banner text, feature column titles/text (all pages).
+- FAQ: content_gap = item_padding (20) on skin/hair/shop-all, so the open answer ends with the same space as above the question (earlier round only fixed question padding 10→20).
+- Product grid: new *Show product badges* (default off) → off on skin/hair/shop-all, on in collection.json. Earlier round only limited the Sale badge to the promotion; Selling Fast + tag badges still showed.
+- Hero: new *Solid start* / *Mobile solid start* (overlay full colour up to %, then fades; --z-ov-solid in zenith-base overlay gradients). Hair CTA mobile photo has a solid teal band baked in → mobile solid start 25.
+
 ### Homepage + mobile cart review (2026-10-09, Loom 'Ayusin ang Navigation, Cart, at FAQ')
 - Promo off (client, editor) → regular hero, no Sale badges, free-shipping goal back to ₱1,200. % off tiers off (`cart_tiers_on` false).
 - Phone menu vanishing after scroll: `html, body { overflow-x: clip }` (zenith-base ≤749) made Dawn's body scroll-lock turn body into its own scroller → sticky header jumped off screen. Lock moved to `html:has(> body.overflow-hidden*)`. Drawer slide forced to animate (global.js reflow, marked zenith:) + 0.3s ease-out (zenith-header-drawer.css).
