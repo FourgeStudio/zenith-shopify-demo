@@ -1,6 +1,6 @@
 # Zenith Shopify — project status
 
-_Last updated: 2026-10-01. Keep this file current at the end of each work session; it is the handoff doc._
+_Last updated: 2026-10-08. Keep this file current at the end of each work session; it is the handoff doc._
 
 ## Where things stand
 - Theme: Dawn 16.0.0 + custom `zenith-*` sections. Store `tryzenith.ph` (Zenith Philippines).
@@ -13,11 +13,60 @@ _Last updated: 2026-10-01. Keep this file current at the end of each work sessio
 - Security pass 2026-09-21: whole repo + full git history audited (no secrets, no third-party JS, every fetch same-origin, all `<script>`/JSON-LD output goes through `| json`, all forms are native `{% form %}`). Hardening applied: every merchant-entered link is now `{{ ... | escape }}`, `current_tags` escaped in the `<title>`, and every `target="_blank"` carries `rel="noopener"`.
 - Brand tokens, colors, fonts, logos: see `.claude/brand.md`.
 
-## Branch flow (two branches only)
-- `staging` — all work is committed here and pushed.
-- `main` — production; updated by merging `staging` when a piece of work is done.
-- No feature branches unless explicitly asked; delete them after merge.
-- Shopify's GitHub app commits theme-editor saves back to the connected branch (`Update from Shopify for theme…`), so `git pull` before starting, and merge `main` → `staging` after editor sessions on `main`.
+## Workflow
+
+### The places
+| Place | What it is | Who changes it |
+|---|---|---|
+| `staging` (zenithph/zenith-shopify) | All work happens here first | Claude Code |
+| `main` (zenithph/zenith-shopify) → draft theme **zenith-shopify/main** | Finished work, reviewed on the draft preview | Claude Code (merge); you / Chrome in the theme editor |
+| `demo` remote (FourgeStudio/zenith-shopify-demo) → **Zenith Demo** store | Copy of main to show the client | Claude Code (copy from main); you in the demo editor |
+| Live theme **Zenith x Komradd [v2]** | The real store | Nobody until "publish" |
+
+No feature branches unless asked. Never push to the live theme.
+
+### Flow
+```mermaid
+flowchart TD
+    A["Request<br/>Basecamp to-do · Loom · screenshot"] --> B["git pull main + staging + demo<br/>(editor saves commit back)"]
+    B --> C["Build on staging<br/>code + editable theme settings"]
+    C --> D{"Checks pass?<br/>validate-schemas.js (incl. range values)<br/>shopify theme check = 0 errors"}
+    D -- no --> C
+    D -- yes --> E{"New settings used<br/>by templates / settings_data?"}
+    E -- yes --> F["Push in order:<br/>1 section/schema → wait for sync<br/>2 templates / settings_data"]
+    E -- no --> G["Merge staging → main, push"]
+    F --> G
+    G --> H["Test draft preview<br/>1440 + 375 · Chrome + iPhone Safari<br/>real clicks: cart, menu, scroll"]
+    H -- problem --> C
+    H -- OK --> I["Copy main → demo<br/>same order · skip demo exceptions"]
+    I --> J["Test demo (password stoffa)<br/>when it matters there"]
+    J --> K["Report: short summary +<br/>paste-ready Basecamp post for Claude in Chrome"]
+    K --> L{"Client says publish?"}
+    L -- not yet --> A
+    L -- yes --> M["Go-live checklist (below)"]
+```
+
+### Who does what
+- **Claude Code**: code, theme settings, templates, git, tests, reports.
+- **Claude in Chrome**: Basecamp posts, Admin-only tasks (shipping rates, pages, menus, files), screens Claude Code can't open.
+- **You**: decisions, theme-editor choices, "publish".
+
+### Rules
+- Never publish; never change the live theme.
+- Menus, pages, products and policies are **shared with the live store**: don't edit them before go-live — use a theme setting instead (e.g. footer *Link override* for Disclaimer).
+- Demo store content (shipping, its own pages) can change; it doesn't affect live.
+- Theme-editor saves write back to GitHub (`Update from Shopify for theme…`): always `git pull` first; merge `main` → `staging` after editor sessions on `main`.
+- Shopify **silently rejects** a JSON file that uses a setting its section doesn't have yet or a range value off its step → push sections before templates; resend with a small change if a file didn't take.
+
+### Demo exceptions (leave alone when syncing)
+- **Featured product**: the demo store refuses the new `sections/zenith-featured-product.liquid`, so the demo keeps the old section with product + *Text under the price = Product description* set on `templates/index.json` and `templates/collection.shop-all.json`. Don't overwrite those three on the demo.
+- **Judge.me** blocks: not installed on the demo, so Shopify drops them from its templates (placeholders there).
+
+### Go-live checklist
+1. Client says publish.
+2. Admin (Chrome / you): create the Disclaimer page (template *disclaimer*), fix shared menus, clean policy text (Shipping sentence, ALL-CAPS Terms headings), assign product + collection templates.
+3. Publish **zenith-shopify/main**.
+4. Clear the footer *Link override* (Disclaimer) once the menu points to the real page.
 
 ## Design sources
 - `design/homepage/`, `design/contact-us/`, `design/about-us/`, `design/shop-all/`, `design/skin-collection-category-page/`, `design/hair-collection-collection-page/`, `design/verify-zenith-products/`, `design/certificates/`, `design/other-pages/` (blog, article, thank-you pages), `design/Product Page/tallow-cream/` (product page, not started) — desktop + mobile full pages, per-section layer exports, designer notes (`guide*.png`). `design/README.md` maps every file to its section. **Exports are local-only** (gitignored since 2026-09-19; only the README is on GitHub) — a fresh clone needs them copied in.
