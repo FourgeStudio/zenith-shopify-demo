@@ -634,7 +634,6 @@
             "image": "shopify://shop_images/night-cream-ingredients-magnifying-glass-over-golden-tallow-cream-1-desktop.webp",
             "title": "Retinol 0.2%",
             "text": "<p>The only percentage on the label. Gentle enough for nightly use.</p>",
-            "title_mobile": "Retinol 0.2% for lines, tone and texture",
             "text_mobile": ""
           }
         },
@@ -644,7 +643,6 @@
             "image": "shopify://shop_images/night-cream-ingredients-golden-retinol-molecule-model-1-desktop.webp",
             "title": "Beef tallow",
             "text": "<p>The base of the cream. It buffers the retinol and absorbs fast, no grease.</p>",
-            "title_mobile": "Premium beef tallow rebuilds the barrier",
             "text_mobile": ""
           }
         },
@@ -654,7 +652,6 @@
             "image": "shopify://shop_images/night-cream-ingredients-green-leaves-beside-golden-oil-droplets-1-desktop.webp",
             "title": "Ectoin and Stephania",
             "text": "<p>Added to keep skin calm when you use retinol every night.</p>",
-            "title_mobile": "",
             "text_mobile": ""
           }
         }
@@ -668,8 +665,8 @@
         "eyebrow": "",
         "heading": "What's in the jar",
         "subheading": "<p>Three ingredients, named on the label.</p>",
-        "image": "shopify://shop_images/night-cream-ingredients-four-close-ups-of-a-cream-1-desktop.webp",
-        "image_mobile": "shopify://shop_images/night-cream-ingredients-four-close-ups-of-a-cream-1-mobile.webp",
+        "image": "shopify://shop_images/shop-all-featured-night-cream-jar-its-box-1-desktop.webp",
+        "image_mobile": "shopify://shop_images/shop-all-featured-night-cream-jar-its-box-1-mobile.webp",
         "open_first": true,
         "item_display": "open",
         "show_list": true,
@@ -678,13 +675,13 @@
         "heading_alignment": "center",
         "image_position": "right",
         "heading_max_width": 800,
-        "media_width": 48,
-        "media_min_height": 600,
+        "media_width": 46,
+        "media_min_height": 640,
         "gap": 52,
         "card_gap": 20,
         "content_padding": 20,
         "item_padding": 20,
-        "thumb_size": 52,
+        "thumb_size": 104,
         "thumb_gap": 16,
         "answer_spacing": 12,
         "content_gap": 20,
@@ -701,8 +698,8 @@
         "subheading_font_size": 18,
         "eyebrow_font_size": 14,
         "heading_spacing": 80,
-        "title_font_size": 22,
-        "text_font_size": 16,
+        "title_font_size": 20,
+        "text_font_size": 14,
         "list_title_font_size": 18,
         "list_text_font_size": 14,
         "icon_size": 24,
@@ -717,7 +714,7 @@
         "card_gap_mobile": 20,
         "content_padding_mobile": 12,
         "item_padding_mobile": 12,
-        "thumb_size_mobile": 52,
+        "thumb_size_mobile": 104,
         "answer_spacing_mobile": 12,
         "content_gap_mobile": 12,
         "list_padding_mobile": 12,
@@ -730,7 +727,9 @@
         "padding_top": 64,
         "padding_bottom": 64,
         "padding_top_mobile": 20,
-        "padding_bottom_mobile": 20
+        "padding_bottom_mobile": 20,
+        "item_style": "cards",
+        "item_gap": 8
       }
     },
     "difference": {
@@ -1597,4 +1596,3 @@
     "cta"
   ]
 }
-

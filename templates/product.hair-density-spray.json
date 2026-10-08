@@ -485,13 +485,13 @@
         "heading_alignment": "center",
         "image_position": "right",
         "heading_max_width": 800,
-        "media_width": 48,
-        "media_min_height": 600,
+        "media_width": 46,
+        "media_min_height": 640,
         "gap": 52,
         "card_gap": 20,
         "content_padding": 20,
         "item_padding": 20,
-        "thumb_size": 52,
+        "thumb_size": 104,
         "thumb_gap": 16,
         "answer_spacing": 12,
         "content_gap": 20,
@@ -508,8 +508,8 @@
         "subheading_font_size": 18,
         "eyebrow_font_size": 14,
         "heading_spacing": 56,
-        "title_font_size": 22,
-        "text_font_size": 16,
+        "title_font_size": 20,
+        "text_font_size": 14,
         "list_title_font_size": 18,
         "list_text_font_size": 14,
         "icon_size": 24,
@@ -524,7 +524,7 @@
         "card_gap_mobile": 20,
         "content_padding_mobile": 12,
         "item_padding_mobile": 12,
-        "thumb_size_mobile": 52,
+        "thumb_size_mobile": 104,
         "answer_spacing_mobile": 12,
         "content_gap_mobile": 12,
         "list_padding_mobile": 12,
@@ -537,7 +537,9 @@
         "padding_top": 52,
         "padding_bottom": 64,
         "padding_top_mobile": 24,
-        "padding_bottom_mobile": 20
+        "padding_bottom_mobile": 20,
+        "item_style": "cards",
+        "item_gap": 8
       }
     },
     "routine": {
@@ -1284,4 +1286,3 @@
     "cta"
   ]
 }
-
