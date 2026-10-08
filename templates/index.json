@@ -1152,7 +1152,7 @@
         "button_icon": "cart",
         "show_media_pager": false,
         "show_rating": false,
-        "below_price": "checklist",
+        "below_price": "description",
         "image_position": "right",
         "full_width": false,
         "media_width": 48,
