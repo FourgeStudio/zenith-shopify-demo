@@ -8,9 +8,6 @@
   # zenith: content is global (Theme settings → Zenith · Featured product) so every page shows the same block;
   # the section only sets layout, colours and spacing.
   assign fp_product = settings.zfp_product
-  if fp_product == blank
-    assign fp_product = s.product
-  endif
   assign fp_badge = settings.zfp_badge
   assign fp_image = settings.zfp_image
   assign fp_image_mobile = settings.zfp_image_mobile
@@ -269,89 +266,8 @@
       "content": "Content"
     },
     {
-      "type": "product",
-      "id": "product",
-      "label": "Product"
-    },
-    {
-      "type": "text",
-      "id": "placeholder_title",
-      "label": "Title shown when no product is selected",
-      "default": "Zenith Anti-Aging Tallow Cream"
-    },
-    {
-      "type": "text",
-      "id": "badge",
-      "label": "Badge",
-      "default": "Featured Product"
-    },
-    {
-      "type": "text",
-      "id": "button_label",
-      "label": "Button label",
-      "default": "Add to Cart"
-    },
-    {
-      "type": "select",
-      "id": "button_icon",
-      "label": "Button icon",
-      "default": "cart",
-      "options": [
-        {
-          "value": "cart",
-          "label": "Cart"
-        },
-        {
-          "value": "arrow_right",
-          "label": "Arrow"
-        },
-        {
-          "value": "none",
-          "label": "None"
-        }
-      ]
-    },
-    {
-      "type": "image_picker",
-      "id": "image",
-      "label": "Image",
-      "info": "Optional. Defaults to the product's images. Best size 1216 × 1076 px (square also works); keep text and the product in the middle, phones crop it square. Tall graphics lose their top and bottom — set a focal point on the image to choose what stays."
-    },
-    {
-      "type": "image_picker",
-      "id": "image_mobile",
-      "label": "Mobile image",
-      "info": "Optional, used with the image above: a different crop for phones (square works best)."
-    },
-    {
-      "type": "checkbox",
-      "id": "show_media_pager",
-      "label": "Show all product images as a slider",
-      "info": "Off = only the product's main image, linked to the product page. Used when no image is selected above and the product has more than one image",
-      "default": false
-    },
-    {
-      "type": "checkbox",
-      "id": "show_rating",
-      "label": "Show product rating",
-      "default": false
-    },
-    {
-      "type": "select",
-      "id": "below_price",
-      "label": "Text under the price",
-      "default": "checklist",
-      "options": [
-        {
-          "value": "checklist",
-          "label": "Checklist"
-        },
-        {
-          "value": "description",
-          "label": "Product description"
-        }
-      ],
-      "info": "Checklist = the Benefit blocks with gold checks. Product description = the selected product's description (uses Text size and the color scheme)."
+      "type": "paragraph",
+      "content": "Product, badge, button, text under the price, image and trust row: Theme settings → Zenith · Featured product (the same on every page)."
     },
     {
       "type": "header",
@@ -568,7 +484,6 @@
     {
       "type": "color",
       "id": "pager_color",
-      "visible_if": "{{ section.settings.show_media_pager }}",
       "label": "Image slider dots",
       "default": "#294850"
     },
@@ -861,167 +776,9 @@
       "default": 20
     }
   ],
-  "blocks": [
-    {
-      "type": "benefit",
-      "name": "Benefit",
-      "settings": [
-        {
-          "type": "header",
-          "content": "Content"
-        },
-        {
-          "type": "text",
-          "id": "text",
-          "label": "Text",
-          "default": "Fights aging and smooths lines with zero irritation."
-        }
-      ]
-    },
-    {
-      "type": "trust",
-      "name": "Trust item",
-      "settings": [
-        {
-          "type": "header",
-          "content": "Content"
-        },
-        {
-          "type": "select",
-          "id": "icon",
-          "label": "Icon",
-          "default": "shield",
-          "options": [
-            {
-              "value": "shield",
-              "label": "Shield"
-            },
-            {
-              "value": "refresh",
-              "label": "Money back"
-            },
-            {
-              "value": "cash",
-              "label": "Cash"
-            },
-            {
-              "value": "badge_check",
-              "label": "Badge check"
-            },
-            {
-              "value": "sun",
-              "label": "Climate"
-            },
-            {
-              "value": "shield_plus",
-              "label": "Shield plus"
-            },
-            {
-              "value": "thermometer",
-              "label": "Thermometer"
-            },
-            {
-              "value": "truck",
-              "label": "Delivery"
-            },
-            {
-              "value": "certified",
-              "label": "Certified"
-            },
-            {
-              "value": "leaf",
-              "label": "Natural"
-            },
-            {
-              "value": "flag",
-              "label": "Flag"
-            },
-            {
-              "value": "lock",
-              "label": "Secure"
-            },
-            {
-              "value": "phone",
-              "label": "Phone"
-            },
-            {
-              "value": "qr",
-              "label": "QR code"
-            }
-          ]
-        },
-        {
-          "type": "text",
-          "id": "text",
-          "label": "Text",
-          "default": "Zenith Money-Back Guarantee"
-        }
-      ]
-    }
-  ],
   "presets": [
     {
-      "name": "Zenith · Featured product",
-      "blocks": [
-        {
-          "type": "benefit",
-          "settings": {
-            "text": "Fights aging and smooths lines with zero irritation."
-          }
-        },
-        {
-          "type": "benefit",
-          "settings": {
-            "text": "Reduces acne and dark spots while smoothing fine lines"
-          }
-        },
-        {
-          "type": "benefit",
-          "settings": {
-            "text": "Fast-absorbing and non-greasy for the PH climate."
-          }
-        },
-        {
-          "type": "benefit",
-          "settings": {
-            "text": "One jar replaces multiple complicated steps."
-          }
-        },
-        {
-          "type": "benefit",
-          "settings": {
-            "text": "Premium ingredients for maximum results, minimal effort."
-          }
-        },
-        {
-          "type": "trust",
-          "settings": {
-            "icon": "shield",
-            "text": "Zenith Money-Back Guarantee"
-          }
-        },
-        {
-          "type": "trust",
-          "settings": {
-            "icon": "cash",
-            "text": "Cash On Delivery"
-          }
-        },
-        {
-          "type": "trust",
-          "settings": {
-            "icon": "badge_check",
-            "text": "FDA-Notified"
-          }
-        },
-        {
-          "type": "trust",
-          "settings": {
-            "icon": "sun",
-            "text": "Formulated For Filipinos"
-          }
-        }
-      ]
+      "name": "Zenith · Featured product"
     }
   ]
 }

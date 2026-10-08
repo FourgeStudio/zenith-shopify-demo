@@ -367,12 +367,18 @@
 /* ---------- Sticky announcement bar (Basecamp "Verify" #4) ----------
    The bar sits under the header in the header group. While the header is sticky, the bar sticks right under it
    (top = header height, set by StickyHeader in header.liquid), so both stay on screen together: no gap, no jump.
-   z-index stays below the header (3), so the menu drawer and dropdowns open over it.
+   z-index: header 5, bar 4 (below), so the menu drawer and dropdowns open over the bar.
    Header hidden on scroll (sticky type "on scroll up") → the bar moves up to the top edge. */
+/* Above all page content (zenith sections go up to z-index 3, e.g. video play buttons): header 5, bar 4.
+   The menu drawer lives inside the header, so it still opens over the bar. */
+.section-header.shopify-section-group-header-group {
+  z-index: 5;
+}
+
 .shopify-section-header-sticky ~ .announcement-bar-section {
   position: sticky;
   top: var(--header-height, 0px);
-  z-index: 2;
+  z-index: 4;
 }
 
 .shopify-section-header-hidden ~ .announcement-bar-section {
