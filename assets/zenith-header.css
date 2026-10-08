@@ -364,7 +364,7 @@
   }
 }
 
-/* ---------- Sticky announcement bar (Basecamp "Verify" #4) ----------
+/* ---------- Sticky announcement bar (Basecamp "Verify" #4; since 2026-10-08 visible only at the top, see below) ----------
    The bar sits under the header in the header group. While the header is sticky, the bar sticks right under it
    (top = header height, set by StickyHeader in header.liquid), so both stay on screen together: no gap, no jump.
    z-index: header 5, bar 4 (below), so the menu drawer and dropdowns open over the bar.
@@ -386,5 +386,22 @@
 }
 
 .section-header.animate ~ .announcement-bar-section {
-  transition: top 0.15s ease-out;
+  transition: top 0.15s ease-out, transform 0.3s ease, visibility 0.3s;
+}
+
+/* Shows only at the top of the page (client, 2026-10-08): scrolling down slides the bar up behind the header,
+   back at the top it slides down again (class set by the script in sections/announcement-bar.liquid). */
+.shopify-section-header-sticky ~ .announcement-bar-section {
+  transition: transform 0.3s ease, visibility 0.3s;
+}
+
+.shopify-section-header-sticky ~ .announcement-bar-section.zenith-ann--hidden {
+  transform: translateY(-100%);
+  visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shopify-section-header-sticky ~ .announcement-bar-section {
+    transition: none;
+  }
 }
