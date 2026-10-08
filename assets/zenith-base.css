@@ -35,6 +35,13 @@
   --z-dawn-gold: #eabe5f;
   --z-horizon: #294850;
   --z-obsidian-blue: #112328;
+  /* UI states + style guide primitives (Figma "Zenith Revamp 2026" → Variables / UI States PDFs, 2026-10-09) */
+  --z-summit-light: #d6b356;
+  --z-summit-dark: #9d750b;
+  --z-white: #ffffff;
+  --z-border-dark: rgba(255, 255, 255, 0.15);
+  --z-error: #f07070;
+  --z-focus-ring: var(--z-summit-light);
 
   /* Spacing scale */
   --z-space-1: 4px;
@@ -158,6 +165,60 @@ h1, h2, h3, h4, h5, .h0, .h1, .h2, .h3, .h4, .h5 {
   }
 }
 
+/* ---------- Brand button variants (Figma "UI Elements → Buttons") ----------
+   Primary = gold · Secondary = gray per scheme (vars set per color scheme in theme.liquid) · Outline · Text link.
+   Sizes: default 46px / small 38px · icon-only square 40px / 36px. Base looks only; states live in the UI states block. */
+.button.zenith-btn--secondary {
+  background: var(--z-btn-secondary-bg, #343434);
+  color: var(--z-btn-secondary-text, var(--z-white));
+}
+
+.button.zenith-btn--text {
+  background: transparent;
+  color: rgb(var(--color-foreground));
+  padding: 0;
+  min-width: 0;
+}
+
+.button.zenith-btn--secondary::after,
+.button.zenith-btn--text::after {
+  box-shadow: none;
+}
+
+.button.zenith-btn--small {
+  min-height: 3.8rem;
+  padding: 0 var(--z-space-3);
+}
+
+.button.zenith-btn--icon-only {
+  width: 4rem;
+  min-width: 0;
+  min-height: 4rem;
+  height: 4rem;
+  padding: 0;
+}
+
+.button.zenith-btn--icon-only.zenith-btn--small {
+  width: 3.6rem;
+  min-height: 3.6rem;
+  height: 3.6rem;
+}
+
+.button.zenith-btn--text.zenith-btn--icon-only {
+  width: auto;
+  min-width: 2.4rem;
+}
+
+@media screen and (min-width: 750px) {
+  .button.zenith-btn--small {
+    padding: 0 var(--z-space-3);
+  }
+
+  .button.zenith-btn--text {
+    padding: 0;
+  }
+}
+
 /* ---------- Page width + gutters ----------
    Theme settings → Layout → Page width = max width of the whole frame INCLUDING gutters (1440).
    Gutters = Theme settings → Zenith → Page side margin (desktop 30 / mobile 20; vars set in theme.liquid).
@@ -226,12 +287,19 @@ h1, h2, h3, h4, h5, .h0, .h1, .h2, .h3, .h4, .h5 {
   text-transform: uppercase;
 }
 
-.zenith-eyebrow {
-  font-size: var(--z-efs, 1.4rem);
+/* ---------- Universal eyebrow (Figma 12177-34751 "Universal Eyebrow Style") ----------
+   ONE style for every small label above a heading (section eyebrows, verify step labels…).
+   Per-section eyebrow size settings no longer apply. Same 16px on all widths. */
+.zenith-eyebrow,
+p.zenith-eyebrow {
+  font-family: var(--font-heading-family);
+  font-style: normal;
   font-weight: 400;
-  letter-spacing: 0;
-  line-height: 1.4;
-  color: var(--z-eyebrow, #d6b356);
+  font-size: 1.6rem;
+  line-height: 1.5;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--z-summit-light);
 }
 
 .zenith-subheading {
@@ -1414,43 +1482,35 @@ div.zenith-overlay {
   .zenith-overlay.zenith-overlay--m-right { background: linear-gradient(to left, rgba(var(--z-ov-rgb), var(--z-ov-a)) 0%, rgba(var(--z-ov-rgb), 0) var(--z-ov-cover)); }
 }
 
-/* Text links (richtext in sections, policy/page content, "Amare Group" auto-links, map addresses):
-   the surrounding text colour — never the browser's default blue — with a thin underline that is always there
-   (colour alone can't mark a link, WCAG 1.4.1) and turns full strength on hover.
-   Inside a sentence or list item only, so linked blocks (cards, buttons) aren't touched. */
+/* Text links (richtext in sections, policy/page content, "Amare Group" auto-links, map addresses, policy links):
+   UI states (Figma "UI States · WCAG 2.2 AA"): always underlined (colour alone can't mark a link, WCAG 1.4.1).
+   Dark schemes: Summit Gold Light text, hover White Rock. Light schemes: --z-link = the text colour with a
+   Summit Gold Dark underline (gold text on white is < 4.5:1). Vars --z-link* are set per scheme in the
+   "UI states" block at the end of this file. Inside a sentence or list item only, so linked blocks
+   (cards, buttons, menus — they carry a class) aren't touched. Inline links keep the line height (no 44px padding).
+   `html body` lets the policy selector outrank the per-section rules. */
 .zenith-section :is(p a, li > a):not([class]),
 .zenith-rte a:not([class]),
 .rte a:not([class]),
-a.zenith-amare-link {
-  color: inherit;
+a.zenith-amare-link,
+html body a[href*='/policies/']:not([class]),
+a.zenith-policy-link {
+  color: var(--z-link, var(--z-summit-light));
   text-decoration: underline;
-  text-decoration-color: color-mix(in srgb, currentColor 60%, transparent);
-  text-underline-offset: 0.15em;
+  text-decoration-color: var(--z-link-line, currentColor);
+  text-underline-offset: 0.2em;
   text-decoration-thickness: 1px;
+  transition: color var(--duration-short, 0.1s) ease;
 }
 
 .zenith-section :is(p a, li > a):not([class]):hover,
 .zenith-rte a:not([class]):hover,
 .rte a:not([class]):hover,
-a.zenith-amare-link:hover {
-  text-decoration-color: currentColor;
-}
-
-/* Policy links in text (Refunds and Returns, Shipping / Privacy Policy, Terms…): always underlined in brand gold.
-   Plain text links only (menus and footer links carry a class); .zenith-policy-link = added by zenith-auto-links.js.
-   `html body` outranks the per-section text link rules above. */
-html body a[href*='/policies/']:not([class]),
-a.zenith-policy-link {
-  color: inherit;
-  text-decoration: underline;
-  text-decoration-color: var(--z-dawn-gold, #eabe5f);
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.2em;
-}
-
+a.zenith-amare-link:hover,
 html body a[href*='/policies/']:not([class]):hover,
 a.zenith-policy-link:hover {
-  color: var(--z-dawn-gold, #eabe5f);
+  color: var(--z-link-hover, var(--z-rock));
+  text-decoration-color: currentColor;
 }
 
 /* Product cards (Zenith cards, Dawn collection / search / related-product cards): no underline, hover included */
@@ -1655,3 +1715,374 @@ body cart-drawer cart-drawer-items.is-empty + .drawer__footer {
     width: 36px;
   }
 }
+
+/* =====================================================================================================
+   UI states (Figma "UI States · WCAG 2.2 AA", Zenith Revamp 2026 → UI States.pdf)
+   Focus · tap targets · button hover/pressed/disabled · text links · form fields · checkboxes · accordions.
+   Dark schemes are the default; light schemes (2 White, 3 Rock, 5 Gold) swap the ring to Obsidian etc.
+   A NEW light colour scheme must be added to the light list below.
+   ===================================================================================================== */
+
+/* ---------- Per-scheme state vars ---------- */
+:root,
+[class*='color-scheme-'] {
+  --z-ring: var(--z-focus-ring);
+  --z-ring-gap: var(--z-obsidian);
+  --z-link: var(--z-summit-light);
+  --z-link-hover: var(--z-rock);
+  --z-link-line: currentColor;
+  --z-field-bg: var(--z-basalt);
+  --z-field-border: var(--z-granite);
+  --z-error-c: var(--z-error);
+  --z-state-mix: var(--z-white); /* secondary button hover lightens on dark */
+  --z-btn-hover: var(--z-summit-light); /* Dawn primary .button = gold on the dark schemes */
+  --z-btn-active: var(--z-summit-dark);
+  --z-btn-active-text: black;
+}
+
+.color-scheme-2,
+.color-scheme-3,
+.color-scheme-5 {
+  --z-ring: var(--z-obsidian);
+  --z-ring-gap: var(--z-white);
+  /* Gold text on white is < 4.5:1 → text colour + Summit Gold Dark underline */
+  --z-link: rgb(var(--color-foreground));
+  --z-link-hover: rgb(var(--color-foreground));
+  --z-link-line: var(--z-summit-dark);
+  --z-field-bg: rgba(var(--color-foreground), 0.05);
+  --z-error-c: color-mix(in srgb, var(--z-error) 55%, var(--z-obsidian)); /* #f07070 is 2.6:1 on white */
+  --z-state-mix: var(--z-obsidian);
+  --z-btn-hover: initial; /* primary is Obsidian here → Dawn's own hover */
+  --z-btn-active: initial;
+  --z-btn-active-text: initial;
+}
+
+.color-scheme-7 {
+  --z-btn-hover: initial; /* white primary button */
+  --z-btn-active: initial;
+  --z-btn-active-text: initial;
+}
+
+/* ---------- 1. Focus: 3px ring + 2px gap (overrides Dawn's *:focus-visible / .button:focus-visible) ----------
+   Offset is not !important so components that must draw inside a clipped box (thumbs, steppers) keep theirs. */
+:focus-visible,
+.focused {
+  outline: 3px solid var(--z-ring) !important;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px var(--z-ring-gap) !important;
+}
+
+/* Inside drawers that clip: ring drawn inward */
+.focus-inset:focus-visible,
+.focused.focus-inset,
+.menu-drawer :focus-visible,
+.drawer__inner :focus-visible {
+  outline-offset: -3px;
+  box-shadow: inset 0 0 0 5px var(--z-ring-gap) !important;
+}
+
+/* ---------- 2. Tap targets ≥ 44px ----------
+   Visually smaller controls get an invisible hit area that grows to 44px only when the box is smaller
+   (top/bottom % = own height, left/right % = own width). */
+.cart-drawer .quantity__button,
+cart-remove-button .button,
+.zenith-carousel__dot {
+  position: relative;
+}
+
+.cart-drawer .quantity__button::after,
+.zenith-carousel__dot::after {
+  content: '';
+  position: absolute;
+  top: min(0px, calc((100% - 4.4rem) / 2));
+  bottom: min(0px, calc((100% - 4.4rem) / 2));
+  left: 0;
+  right: 0;
+}
+
+.button.zenith-btn--small::before,
+.button.zenith-btn--icon-only::before,
+cart-remove-button .button::before {
+  inset: min(0px, calc((100% - 4.4rem) / 2)) min(0px, calc((100% - 4.4rem) / 2));
+}
+
+:root .zenith-nl .button.zenith-nl__button {
+  min-height: max(4.4rem, var(--z-nl-bh-m, 46px));
+}
+
+@media screen and (min-width: 750px) {
+  :root .zenith-nl .button.zenith-nl__button {
+    min-height: max(4.4rem, var(--z-nl-bh, 38px));
+  }
+}
+
+/* Stand-alone links (footer menus + policy links): 44px tall rows. Inline links in paragraphs keep the line height. */
+:root .zenith-footer__link,
+:root .zenith-footer__policies a,
+:root .zenith-footer__email {
+  display: inline-flex;
+  align-items: center;
+  min-height: 4.4rem;
+}
+
+/* ---------- 3. Buttons: hover / pressed / disabled (variant looks live in "Brand button variants") ---------- */
+.button.zenith-btn:is(.zenith-btn--gold, .zenith-btn--dark, .zenith-btn--light, .zenith-btn--secondary, .zenith-btn--text):hover::after {
+  box-shadow: none; /* Dawn's .button:hover::after draws a border */
+}
+
+.button.zenith-btn--gold:not([disabled], [aria-disabled='true']):hover {
+  background: var(--z-summit-light);
+  filter: none;
+}
+
+.button.zenith-btn--gold:not([disabled], [aria-disabled='true']):active {
+  background: var(--z-summit-dark);
+  color: black; /* 4.9:1 on Summit Gold Dark */
+  filter: none;
+}
+
+.button.zenith-btn--secondary {
+  transition: background-color var(--duration-short) ease;
+}
+
+.button.zenith-btn--secondary:not([disabled], [aria-disabled='true']):hover {
+  background: color-mix(in srgb, var(--z-btn-secondary-bg) 88%, var(--z-state-mix));
+}
+
+.button.zenith-btn--secondary:not([disabled], [aria-disabled='true']):active {
+  background: color-mix(in srgb, var(--z-btn-secondary-bg) 85%, black);
+}
+
+.button.zenith-btn--text:not([disabled], [aria-disabled='true']):hover {
+  color: var(--z-link-hover);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.button.zenith-btn--text:not([disabled], [aria-disabled='true']):active {
+  text-decoration-thickness: 2px;
+}
+
+.button.zenith-btn:is(.zenith-btn--dark, .zenith-btn--light):not([disabled], [aria-disabled='true']):active {
+  filter: brightness(0.92);
+}
+
+.button.zenith-btn--outline:not([disabled], [aria-disabled='true']):active {
+  background: rgba(var(--color-foreground), 0.12);
+}
+
+/* Dawn primary buttons (gold on the dark schemes) */
+.button:not(.button--secondary, .button--tertiary, .zenith-btn, [disabled], [aria-disabled='true']):hover {
+  background-color: var(--z-btn-hover, rgba(var(--color-button), var(--alpha-button-background)));
+}
+
+.button:not(.button--secondary, .button--tertiary, .zenith-btn, [disabled], [aria-disabled='true']):active {
+  background-color: var(--z-btn-active, rgba(var(--color-button), var(--alpha-button-background)));
+  color: var(--z-btn-active-text, rgb(var(--color-button-text)));
+}
+
+/* Disabled: Basalt + Granite (4.8:1), not Dawn's 50% opacity. Loading buttons (aria-disabled + .loading) excluded. */
+.button:is([disabled], [aria-disabled='true'], .disabled):not(.loading, .button--tertiary, .zenith-btn--text, .zenith-btn--outline) {
+  opacity: 1;
+  background: var(--z-basalt);
+  color: var(--z-granite);
+  filter: none;
+  cursor: not-allowed;
+}
+
+.button:is([disabled], [aria-disabled='true'], .disabled):not(.loading, .button--tertiary)::after {
+  box-shadow: none;
+}
+
+.button.zenith-btn--outline:is([disabled], [aria-disabled='true']):not(.loading),
+.button.zenith-btn--text:is([disabled], [aria-disabled='true']):not(.loading) {
+  opacity: 1;
+  color: var(--z-granite);
+  cursor: not-allowed;
+}
+
+.button.zenith-btn--outline:is([disabled], [aria-disabled='true']):not(.loading)::after {
+  box-shadow: inset 0 0 0 1px rgba(var(--color-foreground), 0.2);
+}
+
+/* ---------- 4. Text links → "Text links" rules above (colours from --z-link / --z-link-hover here) ---------- */
+
+/* ---------- 5. Form fields: visible label above, Granite border, 2px focus / error border ---------- */
+.zenith-field-label {
+  display: block;
+  margin: 0 0 var(--z-space-2);
+  font-size: 1.4rem;
+  font-weight: 500;
+  line-height: 1.4;
+  color: rgb(var(--color-foreground));
+}
+
+.zenith-field-error {
+  margin: var(--z-space-2) 0 0;
+  font-size: 1.3rem;
+  line-height: 1.4;
+  color: var(--z-error-c);
+}
+
+:root .zenith-nl__status--error {
+  color: var(--z-error-c);
+}
+
+/* Dawn .field: the floating label becomes a static label above; the border moves from .field::after to the input
+   (otherwise it would wrap the label). Covers footer newsletter, search, cart note, password, customer accounts. */
+:root .field::before,
+:root .field::after,
+:root .customer .field::before,
+:root .customer .field::after {
+  content: none;
+}
+
+:root .field:has(> .field__label),
+:root .customer .field:has(> label) {
+  flex-direction: column;
+}
+
+:root .field > .field__label,
+:root .customer .field > label {
+  order: -1;
+  position: static !important;
+  top: auto !important;
+  left: auto !important;
+  margin: 0 0 var(--z-space-2);
+  font-size: 1.4rem !important;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0 !important;
+  color: rgb(var(--color-foreground));
+  transition: none;
+}
+
+:root .field > .field__input:is(*, :focus, :not(:placeholder-shown), :-webkit-autofill),
+:root .customer .field > input:is(*, :focus, :not(:placeholder-shown), :-webkit-autofill) {
+  margin: 0;
+  padding: 1.2rem 1.5rem;
+}
+
+:root .field > input.field__input,
+:root .customer .field > input {
+  height: 4.6rem;
+}
+
+:root .field > .field__button {
+  top: auto;
+  bottom: 0.1rem;
+  height: 4.4rem;
+}
+
+:root .field > .field__input,
+:root .customer .field > input,
+:root .zenith-contact__input,
+:root .zenith-nl__input,
+:root .zenith-article__input {
+  border: 1px solid var(--z-field-border);
+  border-radius: 0;
+  box-shadow: none;
+  transition: border-color var(--duration-short, 0.1s) ease, box-shadow var(--duration-short, 0.1s) ease;
+}
+
+:root .field > .field__input,
+:root .customer .field > input {
+  background-color: var(--z-field-bg);
+}
+
+:root .zenith-contact__input,
+:root .zenith-nl__input {
+  min-height: 4.4rem;
+}
+
+:root .zenith-contact__textarea {
+  min-height: 8rem;
+}
+
+:root :is(.field > .field__input, .customer .field > input, .zenith-contact__input, .zenith-nl__input, .zenith-article__input):hover {
+  border-color: rgb(var(--color-foreground));
+}
+
+/* Focus = 2px border (1px border + 1px inset shadow, no layout shift) instead of the outer ring */
+:root :is(.field > .field__input, .customer .field > input, .zenith-contact__input, .zenith-nl__input, .zenith-article__input):is(:focus, :focus-visible) {
+  outline: 0 !important;
+  border-color: var(--z-ring);
+  box-shadow: inset 0 0 0 1px var(--z-ring) !important;
+}
+
+:root :is(.field > .field__input, .customer .field > input, .zenith-contact__input, .zenith-nl__input, .zenith-article__input)[aria-invalid='true'] {
+  border-color: var(--z-error-c);
+  box-shadow: inset 0 0 0 1px var(--z-error-c) !important;
+}
+
+:root :is(.field > .field__input, .customer .field > input, .zenith-contact__input, .zenith-nl__input, .zenith-article__input):disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+:root .form__message:not([class*='success']) {
+  color: var(--z-error-c);
+}
+
+/* ---------- 6. Checkboxes: 24px box in a 44px row, 2px Granite border, Summit Gold Light + black tick ---------- */
+:root :is(input.zenith-checkbox, input.zenith-contact__checkbox, .facets-layout-list--text .facet-checkbox > input, .mobile-facets__label > input.mobile-facets__checkbox, .customer input)[type='checkbox'] {
+  position: static;
+  z-index: auto;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  width: 2.4rem;
+  height: 2.4rem;
+  margin: 0;
+  opacity: 1;
+  border: 2px solid var(--z-granite);
+  border-radius: 0;
+  background: transparent center / 1.8rem no-repeat;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+:root :is(input.zenith-checkbox, input.zenith-contact__checkbox, .facet-checkbox > input, input.mobile-facets__checkbox, .customer input)[type='checkbox']:hover {
+  border-color: rgb(var(--color-foreground));
+}
+
+:root :is(input.zenith-checkbox, input.zenith-contact__checkbox, .facet-checkbox > input, input.mobile-facets__checkbox, .customer input)[type='checkbox']:checked {
+  border-color: var(--z-summit-light);
+  background-color: var(--z-summit-light);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M4.5 10.5l3.5 3.5 7.5-8' fill='none' stroke='black' stroke-width='2.25' stroke-linecap='square'/%3E%3C/svg%3E");
+}
+
+:root :is(input.zenith-checkbox, input.zenith-contact__checkbox, .facet-checkbox > input, input.mobile-facets__checkbox, .customer input)[type='checkbox'][aria-invalid='true'] {
+  border-color: var(--z-error-c);
+}
+
+:root :is(input.zenith-checkbox, input.zenith-contact__checkbox, .facet-checkbox > input, input.mobile-facets__checkbox, .customer input)[type='checkbox']:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Rows: the label is the target (label[for] / wrapping label), ≥44px tall */
+:root .zenith-contact__consent,
+:root .facets-layout-list--text .facet-checkbox,
+:root .mobile-facets__label {
+  min-height: 4.4rem;
+  align-items: center;
+  gap: var(--z-space-3);
+}
+
+:root .facets-layout-list--text .facet-checkbox {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* Dawn's drawn box + tick are replaced by the input itself */
+.facets-layout-list--text .facet-checkbox > svg,
+.facets-layout-list--text .facet-checkbox > .svg-wrapper,
+.mobile-facets__label > svg,
+.mobile-facets__label > .svg-wrapper,
+.mobile-facets__label .icon-checkmark {
+  display: none;
+}
+
+/* ---------- 7. Accordions → assets/zenith-faq.css (56px rows, Basalt hover, light-scheme Obsidian rows).
+   <details>/<summary>: the browser exposes expanded/collapsed on the summary, so no aria-expanded is set by hand. */

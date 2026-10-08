@@ -42,7 +42,7 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--z-space-3);
-  min-height: var(--zd-item-h, 4.7rem);
+  min-height: max(4.4rem, var(--zd-item-h, 4.7rem)); /* UI states: ≥44px tap target */
   padding: 0;
   font-family: var(--font-body-family);
   font-size: var(--zd-fs, 1.6rem);
@@ -94,7 +94,7 @@
   align-items: center;
   gap: var(--z-space-2);
   width: 100%;
-  min-height: var(--zd-item-h, 4.7rem);
+  min-height: max(4.4rem, var(--zd-item-h, 4.7rem)); /* UI states: ≥44px tap target */
   margin: 0;
   padding: 0;
   font-family: var(--font-body-family);

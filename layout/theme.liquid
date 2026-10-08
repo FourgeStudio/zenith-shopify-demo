@@ -123,6 +123,14 @@
         --color-badge-background: {{ scheme.settings.background.red }},{{ scheme.settings.background.green }},{{ scheme.settings.background.blue }};
         --color-badge-border: {{ scheme.settings.text.red }},{{ scheme.settings.text.green }},{{ scheme.settings.text.blue }};
         --payment-terms-background-color: rgb({{ scheme.settings.background.rgb }});
+        {%- comment -%} zenith: Secondary button (Figma UI Elements) — dark gray on dark schemes, light gray on light ones {%- endcomment -%}
+        {%- if background_color_brightness <= 128 %}
+        --z-btn-secondary-bg: #343434;
+        --z-btn-secondary-text: #ffffff;
+        {%- else %}
+        --z-btn-secondary-bg: #f2f2f2;
+        --z-btn-secondary-text: #121212;
+        {%- endif %}
       }
       {% endfor %}
 

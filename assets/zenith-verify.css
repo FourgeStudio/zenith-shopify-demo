@@ -192,11 +192,9 @@ zenith-video.is-playing .zenith-verify__play {
   max-width: var(--zv-stmw-m, 204px);
 }
 
+/* Type + color come from the universal .zenith-eyebrow (zenith-base.css) */
 .zenith-verify__label {
   margin: 0;
-  font-size: var(--zv-lfs-m, 1.6rem);
-  line-height: 1.25;
-  color: var(--zv-label, #eabe5f);
 }
 
 .zenith-verify__step-title {
@@ -376,11 +374,6 @@ div.zenith-verify__logos-image--empty {
 
   .zenith-verify__step-body {
     max-width: var(--zv-stmw, 340px);
-  }
-
-  .zenith-verify__label {
-    font-size: var(--zv-lfs, 1.6rem);
-    line-height: 1.5;
   }
 
   .zenith-verify__step-title {

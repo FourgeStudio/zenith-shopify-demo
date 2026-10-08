@@ -254,7 +254,7 @@
                 </div>
                 <div class="zenith-verify__step-body">
                   {%- if step_label != blank -%}
-                    <p class="zenith-verify__label">{{ step_label | escape }}</p>
+                    <p class="zenith-eyebrow zenith-verify__label">{{ step_label | escape }}</p>
                   {%- endif -%}
                   {%- if block.settings.title != blank -%}
                     <{{ item_tag }} class="zenith-verify__step-title">{{ block.settings.title | escape }}</{{ item_tag }}>
@@ -714,6 +714,7 @@
       "type": "color",
       "id": "label_color",
       "label": "Step label",
+      "info": "No longer applies: step labels use the universal eyebrow style (.zenith-eyebrow in zenith-base.css).",
       "default": "#EABE5F"
     },
     {
@@ -832,6 +833,7 @@
       "type": "range",
       "id": "label_font_size",
       "label": "Step label size",
+      "info": "No longer applies: step labels use the universal eyebrow style (16px).",
       "min": 10,
       "max": 28,
       "step": 1,
@@ -1087,6 +1089,7 @@
       "type": "range",
       "id": "label_font_size_mobile",
       "label": "Step label size",
+      "info": "No longer applies: step labels use the universal eyebrow style (16px).",
       "min": 10,
       "max": 24,
       "step": 1,
