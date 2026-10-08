@@ -248,3 +248,60 @@
     scroll-behavior: smooth;
   }
 }
+
+/* ---------- Policy pages only (.zenith-doc--policy, layout/theme.liquid) — Basecamp "Legal Pages" ---------- */
+.zenith-doc__eyebrow {
+  margin: 0 0 var(--z-space-2);
+}
+
+/* Bullets on the first line of text: Shopify wraps list text in <p> (a block), which pushed the bullet onto its own
+   line above it. The first paragraph runs inline with the marker; same space between items on every policy. */
+.zenith-doc--policy .zenith-doc__body li > :is(p, div):first-child {
+  display: inline;
+}
+
+.zenith-doc--policy .zenith-doc__body li > p {
+  margin: 0;
+}
+
+.zenith-doc--policy .zenith-doc__body li > p + p {
+  margin-top: var(--z-space-2);
+}
+
+.zenith-doc--policy .zenith-doc__body li + li {
+  margin-top: 1rem;
+}
+
+.zenith-doc--policy .zenith-doc__body li > :is(ul, ol) {
+  margin: 1rem 0 0;
+}
+
+.zenith-doc--policy .zenith-doc__body li::marker {
+  color: var(--z-doc-accent);
+}
+
+/* One heading level for every legal page (Refund uses h2, Privacy/Terms h3): theme H3 size, optional eyebrow above */
+.zenith-doc--policy .zenith-doc__body :is(h2, h3) {
+  margin: var(--z-space-6) 0 var(--z-space-3);
+  font-size: calc(var(--z-doc-hfs-m, 3.2rem) * 0.75);
+}
+
+.zenith-doc--policy .zenith-doc__body > :is(h2, h3):first-child {
+  margin-top: 0;
+}
+
+.zenith-doc__h-eyebrow {
+  display: block;
+  margin-bottom: var(--z-space-1);
+}
+
+.zenith-doc--policy .zenith-doc__body a[href^='tel:'],
+.zenith-doc--policy .zenith-doc__body a[href^='mailto:'] {
+  text-decoration: underline;
+}
+
+@media screen and (min-width: 750px) {
+  .zenith-doc--policy .zenith-doc__body :is(h2, h3) {
+    font-size: calc(var(--z-doc-hfs, 4.2rem) * 0.75);
+  }
+}

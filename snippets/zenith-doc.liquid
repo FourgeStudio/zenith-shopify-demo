@@ -5,6 +5,8 @@
     title {String}, body {String} HTML
     id {String} unique suffix
     show_toc {Boolean}, toc_heading {String}
+    eyebrow {String} optional: universal eyebrow above the title (policies: "Legal")
+    split_caps {Boolean} optional: ALL-CAPS h2–h4 → capital case; "SECTION 1 - ONLINE STORE TERMS" → eyebrow "Section 1" + "Online Store Terms"
     titlecase {Boolean} optional: "Privacy policy" → "Privacy Policy" (Shopify's policy titles)
     class {String} optional extra root classes (zenith-doc--center = centred column, color-scheme-x)
     vars {String} optional CSS custom properties for the root (--z-doc-*: see assets/zenith-doc.css)
@@ -87,6 +89,57 @@
     endif
   endif
 
+  # ALL-CAPS headings (Shopify's Terms of Service template) → capital case, "X - Y" → eyebrow X + headline Y, inside the
+  # same heading (screen readers + the contents list read "Section 1 – Online Store Terms"). The policy text is not changed.
+  if split_caps
+    for n in (2..4)
+      assign h_open = '<h' | append: n
+      assign h_close = '</h' | append: n | append: '>'
+      unless doc_body contains h_open
+        continue
+      endunless
+      assign parts = doc_body | split: h_open
+      assign rebuilt = parts | first
+      for part in parts
+        if forloop.first
+          continue
+        endif
+        unless part contains h_close
+          assign rebuilt = rebuilt | append: h_open | append: part
+          continue
+        endunless
+        assign inner = part | split: h_close | first
+        assign after = part | remove_first: inner
+        assign attrs = inner | split: '>' | first
+        assign content = inner | remove_first: attrs | remove_first: '>'
+        assign text = content | strip_html | strip
+        assign text_up = text | upcase
+        assign text_down = text | downcase
+        if text == blank or text != text_up or text == text_down
+          assign rebuilt = rebuilt | append: h_open | append: part
+          continue
+        endif
+        if text contains ' - '
+          assign eb = text | split: ' - ' | first
+          assign rest = text | remove_first: eb | remove_first: ' - '
+          capture eb_cc
+            render 'zenith-capital-case', text: eb
+          endcapture
+          capture rest_cc
+            render 'zenith-capital-case', text: rest
+          endcapture
+          assign content = '<span class="zenith-eyebrow zenith-doc__h-eyebrow">' | append: eb_cc | append: '</span><span class="visually-hidden"> – </span><span class="zenith-doc__h-text">' | append: rest_cc | append: '</span>'
+        else
+          capture content
+            render 'zenith-capital-case', text: text
+          endcapture
+        endif
+        assign rebuilt = rebuilt | append: h_open | append: attrs | append: '>' | append: content | append: after
+      endfor
+      assign doc_body = rebuilt
+    endfor
+  endif
+
   # Table of Contents: ids on the headings + the list, rendered here (no layout shift).
   # Level = the heading type (h1–h4) with the most non-empty headings, so a stray empty <h1> doesn't win.
   assign toc_items = ''
@@ -164,6 +217,9 @@
   <div class="zenith-doc__hero">
     <div class="page-width">
       <div class="zenith-doc__frame">
+        {%- if eyebrow != blank -%}
+          <p class="zenith-eyebrow zenith-doc__eyebrow">{{ eyebrow | escape }}</p>
+        {%- endif -%}
         <h1 class="zenith-doc__title">{{ doc_title | escape }}</h1>
         {%- if updated != blank -%}
           <p class="zenith-doc__updated">{{ updated | escape }}</p>

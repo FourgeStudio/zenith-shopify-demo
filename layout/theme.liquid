@@ -417,10 +417,14 @@
           body: zenith_policy.body,
           id: zenith_policy_handle,
           titlecase: true,
+          eyebrow: settings.policy_eyebrow,
+          split_caps: settings.policy_split_caps_headings,
+          class: 'zenith-doc--policy',
           show_toc: settings.policy_show_toc,
           toc_heading: settings.policy_toc_heading,
           vars: zenith_policy_vars
         -%}
+        <script src="{{ 'zenith-policy.js' | asset_url }}" defer="defer"></script>
       {%- endif -%}
       {%- comment -%}
         zenith: [customers] in any page content → Theme settings → Zenith → Customer count.

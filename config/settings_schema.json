@@ -6943,6 +6943,20 @@
         "content": "Content"
       },
       {
+        "type": "text",
+        "id": "policy_eyebrow",
+        "label": "Eyebrow above the title",
+        "info": "Universal eyebrow style. Empty = none.",
+        "default": "Legal"
+      },
+      {
+        "type": "checkbox",
+        "id": "policy_split_caps_headings",
+        "label": "Tidy ALL-CAPS headings",
+        "info": "\"SECTION 1 - ONLINE STORE TERMS\" shows as the eyebrow \"Section 1\" + the heading \"Online Store Terms\"; \"OVERVIEW\" → \"Overview\". The policy text itself is not changed.",
+        "default": true
+      },
+      {
         "type": "checkbox",
         "id": "policy_show_toc",
         "label": "Show Table of Contents",
