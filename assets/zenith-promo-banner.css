@@ -96,6 +96,8 @@
   padding: var(--z-space-2) var(--z-promo-cdx-m, var(--z-cpd-m, var(--z-space-5)));
   background: var(--z-cd-strip-bg, linear-gradient(90deg, #d6b356 50%, #c59300 100%));
   color: var(--z-cd-strip-fg, #1a1a1a);
+  /* zenith: the one-row phone countdown sizes itself to this strip (zenith-countdown.css) */
+  container-type: inline-size;
 }
 
 .zenith-promo__countdown[hidden] {

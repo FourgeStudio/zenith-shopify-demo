@@ -93,6 +93,30 @@
   letter-spacing: 0.04em;
 }
 
+/* Phones: always one row ("84 DAYS 14 HOURS 57 MINUTES 08 SECONDS"); sizes follow the width of the strip (cqi; container set by the promo strip, else the screen),
+   capped at the section's mobile sizes, so the row fits down to a 320px screen. */
+@media screen and (max-width: 749px) {
+  .zenith-countdown--labels {
+    flex-wrap: nowrap;
+    gap: var(--z-space-1) min(var(--z-space-2), 2.4cqi);
+    white-space: nowrap;
+  }
+
+  .zenith-countdown--labels .zenith-countdown__unit {
+    gap: 0.25em;
+  }
+
+  .zenith-countdown--labels .zenith-countdown__value {
+    padding: 0 0.15em;
+    font-size: min(var(--z-cdfs-m, 1.6rem), 5.2cqi);
+  }
+
+  .zenith-countdown--labels .zenith-countdown__label {
+    font-size: min(var(--z-cdlfs-m, 1.2rem), 3.9cqi);
+    letter-spacing: 0.01em;
+  }
+}
+
 @media screen and (min-width: 750px) {
   .zenith-countdown__value {
     font-size: var(--z-cdfs, 1.8rem);
