@@ -192,10 +192,58 @@
           "settings": {
             "title": "FAQs",
             "content_source": "questions",
-            "text": "<h3>Will the retinol make my skin peel?</h3><p>0.2% is a gentle retinol level, and the tallow base buffers it. New to retinol? Start 2 to 3 nights a week for the first two weeks, then go nightly. If anything feels wrong, stop and message us.</p><h3>Is it greasy with beef tallow in it?</h3><p>No. It absorbs fast and finishes light. No shine, no residue on the pillow.</p><h3>Does it smell like beef?</h3><p>No. The cream has a light, neutral scent.</p><h3>Do I still need sunscreen?</h3><p>Yes. Retinol makes skin more sensitive to the sun, so wear SPF 30 every morning. The Zenith Anti-Aging Tallow Day Cream SPF 30 is made for that.</p><h3>Can I use it with the Cleanser and the Day Cream?</h3><p>Yes. Cleanser morning and night, Day Cream SPF 30 in the morning, Tallow Cream at night. The directions are on every label.</p><h3>Paano kung hindi ako hiyang?</h3><p>Every order carries the Zenith Money-Back Guarantee. Skin products are covered for 30 days, counted from delivery.&nbsp;<br/><br/>Message us on Facebook or email <a href=\"mailto:hello@tryzenith.ph\" target=\"_blank\" title=\"mailto:hello@tryzenith.ph\">hello@tryzenith.ph</a> with your order number and a photo of the product. Full terms on our <a href=\"/policies/refund-policy\" title=\"Refunds and Returns\">Refunds and Returns</a> page.</p><p></p>",
+            "text": "",
             "open": false,
             "hide_on_mobile": false,
             "hide_on_desktop": false
+          }
+        },
+        "question_1": {
+          "type": "question",
+          "settings": {
+            "question": "Will the retinol make my skin peel?",
+            "answer": "<p>0.2% is a gentle retinol level, and the tallow base buffers it. New to retinol? Start 2 to 3 nights a week for the first two weeks, then go nightly. If anything feels wrong, stop and message us.</p>",
+            "open": false
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "Is it greasy with beef tallow in it?",
+            "answer": "<p>No. It absorbs fast and finishes light. No shine, no residue on the pillow.</p>",
+            "open": false
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "Does it smell like beef?",
+            "answer": "<p>No. The cream has a light, neutral scent.</p>",
+            "open": false
+          }
+        },
+        "question_4": {
+          "type": "question",
+          "settings": {
+            "question": "Do I still need sunscreen?",
+            "answer": "<p>Yes. Retinol makes skin more sensitive to the sun, so wear SPF 30 every morning. The Zenith Anti-Aging Tallow Day Cream SPF 30 is made for that.</p>",
+            "open": false
+          }
+        },
+        "question_5": {
+          "type": "question",
+          "settings": {
+            "question": "Can I use it with the Cleanser and the Day Cream?",
+            "answer": "<p>Yes. Cleanser morning and night, Day Cream SPF 30 in the morning, Tallow Cream at night. The directions are on every label.</p>",
+            "open": false
+          }
+        },
+        "question_6": {
+          "type": "question",
+          "settings": {
+            "question": "Paano kung hindi ako hiyang?",
+            "answer": "<p>Every order carries the Zenith Money-Back Guarantee. Skin products are covered for 30 days, counted from delivery.&nbsp;<br/><br/>Message us on Facebook or email <a href=\"mailto:hello@tryzenith.ph\" target=\"_blank\" title=\"mailto:hello@tryzenith.ph\">hello@tryzenith.ph</a> with your order number and a photo of the product. Full terms on our <a href=\"/policies/refund-policy\" title=\"Refunds and Returns\">Refunds and Returns</a> page.</p>",
+            "open": false
           }
         }
       },
@@ -219,7 +267,13 @@
         "row_7",
         "row_8",
         "row_9",
-        "row_10"
+        "row_10",
+        "question_1",
+        "question_2",
+        "question_3",
+        "question_4",
+        "question_5",
+        "question_6"
       ],
       "settings": {
         "placeholder_title": "Zenith Anti-Aging Tallow Cream",
