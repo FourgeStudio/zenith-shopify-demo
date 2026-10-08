@@ -268,6 +268,15 @@
   margin-top: var(--z-space-2);
 }
 
+.zenith-doc--policy .zenith-doc__body :is(ul, ol) {
+  padding-left: 2.4rem;
+  list-style-position: outside;
+}
+
+.zenith-doc--policy .zenith-doc__body li {
+  padding-left: 0.4rem;
+}
+
 .zenith-doc--policy .zenith-doc__body li + li {
   margin-top: 1rem;
 }
