@@ -208,7 +208,7 @@ _Last updated: 2026-10-01. Keep this file current at the end of each work sessio
 - Theme settings → Zenith · Policy pages: *Eyebrow above the title* (default Legal) + *Tidy ALL-CAPS headings* (on). The latter rewrites h2–h4 server-side in snippets/zenith-doc.liquid: ALL-CAPS → capital case (snippets/zenith-capital-case.liquid), "X - Y" → eyebrow X + headline Y inside the same heading, visually-hidden " – " so screen readers / ToC read "Section 1 – Online Store Terms". Policy text untouched.
 - h2 and h3 in policies share one size (theme H3 = 0.75 × heading size) so Refund (h2) matches Privacy/Terms (h3).
 - assets/zenith-policy.js: plain-text phone numbers (+63 9xx / 09xx) → tel:+63…, emails → mailto:, skips text already in links.
-- Open (Henson/client): footer "Disclaimer" links to # (no page); policy text itself (ALL-CAPS ToS, Shipping typo "PHP 1,000. for orders over.") to be cleaned at go-live in Settings → Policies.
+- Disclaimer: template page.disclaimer exists (text inside its Zenith · Document page section) but no Page is assigned to it → /pages/disclaimer 404; footer item "Disclaimer" (menu faq, 3rd footer column) links to #. Fix in Admin: create Page "Disclaimer" (handle disclaimer, template disclaimer), then point the menu item to it. Open: policy text itself (ALL-CAPS ToS, Shipping typo "PHP 1,000. for orders over.") to be cleaned at go-live in Settings → Policies.
 
 ### Verify page review (2026-10-08, Basecamp "Verify")
 - All text on Verify full white via the sections' opacity settings (verify intro/step title/step text, press heading, trust text, store handles, FDA text, FAQ answers, reviews mobile subheading). Video carousel got *Subheading opacity* (default 70, Verify 100). Other pages unchanged.
