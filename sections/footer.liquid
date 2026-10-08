@@ -177,9 +177,20 @@
                         {%- if links_menu != blank -%}
                           <ul class="zenith-footer__links list-unstyled{{ links_class }}" role="list">
                             {%- for link in links_menu.links -%}
+                              {%- liquid
+                                # zenith: per-theme link override — menus are shared with the live theme, so a link can be changed here instead
+                                assign link_url = link.url
+                                if block.settings.override_title != blank and block.settings.override_url != blank
+                                  assign override_title = block.settings.override_title | strip | downcase
+                                  assign link_title = link.title | strip | downcase
+                                  if link_title == override_title
+                                    assign link_url = block.settings.override_url | strip
+                                  endif
+                                endif
+                              -%}
                               <li>
                                 <a
-                                  href="{{ link.url }}"
+                                  href="{{ link_url }}"
                                   class="zenith-footer__link{% if link.active %} zenith-footer__link--active{% endif %}"
                                   {% if link.current %}
                                     aria-current="page"
@@ -488,6 +499,22 @@
           "label": "Full width on mobile",
           "info": "Puts this menu on its own row on mobile.",
           "default": false
+        },
+        {
+          "type": "header",
+          "content": "Link override (this theme only)"
+        },
+        {
+          "type": "text",
+          "id": "override_title",
+          "label": "Menu item name",
+          "info": "Menus are shared by all themes. Name an item here (e.g. Disclaimer) to give it a different link in this theme only."
+        },
+        {
+          "type": "text",
+          "id": "override_url",
+          "label": "Link for that item",
+          "info": "e.g. /pages/disclaimer"
         }
       ]
     },
