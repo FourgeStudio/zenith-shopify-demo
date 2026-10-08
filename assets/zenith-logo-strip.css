@@ -150,9 +150,15 @@
   }
 }
 
-.zenith-logos__viewport:hover .zenith-logos__track,
 .zenith-logos__viewport:focus-within .zenith-logos__track {
   animation-play-state: paused;
+}
+
+/* zenith: no hover-pause on touch (sticky :hover on iPhone made Safari jump marquees back to the start) */
+@media (hover: hover) and (pointer: fine) {
+  .zenith-logos__viewport:hover .zenith-logos__track {
+    animation-play-state: paused;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

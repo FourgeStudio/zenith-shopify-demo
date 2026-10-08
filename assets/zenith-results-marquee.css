@@ -56,10 +56,17 @@
   animation-direction: reverse;
 }
 
-.zenith-results--pause .zenith-results__row:hover .zenith-results__track,
 .zenith-results__row:focus-within .zenith-results__track,
 .zenith-results.is-paused .zenith-results__track {
   animation-play-state: paused;
+}
+
+/* zenith: hover-pause only with a real mouse. On iPhones a tap leaves a sticky :hover, and pausing/resuming
+   made Safari mobile jump the rows back to the start (client video 2026-10-09). */
+@media (hover: hover) and (pointer: fine) {
+  .zenith-results--pause .zenith-results__row:hover .zenith-results__track {
+    animation-play-state: paused;
+  }
 }
 
 .zenith-results__group {

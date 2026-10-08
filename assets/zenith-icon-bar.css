@@ -103,9 +103,15 @@
     display: flex;
   }
 
-  .zenith-icon-bar--m-marquee .zenith-icon-bar__viewport:hover .zenith-icon-bar__track,
+  /* zenith: no hover-pause on touch (sticky :hover on iPhone made Safari jump the row back to the start) */
   .zenith-icon-bar--m-marquee .zenith-icon-bar__viewport:focus-within .zenith-icon-bar__track {
     animation-play-state: paused;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .zenith-icon-bar--m-marquee .zenith-icon-bar__viewport:hover .zenith-icon-bar__track {
+      animation-play-state: paused;
+    }
   }
 }
 
