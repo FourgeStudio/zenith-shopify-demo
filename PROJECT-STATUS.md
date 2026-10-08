@@ -202,6 +202,14 @@ _Last updated: 2026-10-01. Keep this file current at the end of each work sessio
 - Figma page 2368-52 (Style Guide) read via Chrome extract: radius = square by default, only 4px (small) / 8px (2-3 col) → off values (2/5/6/10px, 0.5rem) moved to 4/8 (Judge.me untouched); accordions use a chevron that flips (FAQ, product rows, ingredients; was + → ×); eyebrow = "Eyebrow Extended" 6% (the 4% label in Figma is a typo per the extract); comment #1956600871 (dark-mode button icons) already met — icons are currentColor.
 - Applied 2026-10-08 (style guide wins): Obsidian #121212 everywhere (was #0E0E0E), Summit Gold #C5930E (was #C59300, --z-gold-rgb 197,147,14), dark schemes (bg brightness ≤128) get 15% card/popup/drawer/text-box borders via the scheme loop in layout/theme.liquid (light schemes keep the theme settings). Eyebrow stays 6% (Eyebrow Extended style); 56/44px rows kept (WCAG). OPEN: off-spec divider colours.
 
+### Legal pages review (2026-10-08, Basecamp "Legal Pages")
+- Policy pages only (zenith-doc rendered with class zenith-doc--policy from layout/theme.liquid; text pages unchanged).
+- Bullets: Shopify wraps list text in <p> → bullet sat on its own line; first <p> in an li is inline, markers outside (base.css forces inside elsewhere), 10px between items, gold markers.
+- Theme settings → Zenith · Policy pages: *Eyebrow above the title* (default Legal) + *Tidy ALL-CAPS headings* (on). The latter rewrites h2–h4 server-side in snippets/zenith-doc.liquid: ALL-CAPS → capital case (snippets/zenith-capital-case.liquid), "X - Y" → eyebrow X + headline Y inside the same heading, visually-hidden " – " so screen readers / ToC read "Section 1 – Online Store Terms". Policy text untouched.
+- h2 and h3 in policies share one size (theme H3 = 0.75 × heading size) so Refund (h2) matches Privacy/Terms (h3).
+- assets/zenith-policy.js: plain-text phone numbers (+63 9xx / 09xx) → tel:+63…, emails → mailto:, skips text already in links.
+- Open (Henson/client): footer "Disclaimer" links to # (no page); policy text itself (ALL-CAPS ToS, Shipping typo "PHP 1,000. for orders over.") to be cleaned at go-live in Settings → Policies.
+
 ### Verify page review (2026-10-08, Basecamp "Verify")
 - All text on Verify full white via the sections' opacity settings (verify intro/step title/step text, press heading, trust text, store handles, FDA text, FAQ answers, reviews mobile subheading). Video carousel got *Subheading opacity* (default 70, Verify 100). Other pages unchanged.
 - Eyebrows: already universal (style guide pass); only STEP 1–3 have eyebrow text on Verify.
