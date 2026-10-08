@@ -17,6 +17,8 @@ function checkSetting(where, st, ids) {
   }
   // Translation keys (t:...) are resolved by Shopify — not checkable here.
   const has = (k) => Object.prototype.hasOwnProperty.call(st, k) && !(typeof st[k] === 'string' && st[k].startsWith('t:'));
+  // Fresh installs reject the whole file (2026-10-08: zenith-video-carousel never reached the demo store).
+  if (st.visible_if && /_list$/.test(st.type)) err(at, `visible_if is not allowed on ${st.type}`);
   switch (st.type) {
     case 'range': {
       const { min, max, step = 1 } = st;
