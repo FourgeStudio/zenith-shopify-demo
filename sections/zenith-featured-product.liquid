@@ -5,7 +5,7 @@
 <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
 {%- liquid
   assign s = section.settings
-  # zenith: content is global (Theme settings → Zenith · Featured product) so every page shows the same block;
+  # zenith: content is global (Theme settings → Zenith · Featured product), so every page shows the same block;
   # the section only sets layout, colours and spacing.
   assign fp_product = settings.zfp_product
   # Product settings have no default: until one is chosen (or if a store drops settings_data), show the Tallow Cream
