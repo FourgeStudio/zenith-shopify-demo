@@ -208,6 +208,10 @@ _Last updated: 2026-10-01. Keep this file current at the end of each work sessio
 - Header z-index 5, sticky announcement bar 4 (content goes up to 3: video/verify play buttons, card buttons painted over the bar).
 - Announcement bar shows only at the top: scrollY > 8 → .zenith-ann--hidden (translateY(-100%) behind the header, 0.3s, reduced-motion = instant); --z-ann-h = 0 while hidden. Script in sections/announcement-bar.liquid.
 
+- Ingredients v2 (Figma "Ingredients Section v2"): zenith-ingredients *Ingredient style* = Separate cards (item_style cards + item_gap; needs Always open): one Basalt card per ingredient, square photo flush left (thumb 104, range now up to 140), title + text beside it. All 5 product pages use it; Tallow Cream image = shop-all-featured-night-cream-jar-its-box (desktop + mobile), short titles on phones. List row text 14px.
+- Product info FAQs: Tallow Cream had its Q&A typed into the FAQs row text → converted to 6 question blocks (nested like the other 4). Bottom FAQ section untouched.
+- OPEN (demo store): zenith-featured-product.liquid and the Featured product settings are NOT applied on the demo (it still renders the old section: badge from section default, no trust row, no product). Re-sent twice. Probably rejected in the one-shot demo sync (new section without benefit/trust blocks + old templates in the same push). Need the sync error text from Demo Admin → Themes → theme → GitHub sync errors.
+
 ### Cart icons (2026-10-08, Basecamp "Profil, Orders, Checkout & Cart" — cart part)
 - −/+/remove in cart drawer + cart page now render snippets/zenith-cart-icon.liquid → official line icons (zenith-icon minus/plus/trash; trash = General/trash-01.svg), 1.5px stroke, text colour; 14px (12px in the phone drawer), bin 16px. Button boxes unchanged (no layout shift; 44px hit areas from the UI-states pass).
 - Theme settings → Zenith · Cart → Icons: cart_icon_minus / _plus / _remove / _van / _checkpoint / _discount (all on). Off: − / + as text, bin as "Remove" (pointer-events none so Dawn quantity-input still reads the button name), van/ticks/tag hidden.
