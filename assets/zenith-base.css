@@ -1250,7 +1250,8 @@ cart-drawer-items .zenith-cart-offers__box {
   }
 
   .cart-drawer .quantity__button .svg-wrapper {
-    width: 0.8rem;
+    width: 1.2rem;
+    height: 1.2rem;
   }
 
   .cart-drawer .quantity__input {
@@ -2090,4 +2091,37 @@ cart-remove-button .button::before {
 /* zenith: keeps a phrase on one line ("Money-Back", added in Liquid) */
 .zenith-nowrap {
   white-space: nowrap;
+}
+
+/* ---------- Cart icons (snippets/zenith-cart-icon.liquid; on/off in Theme settings → Zenith · Cart → Icons) ----------
+   Line icons from the official set (1.5px stroke, current text colour), smaller than Dawn's glyphs.
+   Buttons keep their size; the invisible ≥44px hit areas are in "Tap targets" above. */
+.quantity__button .svg-wrapper.zenith-cart-icon {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+cart-remove-button .svg-wrapper.zenith-cart-icon {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+/* Icon turned off: plain − / + / "Remove". No pointer events, so Dawn's quantity script still reads the button. */
+.zenith-cart-icon-text {
+  pointer-events: none;
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+cart-remove-button .zenith-cart-icon-text--trash {
+  font-size: 1.3rem;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+@media screen and (max-width: 749px) {
+  .cart-drawer .quantity__button .svg-wrapper.zenith-cart-icon {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
 }

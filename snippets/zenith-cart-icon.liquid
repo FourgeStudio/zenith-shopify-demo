@@ -1,0 +1,33 @@
+{%- comment -%}
+  Cart icons (cart drawer + cart page), each with its own on/off in Theme settings → Zenith · Cart → Icons.
+  Line icons from snippets/zenith-icon.liquid (1.5px stroke, current text colour).
+  Accepts: icon {String} 'minus' | 'plus' | 'trash' | 'tag'
+  Off: minus/plus → a plain − / + character, trash → the word "Remove", tag → nothing (buttons never end up empty).
+{%- endcomment -%}
+{%- liquid
+  case icon
+    when 'minus'
+      assign icon_on = settings.cart_icon_minus
+      assign fallback = '−'
+    when 'plus'
+      assign icon_on = settings.cart_icon_plus
+      assign fallback = '+'
+    when 'trash'
+      assign icon_on = settings.cart_icon_remove
+      assign fallback = 'Remove'
+    when 'tag'
+      assign icon_on = settings.cart_icon_discount
+      assign fallback = ''
+  endcase
+-%}
+{%- if icon_on == false -%}
+  {%- if fallback != blank -%}
+    <span class="zenith-cart-icon-text zenith-cart-icon-text--{{ icon }}" aria-hidden="true">{{ fallback }}</span>
+  {%- endif -%}
+{%- elsif icon == 'tag' -%}
+  {{- 'icon-discount.svg' | inline_asset_content -}}
+{%- else -%}
+  <span class="svg-wrapper zenith-cart-icon zenith-cart-icon--{{ icon }}">
+    {%- render 'zenith-icon', icon: icon -%}
+  </span>
+{%- endif -%}
