@@ -274,6 +274,7 @@
         "item_5"
       ],
       "settings": {
+        "display": "image",
         "alignment": "spread",
         "show_border": false,
         "icon_size": 22,
@@ -290,8 +291,7 @@
         "padding_top": 12,
         "padding_bottom": 12,
         "padding_top_mobile": 10,
-        "padding_bottom_mobile": 10,
-        "display": "image"
+        "padding_bottom_mobile": 10
       }
     },
     "new_arrivals": {
@@ -304,6 +304,7 @@
         "collection": "",
         "products_to_show": 12,
         "show_rating": true,
+        "show_badges": false,
         "first_badge": "Selling Fast",
         "badge_icon": "truck",
         "sale_badge": "On Sale",
@@ -368,8 +369,7 @@
         "padding_top": 48,
         "padding_bottom": 48,
         "padding_top_mobile": 32,
-        "padding_bottom_mobile": 32,
-        "show_badges": false
+        "padding_bottom_mobile": 32
       }
     },
     "featured_product": {
@@ -433,6 +433,7 @@
         "collection": "skin-products",
         "products_to_show": 12,
         "show_rating": true,
+        "show_badges": false,
         "first_badge": "Selling Fast",
         "badge_icon": "truck",
         "sale_badge": "On Sale",
@@ -497,8 +498,7 @@
         "padding_top": 48,
         "padding_bottom": 48,
         "padding_top_mobile": 32,
-        "padding_bottom_mobile": 32,
-        "show_badges": false
+        "padding_bottom_mobile": 32
       }
     },
     "hair": {
@@ -510,6 +510,7 @@
         "collection": "hair",
         "products_to_show": 12,
         "show_rating": true,
+        "show_badges": false,
         "first_badge": "Selling Fast",
         "badge_icon": "truck",
         "sale_badge": "On Sale",
@@ -574,8 +575,7 @@
         "padding_top": 48,
         "padding_bottom": 48,
         "padding_top_mobile": 32,
-        "padding_bottom_mobile": 32,
-        "show_badges": false
+        "padding_bottom_mobile": 32
       }
     },
     "hygiene": {
@@ -588,6 +588,7 @@
         "collection": "",
         "products_to_show": 12,
         "show_rating": true,
+        "show_badges": false,
         "first_badge": "Selling Fast",
         "badge_icon": "truck",
         "sale_badge": "On Sale",
@@ -652,8 +653,7 @@
         "padding_top": 48,
         "padding_bottom": 48,
         "padding_top_mobile": 32,
-        "padding_bottom_mobile": 32,
-        "show_badges": false
+        "padding_bottom_mobile": 32
       }
     },
     "results": {
@@ -1136,20 +1136,8 @@
     },
     "zenith_reviews_kL4rHp": {
       "type": "zenith-reviews",
-      "blocks": {
-        "judge_me_reviews_review_widget_homepage_p6zCbj": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget_homepage/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-            "product": "zenith-anti-aging-tallow-cream",
-            "review_data": "real_data",
-            "max_width": 1200
-          }
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_review_widget_homepage_p6zCbj"
-      ],
       "settings": {
+        "jdgm_product": "zenith-anti-aging-tallow-cream",
         "eyebrow": "",
         "heading": "[customers] Filipino Men Trust Zenith Products",
         "subheading": "<p>Men in Manila using the cream. Unedited and verified.</p>",
@@ -1190,8 +1178,7 @@
         "padding_top": 72,
         "padding_bottom": 48,
         "padding_top_mobile": 32,
-        "padding_bottom_mobile": 20,
-        "jdgm_product": "zenith-anti-aging-tallow-cream"
+        "padding_bottom_mobile": 20
       }
     },
     "faq": {

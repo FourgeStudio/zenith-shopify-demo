@@ -169,6 +169,7 @@
         "overlay_color": "#203940",
         "overlay_opacity": 100,
         "overlay_coverage": 75,
+        "overlay_solid": 0,
         "ribbon_color": "#f6233b",
         "ribbon_text_color": "#ffffff",
         "highlight_color": "#eabe5f",
@@ -210,6 +211,7 @@
         "mobile_height": 540,
         "mobile_overlay_style": "top",
         "mobile_overlay_coverage": 70,
+        "mobile_overlay_solid": 0,
         "vertical_padding_mobile": 24,
         "heading_font_size_mobile": 40,
         "subheading_font_size_mobile": 16,
@@ -287,6 +289,8 @@
         "item_5"
       ],
       "settings": {
+        "display": "icons",
+        "show_pause_button": false,
         "alignment": "spread",
         "show_border": false,
         "icon_size": 22,
@@ -588,6 +592,7 @@
         "speed_mobile": 240,
         "alternate_direction": true,
         "pause_on_hover": true,
+        "show_pause_button": false,
         "heading_max_width": 760,
         "heading_gap": 8,
         "heading_spacing": 32,
@@ -845,6 +850,7 @@
         "heading_spacing": 32,
         "gap": 24,
         "controls_spacing": 32,
+        "video_max_height": 0,
         "video_ratio": "13-18",
         "play_size": 80,
         "play_position": 53,
@@ -854,6 +860,7 @@
         "thumb_size": 56,
         "color_scheme": "scheme-1",
         "card_color_scheme": "scheme-6",
+        "subheading_opacity": 70,
         "card_border_color": "#294850",
         "title_color": "#d6b356",
         "overlay_style": "bottom",
@@ -871,6 +878,7 @@
         "title_font_size": 12,
         "handle_font_size": 10,
         "heading_alignment_mobile": "left",
+        "video_max_height_mobile": 0,
         "mobile_slide_width": 83,
         "heading_font_size_mobile": 36,
         "subheading_font_size_mobile": 16,
@@ -1137,6 +1145,14 @@
     "featured_product": {
       "type": "zenith-featured-product",
       "settings": {
+        "product": "zenith-anti-aging-tallow-cream",
+        "placeholder_title": "Zenith Anti-Aging Tallow Cream",
+        "badge": "Featured Product",
+        "button_label": "Add to Cart",
+        "button_icon": "cart",
+        "show_media_pager": false,
+        "show_rating": false,
+        "below_price": "checklist",
         "image_position": "right",
         "full_width": false,
         "media_width": 48,
@@ -1473,6 +1489,7 @@
         "heading": "Our Official Pages",
         "heading_mobile": "Join the #ZenithTribe",
         "text_mobile": "<p>Follow Zenith on Facebook and Instagram. Official pages only, listed on our Verify Zenith Products page.</p>",
+        "hover_effect": true,
         "heading_alignment": "center",
         "columns_desktop": 5,
         "card_layout": "stacked",
@@ -1522,20 +1539,8 @@
     },
     "reviews": {
       "type": "zenith-reviews",
-      "blocks": {
-        "judge_me_reviews_review_widget_homepage_BKCqgw": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget_homepage/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-            "product": "zenith-anti-aging-tallow-cream",
-            "review_data": "real_data",
-            "max_width": 1200
-          }
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_review_widget_homepage_BKCqgw"
-      ],
       "settings": {
+        "jdgm_product": "",
         "eyebrow": "",
         "heading": "[customers] Filipino Men Trust Zenith Products",
         "subheading": "<p>Men in Manila using the cream. Unedited and verified.</p>",
@@ -1857,6 +1862,7 @@
         "used_text": "",
         "note": "<p>Pick one product or run the full set.</p><p>Pareho lang ang directions, nasa label.</p>",
         "show_number": false,
+        "step_label": "",
         "show_divider": true,
         "divider_breakpoint": "mobile",
         "step_layout": "beside",
@@ -1875,6 +1881,7 @@
         "divider_spacing": 40,
         "color_scheme": "scheme-1",
         "title_color": "#d6b356",
+        "title_heading_font": false,
         "number_background": "#c5930e",
         "number_color": "#121212",
         "text_opacity": 70,
@@ -2143,19 +2150,6 @@
     },
     "1790629529cb985278": {
       "type": "apps",
-      "blocks": {
-        "judge_me_reviews_review_widget_homepage_BKCqgw": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget_homepage/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-            "product": "zenith-anti-aging-tallow-cream",
-            "review_data": "real_data",
-            "max_width": 1200
-          }
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_review_widget_homepage_BKCqgw"
-      ],
       "disabled": true,
       "settings": {
         "include_margins": true

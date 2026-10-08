@@ -9,7 +9,6 @@
  */
 {
   "current": {
-    "zfp_product": "zenith-anti-aging-tallow-cream",
     "customer_count": "100,000+",
     "products_first": [
       "zenith-anti-aging-tallow-cream",
@@ -449,6 +448,7 @@
     "zg_logo5_image": "shopify://shop_images/vector-icons_2.png",
     "zg_logo5_name": "Ninja Van",
     "zg_logo5_scale": 100,
+    "zfp_product": "zenith-anti-aging-tallow-cream",
     "zgb_image": "shopify://shop_images/vector-icons_7.png",
     "zbs_text": "<p>Filipino men over 35 have been underserved for too long. Forced to choose between overly complicated routines or generic imported products not built for the climate, Zenith was built to fix that.</p><p>The brand wasn't created to be just another skincare line focused on aesthetics or flashy packaging. Instead, Zenith is committed to building high-performance personal care gear designed for real conditions, real needs, and real lives.</p><p>No hype and no shortcuts. Just straightforward, highly effective products that solve real, everyday problems for men who just want things that actually work.</p><p>Fast forward to today, and [customers] men have made Zenith a part of their daily routine. But looking back on this growth, this milestone isn't really about the company or its logos. It is a testament to the customers who truly built the brand.</p>",
     "zbs_col1_text": "<p>To build premium, high-performance self-care for mature Filipino men, and give them easy access to it.</p>",
@@ -631,13 +631,6 @@
       }
     },
     "content_for_index": [],
-    "blocks": {
-      "14060646107696862457": {
-        "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-        "disabled": false,
-        "settings": {}
-      }
-    },
     "color_schemes": {
       "scheme-1": {
         "settings": {

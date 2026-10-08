@@ -277,7 +277,6 @@
       ],
       "settings": {
         "placeholder_title": "Zenith Anti-Aging Tallow Cream",
-        "show_variant_picker": false,
         "show_rating": true,
         "rating_value": "4.69",
         "rating_count": "2,158",
@@ -305,6 +304,7 @@
         "show_thumbnails": true,
         "show_dots": true,
         "reviews_source": "judgeme",
+        "show_variant_picker": false,
         "variant_style": "pills",
         "variant_card_badge": "[percent]% OFF",
         "variant_card_ship_free": "FREE SHIPPING",
@@ -721,13 +721,15 @@
         "subheading": "<p>Three ingredients, named on the label.</p>",
         "image": "shopify://shop_images/shop-all-featured-night-cream-jar-its-box-1-desktop.webp",
         "image_mobile": "shopify://shop_images/shop-all-featured-night-cream-jar-its-box-1-mobile.webp",
-        "open_first": true,
         "item_display": "open",
+        "open_first": true,
         "show_list": true,
         "list_title": "View Full Ingredient List",
         "list_text": "<p>Water, Glycerin, Adeps Bovis (Tallow), Simmondsia Chinensis (Jojoba) Seed Oil, Butyrospermum Parkii (Shea Butter), Cyclopentasiloxane, Dimethicone, Butylene Glycol, Cetyl Ethylhexanoate, Ceteth-20 Phosphate, Cetearyl Alcohol, Ceteth-20, Glyceryl Stearate, PEG-100 Stearate, Hydroxyacetophenone, 1,2-Hexanediol, Stephania Tetrandra Extract, Taraxacum Officinale (Dandelion) Leaf Extract, Saururus Chinensis Leaf/Root Extract, Allantoin, Tocopherol (Vitamin E), Carbomer, Arginine, Sodium Hyaluronate, Retinol, Ectoin.</p>",
         "heading_alignment": "center",
         "image_position": "right",
+        "item_style": "cards",
+        "item_gap": 8,
         "heading_max_width": 800,
         "media_width": 46,
         "media_min_height": 640,
@@ -781,9 +783,7 @@
         "padding_top": 64,
         "padding_bottom": 64,
         "padding_top_mobile": 20,
-        "padding_bottom_mobile": 20,
-        "item_style": "cards",
-        "item_gap": 8
+        "padding_bottom_mobile": 20
       }
     },
     "difference": {
@@ -1103,20 +1103,6 @@
     },
     "reviews": {
       "type": "zenith-reviews",
-      "blocks": {
-        "judge_me_reviews_review_widget_8KBQ7Y": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-            "review_data": "real_data",
-            "max_width": 1200,
-            "show_shop_reviews": false,
-            "empty_state": "other_products_reviews"
-          }
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_review_widget_8KBQ7Y"
-      ],
       "settings": {
         "eyebrow": "",
         "heading": "[customers] Filipino Men Trust Zenith Products",
