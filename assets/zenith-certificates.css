@@ -146,21 +146,12 @@ a.zenith-cert__frame:focus-visible {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  transition: transform var(--duration-default, 0.2s) ease;
 }
 
-a.zenith-cert__frame:hover .zenith-cert__doc > img {
-  transform: scale(1.015);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .zenith-cert__doc > img {
-    transition: none;
-  }
-
-  a.zenith-cert__frame:hover .zenith-cert__doc > img {
-    transform: none;
-  }
+/* zenith: no hover effects on this page (Basecamp "Certificates"); keyboard focus ring stays */
+.zenith-section.zenith-cert :is(a, button, .zenith-media):hover img {
+  transform: none;
+  filter: none;
 }
 
 /* Empty document / thumbnail: flat grey with an image icon */
@@ -336,11 +327,6 @@ a.zenith-cert__frame:hover .zenith-cert__doc > img {
 .zenith-cert__name-link {
   color: inherit;
   text-decoration: none;
-}
-
-.zenith-cert__name-link:hover {
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
 }
 
 .zenith-cert__name-link:focus-visible {

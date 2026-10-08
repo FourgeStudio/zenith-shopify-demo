@@ -38,7 +38,7 @@
 
 <section
   id="Zenith-{{ section.id }}"
-  class="zenith-section zenith-store-links color-{{ s.color_scheme }} gradient zenith-store-links--{{ s.card_layout }} zenith-store-links--align-{{ s.card_alignment }} zenith-store-links--m-{{ s.card_layout_mobile }} zenith-store-links--m-align-{{ s.card_alignment_mobile }} zenith-store-links--m-heading-{{ s.heading_alignment_mobile }}{% if s.card_width > 0 %} zenith-store-links--fixed{% endif %}"
+  class="zenith-section zenith-store-links color-{{ s.color_scheme }} gradient zenith-store-links--{{ s.card_layout }} zenith-store-links--align-{{ s.card_alignment }} zenith-store-links--m-{{ s.card_layout_mobile }} zenith-store-links--m-align-{{ s.card_alignment_mobile }} zenith-store-links--m-heading-{{ s.heading_alignment_mobile }}{% if s.card_width > 0 %} zenith-store-links--fixed{% endif %}{% if s.hover_effect == false %} zenith-store-links--no-hover{% endif %}"
 >
   <div class="page-width">
     {%- liquid
@@ -248,6 +248,12 @@
     {
       "type": "header",
       "content": "Layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "hover_effect",
+      "label": "Brighten linked cards on hover",
+      "default": true
     },
     {
       "type": "select",
