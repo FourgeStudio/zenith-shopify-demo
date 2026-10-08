@@ -715,13 +715,7 @@
           "shadow": "#000000"
         }
       }
-    },
-    "cart_icon_minus": false,
-    "cart_icon_plus": false,
-    "cart_icon_remove": false,
-    "cart_icon_van": false,
-    "cart_icon_checkpoint": false,
-    "cart_icon_discount": false
+    }
   },
   "presets": {
     "Dawn": {
