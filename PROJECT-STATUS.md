@@ -202,6 +202,14 @@ _Last updated: 2026-10-01. Keep this file current at the end of each work sessio
 - Figma page 2368-52 (Style Guide) read via Chrome extract: radius = square by default, only 4px (small) / 8px (2-3 col) → off values (2/5/6/10px, 0.5rem) moved to 4/8 (Judge.me untouched); accordions use a chevron that flips (FAQ, product rows, ingredients; was + → ×); eyebrow = "Eyebrow Extended" 6% (the 4% label in Figma is a typo per the extract); comment #1956600871 (dark-mode button icons) already met — icons are currentColor.
 - Applied 2026-10-08 (style guide wins): Obsidian #121212 everywhere (was #0E0E0E), Summit Gold #C5930E (was #C59300, --z-gold-rgb 197,147,14), dark schemes (bg brightness ≤128) get 15% card/popup/drawer/text-box borders via the scheme loop in layout/theme.liquid (light schemes keep the theme settings). Eyebrow stays 6% (Eyebrow Extended style); 56/44px rows kept (WCAG). OPEN: off-spec divider colours.
 
+### Verify page review (2026-10-08, Basecamp "Verify")
+- All text on Verify full white via the sections' opacity settings (verify intro/step title/step text, press heading, trust text, store handles, FDA text, FAQ answers, reviews mobile subheading). Video carousel got *Subheading opacity* (default 70, Verify 100). Other pages unchanged.
+- Eyebrows: already universal (style guide pass); only STEP 1–3 have eyebrow text on Verify.
+- Seal card: new *space between seal and text*, *space between title and text*, mobile padding + gap. Verify 24/20/6 desktop, 20/16/6 mobile.
+- Announcement bar sticks under the sticky header site-wide (zenith-header.css: .shopify-section-header-sticky ~ .announcement-bar-section, top = --header-height, z-index 2 under the header). Bar height → --z-ann-h (script in announcement-bar.liquid) for the policy contents list offsets (zenith-doc.css/js). Tested Chromium 1440/375 + WebKit iPhone 13 on Verify, home, Skin: no gap, no sideways scroll, menu drawer fills the screen over the bar.
+- Card style: Official Pages cards identical on home/About/Certificates/Verify; trust card same style on About (only spacing/text size differ: About 16px text, Verify 12px). Not changed — Henson to decide. Step/seal cards have no same-type equivalent elsewhere (closest: Skin/Hair routine steps, different layout).
+- validate-schemas.js now also checks template range values (off-step values make Shopify reject the template silently).
+
 ### Skin + Hair collection review (2026-10-08, Basecamp "Product Collections")
 - promo_hero disabled in skin/hair (was already 0px via the global promo switch). Shop All promo left as is.
 - Routine "Used …" bar off on skin/hair (existing *Show the note under the steps* / show_used; no usage card exists in the product grid).
