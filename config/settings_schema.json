@@ -6311,7 +6311,7 @@
     "settings": [
       {
         "type": "paragraph",
-        "content": "One featured product block for the whole store: every \"Zenith · Featured product\" section (Homepage, Shop All, …) shows this content. The sections only set layout, colours and spacing."
+        "content": "One featured product block for the whole store: every \"Zenith · Featured product\" section (Homepage, Shop All, …) shows this content; the sections only set layout, colours and spacing."
       },
       {
         "type": "header",
