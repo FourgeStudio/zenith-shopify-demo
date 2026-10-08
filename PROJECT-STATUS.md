@@ -207,7 +207,7 @@ _Last updated: 2026-10-01. Keep this file current at the end of each work sessio
 - Eyebrows: already universal (style guide pass); only STEP 1–3 have eyebrow text on Verify.
 - Seal card: new *space between seal and text*, *space between title and text*, mobile padding + gap. Verify 24/20/6 desktop, 20/16/6 mobile.
 - Announcement bar sticks under the sticky header site-wide (zenith-header.css: .shopify-section-header-sticky ~ .announcement-bar-section, top = --header-height, z-index 2 under the header). Bar height → --z-ann-h (script in announcement-bar.liquid) for the policy contents list offsets (zenith-doc.css/js). Tested Chromium 1440/375 + WebKit iPhone 13 on Verify, home, Skin: no gap, no sideways scroll, menu drawer fills the screen over the bar.
-- Card style: Official Pages cards identical on home/About/Certificates/Verify; trust card same style on About (only spacing/text size differ: About 16px text, Verify 12px). Not changed — Henson to decide. Step/seal cards have no same-type equivalent elsewhere (closest: Skin/Hair routine steps, different layout).
+- Card style (Henson: go, 2026-10-08): About trust card spacing/text = Verify (12px text). Seal card *Seal card border* setting (#363636 on Verify). Routine steps: new *Step label* (STEP n in the universal eyebrow) + *Step title in the heading font*; Skin/Hair routines = Verify step card look (square 128px photo beside text, white heading-font title 20px, white 16/14px text; 3 across on desktop, photos top-aligned).
 - validate-schemas.js now also checks template range values (off-step values make Shopify reject the template silently).
 
 ### Skin + Hair collection review (2026-10-08, Basecamp "Product Collections")
