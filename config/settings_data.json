@@ -9,6 +9,7 @@
  */
 {
   "current": {
+    "zfp_product": "zenith-anti-aging-tallow-cream",
     "customer_count": "100,000+",
     "products_first": [
       "zenith-anti-aging-tallow-cream",
@@ -715,8 +716,7 @@
           "shadow": "#000000"
         }
       }
-    },
-    "zfp_product": "zenith-anti-aging-tallow-cream"
+    }
   },
   "presets": {
     "Dawn": {
