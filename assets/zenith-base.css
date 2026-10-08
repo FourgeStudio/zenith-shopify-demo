@@ -2125,3 +2125,7 @@ cart-remove-button .zenith-cart-icon-text--trash {
     height: 1.2rem;
   }
 }
+
+cart-remove-button .button:has(> .zenith-cart-icon-text--trash) {
+  padding: 0 var(--z-space-2, 8px);
+}

@@ -202,6 +202,11 @@ _Last updated: 2026-10-01. Keep this file current at the end of each work sessio
 - Figma page 2368-52 (Style Guide) read via Chrome extract: radius = square by default, only 4px (small) / 8px (2-3 col) → off values (2/5/6/10px, 0.5rem) moved to 4/8 (Judge.me untouched); accordions use a chevron that flips (FAQ, product rows, ingredients; was + → ×); eyebrow = "Eyebrow Extended" 6% (the 4% label in Figma is a typo per the extract); comment #1956600871 (dark-mode button icons) already met — icons are currentColor.
 - Applied 2026-10-08 (style guide wins): Obsidian #121212 everywhere (was #0E0E0E), Summit Gold #C5930E (was #C59300, --z-gold-rgb 197,147,14), dark schemes (bg brightness ≤128) get 15% card/popup/drawer/text-box borders via the scheme loop in layout/theme.liquid (light schemes keep the theme settings). Eyebrow stays 6% (Eyebrow Extended style); 56/44px rows kept (WCAG). OPEN: off-spec divider colours.
 
+### Cart icons (2026-10-08, Basecamp "Profil, Orders, Checkout & Cart" — cart part)
+- −/+/remove in cart drawer + cart page now render snippets/zenith-cart-icon.liquid → official line icons (zenith-icon minus/plus/trash; trash = General/trash-01.svg), 1.5px stroke, text colour; 14px (12px in the phone drawer), bin 16px. Button boxes unchanged (no layout shift; 44px hit areas from the UI-states pass).
+- Theme settings → Zenith · Cart → Icons: cart_icon_minus / _plus / _remove / _van / _checkpoint / _discount (all on). Off: − / + as text, bin as "Remove" (pointer-events none so Dawn quantity-input still reads the button name), van/ticks/tag hidden.
+- Tested on the draft (Chromium 1440/375, drawer + page, on and off): qty +/− and remove work, focus ring shows.
+
 ### Legal pages review (2026-10-08, Basecamp "Legal Pages")
 - Policy pages only (zenith-doc rendered with class zenith-doc--policy from layout/theme.liquid; text pages unchanged).
 - Bullets: Shopify wraps list text in <p> → bullet sat on its own line; first <p> in an li is inline, markers outside (base.css forces inside elsewhere), 10px between items, gold markers.
