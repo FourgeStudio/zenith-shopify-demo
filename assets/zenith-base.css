@@ -1468,18 +1468,18 @@ div.zenith-overlay {
 
 .zenith-overlay--none { background: none; }
 .zenith-overlay--solid { background: rgba(var(--z-ov-rgb), var(--z-ov-a)); }
-.zenith-overlay--bottom { background: linear-gradient(to top, rgba(var(--z-ov-rgb), var(--z-ov-a)) 0%, rgba(var(--z-ov-rgb), 0) var(--z-ov-cover)); }
-.zenith-overlay--top { background: linear-gradient(to bottom, rgba(var(--z-ov-rgb), var(--z-ov-a)) 0%, rgba(var(--z-ov-rgb), 0) var(--z-ov-cover)); }
-.zenith-overlay--left { background: linear-gradient(to right, rgba(var(--z-ov-rgb), var(--z-ov-a)) 0%, rgba(var(--z-ov-rgb), 0) var(--z-ov-cover)); }
-.zenith-overlay--right { background: linear-gradient(to left, rgba(var(--z-ov-rgb), var(--z-ov-a)) 0%, rgba(var(--z-ov-rgb), 0) var(--z-ov-cover)); }
+.zenith-overlay--bottom { background: linear-gradient(to top, rgba(var(--z-ov-rgb), var(--z-ov-a)) var(--z-ov-solid, 0%), rgba(var(--z-ov-rgb), 0) var(--z-ov-cover)); }
+.zenith-overlay--top { background: linear-gradient(to bottom, rgba(var(--z-ov-rgb), var(--z-ov-a)) var(--z-ov-solid, 0%), rgba(var(--z-ov-rgb), 0) var(--z-ov-cover)); }
+.zenith-overlay--left { background: linear-gradient(to right, rgba(var(--z-ov-rgb), var(--z-ov-a)) var(--z-ov-solid, 0%), rgba(var(--z-ov-rgb), 0) var(--z-ov-cover)); }
+.zenith-overlay--right { background: linear-gradient(to left, rgba(var(--z-ov-rgb), var(--z-ov-a)) var(--z-ov-solid, 0%), rgba(var(--z-ov-rgb), 0) var(--z-ov-cover)); }
 
 @media screen and (max-width: 749px) {
   .zenith-overlay.zenith-overlay--m-none { background: none; }
   .zenith-overlay.zenith-overlay--m-solid { background: rgba(var(--z-ov-rgb), var(--z-ov-a)); }
-  .zenith-overlay.zenith-overlay--m-bottom { background: linear-gradient(to top, rgba(var(--z-ov-rgb), var(--z-ov-a)) 0%, rgba(var(--z-ov-rgb), 0) var(--z-ov-cover)); }
-  .zenith-overlay.zenith-overlay--m-top { background: linear-gradient(to bottom, rgba(var(--z-ov-rgb), var(--z-ov-a)) 0%, rgba(var(--z-ov-rgb), 0) var(--z-ov-cover)); }
-  .zenith-overlay.zenith-overlay--m-left { background: linear-gradient(to right, rgba(var(--z-ov-rgb), var(--z-ov-a)) 0%, rgba(var(--z-ov-rgb), 0) var(--z-ov-cover)); }
-  .zenith-overlay.zenith-overlay--m-right { background: linear-gradient(to left, rgba(var(--z-ov-rgb), var(--z-ov-a)) 0%, rgba(var(--z-ov-rgb), 0) var(--z-ov-cover)); }
+  .zenith-overlay.zenith-overlay--m-bottom { background: linear-gradient(to top, rgba(var(--z-ov-rgb), var(--z-ov-a)) var(--z-ov-solid, 0%), rgba(var(--z-ov-rgb), 0) var(--z-ov-cover)); }
+  .zenith-overlay.zenith-overlay--m-top { background: linear-gradient(to bottom, rgba(var(--z-ov-rgb), var(--z-ov-a)) var(--z-ov-solid, 0%), rgba(var(--z-ov-rgb), 0) var(--z-ov-cover)); }
+  .zenith-overlay.zenith-overlay--m-left { background: linear-gradient(to right, rgba(var(--z-ov-rgb), var(--z-ov-a)) var(--z-ov-solid, 0%), rgba(var(--z-ov-rgb), 0) var(--z-ov-cover)); }
+  .zenith-overlay.zenith-overlay--m-right { background: linear-gradient(to left, rgba(var(--z-ov-rgb), var(--z-ov-a)) var(--z-ov-solid, 0%), rgba(var(--z-ov-rgb), 0) var(--z-ov-cover)); }
 }
 
 /* Text links (richtext in sections, policy/page content, "Amare Group" auto-links, map addresses, policy links):
@@ -2086,3 +2086,8 @@ cart-remove-button .button::before {
 
 /* ---------- 7. Accordions → assets/zenith-faq.css (56px rows, Basalt hover, light-scheme Obsidian rows).
    <details>/<summary>: the browser exposes expanded/collapsed on the summary, so no aria-expanded is set by hand. */
+
+/* zenith: keeps a phrase on one line ("Money-Back", added in Liquid) */
+.zenith-nowrap {
+  white-space: nowrap;
+}

@@ -144,6 +144,9 @@
               if card_badge == '' and forloop.first
                 assign card_badge = s.first_badge
               endif
+              if s.show_badges == false
+                assign card_badge = ''
+              endif
             -%}
             <li class="zenith-pg__item">
               {%- render 'zenith-product-card',
@@ -174,6 +177,9 @@
                 assign card_badge = s.sale_badge
                 assign card_badge_style = 'sale'
                 assign card_badge_icon = 'none'
+              endif
+              if s.show_badges == false
+                assign card_badge = ''
               endif
             -%}
             <li class="zenith-pg__item">
@@ -253,6 +259,13 @@
       "label": "Show star rating",
       "info": "Stars + score from your reviews app (Judge.me). Products without reviews show no stars.",
       "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badges",
+      "label": "Show product badges",
+      "info": "First-product, sale and badge:… tag badges. Off = no badges in this grid.",
+      "default": false
     },
     {
       "type": "text",

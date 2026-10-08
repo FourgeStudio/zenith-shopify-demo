@@ -198,3 +198,22 @@
     justify-content: center;
   }
 }
+
+/* zenith: Display = Single image */
+.zenith-icon-bar__picture picture,
+.zenith-icon-bar__image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Single image mode before an image is chosen: the row stays on one line and doesn't move (swipe if it doesn't fit). */
+.zenith-icon-bar--static .zenith-icon-bar__list {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.zenith-icon-bar--static .zenith-icon-bar__list::-webkit-scrollbar {
+  display: none;
+}

@@ -96,6 +96,8 @@
   --z-hero-eg: {{ s.eyebrow_spacing }}px;
   --z-hero-tg: {{ s.text_spacing }}px;
   --z-ov-cover-m: {{ s.mobile_overlay_coverage }}%;
+  --z-ov-solid: {{ s.overlay_solid | default: 0 }}%;
+  --z-ov-solid-m: {{ s.mobile_overlay_solid | default: 0 }}%;
   --z-hl-fs: {{ s.highlight_font_size }}px;
   --z-hl-fs-m: {{ s.highlight_font_size_mobile }}px;
   --z-rib-fs: {{ s.ribbon_font_size }}px;
@@ -889,6 +891,18 @@
       "default": 45
     },
     {
+      "type": "range",
+      "id": "overlay_solid",
+      "visible_if": "{{ section.settings.overlay_style != 'none' and section.settings.overlay_style != 'solid' }}",
+      "label": "Solid start",
+      "info": "Full overlay colour up to here, then the fade starts. Use it when the photo has a solid band at its edge, so the band blends in.",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "default": 0
+    },
+    {
       "type": "color",
       "id": "ribbon_color",
       "label": "Ribbon background",
@@ -1260,6 +1274,18 @@
       "step": 5,
       "unit": "%",
       "default": 70
+    },
+    {
+      "type": "range",
+      "id": "mobile_overlay_solid",
+      "visible_if": "{{ section.settings.mobile_layout == 'overlay' and section.settings.mobile_overlay_style != 'none' and section.settings.mobile_overlay_style != 'solid' }}",
+      "label": "Mobile solid start",
+      "info": "Full overlay colour up to here, then the fade starts. Use it when the photo has a solid band at its edge, so the band blends in.",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "default": 0
     },
     {
       "type": "range",
