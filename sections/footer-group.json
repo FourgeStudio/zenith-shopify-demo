@@ -35,12 +35,12 @@
         "link_list_YRhAig": {
           "type": "link_list",
           "settings": {
+            "override_title": "Disclaimer",
+            "override_url": "/pages/faq?view=disclaimer",
             "heading": "",
             "menu": "faq",
             "menu_mobile": "",
-            "mobile_full_width": false,
-            "override_title": "Disclaimer",
-            "override_url": "/pages/faq?view=disclaimer"
+            "mobile_full_width": false
           }
         }
       },
