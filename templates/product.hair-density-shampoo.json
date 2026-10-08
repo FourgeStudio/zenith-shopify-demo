@@ -217,6 +217,7 @@
       ],
       "settings": {
         "placeholder_title": "Zenith Advanced Hair Density Shampoo",
+        "show_variant_picker": false,
         "show_rating": true,
         "rating_value": "4.69",
         "rating_count": "2,158",
@@ -240,7 +241,6 @@
         "show_thumbnails": true,
         "show_dots": true,
         "reviews_source": "judgeme",
-        "show_variant_picker": false,
         "content_max_width": 1080,
         "gap": 80,
         "content_gap": 12,
@@ -254,7 +254,6 @@
         "thumb_spacing": 8,
         "review_card_width": 220,
         "review_gap": 12,
-        "review_min_stars": 4,
         "review_autoplay": 4,
         "review_spacing": 38,
         "review_photo_size": 48,
@@ -362,7 +361,8 @@
         "padding_top": 40,
         "padding_bottom": 48,
         "padding_top_mobile": 8,
-        "padding_bottom_mobile": 32
+        "padding_bottom_mobile": 32,
+        "review_min_stars": 4
       }
     },
     "videos": {
@@ -440,31 +440,31 @@
         "ingredient-1": {
           "type": "ingredient",
           "settings": {
-            "image": "shopify://shop_images/shampoo-ingredients-oil-bottle-rosemary-1-desktop.webp",
             "title": "Amino acid cleansing base",
             "text": "<p>Removes sweat and oil without that stripped, squeaky feel.</p>",
             "title_mobile": "",
-            "text_mobile": ""
+            "text_mobile": "",
+            "image": "shopify://shop_images/shampoo-ingredients-oil-bottle-rosemary-1-desktop.webp"
           }
         },
         "ingredient-2": {
           "type": "ingredient",
           "settings": {
-            "image": "shopify://shop_images/shampoo-ingredients-amber-molecule-1-desktop.webp",
             "title": "CABROXIL Technology",
             "text": "<p>Caffeine, Rosemary Oil, Diaminopyrimidine Oxide and Biotin, in every wash.</p>",
             "title_mobile": "",
-            "text_mobile": ""
+            "text_mobile": "",
+            "image": "shopify://shop_images/shampoo-ingredients-amber-molecule-1-desktop.webp"
           }
         },
         "ingredient-3": {
           "type": "ingredient",
           "settings": {
-            "image": "shopify://shop_images/shampoo-ingredients-clear-gel-droplets-1-desktop.webp",
             "title": "The 2-minute lather",
             "text": "<p>Leave it on for 2 minutes. Wash your face or body while it sits.</p>",
             "title_mobile": "",
-            "text_mobile": ""
+            "text_mobile": "",
+            "image": "shopify://shop_images/shampoo-ingredients-clear-gel-droplets-1-desktop.webp"
           }
         }
       },
@@ -477,16 +477,13 @@
         "eyebrow": "",
         "heading": "What's in the bottle",
         "subheading": "<p>A sulfate-free wash with four actives.</p>",
-        "image": "shopify://shop_images/shampoo-ingredients-blue-cabroxil-molecules-1-desktop.webp",
-        "item_display": "open",
         "open_first": true,
+        "item_display": "open",
         "show_list": false,
         "list_title": "View Full Ingredient List",
         "list_text": "",
         "heading_alignment": "center",
         "image_position": "right",
-        "item_style": "cards",
-        "item_gap": 8,
         "heading_max_width": 800,
         "media_width": 46,
         "media_min_height": 640,
@@ -540,7 +537,10 @@
         "padding_top": 64,
         "padding_bottom": 64,
         "padding_top_mobile": 20,
-        "padding_bottom_mobile": 20
+        "padding_bottom_mobile": 20,
+        "image": "shopify://shop_images/shampoo-ingredients-blue-cabroxil-molecules-1-desktop.webp",
+        "item_style": "cards",
+        "item_gap": 8
       }
     },
     "routine": {
@@ -549,25 +549,25 @@
         "step_1": {
           "type": "step",
           "settings": {
-            "image": "shopify://shop_images/shampoo-steps-step-1-shampooing-wet-hair-1-desktop.webp",
             "title": "",
-            "text": "Massage in for 60 seconds"
+            "text": "Massage in for 60 seconds",
+            "image": "shopify://shop_images/shampoo-steps-step-1-shampooing-wet-hair-1-desktop.webp"
           }
         },
         "step_2": {
           "type": "step",
           "settings": {
-            "image": "shopify://shop_images/shampoo-steps-step-2-massaging-lather-1-desktop.webp",
             "title": "",
-            "text": "Leave the lather on for 2 minutes"
+            "text": "Leave the lather on for 2 minutes",
+            "image": "shopify://shop_images/shampoo-steps-step-2-massaging-lather-1-desktop.webp"
           }
         },
         "step_3": {
           "type": "step",
           "settings": {
-            "image": "shopify://shop_images/shampoo-steps-step-3-rinsing-1-desktop.webp",
             "title": "",
-            "text": "Rinse well"
+            "text": "Rinse well",
+            "image": "shopify://shop_images/shampoo-steps-step-3-rinsing-1-desktop.webp"
           }
         }
       },
@@ -786,7 +786,21 @@
         "padding_bottom": 48,
         "padding_top_mobile": 20,
         "padding_bottom_mobile": 48
-      }
+      },
+      "blocks": {
+        "judge_me_reviews_review_widget_zn": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "real_data",
+            "max_width": 1200,
+            "show_shop_reviews": true,
+            "empty_state": "other_products_reviews"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_zn"
+      ]
     },
     "guarantee": {
       "type": "zenith-feature-columns",
@@ -1067,7 +1081,6 @@
         "heading_alignment": "center",
         "max_width": 720,
         "open_first": false,
-        "open_all": false,
         "heading_spacing": 32,
         "item_padding": 10,
         "content_gap": 24,
@@ -1096,7 +1109,8 @@
         "padding_top": 72,
         "padding_bottom": 100,
         "padding_top_mobile": 28,
-        "padding_bottom_mobile": 48
+        "padding_bottom_mobile": 48,
+        "open_all": false
       }
     },
     "cta": {
@@ -1147,8 +1161,6 @@
         "button_product": "zenith-advanced-hair-density-shampoo",
         "button_label_mobile": "",
         "button_link_mobile": "",
-        "image": "shopify://shop_images/shampoo-cta-wet-hands-holding-shampoo-1-desktop.webp",
-        "mobile_image": "shopify://shop_images/shampoo-cta-wet-hands-holding-shampoo-1-mobile.webp",
         "show_image": true,
         "icon": "none",
         "display_text": "",
@@ -1170,7 +1182,6 @@
         "media_width": 50,
         "content_position": "center",
         "content_vertical": "middle",
-        "height_mode": "px",
         "height": 560,
         "content_max_width": 440,
         "vertical_padding": 64,
@@ -1223,8 +1234,6 @@
         "text_font_size": 16,
         "countdown_font_size": 18,
         "countdown_label_font_size": 14,
-        "mobile_layout": "stacked",
-        "mobile_image_height": 300,
         "mobile_text_alignment": "center",
         "mobile_alignment": "bottom",
         "mobile_button_bottom": false,
@@ -1255,7 +1264,12 @@
         "padding_top": 40,
         "padding_bottom": 48,
         "padding_top_mobile": 0,
-        "padding_bottom_mobile": 0
+        "padding_bottom_mobile": 0,
+        "height_mode": "px",
+        "image": "shopify://shop_images/shampoo-cta-wet-hands-holding-shampoo-1-desktop.webp",
+        "mobile_image": "shopify://shop_images/shampoo-cta-wet-hands-holding-shampoo-1-mobile.webp",
+        "mobile_layout": "stacked",
+        "mobile_image_height": 300
       }
     }
   },

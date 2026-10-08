@@ -217,6 +217,7 @@
       ],
       "settings": {
         "placeholder_title": "Zenith Anti-Aging Tallow Cleanser",
+        "show_variant_picker": false,
         "show_rating": true,
         "rating_value": "4.69",
         "rating_count": "2,158",
@@ -244,7 +245,6 @@
         "show_thumbnails": true,
         "show_dots": true,
         "reviews_source": "judgeme",
-        "show_variant_picker": false,
         "variant_style": "cards",
         "variant_card_badge": "[percent]% OFF",
         "variant_card_ship_free": "FREE SHIPPING",
@@ -495,15 +495,13 @@
         "subheading": "<p>Three things, named on the label.</p>",
         "image": "{{ product.featured_image }}",
         "image_mobile": "shopify://shop_images/cleanser-ingredients-close-up-of-zenith-tallow-cleanser-1-mobile.webp",
-        "item_display": "open",
         "open_first": true,
+        "item_display": "open",
         "show_list": true,
         "list_title": "View Full Ingredient List",
         "list_text": "<p>Water, Sodium Cocoyl Glycinate, Cocamidopropyl Betaine, Glycerin, Adeps Bovis (Tallow), Polyquaternium-7, Sodium Chloride, Lauryl Glucoside, Cocamide MEA, Sodium Lauroyl Sarcosinate, Aloe Barbadensis Extract, Centella Asiatica Extract, Colloidal Oatmeal, Panthenol, Niacinamide, Tocopherol, Bakuchiol, Hydroxyacetophenone, 1,2-Hexanediol, Phenoxyethanol, Parfum, Disodium EDTA, PEG-75 Lanolin, Citric Acid, Ethylhexylglycerin, Sodium Hyaluronate.</p>",
         "heading_alignment": "center",
         "image_position": "right",
-        "item_style": "cards",
-        "item_gap": 8,
         "heading_max_width": 800,
         "media_width": 46,
         "media_min_height": 640,
@@ -557,7 +555,9 @@
         "padding_top": 52,
         "padding_bottom": 64,
         "padding_top_mobile": 24,
-        "padding_bottom_mobile": 20
+        "padding_bottom_mobile": 20,
+        "item_style": "cards",
+        "item_gap": 8
       }
     },
     "routine": {
@@ -782,6 +782,20 @@
     },
     "reviews": {
       "type": "zenith-reviews",
+      "blocks": {
+        "judge_me_reviews_review_widget_zn": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "real_data",
+            "max_width": 1200,
+            "show_shop_reviews": true,
+            "empty_state": "other_products_reviews"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_zn"
+      ],
       "settings": {
         "eyebrow": "",
         "heading": "What Filipino men say about the Tallow Cleanser",
