@@ -6307,6 +6307,387 @@
     ]
   },
   {
+    "name": "Zenith · Featured product",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "One featured product block for the whole store: every \"Zenith · Featured product\" section (Homepage, Shop All, …) shows this content. The sections only set layout, colours and spacing."
+      },
+      {
+        "type": "header",
+        "content": "Content"
+      },
+      {
+        "type": "product",
+        "id": "zfp_product",
+        "label": "Product"
+      },
+      {
+        "type": "text",
+        "id": "zfp_badge",
+        "label": "Badge",
+        "default": "Featured Product"
+      },
+      {
+        "type": "text",
+        "id": "zfp_button_label",
+        "label": "Button label",
+        "default": "Add to Cart"
+      },
+      {
+        "type": "select",
+        "id": "zfp_button_icon",
+        "label": "Button icon",
+        "default": "cart",
+        "options": [
+          {
+            "value": "cart",
+            "label": "Cart"
+          },
+          {
+            "value": "arrow_right",
+            "label": "Arrow"
+          },
+          {
+            "value": "none",
+            "label": "None"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "zfp_below_price",
+        "label": "Text under the price",
+        "default": "description",
+        "options": [
+          {
+            "value": "description",
+            "label": "Product description"
+          },
+          {
+            "value": "benefits",
+            "label": "Product benefits (checklist)"
+          },
+          {
+            "value": "both",
+            "label": "Description + benefits"
+          }
+        ],
+        "info": "Benefits = the product metafield custom.benefits (list of single-line text), shown with gold checks only when filled; otherwise the description shows."
+      },
+      {
+        "type": "checkbox",
+        "id": "zfp_show_rating",
+        "label": "Show product rating",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "zfp_show_media_pager",
+        "label": "Show all product images as a slider",
+        "default": false,
+        "info": "Off = the product's main image, linked to the product page."
+      },
+      {
+        "type": "image_picker",
+        "id": "zfp_image",
+        "label": "Image override",
+        "info": "Optional. Empty = the product's featured image (recommended). Best size 1216 × 1076 px."
+      },
+      {
+        "type": "image_picker",
+        "id": "zfp_image_mobile",
+        "label": "Mobile image override",
+        "info": "Optional, used with the image above: a square crop for phones."
+      },
+      {
+        "type": "header",
+        "content": "Trust row"
+      },
+      {
+        "type": "select",
+        "id": "zfp_trust_1_icon",
+        "label": "Item 1 icon",
+        "default": "shield_plus",
+        "options": [
+          {
+            "value": "shield",
+            "label": "Shield"
+          },
+          {
+            "value": "refresh",
+            "label": "Money back"
+          },
+          {
+            "value": "cash",
+            "label": "Cash"
+          },
+          {
+            "value": "badge_check",
+            "label": "Badge check"
+          },
+          {
+            "value": "sun",
+            "label": "Climate"
+          },
+          {
+            "value": "shield_plus",
+            "label": "Shield plus"
+          },
+          {
+            "value": "thermometer",
+            "label": "Thermometer"
+          },
+          {
+            "value": "truck",
+            "label": "Delivery"
+          },
+          {
+            "value": "certified",
+            "label": "Certified"
+          },
+          {
+            "value": "leaf",
+            "label": "Natural"
+          },
+          {
+            "value": "flag",
+            "label": "Flag"
+          },
+          {
+            "value": "lock",
+            "label": "Secure"
+          },
+          {
+            "value": "phone",
+            "label": "Phone"
+          },
+          {
+            "value": "qr",
+            "label": "QR code"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "zfp_trust_1_text",
+        "label": "Item 1 text",
+        "default": "Zenith Money-Back Guarantee",
+        "info": "Empty text = item hidden."
+      },
+      {
+        "type": "select",
+        "id": "zfp_trust_2_icon",
+        "label": "Item 2 icon",
+        "default": "cash",
+        "options": [
+          {
+            "value": "shield",
+            "label": "Shield"
+          },
+          {
+            "value": "refresh",
+            "label": "Money back"
+          },
+          {
+            "value": "cash",
+            "label": "Cash"
+          },
+          {
+            "value": "badge_check",
+            "label": "Badge check"
+          },
+          {
+            "value": "sun",
+            "label": "Climate"
+          },
+          {
+            "value": "shield_plus",
+            "label": "Shield plus"
+          },
+          {
+            "value": "thermometer",
+            "label": "Thermometer"
+          },
+          {
+            "value": "truck",
+            "label": "Delivery"
+          },
+          {
+            "value": "certified",
+            "label": "Certified"
+          },
+          {
+            "value": "leaf",
+            "label": "Natural"
+          },
+          {
+            "value": "flag",
+            "label": "Flag"
+          },
+          {
+            "value": "lock",
+            "label": "Secure"
+          },
+          {
+            "value": "phone",
+            "label": "Phone"
+          },
+          {
+            "value": "qr",
+            "label": "QR code"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "zfp_trust_2_text",
+        "label": "Item 2 text",
+        "default": "Cash On Delivery"
+      },
+      {
+        "type": "select",
+        "id": "zfp_trust_3_icon",
+        "label": "Item 3 icon",
+        "default": "badge_check",
+        "options": [
+          {
+            "value": "shield",
+            "label": "Shield"
+          },
+          {
+            "value": "refresh",
+            "label": "Money back"
+          },
+          {
+            "value": "cash",
+            "label": "Cash"
+          },
+          {
+            "value": "badge_check",
+            "label": "Badge check"
+          },
+          {
+            "value": "sun",
+            "label": "Climate"
+          },
+          {
+            "value": "shield_plus",
+            "label": "Shield plus"
+          },
+          {
+            "value": "thermometer",
+            "label": "Thermometer"
+          },
+          {
+            "value": "truck",
+            "label": "Delivery"
+          },
+          {
+            "value": "certified",
+            "label": "Certified"
+          },
+          {
+            "value": "leaf",
+            "label": "Natural"
+          },
+          {
+            "value": "flag",
+            "label": "Flag"
+          },
+          {
+            "value": "lock",
+            "label": "Secure"
+          },
+          {
+            "value": "phone",
+            "label": "Phone"
+          },
+          {
+            "value": "qr",
+            "label": "QR code"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "zfp_trust_3_text",
+        "label": "Item 3 text",
+        "default": "FDA-Notified"
+      },
+      {
+        "type": "select",
+        "id": "zfp_trust_4_icon",
+        "label": "Item 4 icon",
+        "default": "thermometer",
+        "options": [
+          {
+            "value": "shield",
+            "label": "Shield"
+          },
+          {
+            "value": "refresh",
+            "label": "Money back"
+          },
+          {
+            "value": "cash",
+            "label": "Cash"
+          },
+          {
+            "value": "badge_check",
+            "label": "Badge check"
+          },
+          {
+            "value": "sun",
+            "label": "Climate"
+          },
+          {
+            "value": "shield_plus",
+            "label": "Shield plus"
+          },
+          {
+            "value": "thermometer",
+            "label": "Thermometer"
+          },
+          {
+            "value": "truck",
+            "label": "Delivery"
+          },
+          {
+            "value": "certified",
+            "label": "Certified"
+          },
+          {
+            "value": "leaf",
+            "label": "Natural"
+          },
+          {
+            "value": "flag",
+            "label": "Flag"
+          },
+          {
+            "value": "lock",
+            "label": "Secure"
+          },
+          {
+            "value": "phone",
+            "label": "Phone"
+          },
+          {
+            "value": "qr",
+            "label": "QR code"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "zfp_trust_4_text",
+        "label": "Item 4 text",
+        "default": "Formulated For Filipinos"
+      }
+    ]
+  },
+  {
     "name": "Zenith · Guarantee banner",
     "settings": [
       {

@@ -5,14 +5,19 @@
 <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
 {%- liquid
   assign s = section.settings
-  assign fp_product = s.product
+  # zenith: content is global (Theme settings → Zenith · Featured product) so every page shows the same block;
+  # the section only sets layout, colours and spacing.
+  assign fp_product = settings.zfp_product
+  assign fp_badge = settings.zfp_badge
+  assign fp_image = settings.zfp_image
+  assign fp_image_mobile = settings.zfp_image_mobile
   assign btn_style = s.button_style | default: 'gold'
-  assign btn_icon = s.button_icon | default: 'cart'
+  assign btn_icon = settings.zfp_button_icon | default: 'cart'
   assign use_slides = false
-  assign single = s.image
+  assign single = fp_image
   if single == blank and fp_product != blank
     assign product_images = fp_product.media | where: 'media_type', 'image'
-    if s.show_media_pager and product_images.size > 1
+    if settings.zfp_show_media_pager and product_images.size > 1
       assign use_slides = true
     else
       assign single = fp_product.featured_media.preview_image
@@ -69,17 +74,17 @@
     <div class="zenith-fp__grid">
       <div class="zenith-fp__content color-{{ s.color_scheme }} gradient">
         <div class="zenith-fp__content-inner">
-          {%- if s.badge != blank -%}
+          {%- if fp_badge != blank -%}
             <span class="zenith-fp__badge{% if s.badge_position_mobile == 'image' %} zenith-hide-mobile{% endif %}">
-              {{- s.badge | escape -}}
+              {{- fp_badge | escape -}}
             </span>
           {%- endif -%}
 
           <h2 class="zenith-fp__title{% if s.heading_uppercase %} zenith-fp__title--uppercase{% endif %}">
-            {%- if fp_product != blank -%}{{ fp_product.title | escape }}{%- else -%}{{ s.placeholder_title | escape }}{%- endif -%}
+            {%- if fp_product != blank -%}{{ fp_product.title | escape }}{%- else -%}{{ 'Zenith Anti-Aging Tallow Cream' }}{%- endif -%}
           </h2>
 
-          {%- if fp_product != blank and s.show_rating and fp_product.metafields.reviews.rating.value != blank -%}
+          {%- if fp_product != blank and settings.zfp_show_rating and fp_product.metafields.reviews.rating.value != blank -%}
             {%- render 'zenith-stars',
               rating: fp_product.metafields.reviews.rating.value.rating,
               count: fp_product.metafields.reviews.rating_count
@@ -97,21 +102,38 @@
             {%- endif -%}
           </p>
 
-          {%- assign benefits = section.blocks | where: 'type', 'benefit' -%}
-          {%- if s.below_price == 'description' -%}
-            {%- if fp_product.description != blank -%}
-              <div class="zenith-fp__desc rte">{{ fp_product.description }}</div>
-            {%- endif -%}
-          {%- elsif benefits.size > 0 -%}
+          {%- liquid
+            # Benefits = product metafield custom.benefits (list of single-line text; a multi-line text field works too, one per line)
+            assign below = settings.zfp_below_price | default: 'description'
+            assign benefit_list = fp_product.metafields.custom.benefits.value
+            if benefit_list != blank and benefit_list.first == nil
+              assign benefit_list = benefit_list | newline_to_br | split: '<br />'
+            endif
+            assign show_benefits = false
+            if below != 'description' and benefit_list != blank
+              assign show_benefits = true
+            endif
+            assign show_desc = true
+            if below == 'benefits' and show_benefits
+              assign show_desc = false
+            endif
+          -%}
+          {%- if show_desc and fp_product.description != blank -%}
+            <div class="zenith-fp__desc rte">{{ fp_product.description }}</div>
+          {%- endif -%}
+          {%- if show_benefits -%}
             <ul class="zenith-fp__benefits" role="list">
-              {%- for block in benefits -%}
-                <li class="zenith-fp__benefit" id="Block-{{ block.id }}" {{ block.shopify_attributes }}>
-                  <svg class="zenith-fp__check" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                    <circle cx="12" cy="12" r="12" fill="currentColor"/>
-                    <path d="M7.4 12.4l3.1 3.1 6.1-6.3" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                  <span>{{ block.settings.text | escape | replace: '[customers]', settings.customer_count }}</span>
-                </li>
+              {%- for benefit in benefit_list -%}
+                {%- assign benefit_text = benefit | strip -%}
+                {%- if benefit_text != blank -%}
+                  <li class="zenith-fp__benefit">
+                    <svg class="zenith-fp__check" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                      <circle cx="12" cy="12" r="12" fill="currentColor"/>
+                      <path d="M7.4 12.4l3.1 3.1 6.1-6.3" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>{{ benefit_text | escape | replace: '[customers]', settings.customer_count }}</span>
+                  </li>
+                {%- endif -%}
               {%- endfor -%}
             </ul>
           {%- endif -%}
@@ -122,7 +144,7 @@
               {%- render 'zenith-add-to-cart',
                 product: fp_product,
                 form_id: form_id,
-                label: s.button_label,
+                label: settings.zfp_button_label,
                 style: btn_style,
                 icon: btn_icon,
                 class: 'zenith-fp__atc'
@@ -134,7 +156,7 @@
                 disabled
               >
                 <span>
-                  {%- if s.button_label != blank -%}{{ s.button_label | escape }}{%- else -%}{{ 'products.product.add_to_cart' | t }}{%- endif -%}
+                  {%- if settings.zfp_button_label != blank -%}{{ settings.zfp_button_label | escape }}{%- else -%}{{ 'products.product.add_to_cart' | t }}{%- endif -%}
                 </span>
                 {%- if btn_icon != 'none' and btn_style != 'scheme' -%}
                   {%- render 'zenith-icon', icon: btn_icon, class: 'zenith-btn__icon' -%}
@@ -143,23 +165,29 @@
             {%- endif -%}
           </div>
 
-          {%- assign trust_items = section.blocks | where: 'type', 'trust' -%}
-          {%- if trust_items.size > 0 -%}
-            <ul class="zenith-fp__trust zenith-fp__trust--{{ s.trust_alignment }} zenith-fp__trust--m-{{ s.trust_alignment_mobile }}" role="list">
-              {%- for block in trust_items -%}
-                <li id="Block-{{ block.id }}" {{ block.shopify_attributes }}>
-                  {%- render 'zenith-icon', icon: block.settings.icon -%}
-                  <span>{{ block.settings.text | escape | replace: '[customers]', settings.customer_count }}</span>
+          {%- capture trust_items -%}
+            {%- for n in (1..4) -%}
+              {%- assign t_text_key = 'zfp_trust_' | append: n | append: '_text' -%}
+              {%- assign t_icon_key = 'zfp_trust_' | append: n | append: '_icon' -%}
+              {%- if settings[t_text_key] != blank -%}
+                <li>
+                  {%- render 'zenith-icon', icon: settings[t_icon_key] -%}
+                  <span>{{ settings[t_text_key] | escape | replace: '[customers]', settings.customer_count }}</span>
                 </li>
-              {%- endfor -%}
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endcapture -%}
+          {%- if trust_items != blank -%}
+            <ul class="zenith-fp__trust zenith-fp__trust--{{ s.trust_alignment }} zenith-fp__trust--m-{{ s.trust_alignment_mobile }}" role="list">
+              {{- trust_items -}}
             </ul>
           {%- endif -%}
         </div>
       </div>
 
       <div class="zenith-fp__media-wrap color-{{ s.media_color_scheme }} gradient">
-        {%- if s.badge != blank and s.badge_position_mobile == 'image' -%}
-          <span class="zenith-fp__badge zenith-fp__badge--media zenith-hide-desktop">{{ s.badge | escape }}</span>
+        {%- if fp_badge != blank and s.badge_position_mobile == 'image' -%}
+          <span class="zenith-fp__badge zenith-fp__badge--media zenith-hide-desktop">{{ fp_badge | escape }}</span>
         {%- endif -%}
 
         {%- if use_slides -%}
@@ -191,10 +219,10 @@
           {%- else -%}
             <div class="zenith-media zenith-fp__media">
           {%- endif -%}
-            {%- if s.image != blank and s.image_mobile != blank -%}
+            {%- if fp_image != blank and fp_image_mobile != blank -%}
               {%- render 'zenith-responsive-image',
-                image: s.image,
-                mobile_image: s.image_mobile,
+                image: fp_image,
+                mobile_image: fp_image_mobile,
                 widths: '400, 600, 800, 1100, 1600',
                 sizes: media_sizes
               -%}
@@ -238,89 +266,8 @@
       "content": "Content"
     },
     {
-      "type": "product",
-      "id": "product",
-      "label": "Product"
-    },
-    {
-      "type": "text",
-      "id": "placeholder_title",
-      "label": "Title shown when no product is selected",
-      "default": "Zenith Anti-Aging Tallow Cream"
-    },
-    {
-      "type": "text",
-      "id": "badge",
-      "label": "Badge",
-      "default": "Featured Product"
-    },
-    {
-      "type": "text",
-      "id": "button_label",
-      "label": "Button label",
-      "default": "Add to Cart"
-    },
-    {
-      "type": "select",
-      "id": "button_icon",
-      "label": "Button icon",
-      "default": "cart",
-      "options": [
-        {
-          "value": "cart",
-          "label": "Cart"
-        },
-        {
-          "value": "arrow_right",
-          "label": "Arrow"
-        },
-        {
-          "value": "none",
-          "label": "None"
-        }
-      ]
-    },
-    {
-      "type": "image_picker",
-      "id": "image",
-      "label": "Image",
-      "info": "Optional. Defaults to the product's images. Best size 1216 × 1076 px (square also works); keep text and the product in the middle, phones crop it square. Tall graphics lose their top and bottom — set a focal point on the image to choose what stays."
-    },
-    {
-      "type": "image_picker",
-      "id": "image_mobile",
-      "label": "Mobile image",
-      "info": "Optional, used with the image above: a different crop for phones (square works best)."
-    },
-    {
-      "type": "checkbox",
-      "id": "show_media_pager",
-      "label": "Show all product images as a slider",
-      "info": "Off = only the product's main image, linked to the product page. Used when no image is selected above and the product has more than one image",
-      "default": false
-    },
-    {
-      "type": "checkbox",
-      "id": "show_rating",
-      "label": "Show product rating",
-      "default": false
-    },
-    {
-      "type": "select",
-      "id": "below_price",
-      "label": "Text under the price",
-      "default": "checklist",
-      "options": [
-        {
-          "value": "checklist",
-          "label": "Checklist"
-        },
-        {
-          "value": "description",
-          "label": "Product description"
-        }
-      ],
-      "info": "Checklist = the Benefit blocks with gold checks. Product description = the selected product's description (uses Text size and the color scheme)."
+      "type": "paragraph",
+      "content": "Product, badge, button, text under the price, image and trust row: Theme settings → Zenith · Featured product (the same on every page)."
     },
     {
       "type": "header",
@@ -537,7 +484,6 @@
     {
       "type": "color",
       "id": "pager_color",
-      "visible_if": "{{ section.settings.show_media_pager }}",
       "label": "Image slider dots",
       "default": "#294850"
     },
@@ -830,167 +776,9 @@
       "default": 20
     }
   ],
-  "blocks": [
-    {
-      "type": "benefit",
-      "name": "Benefit",
-      "settings": [
-        {
-          "type": "header",
-          "content": "Content"
-        },
-        {
-          "type": "text",
-          "id": "text",
-          "label": "Text",
-          "default": "Fights aging and smooths lines with zero irritation."
-        }
-      ]
-    },
-    {
-      "type": "trust",
-      "name": "Trust item",
-      "settings": [
-        {
-          "type": "header",
-          "content": "Content"
-        },
-        {
-          "type": "select",
-          "id": "icon",
-          "label": "Icon",
-          "default": "shield",
-          "options": [
-            {
-              "value": "shield",
-              "label": "Shield"
-            },
-            {
-              "value": "refresh",
-              "label": "Money back"
-            },
-            {
-              "value": "cash",
-              "label": "Cash"
-            },
-            {
-              "value": "badge_check",
-              "label": "Badge check"
-            },
-            {
-              "value": "sun",
-              "label": "Climate"
-            },
-            {
-              "value": "shield_plus",
-              "label": "Shield plus"
-            },
-            {
-              "value": "thermometer",
-              "label": "Thermometer"
-            },
-            {
-              "value": "truck",
-              "label": "Delivery"
-            },
-            {
-              "value": "certified",
-              "label": "Certified"
-            },
-            {
-              "value": "leaf",
-              "label": "Natural"
-            },
-            {
-              "value": "flag",
-              "label": "Flag"
-            },
-            {
-              "value": "lock",
-              "label": "Secure"
-            },
-            {
-              "value": "phone",
-              "label": "Phone"
-            },
-            {
-              "value": "qr",
-              "label": "QR code"
-            }
-          ]
-        },
-        {
-          "type": "text",
-          "id": "text",
-          "label": "Text",
-          "default": "Zenith Money-Back Guarantee"
-        }
-      ]
-    }
-  ],
   "presets": [
     {
-      "name": "Zenith · Featured product",
-      "blocks": [
-        {
-          "type": "benefit",
-          "settings": {
-            "text": "Fights aging and smooths lines with zero irritation."
-          }
-        },
-        {
-          "type": "benefit",
-          "settings": {
-            "text": "Reduces acne and dark spots while smoothing fine lines"
-          }
-        },
-        {
-          "type": "benefit",
-          "settings": {
-            "text": "Fast-absorbing and non-greasy for the PH climate."
-          }
-        },
-        {
-          "type": "benefit",
-          "settings": {
-            "text": "One jar replaces multiple complicated steps."
-          }
-        },
-        {
-          "type": "benefit",
-          "settings": {
-            "text": "Premium ingredients for maximum results, minimal effort."
-          }
-        },
-        {
-          "type": "trust",
-          "settings": {
-            "icon": "shield",
-            "text": "Zenith Money-Back Guarantee"
-          }
-        },
-        {
-          "type": "trust",
-          "settings": {
-            "icon": "cash",
-            "text": "Cash On Delivery"
-          }
-        },
-        {
-          "type": "trust",
-          "settings": {
-            "icon": "badge_check",
-            "text": "FDA-Notified"
-          }
-        },
-        {
-          "type": "trust",
-          "settings": {
-            "icon": "sun",
-            "text": "Formulated For Filipinos"
-          }
-        }
-      ]
+      "name": "Zenith · Featured product"
     }
   ]
 }
