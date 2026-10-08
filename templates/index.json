@@ -1632,7 +1632,7 @@
         "card_border_color": "",
         "button_style": "outline",
         "star_color": "#d6b356",
-        "accent_color": "#c59300",
+        "accent_color": "#c5930e",
         "heading_font_size": 48,
         "heading_uppercase": false,
         "subheading_font_size": 18,
@@ -1747,7 +1747,7 @@
         "open_first": false,
         "open_all": false,
         "heading_spacing": 32,
-        "item_padding": 10,
+        "item_padding": 20,
         "content_gap": 24,
         "color_scheme": "scheme-1",
         "icon_color": "#eabe5f",
@@ -1768,7 +1768,7 @@
         "heading_spacing_mobile": 32,
         "title_font_size_mobile": 24,
         "text_font_size_mobile": 16,
-        "item_padding_mobile": 10,
+        "item_padding_mobile": 20,
         "content_gap_mobile": 24,
         "icon_size_mobile": 20,
         "padding_top": 64,
@@ -1954,7 +1954,7 @@
         "divider_spacing": 40,
         "color_scheme": "scheme-1",
         "title_color": "#d6b356",
-        "number_background": "#c59300",
+        "number_background": "#c5930e",
         "number_color": "#121212",
         "text_opacity": 70,
         "bar_color": "#202020",
@@ -2352,4 +2352,3 @@
     "promo_bottom"
   ]
 }
-
