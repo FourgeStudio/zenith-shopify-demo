@@ -212,3 +212,78 @@
     font-size: var(--z-ing-lbfs, 1.4rem);
   }
 }
+
+
+/* ---------- Ingredient style "Separate cards" (Figma "Ingredients Section v2") ----------
+   Each ingredient is its own card: square photo flush on the left, title + text beside it.
+   The summary/lead wrappers step aside (display: contents) so photo, title and text share one grid. */
+.zenith-ingredients--cards .zenith-ingredients__card:not(.zenith-ingredients__card--list) {
+  display: flex;
+  flex-direction: column;
+  gap: var(--z-ing-itemgap, 8px);
+  background: none;
+}
+
+.zenith-ingredients--cards .zenith-ingredients__item--static {
+  display: grid;
+  grid-template-columns: var(--z-ing-thumb-m, 104px) minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  align-content: center;
+  column-gap: var(--z-ing-thumb-gap, 16px);
+  min-height: var(--z-ing-thumb-m, 104px);
+  padding: 0;
+  border-top: 0;
+  background: var(--z-ing-card, #202020);
+}
+
+.zenith-ingredients--cards .zenith-ingredients__item--static > .zenith-ingredients__summary,
+.zenith-ingredients--cards .zenith-ingredients__item--static .zenith-ingredients__lead {
+  display: contents;
+}
+
+.zenith-ingredients--cards .zenith-ingredients__item--static .zenith-ingredients__thumb {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  width: 100%;
+  height: 100%;
+  min-height: var(--z-ing-thumb-m, 104px);
+}
+
+.zenith-ingredients--cards .zenith-ingredients__item--static .zenith-ingredients__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.zenith-ingredients--cards .zenith-ingredients__item--static .zenith-ingredients__title {
+  grid-column: 2;
+  align-self: end;
+  padding: var(--z-space-3) var(--z-space-3) 0 0;
+  font-size: var(--z-ttfs-m, 1.8rem);
+  line-height: 1.3;
+}
+
+.zenith-ingredients--cards .zenith-ingredients__item--static .zenith-ingredients__answer {
+  grid-column: 2;
+  align-self: start;
+  padding: var(--z-space-1) var(--z-space-3) var(--z-space-3) 0;
+}
+
+@media screen and (min-width: 750px) {
+  .zenith-ingredients--cards .zenith-ingredients__item--static {
+    grid-template-columns: var(--z-ing-thumb, 104px) minmax(0, 1fr);
+    min-height: var(--z-ing-thumb, 104px);
+  }
+
+  .zenith-ingredients--cards .zenith-ingredients__item--static .zenith-ingredients__thumb {
+    min-height: var(--z-ing-thumb, 104px);
+  }
+
+  .zenith-ingredients--cards .zenith-ingredients__item--static .zenith-ingredients__title {
+    font-size: var(--z-ttfs, 2rem);
+  }
+
+  .zenith-ingredients--cards .zenith-ingredients__item--static .zenith-ingredients__answer {
+    padding-bottom: var(--z-space-3);
+  }
+}

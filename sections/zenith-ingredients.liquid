@@ -33,6 +33,7 @@
   --z-ing-lbfs-m: {{ section.settings.list_text_font_size_mobile }}px;
   --z-ing-cardgap: {{ section.settings.card_gap }}px;
   --z-ing-cardgap-m: {{ section.settings.card_gap_mobile }}px;
+  --z-ing-itemgap: {{ section.settings.item_gap | default: 8 }}px;
   --z-ing-ar-m: {{ media_ratio }};
   --z-faq-icon: {{ section.settings.icon_color }};
   --z-faq-ans: {{ section.settings.text_opacity | divided_by: 100.0 }};
@@ -42,7 +43,7 @@
 
 <section
   id="Zenith-{{ section.id }}"
-  class="zenith-section zenith-ingredients zenith-ingredients--m-{{ section.settings.heading_alignment_mobile }} zenith-ingredients--media-{{ section.settings.image_position }}{% if section.settings.image_first_mobile %} zenith-ingredients--m-media-first{% endif %} color-{{ section.settings.color_scheme }} gradient{% if section.index > 2 %} zenith-defer{% endif %}"
+  class="zenith-section zenith-ingredients zenith-ingredients--m-{{ section.settings.heading_alignment_mobile }} zenith-ingredients--media-{{ section.settings.image_position }}{% if section.settings.item_style == 'cards' and section.settings.item_display == 'open' %} zenith-ingredients--cards{% endif %}{% if section.settings.image_first_mobile %} zenith-ingredients--m-media-first{% endif %} color-{{ section.settings.color_scheme }} gradient{% if section.index > 2 %} zenith-defer{% endif %}"
 >
   <div class="page-width">
     {%- render 'zenith-section-heading',
@@ -308,6 +309,34 @@
       ]
     },
     {
+      "type": "select",
+      "id": "item_style",
+      "label": "Ingredient style",
+      "default": "list",
+      "options": [
+        {
+          "value": "list",
+          "label": "One card with dividers"
+        },
+        {
+          "value": "cards",
+          "label": "Separate cards, photo beside the text"
+        }
+      ],
+      "info": "Separate cards = Ingredients Section v2 (square photo on the left of each card). Needs Ingredient items = Always open; the photo size is the Thumbnail size."
+    },
+    {
+      "type": "range",
+      "id": "item_gap",
+      "label": "Space between ingredient cards",
+      "visible_if": "{{ section.settings.item_style == 'cards' }}",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
       "type": "range",
       "id": "heading_max_width",
       "label": "Heading width",
@@ -382,7 +411,7 @@
       "id": "thumb_size",
       "label": "Thumbnail size",
       "min": 32,
-      "max": 96,
+      "max": 140,
       "step": 2,
       "unit": "px",
       "default": 52
@@ -730,7 +759,7 @@
       "id": "thumb_size_mobile",
       "label": "Thumbnail size",
       "min": 32,
-      "max": 88,
+      "max": 140,
       "step": 2,
       "unit": "px",
       "default": 52
