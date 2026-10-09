@@ -256,18 +256,33 @@
   transition: opacity 0.3s ease, visibility 0s;
 }
 
-/* Header items that change place while the drawer is open (logo, close X, account/cart) fade instead of jumping:
-   in on open; out while it closes (global.js keeps menu-open + adds menu-closing for the 400ms slide), back in after. */
-.zenith-header :is(.header__heading-link, .header__icons, .header__icon--menu > span) {
+/* Header items that change place while the drawer is open fade instead of jumping: in on open; out while it closes
+   (global.js keeps menu-open + adds menu-closing for the 400ms slide), back in after. Logo + menu toggle move on every
+   width; account/cart only move on phones, so they only fade there. */
+.zenith-header :is(.header__heading-link, .header__icon--menu > span) {
   transition: opacity 0.2s ease;
 }
 
-.section-header.menu-open:not(.menu-closing) .zenith-header :is(.header__heading-link, .header__icons, .header__icon--menu > span) {
+.section-header.menu-open:not(.menu-closing) .zenith-header :is(.header__heading-link, .header__icon--menu > span) {
   animation: zenith-header-fade-in 0.25s ease;
 }
 
-.section-header.menu-closing .zenith-header :is(.header__heading-link, .header__icons, .header__icon--menu > span) {
+.section-header.menu-closing .zenith-header :is(.header__heading-link, .header__icon--menu > span) {
   opacity: 0;
+}
+
+@media screen and (max-width: 749px) {
+  .zenith-header .header__icons {
+    transition: opacity 0.2s ease;
+  }
+
+  .section-header.menu-open:not(.menu-closing) .zenith-header .header__icons {
+    animation: zenith-header-fade-in 0.25s ease;
+  }
+
+  .section-header.menu-closing .zenith-header .header__icons {
+    opacity: 0;
+  }
 }
 
 @keyframes zenith-header-fade-in {
@@ -282,7 +297,8 @@
 
 @media (prefers-reduced-motion: reduce) {
   .zenith-header .header__icon--menu::before,
-  .zenith-header :is(.header__heading-link, .header__icons, .header__icon--menu > span) {
+  .zenith-header :is(.header__heading-link, .header__icons, .header__icon--menu > span),
+  .section-header.menu-open .zenith-header :is(.header__heading-link, .header__icons, .header__icon--menu > span) {
     transition: none;
     animation: none;
   }
