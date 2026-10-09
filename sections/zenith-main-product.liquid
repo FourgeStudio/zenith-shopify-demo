@@ -160,7 +160,7 @@
 {%- endcapture -%}
 {%- render 'zenith-section-style', section: section, extra: extra -%}
 
-<section id="Zenith-{{ section.id }}" class="zenith-section zenith-mp zenith-mp--chip-{{ s.badge_align | default: 'after' }} color-{{ s.color_scheme }} gradient">
+<section id="Zenith-{{ section.id }}" class="zenith-section zenith-mp zenith-mp--chip-{{ s.badge_align | default: 'after' }}{% if s.show_stars %} zenith-mp--stars{% endif %} color-{{ s.color_scheme }} gradient">
   {%- if mp_product != blank -%}
     <script type="application/ld+json">
       {{ mp_product | structured_data }}
@@ -787,7 +787,7 @@
       "default": "Zenith Anti-Aging Tallow Cream"
     },
     { "type": "checkbox", "id": "show_rating", "label": "Show eyebrow (rating text)", "default": true },
-    { "type": "checkbox", "id": "show_stars", "label": "Show star rating", "info": "Off = the rating text shows as a gold eyebrow above the title.", "default": false },
+    { "type": "checkbox", "id": "show_stars", "label": "Show star rating", "info": "Off = no stars on the product page (rating row and review cards); the rating text shows as a gold eyebrow above the title.", "default": false },
     {
       "type": "text",
       "id": "rating_value",
