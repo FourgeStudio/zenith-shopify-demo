@@ -87,6 +87,7 @@ function checkSchema(where, schema) {
     for (const st of b.settings || []) checkSetting(`${where} › block ${b.type}`, st, bids);
   }
   if (schema.max_blocks > 50) err(where, 'max_blocks > 50');
+  if (schema.max_blocks !== undefined && !schema.blocks) err(where, 'max_blocks without blocks (Shopify rejects the file)');
   for (const p of schema.presets || []) {
     for (const b of p.blocks || []) if (!blockTypes.has(b.type)) err(`${where} › preset "${p.name}"`, `unknown block type ${b.type}`);
   }
