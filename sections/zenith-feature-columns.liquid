@@ -94,6 +94,9 @@
   if section.settings.title_color != blank
     assign features_mods = features_mods | append: ' zenith-features--title-color'
   endif
+  if section.settings.image_zoom == false
+    assign features_mods = features_mods | append: ' zenith-features--no-zoom'
+  endif
 -%}
 
 <section
@@ -395,6 +398,13 @@
       "id": "show_media",
       "label": "Show column images",
       "info": "Turn off for icon cards without images",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "image_zoom",
+      "label": "Zoom images on hover",
+      "visible_if": "{{ section.settings.show_media }}",
       "default": true
     },
     {

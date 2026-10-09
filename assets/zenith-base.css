@@ -1644,6 +1644,12 @@ p, li, blockquote {
   }
 }
 
+/* Feature columns with "Zoom images on hover" off (Zenith Guarantee) */
+.zenith-features.zenith-features--no-zoom .zenith-features__media > img,
+.zenith-features.zenith-features--no-zoom .zenith-features__media > picture > img {
+  transform: none;
+}
+
 /* ---------- Cart drawer: empty cart keeps the full layout ----------
    Dawn swaps in a separate "empty" screen (cart-drawer.is-empty / cart-drawer-items.is-empty, toggled by cart.js);
    the drawer instead shows the offers panel from ₱0, an empty message, suggestions and ₱0 totals. */
