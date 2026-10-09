@@ -6,7 +6,7 @@
 {%- liquid
   assign s = section.settings
   # zenith: content is global (Theme settings → Zenith · Featured product), so every page shows the same block;
-  # the section only sets layout, colours and spacing.
+  # the section only sets layout, colours and spacing. Badge only with "Show badge" on (off by default).
   assign fp_product = settings.zfp_product
   assign fp_badge = blank
   if settings.zfp_show_badge

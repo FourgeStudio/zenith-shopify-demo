@@ -320,6 +320,11 @@
   color: rgba(var(--color-foreground), 0.85);
 }
 
+/* "Show star rating" off: no stars anywhere on the product page (review strip cards are filled by JS, so CSS) */
+.zenith-mp:not(.zenith-mp--stars) .zenith-mp__review-head .zenith-stars {
+  display: none;
+}
+
 /* Rating text as the universal eyebrow (stars off): heading font, uppercase, Summit gold */
 .zenith-mp__rating--eyebrow .zenith-mp__rating-label {
   font-family: var(--font-heading-family);
