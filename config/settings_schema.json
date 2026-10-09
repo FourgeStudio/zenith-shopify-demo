@@ -6323,6 +6323,12 @@
         "label": "Product"
       },
       {
+        "type": "checkbox",
+        "id": "zfp_show_badge",
+        "label": "Show badge",
+        "default": false
+      },
+      {
         "type": "text",
         "id": "zfp_badge",
         "label": "Badge",

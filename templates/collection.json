@@ -230,7 +230,7 @@
         "subheading": "",
         "collection": "",
         "products_to_show": 50,
-        "show_rating": true,
+        "show_rating": false,
         "first_badge": "Selling Fast",
         "badge_icon": "truck",
         "sale_badge": "On Sale",
@@ -296,7 +296,7 @@
         "padding_bottom": 48,
         "padding_top_mobile": 32,
         "padding_bottom_mobile": 32,
-        "show_badges": true
+        "show_badges": false
       }
     },
     "money_back": {
@@ -342,12 +342,132 @@
         "padding_top_mobile": 20,
         "padding_bottom_mobile": 20
       }
+    },
+    "faq": {
+      "type": "zenith-faq",
+      "blocks": {
+        "question_1": {
+          "type": "question",
+          "settings": {
+            "question": "What makes Zenith different from other men’s grooming brands?",
+            "answer": "<p>Zenith is made for Filipino men and Philippine weather. Every product is FDA-notified, the ingredients are named on the label, and the routine is short enough to keep.</p>"
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "Who is Zenith for?",
+            "answer": "<p>Men who want a short routine that works with heat and sweat. Most Zenith customers are Filipino men over 35.</p>"
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "How long should I use Zenith before I judge it?",
+            "answer": "<p>Use it as directed every day and give one full product a fair run before you decide. Skin care and hair care both take time. Full guarantee terms are on the <a href=\"/policies/refund-policy\">Refunds and Returns</a> page.</p>"
+          }
+        },
+        "question_4": {
+          "type": "question",
+          "settings": {
+            "question": "Can I use Zenith products together?",
+            "answer": "<p>Yes. Cleanser and day cream in the morning, tallow cream at night, shampoo in the shower, spray on a clean dry scalp before bed. The directions are on every label.</p>"
+          }
+        },
+        "question_5": {
+          "type": "question",
+          "settings": {
+            "question": "Can I use Zenith if my skin is sensitive?",
+            "answer": "<p>Check the full ingredient list on the product page first. Start with a small amount. If anything feels wrong, stop and message us.</p>"
+          }
+        },
+        "question_6": {
+          "type": "question",
+          "settings": {
+            "question": "What is beef tallow and why is it in your skincare?",
+            "answer": "<p>Beef tallow is rendered beef fat. It is the base of the Zenith Anti-Aging Tallow Cream, Cleanser and Day Cream SPF 30. The full ingredient list is on every product page.</p>"
+          }
+        },
+        "question_7": {
+          "type": "question",
+          "settings": {
+            "question": "Do you offer free shipping?",
+            "answer": "<p>Shipping fees vary by location and promotion. Check the product page or your cart for the latest.</p>"
+          }
+        },
+        "question_8": {
+          "type": "question",
+          "settings": {
+            "question": "How long is delivery?",
+            "answer": "<p>Metro Manila orders arrive in about 3 days. Visayas and Mindanao in 3 to 7 days.</p>"
+          }
+        },
+        "question_9": {
+          "type": "question",
+          "settings": {
+            "question": "What is your return policy?",
+            "answer": "<p>Every order carries the Zenith Money-Back Guarantee. Skin products are covered for 30 days and hair products for 60 days. Full terms on our <a href=\"/policies/refund-policy\">Refunds and Returns</a> page.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_1",
+        "question_2",
+        "question_3",
+        "question_4",
+        "question_5",
+        "question_6",
+        "question_7",
+        "question_8",
+        "question_9"
+      ],
+      "settings": {
+        "content_source": "global",
+        "eyebrow": "",
+        "heading": "Frequently Asked Questions",
+        "subheading": "<p>No-nonsense answers about your daily essentials.</p>",
+        "enable_schema": true,
+        "heading_alignment": "center",
+        "max_width": 720,
+        "open_first": false,
+        "open_all": false,
+        "heading_spacing": 32,
+        "item_padding": 20,
+        "content_gap": 24,
+        "color_scheme": "scheme-1",
+        "icon_color": "#eabe5f",
+        "divider_opacity": 10,
+        "answer_opacity": 70,
+        "heading_font_size": 48,
+        "heading_uppercase": false,
+        "subheading_font_size": 18,
+        "subheading_opacity": 100,
+        "eyebrow_font_size": 14,
+        "title_font_size": 22,
+        "text_font_size": 16,
+        "icon_size": 20,
+        "heading_alignment_mobile": "left",
+        "heading_font_size_mobile": 36,
+        "subheading_font_size_mobile": 18,
+        "subheading_opacity_mobile": 100,
+        "heading_spacing_mobile": 32,
+        "title_font_size_mobile": 18,
+        "text_font_size_mobile": 16,
+        "item_padding_mobile": 20,
+        "content_gap_mobile": 24,
+        "icon_size_mobile": 20,
+        "padding_top": 64,
+        "padding_bottom": 72,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 32
+      }
     }
   },
   "order": [
     "promo_hero",
     "hero",
     "product_grid",
-    "money_back"
+    "money_back",
+    "faq"
   ]
 }

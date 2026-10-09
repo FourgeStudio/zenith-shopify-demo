@@ -8,7 +8,10 @@
   # zenith: content is global (Theme settings → Zenith · Featured product), so every page shows the same block;
   # the section only sets layout, colours and spacing.
   assign fp_product = settings.zfp_product
-  assign fp_badge = settings.zfp_badge
+  assign fp_badge = blank
+  if settings.zfp_show_badge
+    assign fp_badge = settings.zfp_badge
+  endif
   assign fp_image = settings.zfp_image
   assign fp_image_mobile = settings.zfp_image_mobile
   assign btn_style = s.button_style | default: 'gold'

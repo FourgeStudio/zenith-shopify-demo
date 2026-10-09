@@ -320,6 +320,33 @@
   color: rgba(var(--color-foreground), 0.85);
 }
 
+/* Rating text as the universal eyebrow (stars off): heading font, uppercase, Summit gold */
+.zenith-mp__rating--eyebrow .zenith-mp__rating-label {
+  font-family: var(--font-heading-family);
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--z-summit-light);
+}
+
+/* Headline block (eyebrow → title → short description → price) sits tighter than the rest of the buy box */
+.zenith-mp__rating + .zenith-mp__title,
+.zenith-mp__title + .zenith-mp__subtitle,
+.zenith-mp__title + .zenith-mp__price,
+.zenith-mp__subtitle + .zenith-mp__price {
+  margin-top: calc(var(--z-mp-hgap-m, 6px) - var(--z-mp-buy-gap, 12px));
+}
+
+@media screen and (min-width: 750px) {
+  .zenith-mp__rating + .zenith-mp__title,
+  .zenith-mp__title + .zenith-mp__subtitle,
+  .zenith-mp__title + .zenith-mp__price,
+  .zenith-mp__subtitle + .zenith-mp__price {
+    margin-top: calc(var(--z-mp-hgap, 8px) - var(--z-mp-buy-gap, 12px));
+  }
+}
+
 /* Title + short description */
 .zenith-mp__title {
   margin: 0;
@@ -814,7 +841,6 @@
    The row's own [open] rule rotates every .zenith-faq__icon inside it, so the chevron resets first. */
 .zenith-mp__questions {
   margin-bottom: calc(var(--z-cgap-m, 14px) * -1);
-  padding-left: var(--z-space-3);
 }
 
 
@@ -1079,7 +1105,6 @@
 
   .zenith-mp__questions {
     margin-bottom: calc(var(--z-cgap, 16px) * -1);
-    padding-left: var(--z-space-4);
   }
 
 
