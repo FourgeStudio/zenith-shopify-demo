@@ -1280,7 +1280,7 @@ html:root .cart-item cart-remove-button {
   min-height: 4.4rem;
 }
 
-.cart-drawer .quantity__button::after {
+html .cart-drawer .quantity__button::after {
   left: min(0px, calc((100% - 4.4rem) / 2));
   right: min(0px, calc((100% - 4.4rem) / 2));
 }
