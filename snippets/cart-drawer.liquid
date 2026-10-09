@@ -584,14 +584,15 @@
           <button
             type="submit"
             id="CartDrawer-Checkout"
-            class="cart__checkout-button button"
+            class="cart__checkout-button button zenith-btn zenith-btn--gold zenith-btn--full"
             name="checkout"
             form="CartDrawer-Form"
             {% if cart == empty %}
               disabled
             {% endif %}
           >
-            {{ 'sections.cart.checkout' | t }}
+            <span>{{ 'sections.cart.checkout' | t }}</span>
+            {%- render 'zenith-icon', icon: 'arrow_right', class: 'zenith-btn__icon' -%}
           </button>
         </div>
       </div>

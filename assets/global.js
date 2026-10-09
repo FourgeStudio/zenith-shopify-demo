@@ -568,6 +568,9 @@ class HeaderDrawer extends MenuDrawer {
       '--header-bottom-position',
       `${parseInt(this.header.getBoundingClientRect().bottom - this.borderOffset)}px`
     );
+    // zenith: a close still finishing (menu-closing) is cancelled by reopening
+    clearTimeout(this.closingTimer);
+    this.header.classList.remove('menu-closing');
     this.header.classList.add('menu-open');
 
     setTimeout(() => {
@@ -586,7 +589,11 @@ class HeaderDrawer extends MenuDrawer {
   closeMenuDrawer(event, elementToFocus) {
     if (!elementToFocus) return;
     super.closeMenuDrawer(event, elementToFocus);
-    this.header.classList.remove('menu-open');
+    // zenith: keep the "open" header layout until the drawer has slid out (closeAnimation: 400ms) while the logo and
+    // icons fade out; then they move back unseen and fade in. Removing menu-open at once made them jump mid-slide.
+    this.header.classList.add('menu-closing');
+    clearTimeout(this.closingTimer);
+    this.closingTimer = setTimeout(() => this.header.classList.remove('menu-open', 'menu-closing'), 400);
     window.removeEventListener('resize', this.onResize);
   }
 

@@ -999,7 +999,7 @@ div.zenith-cart-ship__fill {
   position: relative;
   overflow-x: clip;
   margin-top: var(--z-space-4, 16px);
-  padding-top: 3.4rem;
+  padding-top: 4.4rem; /* two 12px label lines + 1.4rem above the track; 3.4rem let them poke out of the box */
 }
 
 .zenith-cart-offers__track {
@@ -1265,6 +1265,28 @@ cart-drawer-items .zenith-cart-offers__box {
     min-width: 3.2rem;
     min-height: 3.2rem;
   }
+}
+
+/* ---------- Cart lines: delete (bin) kept clear of the + button ----------
+   Bin = a real 44×44px button; the drawer's small −/+ get a 44px-wide tap area (vertical is already 44px). The 22px
+   margin leaves ≥16px between the + and bin tap areas (it was 1px in the phone drawer, 11px in the desktop drawer). */
+:root .cart-item cart-remove-button {
+  margin-left: 2.2rem;
+}
+
+:root cart-remove-button .button {
+  min-width: 4.4rem;
+  min-height: 4.4rem;
+}
+
+.cart-drawer .quantity__button::after {
+  left: min(0px, calc((100% - 4.4rem) / 2));
+  right: min(0px, calc((100% - 4.4rem) / 2));
+}
+
+/* Check out = brand gold button (zenith-btn--gold): same type, height and square corners as Add to Cart */
+.button.zenith-btn.cart__checkout-button {
+  min-height: 4.6rem;
 }
 
 /* ---------- Cart lines: product type under the title (cart-drawer + main-cart-items) ---------- */
