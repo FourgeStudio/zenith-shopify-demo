@@ -375,8 +375,7 @@
     },
     "featured_product": {
       "type": "zenith-featured-product",
-      "settings": {
-        "badge": "",
+      "settings": {
         "image_position": "right",
         "full_width": false,
         "media_width": 48,
@@ -392,6 +391,7 @@
         "media_color_scheme": "scheme-3",
         "section_background": "",
         "button_style": "gold",
+        "badge": "",
         "badge_background": "#eabe5f",
         "badge_text_color": "#121212",
         "price_color": "#eabe5f",
