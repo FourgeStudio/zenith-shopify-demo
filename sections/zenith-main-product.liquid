@@ -103,6 +103,8 @@
   --z-mp-star-m: {{ s.star_size_mobile }}px;
   --z-mp-star-c: {{ s.star_color }};
   --z-mp-rfs: {{ s.rating_font_size }}px;
+  --z-mp-hgap: {{ s.head_gap | default: 8 }}px;
+  --z-mp-hgap-m: {{ s.head_gap_mobile | default: 6 }}px;
   --z-mp-rfs-m: {{ s.rating_font_size_mobile }}px;
   --z-mp-price-c: {{ s.price_color }};
   --z-mp-cmp-c: {{ s.compare_color }};
@@ -365,11 +367,26 @@
 
       {%- comment -%} ---------------- Buy box ---------------- {%- endcomment -%}
       <div class="zenith-mp__buy">
-        {%- if s.show_rating and rating_value != blank -%}
-          <div class="zenith-mp__rating">
-            {%- render 'zenith-stars', rating: rating_value -%}
+        {%- liquid
+          # zenith: eyebrow = the rating text; stars only with "Show star rating" (off by default)
+          assign mp_stars = false
+          if s.show_stars and rating_value != blank
+            assign mp_stars = true
+          endif
+          assign mp_eyebrow = false
+          if s.show_rating
+            if mp_stars or rating_label != blank
+              assign mp_eyebrow = true
+            endif
+          endif
+        -%}
+        {%- if mp_eyebrow -%}
+          <div class="zenith-mp__rating{% unless mp_stars %} zenith-mp__rating--eyebrow{% endunless %}">
+            {%- if mp_stars -%}
+              {%- render 'zenith-stars', rating: rating_value -%}
+            {%- endif -%}
             {%- if rating_label != blank -%}
-              <span class="zenith-mp__rating-label">{{ rating_label | escape }}</span>
+              <span class="zenith-mp__rating-label{% unless mp_stars %} zenith-eyebrow{% endunless %}">{{ rating_label | escape }}</span>
             {%- endif -%}
           </div>
         {%- endif -%}
@@ -769,7 +786,8 @@
       "label": "Title shown outside a product page",
       "default": "Zenith Anti-Aging Tallow Cream"
     },
-    { "type": "checkbox", "id": "show_rating", "label": "Show rating", "default": true },
+    { "type": "checkbox", "id": "show_rating", "label": "Show eyebrow (rating text)", "default": true },
+    { "type": "checkbox", "id": "show_stars", "label": "Show star rating", "info": "Off = the rating text shows as a gold eyebrow above the title.", "default": false },
     {
       "type": "text",
       "id": "rating_value",
@@ -957,6 +975,7 @@
     },
     { "type": "range", "id": "gap", "label": "Space between columns", "min": 20, "max": 120, "step": 4, "unit": "px", "default": 80 },
     { "type": "range", "id": "content_gap", "label": "Space between buy box items", "min": 4, "max": 40, "step": 2, "unit": "px", "default": 12 },
+    { "type": "range", "id": "head_gap", "label": "Space between eyebrow, title, short description and price", "min": 0, "max": 40, "step": 2, "unit": "px", "default": 8 },
     { "type": "range", "id": "gallery_ratio", "label": "Image height", "min": 60, "max": 160, "step": 2, "unit": "%", "default": 108 },
     { "type": "range", "id": "dot_size", "label": "Slider dot size", "min": 4, "max": 16, "step": 1, "unit": "px", "default": 8 },
     { "type": "range", "id": "dot_width", "label": "Active slider dot width", "min": 12, "max": 80, "step": 2, "unit": "px", "default": 40 },
@@ -1096,6 +1115,7 @@
     { "type": "checkbox", "id": "subtitle_mobile", "label": "Show short description on mobile", "default": true },
     { "type": "range", "id": "gap_mobile", "label": "Space between gallery and buy box", "min": 0, "max": 60, "step": 2, "unit": "px", "default": 18 },
     { "type": "range", "id": "content_gap_mobile", "label": "Space between buy box items", "min": 4, "max": 40, "step": 2, "unit": "px", "default": 12 },
+    { "type": "range", "id": "head_gap_mobile", "label": "Space between eyebrow, title, short description and price", "min": 0, "max": 40, "step": 2, "unit": "px", "default": 6 },
     { "type": "range", "id": "variant_card_min_mobile", "label": "Bundle card min width", "info": "Lower it if three bundles do not fit across a phone.", "visible_if": "{{ section.settings.variant_style == 'cards' }}", "min": 70, "max": 180, "step": 2, "unit": "px", "default": 88 },
     { "type": "range", "id": "gallery_ratio_mobile", "label": "Image height", "min": 60, "max": 160, "step": 2, "unit": "%", "default": 100 },
     { "type": "range", "id": "gallery_start_mobile", "label": "Start at image", "info": "Phones only: the gallery opens on this image (1 = first). Desktop always starts at the first.", "min": 1, "max": 10, "step": 1, "default": 2 },
