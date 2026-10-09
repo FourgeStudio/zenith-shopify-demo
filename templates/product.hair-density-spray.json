@@ -216,6 +216,7 @@
         "question_6"
       ],
       "settings": {
+        "show_money_back": false,
         "placeholder_title": "Zenith Advanced Hair Density Spray",
         "show_rating": true,
         "rating_value": "4.69",
@@ -427,7 +428,7 @@
         "thumb_size_mobile": 56,
         "text_font_size_mobile": 16,
         "title_font_size_mobile": 12,
-        "handle_font_size_mobile": 10,
+        "handle_font_size_mobile": 12,
         "padding_top": 56,
         "padding_bottom": 40,
         "padding_top_mobile": 20,
@@ -955,7 +956,7 @@
         "footer_image_width_mobile": 336,
         "logo_height_mobile": 20,
         "logo_gap_mobile": 12,
-        "footer_text_size_mobile": 10,
+        "footer_text_size_mobile": 12,
         "footer_max_width_mobile": 256,
         "padding_top": 60,
         "padding_bottom": 56,
@@ -1081,7 +1082,7 @@
         "subheading_font_size": 18,
         "subheading_opacity": 100,
         "eyebrow_font_size": 14,
-        "title_font_size": 24,
+        "title_font_size": 22,
         "text_font_size": 16,
         "icon_size": 20,
         "heading_alignment_mobile": "left",
@@ -1089,7 +1090,7 @@
         "subheading_font_size_mobile": 18,
         "subheading_opacity_mobile": 100,
         "heading_spacing_mobile": 32,
-        "title_font_size_mobile": 24,
+        "title_font_size_mobile": 18,
         "text_font_size_mobile": 16,
         "item_padding_mobile": 10,
         "content_gap_mobile": 24,
@@ -1139,6 +1140,7 @@
         "trust_4"
       ],
       "settings": {
+        "show_money_back": false,
         "eyebrow": "",
         "heading": "Zenith Advanced Hair Density Spray",
         "heading_mobile": "",
