@@ -303,7 +303,7 @@
         "subheading": "",
         "collection": "hair-products",
         "products_to_show": 12,
-        "show_rating": true,
+        "show_rating": false,
         "first_badge": "Selling Fast",
         "badge_icon": "truck",
         "sale_badge": "On Sale",
