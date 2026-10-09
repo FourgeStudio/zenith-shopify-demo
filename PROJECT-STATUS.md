@@ -11,6 +11,7 @@ _Last updated: 2026-10-08. Keep this file current at the end of each work sessio
 - Contact page (`templates/page.contact.json` → new `zenith-contact` section: contact details + FAQ + contact form) built to `design/contact-us/` (2026-09-18). Same verification caveat.
 - About page (`templates/page.about.json`) built to `design/about-us/` (2026-09-18): Brand story ×3 (intro / story / care — new options: heading tag + colour, mobile heading above image, mobile edge-to-edge image + fade + text overlap, wordmark logo), Feature columns as icon cards ("What We Believe": card colours, number badge, icon beside text on mobile), new **Zenith · Store links** (Lazada / Shopee / TikTok Shop cards) and **Zenith · Trust checklist** (checklist + Amare seal card), homepage Hero reused as the closing CTA. Same verification caveat.
 - Security pass 2026-09-21: whole repo + full git history audited (no secrets, no third-party JS, every fetch same-origin, all `<script>`/JSON-LD output goes through `| json`, all forms are native `{% form %}`). Hardening applied: every merchant-entered link is now `{{ ... | escape }}`, `current_tags` escaped in the `<title>`, and every `target="_blank"` carries `rel="noopener"`.
+- 2026-10-09 (Henson feedback): Skin/Hair routines back to **stacked** on desktop (design; phones stay photo-beside-text). Zenith Guarantee (key `guarantee`, 10 templates): text centred to the photo + new feature-columns setting **Zoom images on hover** off. Verified on demo.
 - Brand tokens, colors, fonts, logos: see `.claude/brand.md`.
 
 ## Workflow
