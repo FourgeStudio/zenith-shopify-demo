@@ -376,6 +376,7 @@
     "featured_product": {
       "type": "zenith-featured-product",
       "settings": {
+        "badge": "",
         "image_position": "right",
         "full_width": false,
         "media_width": 48,
