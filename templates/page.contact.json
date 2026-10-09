@@ -20,6 +20,7 @@
     "contact": {
       "type": "zenith-contact",
       "settings": {
+        "faq_question_size": 22,
         "heading": "Direct Contact",
         "heading_tag": "h1",
         "subheading": "<p>Prefer to reach out directly? <br>Connect with the Zenith support team through the channels below.</p>",
