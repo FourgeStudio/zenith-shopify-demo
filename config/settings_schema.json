@@ -6377,6 +6377,13 @@
       },
       {
         "type": "checkbox",
+        "id": "zfp_show_money_back",
+        "label": "Show Money-Back Guarantee in the trust row",
+        "info": "Off hides the trust item that mentions the Zenith Money-Back Guarantee (it stays in the announcement bar and the guarantee sections).",
+        "default": false
+      },
+      {
+        "type": "checkbox",
         "id": "zfp_show_rating",
         "label": "Show product rating",
         "default": false
