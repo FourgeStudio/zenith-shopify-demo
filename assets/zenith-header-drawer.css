@@ -232,9 +232,60 @@
   color: rgb(var(--color-foreground));
 }
 
-/* Page overlay beside the desktop drawer: dark veil instead of Dawn's foreground tint */
-.zenith-header .header__icon--menu[aria-expanded='true']::before {
+/* Page overlay beside the desktop drawer: dark veil instead of Dawn's foreground tint. It fades with the drawer slide
+   (Dawn switched it on/off in one frame: the whole page flashed dark on open and back on close mid-slide). */
+.zenith-header .header__icon--menu::before {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: calc(var(--viewport-height, 100vh) - (var(--header-bottom-position, 100%)));
   background: rgba(var(--color-shadow), 0.6);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+}
+
+.zenith-header details.menu-opening > .header__icon--menu::before {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: opacity 0.3s ease, visibility 0s;
+}
+
+/* Header items that change place while the drawer is open (logo, close X, account/cart) fade instead of jumping:
+   in on open; out while it closes (global.js keeps menu-open + adds menu-closing for the 400ms slide), back in after. */
+.zenith-header :is(.header__heading-link, .header__icons, .header__icon--menu > span) {
+  transition: opacity 0.2s ease;
+}
+
+.section-header.menu-open:not(.menu-closing) .zenith-header :is(.header__heading-link, .header__icons, .header__icon--menu > span) {
+  animation: zenith-header-fade-in 0.25s ease;
+}
+
+.section-header.menu-closing .zenith-header :is(.header__heading-link, .header__icons, .header__icon--menu > span) {
+  opacity: 0;
+}
+
+@keyframes zenith-header-fade-in {
+  from { opacity: 0; }
+}
+
+/* iOS draws a grey box on every tapped link/summary (a flash on each tap); the gold hover + focus ring show the state. */
+.zenith-header,
+.zenith-drawer {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zenith-header .header__icon--menu::before,
+  .zenith-header :is(.header__heading-link, .header__icons, .header__icon--menu > span) {
+    transition: none;
+    animation: none;
+  }
 }
 
 /* Header bar while the drawer is open (mobile): logo left, then account/cart, close on the right */
