@@ -123,9 +123,13 @@ h1, h2, h3, h4, h5, .h0, .h1, .h2, .h3, .h4, .h5 {
   box-shadow: none;
 }
 
+/* Solid gold under the gradient + no fade. A gradient can't transition, so fading background-color up from the
+   shorthand's transparent made the button blink see-through for a frame on hover/tap (the "flicker"). */
 .button.zenith-btn--gold {
-  background: linear-gradient(90deg, var(--z-dawn-gold) 0%, var(--z-gold) 100%);
+  background-color: var(--z-gold);
+  background-image: linear-gradient(90deg, var(--z-dawn-gold) 0%, var(--z-gold) 100%);
   color: var(--z-obsidian);
+  transition: none;
 }
 
 .button.zenith-btn--dark {
@@ -148,7 +152,6 @@ h1, h2, h3, h4, h5, .h0, .h1, .h2, .h3, .h4, .h5 {
   box-shadow: inset 0 0 0 1px var(--z-dawn-gold);
 }
 
-.button.zenith-btn--gold:not([disabled]):hover,
 .button.zenith-btn--dark:not([disabled]):hover,
 .button.zenith-btn--light:not([disabled]):hover {
   filter: brightness(1.08);
@@ -1124,7 +1127,7 @@ div.zenith-cart-offers__fill {
   /* One word per line, so every label is the same two-line block ("FREE / SHIPPING", "10% / OFF")
      and neighbours never run into each other. */
   width: min-content;
-  font-size: 1.05rem;
+  font-size: 1.2rem; /* ≥12px on phones (design audit) */
   line-height: 1.15;
   letter-spacing: 0.02em;
   text-align: center;
@@ -1156,7 +1159,6 @@ div.zenith-cart-offers__fill {
 @media screen and (max-width: 375px) {
   .zenith-cart-offers__box { gap: var(--z-space-3, 12px); padding: var(--z-space-3, 12px); }
   .zenith-cart-offers__title { font-size: 1.5rem; }
-  .zenith-cart-offers__step-label { font-size: 0.95rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1290,7 +1292,7 @@ cart-drawer-items .zenith-cart-offers__box {
 
 .zenith-cart-upsell__heading {
   margin: 0 0 var(--z-space-3, 12px);
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: rgba(var(--color-foreground), 0.6);
@@ -1441,7 +1443,7 @@ cart-drawer-items .zenith-cart-offers__box {
   border-radius: 99rem;
   background: rgba(var(--z-gold-rgb), 0.3);
   color: var(--z-dawn-gold, #eabe5f);
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   line-height: 1.3;
   vertical-align: middle;
 }
@@ -1837,13 +1839,18 @@ cart-remove-button .button::before {
   box-shadow: none; /* Dawn's .button:hover::after draws a border */
 }
 
-.button.zenith-btn--gold:not([disabled], [aria-disabled='true']):hover {
-  background: var(--z-summit-light);
-  filter: none;
+/* Hover only where a pointer hovers: on phones a tap left the hover colour stuck on */
+@media (hover: hover) {
+  .button.zenith-btn--gold:not([disabled], [aria-disabled='true']):hover {
+    background-color: var(--z-summit-light);
+    background-image: none;
+    filter: none;
+  }
 }
 
 .button.zenith-btn--gold:not([disabled], [aria-disabled='true']):active {
-  background: var(--z-summit-dark);
+  background-color: var(--z-summit-dark);
+  background-image: none;
   color: black; /* 4.9:1 on Summit Gold Dark */
   filter: none;
 }

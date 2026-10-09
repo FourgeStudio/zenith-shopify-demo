@@ -187,7 +187,7 @@
       {%- endif -%}
 
       {%- if has_faq -%}
-        <div class="zenith-contact__faq zenith-faq{% if s.faq_question_font_mobile == 'body' %} zenith-faq-q-body-m{% endif %}">
+        <div class="zenith-contact__faq zenith-faq{% if s.faq_question_font_mobile == 'body' %} zenith-faq-q-body-m{% endif %}{% if s.faq_question_font != 'heading' %} zenith-faq--q-body{% endif %}">
           {%- render 'zenith-section-heading',
             heading: s.faq_heading,
             subheading: s.faq_subheading,
@@ -828,6 +828,16 @@
       "step": 2,
       "unit": "px",
       "default": 40
+    },
+    {
+      "type": "select",
+      "id": "faq_question_font",
+      "label": "FAQ question font",
+      "default": "body",
+      "options": [
+        { "value": "body", "label": "Body font (Geist, regular)" },
+        { "value": "heading", "label": "Heading font" }
+      ]
     },
     {
       "type": "range",

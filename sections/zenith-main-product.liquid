@@ -652,15 +652,24 @@
           </div>
         {%- endif -%}
 
-        {%- if trust_blocks.size > 0 -%}
-          <ul class="zenith-mp__trust" role="list">
-            {%- for block in trust_blocks -%}
-              <li class="zenith-mp__trust-item" id="Block-{{ block.id }}" {{ block.shopify_attributes }}>
-                {%- render 'zenith-icon', icon: block.settings.icon, class: 'zenith-mp__trust-icon' -%}
-                <span>{{ block.settings.text | escape }}</span>
-              </li>
-            {%- endfor -%}
-          </ul>
+        {%- capture mp_trust -%}
+          {%- for block in trust_blocks -%}
+            {%- liquid
+                assign mbg_text = block.settings.text | downcase
+                if s.show_money_back == false
+                  if mbg_text contains 'money-back' or mbg_text contains 'money back'
+                    continue
+                  endif
+                endif
+              -%}
+            <li class="zenith-mp__trust-item" id="Block-{{ block.id }}" {{ block.shopify_attributes }}>
+              {%- render 'zenith-icon', icon: block.settings.icon, class: 'zenith-mp__trust-icon' -%}
+              <span>{{ block.settings.text | escape }}</span>
+            </li>
+          {%- endfor -%}
+        {%- endcapture -%}
+        {%- if mp_trust != blank -%}
+          <ul class="zenith-mp__trust" role="list">{{ mp_trust }}</ul>
         {%- endif -%}
 
         {%- if row_blocks.size > 0 -%}
@@ -747,6 +756,13 @@
   },
   "settings": [
     { "type": "header", "content": "Content" },
+    {
+      "type": "checkbox",
+      "id": "show_money_back",
+      "label": "Show Money-Back Guarantee",
+      "info": "Off hides any trust item that mentions the Zenith Money-Back Guarantee (it stays in the announcement bar and the guarantee sections).",
+      "default": true
+    },
     {
       "type": "text",
       "id": "placeholder_title",
@@ -1108,7 +1124,7 @@
     { "type": "range", "id": "fda_font_size_mobile", "label": "FDA bar text size", "min": 9, "max": 18, "step": 1, "unit": "px", "default": 13 },
     { "type": "range", "id": "button_font_size_mobile", "label": "Add to cart text size", "min": 14, "max": 32, "step": 1, "unit": "px", "default": 22 },
     { "type": "range", "id": "delivery_title_font_size_mobile", "label": "Delivery title size", "min": 11, "max": 22, "step": 1, "unit": "px", "default": 15 },
-    { "type": "range", "id": "delivery_text_font_size_mobile", "label": "Delivery text size", "info": "11px keeps the default copy on one line on a 375px phone. Raise it only if you shorten the text.", "min": 9, "max": 18, "step": 1, "unit": "px", "default": 11 },
+    { "type": "range", "id": "delivery_text_font_size_mobile", "label": "Delivery text size", "info": "12px is the smallest readable size on phones; long copy wraps to a second line.", "min": 9, "max": 18, "step": 1, "unit": "px", "default": 12 },
     { "type": "range", "id": "trust_font_size_mobile", "label": "Trust item size", "min": 9, "max": 18, "step": 1, "unit": "px", "default": 13 },
     { "type": "range", "id": "title_font_size_mobile", "label": "Accordion title size", "min": 12, "max": 28, "step": 1, "unit": "px", "default": 18 },
     { "type": "range", "id": "row_text_font_size_mobile", "label": "Accordion text size", "min": 11, "max": 22, "step": 1, "unit": "px", "default": 15 },

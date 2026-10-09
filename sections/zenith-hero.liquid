@@ -277,17 +277,26 @@
         {%- endif -%}
 
         {%- assign trust_items = section.blocks | where: 'type', 'trust' -%}
-        {%- if trust_items.size > 0 -%}
-          <ul class="zenith-hero__trust" role="list">
-            {%- for block in trust_items -%}
-              <li id="Block-{{ block.id }}" {{ block.shopify_attributes }}>
-                {%- if block.settings.icon != 'none' -%}
-                  {%- render 'zenith-icon', icon: block.settings.icon -%}
-                {%- endif -%}
-                <span>{{ block.settings.text | escape }}</span>
-              </li>
-            {%- endfor -%}
-          </ul>
+        {%- capture hero_trust -%}
+          {%- for block in trust_items -%}
+            {%- liquid
+                assign mbg_text = block.settings.text | downcase
+                if section.settings.show_money_back == false
+                  if mbg_text contains 'money-back' or mbg_text contains 'money back'
+                    continue
+                  endif
+                endif
+              -%}
+            <li id="Block-{{ block.id }}" {{ block.shopify_attributes }}>
+              {%- if block.settings.icon != 'none' -%}
+                {%- render 'zenith-icon', icon: block.settings.icon -%}
+              {%- endif -%}
+              <span>{{ block.settings.text | escape }}</span>
+            </li>
+          {%- endfor -%}
+        {%- endcapture -%}
+        {%- if hero_trust != blank -%}
+          <ul class="zenith-hero__trust" role="list">{{ hero_trust }}</ul>
         {%- endif -%}
       </div>
     </div>
@@ -327,6 +336,13 @@
     {
       "type": "header",
       "content": "Content"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_money_back",
+      "label": "Show Money-Back Guarantee",
+      "info": "Off hides any trust item that mentions the Zenith Money-Back Guarantee (it stays in the announcement bar and the guarantee sections).",
+      "default": true
     },
     {
       "type": "text",

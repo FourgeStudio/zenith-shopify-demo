@@ -54,10 +54,11 @@
   content: '';
 }
 
-/* UI states (Figma "UI States · WCAG 2.2 AA"): hover = Basalt row. The fill reaches --z-faq-hover-x past the text on
-   both sides (box-shadow, no layout shift) so the text stays aligned with the heading. Focus ring = zenith-base.css. */
+/* UI states (Figma "UI States · WCAG 2.2 AA"): hover = Basalt row. --z-faq-hover-x can widen the fill past the row
+   (box-shadow, no layout shift); 0 = the fill is exactly as wide as the divider lines (design audit 2026-10: the
+   hover box was 12px wider than the resting row on each side). Focus ring = zenith-base.css. */
 .zenith-faq__question {
-  --z-faq-hover-x: var(--z-space-3);
+  --z-faq-hover-x: 0px;
   transition: background-color var(--duration-short, 0.1s) ease, box-shadow var(--duration-short, 0.1s) ease;
 }
 
@@ -135,6 +136,14 @@
 /* JS fallback: the icon turns back as soon as closing starts */
 .zenith-faq__item.is-closing .zenith-faq__icon {
   transform: none;
+}
+
+/* Questions in the body font (Geist, regular) — design audit 2026-10: FAQ = "text-large", not the condensed heading font.
+   Section setting "Question font"; the FAQ section heading keeps the heading font. */
+.zenith-faq--q-body .zenith-faq__question {
+  font-family: var(--font-body-family);
+  font-weight: 400;
+  line-height: 1.4;
 }
 
 /* Optional: questions in the body font on mobile (wrapper class zenith-faq-q-body-m; contact page design). */

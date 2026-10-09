@@ -458,7 +458,7 @@
   padding: 4px 3px;
   background: rgba(var(--z-gold-rgb, 197, 147, 14), 0.16);
   color: var(--z-dawn-gold, #eabe5f);
-  font-size: 0.9rem;
+  font-size: 1.2rem;
   line-height: 1.2;
   text-align: center;
   letter-spacing: 0.02em;
@@ -509,7 +509,7 @@
 
 .zenith-mp__vcard-title {
   padding: 5px 4px 0;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   line-height: 1.25;
   font-weight: 600;
   text-align: center;
@@ -533,7 +533,7 @@
 
 .zenith-mp__vcard-was {
   color: rgba(var(--color-foreground), 0.55);
-  font-size: 1rem;
+  font-size: 1.2rem;
 }
 
 .zenith-mp__vcard-badge {
@@ -542,7 +542,7 @@
   border-radius: 4px;
   background: rgba(var(--z-gold-rgb, 197, 147, 14), 0.22);
   color: var(--z-dawn-gold, #eabe5f);
-  font-size: 0.95rem;
+  font-size: 1.2rem;
   line-height: 1.5;
   text-align: center;
 }
@@ -861,7 +861,7 @@
   .zenith-mp__vcard-ship {
     gap: 6px;
     padding: 6px 8px;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     letter-spacing: 0.04em;
   }
 
@@ -904,7 +904,7 @@
   .zenith-mp__vcard-badge {
     margin: 6px 8px 10px;
     padding: 2px 8px;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
   }
 
   .zenith-mp__vcard-prices:last-child {

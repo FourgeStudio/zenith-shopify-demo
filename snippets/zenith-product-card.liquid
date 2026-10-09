@@ -133,7 +133,7 @@
           href="{{ product.url }}"
           class="button zenith-atc zenith-card__link{% if card_btn_style != 'scheme' %} zenith-btn zenith-btn--{{ card_btn_style }}{% endif %}"
         >
-          <span>{{ button_label | default: 'View product' | escape }}<span class="visually-hidden">: {{ product.title | escape }}</span></span>
+          <span>{{ button_label | default: 'View product' | escape }}</span>
           {%- if card_btn_icon != 'none' -%}
             {%- render 'zenith-icon', icon: card_btn_icon, class: 'zenith-btn__icon' -%}
           {%- endif -%}

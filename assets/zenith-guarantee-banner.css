@@ -71,7 +71,7 @@
   border: 3px double var(--z-gold);
   border-radius: 50%;
   color: var(--z-dawn-gold);
-  font-size: 0.7rem;
+  font-size: 1rem; /* micro label: 10px minimum */
   text-transform: uppercase;
   letter-spacing: 0.12em;
   text-align: center;

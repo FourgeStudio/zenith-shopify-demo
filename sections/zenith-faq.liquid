@@ -33,7 +33,7 @@
 
 <section
   id="Zenith-{{ section.id }}"
-  class="zenith-section zenith-faq zenith-faq--m-{{ section.settings.heading_alignment_mobile }} color-{{ section.settings.color_scheme }} gradient"
+  class="zenith-section zenith-faq zenith-faq--m-{{ section.settings.heading_alignment_mobile }} zenith-faq--q-{{ section.settings.question_font | default: 'body' }} color-{{ section.settings.color_scheme }} gradient"
 >
   <div class="page-width">
     <div class="zenith-faq__inner">
@@ -279,6 +279,16 @@
       "step": 1,
       "unit": "px",
       "default": 14
+    },
+    {
+      "type": "select",
+      "id": "question_font",
+      "label": "Question font",
+      "default": "body",
+      "options": [
+        { "value": "body", "label": "Body font (Geist, regular)" },
+        { "value": "heading", "label": "Heading font" }
+      ]
     },
     {
       "type": "range",

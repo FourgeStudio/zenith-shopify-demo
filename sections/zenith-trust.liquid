@@ -42,6 +42,14 @@
         {%- if section.blocks.size > 0 -%}
           <ul class="zenith-trust__list" role="list">
             {%- for block in section.blocks -%}
+              {%- liquid
+                assign mbg_text = block.settings.text | downcase
+                if s.show_money_back == false
+                  if mbg_text contains 'money-back' or mbg_text contains 'money back'
+                    continue
+                  endif
+                endif
+              -%}
               <li class="zenith-trust__item" id="Block-{{ block.id }}" {{ block.shopify_attributes }}>
                 {%- if block.settings.icon != 'none' -%}
                   {%- render 'zenith-icon', icon: block.settings.icon, class: 'zenith-trust__icon' -%}
@@ -101,6 +109,13 @@
     {
       "type": "header",
       "content": "Content"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_money_back",
+      "label": "Show Money-Back Guarantee",
+      "info": "Off hides any trust item that mentions the Zenith Money-Back Guarantee (it stays in the announcement bar and the guarantee sections).",
+      "default": true
     },
     {
       "type": "text",
