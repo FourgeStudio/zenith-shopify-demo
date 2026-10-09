@@ -6,7 +6,7 @@
 {%- liquid
   assign s = section.settings
   # zenith: content is global (Theme settings → Zenith · Featured product), so every page shows the same block;
-  # the section only sets layout, colours and spacing.
+  # the section only sets layout, colours and spacing. Badge only with "Show badge" on (off by default).
   assign fp_product = settings.zfp_product
   assign fp_badge = ''
   if settings.zfp_show_badge
@@ -172,7 +172,18 @@
             {%- for n in (1..4) -%}
               {%- assign t_text_key = 'zfp_trust_' | append: n | append: '_text' -%}
               {%- assign t_icon_key = 'zfp_trust_' | append: n | append: '_icon' -%}
-              {%- if settings[t_text_key] != blank -%}
+              {%- liquid
+                assign t_text = settings[t_text_key] | downcase
+                assign t_show = true
+                if settings[t_text_key] == blank
+                  assign t_show = false
+                elsif settings.zfp_show_money_back == false
+                  if t_text contains 'money-back' or t_text contains 'money back'
+                    assign t_show = false
+                  endif
+                endif
+              -%}
+              {%- if t_show -%}
                 <li>
                   {%- render 'zenith-icon', icon: settings[t_icon_key] -%}
                   <span>{{ settings[t_text_key] | escape | replace: '[customers]', settings.customer_count }}</span>
@@ -701,7 +712,7 @@
       "max": 18,
       "step": 1,
       "unit": "px",
-      "default": 10
+      "default": 12
     },
     {
       "type": "range",
