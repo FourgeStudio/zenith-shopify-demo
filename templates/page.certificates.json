@@ -447,6 +447,7 @@
         "heading": "Our Official Pages",
         "heading_mobile": "",
         "text_mobile": "",
+        "hover_effect": false,
         "heading_alignment": "center",
         "columns_desktop": 5,
         "card_layout": "stacked",
@@ -491,8 +492,7 @@
         "padding_top": 32,
         "padding_bottom": 40,
         "padding_top_mobile": 24,
-        "padding_bottom_mobile": 20,
-        "hover_effect": false
+        "padding_bottom_mobile": 20
       }
     },
     "notice": {
@@ -607,6 +607,7 @@
         "subheading_font_size": 18,
         "subheading_opacity": 100,
         "eyebrow_font_size": 14,
+        "question_font": "body",
         "title_font_size": 22,
         "text_font_size": 16,
         "icon_size": 20,
@@ -642,9 +643,10 @@
         "judge_me_reviews_review_widget_homepage_BKCqgw"
       ],
       "settings": {
+        "jdgm_product": "zenith-anti-aging-tallow-cream",
         "eyebrow": "",
-        "heading": "[customers] Filipino Men Trust Zenith Products",
-        "subheading": "<p>Men in Manila using the cream. Unedited and verified.</p>",
+        "heading": "[customers] Filipino Men Have Ordered From Zenith",
+        "subheading": "",
         "heading_alignment": "center",
         "heading_max_width": 760,
         "subheading_spacing": 28,
@@ -668,8 +670,8 @@
         "text_font_size": 14,
         "icon_size": 14,
         "button_font_size": 20,
-        "heading_mobile": "",
-        "subheading_mobile": "<p>Real Filipino men using Zenith. Unedited and verified.</p>",
+        "heading_mobile": "[customers] Filipino Men Have Ordered From Zenith",
+        "subheading_mobile": "",
         "heading_font_size_mobile": 36,
         "subheading_font_size_mobile": 16,
         "subheading_opacity_mobile": 70,
@@ -682,8 +684,7 @@
         "padding_top": 52,
         "padding_bottom": 48,
         "padding_top_mobile": 20,
-        "padding_bottom_mobile": 8,
-        "jdgm_product": "zenith-anti-aging-tallow-cream"
+        "padding_bottom_mobile": 8
       }
     }
   },
