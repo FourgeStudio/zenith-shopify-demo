@@ -117,7 +117,7 @@
         "heading": "The Maintenance System Built for Filipino Men",
         "heading_mobile": "",
         "text": "<p>Everything you need to stay in your prime.</p>",
-        "button_label": "Shop Now",
+        "button_label": "Shop Zenith Products",
         "button_link": "shopify://collections/all",
         "button_product": "",
         "button_label_mobile": "Shop Zenith Products",
@@ -170,6 +170,7 @@
         "overlay_color": "#203940",
         "overlay_opacity": 100,
         "overlay_coverage": 75,
+        "overlay_solid": 0,
         "ribbon_color": "#f6233b",
         "ribbon_text_color": "#ffffff",
         "highlight_color": "#eabe5f",
@@ -211,6 +212,7 @@
         "mobile_height": 540,
         "mobile_overlay_style": "top",
         "mobile_overlay_coverage": 70,
+        "mobile_overlay_solid": 0,
         "vertical_padding_mobile": 24,
         "heading_font_size_mobile": 40,
         "subheading_font_size_mobile": 16,
@@ -259,7 +261,7 @@
           "type": "item",
           "settings": {
             "icon": "certificate",
-            "text": "FDA-Notified Products",
+            "text": "Notified with the Philippine FDA",
             "link": ""
           }
         },
@@ -267,7 +269,7 @@
           "type": "item",
           "settings": {
             "icon": "farm",
-            "text": "100% Grass-Fed Beef Tallow",
+            "text": "Premium Grass-Fed Beef Tallow",
             "link": ""
           }
         },
@@ -275,7 +277,7 @@
           "type": "item",
           "settings": {
             "icon": "dropper",
-            "text": "Formulated For Filipinos",
+            "text": "Made for Filipino Men",
             "link": ""
           }
         }
@@ -289,6 +291,8 @@
       ],
       "settings": {
         "show_money_back": false,
+        "display": "icons",
+        "show_pause_button": false,
         "alignment": "spread",
         "show_border": false,
         "icon_size": 22,
@@ -590,6 +594,7 @@
         "speed_mobile": 240,
         "alternate_direction": true,
         "pause_on_hover": true,
+        "show_pause_button": false,
         "heading_max_width": 760,
         "heading_gap": 8,
         "heading_spacing": 32,
@@ -847,6 +852,7 @@
         "heading_spacing": 32,
         "gap": 24,
         "controls_spacing": 32,
+        "video_max_height": 0,
         "video_ratio": "13-18",
         "play_size": 80,
         "play_position": 53,
@@ -856,6 +862,7 @@
         "thumb_size": 56,
         "color_scheme": "scheme-1",
         "card_color_scheme": "scheme-6",
+        "subheading_opacity": 70,
         "card_border_color": "#294850",
         "title_color": "#d6b356",
         "overlay_style": "bottom",
@@ -873,6 +880,7 @@
         "title_font_size": 12,
         "handle_font_size": 10,
         "heading_alignment_mobile": "left",
+        "video_max_height_mobile": 0,
         "mobile_slide_width": 83,
         "heading_font_size_mobile": 36,
         "subheading_font_size_mobile": 16,
@@ -942,13 +950,13 @@
         "heading_alignment": "center",
         "columns_desktop": 3,
         "show_media": true,
+        "image_zoom": false,
         "media_position": "left",
         "image_ratio": "square",
         "image_size": 152,
         "text_alignment": "left",
         "icon_position": "top",
         "vertical_alignment": "center",
-        "image_zoom": false,
         "heading_max_width": 760,
         "heading_spacing": 32,
         "gap": 32,
@@ -1476,6 +1484,7 @@
         "heading": "Our Official Pages",
         "heading_mobile": "Join the #ZenithTribe",
         "text_mobile": "<p>Follow Zenith on Facebook and Instagram. Official pages only, listed on our Verify Zenith Products page.</p>",
+        "hover_effect": true,
         "heading_alignment": "center",
         "columns_desktop": 5,
         "card_layout": "stacked",
@@ -1539,6 +1548,7 @@
         "judge_me_reviews_review_widget_homepage_BKCqgw"
       ],
       "settings": {
+        "jdgm_product": "",
         "eyebrow": "",
         "heading": "[customers] Filipino Men Trust Zenith Products",
         "subheading": "<p>Men in Manila using the cream. Unedited and verified.</p>",
@@ -1682,6 +1692,7 @@
         "subheading_font_size": 18,
         "subheading_opacity": 100,
         "eyebrow_font_size": 14,
+        "question_font": "body",
         "title_font_size": 22,
         "text_font_size": 16,
         "icon_size": 20,
@@ -1860,6 +1871,7 @@
         "used_text": "",
         "note": "<p>Pick one product or run the full set.</p><p>Pareho lang ang directions, nasa label.</p>",
         "show_number": false,
+        "step_label": "",
         "show_divider": true,
         "divider_breakpoint": "mobile",
         "step_layout": "beside",
@@ -1878,6 +1890,7 @@
         "divider_spacing": 40,
         "color_scheme": "scheme-1",
         "title_color": "#d6b356",
+        "title_heading_font": false,
         "number_background": "#c5930e",
         "number_color": "#121212",
         "text_opacity": 70,
