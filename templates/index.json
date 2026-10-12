@@ -574,14 +574,14 @@
       ],
       "settings": {
         "content_source": "global",
-        "eyebrow": "Used by [customers] Filipino men",
-        "heading": "Real Men. Real Results.",
-        "heading_mobile": "Built for Filipino men over 35",
-        "subheading": "<p>See the difference a proper regimen makes.</p><p>From clearer skin to thicker hair, every transformation here comes from verified Zenith customers putting in the consistent work.</p>",
+        "eyebrow": "",
+        "heading": "Straight from Zenith Men",
+        "heading_mobile": "Straight from Zenith Men",
+        "subheading": "<p>Individual results may vary.</p>",
         "product_prefix": "Used",
         "verified_label": "Verified buyer",
         "show_avatar": false,
-        "disclaimer": "Individual results may vary.*",
+        "disclaimer": "",
         "link_label": "",
         "link": "",
         "heading_alignment": "center",
@@ -910,7 +910,7 @@
             "icon": "phone",
             "icon_text": "",
             "title": "",
-            "text": "<p>Our team texts or calls to confirm your details, so your order goes to the right place.</p>"
+            "text": "<p>Our local team will text or call to verify your details, ensuring your order gets exactly where it needs to go.</p>"
           }
         },
         "column_2": {
@@ -920,7 +920,7 @@
             "icon": "qr",
             "icon_text": "",
             "title": "",
-            "text": "<p>Every box has its own QR code. Scan it when it arrives to check it is a real Zenith product.</p>"
+            "text": "<p>Every box features a unique, tamper-proof QR code. Scan it upon arrival to instantly verify your gear is 100% authentic.</p>"
           }
         },
         "column_4": {
@@ -930,7 +930,7 @@
             "icon": "badge_check",
             "icon_text": "",
             "title": "",
-            "text": "<p>Pay when it is in your hands, with nationwide Cash on Delivery.</p>"
+            "text": "<p>Pay only when the product is in your hands with our nationwide Cash on Delivery.</p>"
           }
         }
       },
