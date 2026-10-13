@@ -721,7 +721,7 @@
         "zenith_caption": "Zenith Anti-Aging Tallow Cleanser",
         "column_1_title": "Other Product",
         "column_1_note": "(Harsh deep-clean washes, Strong foaming face washes)",
-        "column_2_title": "Other Products",
+        "column_2_title": "Other Product",
         "column_2_note": "(Gentle washes, Basic mild cleansers)",
         "column_3_title": "",
         "column_3_note": "",
@@ -824,7 +824,7 @@
         "text_font_size": 16,
         "icon_size": 14,
         "button_font_size": 20,
-        "heading_mobile": "[customers] Filipino Men Trust Zenith Products",
+        "heading_mobile": "",
         "subheading_mobile": "",
         "heading_font_size_mobile": 36,
         "subheading_font_size_mobile": 16,
@@ -1191,7 +1191,7 @@
           "type": "trust",
           "settings": {
             "icon": "dropper",
-            "text": "Ingredients named on the label"
+            "text": "Ingredients named on the labels"
           }
         }
       },

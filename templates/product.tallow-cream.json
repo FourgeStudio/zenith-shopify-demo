@@ -283,7 +283,7 @@
         "rating_value": "4.69",
         "rating_count": "2,158",
         "rating_label": "Trusted by [customers] Filipino men",
-        "subtitle": "<p>The night cream that does the whole job. Retinol 0.2% buffered by premium beef tallow, in one lightweight step before bed.</p>",
+        "subtitle": "<p>Night cream with 0.2% retinol on a beef tallow base.</p>",
         "price_badge": "",
         "show_fda": true,
         "fda_label": "Philippine FDA Notified",
@@ -926,8 +926,8 @@
       ],
       "settings": {
         "eyebrow": "",
-        "heading": "Two minutes at night",
-        "subheading": "<p>No 10-step routines</p>",
+        "heading": "3-Step Process",
+        "subheading": "<p>Less than a minute before bed.</p>",
         "show_used": true,
         "products": [],
         "used_text": "",
@@ -1051,7 +1051,7 @@
         "heading": "Why guys switch to Zenith",
         "subheading": "<p>Built specifically for the Filipino climate and lifestyle.</p>",
         "zenith_label": "Zenith",
-        "zenith_caption": "",
+        "zenith_caption": "Zenith Anti-Aging Tallow Cream",
         "column_1_title": "Other Product",
         "column_1_note": "(High-strength retinol cream, Higher retinol percentages)",
         "column_2_title": "Other Product",
@@ -1133,7 +1133,7 @@
       "settings": {
         "jdgm_product": "",
         "eyebrow": "",
-        "heading": "[customers] Filipino Men Trust Zenith Products",
+        "heading": "What Filipino men say about the Tallow Cream",
         "subheading": "<p>Reviews from customers who bought the Zenith Anti-Aging Tallow Cream, shown as they wrote them.</p>",
         "heading_alignment": "center",
         "heading_max_width": 760,
@@ -1267,7 +1267,8 @@
       "settings": {
         "content_source": "global",
         "eyebrow": "",
-        "heading": "The Zenith Guarantee",
+        "heading": "What happens after you order",
+        "heading_mobile": "The Zenith Guarantee",
         "subheading": "",
         "show_payment_icons": false,
         "footer_text": "<p>Delivered by LBC, J&T, Gogo Express, Ninja Van, and Amare Group's own rider fleet.</p>",
@@ -1519,7 +1520,7 @@
           "type": "trust",
           "settings": {
             "icon": "dropper",
-            "text": "Ingredients named on the label"
+            "text": "Ingredients named on the labels"
           }
         }
       },
@@ -1535,7 +1536,7 @@
         "use_collection_content": false,
         "heading": "{{ section.settings.button_product.title }}",
         "heading_mobile": "",
-        "text": "<p>One thin layer before bed. That is the&nbsp;<br/>whole night routine.</p>",
+        "text": "<p>One thin layer before bed. That is the whole night routine.</p>",
         "button_label": "Add to Cart",
         "button_link": "",
         "button_product": "zenith-anti-aging-tallow-cream",

@@ -772,7 +772,7 @@
         "text_font_size": 16,
         "icon_size": 14,
         "button_font_size": 20,
-        "heading_mobile": "[customers] Filipino Men Trust Zenith Products",
+        "heading_mobile": "",
         "subheading_mobile": "",
         "heading_font_size_mobile": 36,
         "subheading_font_size_mobile": 16,
@@ -1143,7 +1143,7 @@
           "type": "trust",
           "settings": {
             "icon": "dropper",
-            "text": "Ingredients named on the label"
+            "text": "Ingredients named on the labels"
           }
         }
       },
