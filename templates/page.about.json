@@ -209,7 +209,7 @@
             "icon": "badge_check_round",
             "icon_text": "",
             "title": "Proof Over Hype",
-            "text": "<p>We use therapeutic doses of clinically-backed ingredients like 0.2% Retinol, Niacinamide, and our 4-active CABROXIL matrix so you get visible results without pharmaceutical side effects or lifelong dependency.</p>"
+            "text": "<p>We use thoughtfully dosed ingredients like 0.2% Retinol, Niacinamide, and our 4-active CABROXIL matrix, in beef tallow, for a simple routine that feels gentle on skin.</p>"
           }
         },
         "belief_climate": {
@@ -336,7 +336,7 @@
         "shared_text": false,
         "shared_columns": false,
         "text": "<p>Zenith started with one problem:&nbsp;<br/>Filipino men over 35 were underserved.&nbsp;<br/><br/>We built simple, effective skincare and hair care for real routines in Philippine heat. Two years and 100,000+ customers later, that is still the job.</p>",
-        "button_label": "Shop Our Products",
+        "button_label": "Shop Zenith",
         "button_link": "shopify://collections/all",
         "image_position": "left",
         "image_ratio": "adapt",
@@ -444,7 +444,7 @@
       ],
       "settings": {
         "content_source": "global",
-        "heading": "Our Official Pages",
+        "heading": "Our Official Stores",
         "heading_mobile": "",
         "text_mobile": "",
         "hover_effect": true,
