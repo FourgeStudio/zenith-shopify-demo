@@ -186,7 +186,7 @@
         <p class="zenith-cart-offers__title">{{ zco_title }}</p>
         <p class="zenith-cart-offers__msg" role="status">
           {%- if zco_next_offer != '' -%}
-            {%- capture zco_money -%}<strong>{{ zco_next_left | money }}</strong>{%- endcapture -%}
+            {%- capture zco_money -%}<strong>{{ zco_next_left | money_without_trailing_zeros }}</strong>{%- endcapture -%}
             {%- capture zco_offer -%}<strong>{{ zco_next_offer }}</strong>{%- endcapture -%}
             {{- settings.cart_offers_next | escape | replace: '[amount]', zco_money | replace: '[offer]', zco_offer -}}
           {%- else -%}

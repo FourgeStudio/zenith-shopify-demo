@@ -392,7 +392,7 @@
           "type": "question",
           "settings": {
             "question": "Do you offer free shipping?",
-            "answer": "<p>Shipping fees vary by location and promotion. Check the product page or your cart for the latest.</p>"
+            "answer": "<p>Shipping is free on orders of [free_shipping] and up. Below that, the shipping fee depends on your location and shows in your cart before you pay.</p>"
           }
         },
         "question_8": {

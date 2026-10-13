@@ -276,7 +276,7 @@
         "question_6"
       ],
       "settings": {
-        "show_money_back": false,
+        "show_money_back": true,
         "placeholder_title": "Zenith Anti-Aging Tallow Cream",
         "show_rating": true,
         "show_stars": false,
@@ -621,7 +621,7 @@
         "filter_products": [],
         "eyebrow": "",
         "heading": "A Complete Routine,  Built for Men.",
-        "heading_mobile": "Hear from the men who use Zenith every day.",
+        "heading_mobile": "",
         "subheading": "<p>Hear from the men who use Zenith every day.</p>",
         "subheading_mobile_only": false,
         "play_label": "Play video",
@@ -1022,7 +1022,7 @@
         "row-3": {
           "type": "row",
           "settings": {
-            "label": "Made for nightly use",
+            "label": "Gentle enough for nightly use",
             "zenith_value": "Yes",
             "value_1": "No",
             "value_2": "Yes",
@@ -1053,9 +1053,9 @@
         "zenith_label": "Zenith",
         "zenith_caption": "",
         "column_1_title": "Other Product",
-        "column_1_note": "(Harsh deep-clean washes, Strong foaming face washes)",
+        "column_1_note": "(Regular retinol creams)",
         "column_2_title": "Other Product",
-        "column_2_note": "(Gentle washes, Basic mild cleansers)",
+        "column_2_note": "(Basic moisturizers)",
         "column_3_title": "",
         "column_3_note": "",
         "heading_alignment": "center",
@@ -1270,7 +1270,7 @@
         "heading": "The Zenith Guarantee",
         "subheading": "",
         "show_payment_icons": false,
-        "footer_text": "<p>Delivered by LBC, J&T, Gogo Express, Ninja Van, and Amare Group's own rider fleet.</p>",
+        "footer_text": "<p>Delivered by GoGo Xpress, SPX, LBC, J&T, Ninja Van, and Amare Group's own rider fleet.</p>",
         "heading_alignment": "center",
         "columns_desktop": 3,
         "show_media": true,
@@ -1416,14 +1416,14 @@
           "type": "question",
           "settings": {
             "question": "How long will one jar of the Zenith Anti-Aging Tallow Cream last?",
-            "answer": "<p>With recommended nightly use, one jar of Zenith Anti-Aging Tallow Cream typically lasts 1 -2 months.<br/><br/>Since you only need a pea-sized amount for the entire face, a little goes a long way.</p>"
+            "answer": "<p>With recommended nightly use, one jar of Zenith Anti-Aging Tallow Cream typically lasts 1 to 2 months.<br/><br/>Since you only need a pea-sized amount for the entire face, a little goes a long way.</p>"
           }
         },
         "question_4": {
           "type": "question",
           "settings": {
             "question": "Should I use the Zenith Anti-Aging Tallow Cream in the morning or evening?",
-            "answer": "<p>The Zenith Anti-Aging Tallow Cream is best used in the evening, as retinol can increase sun sensitivity.<br/><br/>Apply to clean, dry skin before bed. We recommend to use sunscreen during daytime hours when using any retinol product, regardless of when you apply it.</p>"
+            "answer": "<p>The Zenith Anti-Aging Tallow Cream is best used in the evening, as retinol can increase sun sensitivity.<br/><br/>Apply to clean, dry skin before bed. We recommend using sunscreen during daytime hours when using any retinol product, regardless of when you apply it.</p>"
           }
         },
         "question_5": {
@@ -1437,7 +1437,7 @@
           "type": "question",
           "settings": {
             "question": "How long will it take for the product to ship to me?",
-            "answer": "<p>We ship within 1 business day using GoGoXpress, NinjaVan, and SPX.<br/><br/>Delivery typically takes 3 business days for Metro Manila and 3-7 business days for Visayas and Mindanao regions.</p>"
+            "answer": "<p>We ship within 1 business day using GoGo Xpress, SPX, LBC, J&T, Ninja Van, or Amare Group's own riders.<br/><br/>Delivery typically takes 3 business days for Metro Manila and 3-7 business days for Visayas and Mindanao regions.</p>"
           }
         }
       },
@@ -1530,7 +1530,7 @@
         "trust_4"
       ],
       "settings": {
-        "show_money_back": false,
+        "show_money_back": true,
         "eyebrow": "Trusted by [customers] Filipino men",
         "use_collection_content": false,
         "heading": "{{ section.settings.button_product.title }}",

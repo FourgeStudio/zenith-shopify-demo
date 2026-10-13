@@ -946,7 +946,7 @@
         "subheading": "",
         "footer_image": "shopify://shop_images/payments.svg",
         "show_payment_icons": false,
-        "footer_text": "<p>Delivered by LBC, J&T, Gogo Express, Ninja Van and Amare Group's own riders.</p>",
+        "footer_text": "<p>Delivered by GoGo Xpress, SPX, LBC, J&T, Ninja Van, and Amare Group's own riders.</p>",
         "heading_alignment": "center",
         "columns_desktop": 3,
         "show_media": true,
@@ -1103,7 +1103,7 @@
         "subheading": "<p>Honest gear for your skin, your hair, and the man wearing it.</p>",
         "button_icon": "arrow_right",
         "heading_alignment": "center",
-        "columns_desktop": 4,
+        "columns_desktop": 2,
         "aspect_ratio": "fixed",
         "card_height": 440,
         "heading_max_width": 760,
@@ -1641,7 +1641,7 @@
           "type": "question",
           "settings": {
             "question": "Do you offer free shipping?",
-            "answer": "<p>Shipping fees vary by location and promotion. Check the product page or your cart for the latest.</p>"
+            "answer": "<p>Shipping is free on orders of [free_shipping] and up. Below that, the shipping fee depends on your location and shows in your cart before you pay.</p>"
           }
         },
         "question_8": {
