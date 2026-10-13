@@ -4,9 +4,10 @@
   Accepts: eyebrow, heading, subheading (richtext), alignment ('left'|'center'),
            tag ('h1'|'h2'|'h3'), uppercase {Boolean}, class optional,
            heading_mobile optional (replaces the heading below 750px)
+           subheading_mobile optional (replaces the subheading below 750px)
   [customers] in any text is replaced by Theme settings → Zenith → Customer count.
 {% endcomment %}
-{%- if eyebrow != blank or heading != blank or heading_mobile != blank or subheading != blank -%}
+{%- if eyebrow != blank or heading != blank or heading_mobile != blank or subheading != blank or subheading_mobile != blank -%}
   {%- assign heading_tag = tag | default: 'h2' -%}
   <div class="zenith-heading zenith-heading--{{ alignment | default: 'center' }}{% if uppercase %} zenith-heading--uppercase{% endif %} {{ class }}">
     {%- if eyebrow != blank -%}
@@ -20,8 +21,11 @@
     {%- elsif heading != blank -%}
       <{{ heading_tag }} class="zenith-heading__title">{{ heading | escape | replace: '[customers]', settings.customer_count | replace: 'Money-Back', '<span class="zenith-nowrap">Money-Back</span>' | replace: 'Money-back', '<span class="zenith-nowrap">Money-back</span>' }}</{{ heading_tag }}>
     {%- endif -%}
+    {%- if subheading_mobile != blank -%}
+      <div class="zenith-subheading zenith-hide-desktop">{{ subheading_mobile | replace: '[customers]', settings.customer_count }}</div>
+    {%- endif -%}
     {%- if subheading != blank -%}
-      <div class="zenith-subheading">{{ subheading | replace: '[customers]', settings.customer_count | replace: 'Money-Back', '<span class="zenith-nowrap">Money-Back</span>' | replace: 'Money-back', '<span class="zenith-nowrap">Money-back</span>' }}</div>
+      <div class="zenith-subheading{% if subheading_mobile != blank %} zenith-hide-mobile{% endif %}">{{ subheading | replace: '[customers]', settings.customer_count | replace: 'Money-Back', '<span class="zenith-nowrap">Money-Back</span>' | replace: 'Money-back', '<span class="zenith-nowrap">Money-back</span>' }}</div>
     {%- endif -%}
   </div>
 {%- endif -%}

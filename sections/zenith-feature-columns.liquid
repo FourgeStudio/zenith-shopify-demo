@@ -107,6 +107,7 @@
     {%- render 'zenith-section-heading',
       eyebrow: section.settings.eyebrow,
       heading: section.settings.heading,
+      heading_mobile: section.settings.heading_mobile,
       subheading: section.settings.subheading,
       alignment: section.settings.heading_alignment,
       uppercase: section.settings.heading_uppercase
@@ -336,6 +337,12 @@
       "id": "heading",
       "label": "Heading",
       "default": "The Zenith Guarantee"
+    },
+    {
+      "type": "text",
+      "id": "heading_mobile",
+      "label": "Mobile heading",
+      "info": "Optional. Replaces the heading on phones."
     },
     {
       "type": "richtext",
