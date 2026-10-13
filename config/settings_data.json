@@ -449,9 +449,14 @@
     "zg_logo5_name": "Ninja Van",
     "zg_logo5_scale": 100,
     "zfp_product": "zenith-anti-aging-tallow-cream",
+    "zfp_show_badge": true,
+    "zfp_below_price": "benefits",
+    "zfp_show_money_back": true,
+    "zfp_show_media_pager": true,
+    "zgb_text": "<p>We stand behind every Zenith product. Use it as directed, and if you are not happy with your results, we will refund you. No Hassle. Just show us proof. Full terms on our <a href=\"/policies/refund-policy\">Refunds and Returns</a> page.</p>",
     "zgb_image": "shopify://shop_images/vector-icons_7.png",
-    "zbs_text": "<p>Filipino men over 35 have been underserved for too long. Forced to choose between overly complicated routines or generic imported products not built for the climate, Zenith was built to fix that.</p><p>The brand wasn't created to be just another skincare line focused on aesthetics or flashy packaging. Instead, Zenith is committed to building high-performance personal care gear designed for real conditions, real needs, and real lives.</p><p>No hype and no shortcuts. Just straightforward, highly effective products that solve real, everyday problems for men who just want things that actually work.</p><p>Fast forward to today, and [customers] men have made Zenith a part of their daily routine. But looking back on this growth, this milestone isn't really about the company or its logos. It is a testament to the customers who truly built the brand.</p>",
-    "zbs_col1_text": "<p>To build premium, high-performance self-care for mature Filipino men, and give them easy access to it.</p>",
+    "zbs_text": "<p>Most skin and hair care on the shelf was made for other men and other weather. For Filipino men over 35, that meant a long routine nobody keeps, or an imported formula that feels heavy by lunchtime.<br/><br/>Zenith started with that gap. Five products, ingredients named on the label, and directions short enough to follow every day in Philippine heat.<br/><br/>Today, 100,000+ Filipino men have ordered from Zenith. We keep building for them.</p>",
+    "zbs_col1_text": "<p>To make simple, well-made self-care for mature Filipino men, and make it easy to get.</p>",
     "op_new_tab": true,
     "op1_icon": "facebook",
     "op1_handle": "Zenith PH",
@@ -485,11 +490,11 @@
     "faq3_question": "How long should I use Zenith before I judge it?",
     "faq3_answer": "<p>Use it as directed every day and give one full product a fair run before you decide. Skin care and hair care both take time. Full guarantee terms are on the <a href=\"/policies/refund-policy\">Refunds and Returns</a> page.</p>",
     "faq4_question": "Can I use Zenith products together?",
-    "faq4_answer": "<p>Yes. Cleanser and day cream in the morning, tallow cream at night, shampoo in the shower, spray on a clean dry scalp before bed. The directions are on every label.</p>",
+    "faq4_answer": "<p>Yes. Cleanser and day cream in the morning, tallow cream at night, shampoo in the shower, spray on a clean, towel-dried scalp before bed. The directions are on every label.</p>",
     "faq5_question": "Can I use Zenith if my skin is sensitive?",
     "faq5_answer": "<p>Check the full ingredient list on the product page first. Start with a small amount. If anything feels wrong, stop and message us.</p>",
     "faq6_question": "What is beef tallow and why is it in your skincare?",
-    "faq6_answer": "<p>Beef tallow is rendered beef fat. It is the base of the Zenith Anti-Aging Tallow Cream, Cleanser and Day Cream SPF 30. The full ingredient list is on every product page.</p>",
+    "faq6_answer": "<p>Zenith uses premium grass-fed beef tallow, which is rendered beef fat. It is the base of the Zenith Anti-Aging Tallow Cream, Cleanser and Day Cream SPF 30. The full ingredient list is on every product page.</p>",
     "faq7_question": "Do you offer free shipping?",
     "faq7_answer": "<p>Shipping fees vary by location and promotion. Check the product page or your cart for the latest.</p>",
     "faq8_question": "How long is delivery?",
@@ -631,6 +636,13 @@
       }
     },
     "content_for_index": [],
+    "blocks": {
+      "14060646107696862457": {
+        "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+        "disabled": false,
+        "settings": {}
+      }
+    },
     "color_schemes": {
       "scheme-1": {
         "settings": {

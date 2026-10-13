@@ -276,9 +276,10 @@
         "question_6"
       ],
       "settings": {
-        "show_money_back": false,
+        "show_money_back": true,
         "placeholder_title": "Zenith Anti-Aging Tallow Cream",
         "show_rating": true,
+        "show_stars": false,
         "rating_value": "4.69",
         "rating_count": "2,158",
         "rating_label": "Trusted by [customers] Filipino men",
@@ -313,6 +314,7 @@
         "content_max_width": 1080,
         "gap": 80,
         "content_gap": 12,
+        "head_gap": 8,
         "gallery_ratio": 108,
         "dot_size": 8,
         "dot_width": 40,
@@ -395,6 +397,7 @@
         "subtitle_mobile": true,
         "gap_mobile": 18,
         "content_gap_mobile": 12,
+        "head_gap_mobile": 6,
         "variant_card_min_mobile": 88,
         "gallery_ratio_mobile": 100,
         "gallery_start_mobile": 2,
@@ -618,7 +621,7 @@
         "filter_products": [],
         "eyebrow": "",
         "heading": "A Complete Routine,  Built for Men.",
-        "heading_mobile": "Hear from the men who use Zenith every day.",
+        "heading_mobile": "",
         "subheading": "<p>Hear from the men who use Zenith every day.</p>",
         "subheading_mobile_only": false,
         "play_label": "Play video",
@@ -635,6 +638,7 @@
         "heading_spacing": 32,
         "gap": 24,
         "controls_spacing": 32,
+        "video_max_height": 0,
         "video_ratio": "13-18",
         "play_size": 80,
         "play_position": 53,
@@ -644,6 +648,7 @@
         "thumb_size": 56,
         "color_scheme": "scheme-1",
         "card_color_scheme": "scheme-6",
+        "subheading_opacity": 70,
         "card_border_color": "#294850",
         "title_color": "#d6b356",
         "overlay_style": "bottom",
@@ -661,6 +666,7 @@
         "title_font_size": 12,
         "handle_font_size": 12,
         "heading_alignment_mobile": "left",
+        "video_max_height_mobile": 0,
         "mobile_slide_width": 83,
         "heading_font_size_mobile": 36,
         "subheading_font_size_mobile": 16,
@@ -689,6 +695,7 @@
             "image": "shopify://shop_images/night-cream-ingredients-magnifying-glass-over-golden-tallow-cream-1-desktop.webp",
             "title": "Retinol 0.2%",
             "text": "<p>The only percentage on the label. Gentle enough for nightly use.</p>",
+            "title_mobile": "",
             "text_mobile": ""
           }
         },
@@ -698,6 +705,7 @@
             "image": "shopify://shop_images/night-cream-ingredients-golden-retinol-molecule-model-1-desktop.webp",
             "title": "Beef tallow",
             "text": "<p>The base of the cream. It buffers the retinol and absorbs fast, no grease.</p>",
+            "title_mobile": "",
             "text_mobile": ""
           }
         },
@@ -707,6 +715,7 @@
             "image": "shopify://shop_images/night-cream-ingredients-green-leaves-beside-golden-oil-droplets-1-desktop.webp",
             "title": "Ectoin and Stephania",
             "text": "<p>Added to keep skin calm when you use retinol every night.</p>",
+            "title_mobile": "",
             "text_mobile": ""
           }
         }
@@ -919,10 +928,12 @@
         "eyebrow": "",
         "heading": "Two minutes at night",
         "subheading": "<p>No 10-step routines</p>",
+        "show_used": true,
         "products": [],
         "used_text": "",
         "note": "",
         "show_number": true,
+        "step_label": "",
         "show_divider": true,
         "divider_breakpoint": "mobile",
         "step_layout": "beside",
@@ -941,6 +952,7 @@
         "divider_spacing": 56,
         "color_scheme": "scheme-1",
         "title_color": "#d6b356",
+        "title_heading_font": false,
         "number_background": "#c5930e",
         "number_color": "#121212",
         "text_opacity": 70,
@@ -1010,7 +1022,7 @@
         "row-3": {
           "type": "row",
           "settings": {
-            "label": "Made for nightly use",
+            "label": "Gentle enough for nightly use",
             "zenith_value": "Yes",
             "value_1": "No",
             "value_2": "Yes",
@@ -1041,9 +1053,9 @@
         "zenith_label": "Zenith",
         "zenith_caption": "",
         "column_1_title": "Other Product",
-        "column_1_note": "Ordinary hair oils, Single oils like coconut or castor",
+        "column_1_note": "(Regular retinol creams)",
         "column_2_title": "Other Product",
-        "column_2_note": "Regular conditioner, Rinse-out conditioner",
+        "column_2_note": "(Basic moisturizers)",
         "column_3_title": "",
         "column_3_note": "",
         "heading_alignment": "center",
@@ -1104,7 +1116,22 @@
     },
     "reviews": {
       "type": "zenith-reviews",
+      "blocks": {
+        "judge_me_reviews_review_widget_8KBQ7Y": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "real_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "other_products_reviews"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_8KBQ7Y"
+      ],
       "settings": {
+        "jdgm_product": "",
         "eyebrow": "",
         "heading": "[customers] Filipino Men Trust Zenith Products",
         "subheading": "<p>Reviews from customers who bought the Zenith Anti-Aging Tallow Cream, shown as they wrote them.</p>",
@@ -1243,17 +1270,17 @@
         "heading": "The Zenith Guarantee",
         "subheading": "",
         "show_payment_icons": false,
-        "footer_text": "<p>Delivered by LBC, J&T, Gogo Express, Ninja Van, and Amare Group's own rider fleet.</p>",
+        "footer_text": "<p>Delivered by GoGo Xpress, SPX, LBC, J&T, Ninja Van, and Amare Group's own rider fleet.</p>",
         "heading_alignment": "center",
         "columns_desktop": 3,
         "show_media": true,
+        "image_zoom": false,
         "media_position": "left",
         "image_ratio": "square",
         "image_size": 152,
         "text_alignment": "left",
         "icon_position": "top",
         "vertical_alignment": "center",
-        "image_zoom": false,
         "heading_max_width": 760,
         "heading_spacing": 32,
         "gap": 32,
@@ -1389,14 +1416,14 @@
           "type": "question",
           "settings": {
             "question": "How long will one jar of the Zenith Anti-Aging Tallow Cream last?",
-            "answer": "<p>With recommended nightly use, one jar of Zenith Anti-Aging Tallow Cream typically lasts 1 -2 months.<br/><br/>Since you only need a pea-sized amount for the entire face, a little goes a long way.</p>"
+            "answer": "<p>With recommended nightly use, one jar of Zenith Anti-Aging Tallow Cream typically lasts 1 to 2 months.<br/><br/>Since you only need a pea-sized amount for the entire face, a little goes a long way.</p>"
           }
         },
         "question_4": {
           "type": "question",
           "settings": {
             "question": "Should I use the Zenith Anti-Aging Tallow Cream in the morning or evening?",
-            "answer": "<p>The Zenith Anti-Aging Tallow Cream is best used in the evening, as retinol can increase sun sensitivity.<br/><br/>Apply to clean, dry skin before bed. We recommend to use sunscreen during daytime hours when using any retinol product, regardless of when you apply it.</p>"
+            "answer": "<p>The Zenith Anti-Aging Tallow Cream is best used in the evening, as retinol can increase sun sensitivity.<br/><br/>Apply to clean, dry skin before bed. We recommend using sunscreen during daytime hours when using any retinol product, regardless of when you apply it.</p>"
           }
         },
         "question_5": {
@@ -1410,7 +1437,7 @@
           "type": "question",
           "settings": {
             "question": "How long will it take for the product to ship to me?",
-            "answer": "<p>We ship within 1 business day using GoGoXpress, NinjaVan, and SPX.<br/><br/>Delivery typically takes 3 business days for Metro Manila and 3-7 business days for Visayas and Mindanao regions.</p>"
+            "answer": "<p>We ship within 1 business day using GoGo Xpress, SPX, LBC, J&T, Ninja Van, or Amare Group's own riders.<br/><br/>Delivery typically takes 3 business days for Metro Manila and 3-7 business days for Visayas and Mindanao regions.</p>"
           }
         }
       },
@@ -1423,6 +1450,7 @@
         "question_rcbiaD"
       ],
       "settings": {
+        "content_source": "custom",
         "eyebrow": "",
         "heading": "Frequently Asked Questions",
         "subheading": "<p>No-nonsense answers about your daily essentials.</p>",
@@ -1443,6 +1471,7 @@
         "subheading_font_size": 18,
         "subheading_opacity": 100,
         "eyebrow_font_size": 14,
+        "question_font": "body",
         "title_font_size": 22,
         "text_font_size": 16,
         "icon_size": 20,
@@ -1501,8 +1530,9 @@
         "trust_4"
       ],
       "settings": {
-        "show_money_back": false,
+        "show_money_back": true,
         "eyebrow": "Trusted by [customers] Filipino men",
+        "use_collection_content": false,
         "heading": "{{ section.settings.button_product.title }}",
         "heading_mobile": "",
         "text": "<p>One thin layer before bed. That is the&nbsp;<br/>whole night routine.</p>",
@@ -1558,6 +1588,7 @@
         "overlay_color": "#203940",
         "overlay_opacity": 100,
         "overlay_coverage": 50,
+        "overlay_solid": 0,
         "ribbon_color": "#f6233b",
         "ribbon_text_color": "#ffffff",
         "highlight_color": "#eabe5f",
@@ -1599,6 +1630,7 @@
         "mobile_height": 520,
         "mobile_overlay_style": "bottom",
         "mobile_overlay_coverage": 70,
+        "mobile_overlay_solid": 0,
         "vertical_padding_mobile": 24,
         "heading_font_size_mobile": 32,
         "subheading_font_size_mobile": 16,

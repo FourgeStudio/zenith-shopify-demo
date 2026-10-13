@@ -98,6 +98,7 @@
     "hero": {
       "type": "zenith-hero",
       "settings": {
+        "show_money_back": true,
         "eyebrow": "Trusted by [customers] Filipino men",
         "use_collection_content": false,
         "heading": "Everything you need to stay in your prime.",
@@ -156,6 +157,7 @@
         "overlay_color": "#203940",
         "overlay_opacity": 100,
         "overlay_coverage": 80,
+        "overlay_solid": 0,
         "ribbon_color": "#f6233b",
         "ribbon_text_color": "#ffffff",
         "highlight_color": "#eabe5f",
@@ -197,6 +199,7 @@
         "mobile_height": 440,
         "mobile_overlay_style": "top",
         "mobile_overlay_coverage": 70,
+        "mobile_overlay_solid": 0,
         "vertical_padding_mobile": 24,
         "heading_font_size_mobile": 40,
         "subheading_font_size_mobile": 16,
@@ -245,7 +248,7 @@
           "type": "item",
           "settings": {
             "icon": "certificate",
-            "text": "FDA-Notified Products",
+            "text": "Notified with the Philippine FDA",
             "link": ""
           }
         },
@@ -253,7 +256,7 @@
           "type": "item",
           "settings": {
             "icon": "farm",
-            "text": "100% Grass-Fed Beef Tallow",
+            "text": "Premium Grass-Fed Beef Tallow",
             "link": ""
           }
         },
@@ -261,7 +264,7 @@
           "type": "item",
           "settings": {
             "icon": "dropper",
-            "text": "Formulated For Filipinos",
+            "text": "Made for Filipino Men",
             "link": ""
           }
         }
@@ -276,6 +279,7 @@
       "settings": {
         "show_money_back": false,
         "display": "image",
+        "show_pause_button": false,
         "alignment": "spread",
         "show_border": false,
         "icon_size": 22,
@@ -375,7 +379,7 @@
     },
     "featured_product": {
       "type": "zenith-featured-product",
-      "settings": {
+      "settings": {
         "image_position": "right",
         "full_width": false,
         "media_width": 48,
@@ -391,7 +395,6 @@
         "media_color_scheme": "scheme-3",
         "section_background": "",
         "button_style": "gold",
-        "badge": "",
         "badge_background": "#eabe5f",
         "badge_text_color": "#121212",
         "price_color": "#eabe5f",
@@ -423,9 +426,7 @@
         "padding_top": 32,
         "padding_bottom": 32,
         "padding_top_mobile": 20,
-        "padding_bottom_mobile": 20,
-        "product": "zenith-anti-aging-tallow-cream",
-        "below_price": "description"
+        "padding_bottom_mobile": 20
       }
     },
     "skin": {
@@ -859,6 +860,7 @@
         "speed_mobile": 240,
         "alternate_direction": true,
         "pause_on_hover": true,
+        "show_pause_button": false,
         "heading_max_width": 760,
         "heading_gap": 8,
         "heading_spacing": 32,
@@ -1014,17 +1016,17 @@
         "heading": "The Zenith Guarantee",
         "subheading": "",
         "show_payment_icons": false,
-        "footer_text": "<p>Delivered by LBC, J&T, Gogo Express, Ninja Van, and Amare Group's own rider fleet.</p>",
+        "footer_text": "<p>Delivered by GoGo Xpress, SPX, LBC, J&T, Ninja Van, and Amare Group's own rider fleet.</p>",
         "heading_alignment": "center",
         "columns_desktop": 3,
         "show_media": true,
+        "image_zoom": false,
         "media_position": "left",
         "image_ratio": "square",
         "image_size": 152,
         "text_alignment": "left",
         "icon_position": "top",
         "vertical_alignment": "center",
-        "image_zoom": false,
         "heading_max_width": 760,
         "heading_spacing": 32,
         "gap": 32,
@@ -1254,6 +1256,7 @@
         "subheading_font_size": 18,
         "subheading_opacity": 100,
         "eyebrow_font_size": 14,
+        "question_font": "body",
         "title_font_size": 22,
         "text_font_size": 16,
         "icon_size": 20,
@@ -1277,6 +1280,7 @@
       "type": "zenith-hero",
       "disabled": true,
       "settings": {
+        "show_money_back": true,
         "eyebrow": "Trusted by [customers] Filipino men",
         "use_collection_content": false,
         "heading": "The Maintenance System Built for Filipino Men",
@@ -1334,6 +1338,7 @@
         "overlay_color": "#203940",
         "overlay_opacity": 100,
         "overlay_coverage": 50,
+        "overlay_solid": 0,
         "ribbon_color": "#f6233b",
         "ribbon_text_color": "#ffffff",
         "highlight_color": "#eabe5f",
@@ -1375,6 +1380,7 @@
         "mobile_height": 540,
         "mobile_overlay_style": "top",
         "mobile_overlay_coverage": 70,
+        "mobile_overlay_solid": 0,
         "vertical_padding_mobile": 24,
         "heading_font_size_mobile": 40,
         "subheading_font_size_mobile": 16,

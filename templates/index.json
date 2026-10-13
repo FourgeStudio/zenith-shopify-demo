@@ -117,7 +117,7 @@
         "heading": "The Maintenance System Built for Filipino Men",
         "heading_mobile": "",
         "text": "<p>Everything you need to stay in your prime.</p>",
-        "button_label": "Shop Now",
+        "button_label": "Shop Zenith Products",
         "button_link": "shopify://collections/all",
         "button_product": "",
         "button_label_mobile": "Shop Zenith Products",
@@ -261,7 +261,7 @@
           "type": "item",
           "settings": {
             "icon": "certificate",
-            "text": "FDA-Notified Products",
+            "text": "Notified with the Philippine FDA",
             "link": ""
           }
         },
@@ -269,7 +269,7 @@
           "type": "item",
           "settings": {
             "icon": "farm",
-            "text": "100% Grass-Fed Beef Tallow",
+            "text": "Premium Grass-Fed Beef Tallow",
             "link": ""
           }
         },
@@ -277,7 +277,7 @@
           "type": "item",
           "settings": {
             "icon": "dropper",
-            "text": "Formulated For Filipinos",
+            "text": "Made for Filipino Men",
             "link": ""
           }
         }
@@ -574,14 +574,14 @@
       ],
       "settings": {
         "content_source": "global",
-        "eyebrow": "Used by [customers] Filipino men",
-        "heading": "Real Men. Real Results.",
-        "heading_mobile": "Built for Filipino men over 35",
-        "subheading": "<p>See the difference a proper regimen makes.</p><p>From clearer skin to thicker hair, every transformation here comes from verified Zenith customers putting in the consistent work.</p>",
+        "eyebrow": "",
+        "heading": "Straight from Zenith Men",
+        "heading_mobile": "Straight from Zenith Men",
+        "subheading": "<p>Individual results may vary.</p>",
         "product_prefix": "Used",
         "verified_label": "Verified buyer",
         "show_avatar": false,
-        "disclaimer": "Individual results may vary.*",
+        "disclaimer": "",
         "link_label": "",
         "link": "",
         "heading_alignment": "center",
@@ -910,7 +910,7 @@
             "icon": "phone",
             "icon_text": "",
             "title": "",
-            "text": "<p>Our team texts or calls to confirm your details, so your order goes to the right place.</p>"
+            "text": "<p>Our local team will text or call to verify your details, ensuring your order gets exactly where it needs to go.</p>"
           }
         },
         "column_2": {
@@ -920,7 +920,7 @@
             "icon": "qr",
             "icon_text": "",
             "title": "",
-            "text": "<p>Every box has its own QR code. Scan it when it arrives to check it is a real Zenith product.</p>"
+            "text": "<p>Every box features a unique, tamper-proof QR code. Scan it upon arrival to instantly verify your gear is 100% authentic.</p>"
           }
         },
         "column_4": {
@@ -930,7 +930,7 @@
             "icon": "badge_check",
             "icon_text": "",
             "title": "",
-            "text": "<p>Pay when it is in your hands, with nationwide Cash on Delivery.</p>"
+            "text": "<p>Pay only when the product is in your hands with our nationwide Cash on Delivery.</p>"
           }
         }
       },
@@ -946,17 +946,17 @@
         "subheading": "",
         "footer_image": "shopify://shop_images/payments.svg",
         "show_payment_icons": false,
-        "footer_text": "<p>Delivered by LBC, J&T, Gogo Express, Ninja Van and Amare Group's own riders.</p>",
+        "footer_text": "<p>Delivered by GoGo Xpress, SPX, LBC, J&T, Ninja Van, and Amare Group's own riders.</p>",
         "heading_alignment": "center",
         "columns_desktop": 3,
         "show_media": true,
+        "image_zoom": false,
         "media_position": "left",
         "image_ratio": "square",
         "image_size": 152,
         "text_alignment": "left",
         "icon_position": "top",
         "vertical_alignment": "center",
-        "image_zoom": false,
         "heading_max_width": 760,
         "heading_spacing": 32,
         "gap": 32,
@@ -1099,11 +1099,11 @@
       ],
       "settings": {
         "eyebrow": "",
-        "heading": "Products formulated for the Philippine Climate",
+        "heading": "Made for the Philippine Climate",
         "subheading": "<p>Honest gear for your skin, your hair, and the man wearing it.</p>",
         "button_icon": "arrow_right",
         "heading_alignment": "center",
-        "columns_desktop": 4,
+        "columns_desktop": 2,
         "aspect_ratio": "fixed",
         "card_height": 440,
         "heading_max_width": 760,
@@ -1148,14 +1148,6 @@
     "featured_product": {
       "type": "zenith-featured-product",
       "settings": {
-        "product": "zenith-anti-aging-tallow-cream",
-        "placeholder_title": "Zenith Anti-Aging Tallow Cream",
-        "badge": "",
-        "button_label": "Add to Cart",
-        "button_icon": "cart",
-        "show_media_pager": false,
-        "show_rating": false,
-        "below_price": "description",
         "image_position": "right",
         "full_width": false,
         "media_width": 48,
@@ -1542,11 +1534,24 @@
     },
     "reviews": {
       "type": "zenith-reviews",
+      "blocks": {
+        "judge_me_reviews_review_widget_homepage_BKCqgw": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget_homepage/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "product": "zenith-anti-aging-tallow-cream",
+            "review_data": "real_data",
+            "max_width": 1200
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_homepage_BKCqgw"
+      ],
       "settings": {
         "jdgm_product": "",
         "eyebrow": "",
-        "heading": "[customers] Filipino Men Trust Zenith Products",
-        "subheading": "<p>Men in Manila using the cream. Unedited and verified.</p>",
+        "heading": "[customers] Filipino Men Have Ordered From Zenith",
+        "subheading": "",
         "heading_alignment": "center",
         "heading_max_width": 900,
         "subheading_spacing": 28,
@@ -1570,8 +1575,8 @@
         "text_font_size": 14,
         "icon_size": 14,
         "button_font_size": 20,
-        "heading_mobile": "[customers] Filipino Men Trust Zenith Products",
-        "subheading_mobile": "<p>Real Filipino men using Zenith. Unedited and verified.</p>",
+        "heading_mobile": "[customers] Filipino Men Have Ordered From Zenith",
+        "subheading_mobile": "",
         "heading_font_size_mobile": 36,
         "subheading_font_size_mobile": 16,
         "subheading_opacity_mobile": 70,
@@ -1615,7 +1620,7 @@
           "type": "question",
           "settings": {
             "question": "Can I use Zenith products together?",
-            "answer": "<p>Yes. Cleanser and day cream in the morning, tallow cream at night, shampoo in the shower, spray on a clean dry scalp before bed. The directions are on every label.</p>"
+            "answer": "<p>Yes. Cleanser and day cream in the morning, tallow cream at night, shampoo in the shower, spray on a clean, towel-dried scalp before bed. The directions are on every label.</p>"
           }
         },
         "question_5": {
@@ -1629,14 +1634,14 @@
           "type": "question",
           "settings": {
             "question": "What is beef tallow and why is it in your skincare?",
-            "answer": "<p>Beef tallow is rendered beef fat. It is the base of the Zenith Anti-Aging Tallow Cream, Cleanser and Day Cream SPF 30. The full ingredient list is on every product page.</p>"
+            "answer": "<p>Zenith uses premium grass-fed beef tallow, which is rendered beef fat. It is the base of the Zenith Anti-Aging Tallow Cream, Cleanser and Day Cream SPF 30. The full ingredient list is on every product page.</p>"
           }
         },
         "question_7": {
           "type": "question",
           "settings": {
             "question": "Do you offer free shipping?",
-            "answer": "<p>Shipping fees vary by location and promotion. Check the product page or your cart for the latest.</p>"
+            "answer": "<p>Shipping is free on orders of [free_shipping] and up. Below that, the shipping fee depends on your location and shows in your cart before you pay.</p>"
           }
         },
         "question_8": {
@@ -1687,6 +1692,7 @@
         "subheading_font_size": 18,
         "subheading_opacity": 100,
         "eyebrow_font_size": 14,
+        "question_font": "body",
         "title_font_size": 22,
         "text_font_size": 16,
         "icon_size": 20,
@@ -2153,6 +2159,19 @@
     },
     "1790629529cb985278": {
       "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_homepage_BKCqgw": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget_homepage/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "product": "zenith-anti-aging-tallow-cream",
+            "review_data": "real_data",
+            "max_width": 1200
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_homepage_BKCqgw"
+      ],
       "disabled": true,
       "settings": {
         "include_margins": true
