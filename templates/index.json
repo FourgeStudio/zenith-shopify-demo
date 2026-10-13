@@ -208,8 +208,8 @@
         "mobile_button_bottom": true,
         "mobile_button_full": true,
         "mobile_hide_button": false,
-        "mobile_height_screen": 75,
         "mobile_height_mode": "px",
+        "mobile_height_screen": 75,
         "mobile_height": 620,
         "mobile_overlay_style": "top",
         "mobile_overlay_coverage": 70,
@@ -1301,8 +1301,8 @@
       "settings": {
         "eyebrow": "All Products",
         "heading": "The Zenith Grooming Collection",
-        "subheading_mobile": "<p>The products men come back for. Simple. Effective. Proven.</p>",
         "subheading": "<p>The products men come back for. Simple routines, named ingredients.</p>",
+        "subheading_mobile": "<p>The products men come back for. Simple. Effective. Proven.</p>",
         "view_all_label": "Shop All Products",
         "view_all_link": "shopify://collections/shop-all",
         "collection": "shop-all",
@@ -1485,7 +1485,6 @@
       "settings": {
         "content_source": "global",
         "heading": "Our Official Pages",
-        "hide_mobile": true,
         "heading_mobile": "Join the #ZenithTribe",
         "text_mobile": "<p>Follow Zenith on Facebook and Instagram. Official pages only, listed on our Verify Zenith Products page.</p>",
         "hover_effect": true,
@@ -1514,6 +1513,7 @@
         "title_font_size": 16,
         "text_font_size": 16,
         "line_height": 150,
+        "hide_mobile": true,
         "heading_alignment_mobile": "left",
         "columns_mobile": 2,
         "card_layout_mobile": "stacked",
@@ -1538,19 +1538,6 @@
     },
     "reviews": {
       "type": "zenith-reviews",
-      "blocks": {
-        "judge_me_reviews_review_widget_homepage_BKCqgw": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget_homepage/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-            "product": "zenith-anti-aging-tallow-cream",
-            "review_data": "real_data",
-            "max_width": 1200
-          }
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_review_widget_homepage_BKCqgw"
-      ],
       "settings": {
         "jdgm_product": "",
         "eyebrow": "",
@@ -2163,19 +2150,6 @@
     },
     "1790629529cb985278": {
       "type": "apps",
-      "blocks": {
-        "judge_me_reviews_review_widget_homepage_BKCqgw": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget_homepage/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-            "product": "zenith-anti-aging-tallow-cream",
-            "review_data": "real_data",
-            "max_width": 1200
-          }
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_review_widget_homepage_BKCqgw"
-      ],
       "disabled": true,
       "settings": {
         "include_margins": true
