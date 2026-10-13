@@ -85,9 +85,18 @@
   {%- comment -%} svh = height with the phone's browser bars showing, so the hero doesn't jump while scrolling {%- endcomment -%}
   {%- if s.height_mode == 'px' %}
   --z-hero-h: {{ s.height }}px;
-  --z-hero-h-m: {{ s.mobile_height }}px;
   {%- else %}
   --z-hero-h: {{ s.height_screen }}svh;
+  {%- endif %}
+  {%- liquid
+    assign hero_m_mode = s.mobile_height_mode | default: 'same'
+    if hero_m_mode == 'same'
+      assign hero_m_mode = s.height_mode
+    endif
+  -%}
+  {%- if hero_m_mode == 'px' %}
+  --z-hero-h-m: {{ s.mobile_height }}px;
+  {%- else %}
   --z-hero-h-m: {{ s.mobile_height_screen }}svh;
   {%- endif %}
   --z-hero-py: {{ s.vertical_padding }}px;
@@ -646,7 +655,7 @@
       "type": "select",
       "id": "height_mode",
       "label": "Height",
-      "info": "Minimum height; taller content still fits. Applies to desktop and mobile.",
+      "info": "Minimum height; taller content still fits. Mobile follows this unless Mobile → Mobile height type is set.",
       "default": "screen",
       "options": [
         { "value": "screen", "label": "% of screen height" },
@@ -1242,9 +1251,20 @@
       "default": false
     },
     {
+      "type": "select",
+      "id": "mobile_height_mode",
+      "label": "Mobile height type",
+      "default": "same",
+      "options": [
+        { "value": "same", "label": "Same as desktop" },
+        { "value": "screen", "label": "% of screen height" },
+        { "value": "px", "label": "Fixed (px)" }
+      ]
+    },
+    {
       "type": "range",
       "id": "mobile_height_screen",
-      "visible_if": "{{ section.settings.height_mode == 'screen' }}",
+      "info": "Used when the mobile height type is % of screen.",
       "label": "Mobile height (% of screen)",
       "min": 30,
       "max": 100,
@@ -1255,14 +1275,13 @@
     {
       "type": "range",
       "id": "mobile_height",
-      "visible_if": "{{ section.settings.height_mode == 'px' }}",
       "label": "Mobile height (fixed)",
       "min": 360,
       "max": 800,
       "step": 20,
       "unit": "px",
       "default": 540,
-      "info": "Minimum height: below the height the text needs, the hero keeps growing to fit it."
+      "info": "Used when the mobile height type is Fixed. Minimum height: below the height the text needs, the hero keeps growing to fit it."
     },
     {
       "type": "select",
