@@ -72,7 +72,7 @@
 >
   <div class="zenith-cart-sum__row">
     <span>{{ settings.cart_summary_subtotal | escape }}</span>
-    <span>{{ zcsum_sub | money }}</span>
+    <span>{{ zcsum_sub | money_without_trailing_zeros }}</span>
   </div>
   {%- if zcsum_tiers != blank or zcsum_disc > 0 -%}
     <div class="zenith-cart-sum__row">
@@ -85,7 +85,7 @@
         {%- endif -%}
       </span>
       <span class="zenith-cart-sum__gold">
-        {%- if zcsum_disc > 0 -%}−{{ zcsum_disc | money }}{%- else -%}—{%- endif -%}
+        {%- if zcsum_disc > 0 -%}−{{ zcsum_disc | money_without_trailing_zeros }}{%- else -%}—{%- endif -%}
       </span>
     </div>
   {%- endif -%}
@@ -97,7 +97,7 @@
           {%- if zcsum_ship_on -%}
             {{ settings.cart_summary_free | escape }}
           {%- elsif zcsum_fee > 0 -%}
-            {{ zcsum_fee | money }}
+            {{ zcsum_fee | money_without_trailing_zeros }}
           {%- else -%}
             {{ settings.cart_summary_ship_later | escape }}
           {%- endif -%}
@@ -105,7 +105,7 @@
       {%- elsif zcsum_ship_on -%}
         <span class="zenith-cart-sum__ok">{{ settings.cart_summary_free | escape }}</span>
       {%- elsif zcsum_fee > 0 -%}
-        <span>{{ zcsum_fee | money }}</span>
+        <span>{{ zcsum_fee | money_without_trailing_zeros }}</span>
       {%- else -%}
         <span>{{ settings.cart_summary_ship_later | escape }}</span>
       {%- endif -%}
@@ -113,6 +113,6 @@
   {%- endif -%}
   <div class="zenith-cart-sum__row zenith-cart-sum__total">
     <span>{{ settings.cart_summary_total | escape }}</span>
-    <span{% if zcsum_live %} data-zcship-total class="zenith-cart-sum__est"{% endif %}>{{ zcsum_total | money }}</span>
+    <span{% if zcsum_live %} data-zcship-total class="zenith-cart-sum__est"{% endif %}>{{ zcsum_total | money_without_trailing_zeros }}</span>
   </div>
 </div>

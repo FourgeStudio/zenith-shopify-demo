@@ -24,7 +24,7 @@
     <a href="{{ product.url }}" class="zenith-cart-upsell__title">{{ product.title | escape }}</a>
     <p class="zenith-cart-upsell__meta">
       {%- if product.type != blank -%}{{ product.type | escape }} · {% endif -%}
-      {{- zcui_variant.price | money -}}
+      {{- zcui_variant.price | money_without_trailing_zeros -}}
     </p>
   </div>
   {%- if context == 'page' -%}

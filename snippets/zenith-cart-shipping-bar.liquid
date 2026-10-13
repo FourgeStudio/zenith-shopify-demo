@@ -24,7 +24,7 @@
   <div class="zenith-cart-ship{% if zcs_left <= 0 %} zenith-cart-ship--unlocked{% endif %}">
     <p class="zenith-cart-ship__text" role="status">
       {%- if zcs_left > 0 -%}
-        {%- capture zcs_money -%}{{ zcs_left | money }}{%- endcapture -%}
+        {%- capture zcs_money -%}{{ zcs_left | money_without_trailing_zeros }}{%- endcapture -%}
         {%- assign zcs_text = settings.cart_free_shipping_away | escape | replace: '[amount]', zcs_money -%}
         {{- zcs_text | replace: '[fee]', zcs_fee -}}
       {%- else -%}
