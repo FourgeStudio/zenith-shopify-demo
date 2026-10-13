@@ -1022,7 +1022,7 @@
         "row-3": {
           "type": "row",
           "settings": {
-            "label": "Gentle enough for nightly use",
+            "label": "Made for nightly use",
             "zenith_value": "Yes",
             "value_1": "No",
             "value_2": "Yes",
@@ -1053,9 +1053,9 @@
         "zenith_label": "Zenith",
         "zenith_caption": "",
         "column_1_title": "Other Product",
-        "column_1_note": "(Regular retinol creams)",
+        "column_1_note": "(High-strength retinol cream, Higher retinol percentages)",
         "column_2_title": "Other Product",
-        "column_2_note": "(Basic moisturizers)",
+        "column_2_note": "(Basic men's moisturizers, Everyday moisturizers without retinol)",
         "column_3_title": "",
         "column_3_note": "",
         "heading_alignment": "center",
