@@ -1103,7 +1103,7 @@
         "subheading": "<p>Honest gear for your skin, your hair, and the man wearing it.</p>",
         "button_icon": "arrow_right",
         "heading_alignment": "center",
-        "columns_desktop": 2,
+        "columns_desktop": 4,
         "aspect_ratio": "fixed",
         "card_height": 440,
         "heading_max_width": 760,
