@@ -290,7 +290,7 @@
         "item_5"
       ],
       "settings": {
-        "show_money_back": false,
+        "show_money_back": true,
         "display": "icons",
         "show_pause_button": false,
         "alignment": "spread",
