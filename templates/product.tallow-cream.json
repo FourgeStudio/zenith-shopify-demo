@@ -1270,7 +1270,7 @@
         "heading": "The Zenith Guarantee",
         "subheading": "",
         "show_payment_icons": false,
-        "footer_text": "<p>Delivered by GoGo Xpress, SPX, LBC, J&T, Ninja Van, and Amare Group's own rider fleet.</p>",
+        "footer_text": "<p>Delivered by LBC, J&T, Gogo Express, Ninja Van, and Amare Group's own rider fleet.</p>",
         "heading_alignment": "center",
         "columns_desktop": 3,
         "show_media": true,
@@ -1437,7 +1437,7 @@
           "type": "question",
           "settings": {
             "question": "How long will it take for the product to ship to me?",
-            "answer": "<p>We ship within 1 business day using GoGo Xpress, SPX, LBC, J&T, Ninja Van, or Amare Group's own riders.<br/><br/>Delivery typically takes 3 business days for Metro Manila and 3-7 business days for Visayas and Mindanao regions.</p>"
+            "answer": "<p>We ship within 1 business day using LBC, J&T, Gogo Express, Ninja Van or Amare Group's own riders.<br/><br/>Delivery typically takes 3 business days for Metro Manila and 3-7 business days for Visayas and Mindanao regions.</p>"
           }
         }
       },
