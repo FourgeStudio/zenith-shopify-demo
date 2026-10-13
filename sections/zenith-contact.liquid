@@ -252,7 +252,7 @@
               name="contact[First name]"
               autocomplete="given-name"
               value="{% if customer %}{{ customer.first_name }}{% endif %}"
-              placeholder="{{ s.first_name_placeholder | escape }}"
+              placeholder="{{ s.first_name_label | escape }}"
             >
           </div>
           <div class="zenith-contact__field zenith-contact__field--half">
@@ -264,7 +264,7 @@
               name="contact[Last name]"
               autocomplete="family-name"
               value="{% if customer %}{{ customer.last_name }}{% endif %}"
-              placeholder="{{ s.last_name_placeholder | escape }}"
+              placeholder="{{ s.last_name_label | escape }}"
             >
           </div>
           <div class="zenith-contact__field{% if s.show_phone %} zenith-contact__field--half-desktop{% endif %}">
@@ -280,7 +280,7 @@
               required
               aria-required="true"
               value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
-              placeholder="{{ s.email_placeholder | escape }}"
+              placeholder="{{ s.email_label | escape }}"
               {% if form.errors contains 'email' %}
                 aria-invalid="true"
                 aria-describedby="{{ form_id }}-email-error"
@@ -303,7 +303,7 @@
                 autocomplete="tel"
                 pattern="[0-9\-\+\s\(\)]*"
                 value="{% if customer %}{{ customer.phone }}{% endif %}"
-                placeholder="{{ s.phone_placeholder | escape }}"
+                placeholder="{{ s.phone_label | escape }}"
               >
             </div>
           {%- endif -%}
@@ -455,24 +455,21 @@
     {
       "type": "text",
       "id": "first_name_label",
-      "label": "First name label",
+      "label": "First name placeholder",
       "default": "First name"
     },
-    { "type": "text", "id": "first_name_placeholder", "label": "First name placeholder", "info": "Text inside the empty box. Leave blank for none." },
     {
       "type": "text",
       "id": "last_name_label",
-      "label": "Last name label",
+      "label": "Last name placeholder",
       "default": "Last name"
     },
-    { "type": "text", "id": "last_name_placeholder", "label": "Last name placeholder" },
     {
       "type": "text",
       "id": "email_label",
-      "label": "Email label",
+      "label": "Email placeholder",
       "default": "Email address"
     },
-    { "type": "text", "id": "email_placeholder", "label": "Email placeholder", "default": "you@example.com" },
     {
       "type": "checkbox",
       "id": "show_phone",
@@ -482,11 +479,10 @@
     {
       "type": "text",
       "id": "phone_label",
-      "label": "Phone label",
+      "label": "Phone placeholder",
       "visible_if": "{{ section.settings.show_phone }}",
       "default": "Phone number"
     },
-    { "type": "text", "id": "phone_placeholder", "label": "Phone placeholder", "visible_if": "{{ section.settings.show_phone }}", "default": "09XX XXX XXXX" },
     {
       "type": "text",
       "id": "topic_label",
