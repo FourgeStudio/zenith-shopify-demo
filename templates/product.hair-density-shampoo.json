@@ -115,7 +115,7 @@
           "settings": {
             "title": "Ingredients",
             "content_source": "custom",
-            "text": "<p>Key ingredients: Sodium Cocoyl Glycinate (amino acid cleansing base), CABROXIL Technology (Caffeine, Rosemary Oil, Diaminopyrimidine Oxide, Biotin), Tripeptide-1, Glycerin.</p><p>Full ingredient list: [SLOT: copy word for word from the label]</p>",
+            "text": "<p>Key ingredients: Sodium Cocoyl Glycinate (amino acid cleansing base), CABROXIL Technology (Caffeine, Rosemary Oil, Diaminopyrimidine Oxide, Biotin), Tripeptide-1, Glycerin.</p>",
             "open": false,
             "hide_on_mobile": false,
             "hide_on_desktop": false
@@ -216,7 +216,7 @@
         "question_6"
       ],
       "settings": {
-        "show_money_back": false,
+        "show_money_back": true,
         "placeholder_title": "Zenith Advanced Hair Density Shampoo",
         "show_variant_picker": false,
         "show_rating": true,
@@ -227,7 +227,7 @@
         "price_badge": "UP TO 33% OFF + ₱300 OFF",
         "show_fda": true,
         "fda_label": "FDA-Notified",
-        "fda_number": "",
+        "fda_number": "NN-1000015997846",
         "button_label": "Add to Cart",
         "button_icon": "cart",
         "quantity_pad": true,
@@ -1154,7 +1154,7 @@
         "trust_4"
       ],
       "settings": {
-        "show_money_back": false,
+        "show_money_back": true,
         "eyebrow": "",
         "heading": "Zenith Advanced Hair Density Shampoo",
         "heading_mobile": "",

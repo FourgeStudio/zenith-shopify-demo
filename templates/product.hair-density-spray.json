@@ -216,7 +216,7 @@
         "question_6"
       ],
       "settings": {
-        "show_money_back": false,
+        "show_money_back": true,
         "placeholder_title": "Zenith Advanced Hair Density Spray",
         "show_variant_picker": false,
         "show_rating": true,
@@ -1154,7 +1154,7 @@
         "trust_4"
       ],
       "settings": {
-        "show_money_back": false,
+        "show_money_back": true,
         "eyebrow": "",
         "heading": "Zenith Advanced Hair Density Spray",
         "heading_mobile": "",
