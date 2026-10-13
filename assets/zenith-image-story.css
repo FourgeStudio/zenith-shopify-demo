@@ -280,3 +280,21 @@
   .zenith-story .zenith-story__heading--top,
   .zenith-story--heading-hide-d .zenith-story__heading { display: none; }
 }
+
+/* Mobile button width = Fit the label: beats Theme settings → Full-width buttons on mobile */
+@media screen and (max-width: 749px) {
+  .zenith-m-btn-full .zenith-story--m-btn-auto .zenith-story__actions {
+    align-self: auto;
+    width: auto;
+  }
+
+  .zenith-m-btn-full .zenith-story--m-btn-auto .button.zenith-btn {
+    width: auto;
+  }
+}
+
+/* Mobile image crop (Top / Bottom); tablet stacks too, so same breakpoint as the stacked layout */
+@media screen and (max-width: 989px) {
+  .zenith-story--m-focus-top .zenith-story__media img { object-position: 50% 0%; }
+  .zenith-story--m-focus-bottom .zenith-story__media img { object-position: 50% 100%; }
+}
