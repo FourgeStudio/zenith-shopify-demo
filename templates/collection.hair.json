@@ -304,7 +304,7 @@
       "type": "zenith-product-grid",
       "settings": {
         "eyebrow": "Hair Products",
-        "heading": "The Complete Hair Density System",
+        "heading": "The Advanced Hair Density System",
         "subheading": "",
         "collection": "hair-products",
         "products_to_show": 12,
@@ -479,7 +479,7 @@
           "settings": {
             "image": "shopify://shop_images/hair-category-gallery-man-rinsing-shampoo-shower-1-desktop.webp",
             "title": "Activate",
-            "text": "Leave the lather on for 2 minutes to allow the CABROXIL actives to penetrate the follicles."
+            "text": "Massage 60 seconds, leave 2 minutes, rinse."
           }
         },
         "step_3": {
@@ -500,8 +500,10 @@
         "eyebrow": "",
         "heading": "Hair Washing Routine",
         "subheading": "<p>Get a Healthier Scalp In 3 Steps</p>",
-        "show_used": false,
-        "products": [],
+        "show_used": true,
+        "products": [
+          "zenith-advanced-hair-density-shampoo"
+        ],
         "used_text": "Used Zenith Advanced Hair Density Shampoo",
         "note": "",
         "show_number": false,
@@ -515,7 +517,7 @@
         "content_max_width": 1020,
         "heading_spacing": 52,
         "gap": 32,
-        "image_ratio": "1",
+        "image_ratio": "0.75",
         "step_title_spacing": 20,
         "used_spacing": 40,
         "used_width": 520,
@@ -549,7 +551,7 @@
         "heading_max_width_mobile": 800,
         "subheading_font_size_mobile": 16,
         "heading_spacing_mobile": 16,
-        "image_width_mobile": 128,
+        "image_width_mobile": 100,
         "number_size_mobile": 28,
         "number_font_size_mobile": 14,
         "gap_mobile": 12,
@@ -576,7 +578,7 @@
           "settings": {
             "image": "shopify://shop_images/hair-category-gallery-man-spraying-hair-density-spray-1-desktop.webp",
             "title": "Spray",
-            "text": "Towel dry hair. Part your hair and spray the Zenith Density Spray directly onto the scalp in thinning areas."
+            "text": "Towel dry hair. Part your hair and spray the Zenith Advanced Hair Density Spray directly onto a clean, towel-dried scalp."
           }
         },
         "step_2": {
@@ -605,9 +607,11 @@
         "eyebrow": "",
         "heading": "Hair Grooming Routine",
         "subheading": "<p>Get Thicker & Fuller Hair In 3 Steps</p>",
-        "show_used": false,
-        "products": [],
-        "used_text": "Used Zenith Advanced Hair Density Hair Spray",
+        "show_used": true,
+        "products": [
+          "zenith-advanced-hair-density-spray"
+        ],
+        "used_text": "Used Zenith Advanced Hair Density Spray",
         "note": "",
         "show_number": false,
         "step_label": "Step",
@@ -620,7 +624,7 @@
         "content_max_width": 1020,
         "heading_spacing": 52,
         "gap": 32,
-        "image_ratio": "1",
+        "image_ratio": "0.75",
         "step_title_spacing": 20,
         "used_spacing": 40,
         "used_width": 520,
@@ -654,7 +658,7 @@
         "heading_max_width_mobile": 800,
         "subheading_font_size_mobile": 16,
         "heading_spacing_mobile": 16,
-        "image_width_mobile": 128,
+        "image_width_mobile": 100,
         "number_size_mobile": 28,
         "number_font_size_mobile": 14,
         "gap_mobile": 12,
@@ -1013,7 +1017,8 @@
       "settings": {
         "content_source": "global",
         "eyebrow": "",
-        "heading": "The Zenith Guarantee",
+        "heading": "What happens after you order",
+        "heading_mobile": "The Zenith Guarantee",
         "subheading": "",
         "show_payment_icons": false,
         "footer_text": "<p>Delivered by LBC, J&T, Gogo Express, Ninja Van, and Amare Group's own rider fleet.</p>",
@@ -1147,7 +1152,7 @@
         "jdgm_product": "zenith-advanced-hair-density-shampoo",
         "eyebrow": "",
         "heading": "[customers] Filipino Men Trust Zenith Products",
-        "subheading": "<p>Men in Manila using the cream. Unedited and verified.</p>",
+        "subheading": "<p>Men in Manila using the cream.</p>",
         "heading_alignment": "center",
         "heading_max_width": 760,
         "subheading_spacing": 28,
@@ -1172,7 +1177,7 @@
         "icon_size": 14,
         "button_font_size": 20,
         "heading_mobile": "",
-        "subheading_mobile": "<p>Men across the Philippines using the cream. Unedited and verified.</p>",
+        "subheading_mobile": "<p>Men across the Philippines using the cream.</p>",
         "heading_font_size_mobile": 36,
         "subheading_font_size_mobile": 16,
         "subheading_opacity_mobile": 70,
