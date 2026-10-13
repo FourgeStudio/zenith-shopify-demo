@@ -943,6 +943,7 @@
         "content_source": "custom",
         "eyebrow": "",
         "heading": "What happens after you order",
+        "heading_mobile": "The Zenith Guarantee",
         "subheading": "",
         "footer_image": "shopify://shop_images/payments.svg",
         "show_payment_icons": false,
@@ -1299,6 +1300,7 @@
       "settings": {
         "eyebrow": "All Products",
         "heading": "The Zenith Grooming Collection",
+        "subheading_mobile": "<p>The products men come back for. Simple. Effective. Proven.</p>",
         "subheading": "<p>The products men come back for. Simple routines, named ingredients.</p>",
         "view_all_label": "Shop All Products",
         "view_all_link": "shopify://collections/shop-all",
@@ -1482,6 +1484,7 @@
       "settings": {
         "content_source": "global",
         "heading": "Our Official Pages",
+        "hide_mobile": true,
         "heading_mobile": "Join the #ZenithTribe",
         "text_mobile": "<p>Follow Zenith on Facebook and Instagram. Official pages only, listed on our Verify Zenith Products page.</p>",
         "hover_effect": true,
@@ -1575,7 +1578,7 @@
         "text_font_size": 14,
         "icon_size": 14,
         "button_font_size": 20,
-        "heading_mobile": "[customers] Filipino Men Have Ordered From Zenith",
+        "heading_mobile": "[customers] Filipino Men Trust Zenith Products",
         "subheading_mobile": "",
         "heading_font_size_mobile": 36,
         "subheading_font_size_mobile": 16,
