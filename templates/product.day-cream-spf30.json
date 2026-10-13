@@ -216,7 +216,7 @@
         "question_6"
       ],
       "settings": {
-        "show_money_back": false,
+        "show_money_back": true,
         "placeholder_title": "Zenith Anti-Aging Tallow Day Cream SPF 30",
         "show_rating": true,
         "rating_value": "4.69",
@@ -226,7 +226,7 @@
         "price_badge": "UP TO 33% OFF + ₱300 OFF",
         "show_fda": true,
         "fda_label": "FDA-Notified",
-        "fda_number": "",
+        "fda_number": "NN-1000015050772",
         "button_label": "Add to Cart",
         "button_icon": "cart",
         "quantity_pad": true,
@@ -1185,7 +1185,7 @@
         "trust_4"
       ],
       "settings": {
-        "show_money_back": false,
+        "show_money_back": true,
         "eyebrow": "",
         "heading": "Zenith Anti-Aging Tallow Day Cream SPF 30",
         "heading_mobile": "",

@@ -216,7 +216,7 @@
         "question_6"
       ],
       "settings": {
-        "show_money_back": false,
+        "show_money_back": true,
         "placeholder_title": "Zenith Anti-Aging Tallow Cleanser",
         "show_rating": true,
         "rating_value": "4.69",
@@ -226,7 +226,7 @@
         "price_badge": "",
         "show_fda": true,
         "fda_label": "FDA-Notified",
-        "fda_number": "",
+        "fda_number": "NN-1000015038905",
         "button_label": "Add to Cart",
         "button_icon": "cart",
         "quantity_pad": true,
@@ -1082,7 +1082,7 @@
           "type": "question",
           "settings": {
             "question": "Can I use this with my other products like moisturizer and sunscreen?",
-            "answer": "<p>Yes! The Zenith Anti-Aging Tallow Cleanser works perfectly as the foundation of any skincare routine. For complete anti-aging care, follow with Zenith Anti-Aging Tallow Day Cream SPF 30 in the morning for protection, and Zenith Anti-Aging Tallow Night Cream in the evening for maximum repair and renewal.</p>"
+            "answer": "<p>Yes! The Zenith Anti-Aging Tallow Cleanser works perfectly as the foundation of any skincare routine. For complete anti-aging care, follow with Zenith Anti-Aging Tallow Day Cream SPF 30 in the morning for protection, and Zenith Anti-Aging Tallow Cream in the evening for maximum repair and renewal.</p>"
           }
         },
         "question_6": {
@@ -1188,7 +1188,7 @@
         "trust_4"
       ],
       "settings": {
-        "show_money_back": false,
+        "show_money_back": true,
         "eyebrow": "",
         "heading": "Zenith Anti-Aging Tallow Cleanser",
         "heading_mobile": "",
