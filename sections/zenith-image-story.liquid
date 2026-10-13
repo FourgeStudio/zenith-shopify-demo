@@ -43,6 +43,12 @@
   assign story_classes = 'zenith-story--' | append: section.settings.image_ratio
   assign story_classes = story_classes | append: ' zenith-story--m-' | append: section.settings.image_ratio_mobile
   assign story_classes = story_classes | append: ' zenith-story--align-' | append: section.settings.content_align
+  if section.settings.image_focus_mobile != blank and section.settings.image_focus_mobile != 'center'
+    assign story_classes = story_classes | append: ' zenith-story--m-focus-' | append: section.settings.image_focus_mobile
+  endif
+  if section.settings.button_width_mobile == 'auto'
+    assign story_classes = story_classes | append: ' zenith-story--m-btn-auto'
+  endif
   if section.settings.image_position == 'right'
     assign story_classes = story_classes | append: ' zenith-story--image-right'
   endif
@@ -765,6 +771,28 @@
       "step": 5,
       "unit": "%",
       "default": 0
+    },
+    {
+      "type": "select",
+      "id": "image_focus_mobile",
+      "label": "Mobile image crop",
+      "info": "Which part of the photo stays in view when the mobile image shape crops it.",
+      "default": "center",
+      "options": [
+        { "value": "top", "label": "Top" },
+        { "value": "center", "label": "Center" },
+        { "value": "bottom", "label": "Bottom" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "button_width_mobile",
+      "label": "Mobile button width",
+      "default": "theme",
+      "options": [
+        { "value": "theme", "label": "Theme setting (Full-width buttons on mobile)" },
+        { "value": "auto", "label": "Fit the label" }
+      ]
     },
     {
       "type": "select",
