@@ -1,6 +1,6 @@
 # Zenith Shopify — project status
 
-_Last updated: 2026-10-08. Keep this file current at the end of each work session; it is the handoff doc._
+_Last updated: 2026-10-13. Keep this file current at the end of each work session; it is the handoff doc._
 
 ## Where things stand
 - Theme: Dawn 16.0.0 + custom `zenith-*` sections. Store `tryzenith.ph` (Zenith Philippines).
@@ -16,6 +16,7 @@ _Last updated: 2026-10-08. Keep this file current at the end of each work sessio
 - 2026-10-09 Nav and Checkout: menu drawer flicker fixed (page overlay snapped on/off in one frame; logo/X/icons jumped at the first frame of open and at the start of close mid-slide). Now the overlay fades with the slide, header items fade, and global.js HeaderDrawer keeps `menu-open` + adds `menu-closing` for the 400ms slide; iOS tap highlight off. Cart: goal step labels fit (padding-top 4.4rem), bin = 44px button 22px from + (drawer −/+ 44px-wide tap areas, ≥16px between), Check out = `zenith-btn--gold` + arrow (drawer + cart page). Specificity traps: Dawn's phone drawer `margin-left: 0` and the later tap-area `::after` rule needed `html`-prefixed selectors.
 - 2026-10-09 Single Products: no badges/stars on listings (grid show_badges/show_rating off, schema defaults off; featured product badge = new global `zfp_show_badge`, off), Judge.me `.jdgm-prev-badge/.jdgm-preview-badge` hidden, product page rating text = gold universal eyebrow ("Trusted by [customers] Filipino men") + new `show_stars` (off, also hides review-strip stars) + new `head_gap`/`head_gap_mobile` (8/6px), product-page body text ≥16/15px and labels ≥12px, homepage FAQ added to collection.json, nested product FAQ inset removed, no hover zoom on featured product / ingredients product photo.
 - RESOLVED 2026-10-09: Shopify refused `sections/zenith-featured-product.liquid` (on main since 919228e, and the earlier demo refusal) with "Invalid schema: max_blocks can only be used when blocks is present" — the global refactor removed the blocks but left `max_blocks`. Removed; validator now flags it. Sync errors: Admin → Themes → theme ⋯ menu → GitHub integration theme logs.
+- 2026-10-13 Demo review (artifact SrwNrfX9UysDkG7fQn2icy): A1–A6, B1, B2, B4 done on main + demo. Prices drop centavos everywhere (all `| money` / `| money_with_currency` → `money_without_trailing_zeros`); tallow cream: mobile video heading blank (= desktop), `show_money_back` on (main product + bottom CTA), comparison vs "Regular retinol creams" / "Basic moisturizers", FAQ typos; home categories 2 columns; featured product globals on (badge, benefits, Money-Back, image slider) — benefits need product metafield `custom.benefits` filled or the description shows; home + collection FAQ shipping answer uses `[free_shipping]`; one courier list everywhere (GoGo Xpress, SPX, LBC, J&T, Ninja Van + Amare riders, matching the logos — **assumed, confirm with client**). Demo now runs the new featured product section (exception removed). **Open:** B3 Refunds page is shared store content (check only, go-live); section C = client decisions (C4/C5: site already right).
 - Brand tokens, colors, fonts, logos: see `.claude/brand.md`.
 
 ## Workflow
@@ -64,7 +65,6 @@ flowchart TD
 - Shopify **silently rejects** a JSON file that uses a setting its section doesn't have yet or a range value off its step → push sections before templates; resend with a small change if a file didn't take.
 
 ### Demo exceptions (leave alone when syncing)
-- **Featured product**: the demo store refuses the new `sections/zenith-featured-product.liquid`, so the demo keeps the old section with product + *Text under the price = Product description* set on `templates/index.json` and `templates/collection.shop-all.json`. Don't overwrite those three on the demo.
 - **Judge.me** blocks: not installed on the demo, so Shopify drops them from its templates (placeholders there).
 
 ### Go-live checklist
