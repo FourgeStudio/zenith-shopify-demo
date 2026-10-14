@@ -364,7 +364,7 @@
         "compare_color": "#8e8c8c",
         "badge_background": "#294850",
         "badge_text_color": "#ffffff",
-        "check_color": "#FFFFFF",
+        "check_color": "#ffffff",
         "bar_background": "#202020",
         "delivery_background": "#112328",
         "trust_icon_color": "#eabe5f",
@@ -1253,7 +1253,7 @@
       "settings": {
         "content_source": "global",
         "eyebrow": "",
-        "heading": "What happens after you order",
+        "heading": "The Zenith Guarantee",
         "heading_mobile": "The Zenith Guarantee",
         "subheading": "",
         "show_payment_icons": false,
