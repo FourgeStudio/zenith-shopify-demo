@@ -1,6 +1,6 @@
 /* Zenith · Featured product — "Text under the price" = Product page checklist.
-   Loads the checklist from the selected product's own page (Section Rendering API: the "main" section of
-   its product template) when the section comes near the screen, and shows it with the featured product's
+   Loads the checklist from the selected product's own page (the page HTML: the Section Rendering API
+   needs the template's full section id, unknown here) when the section comes near the screen, and shows it with the featured product's
    gold checks. The description inside the element stays if the request fails or the page has no checklist. */
 if (!customElements.get('zenith-fp-checks')) {
   customElements.define(
@@ -27,10 +27,9 @@ if (!customElements.get('zenith-fp-checks')) {
         this.loaded = true;
         try {
           const url = new URL(this.dataset.url, window.location.origin);
-          url.searchParams.set('sections', 'main');
           const response = await fetch(url);
           if (!response.ok) return;
-          const html = (await response.json()).main;
+          const html = await response.text();
           if (!html) return;
           const doc = new DOMParser().parseFromString(html, 'text/html');
           const items = Array.from(doc.querySelectorAll('.zenith-mp__checks .zenith-mp__check'));
