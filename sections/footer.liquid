@@ -134,6 +134,7 @@
       {%- if section.blocks.size > 0 -%}
         <div class="zenith-footer__menus">
           {%- for block in section.blocks -%}
+            {%- if block.type == 'payment' -%}{%- continue -%}{%- endif -%}
             <div
               class="zenith-footer__block zenith-footer__block--{{ block.type | handleize }}{% if block.settings.mobile_full_width %} zenith-footer__block--full-m{% endif %}{% if block.type == 'image' and block.settings.placement != 'inline' %} zenith-footer__block--row{% endif %}"
               {{ block.shopify_attributes }}
@@ -261,7 +262,30 @@
           </a>
         {%- endif -%}
 
-        {%- if s.payment_image != blank -%}
+        {%- assign payment_blocks = section.blocks | where: 'type', 'payment' -%}
+        {%- if payment_blocks.size > 0 -%}
+          {%- comment -%} Payment badge blocks: one image each, added / removed / reordered in the editor {%- endcomment -%}
+          <ul
+            class="zenith-footer__payments list-unstyled"
+            role="list"
+            aria-label="{{ 'sections.footer.payment' | t | escape }}"
+          >
+            {%- for block in payment_blocks -%}
+              {%- if block.settings.image != blank -%}
+                <li {{ block.shopify_attributes }}>
+                  {{
+                    block.settings.image
+                    | image_url: height: 120
+                    | image_tag:
+                      loading: 'lazy',
+                      class: 'zenith-footer__payment-badge',
+                      alt: block.settings.name
+                  }}
+                </li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        {%- elsif s.payment_image != blank -%}
           {%- capture payment_sizes -%}(min-width: 750px) {{ s.payment_image_height | times: s.payment_image.aspect_ratio | ceil }}px, {{ s.payment_image_height_mobile | times: s.payment_image.aspect_ratio | ceil }}px{%- endcapture -%}
           {{
             s.payment_image
@@ -464,6 +488,24 @@
       "type": "@app"
     },
     {
+      "type": "payment",
+      "name": "Payment badge",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Badge image",
+          "info": "One payment method per block (e.g. GCash). Shown in the payment row, in block order; height = Payment badges height. Adding any badge block replaces the single Payment image."
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name (for screen readers)",
+          "default": "GCash"
+        }
+      ]
+    },
+    {
       "type": "link_list",
       "name": "t:sections.footer.blocks.link_list.name",
       "settings": [
@@ -652,7 +694,7 @@
       "type": "image_picker",
       "id": "payment_image",
       "label": "Payment badges image",
-      "info": "One image with all badges (GCash, Maya, Visa…). Empty = the store's payment icons, if enabled below."
+      "info": "One image with all badges (GCash, Maya, Visa…). To add badges one by one instead, add Payment badge blocks (they replace this image). Empty = the store's payment icons, if enabled below."
     },
     {
       "type": "checkbox",
