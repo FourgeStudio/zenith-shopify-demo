@@ -1424,7 +1424,7 @@
           "type": "question",
           "settings": {
             "question": "How long will it take for the product to ship to me?",
-            "answer": "<p>We ship within 1 business day using LBC, J&T, Gogo Express, Ninja Van or Amare Group's own riders.<br/><br/>Delivery typically takes 3 business days for Metro Manila and 3-7 business days for Visayas and Mindanao regions.</p>"
+            "answer": "<p>We ship within 1 business day using GoGoXpress, NinjaVan, and SPX.<br/><br/>Delivery typically takes 3-5 business days for Metro Manila and 5-7 business days for Visayas and Mindanao regions.</p>"
           }
         }
       },
