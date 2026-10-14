@@ -999,8 +999,11 @@ div.zenith-cart-ship__fill {
 .zenith-cart-offers__steps {
   position: relative;
   overflow-x: clip;
-  overflow-clip-margin: 0.4rem; /* the ring sits 2px outside the dot */
+  /* The bar stops 2rem short of the edge and the pop may paint into that gap, so the end checkpoint's
+     pop + ring stay whole and still never reach past the cart content. */
+  overflow-clip-margin: 2rem;
   margin-top: var(--z-space-4, 16px);
+  margin-right: 2rem;
   padding-top: 4.4rem; /* two 12px label lines + 1.4rem above the track; 3.4rem let them poke out of the box */
 }
 
@@ -1119,12 +1122,6 @@ div.zenith-cart-offers__fill {
 .zenith-cart-offers__step.is-end .zenith-cart-offers__step-dot {
   left: auto;
   right: 0;
-}
-
-/* ...and its pop + ring grow leftwards from that edge, so nothing pokes past the drawer content and gets cut off. */
-.zenith-cart-offers__step.is-end .zenith-cart-offers__step-dot,
-.zenith-cart-offers__step.is-end .zenith-cart-offers__step-dot::after {
-  transform-origin: right center;
 }
 
 .zenith-cart-offers__step-label {
