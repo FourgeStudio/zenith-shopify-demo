@@ -141,6 +141,7 @@
 .zenith-contact__form-card {
   padding: var(--z-space-5);
   background: var(--z-ct-card, #010101);
+  border: var(--z-ct-card-bd, 0);
   --z-hfs-m: var(--z-ct-form-hfs-m, 3.2rem);
   --z-hfs: var(--z-ct-form-hfs, 3.4rem);
   --z-hsp-m: 20px;
@@ -381,6 +382,7 @@ input.zenith-contact__checkbox[type='checkbox']:checked {
   .zenith-contact--m-flat .zenith-contact__form-card {
     padding: var(--z-ct-card-pad, 40px);
     background: var(--z-ct-card, #010101);
+    border: var(--z-ct-card-bd, 0);
   }
 
   .zenith-contact--m-inline-text .zenith-contact__form-card .zenith-subheading p {

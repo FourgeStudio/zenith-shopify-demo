@@ -74,6 +74,19 @@
     hits.forEach(linkify);
   };
 
+  // Policy pages (Privacy, Refund, Shipping, Terms…) always open in a new tab (client 2026-10-14): written links,
+  // menu links and the auto-links above. Set on click, so links added later are covered too.
+  document.addEventListener(
+    'click',
+    (e) => {
+      const link = e.target.closest && e.target.closest('a[href*="/policies/"]');
+      if (!link || link.target === '_blank') return;
+      link.target = '_blank';
+      link.rel = 'noopener';
+    },
+    true
+  );
+
   const start = () => {
     // Initial pass off the critical path: when the main thread is idle
     if ('requestIdleCallback' in window) requestIdleCallback(() => scan(document.body), { timeout: 2000 });
