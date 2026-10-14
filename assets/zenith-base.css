@@ -1841,9 +1841,8 @@ cart-remove-button .button::before {
   }
 }
 
-/* Stand-alone links (footer menus + policy links): 44px tall rows. Inline links in paragraphs keep the line height. */
-:root .zenith-footer__link,
-:root .zenith-footer__policies a,
+/* Footer email: 44px tall row. Footer menu + policy links use the Link spacing setting (12px gap, client 2026-10-14);
+   each row is still ≥ 24px tall (WCAG 2.2 AA target size). */
 :root .zenith-footer__email {
   display: inline-flex;
   align-items: center;
