@@ -98,15 +98,14 @@
     "hero": {
       "type": "zenith-hero",
       "settings": {
-        "show_money_back": true,
         "eyebrow": "Trusted by [customers] Filipino men",
-        "use_collection_content": true,
         "heading": "Everything you need to stay in your prime.",
         "heading_mobile": "",
         "text": "<p>Everything you need to look sharp, feel confident, and stay in your prime.</p>",
-        "button_label": "",
+        "show_button": false,
+        "button_label": "Add to Cart",
         "button_link": "",
-        "button_product": "",
+        "button_product": "zenith-anti-aging-tallow-cream",
         "button_label_mobile": "",
         "button_link_mobile": "",
         "image": "shopify://shop_images/shop-all-hero-hair-skin-care-range-wooden-1-desktop.webp",
@@ -157,7 +156,6 @@
         "overlay_color": "#203940",
         "overlay_opacity": 100,
         "overlay_coverage": 80,
-        "overlay_solid": 0,
         "ribbon_color": "#f6233b",
         "ribbon_text_color": "#ffffff",
         "highlight_color": "#eabe5f",
@@ -195,12 +193,10 @@
         "mobile_button_bottom": true,
         "mobile_button_full": true,
         "mobile_hide_button": true,
-        "mobile_height_mode": "same",
         "mobile_height_screen": 65,
         "mobile_height": 440,
         "mobile_overlay_style": "top",
         "mobile_overlay_coverage": 70,
-        "mobile_overlay_solid": 0,
         "vertical_padding_mobile": 24,
         "heading_font_size_mobile": 40,
         "subheading_font_size_mobile": 16,
@@ -223,7 +219,8 @@
         "padding_top": 0,
         "padding_bottom": 0,
         "padding_top_mobile": 0,
-        "padding_bottom_mobile": 0
+        "padding_bottom_mobile": 0,
+        "use_collection_content": true
       }
     },
     "product_grid": {
@@ -235,7 +232,6 @@
         "collection": "",
         "products_to_show": 50,
         "show_rating": false,
-        "show_badges": false,
         "first_badge": "Selling Fast",
         "badge_icon": "truck",
         "sale_badge": "On Sale",
@@ -300,7 +296,8 @@
         "padding_top": 48,
         "padding_bottom": 48,
         "padding_top_mobile": 32,
-        "padding_bottom_mobile": 32
+        "padding_bottom_mobile": 32,
+        "show_badges": false
       }
     },
     "money_back": {
@@ -447,7 +444,6 @@
         "subheading_font_size": 18,
         "subheading_opacity": 100,
         "eyebrow_font_size": 14,
-        "question_font": "body",
         "title_font_size": 22,
         "text_font_size": 16,
         "icon_size": 20,
