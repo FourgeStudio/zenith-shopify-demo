@@ -15,67 +15,25 @@ if (!customElements.get('zenith-main-product')) {
         this.initVariants();
       }
 
-      disconnectedCallback() {
-        if (this.track && this.onScroll) this.track.removeEventListener('scroll', this.onScroll);
-        cancelAnimationFrame(this.frame);
-      }
-
       /* ---------- Gallery ---------- */
+      // Slides, loop and the phone start image live in zenith-carousel (data-loop, data-start-mobile);
+      // this keeps the thumbnails in step with it.
       initGallery() {
-        if (!this.track) return;
-
-        if (this.thumbs.length > 0) {
-          this.thumbs.forEach((thumb) => {
-            thumb.addEventListener('click', () => this.goToSlide(Number(thumb.dataset.thumb) || 0));
-          });
-
-          this.onScroll = () => {
-            cancelAnimationFrame(this.frame);
-            this.frame = requestAnimationFrame(() => this.setActiveThumb(this.currentIndex()));
-          };
-          this.track.addEventListener('scroll', this.onScroll, { passive: true });
+        if (!this.track || this.thumbs.length === 0) return;
+        this.thumbs.forEach((thumb) => {
+          thumb.addEventListener('click', () => this.goToSlide(Number(thumb.dataset.thumb) || 0));
+        });
+        if (this.carousel) {
+          this.carousel.addEventListener('zenith-carousel:change', (e) => this.setActiveThumb(e.detail.index));
+          if (Number.isFinite(this.carousel.index)) this.setActiveThumb(this.carousel.index);
         }
-
-        // Phones: open on the "Start at image" slide (section setting), once the track has a size.
-        // Runs with or without thumbnails (it used to be skipped when "Show image thumbnails" was off).
-        const start = (Number(this.dataset.startMobile) || 1) - 1;
-        if (start > 0 && start < this.track.children.length && window.matchMedia('(max-width: 749px)').matches) {
-          const apply = () => {
-            if (!this.track.clientWidth) return false;
-            this.track.scrollTo({ left: start * this.step, behavior: 'instant' });
-            this.setActiveThumb(start);
-            return true;
-          };
-          if (!apply()) {
-            const observer = new ResizeObserver(() => {
-              if (apply()) observer.disconnect();
-            });
-            observer.observe(this.track);
-          }
-        }
-      }
-
-      get step() {
-        // Same measurement zenith-carousel.js uses: distance between two slides, or one slide's width.
-        if (this.carousel && typeof this.carousel.step === 'number' && this.carousel.step > 0) {
-          return this.carousel.step;
-        }
-        const slides = this.track.children;
-        if (slides.length > 1) return slides[1].offsetLeft - slides[0].offsetLeft;
-        return slides.length ? slides[0].offsetWidth : this.track.clientWidth;
-      }
-
-      currentIndex() {
-        const step = this.step;
-        if (!step) return 0;
-        return Math.max(0, Math.min(this.track.children.length - 1, Math.round(this.track.scrollLeft / step)));
       }
 
       goToSlide(index) {
         if (this.carousel && typeof this.carousel.scrollToIndex === 'function') {
           this.carousel.scrollToIndex(index);
         } else {
-          this.track.scrollTo({ left: index * this.step });
+          this.track.scrollTo({ left: index * this.track.clientWidth });
         }
         this.setActiveThumb(index);
       }

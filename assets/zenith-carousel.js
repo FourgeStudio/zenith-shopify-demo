@@ -10,9 +10,18 @@ if (!customElements.get('zenith-carousel')) {
         this.next = this.querySelector('[data-carousel-next]');
         this.dotsWrap = this.querySelector('.zenith-carousel__dots');
 
+        // data-loop: endless slides. Copies of the last / first slides sit before / after the real ones
+        // (hidden from screen readers and keyboard); when the scroll comes to rest on a copy it jumps,
+        // without animation, to the real slide it copies.
+        this.clones = 0;
+        if (this.hasAttribute('data-loop') && this.slides.length > 1) this.addClones();
+
         this.prev?.addEventListener('click', () => this.go(-1));
         this.next?.addEventListener('click', () => this.go(1));
         this.track.addEventListener('scroll', () => this.onScroll(), { passive: true });
+        if (this.clones && 'onscrollend' in window) {
+          this.track.addEventListener('scrollend', () => this.normalize());
+        }
 
         // Mouse drag = swipe (touch already scrolls natively). No native image/link dragging, and a drag
         // doesn't count as a click on the link or card under the pointer.
@@ -28,6 +37,17 @@ if (!customElements.get('zenith-carousel')) {
           true
         );
 
+        // Once the shopper moves the slides, layout changes no longer re-apply the start slide.
+        ['pointerdown', 'touchstart', 'wheel', 'keydown'].forEach((type) =>
+          this.track.addEventListener(
+            type,
+            () => {
+              this.touched = true;
+            },
+            { passive: true }
+          )
+        );
+
         this.resizeObserver = new ResizeObserver(() => this.update());
         this.resizeObserver.observe(this.track);
 
@@ -39,6 +59,28 @@ if (!customElements.get('zenith-carousel')) {
           this.addPauseButton();
           this.start();
         }
+      }
+
+      addClones() {
+        const count = Math.min(2, this.slides.length);
+        const copy = (slide) => {
+          const clone = slide.cloneNode(true);
+          clone.classList.add('is-clone');
+          clone.setAttribute('aria-hidden', 'true');
+          clone.setAttribute('inert', '');
+          clone.removeAttribute('id');
+          clone.querySelectorAll('[id]').forEach((el) => el.removeAttribute('id'));
+          clone.querySelectorAll('img').forEach((img) => {
+            img.removeAttribute('fetchpriority');
+            img.loading = 'lazy';
+          });
+          return clone;
+        };
+        const head = this.slides.slice(-count).map(copy);
+        const tail = this.slides.slice(0, count).map(copy);
+        this.track.prepend(...head);
+        this.track.append(...tail);
+        this.clones = count;
       }
 
       // Pause/play for autoplay (WCAG 2.2.2), same markup as snippets/zenith-pause-button.liquid.
@@ -90,22 +132,65 @@ if (!customElements.get('zenith-carousel')) {
       }
 
       get pageCount() {
+        if (this.clones) return this.slides.length;
         const perPage = Math.max(1, Math.round(this.viewport / this.step));
         return Math.max(1, this.slides.length - perPage + 1);
       }
 
+      // Scroll position of a real slide (the copies in front shift every real slide by `clones` steps)
+      leftOf(i) {
+        return (i + this.clones) * this.step;
+      }
+
       get index() {
-        return Math.round(this.track.scrollLeft / this.step);
+        const slot = Math.round(this.track.scrollLeft / this.step) - this.clones;
+        if (!this.clones) return slot;
+        const n = this.slides.length;
+        return ((slot % n) + n) % n;
+      }
+
+      scrollTrack(left, behavior) {
+        this.track.scrollTo(behavior ? { left, behavior } : { left });
       }
 
       go(direction) {
+        this.touched = true;
+        if (this.clones) {
+          // Step onto the copy beside an end slide; normalize() then jumps to the real one.
+          const slot = Math.round(this.track.scrollLeft / this.step) - this.clones;
+          this.scrollTrack(this.leftOf(slot + direction));
+          return;
+        }
         this.scrollToIndex(this.index + direction);
       }
 
-      scrollToIndex(i) {
+      scrollToIndex(i, behavior) {
+        this.touched = true;
+        if (this.clones) {
+          this.scrollTrack(this.leftOf(i), behavior);
+          return;
+        }
         const max = this.pageCount - 1;
         const target = i > max ? 0 : i < 0 ? max : i;
-        this.track.scrollTo({ left: target * this.step });
+        this.scrollTrack(target * this.step, behavior);
+      }
+
+      // Loop: resting on a copy → jump to the real slide without animation.
+      normalize() {
+        if (!this.clones || this.dragging) return;
+        const n = this.slides.length;
+        const slot = Math.round(this.track.scrollLeft / this.step);
+        let real = slot;
+        if (slot < this.clones) real = slot + n;
+        else if (slot >= this.clones + n) real = slot - n;
+        if (real === slot) return;
+        this.track.style.scrollSnapType = 'none';
+        this.track.style.scrollBehavior = 'auto';
+        this.track.scrollLeft = real * this.step;
+        requestAnimationFrame(() => {
+          this.track.style.scrollSnapType = '';
+          this.track.style.scrollBehavior = '';
+        });
       }
 
       dragStart(e) {
@@ -119,6 +204,7 @@ if (!customElements.get('zenith-carousel')) {
           const dx = ev.clientX - startX;
           if (!moved && Math.abs(dx) > 5) {
             moved = true;
+            this.dragging = true;
             this.track.classList.add('is-dragging');
             this.track.style.scrollSnapType = 'none';
             this.track.style.scrollBehavior = 'auto';
@@ -130,17 +216,21 @@ if (!customElements.get('zenith-carousel')) {
           window.removeEventListener('pointerup', up);
           window.removeEventListener('pointercancel', up);
           if (!moved) return;
+          this.dragging = false;
           this.track.classList.remove('is-dragging');
           this.track.style.scrollBehavior = '';
+          const step = this.step;
           const delta = this.track.scrollLeft - startLeft;
-          const from = Math.round(startLeft / this.step);
-          let to = Math.round(this.track.scrollLeft / this.step);
+          const from = Math.round(startLeft / step);
+          let to = Math.round(this.track.scrollLeft / step);
           // A short flick still moves one slide
-          if (to === from && Math.abs(delta) > this.step * 0.15) to = from + Math.sign(delta);
-          to = Math.max(0, Math.min(this.pageCount - 1, to));
-          this.track.scrollTo({ left: to * this.step, behavior: 'smooth' });
+          if (to === from && Math.abs(delta) > step * 0.15) to = from + Math.sign(delta);
+          const last = this.clones ? this.track.children.length - 1 : this.pageCount - 1;
+          to = Math.max(0, Math.min(last, to));
+          this.track.scrollTo({ left: to * step, behavior: 'smooth' });
           setTimeout(() => {
             this.track.style.scrollSnapType = '';
+            this.normalize();
           }, 450);
           this.justDragged = true;
           setTimeout(() => {
@@ -165,19 +255,31 @@ if (!customElements.get('zenith-carousel')) {
       onScroll() {
         cancelAnimationFrame(this.frame);
         this.frame = requestAnimationFrame(() => this.updateState());
+        if (this.clones && !('onscrollend' in window)) {
+          clearTimeout(this.settle);
+          this.settle = setTimeout(() => this.normalize(), 150);
+        }
+      }
+
+      // Start slide (1-based): data-start-mobile on phones, otherwise data-start. Re-applied on every
+      // layout change until the shopper moves the slides, so late CSS or images can't leave it on slide 1.
+      get startIndex() {
+        const mobile = window.matchMedia('(max-width: 749px)').matches && this.dataset.startMobile;
+        const start = (Number(mobile || this.dataset.start) || 1) - 1;
+        return Math.max(0, Math.min(this.slides.length - 1, start));
       }
 
       update() {
-        // data-start: open scrolled to that slide (1-based), once, as soon as the track has a size
-        if (!this.startApplied && this.track.clientWidth) {
-          this.startApplied = true;
-          const start = (Number(this.dataset.start) || 1) - 1;
-          if (start > 0 && this.track.scrollWidth > this.track.clientWidth + 2) {
+        if (!this.touched && this.track.clientWidth) {
+          const start = this.startIndex;
+          if (this.clones) {
+            this.track.scrollTo({ left: this.leftOf(start), behavior: 'instant' });
+          } else if (start > 0 && this.track.scrollWidth > this.track.clientWidth + 2) {
             this.track.scrollTo({ left: Math.min(start, this.pageCount - 1) * this.step, behavior: 'instant' });
           }
         }
         // All slides fit: .is-static hides the controls (sections can also center the slides)
-        this.classList.toggle('is-static', this.track.scrollWidth <= this.track.clientWidth + 2);
+        this.classList.toggle('is-static', !this.clones && this.track.scrollWidth <= this.track.clientWidth + 2);
         if (this.dotsWrap) {
           const count = this.pageCount;
           if (this.dotsWrap.children.length !== count) {
@@ -201,11 +303,16 @@ if (!customElements.get('zenith-carousel')) {
         const i = this.index;
         const atEnd = this.track.scrollLeft + this.track.clientWidth >= this.track.scrollWidth - 2;
         const scrollable = this.track.scrollWidth > this.track.clientWidth + 2;
-        if (this.prev) this.prev.disabled = !scrollable || (!this.autoplay && i === 0);
-        if (this.next) this.next.disabled = !scrollable || (!this.autoplay && atEnd);
+        const loops = this.clones || this.autoplay;
+        if (this.prev) this.prev.disabled = !scrollable || (!loops && i === 0);
+        if (this.next) this.next.disabled = !scrollable || (!loops && atEnd);
         Array.from(this.dotsWrap?.children || []).forEach((dot, n) => {
           dot.setAttribute('aria-current', String(n === Math.min(i, this.pageCount - 1)));
         });
+        if (i !== this.lastIndex) {
+          this.lastIndex = i;
+          this.dispatchEvent(new CustomEvent('zenith-carousel:change', { detail: { index: i } }));
+        }
       }
     }
   );
