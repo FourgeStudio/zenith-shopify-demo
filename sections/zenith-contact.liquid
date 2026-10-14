@@ -44,6 +44,7 @@
   --z-ct-col-gap: {{ s.column_gap }}px;
   --z-ct-stack-m: {{ s.stack_gap_mobile }}px;
   --z-ct-card: {{ s.form_background }};
+  --z-ct-card-bd: {% if s.form_border_width > 0 and s.form_border_color != blank %}{{ s.form_border_width }}px solid {{ s.form_border_color }}{% else %}0{% endif %};
   --z-ct-card-pad: {{ s.card_padding }}px;
   --z-ct-item-gap: {{ s.item_spacing }}px;
   --z-ct-item-gap-m: {{ s.item_spacing_mobile }}px;
@@ -699,8 +700,10 @@
       "type": "color",
       "id": "form_background",
       "label": "Form card background",
-      "default": "#010101"
+      "default": "#202020"
     },
+    { "type": "color", "id": "form_border_color", "label": "Form card border", "default": "#414141" },
+    { "type": "range", "id": "form_border_width", "label": "Form card border width", "min": 0, "max": 8, "step": 1, "unit": "px", "default": 1 },
     {
       "type": "color",
       "id": "icon_color",
