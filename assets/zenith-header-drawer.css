@@ -359,3 +359,40 @@
     transform: translateY(-50%);
   }
 }
+
+/* Opening the menu: items come in one after another (client 2026-10-14) — menu links, then the button,
+   then the socials/contact row. Re-plays on every open (menu-opening is added on each open). */
+@keyframes zenith-drawer-item-in {
+  from {
+    opacity: 0;
+    transform: translateX(-1.6rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .menu-opening > .menu-drawer .menu-drawer__navigation > .menu-drawer__menu > li,
+  .menu-opening > .menu-drawer .zenith-drawer__cta-wrap,
+  .menu-opening > .menu-drawer .zenith-drawer__footer {
+    animation: zenith-drawer-item-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: calc(0.12s + var(--z-dr-i, 0) * 0.06s);
+  }
+
+  .menu-opening > .menu-drawer .menu-drawer__navigation > .menu-drawer__menu > li:nth-child(1) { --z-dr-i: 0; }
+  .menu-opening > .menu-drawer .menu-drawer__navigation > .menu-drawer__menu > li:nth-child(2) { --z-dr-i: 1; }
+  .menu-opening > .menu-drawer .menu-drawer__navigation > .menu-drawer__menu > li:nth-child(3) { --z-dr-i: 2; }
+  .menu-opening > .menu-drawer .menu-drawer__navigation > .menu-drawer__menu > li:nth-child(4) { --z-dr-i: 3; }
+  .menu-opening > .menu-drawer .menu-drawer__navigation > .menu-drawer__menu > li:nth-child(5) { --z-dr-i: 4; }
+  .menu-opening > .menu-drawer .menu-drawer__navigation > .menu-drawer__menu > li:nth-child(6) { --z-dr-i: 5; }
+  .menu-opening > .menu-drawer .menu-drawer__navigation > .menu-drawer__menu > li:nth-child(7) { --z-dr-i: 6; }
+  .menu-opening > .menu-drawer .menu-drawer__navigation > .menu-drawer__menu > li:nth-child(8) { --z-dr-i: 7; }
+  .menu-opening > .menu-drawer .menu-drawer__navigation > .menu-drawer__menu > li:nth-child(9) { --z-dr-i: 8; }
+  .menu-opening > .menu-drawer .menu-drawer__navigation > .menu-drawer__menu > li:nth-child(10) { --z-dr-i: 9; }
+  .menu-opening > .menu-drawer .menu-drawer__navigation > .menu-drawer__menu > li:nth-child(11) { --z-dr-i: 10; }
+  .menu-opening > .menu-drawer .menu-drawer__navigation > .menu-drawer__menu > li:nth-child(12) { --z-dr-i: 11; }
+  .menu-opening > .menu-drawer .zenith-drawer__cta-wrap { --z-dr-i: 7; }
+  .menu-opening > .menu-drawer .zenith-drawer__footer { --z-dr-i: 8; }
+}

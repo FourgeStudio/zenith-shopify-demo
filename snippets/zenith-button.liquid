@@ -15,6 +15,13 @@
   {%- liquid
     assign btn_style = style | default: 'gold'
     assign btn_icon = icon | default: 'arrow_right'
+    # Client 2026-10-14: Add to Cart labels always get the cart icon; other buttons use the arrow, not the chevron
+    assign btn_label_lc = label | downcase
+    if btn_label_lc contains 'add to cart'
+      assign btn_icon = 'cart'
+    elsif btn_icon == 'chevron_right'
+      assign btn_icon = 'arrow_right'
+    endif
     if icon_only and btn_icon == 'none'
       assign btn_icon = 'arrow_right'
     endif

@@ -42,7 +42,7 @@
         "drawer_button_label": "Shop Zenith Products",
         "drawer_button_link": "/collections/all?view=shop-all",
         "drawer_button_product": "",
-        "drawer_button_icon": "chevron_right",
+        "drawer_button_icon": "arrow_right",
         "drawer_show_social": true,
         "drawer_email": "hello@tryzenith.ph",
         "drawer_show_payment_icons": true,

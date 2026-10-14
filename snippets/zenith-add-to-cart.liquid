@@ -34,8 +34,9 @@
           {{ 'products.product.sold_out' | t }}
         {%- endif -%}
       </span>
-      {%- if icon != blank and icon != 'none' and variant.available -%}
-        {%- render 'zenith-icon', icon: icon, class: 'zenith-btn__icon' -%}
+      {%- comment -%} Every Add to Cart button shows the cart icon (client 2026-10-14) {%- endcomment -%}
+      {%- if variant.available -%}
+        {%- render 'zenith-icon', icon: 'cart', class: 'zenith-btn__icon' -%}
       {%- endif -%}
       <span class="sold-out-message hidden">{{ 'products.product.sold_out' | t }}</span>
       {%- render 'loading-spinner' -%}
