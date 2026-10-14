@@ -91,6 +91,10 @@ zenith-fp-checks {
 }
 
 /* Skeleton while the product page checklist loads (same row height as the real list) */
+.zenith-fp__skeleton .zenith-fp__benefit {
+  min-height: 1.5em;
+}
+
 .zenith-fp__skel-check {
   flex-shrink: 0;
   width: 1.8rem;
