@@ -44,8 +44,8 @@
   --z-ct-col-gap: {{ s.column_gap }}px;
   --z-ct-stack-m: {{ s.stack_gap_mobile }}px;
   --z-ct-card: {{ s.form_background }};
-  --z-ct-bd-c: {% if s.form_border_color != blank %}{{ s.form_border_color }}{% else %}rgba(255, 255, 255, 0.15){% endif %};
-  --z-ct-card-bd: {% if s.form_border_width > 0 %}{{ s.form_border_width }}px solid {% if s.form_border_color != blank %}{{ s.form_border_color }}{% else %}rgba(255, 255, 255, 0.15){% endif %}{% else %}0{% endif %};
+  --z-ct-bd-c: {% if s.form_border_color != blank %}{{ s.form_border_color }}{% else %}#414141{% endif %};
+  --z-ct-card-bd: {% if s.form_border_width > 0 %}{{ s.form_border_width }}px solid {% if s.form_border_color != blank %}{{ s.form_border_color }}{% else %}#414141{% endif %}{% else %}0{% endif %};
   --z-ct-card-pad: {{ s.card_padding }}px;
   --z-ct-item-gap: {{ s.item_spacing }}px;
   --z-ct-item-gap-m: {{ s.item_spacing_mobile }}px;
@@ -704,7 +704,7 @@
       "label": "Form card background",
       "default": "#202020"
     },
-    { "type": "color", "id": "form_border_color", "label": "Form card and field border", "info": "Empty = white at 15% (brand Color Scheme 2 border)." },
+    { "type": "color", "id": "form_border_color", "label": "Form card and field border", "info": "Empty = #414141." },
     { "type": "range", "id": "form_border_width", "label": "Form card border width", "min": 0, "max": 8, "step": 1, "unit": "px", "default": 1 },
     {
       "type": "color",
