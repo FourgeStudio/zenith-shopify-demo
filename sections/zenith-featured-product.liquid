@@ -72,7 +72,7 @@
 
 <section
   id="Zenith-{{ section.id }}"
-  class="zenith-section zenith-fp zenith-fp--fit-{{ s.image_fit }} zenith-fp--m-{{ s.media_ratio_mobile }}{% if s.image_position == 'left' %} zenith-fp--image-left{% endif %}{% if s.mobile_image_first %} zenith-fp--m-image-first{% endif %}"
+  class="zenith-section zenith-fp zenith-fp--fit-{{ s.image_fit }} zenith-fp--d-{{ s.media_ratio | default: 'fill' }} zenith-fp--m-{{ s.media_ratio_mobile }}{% if s.image_position == 'left' %} zenith-fp--image-left{% endif %}{% if s.mobile_image_first %} zenith-fp--m-image-first{% endif %}"
 >
   <div class="{% unless s.full_width %}page-width{% endunless %}">
     <div class="zenith-fp__grid">
@@ -337,8 +337,22 @@
       "default": 48
     },
     {
+      "type": "select",
+      "id": "media_ratio",
+      "label": "Image shape (desktop)",
+      "info": "Fill the row = the image is as tall as the text panel (it gets cropped). Square / Portrait / Landscape keep that shape, so a photo with text or labels on it shows whole.",
+      "default": "fill",
+      "options": [
+        { "value": "fill", "label": "Fill the row" },
+        { "value": "square", "label": "Square 1:1" },
+        { "value": "portrait", "label": "Portrait 4:5" },
+        { "value": "landscape", "label": "Landscape 4:3" }
+      ]
+    },
+    {
       "type": "range",
       "id": "media_min_height",
+      "visible_if": "{{ section.settings.media_ratio == 'fill' or section.settings.media_ratio == blank }}",
       "label": "Minimum height",
       "info": "Desktop. The image grows to match the text panel when that is taller.",
       "min": 240,
