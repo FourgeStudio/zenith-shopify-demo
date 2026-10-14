@@ -6377,9 +6377,13 @@
           {
             "value": "both",
             "label": "Description + benefits"
+          },
+          {
+            "value": "page",
+            "label": "Product page checklist"
           }
         ],
-        "info": "Benefits = the product metafield custom.benefits (list of single-line text), shown with gold checks only when filled; otherwise the description shows."
+        "info": "Product page checklist = the same checklist as the product's own page (its Checklist item blocks), so changing the product changes the list. Benefits = the product metafield custom.benefits. Without a list the description shows."
       },
       {
         "type": "checkbox",
