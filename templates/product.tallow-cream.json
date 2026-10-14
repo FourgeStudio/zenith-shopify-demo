@@ -15,7 +15,7 @@
         "benefit_1": {
           "type": "benefit",
           "settings": {
-            "text": "0.2% retinol on a beef tallow base",
+            "text": "Broad-spectrum SPF 30, six UV filters",
             "hide_on_desktop": false,
             "hide_on_mobile": false
           }
@@ -23,7 +23,7 @@
         "benefit_2": {
           "type": "benefit",
           "settings": {
-            "text": "One pea-sized amount before bed",
+            "text": "No white cast",
             "hide_on_desktop": false,
             "hide_on_mobile": false
           }
@@ -31,7 +31,7 @@
         "benefit_3": {
           "type": "benefit",
           "settings": {
-            "text": "Ectoin and Stephania keep skin calm",
+            "text": "Bakuchiol and Niacinamide, day-safe",
             "hide_on_desktop": false,
             "hide_on_mobile": false
           }
@@ -39,7 +39,7 @@
         "benefit_4": {
           "type": "benefit",
           "settings": {
-            "text": "Absorbs fast, no grease on the pillow",
+            "text": "Matte finish for Philippine heat",
             "hide_on_desktop": false,
             "hide_on_mobile": false
           }
@@ -47,7 +47,7 @@
         "benefit_5": {
           "type": "benefit",
           "settings": {
-            "text": "Light enough for Philippine humidity",
+            "text": "One step every morning",
             "hide_on_desktop": false,
             "hide_on_mobile": false
           }
