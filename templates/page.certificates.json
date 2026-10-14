@@ -234,6 +234,7 @@
         "nn_hair_spray": {
           "type": "certificate",
           "settings": {
+            "image": "shopify://shop_images/FDA_cosmetic_notification_for_Zenith_Anti-Aging_Tallow_Cleanser.png",
             "title": "Advanced Hair Density Spray",
             "number": "NN-1000015050639",
             "link": "",
@@ -472,6 +473,7 @@
         "title_font_size": 16,
         "text_font_size": 16,
         "line_height": 150,
+        "hide_mobile": false,
         "heading_alignment_mobile": "left",
         "columns_mobile": 2,
         "card_layout_mobile": "stacked",
