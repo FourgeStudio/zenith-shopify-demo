@@ -1773,7 +1773,7 @@
         "id": "rv1_show_prefix",
         "label": "Show the word before the product name",
         "info": "The word on the photo (\"Used\" by default, set in the section's settings)",
-        "default": true
+        "default": false
       },
       {
         "type": "checkbox",
@@ -1903,7 +1903,7 @@
         "id": "rv2_show_prefix",
         "label": "Show the word before the product name",
         "info": "The word on the photo (\"Used\" by default, set in the section's settings)",
-        "default": true
+        "default": false
       },
       {
         "type": "checkbox",
@@ -2033,7 +2033,7 @@
         "id": "rv3_show_prefix",
         "label": "Show the word before the product name",
         "info": "The word on the photo (\"Used\" by default, set in the section's settings)",
-        "default": true
+        "default": false
       },
       {
         "type": "checkbox",
@@ -2163,7 +2163,7 @@
         "id": "rv4_show_prefix",
         "label": "Show the word before the product name",
         "info": "The word on the photo (\"Used\" by default, set in the section's settings)",
-        "default": true
+        "default": false
       },
       {
         "type": "checkbox",
@@ -2293,7 +2293,7 @@
         "id": "rv5_show_prefix",
         "label": "Show the word before the product name",
         "info": "The word on the photo (\"Used\" by default, set in the section's settings)",
-        "default": true
+        "default": false
       },
       {
         "type": "checkbox",
@@ -2423,7 +2423,7 @@
         "id": "rv6_show_prefix",
         "label": "Show the word before the product name",
         "info": "The word on the photo (\"Used\" by default, set in the section's settings)",
-        "default": true
+        "default": false
       },
       {
         "type": "checkbox",
@@ -2553,7 +2553,7 @@
         "id": "rv7_show_prefix",
         "label": "Show the word before the product name",
         "info": "The word on the photo (\"Used\" by default, set in the section's settings)",
-        "default": true
+        "default": false
       },
       {
         "type": "checkbox",
@@ -2683,7 +2683,7 @@
         "id": "rv8_show_prefix",
         "label": "Show the word before the product name",
         "info": "The word on the photo (\"Used\" by default, set in the section's settings)",
-        "default": true
+        "default": false
       },
       {
         "type": "checkbox",
@@ -2813,7 +2813,7 @@
         "id": "rv9_show_prefix",
         "label": "Show the word before the product name",
         "info": "The word on the photo (\"Used\" by default, set in the section's settings)",
-        "default": true
+        "default": false
       },
       {
         "type": "checkbox",
@@ -2943,7 +2943,7 @@
         "id": "rv10_show_prefix",
         "label": "Show the word before the product name",
         "info": "The word on the photo (\"Used\" by default, set in the section's settings)",
-        "default": true
+        "default": false
       },
       {
         "type": "checkbox",
@@ -3073,7 +3073,7 @@
         "id": "rv11_show_prefix",
         "label": "Show the word before the product name",
         "info": "The word on the photo (\"Used\" by default, set in the section's settings)",
-        "default": true
+        "default": false
       },
       {
         "type": "checkbox",
@@ -3203,7 +3203,7 @@
         "id": "rv12_show_prefix",
         "label": "Show the word before the product name",
         "info": "The word on the photo (\"Used\" by default, set in the section's settings)",
-        "default": true
+        "default": false
       },
       {
         "type": "checkbox",
@@ -3333,7 +3333,7 @@
         "id": "rv13_show_prefix",
         "label": "Show the word before the product name",
         "info": "The word on the photo (\"Used\" by default, set in the section's settings)",
-        "default": true
+        "default": false
       },
       {
         "type": "checkbox",
@@ -3463,7 +3463,7 @@
         "id": "rv14_show_prefix",
         "label": "Show the word before the product name",
         "info": "The word on the photo (\"Used\" by default, set in the section's settings)",
-        "default": true
+        "default": false
       },
       {
         "type": "checkbox",
@@ -3593,7 +3593,7 @@
         "id": "rv15_show_prefix",
         "label": "Show the word before the product name",
         "info": "The word on the photo (\"Used\" by default, set in the section's settings)",
-        "default": true
+        "default": false
       },
       {
         "type": "checkbox",
@@ -3723,7 +3723,7 @@
         "id": "rv16_show_prefix",
         "label": "Show the word before the product name",
         "info": "The word on the photo (\"Used\" by default, set in the section's settings)",
-        "default": true
+        "default": false
       },
       {
         "type": "checkbox",
@@ -3853,7 +3853,7 @@
         "id": "rv17_show_prefix",
         "label": "Show the word before the product name",
         "info": "The word on the photo (\"Used\" by default, set in the section's settings)",
-        "default": true
+        "default": false
       },
       {
         "type": "checkbox",
@@ -3983,7 +3983,7 @@
         "id": "rv18_show_prefix",
         "label": "Show the word before the product name",
         "info": "The word on the photo (\"Used\" by default, set in the section's settings)",
-        "default": true
+        "default": false
       },
       {
         "type": "checkbox",
@@ -4113,7 +4113,7 @@
         "id": "rv19_show_prefix",
         "label": "Show the word before the product name",
         "info": "The word on the photo (\"Used\" by default, set in the section's settings)",
-        "default": true
+        "default": false
       },
       {
         "type": "checkbox",
@@ -4243,7 +4243,7 @@
         "id": "rv20_show_prefix",
         "label": "Show the word before the product name",
         "info": "The word on the photo (\"Used\" by default, set in the section's settings)",
-        "default": true
+        "default": false
       },
       {
         "type": "checkbox",
@@ -4373,7 +4373,7 @@
         "id": "rv21_show_prefix",
         "label": "Show the word before the product name",
         "info": "The word on the photo (\"Used\" by default, set in the section's settings)",
-        "default": true
+        "default": false
       },
       {
         "type": "checkbox",
@@ -4503,7 +4503,7 @@
         "id": "rv22_show_prefix",
         "label": "Show the word before the product name",
         "info": "The word on the photo (\"Used\" by default, set in the section's settings)",
-        "default": true
+        "default": false
       },
       {
         "type": "checkbox",
@@ -4633,7 +4633,7 @@
         "id": "rv23_show_prefix",
         "label": "Show the word before the product name",
         "info": "The word on the photo (\"Used\" by default, set in the section's settings)",
-        "default": true
+        "default": false
       },
       {
         "type": "checkbox",
@@ -4763,7 +4763,7 @@
         "id": "rv24_show_prefix",
         "label": "Show the word before the product name",
         "info": "The word on the photo (\"Used\" by default, set in the section's settings)",
-        "default": true
+        "default": false
       },
       {
         "type": "checkbox",
@@ -4893,7 +4893,7 @@
         "id": "rv25_show_prefix",
         "label": "Show the word before the product name",
         "info": "The word on the photo (\"Used\" by default, set in the section's settings)",
-        "default": true
+        "default": false
       },
       {
         "type": "checkbox",
@@ -5023,7 +5023,7 @@
         "id": "rv26_show_prefix",
         "label": "Show the word before the product name",
         "info": "The word on the photo (\"Used\" by default, set in the section's settings)",
-        "default": true
+        "default": false
       },
       {
         "type": "checkbox",
@@ -5153,7 +5153,7 @@
         "id": "rv27_show_prefix",
         "label": "Show the word before the product name",
         "info": "The word on the photo (\"Used\" by default, set in the section's settings)",
-        "default": true
+        "default": false
       },
       {
         "type": "checkbox",
@@ -5283,7 +5283,7 @@
         "id": "rv28_show_prefix",
         "label": "Show the word before the product name",
         "info": "The word on the photo (\"Used\" by default, set in the section's settings)",
-        "default": true
+        "default": false
       },
       {
         "type": "checkbox",
@@ -5413,7 +5413,7 @@
         "id": "rv29_show_prefix",
         "label": "Show the word before the product name",
         "info": "The word on the photo (\"Used\" by default, set in the section's settings)",
-        "default": true
+        "default": false
       },
       {
         "type": "checkbox",
@@ -5543,7 +5543,7 @@
         "id": "rv30_show_prefix",
         "label": "Show the word before the product name",
         "info": "The word on the photo (\"Used\" by default, set in the section's settings)",
-        "default": true
+        "default": false
       },
       {
         "type": "checkbox",
