@@ -413,7 +413,7 @@
             "card_type": "auto",
             "show_prefix": false,
             "show_product": true,
-            "show_detail_product": true,
+            "show_detail_product": false,
             "row": "1"
           }
         },
@@ -431,7 +431,7 @@
             "card_type": "auto",
             "show_prefix": false,
             "show_product": true,
-            "show_detail_product": true,
+            "show_detail_product": false,
             "row": "1"
           }
         },
@@ -449,7 +449,7 @@
             "card_type": "auto",
             "show_prefix": false,
             "show_product": true,
-            "show_detail_product": true,
+            "show_detail_product": false,
             "row": "1"
           }
         },
@@ -467,7 +467,7 @@
             "card_type": "auto",
             "show_prefix": false,
             "show_product": true,
-            "show_detail_product": true,
+            "show_detail_product": false,
             "row": "1"
           }
         },
@@ -485,7 +485,7 @@
             "card_type": "auto",
             "show_prefix": false,
             "show_product": true,
-            "show_detail_product": true,
+            "show_detail_product": false,
             "row": "1"
           }
         },
@@ -503,7 +503,7 @@
             "card_type": "auto",
             "show_prefix": false,
             "show_product": true,
-            "show_detail_product": true,
+            "show_detail_product": false,
             "row": "2"
           }
         },
@@ -521,7 +521,7 @@
             "card_type": "auto",
             "show_prefix": false,
             "show_product": true,
-            "show_detail_product": true,
+            "show_detail_product": false,
             "row": "2"
           }
         },
@@ -539,7 +539,7 @@
             "card_type": "auto",
             "show_prefix": false,
             "show_product": true,
-            "show_detail_product": true,
+            "show_detail_product": false,
             "row": "2"
           }
         },
@@ -557,7 +557,7 @@
             "card_type": "auto",
             "show_prefix": false,
             "show_product": true,
-            "show_detail_product": true,
+            "show_detail_product": false,
             "row": "2"
           }
         }
@@ -1173,7 +1173,7 @@
         "check_color": "#eabe5f",
         "icon_color": "#eabe5f",
         "border_color": "#414f53",
-        "border_width": 4,
+        "border_width": 2,
         "pager_color": "#294850",
         "heading_font_size": 36,
         "heading_uppercase": false,
