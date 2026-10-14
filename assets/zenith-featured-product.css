@@ -86,6 +86,10 @@
   color: rgba(var(--color-foreground), 0.6);
 }
 
+zenith-fp-checks {
+  display: block;
+}
+
 .zenith-fp__benefits,
 .zenith-fp__trust {
   list-style: none;
