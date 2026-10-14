@@ -54,6 +54,7 @@
   --z-ct-link-line: {{ s.link_underline_color }};
   --z-ct-muted: {{ s.muted_opacity | divided_by: 100.0 }};
   --z-ct-field-a: {{ s.field_opacity | divided_by: 100.0 }};
+  {%- if s.field_background != blank %}--z-ct-field-bg: {{ s.field_background }};{% endif %}
   --z-ct-ph-a: {{ s.placeholder_opacity | divided_by: 100.0 }};
   --z-ct-fh: {{ s.field_height }}px;
   --z-ct-fh-m: {{ s.field_height_mobile }}px;
@@ -733,10 +734,12 @@
       "unit": "%",
       "default": 70
     },
+    { "type": "color", "id": "field_background", "label": "Field background", "default": "#202020", "info": "Brand Color Scheme 2. Empty = text colour tint (strength below)." },
     {
       "type": "range",
       "id": "field_opacity",
       "label": "Field background strength",
+      "visible_if": "{{ section.settings.field_background == blank }}",
       "min": 5,
       "max": 40,
       "step": 1,
