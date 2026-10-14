@@ -1172,6 +1172,8 @@
         "price_color": "#eabe5f",
         "check_color": "#eabe5f",
         "icon_color": "#eabe5f",
+        "border_color": "#414f53",
+        "border_width": 4,
         "pager_color": "#294850",
         "heading_font_size": 36,
         "heading_uppercase": false,
