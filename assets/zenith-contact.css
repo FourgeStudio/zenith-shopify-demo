@@ -254,6 +254,10 @@
   background: #1a1a1a;
 }
 
+.zenith-contact__select-wrap {
+  position: relative;
+}
+
 .zenith-contact__select-icon {
   position: absolute;
   top: 50%;
@@ -283,6 +287,7 @@
 .zenith-contact__consent a {
   color: inherit;
   text-decoration: underline; /* UI states: text links always underlined (WCAG 1.4.1) */
+  text-decoration-color: var(--z-link-line, currentColor);
   text-underline-offset: 2px;
 }
 
