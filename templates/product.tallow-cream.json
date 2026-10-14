@@ -951,7 +951,7 @@
         "note_spacing": 24,
         "divider_spacing": 56,
         "color_scheme": "scheme-1",
-        "title_color": "#FFFFFF",
+        "title_color": "#ffffff",
         "title_heading_font": false,
         "number_background": "#c5930e",
         "number_color": "#121212",
@@ -1518,7 +1518,7 @@
       ],
       "settings": {
         "show_money_back": true,
-        "eyebrow": "Trusted by [customers] Filipino men",
+        "eyebrow": "",
         "use_collection_content": false,
         "heading": "{{ section.settings.button_product.title }}",
         "heading_mobile": "",
