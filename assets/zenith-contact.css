@@ -204,7 +204,7 @@
   font-size: var(--z-ct-ifs-m, 1.4rem);
   line-height: 1.4;
   color: rgb(var(--color-foreground));
-  background: rgba(var(--color-foreground), var(--z-ct-field-a, 0.15));
+  background: var(--z-ct-field-bg, rgba(var(--color-foreground), var(--z-ct-field-a, 0.15)));
   background-clip: padding-box;
   border: 1px solid var(--z-ct-bd-c, rgba(255, 255, 255, 0.15));
   border-radius: 0;
