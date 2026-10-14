@@ -240,7 +240,15 @@
           -%}
         {%- endif -%}
 
-        {%- if s.button_label != blank or mobile_label != blank -%}
+        {%- liquid
+          assign hero_has_button = false
+          if s.show_button != false
+            if s.button_label != blank or mobile_label != blank
+              assign hero_has_button = true
+            endif
+          endif
+        -%}
+        {%- if hero_has_button -%}
           <div class="zenith-hero__actions{% if s.mobile_hide_button %} zenith-hide-mobile{% endif %}">
             {%- liquid
               assign desktop_hide = ''
@@ -384,6 +392,13 @@
       "id": "text",
       "label": "Text",
       "default": "<p>Everything you need to stay in your prime.</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_button",
+      "label": "Show button",
+      "info": "Off hides the button (label, link and product stay saved).",
+      "default": true
     },
     {
       "type": "text",
