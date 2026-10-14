@@ -1330,7 +1330,6 @@
         "heading_spacing": 32,
         "gap": 24,
         "image_ratio": "square",
-        "media_ratio": "square",
         "image_fit": "cover",
         "image_padding": 0,
         "card_text_spacing": 14,
