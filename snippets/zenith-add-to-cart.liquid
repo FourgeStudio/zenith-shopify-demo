@@ -34,9 +34,18 @@
           {{ 'products.product.sold_out' | t }}
         {%- endif -%}
       </span>
-      {%- comment -%} Every Add to Cart button shows the cart icon (client 2026-10-14) {%- endcomment -%}
-      {%- if variant.available -%}
-        {%- render 'zenith-icon', icon: 'cart', class: 'zenith-btn__icon' -%}
+      {%- liquid
+        # Add to Cart labels always show the cart icon (client 2026-10-14); other labels keep their icon, arrow not chevron
+        assign atc_label_lc = label | default: 'add to cart' | downcase
+        assign atc_icon = icon | default: 'cart'
+        if atc_label_lc contains 'add to cart'
+          assign atc_icon = 'cart'
+        elsif atc_icon == 'chevron_right'
+          assign atc_icon = 'arrow_right'
+        endif
+      -%}
+      {%- if atc_icon != 'none' and variant.available -%}
+        {%- render 'zenith-icon', icon: atc_icon, class: 'zenith-btn__icon' -%}
       {%- endif -%}
       <span class="sold-out-message hidden">{{ 'products.product.sold_out' | t }}</span>
       {%- render 'loading-spinner' -%}
