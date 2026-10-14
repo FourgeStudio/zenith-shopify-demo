@@ -206,7 +206,7 @@
   color: rgb(var(--color-foreground));
   background: var(--z-ct-field-bg, rgba(var(--color-foreground), var(--z-ct-field-a, 0.15)));
   background-clip: padding-box;
-  border: 1px solid var(--z-ct-bd-c, rgba(255, 255, 255, 0.15));
+  border: 1px solid var(--z-ct-bd-c, #414141);
   border-radius: 0;
   box-shadow: none;
   appearance: none;
@@ -304,7 +304,7 @@ input.zenith-contact__checkbox[type='checkbox'] {
   width: 20px;
   height: 20px;
   margin: 0;
-  border: 1px solid var(--z-ct-bd-c, rgba(255, 255, 255, 0.15));
+  border: 1px solid var(--z-ct-bd-c, #414141);
   border-radius: 0;
   background: transparent;
   appearance: none;
