@@ -25,9 +25,11 @@
   const ANY = new RegExp(RULES.map((r) => `(${r.re.source})`).join('|'), 'gi');
   const TEST = new RegExp(ANY.source, 'i');
   // Never inside FAQ questions / form labels (clicking would follow the link instead of opening the answer or
-  // ticking the box), nor in the announcement bar (plain text by request). Marquee copies (aria-hidden) get the same links, kept out of the tab order.
+  // ticking the box), nor in the announcement bar or trust badges (plain text by request). Marquee copies (aria-hidden) get the same links, kept out of the tab order.
   const SKIP =
-    'a, button, script, style, noscript, textarea, input, select, option, code, pre, svg, [contenteditable], summary, label, .zenith-announcement';
+    'a, button, script, style, noscript, textarea, input, select, option, code, pre, svg, [contenteditable], summary, label, .zenith-announcement, ' +
+  // Trust badges stay plain text (client request 2026-10-14)
+  '.zenith-hero__trust, .zenith-icon-bar__list, .zenith-mp__trust, .zenith-fp__trust, .zenith-trust__list';
   // Policy names are also left as plain text in titles and menus.
   const POLICY_SKIP = 'h1, h2, h3, h4, h5, h6, nav, .zenith-doc__toc';
 
