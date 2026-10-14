@@ -200,10 +200,10 @@
         assign atc_label = 'products.product.add_to_cart' | t
       endif
     -%}
-    <zenith-main-product class="zenith-mp__grid" data-start-mobile="{{ s.gallery_start_mobile | default: 1 }}" data-atc-label="{{ atc_label | escape }}">
+    <zenith-main-product class="zenith-mp__grid" data-atc-label="{{ atc_label | escape }}">
       {%- comment -%} ---------------- Gallery ---------------- {%- endcomment -%}
       <div class="zenith-mp__gallery">
-        <zenith-carousel class="zenith-mp__carousel" data-slide-label="Image">
+        <zenith-carousel class="zenith-mp__carousel" data-slide-label="Image" data-loop data-start-mobile="{{ s.gallery_start_mobile | default: 1 }}">
           <ul class="zenith-carousel__track zenith-mp__track" role="list">
             {%- if gallery_media.size > 0 -%}
               {%- for media in gallery_media -%}
