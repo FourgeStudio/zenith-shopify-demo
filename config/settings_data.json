@@ -24,7 +24,7 @@
     "cart_shipping_province": "Metro Manila",
     "cart_shipping_zip": "1000",
     "cart_tiers_on": false,
-    "cart_upsell_enable": false,
+    "cart_upsell_enable": true,
     "cart_upsell_heading": "Best used with",
     "cart_upsell_button": "Add",
     "promo_enabled": false,
