@@ -1153,7 +1153,7 @@
         "image_position": "right",
         "full_width": false,
         "media_width": 48,
-        "media_min_height": 600,
+        "media_min_height": 640,
         "content_max_width": 500,
         "content_padding": 40,
         "content_gap": 12,
