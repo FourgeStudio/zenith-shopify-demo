@@ -165,7 +165,7 @@
               {%- endif -%}
             {%- endif -%}
             {%- if handle != blank -%}
-              <p class="zenith-video-card__handle">{{ handle }}</p>
+              <p class="zenith-video-card__handle" title="{{ handle | strip_html | escape }}">{{ handle }}</p>
             {%- endif -%}
           </div>
         </div>
