@@ -250,6 +250,12 @@ zenith-video.is-playing .zenith-video-card__play {
   line-height: 1.4;
   color: var(--z-title-color, #d6b356);
   text-decoration: none;
+  /* Two lines at most, so every card footer lines up */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
 }
 
 a.zenith-video-card__title:hover {
@@ -263,7 +269,10 @@ a.zenith-video-card__title:hover {
   font-weight: 500;
   line-height: 1.4;
   color: rgb(var(--color-foreground));
-  overflow-wrap: anywhere;
+  /* One line; long handles end in … instead of breaking mid-word (full handle on hover) */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 @media screen and (min-width: 750px) {
