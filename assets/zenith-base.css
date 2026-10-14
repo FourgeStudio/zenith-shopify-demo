@@ -1634,35 +1634,21 @@ p, li, blockquote {
   }
 }
 
-@media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .zenith-results__media > img,
-  .zenith-ba__photo > img,
-  .zenith-rt__image > img,
-  .zenith-features__media > img,
-  .zenith-acard__media > img {
-    transition: transform 0.6s ease;
-  }
-
-  .zenith-results__card:hover .zenith-results__media > img,
-  .zenith-video-card:hover .zenith-video-card__poster,
-  .zenith-ba__pair:hover .zenith-ba__photo > img,
-  .zenith-rt__step:hover .zenith-rt__image > img,
-  .zenith-features__item:hover .zenith-features__media > img,
-  .zenith-acard:hover .zenith-acard__media > img {
-    transform: scale(1.04);
-  }
-}
-
-/* Every other image box zooms when hovered. Product images never zoom (design audit 2026-10): product cards (they
-   swap photos), the product page gallery, the featured product and the ingredients product photo. */
+/* Images zoom on hover only where they are clickable (client 2026-10-14): inside a link, a category card,
+   an article card, a video card or a results card that links. Hero, story, promo, routine, guarantee and other
+   decorative photos stay still. Product images never zoom (product cards swap photos instead). */
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
   .zenith-media:not(.zenith-card__media, .zenith-mp__media, .zenith-mp__review-photo, .zenith-fp__media, .zenith-ingredients__media) > img,
-  .zenith-media:not(.zenith-card__media, .zenith-mp__media, .zenith-mp__review-photo, .zenith-fp__media, .zenith-ingredients__media) > picture > img {
+  .zenith-media:not(.zenith-card__media, .zenith-mp__media, .zenith-mp__review-photo, .zenith-fp__media, .zenith-ingredients__media) > picture > img,
+  .zenith-video-card__poster {
     transition: transform 0.6s ease;
   }
 
-  .zenith-media:not(.zenith-card__media, .zenith-mp__media, .zenith-mp__review-photo, .zenith-fp__media, .zenith-ingredients__media):hover > img,
-  .zenith-media:not(.zenith-card__media, .zenith-mp__media, .zenith-mp__review-photo, .zenith-fp__media, .zenith-ingredients__media):hover > picture > img {
+  a.zenith-media:not(.zenith-card__media, .zenith-mp__media, .zenith-mp__review-photo, .zenith-fp__media, .zenith-ingredients__media):hover > img,
+  a.zenith-media:not(.zenith-card__media, .zenith-mp__media, .zenith-mp__review-photo, .zenith-fp__media, .zenith-ingredients__media):hover > picture > img,
+  :is(a, .zenith-cats__card, .zenith-acard, .zenith-results__card:has(a)):hover .zenith-media:not(.zenith-card__media, .zenith-mp__media, .zenith-mp__review-photo, .zenith-fp__media, .zenith-ingredients__media) > img,
+  :is(a, .zenith-cats__card, .zenith-acard, .zenith-results__card:has(a)):hover .zenith-media:not(.zenith-card__media, .zenith-mp__media, .zenith-mp__review-photo, .zenith-fp__media, .zenith-ingredients__media) > picture > img,
+  .zenith-video-card:hover .zenith-video-card__poster {
     transform: scale(1.04);
   }
 }
