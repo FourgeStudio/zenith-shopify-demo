@@ -206,7 +206,7 @@
   color: rgb(var(--color-foreground));
   background: rgba(var(--color-foreground), var(--z-ct-field-a, 0.15));
   background-clip: padding-box;
-  border: 1px solid rgba(var(--color-foreground), 0.45); /* ≥3:1 against the section (WCAG 1.4.11) */
+  border: 1px solid var(--z-ct-bd-c, rgba(255, 255, 255, 0.15));
   border-radius: 0;
   box-shadow: none;
   appearance: none;
@@ -219,7 +219,7 @@
 }
 
 .zenith-contact__input:hover {
-  border-color: rgba(var(--color-foreground), 0.7);
+  border-color: rgba(var(--color-foreground), 0.4);
 }
 
 .zenith-contact__input:focus,
@@ -304,7 +304,7 @@ input.zenith-contact__checkbox[type='checkbox'] {
   width: 20px;
   height: 20px;
   margin: 0;
-  border: 1px solid rgba(var(--color-foreground), 0.4);
+  border: 1px solid var(--z-ct-bd-c, rgba(255, 255, 255, 0.15));
   border-radius: 0;
   background: transparent;
   appearance: none;
