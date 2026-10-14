@@ -996,7 +996,7 @@ div.zenith-cart-ship__fill {
 }
 
 /* Labels sit above the track; top padding leaves room for two lines ("FREE / SHIPPING"). */
-/* The bar stops 1.6rem short of the edge so the end checkpoint's pop + ring have room to play out in full. */
+/* The bar stops 1.6rem short of the edge so the end checkpoint's pop + ring have room to play out in full (clip is on the panel). */
 .zenith-cart-offers__steps {
   position: relative;
   margin-top: var(--z-space-4, 16px);
