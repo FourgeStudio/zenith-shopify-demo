@@ -33,6 +33,10 @@
   max-width: var(--z-cmw, 50rem);
 }
 
+.zenith-fp__eyebrow {
+  margin: 0;
+}
+
 .zenith-fp__badge {
   display: inline-flex;
   align-items: center;

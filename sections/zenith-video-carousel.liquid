@@ -192,7 +192,7 @@
           assign vc_start = settings.vt_start_slide | default: vc_start
         endif
       -%}
-      <zenith-carousel data-autoplay="{{ section.settings.autoplay }}" data-slide-label="Video" data-start="{{ vc_start }}">
+      <zenith-carousel data-loop data-autoplay="{{ section.settings.autoplay }}" data-slide-label="Video" data-start="{{ vc_start }}">
         <ul class="zenith-carousel__track" role="list">
           {{- cards -}}
         </ul>
@@ -719,7 +719,7 @@
       "max": 20,
       "step": 1,
       "unit": "px",
-      "default": 12
+      "default": 14
     },
     {
       "type": "range",
@@ -729,7 +729,7 @@
       "max": 16,
       "step": 1,
       "unit": "px",
-      "default": 10
+      "default": 14
     },
     {
       "type": "header",

@@ -79,9 +79,13 @@
       <div class="zenith-fp__content color-{{ s.color_scheme }} gradient">
         <div class="zenith-fp__content-inner">
           {%- if fp_badge != blank -%}
-            <span class="zenith-fp__badge{% if s.badge_position_mobile == 'image' %} zenith-hide-mobile{% endif %}">
-              {{- fp_badge | escape -}}
-            </span>
+            {%- if s.badge_style == 'pill' -%}
+              <span class="zenith-fp__badge{% if s.badge_position_mobile == 'image' %} zenith-hide-mobile{% endif %}">
+                {{- fp_badge | escape -}}
+              </span>
+            {%- else -%}
+              <p class="zenith-eyebrow zenith-fp__eyebrow">{{ fp_badge | escape | replace: '[customers]', settings.customer_count }}</p>
+            {%- endif -%}
           {%- endif -%}
 
           <h2 class="zenith-fp__title{% if s.heading_uppercase %} zenith-fp__title--uppercase{% endif %}">
@@ -218,7 +222,7 @@
       </div>
 
       <div class="zenith-fp__media-wrap color-{{ s.media_color_scheme }} gradient">
-        {%- if fp_badge != blank and s.badge_position_mobile == 'image' -%}
+        {%- if fp_badge != blank and s.badge_style == 'pill' and s.badge_position_mobile == 'image' -%}
           <span class="zenith-fp__badge zenith-fp__badge--media zenith-hide-desktop">{{ fp_badge | escape }}</span>
         {%- endif -%}
 
@@ -497,14 +501,26 @@
       ]
     },
     {
+      "type": "select",
+      "id": "badge_style",
+      "label": "Badge style",
+      "default": "eyebrow",
+      "options": [
+        { "value": "eyebrow", "label": "Eyebrow text (gold, uppercase)" },
+        { "value": "pill", "label": "Pill" }
+      ]
+    },
+    {
       "type": "color",
       "id": "badge_background",
+      "visible_if": "{{ section.settings.badge_style == 'pill' }}",
       "label": "Badge background",
       "default": "#EABE5F"
     },
     {
       "type": "color",
       "id": "badge_text_color",
+      "visible_if": "{{ section.settings.badge_style == 'pill' }}",
       "label": "Badge text",
       "default": "#121212"
     },
@@ -575,12 +591,13 @@
     {
       "type": "range",
       "id": "badge_font_size",
+      "visible_if": "{{ section.settings.badge_style == 'pill' }}",
       "label": "Badge text size",
       "min": 10,
       "max": 20,
       "step": 1,
       "unit": "px",
-      "default": 12
+      "default": 14
     },
     {
       "type": "range",
@@ -590,7 +607,7 @@
       "max": 18,
       "step": 1,
       "unit": "px",
-      "default": 10
+      "default": 14
     },
     {
       "type": "range",
@@ -616,6 +633,7 @@
     {
       "type": "select",
       "id": "badge_position_mobile",
+      "visible_if": "{{ section.settings.badge_style == 'pill' }}",
       "label": "Badge position",
       "default": "image",
       "options": [
@@ -728,6 +746,7 @@
     {
       "type": "range",
       "id": "badge_font_size_mobile",
+      "visible_if": "{{ section.settings.badge_style == 'pill' }}",
       "label": "Badge text size",
       "min": 10,
       "max": 20,
