@@ -713,6 +713,7 @@ zenith-carousel.is-static .zenith-carousel__pause--solo {
 .zenith-card__price {
   font-size: var(--z-pfs-m, 1.5rem);
   font-weight: 600;
+  color: rgba(var(--color-foreground), 0.7);
 }
 
 .zenith-card__price s {
