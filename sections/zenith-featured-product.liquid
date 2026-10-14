@@ -66,6 +66,7 @@
   {%- endif -%}
   {%- if s.pager_color != blank %}
   --z-pager-rgb: {{ s.pager_color.red }}, {{ s.pager_color.green }}, {{ s.pager_color.blue }};
+  --z-fp-border: {% if s.border_color != blank and s.border_width > 0 %}{{ s.border_width }}px solid {{ s.border_color }}{% else %}0{% endif %};
   {%- endif %}
 {%- endcapture -%}
 {%- render 'zenith-section-style', section: section, extra: extra -%}
@@ -542,6 +543,8 @@
       "label": "Trust icons",
       "default": "#EABE5F"
     },
+    { "type": "color", "id": "border_color", "label": "Border color", "info": "Frame around the whole block (text panel + image). Empty = no border." },
+    { "type": "range", "id": "border_width", "label": "Border width", "min": 0, "max": 12, "step": 1, "unit": "px", "default": 0 },
     {
       "type": "color",
       "id": "pager_color",

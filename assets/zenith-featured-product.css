@@ -5,6 +5,7 @@
 
 .zenith-fp__grid {
   display: grid;
+  border: var(--z-fp-border, 0);
   grid-template-columns: minmax(0, 1fr);
 }
 
