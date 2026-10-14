@@ -1841,7 +1841,7 @@ cart-remove-button .button::before {
   }
 }
 
-/* Footer email: 44px tall row. Footer menu + policy links use the Link spacing setting (12px gap, client 2026-10-14);
+/* Footer email: 44px tall row (resent 2026-10-14). Footer menu + policy links use the Link spacing setting (12px gap, client 2026-10-14);
    each row is still ≥ 24px tall (WCAG 2.2 AA target size). */
 :root .zenith-footer__email {
   display: inline-flex;
