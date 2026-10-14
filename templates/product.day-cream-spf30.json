@@ -1126,7 +1126,7 @@
         "subheading": "<p>No-nonsense answers about your daily essentials.</p>",
         "enable_schema": true,
         "heading_alignment": "center",
-        "max_width": 720,
+        "max_width": 760,
         "open_first": false,
         "open_all": false,
         "heading_spacing": 32,

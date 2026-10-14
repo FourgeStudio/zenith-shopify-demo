@@ -181,6 +181,7 @@ footer.footer.zenith-footer {
   display: flex;
 }
 
+.zenith-footer__payment-badge,
 .zenith-footer__payments svg {
   display: block;
   height: var(--z-pay-h-m, 18px);
@@ -358,6 +359,7 @@ footer.footer.zenith-footer {
     height: var(--z-icon, 22px);
   }
 
+  .zenith-footer__payment-badge,
   .zenith-footer__payments-image,
   .zenith-footer__payments svg {
     height: var(--z-pay-h, 20px);

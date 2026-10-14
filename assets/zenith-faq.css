@@ -196,3 +196,11 @@
     font-size: var(--z-tfs, 1.6rem);
   }
 }
+
+/* FAQ sections + contact FAQ: question and answer sit 16px in from the divider lines, so the hover fill has room
+   on both sides (client 2026-10-14). Width settings were raised by 32px to keep the text column the same. */
+.zenith-faq__question--inset,
+.zenith-faq__answer--inset {
+  padding-left: var(--z-faq-inset, 1.6rem);
+  padding-right: var(--z-faq-inset, 1.6rem);
+}
