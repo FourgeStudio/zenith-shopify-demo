@@ -926,6 +926,7 @@ div.zenith-cart-ship__fill {
   display: block;
   padding: var(--z-space-4, 16px) 0 var(--z-space-5, 24px);
   border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.15);
+  overflow-x: clip; /* a pop ring never gives the drawer a sideways scrollbar */
 }
 
 .zenith-cart-offers p {
@@ -995,15 +996,11 @@ div.zenith-cart-ship__fill {
 }
 
 /* Labels sit above the track; top padding leaves room for two lines ("FREE / SHIPPING"). */
-/* overflow-x: clip keeps the end checkpoint's pop ring from giving the drawer a sideways scrollbar. */
+/* The bar stops 1.6rem short of the edge so the end checkpoint's pop + ring have room to play out in full. */
 .zenith-cart-offers__steps {
   position: relative;
-  overflow-x: clip;
-  /* The bar stops 2rem short of the edge and the pop may paint into that gap, so the end checkpoint's
-     pop + ring stay whole and still never reach past the cart content. */
-  overflow-clip-margin: 2rem;
   margin-top: var(--z-space-4, 16px);
-  margin-right: 2rem;
+  margin-right: 1.6rem;
   padding-top: 4.4rem; /* two 12px label lines + 1.4rem above the track; 3.4rem let them poke out of the box */
 }
 
@@ -1060,6 +1057,16 @@ div.zenith-cart-offers__fill {
 
 @keyframes zenith-cart-dot-pop {
   40% { scale: 1.7; }
+}
+
+/* The end ring spreads a little less, so it fits the room beside the bar. */
+.zenith-cart-offers__step.is-pop.is-end .zenith-cart-offers__step-dot::after {
+  animation-name: zenith-cart-dot-ring-end;
+}
+
+@keyframes zenith-cart-dot-ring-end {
+  from { scale: 1; opacity: 1; }
+  to { scale: 2.2; opacity: 0; }
 }
 
 @keyframes zenith-cart-dot-ring {
