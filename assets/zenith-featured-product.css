@@ -79,10 +79,10 @@
   margin: 0;
   font-family: var(--font-body-family);
   font-size: var(--z-pfs-m, 2.2rem);
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.2;
   letter-spacing: 0;
-  color: var(--z-price, var(--z-dawn-gold));
+  color: var(--z-price, rgba(var(--color-foreground), 0.7));
 }
 
 .zenith-fp__price s {
