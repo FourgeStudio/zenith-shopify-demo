@@ -48,12 +48,12 @@
 }
 
 .zenith-videos--bleed .zenith-carousel__track {
-  margin-left: calc((100cqi - 100vw) / 2);
-  margin-right: calc((100cqi - 100vw) / 2);
-  padding-left: calc((100vw - 100cqi) / 2);
-  padding-right: calc((100vw - 100cqi) / 2);
-  scroll-padding-left: calc((100vw - 100cqi) / 2);
-  scroll-padding-right: calc((100vw - 100cqi) / 2);
+  margin-left: calc((100cqi - var(--z-bleed-w, 100vw)) / 2);
+  margin-right: calc((100cqi - var(--z-bleed-w, 100vw)) / 2);
+  padding-left: calc((var(--z-bleed-w, 100vw) - 100cqi) / 2);
+  padding-right: calc((var(--z-bleed-w, 100vw) - 100cqi) / 2);
+  scroll-padding-left: calc((var(--z-bleed-w, 100vw) - 100cqi) / 2);
+  scroll-padding-right: calc((var(--z-bleed-w, 100vw) - 100cqi) / 2);
 }
 
 .zenith-videos .zenith-carousel__controls {
@@ -318,4 +318,10 @@ a.zenith-video-card__title:hover {
   button.zenith-video-card__play:hover {
     transform: translate(-50%, -50%);
   }
+}
+
+/* Soft fade on the left/right edges while the cards scroll (not when they all fit and sit centred) */
+.zenith-videos zenith-carousel:not(.is-static) .zenith-carousel__track {
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
 }
