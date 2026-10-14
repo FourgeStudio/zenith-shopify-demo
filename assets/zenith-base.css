@@ -1765,9 +1765,10 @@ body cart-drawer cart-drawer-items.is-empty + .drawer__footer {
 [class*='color-scheme-'] {
   --z-ring: var(--z-focus-ring);
   --z-ring-gap: var(--z-obsidian);
-  --z-link: var(--z-summit-light);
-  --z-link-hover: var(--z-rock);
-  --z-link-line: currentColor;
+  /* Links keep the text colour; only the underline is Summit Gold (client request 2026-10-14) */
+  --z-link: currentColor;
+  --z-link-hover: currentColor;
+  --z-link-line: var(--z-summit-light);
   --z-field-bg: var(--z-basalt);
   --z-field-border: var(--z-granite);
   --z-error-c: var(--z-error);
@@ -2169,4 +2170,10 @@ cart-remove-button .zenith-cart-icon-text--trash {
 
 cart-remove-button .button:has(> .zenith-cart-icon-text--trash) {
   padding: 0 var(--z-space-2, 8px);
+}
+
+/* zenith-carousel: mouse drag swipes (zenith-carousel.js) */
+@media (hover: hover) and (pointer: fine) {
+  zenith-carousel:not(.is-static) .zenith-carousel__track { cursor: grab; }
+  .zenith-carousel__track.is-dragging { cursor: grabbing; user-select: none; }
 }

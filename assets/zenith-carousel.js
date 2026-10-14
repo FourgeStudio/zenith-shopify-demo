@@ -14,6 +14,20 @@ if (!customElements.get('zenith-carousel')) {
         this.next?.addEventListener('click', () => this.go(1));
         this.track.addEventListener('scroll', () => this.onScroll(), { passive: true });
 
+        // Mouse drag = swipe (touch already scrolls natively). No native image/link dragging, and a drag
+        // doesn't count as a click on the link or card under the pointer.
+        this.track.addEventListener('dragstart', (e) => e.preventDefault());
+        this.track.addEventListener('pointerdown', (e) => this.dragStart(e));
+        this.track.addEventListener(
+          'click',
+          (e) => {
+            if (!this.justDragged) return;
+            e.preventDefault();
+            e.stopPropagation();
+          },
+          true
+        );
+
         this.resizeObserver = new ResizeObserver(() => this.update());
         this.resizeObserver.observe(this.track);
 
@@ -92,6 +106,50 @@ if (!customElements.get('zenith-carousel')) {
         const max = this.pageCount - 1;
         const target = i > max ? 0 : i < 0 ? max : i;
         this.track.scrollTo({ left: target * this.step });
+      }
+
+      dragStart(e) {
+        if (e.pointerType !== 'mouse' || e.button !== 0) return;
+        if (this.track.scrollWidth <= this.track.clientWidth + 2) return;
+        if (e.target.closest('button, input, select, textarea, iframe, video')) return;
+        const startX = e.clientX;
+        const startLeft = this.track.scrollLeft;
+        let moved = false;
+        const move = (ev) => {
+          const dx = ev.clientX - startX;
+          if (!moved && Math.abs(dx) > 5) {
+            moved = true;
+            this.track.classList.add('is-dragging');
+            this.track.style.scrollSnapType = 'none';
+            this.track.style.scrollBehavior = 'auto';
+          }
+          if (moved) this.track.scrollLeft = startLeft - dx;
+        };
+        const up = () => {
+          window.removeEventListener('pointermove', move);
+          window.removeEventListener('pointerup', up);
+          window.removeEventListener('pointercancel', up);
+          if (!moved) return;
+          this.track.classList.remove('is-dragging');
+          this.track.style.scrollBehavior = '';
+          const delta = this.track.scrollLeft - startLeft;
+          const from = Math.round(startLeft / this.step);
+          let to = Math.round(this.track.scrollLeft / this.step);
+          // A short flick still moves one slide
+          if (to === from && Math.abs(delta) > this.step * 0.15) to = from + Math.sign(delta);
+          to = Math.max(0, Math.min(this.pageCount - 1, to));
+          this.track.scrollTo({ left: to * this.step, behavior: 'smooth' });
+          setTimeout(() => {
+            this.track.style.scrollSnapType = '';
+          }, 450);
+          this.justDragged = true;
+          setTimeout(() => {
+            this.justDragged = false;
+          }, 50);
+        };
+        window.addEventListener('pointermove', move);
+        window.addEventListener('pointerup', up);
+        window.addEventListener('pointercancel', up);
       }
 
       start() {

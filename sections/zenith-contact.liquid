@@ -309,7 +309,8 @@
           {%- endif -%}
           {%- if s.topics != blank -%}
             <div class="zenith-contact__field zenith-contact__field--select">
-              <label class="zenith-field-label" for="{{ form_id }}-topic">{{ s.topic_label | escape }}</label>
+              <label class="zenith-field-label" for="{{ form_id }}-topic">{{ s.topic_title | default: s.topic_label | escape }}</label>
+              <div class="zenith-contact__select-wrap">
               <select class="zenith-contact__input zenith-contact__select" id="{{ form_id }}-topic" name="contact[Topic]">
                 <option value="" selected disabled>{{ s.topic_label | escape }}</option>
                 {%- for topic in topics -%}
@@ -320,10 +321,11 @@
                 {%- endfor -%}
               </select>
               {%- render 'zenith-icon', icon: 'chevron_down', class: 'zenith-contact__select-icon' -%}
+              </div>
             </div>
           {%- endif -%}
           <div class="zenith-contact__field">
-            <label class="zenith-field-label" for="{{ form_id }}-body">{{ s.message_label | escape }}</label>
+            <label class="zenith-field-label" for="{{ form_id }}-body">{{ s.message_title | default: s.message_label | escape }}</label>
             <textarea
               class="zenith-contact__input zenith-contact__textarea"
               id="{{ form_id }}-body"
@@ -487,6 +489,7 @@
       "default": "Phone number"
     },
     { "type": "text", "id": "phone_placeholder", "label": "Phone placeholder", "visible_if": "{{ section.settings.show_phone }}", "default": "09XX XXX XXXX" },
+    { "type": "text", "id": "topic_title", "label": "Topic label", "default": "Topic" },
     {
       "type": "text",
       "id": "topic_label",
@@ -500,6 +503,7 @@
       "default": "Order status\nProduct question\nReturns & refunds\nWholesale & partnerships\nOther",
       "info": "One per line. Leave empty to hide the dropdown."
     },
+    { "type": "text", "id": "message_title", "label": "Message label", "default": "Message" },
     {
       "type": "text",
       "id": "message_label",
