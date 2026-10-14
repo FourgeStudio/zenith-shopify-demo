@@ -79,7 +79,7 @@
     {% endif %}
     {{ block.shopify_attributes }}
   >
-    <summary class="zenith-faq__question" id="FaqQuestion-{{ block.id }}-{{ section_id }}">
+    <summary class="zenith-faq__question zenith-faq__question--inset" id="FaqQuestion-{{ block.id }}-{{ section_id }}">
       <span class="zenith-faq__question-text">
         {{- block.settings.question | escape | replace: '[customers]', settings.customer_count -}}
       </span>
@@ -87,7 +87,7 @@
         {%- render 'zenith-icon', icon: 'chevron_down' -%}
       </span>
     </summary>
-    <div class="zenith-faq__answer zenith-rte" role="region" aria-labelledby="FaqQuestion-{{ block.id }}-{{ section_id }}">
+    <div class="zenith-faq__answer zenith-faq__answer--inset zenith-rte" role="region" aria-labelledby="FaqQuestion-{{ block.id }}-{{ section_id }}">
       {{- block.settings.answer | replace: '[customers]', settings.customer_count -}}
     </div>
   </details>
