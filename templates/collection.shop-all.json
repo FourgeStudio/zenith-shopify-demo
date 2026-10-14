@@ -406,7 +406,7 @@
         "price_font_size": 22,
         "text_font_size": 14,
         "badge_font_size": 12,
-        "trust_font_size": 10,
+        "trust_font_size": 12,
         "button_font_size": 22,
         "mobile_image_first": true,
         "badge_position_mobile": "image",
