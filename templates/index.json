@@ -146,7 +146,7 @@
         "media_width": 50,
         "content_position": "left",
         "content_vertical": "middle",
-        "height_mode": "screen",
+        "height_mode": "px",
         "height_screen": 65,
         "height": 540,
         "content_max_width": 600,
