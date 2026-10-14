@@ -103,12 +103,12 @@
 
 /* Thumbnails + review strip: scrolling rows that run to the screen edge on mobile */
 .zenith-mp__bleed {
-  margin-left: calc((100cqi - 100vw) / 2);
-  margin-right: calc((100cqi - 100vw) / 2);
-  padding-left: calc((100vw - 100cqi) / 2);
-  padding-right: calc((100vw - 100cqi) / 2);
-  scroll-padding-left: calc((100vw - 100cqi) / 2);
-  scroll-padding-right: calc((100vw - 100cqi) / 2);
+  margin-left: calc((100cqi - var(--z-bleed-w, 100vw)) / 2);
+  margin-right: calc((100cqi - var(--z-bleed-w, 100vw)) / 2);
+  padding-left: calc((var(--z-bleed-w, 100vw) - 100cqi) / 2);
+  padding-right: calc((var(--z-bleed-w, 100vw) - 100cqi) / 2);
+  scroll-padding-left: calc((var(--z-bleed-w, 100vw) - 100cqi) / 2);
+  scroll-padding-right: calc((var(--z-bleed-w, 100vw) - 100cqi) / 2);
 }
 
 @supports not (width: 1cqi) {

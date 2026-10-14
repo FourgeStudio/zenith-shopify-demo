@@ -420,3 +420,10 @@ a.zenith-results__meta:focus-visible {
     display: none;
   }
 }
+
+/* Rows stop at 1920px on very wide screens */
+.zenith-results__rows {
+  max-width: 1920px;
+  margin-left: auto;
+  margin-right: auto;
+}

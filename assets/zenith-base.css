@@ -2178,3 +2178,14 @@ cart-remove-button .button:has(> .zenith-cart-icon-text--trash) {
   zenith-carousel:not(.is-static) .zenith-carousel__track { cursor: grab; }
   .zenith-carousel__track.is-dragging { cursor: grabbing; user-select: none; }
 }
+
+/* Edge-to-edge carousels/bands stop at 1920px on very wide screens (centred) instead of the full window */
+:root {
+  --z-bleed-w: min(100vw, 1920px);
+}
+
+/* Soft fade on the left and right edges of the scrolling rows (results marquee, video carousels) */
+.zenith-edge-fade {
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+}
