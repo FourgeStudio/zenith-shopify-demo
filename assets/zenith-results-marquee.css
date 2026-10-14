@@ -421,9 +421,9 @@ a.zenith-results__meta:focus-visible {
   }
 }
 
-/* Rows stop at 1920px on very wide screens */
+/* Rows stop at 2560px on very wide screens */
 .zenith-results__rows {
-  max-width: 1920px;
+  max-width: 2560px;
   margin-left: auto;
   margin-right: auto;
 }
