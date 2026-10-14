@@ -618,7 +618,7 @@
         "used_text": "Used Zenith Anti-Aging Tallow Cleanser and Night Cream",
         "note": "",
         "show_number": false,
-        "step_label": "Step",
+        "step_label": "",
         "show_divider": true,
         "divider_breakpoint": "all",
         "step_layout": "stacked",
