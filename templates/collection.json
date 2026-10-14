@@ -102,6 +102,7 @@
         "heading": "Everything you need to stay in your prime.",
         "heading_mobile": "",
         "text": "<p>Everything you need to look sharp, feel confident, and stay in your prime.</p>",
+        "show_button": false,
         "button_label": "Add to Cart",
         "button_link": "",
         "button_product": "zenith-anti-aging-tallow-cream",
