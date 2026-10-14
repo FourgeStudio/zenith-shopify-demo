@@ -1787,7 +1787,7 @@
         "id": "rv1_show_detail_product",
         "label": "Show product name under the reviewer name",
         "info": "Only used when \"Text under the name\" is empty",
-        "default": true
+        "default": false
       },
       {
         "type": "number",
@@ -1917,7 +1917,7 @@
         "id": "rv2_show_detail_product",
         "label": "Show product name under the reviewer name",
         "info": "Only used when \"Text under the name\" is empty",
-        "default": true
+        "default": false
       },
       {
         "type": "number",
@@ -2047,7 +2047,7 @@
         "id": "rv3_show_detail_product",
         "label": "Show product name under the reviewer name",
         "info": "Only used when \"Text under the name\" is empty",
-        "default": true
+        "default": false
       },
       {
         "type": "number",
@@ -2177,7 +2177,7 @@
         "id": "rv4_show_detail_product",
         "label": "Show product name under the reviewer name",
         "info": "Only used when \"Text under the name\" is empty",
-        "default": true
+        "default": false
       },
       {
         "type": "number",
@@ -2307,7 +2307,7 @@
         "id": "rv5_show_detail_product",
         "label": "Show product name under the reviewer name",
         "info": "Only used when \"Text under the name\" is empty",
-        "default": true
+        "default": false
       },
       {
         "type": "number",
@@ -2437,7 +2437,7 @@
         "id": "rv6_show_detail_product",
         "label": "Show product name under the reviewer name",
         "info": "Only used when \"Text under the name\" is empty",
-        "default": true
+        "default": false
       },
       {
         "type": "number",
@@ -2567,7 +2567,7 @@
         "id": "rv7_show_detail_product",
         "label": "Show product name under the reviewer name",
         "info": "Only used when \"Text under the name\" is empty",
-        "default": true
+        "default": false
       },
       {
         "type": "number",
@@ -2697,7 +2697,7 @@
         "id": "rv8_show_detail_product",
         "label": "Show product name under the reviewer name",
         "info": "Only used when \"Text under the name\" is empty",
-        "default": true
+        "default": false
       },
       {
         "type": "number",
@@ -2827,7 +2827,7 @@
         "id": "rv9_show_detail_product",
         "label": "Show product name under the reviewer name",
         "info": "Only used when \"Text under the name\" is empty",
-        "default": true
+        "default": false
       },
       {
         "type": "number",
@@ -2957,7 +2957,7 @@
         "id": "rv10_show_detail_product",
         "label": "Show product name under the reviewer name",
         "info": "Only used when \"Text under the name\" is empty",
-        "default": true
+        "default": false
       },
       {
         "type": "number",
@@ -3087,7 +3087,7 @@
         "id": "rv11_show_detail_product",
         "label": "Show product name under the reviewer name",
         "info": "Only used when \"Text under the name\" is empty",
-        "default": true
+        "default": false
       },
       {
         "type": "number",
@@ -3217,7 +3217,7 @@
         "id": "rv12_show_detail_product",
         "label": "Show product name under the reviewer name",
         "info": "Only used when \"Text under the name\" is empty",
-        "default": true
+        "default": false
       },
       {
         "type": "number",
@@ -3347,7 +3347,7 @@
         "id": "rv13_show_detail_product",
         "label": "Show product name under the reviewer name",
         "info": "Only used when \"Text under the name\" is empty",
-        "default": true
+        "default": false
       },
       {
         "type": "number",
@@ -3477,7 +3477,7 @@
         "id": "rv14_show_detail_product",
         "label": "Show product name under the reviewer name",
         "info": "Only used when \"Text under the name\" is empty",
-        "default": true
+        "default": false
       },
       {
         "type": "number",
@@ -3607,7 +3607,7 @@
         "id": "rv15_show_detail_product",
         "label": "Show product name under the reviewer name",
         "info": "Only used when \"Text under the name\" is empty",
-        "default": true
+        "default": false
       },
       {
         "type": "number",
@@ -3737,7 +3737,7 @@
         "id": "rv16_show_detail_product",
         "label": "Show product name under the reviewer name",
         "info": "Only used when \"Text under the name\" is empty",
-        "default": true
+        "default": false
       },
       {
         "type": "number",
@@ -3867,7 +3867,7 @@
         "id": "rv17_show_detail_product",
         "label": "Show product name under the reviewer name",
         "info": "Only used when \"Text under the name\" is empty",
-        "default": true
+        "default": false
       },
       {
         "type": "number",
@@ -3997,7 +3997,7 @@
         "id": "rv18_show_detail_product",
         "label": "Show product name under the reviewer name",
         "info": "Only used when \"Text under the name\" is empty",
-        "default": true
+        "default": false
       },
       {
         "type": "number",
@@ -4127,7 +4127,7 @@
         "id": "rv19_show_detail_product",
         "label": "Show product name under the reviewer name",
         "info": "Only used when \"Text under the name\" is empty",
-        "default": true
+        "default": false
       },
       {
         "type": "number",
@@ -4257,7 +4257,7 @@
         "id": "rv20_show_detail_product",
         "label": "Show product name under the reviewer name",
         "info": "Only used when \"Text under the name\" is empty",
-        "default": true
+        "default": false
       },
       {
         "type": "number",
@@ -4387,7 +4387,7 @@
         "id": "rv21_show_detail_product",
         "label": "Show product name under the reviewer name",
         "info": "Only used when \"Text under the name\" is empty",
-        "default": true
+        "default": false
       },
       {
         "type": "number",
@@ -4517,7 +4517,7 @@
         "id": "rv22_show_detail_product",
         "label": "Show product name under the reviewer name",
         "info": "Only used when \"Text under the name\" is empty",
-        "default": true
+        "default": false
       },
       {
         "type": "number",
@@ -4647,7 +4647,7 @@
         "id": "rv23_show_detail_product",
         "label": "Show product name under the reviewer name",
         "info": "Only used when \"Text under the name\" is empty",
-        "default": true
+        "default": false
       },
       {
         "type": "number",
@@ -4777,7 +4777,7 @@
         "id": "rv24_show_detail_product",
         "label": "Show product name under the reviewer name",
         "info": "Only used when \"Text under the name\" is empty",
-        "default": true
+        "default": false
       },
       {
         "type": "number",
@@ -4907,7 +4907,7 @@
         "id": "rv25_show_detail_product",
         "label": "Show product name under the reviewer name",
         "info": "Only used when \"Text under the name\" is empty",
-        "default": true
+        "default": false
       },
       {
         "type": "number",
@@ -5037,7 +5037,7 @@
         "id": "rv26_show_detail_product",
         "label": "Show product name under the reviewer name",
         "info": "Only used when \"Text under the name\" is empty",
-        "default": true
+        "default": false
       },
       {
         "type": "number",
@@ -5167,7 +5167,7 @@
         "id": "rv27_show_detail_product",
         "label": "Show product name under the reviewer name",
         "info": "Only used when \"Text under the name\" is empty",
-        "default": true
+        "default": false
       },
       {
         "type": "number",
@@ -5297,7 +5297,7 @@
         "id": "rv28_show_detail_product",
         "label": "Show product name under the reviewer name",
         "info": "Only used when \"Text under the name\" is empty",
-        "default": true
+        "default": false
       },
       {
         "type": "number",
@@ -5427,7 +5427,7 @@
         "id": "rv29_show_detail_product",
         "label": "Show product name under the reviewer name",
         "info": "Only used when \"Text under the name\" is empty",
-        "default": true
+        "default": false
       },
       {
         "type": "number",
@@ -5557,7 +5557,7 @@
         "id": "rv30_show_detail_product",
         "label": "Show product name under the reviewer name",
         "info": "Only used when \"Text under the name\" is empty",
-        "default": true
+        "default": false
       },
       {
         "type": "number",
