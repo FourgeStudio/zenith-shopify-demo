@@ -153,6 +153,7 @@
 {%- endcapture -%}
 {%- render 'zenith-section-style', section: section, extra: extra -%}
 
+<!-- zenith-hero 2026-10-14b -->
 <section
   id="Zenith-{{ section.id }}"
   class="zenith-section zenith-hero color-{{ s.color_scheme }} gradient zenith-hero--{{ s.content_position }} zenith-hero--v-{{ s.content_vertical }} zenith-hero--m-{{ s.mobile_alignment }} zenith-hero--m-text-{{ s.mobile_text_alignment }}{% if s.mobile_button_bottom %} zenith-hero--m-pin{% endif %}{% if s.mobile_button_full %} zenith-hero--m-full{% endif %}{% if s.desktop_layout == 'image_beside' %} zenith-hero--split{% endif %}{% if s.panel_width == 'page' %} zenith-hero--framed{% endif %}{% if s.button_full %} zenith-hero--btn-full{% endif %}{% if s.mobile_layout == 'stacked' %} zenith-hero--m-stacked{% endif %}{{ promo_class }}"
@@ -241,6 +242,7 @@
         {%- endif -%}
 
         {%- liquid
+          # zenith hero v2026-10-14b
           assign hero_has_button = false
           if s.show_button != false
             if s.button_label != blank or mobile_label != blank
