@@ -153,6 +153,7 @@
 .zenith-contact--m-flat .zenith-contact__form-card {
   padding: 0;
   background: none;
+  border: 0;
 }
 
 .zenith-contact__form-card .zenith-subheading p + p {
