@@ -10,18 +10,16 @@ if (!customElements.get('zenith-carousel')) {
         this.next = this.querySelector('[data-carousel-next]');
         this.dotsWrap = this.querySelector('.zenith-carousel__dots');
 
-        // data-loop: endless slides. Copies of the last / first slides sit before / after the real ones
+        // data-loop: endless slides (only once the slides overflow; checked on layout changes). Copies of the last / first slides sit before / after the real ones
         // (hidden from screen readers and keyboard); when the scroll comes to rest on a copy it jumps,
         // without animation, to the real slide it copies.
         this.clones = 0;
-        if (this.hasAttribute('data-loop') && this.slides.length > 1) this.addClones();
+        this.wantsLoop = this.hasAttribute('data-loop') && this.slides.length > 1;
 
         this.prev?.addEventListener('click', () => this.go(-1));
         this.next?.addEventListener('click', () => this.go(1));
         this.track.addEventListener('scroll', () => this.onScroll(), { passive: true });
-        if (this.clones && 'onscrollend' in window) {
-          this.track.addEventListener('scrollend', () => this.normalize());
-        }
+        if ('onscrollend' in window) this.track.addEventListener('scrollend', () => this.normalize());
 
         // Mouse drag = swipe (touch already scrolls natively). No native image/link dragging, and a drag
         // doesn't count as a click on the link or card under the pointer.
@@ -62,12 +60,15 @@ if (!customElements.get('zenith-carousel')) {
       }
 
       addClones() {
-        const count = Math.min(2, this.slides.length);
+        // Enough copies to fill the visible width past either end (+1 for the peeking card)
+        const perView = Math.ceil(this.track.clientWidth / this.step) + 1;
+        const count = Math.min(this.slides.length, Math.max(2, perView));
         const copy = (slide) => {
           const clone = slide.cloneNode(true);
           clone.classList.add('is-clone');
           clone.setAttribute('aria-hidden', 'true');
-          clone.setAttribute('inert', '');
+          // Copies stay clickable (a video card in view can be played) but out of the tab order
+          clone.querySelectorAll('a, button, iframe, video, [tabindex]').forEach((el) => el.setAttribute('tabindex', '-1'));
           clone.removeAttribute('id');
           clone.querySelectorAll('[id]').forEach((el) => el.removeAttribute('id'));
           clone.querySelectorAll('img').forEach((img) => {
@@ -81,6 +82,7 @@ if (!customElements.get('zenith-carousel')) {
         this.track.prepend(...head);
         this.track.append(...tail);
         this.clones = count;
+        this.dispatchEvent(new CustomEvent('zenith-carousel:cloned'));
       }
 
       // Pause/play for autoplay (WCAG 2.2.2), same markup as snippets/zenith-pause-button.liquid.
@@ -270,6 +272,9 @@ if (!customElements.get('zenith-carousel')) {
       }
 
       update() {
+        if (this.wantsLoop && !this.clones && this.track.clientWidth && this.track.scrollWidth > this.track.clientWidth + 2) {
+          this.addClones();
+        }
         if (!this.touched && this.track.clientWidth) {
           const start = this.startIndex;
           if (this.clones) {
