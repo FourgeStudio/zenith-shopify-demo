@@ -125,13 +125,19 @@
           {%- if below == 'page' and fp_product != blank -%}
             {%- comment -%}
               Same checklist as the product's own page (its Zenith · Product page "Checklist item" blocks), loaded
-              from that page by assets/zenith-featured-product.js. The description shows until then, or if the
-              page has no checklist.
+              from that page by assets/zenith-featured-product.js. A skeleton holds the space while it
+              loads; the description shows only if the page has no checklist or can't be loaded.
             {%- endcomment -%}
-            <zenith-fp-checks data-url="{{ fp_product.url }}">
+            <zenith-fp-checks data-url="{{ fp_product.url }}" aria-busy="true">
+              <ul class="zenith-fp__benefits zenith-fp__skeleton" role="list" aria-hidden="true">
+                {%- for i in (1..6) -%}
+                  <li class="zenith-fp__benefit"><span class="zenith-fp__skel-check"></span><span class="zenith-fp__skel-bar"></span></li>
+                {%- endfor -%}
+              </ul>
               {%- if fp_product.description != blank -%}
-                <div class="zenith-fp__desc rte">{{ fp_product.description }}</div>
+                <div class="zenith-fp__desc rte" hidden>{{ fp_product.description }}</div>
               {%- endif -%}
+              <noscript><style>.zenith-fp__skeleton { display: none; }</style></noscript>
             </zenith-fp-checks>
           {%- elsif show_desc and fp_product.description != blank -%}
             <div class="zenith-fp__desc rte">{{ fp_product.description }}</div>

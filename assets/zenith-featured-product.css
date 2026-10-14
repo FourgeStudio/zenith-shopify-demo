@@ -90,6 +90,42 @@ zenith-fp-checks {
   display: block;
 }
 
+/* Skeleton while the product page checklist loads (same row height as the real list) */
+.zenith-fp__skel-check {
+  flex-shrink: 0;
+  width: 1.8rem;
+  height: 1.8rem;
+  margin-top: calc((1.5em - 1.8rem) / 2);
+  border-radius: 50%;
+}
+
+.zenith-fp__skel-bar {
+  height: 0.9em;
+  margin-top: 0.3em;
+  border-radius: 0.4rem;
+  width: 70%;
+}
+
+.zenith-fp__benefit:nth-child(2n) .zenith-fp__skel-bar { width: 55%; }
+.zenith-fp__benefit:nth-child(3n) .zenith-fp__skel-bar { width: 80%; }
+
+.zenith-fp__skel-check,
+.zenith-fp__skel-bar {
+  background: linear-gradient(90deg, rgba(var(--color-foreground), 0.08) 25%, rgba(var(--color-foreground), 0.18) 50%, rgba(var(--color-foreground), 0.08) 75%);
+  background-size: 200% 100%;
+  animation: zenith-fp-shimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes zenith-fp-shimmer {
+  from { background-position: 100% 0; }
+  to { background-position: -100% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zenith-fp__skel-check,
+  .zenith-fp__skel-bar { animation: none; }
+}
+
 .zenith-fp__benefits,
 .zenith-fp__trust {
   list-style: none;

@@ -1,26 +1,28 @@
 /* Zenith · Featured product — "Text under the price" = Product page checklist.
    Loads the checklist from the selected product's own page (the page HTML: the Section Rendering API
-   needs the template's full section id, unknown here) when the section comes near the screen, and shows it with the featured product's
-   gold checks. The description inside the element stays if the request fails or the page has no checklist. */
+   needs the template's full section id, unknown here) right after the page loads, and shows it with the featured product's
+   gold checks. A skeleton holds the space meanwhile; the description shows if the request fails or there is no checklist. */
 if (!customElements.get('zenith-fp-checks')) {
   customElements.define(
     'zenith-fp-checks',
     class ZenithFpChecks extends HTMLElement {
       connectedCallback() {
-        if (!this.dataset.url || this.loaded) return;
-        this.observer = new IntersectionObserver(
-          (entries) => {
-            if (!entries.some((entry) => entry.isIntersecting)) return;
-            this.observer.disconnect();
-            this.load();
-          },
-          { rootMargin: '600px 0px' }
-        );
-        this.observer.observe(this);
+        if (!this.dataset.url || this.loaded) {
+          if (!this.dataset.url) this.fallback();
+          return;
+        }
+        // Start right after the page has loaded, so the list is usually in before the section is reached
+        const start = () => this.load();
+        if (document.readyState === 'complete') start();
+        else window.addEventListener('load', start, { once: true });
       }
 
-      disconnectedCallback() {
-        this.observer?.disconnect();
+      // No checklist / request failed: show the product description instead of the skeleton
+      fallback() {
+        this.querySelector('.zenith-fp__skeleton')?.remove();
+        const desc = this.querySelector('.zenith-fp__desc');
+        if (desc) desc.hidden = false;
+        this.removeAttribute('aria-busy');
       }
 
       async load() {
@@ -28,12 +30,12 @@ if (!customElements.get('zenith-fp-checks')) {
         try {
           const url = new URL(this.dataset.url, window.location.origin);
           const response = await fetch(url);
-          if (!response.ok) return;
+          if (!response.ok) return this.fallback();
           const html = await response.text();
-          if (!html) return;
+          if (!html) return this.fallback();
           const doc = new DOMParser().parseFromString(html, 'text/html');
           const items = Array.from(doc.querySelectorAll('.zenith-mp__checks .zenith-mp__check'));
-          if (!items.length) return;
+          if (!items.length) return this.fallback();
           const list = document.createElement('ul');
           list.className = 'zenith-fp__benefits';
           list.setAttribute('role', 'list');
@@ -53,9 +55,11 @@ if (!customElements.get('zenith-fp-checks')) {
             li.append(span);
             list.append(li);
           });
-          if (list.children.length) this.replaceChildren(list);
+          if (!list.children.length) return this.fallback();
+          this.replaceChildren(list);
+          this.removeAttribute('aria-busy');
         } catch (error) {
-          // Network or parse error: the description stays.
+          this.fallback();
         }
       }
     }
