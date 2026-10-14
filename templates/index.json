@@ -411,7 +411,7 @@
             "avatar": "shopify://shop_images/rinse.jpg",
             "author_detail": "",
             "card_type": "auto",
-            "show_prefix": true,
+            "show_prefix": false,
             "show_product": true,
             "show_detail_product": true,
             "row": "1"
@@ -429,7 +429,7 @@
             "avatar": "shopify://shop_images/rinse.jpg",
             "author_detail": "",
             "card_type": "auto",
-            "show_prefix": true,
+            "show_prefix": false,
             "show_product": true,
             "show_detail_product": true,
             "row": "1"
@@ -447,7 +447,7 @@
             "avatar": "shopify://shop_images/rinse.jpg",
             "author_detail": "",
             "card_type": "auto",
-            "show_prefix": true,
+            "show_prefix": false,
             "show_product": true,
             "show_detail_product": true,
             "row": "1"
@@ -465,7 +465,7 @@
             "avatar": "shopify://shop_images/rinse.jpg",
             "author_detail": "",
             "card_type": "auto",
-            "show_prefix": true,
+            "show_prefix": false,
             "show_product": true,
             "show_detail_product": true,
             "row": "1"
@@ -483,7 +483,7 @@
             "avatar": "shopify://shop_images/rinse.jpg",
             "author_detail": "",
             "card_type": "auto",
-            "show_prefix": true,
+            "show_prefix": false,
             "show_product": true,
             "show_detail_product": true,
             "row": "1"
@@ -501,7 +501,7 @@
             "avatar": "shopify://shop_images/rinse.jpg",
             "author_detail": "",
             "card_type": "auto",
-            "show_prefix": true,
+            "show_prefix": false,
             "show_product": true,
             "show_detail_product": true,
             "row": "2"
@@ -519,7 +519,7 @@
             "avatar": "shopify://shop_images/rinse.jpg",
             "author_detail": "",
             "card_type": "auto",
-            "show_prefix": true,
+            "show_prefix": false,
             "show_product": true,
             "show_detail_product": true,
             "row": "2"
@@ -537,7 +537,7 @@
             "avatar": "shopify://shop_images/rinse.jpg",
             "author_detail": "",
             "card_type": "auto",
-            "show_prefix": true,
+            "show_prefix": false,
             "show_product": true,
             "show_detail_product": true,
             "row": "2"
@@ -555,7 +555,7 @@
             "avatar": "shopify://shop_images/rinse.jpg",
             "author_detail": "",
             "card_type": "auto",
-            "show_prefix": true,
+            "show_prefix": false,
             "show_product": true,
             "show_detail_product": true,
             "row": "2"
