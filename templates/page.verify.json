@@ -642,7 +642,7 @@
         "icon_stroke_width": "1.5",
         "badge_size": 44,
         "badge_font_size": 30,
-        "footer_text_size": 10,
+        "footer_text_size": 14,
         "columns_mobile": "1",
         "vertical_alignment_mobile": "center",
         "icon_position_mobile": "top",
