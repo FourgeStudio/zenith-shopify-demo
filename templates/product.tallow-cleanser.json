@@ -147,7 +147,7 @@
           "type": "question",
           "settings": {
             "question": "Will the tallow feel greasy?",
-            "answer": "<p>No. It conditions while you wash and rinses off with the lather. Skin feels clean and soft, not coated.</p>",
+            "answer": "<p>Yes. It is a simple first step for men new to skincare. Use it morning and night.</p>",
             "open": false
           }
         },
@@ -171,7 +171,7 @@
           "type": "question",
           "settings": {
             "question": "Can I use it with the Tallow Cream and the Day Cream?",
-            "answer": "<p>Yes. It is the first step: Cleanser, then Day Cream SPF 30 in the morning and Tallow Cream at night.</p>",
+            "answer": "<p>Yes. It is the first step: Cleanser, then Day Cream SPF30 in the morning and Tallow Cream at night.</p>",
             "open": false
           }
         },
@@ -304,7 +304,7 @@
         "compare_color": "#8e8c8c",
         "badge_background": "#294850",
         "badge_text_color": "#ffffff",
-        "check_color": "#FFFFFF",
+        "check_color": "#ffffff",
         "bar_background": "#202020",
         "delivery_background": "#112328",
         "trust_icon_color": "#eabe5f",
@@ -485,7 +485,7 @@
           "settings": {
             "image": "shopify://shop_images/cleanser-ingredients-creamy-tallow-texture-close-up-1-desktop.webp",
             "title": "Bakuchiol and Niacinamide",
-            "text": "<p>Bakuchiol, a plant-based retinol alternative. Niacinamide for tone and oil balance.</p>",
+            "text": "<p>Bakuchiol, a plant-based retinol alternative. Niacinamide to help even the look of skin tone.</p>",
             "title_mobile": "",
             "text_mobile": ""
           }
@@ -1071,28 +1071,28 @@
           "type": "question",
           "settings": {
             "question": "Hindi ba ito magiging tight or stripping sa face? Ayoko kasing parang soap yung feeling.",
-            "answer": "<p>Not at all! We’ve specially formulated the Zenith Anti-Aging Tallow Cleanser with premium amino acid cleansers for the Philippine climate. Unlike harsh cleansers, the Zenith Anti-Aging Tallow Cleanser conditions your skin with tallow while cleansing deeply. It’s gentle enough for daily use but powerful enough to give real results.</p>"
+            "answer": "<p>Not at all! We’ve specially formulated the Zenith Anti-Aging Tallow Cleanser with premium amino acid cleansers for the Philippine climate. Unlike harsh cleansers, the Zenith Anti-Aging Tallow Cleanser conditions your skin with tallow while cleansing deeply. It is gentle enough for twice-daily use.</p>"
           }
         },
         "question_3": {
           "type": "question",
           "settings": {
             "question": "Can I use this if I have sensitive skin?",
-            "answer": "<p>Yes! Tallow actually matches your skin’s natural oils, making it ideal for sensitive skin. The Zenith Anti-Aging Tallow Cleanser uses gentle amino acid cleansers and botanical extracts that are free from harsh chemicals that typically cause irritation.</p>"
+            "answer": "<p>It is made to be gentle. Tallow has lipids similar to those found in skin, and the amino acid cleanser leaves skin soft and comfortable, not tight. If your skin is sensitive, do a small patch test first.</p>"
           }
         },
         "question_4": {
           "type": "question",
           "settings": {
             "question": "How long will one bottle last?",
-            "answer": "<p>One 100ml bottle of the Zenith Anti-Aging Tallow Cleanser typically lasts 30 days when used as directed (once daily). A little goes a long way – you only need 2-3 pea-sized pumps as it creates rich lather for your entire face.</p>"
+            "answer": "<p>A little goes a long way. A pea-sized amount makes a rich lather for your whole face.</p>"
           }
         },
         "question_5": {
           "type": "question",
           "settings": {
             "question": "Can I use this with my other products like moisturizer and sunscreen?",
-            "answer": "<p>Yes! The Zenith Anti-Aging Tallow Cleanser works perfectly as the foundation of any skincare routine. For complete anti-aging care, follow with Zenith Anti-Aging Tallow Day Cream SPF 30 in the morning for protection, and Zenith Anti-Aging Tallow Cream in the evening for maximum repair and renewal.</p>"
+            "answer": "<p>Yes! The Zenith Anti-Aging Tallow Cleanser works perfectly as the foundation of any skincare routine. For complete anti-aging care, follow with Zenith Anti-Aging Tallow Day Cream SPF30 in the morning for protection, and the Zenith Anti-Aging Tallow Cream at night.</p>"
           }
         },
         "question_6": {
