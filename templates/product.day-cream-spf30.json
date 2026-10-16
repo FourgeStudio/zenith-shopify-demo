@@ -15,7 +15,7 @@
         "benefit_1": {
           "type": "benefit",
           "settings": {
-            "text": "Broad-spectrum SPF 30, six UV filters",
+            "text": "Broad Spectrum SPF30, six UV filters",
             "hide_on_desktop": false,
             "hide_on_mobile": false
           }
@@ -93,7 +93,7 @@
           "settings": {
             "title": "About this product",
             "content_source": "custom",
-            "text": "<p>Most sunscreens feel heavy in our heat, and most anti-aging creams are made for night.</p><p>This does the morning in one step: broad-spectrum SPF 30 from six UV filters, Bakuchiol and Niacinamide, on a beef tallow base with Zinc PCA and silica for a matte finish. No white cast.</p>",
+            "text": "<p>Most sunscreens feel heavy in our heat, and most anti-aging creams are made for night.</p><p>This does the morning in one step: Broad spectrum SPF30 from six UV filters, Bakuchiol and Niacinamide, on a beef tallow base with Zinc PCA and silica for a matte finish. No white cast.</p>",
             "open": true,
             "hide_on_mobile": false,
             "hide_on_desktop": false
@@ -104,7 +104,7 @@
           "settings": {
             "title": "How to use",
             "content_source": "custom",
-            "text": "<p>1. Every morning, on clean, dry skin, apply about a quarter teaspoon to the face and neck.</p><p>2. Massage until absorbed, 15 minutes before heading out.</p><p>3. Reapply every 2 hours when you are outdoors or sweating.</p>",
+            "text": "<p>1. Every morning, on clean, dry skin, apply about a quarter teaspoon to the face and neck.</p><p>2. Massage until absorbed, 15 minutes before heading out.</p><p>3. Reapply at least every 2 hours, and after sweating or towelling.</p>",
             "open": false,
             "hide_on_mobile": false,
             "hide_on_desktop": false
@@ -163,7 +163,7 @@
           "type": "question",
           "settings": {
             "question": "How often should I reapply?",
-            "answer": "<p>Every 2 hours when you are outdoors or sweating. Put it on every morning, even on cloudy days.</p>",
+            "answer": "<p>At least every 2 hours, and again after sweating or towelling. It is not water-resistant. Put it on every morning, even on cloudy days.</p>",
             "open": false
           }
         },
@@ -179,7 +179,7 @@
           "type": "question",
           "settings": {
             "question": "Is it the same as the Tallow Cream?",
-            "answer": "<p>No. The Day Cream has SPF 30 for the day. The Tallow Cream has 0.2% retinol for the night. Use both for the full routine.</p>",
+            "answer": "<p>No. The Day Cream has SPF30 for the day. The Tallow Cream has 0.2% retinol for the night. Use both for the full routine.</p>",
             "open": false
           }
         },
@@ -217,13 +217,13 @@
       ],
       "settings": {
         "show_money_back": true,
-        "placeholder_title": "Zenith Anti-Aging Tallow Day Cream SPF 30",
+        "placeholder_title": "Zenith Anti-Aging Tallow Day Cream SPF30",
         "show_rating": true,
         "show_stars": false,
         "rating_value": "4.69",
         "rating_count": "2,158",
         "rating_label": "Trusted by [customers] Filipino men",
-        "subtitle": "<p>Light day cream with SPF 30. No white cast.</p>",
+        "subtitle": "<p>Light day cream with Broad Spectrum SPF30.</p>",
         "price_badge": "",
         "show_fda": true,
         "fda_label": "FDA-Notified",
@@ -461,7 +461,7 @@
           "type": "ingredient",
           "settings": {
             "image": "shopify://shop_images/day-cream-ingredients-creamy-tallow-texture-close-up-1-desktop.webp",
-            "title": "Broad-spectrum SPF 30",
+            "title": "Broad-spectrum SPF30",
             "text": "<p>Six modern UV filters. No white cast.</p>",
             "title_mobile": "",
             "text_mobile": ""
@@ -588,7 +588,7 @@
           "settings": {
             "image": "shopify://shop_images/day-cream-how-to-use-step-3-smiling-man-ready-for-1-mobile.webp",
             "title": "",
-            "text": "Reapply every 2 hours outdoors"
+            "text": "Reapply at least every 2 hours"
           }
         }
       },
@@ -675,7 +675,7 @@
         "row-1": {
           "type": "row",
           "settings": {
-            "label": "Broad-spectrum SPF 30",
+            "label": "Broad Spectrum SPF30",
             "zenith_value": "Yes",
             "value_1": "Yes",
             "value_2": "No",
@@ -1062,14 +1062,14 @@
           "type": "question",
           "settings": {
             "question": "Will this work even if I've never used sunscreen with anti-aging before?",
-            "answer": "<p>Yes! The Zenith Anti-Aging Tallow Day Cream SPF 30 is specifically designed for Filipino men who are new to comprehensive daytime protection. Our lightweight formula is engineered to work with your skin’s natural processes, making it perfect for beginners. You’ll get professional protection and anti-aging results even if this is your first SPF product.</p>"
+            "answer": "<p>Yes! The Zenith Anti-Aging Tallow Day Cream SPF30 is specifically designed for Filipino men who are new to comprehensive daytime protection. Our lightweight formula is engineered to work with your skin’s natural processes, making it perfect for beginners. You’ll get professional protection and anti-aging results even if this is your first SPF product.</p>"
           }
         },
         "question_2": {
           "type": "question",
           "settings": {
             "question": "Hindi ba ito magiging white cast or greasy sa face? Ayoko kasing parang typical sunscreen yung feeling.",
-            "answer": "<p>Not at all! We’ve specially formulated the Zenith Anti-Aging Tallow Day Cream SPF 30 for the Philippine climate with zero white cast technology.</p><p>Unlike heavy sunscreens, the Zenith Anti-Aging Tallow Day Cream SPF 30 absorbs instantly with a natural matte finish. It’s lightweight enough for daily use but powerful enough to give real protection and anti-aging results.</p>"
+            "answer": "<p>Not at all! We’ve specially formulated the Zenith Anti-Aging Tallow Day Cream SPF30 for the Philippine climate with zero white cast technology.</p><p>Unlike heavy sunscreens, the Zenith Anti-Aging Tallow Day Cream SPF30 absorbs instantly with a natural matte finish. It’s lightweight enough for daily use but powerful enough to give real protection and anti-aging results.</p>"
           }
         },
         "question_3": {
@@ -1104,7 +1104,7 @@
           "type": "question",
           "settings": {
             "question": "When will I see results?",
-            "answer": "<p>Sun protection and comfort from the first use with the Zenith Anti-Aging Tallow Day Cream SPF 30.</p><p>That’s why we offer the Zenith Money-Back Guarantee – we’re confident you’ll see real protection and anti-aging results.</p>"
+            "answer": "<p>Sun protection and comfort from the first use with the Zenith Anti-Aging Tallow Day Cream SPF30.</p><p>That’s why we offer the Zenith Money-Back Guarantee – we’re confident you’ll see real protection and anti-aging results.</p>"
           }
         }
       },
@@ -1201,7 +1201,7 @@
         "show_money_back": true,
         "eyebrow": "",
         "use_collection_content": false,
-        "heading": "Zenith Anti-Aging Tallow Day Cream SPF 30",
+        "heading": "Zenith Anti-Aging Tallow Day Cream SPF30",
         "heading_mobile": "",
         "text": "<p>Light day cream with SPF 30. No white cast. Made for daytime in the Philippines.</p>",
         "show_button": true,
