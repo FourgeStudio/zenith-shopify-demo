@@ -28,7 +28,7 @@
         "heading": "Nobody Made This for Filipino Men. So We Did.",
         "shared_text": false,
         "shared_columns": false,
-        "text": "<p>For a long time, taking care of yourself wasn't something Filipino men were supposed to do. So most of us didn't. One bar of soap handled the face, the hair, and the rest.</p><p>Zenith started two years ago to change that, one simple step at a time. Nothing you don't need, honest labels, built for our weather. More than [customers] Filipino men have picked it up since.</p>",
+        "text": "<p>For a long time, taking care of yourself wasn't something Filipino men were supposed to do. So most of us didn't. One bar of soap handled the face, the hair, and the rest.</p><p>Zenith started two years ago to change that, one simple step at a time. Nothing you don't need, honest labels, built for our weather. [customers] Filipino men have picked it up since.</p>",
         "button_label": "",
         "button_link": "",
         "image_position": "right",
@@ -213,7 +213,7 @@
             "icon": "badge_check_round",
             "icon_text": "",
             "title": "Proof Over Hype",
-            "text": "<p>We use thoughtfully dosed ingredients like 0.2% Retinol, Niacinamide, and our 4-active CABROXIL matrix, in beef tallow, for a simple routine that feels gentle on skin.</p>"
+            "text": "<p>We name every ingredient, like 0.2% Retinol and Niacinamide on a beef tallow base for skin, and CABROXIL for hair.</p>"
           }
         },
         "belief_climate": {
@@ -222,7 +222,7 @@
             "icon": "sun_cloud",
             "icon_text": "",
             "title": "Made for Our Climate",
-            "text": "<p>Traditional heavy creams and generic imported shampoos fail in tropical weather. Our lightweight, sulfate-free, and sweat-resistant formulations are engineered to work with your environment, not against it.</p>"
+            "text": "<p>Traditional heavy creams and generic imported shampoos fail in tropical weather. Our lightweight formulas are made for Philippine heat and humidity.</p>"
           }
         },
         "belief_steps": {
@@ -230,7 +230,7 @@
           "settings": {
             "icon": "none",
             "icon_text": "3",
-            "title": "Fewer Steps, Steady Results",
+            "title": "Fewer Steps, Easy To Keep",
             "text": "<p>You don't have time for a complicated routine. We consolidated the most powerful ingredients into simple, 2-minute daily habits that fit seamlessly into a busy professional's schedule.</p>"
           }
         }
