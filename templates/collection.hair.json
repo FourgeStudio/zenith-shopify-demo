@@ -1201,48 +1201,40 @@
         "question_1": {
           "type": "question",
           "settings": {
-            "question": "Different from drugstore brands?",
-            "answer": "<p>Drugstore products are built for mass appeal and the lowest possible cost. Zenith formulas are built specifically for the Philippine climate and the realities of men over 35. We use higher-grade ingredients with absolutely zero unnecessary fillers.</p>"
+            "question": "When will my order arrive?",
+            "answer": "<p>Metro Manila orders arrive in about 3 days. Visayas and Mindanao in 3 to 7 days. Free shipping on the bundle.</p>"
+          }
+        },
+        "question_h9dKrx": {
+          "type": "question",
+          "settings": {
+            "question": "Can I use this if I have a sensitive scalp?",
+            "answer": "<p>Check the full ingredient list on the product page first. Avoid contact with eyes. If your scalp feels irritated, stop using it and message us.</p>"
           }
         },
         "question_2": {
           "type": "question",
           "settings": {
-            "question": "Safe for sensitive skin?",
-            "answer": "<p>Yes. Every product is tested in tropical humidity and designed to be gentle. We avoid harsh sulfates and synthetic fragrances that cause irritation. If your skin reacts, stop use and message us right away with photos. Covered by the Zenith Money-Back Guarantee.</p>"
+            "question": "Can I use just one of them?",
+            "answer": "<p>Yes. The shampoo and the spray each work on their own. Together they are the Zenith Complete Hair Density System.</p>"
           }
         },
         "question_3": {
           "type": "question",
           "settings": {
-            "question": "How to layer with skincare?",
-            "answer": "<p>Keep it simple. Cleanse first with the Tallow Cleanser, then Tallow Day Cream SPF 30 in the morning and Anti-Aging Tallow Cream at night. Three steps, that's it.</p>"
-          }
-        },
-        "question_4": {
-          "type": "question",
-          "settings": {
-            "question": "What is coming next?",
-            "answer": "<p>We are developing a full body wash, a deodorant that respects your skin, and a shave cream that reduces razor burn. The toothpaste is in development. Sign up for notifications on the product page to know the moment they launch.</p>"
-          }
-        },
-        "question_5": {
-          "type": "question",
-          "settings": {
-            "question": "Why no antiperspirant yet?",
-            "answer": "<p>We are taking our time to get it right. A deodorant that performs in this heat without staining shirts or clogging pores requires real testing. It is coming when it is ready, not a moment sooner.</p>"
+            "question": "What if it does not work for me?",
+            "answer": "<p>Every order carries the Zenith Money-Back Guarantee. No hassle. Just show us proof. Full terms on our Refunds and Returns page.</p>"
           }
         }
       },
       "block_order": [
         "question_1",
+        "question_h9dKrx",
         "question_2",
-        "question_3",
-        "question_4",
-        "question_5"
+        "question_3"
       ],
       "settings": {
-        "content_source": "global",
+        "content_source": "custom",
         "eyebrow": "",
         "heading": "Frequently Asked Questions",
         "subheading": "<p>No-nonsense answers about your daily essentials.</p>",
