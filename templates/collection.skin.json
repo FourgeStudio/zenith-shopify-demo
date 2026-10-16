@@ -481,7 +481,7 @@
           "settings": {
             "image": "shopify://shop_images/skin-category-gallery-man-applying-day-cream-holding-1-desktop.webp",
             "title": "Apply",
-            "text": "Dot Zenith Day Cream SPF 30 evenly across your face and neck."
+            "text": "Dot the Zenith Anti-Aging Tallow Day Cream SPF30 evenly across your face and neck. Reapply at least every 2 hours."
           }
         },
         "step_3": {
@@ -489,7 +489,7 @@
           "settings": {
             "image": "shopify://shop_images/skin-category-gallery-smiling-man-outdoors-palm-trees-1-desktop.webp",
             "title": "Protect",
-            "text": "Massage gently until absorbed. Dries instantly to a matte, zero-white-cast finish built for the heat."
+            "text": "Massage gently until absorbed. Absorbs in seconds to a matte-looking finish with no white cast."
           }
         }
       },
@@ -501,7 +501,7 @@
       "settings": {
         "eyebrow": "Day Routine",
         "heading": "Matte & Protected",
-        "subheading": "<p>Get Complete Protection + Anti-Aging + Brightening In 3 Steps</p>",
+        "subheading": "<p>Sun Protection, Anti-Aging Care And Brighter-Looking Skin In 3 Steps</p>",
         "show_used": true,
         "products": [
           "zenith-anti-aging-tallow-cleanser",
@@ -596,8 +596,8 @@
           "type": "step",
           "settings": {
             "image": "shopify://shop_images/skin-category-gallery-man-massaging-cream-into-both-1-desktop.webp",
-            "title": "Repair",
-            "text": "Massage into the skin. 0.2% Retinol and 5% Tallow do the heavy lifting to smooth fine lines while you sleep."
+            "title": "Smooth",
+            "text": "Massage into the skin. 0.2% Retinol on a beef tallow base visibly smooths fine lines while you sleep."
           }
         }
       },
@@ -608,7 +608,7 @@
       ],
       "settings": {
         "eyebrow": "Night Routine",
-        "heading": "Recovery & Repair",
+        "heading": "Night Care",
         "subheading": "<p>Get Younger-Looking Skin In 3 Steps</p>",
         "show_used": true,
         "products": [
