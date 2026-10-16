@@ -102,9 +102,9 @@
         "show_money_back": true,
         "eyebrow": "Trusted by [customers] Filipino men",
         "use_collection_content": false,
-        "heading": "Thicker, Fuller Hair Starts at the Scalp.",
+        "heading": "Thicker, Fuller-Looking Hair Starts At The Scalp.",
         "heading_mobile": "",
-        "text": "<p>Powerful, daily maintenance designed to clear buildup, stimulate roots, and visibly increase hair density.</p>",
+        "text": "<p>Daily care that clears buildup, for the appearance of thicker, fuller-looking hair.</p>",
         "show_button": false,
         "button_label": "",
         "button_link": "",
@@ -306,7 +306,7 @@
       "type": "zenith-product-grid",
       "settings": {
         "eyebrow": "Hair Products",
-        "heading": "The Advanced Hair Density System",
+        "heading": "Zenith Complete Hair Density System",
         "subheading": "",
         "collection": "hair-products",
         "products_to_show": 12,
@@ -480,7 +480,7 @@
           "type": "step",
           "settings": {
             "image": "shopify://shop_images/hair-category-gallery-man-rinsing-shampoo-shower-1-desktop.webp",
-            "title": "Activate",
+            "title": "Massage",
             "text": "Massage 60 seconds, leave 2 minutes, rinse."
           }
         },
@@ -501,7 +501,7 @@
       "settings": {
         "eyebrow": "",
         "heading": "Hair Washing Routine",
-        "subheading": "<p>Get a Healthier Scalp In 3 Steps</p>",
+        "subheading": "<p>Thicker, Fuller-Looking Hair In 3 Steps</p>",
         "show_used": true,
         "products": [
           "zenith-advanced-hair-density-shampoo"
@@ -588,7 +588,7 @@
           "settings": {
             "image": "shopify://shop_images/hair-category-gallery-close-up-thinning-hairline-1-desktop.webp",
             "title": "Absorb",
-            "text": "Use your fingertips to massage the serum into the scalp for 30 seconds to stimulate microcirculation. Do not rinse."
+            "text": "Use your fingertips to massage it into the scalp for 30 seconds. Do not rinse."
           }
         },
         "step_3": {
@@ -596,7 +596,7 @@
           "settings": {
             "image": "shopify://shop_images/hair-category-gallery-man-checking-hairline-mirror-1-desktop.webp",
             "title": "Style",
-            "text": "Style your hair as usual. Use once daily for maintenance, or twice daily for maximum density support."
+            "text": "Style your hair as usual. Use at least once daily, at night."
           }
         }
       },
@@ -1225,13 +1225,21 @@
             "question": "What if it does not work for me?",
             "answer": "<p>Every order carries the Zenith Money-Back Guarantee. No hassle. Just show us proof. Full terms on our Refunds and Returns page.</p>"
           }
+        },
+        "question_zLBRb8": {
+          "type": "question",
+          "settings": {
+            "question": "Can I use Zenith products together?",
+            "answer": "<p>Yes. Cleanser and day cream in the morning, tallow cream at night, shampoo in the shower, spray on a clean, towel-dried scalp before bed. The directions are on every label.</p>"
+          }
         }
       },
       "block_order": [
         "question_1",
         "question_h9dKrx",
         "question_2",
-        "question_3"
+        "question_3",
+        "question_zLBRb8"
       ],
       "settings": {
         "content_source": "custom",
