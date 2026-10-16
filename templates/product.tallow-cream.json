@@ -159,7 +159,7 @@
           "settings": {
             "title": "How to use",
             "content_source": "custom",
-            "text": "<p>1. At night, on a clean, dry face, take a pea-sized amount.<br/><br/>2. Dot it on forehead, cheeks and chin, then massage upward into the face and neck until absorbed.<br/><br/>3. New to retinol? Use it 2 to 3 nights a week for the first two weeks, then move to nightly. Always wear SPF 30 in the morning.</p>",
+            "text": "<p>1. At night, on a clean, dry face, take a pea-sized amount.<br/><br/>2. Dot it on forehead, cheeks and chin, then massage upward into the face and neck until absorbed.<br/><br/>3. New to retinol? Start 2 to 3 nights a week, then go nightly as your skin adjusts. Use sun protection every day.</p>",
             "open": false,
             "hide_on_mobile": false,
             "hide_on_desktop": false
@@ -202,7 +202,7 @@
           "type": "question",
           "settings": {
             "question": "Will the retinol make my skin peel?",
-            "answer": "<p>0.2% is a gentle retinol level, and the tallow base buffers it. New to retinol? Start 2 to 3 nights a week for the first two weeks, then go nightly. If anything feels wrong, stop and message us.</p>",
+            "answer": "<p>0.2% is a gentle retinol level, and the tallow base buffers it. New to retinol? Start 2 to 3 nights a week, then go nightly as your skin adjusts.</p>",
             "open": false
           }
         },
@@ -226,7 +226,7 @@
           "type": "question",
           "settings": {
             "question": "Do I still need sunscreen?",
-            "answer": "<p>Yes. Retinol makes skin more sensitive to the sun, so wear SPF 30 every morning. The Zenith Anti-Aging Tallow Day Cream SPF 30 is made for that.</p>",
+            "answer": "<p>Yes. Retinol makes skin more sensitive to the sun, so use sun protection every day. The Zenith Anti-Aging Tallow Day Cream SPF30 is the daytime pair.</p>",
             "open": false
           }
         },
