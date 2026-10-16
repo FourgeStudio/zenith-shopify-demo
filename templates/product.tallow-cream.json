@@ -234,7 +234,7 @@
           "type": "question",
           "settings": {
             "question": "Can I use it with the Cleanser and the Day Cream?",
-            "answer": "<p>Yes. Cleanser morning and night, Day Cream SPF 30 in the morning, Tallow Cream at night. The directions are on every label.</p>",
+            "answer": "<p>Yes. Cleanser morning and night, Day Cream SPF30 in the morning, Tallow Cream at night. The directions are on every label.</p>",
             "open": false
           }
         },
@@ -1389,7 +1389,7 @@
           "type": "question",
           "settings": {
             "question": "Is the Zenith Anti-Aging Tallow Cream suitable for all skin types?",
-            "answer": "<p>Yes, the Zenith Anti-Aging Tallow Cream is formulated to benefit all skin types, including sensitive skin. The tallow helps buffer potential retinol irritation.<br/><br/>However, as with any skincare product containing active ingredients, we recommend starting with less frequent application (2-3 times weekly) until your skin adjusts.</p>"
+            "answer": "<p>Yes, the Zenith Anti-Aging Tallow Cream is made to be gentle. The tallow helps buffer potential retinol irritation.<br/><br/>However, as with any skincare product containing active ingredients, we recommend starting with less frequent application (2-3 times weekly) until your skin adjusts.</p>"
           }
         },
         "question_2": {
