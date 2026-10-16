@@ -179,7 +179,7 @@
           "type": "question",
           "settings": {
             "question": "What is CABROXIL Technology?",
-            "answer": "<p>Zenith's name for the four ingredients in the spray and the shampoo: Caffeine, Rosemary Oil, Diaminopyrimidine Oxide and Biotin.</p>",
+            "answer": "<p>Zenith's name for the 4-Part Care Complex in our hair line. In the spray: Caffeine, Rosemary Oil, Diaminopyrimidine Oxide (Kopexil) and Biotin.</p>",
             "open": false
           }
         },
@@ -599,7 +599,7 @@
       ],
       "settings": {
         "eyebrow": "",
-        "heading": "Get Thicker & Fuller Hair In 3 Steps",
+        "heading": "Thicker, Fuller-Looking Hair In 3 Steps",
         "subheading": "<p>Thirty seconds before bed.</p>",
         "show_used": true,
         "products": [],
@@ -1039,7 +1039,7 @@
         "eyebrow_font_size": 14,
         "text_font_size": 18,
         "button_font_size": 22,
-        "text_mobile": "<p>Hair takes time, kaya sinusuportahan ka namin hanggang sa makita mo ang resulta. Message mo lang kami, full refund. Walang hassle. Proof lang. Full terms on our <a href=\"/policies/refund-policy\">Refunds and Returns</a> page.</p>",
+        "text_mobile": "<p>Every order carries the Zenith Money-Back Guarantee. No hassle. Just show us proof. Full terms on our <a href=\"/policies/refund-policy\">Refunds and Returns</a> page.</p>",
         "heading_font_size_mobile": 32,
         "text_font_size_mobile": 18,
         "text_opacity_mobile": 70,
@@ -1090,7 +1090,7 @@
           "type": "question",
           "settings": {
             "question": "What is CABROXIL Technology?",
-            "answer": "<p>Zenith's name for the four ingredients in the spray and the shampoo: Caffeine, Rosemary Oil, Diaminopyrimidine Oxide and Biotin.</p>"
+            "answer": "<p>Zenith's name for the 4-Part Care Complex in our hair line. In the spray: Caffeine, Rosemary Oil, Diaminopyrimidine Oxide (Kopexil) and Biotin.</p>"
           }
         },
         "question_6": {
