@@ -231,7 +231,7 @@
           <zenith-carousel class="zenith-fp__carousel" data-slide-label="Image" data-loop{% if s.slide_autoplay > 0 %} data-autoplay="{{ s.slide_autoplay }}" data-pause-button="false"{% endif %}>
             <ul class="zenith-carousel__track zenith-fp__track" role="list">
               {%- for media in product_images -%}
-                {%- assign media_alt = media.alt | default: fp_product.title -%}
+                {%- capture media_alt -%}{%- render 'zenith-alt', image: media.preview_image, scope: fp_product.handle, fallback: fp_product.title -%}{%- endcapture -%}
                 {%- assign fp_focus = '' -%}
                 {%- if media.preview_image.presentation.focal_point != blank -%}
                   {%- assign fp_focus = 'object-position: ' | append: media.preview_image.presentation.focal_point -%}

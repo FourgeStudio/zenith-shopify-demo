@@ -44,6 +44,11 @@
   # image_tag escapes the alt itself
   assign img_alt = alt | default: img.alt | default: image.alt
 -%}
+{%- if img_alt == blank -%}
+  {%- comment -%} No alt in Files yet: the approved QA text for this file (snippets/zenith-alt) {%- endcomment -%}
+  {%- capture img_alt -%}{%- render 'zenith-alt', image: img -%}{%- endcapture -%}
+  {%- if img_alt == blank and image != blank -%}{%- capture img_alt -%}{%- render 'zenith-alt', image: image -%}{%- endcapture -%}{%- endif -%}
+{%- endif -%}
 {%- if img != blank -%}
   {%- if art_direction -%}
     {%- liquid
