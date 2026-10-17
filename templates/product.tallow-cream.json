@@ -93,7 +93,7 @@
           "settings": {
             "title": "Will this work even if I've never used skincare before?",
             "content_source": "custom",
-            "text": "<p>Yes. Most of our users started with just soap and water. We formulated this with 0.2% Retinol and 5% Tallow to do the heavy lifting while you sleep with no complicated routines needed.</p>",
+            "text": "<p>Yes. Most of our users started with just soap and water.</p>",
             "open": true,
             "hide_on_mobile": true,
             "hide_on_desktop": true
@@ -632,7 +632,7 @@
         "show_peek": true,
         "show_dots": true,
         "show_arrows": true,
-        "autoplay": 6,
+        "autoplay": 0,
         "heading_max_width": 800,
         "heading_gap": 4,
         "heading_spacing": 32,
@@ -914,7 +914,7 @@
           "type": "step",
           "settings": {
             "image": "shopify://shop_images/night-cream-how-to-use-step-3-smiling-man-touching-his-1-desktop.webp",
-            "title": "SPF 30 the next morning",
+            "title": "Day Cream SPF30 the next morning",
             "text": ""
           }
         }
@@ -1271,7 +1271,7 @@
         "heading_mobile": "The Zenith Guarantee",
         "subheading": "",
         "show_payment_icons": false,
-        "footer_text": "<p>Delivered by LBC, J&T, Gogo Express, Ninja Van, and Amare Group's own rider fleet.</p>",
+        "footer_text": "<p>Delivered by LBC, J&T, Gogo Express, Ninja Van, and Amare Group's own riders.</p>",
         "heading_alignment": "center",
         "columns_desktop": 3,
         "show_media": true,
@@ -1417,7 +1417,7 @@
           "type": "question",
           "settings": {
             "question": "How long will one jar of the Zenith Anti-Aging Tallow Cream last?",
-            "answer": "<p>With recommended nightly use, one jar of Zenith Anti-Aging Tallow Cream typically lasts 1 to 2 months.<br/><br/>Since you only need a pea-sized amount for the entire face, a little goes a long way.</p>"
+            "answer": "<p>You only need a pea-sized amount for the face and neck, so a little goes a long way.</p>"
           }
         },
         "question_4": {

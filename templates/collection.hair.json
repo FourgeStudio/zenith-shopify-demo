@@ -501,7 +501,7 @@
       "settings": {
         "eyebrow": "",
         "heading": "Hair Washing Routine",
-        "subheading": "<p>Thicker, Fuller-Looking Hair In 3 Steps</p>",
+        "subheading": "<p>A Fresh, Clean-Feeling Scalp In 3 Steps.</p>",
         "show_used": true,
         "products": [
           "zenith-advanced-hair-density-shampoo"
@@ -608,7 +608,7 @@
       "settings": {
         "eyebrow": "",
         "heading": "Hair Grooming Routine",
-        "subheading": "<p>Thicker, Fuller-Looking Hair In 3 Steps</p>",
+        "subheading": "<p>Thicker, Fuller-Looking Hair In 3 Steps.</p>",
         "show_used": true,
         "products": [
           "zenith-advanced-hair-density-spray"
@@ -873,7 +873,7 @@
         "show_peek": true,
         "show_dots": true,
         "show_arrows": true,
-        "autoplay": 6,
+        "autoplay": 0,
         "heading_max_width": 400,
         "heading_gap": 4,
         "heading_spacing": 24,
@@ -907,7 +907,7 @@
         "title_font_size": 14,
         "handle_font_size": 14,
         "heading_alignment_mobile": "left",
-        "video_max_height_mobile": 30,
+        "video_max_height_mobile": 0,
         "mobile_slide_width": 83,
         "heading_font_size_mobile": 36,
         "subheading_font_size_mobile": 16,
@@ -947,7 +947,7 @@
             "icon": "qr",
             "icon_text": "",
             "title": "",
-            "text": "<p>Every box features a unique, tamper-proof QR code. Scan it upon arrival to instantly verify your gear is 100% authentic.</p>"
+            "text": "<p>Every box has its own QR code. Scan it when it arrives to check it is a real Zenith product.</p>"
           }
         },
         "column_4": {
@@ -1017,7 +1017,7 @@
         "logo_ninjavan"
       ],
       "settings": {
-        "content_source": "global",
+        "content_source": "custom",
         "eyebrow": "",
         "heading": "The Zenith Guarantee",
         "heading_mobile": "The Zenith Guarantee",
@@ -1154,7 +1154,7 @@
         "jdgm_product": "zenith-advanced-hair-density-shampoo",
         "eyebrow": "",
         "heading": "[customers] Filipino Men Trust Zenith Products",
-        "subheading": "<p>Men in Manila using the cream.</p>",
+        "subheading": "<p>Men in Manila using hair products.</p>",
         "heading_alignment": "center",
         "heading_max_width": 760,
         "subheading_spacing": 28,

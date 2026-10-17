@@ -104,7 +104,7 @@
           "settings": {
             "title": "How to use",
             "content_source": "custom",
-            "text": "<p>1. At night, on a clean, dry scalp, spray 3 to 5 times on the areas you want to look fuller.</p><p>2. Massage for 30 seconds with your fingertips. Do not rinse.</p><p>3. Use daily. Pair it with the Advanced Hair Density Shampoo in your shower for the full system.</p>",
+            "text": "<p>1. At night, apply 3 to 5 sprays directly onto a clean, towel-dried scalp.</p><p>2. Massage for 30 seconds with your fingertips. Do not rinse.</p><p>3. Use daily. Pair it with the Advanced Hair Density Shampoo in your shower for the full system.</p>",
             "open": false,
             "hide_on_mobile": false,
             "hide_on_desktop": false
@@ -400,7 +400,7 @@
         "show_peek": true,
         "show_dots": true,
         "show_arrows": true,
-        "autoplay": 6,
+        "autoplay": 0,
         "heading_max_width": 800,
         "heading_gap": 4,
         "heading_spacing": 32,
@@ -789,6 +789,20 @@
     },
     "reviews": {
       "type": "zenith-reviews",
+      "blocks": {
+        "judge_me_reviews_review_widget_zn": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "real_data",
+            "max_width": 1200,
+            "show_shop_reviews": true,
+            "empty_state": "other_products_reviews"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_zn"
+      ],
       "settings": {
         "jdgm_product": "",
         "eyebrow": "",
