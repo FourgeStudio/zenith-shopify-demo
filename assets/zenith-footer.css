@@ -264,6 +264,12 @@ footer.footer.zenith-footer {
   gap: var(--z-space-1) var(--z-space-3);
 }
 
+.zenith-footer__policies a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.4rem; /* WCAG 2.2 AA target size (resend) */
+}
+
 .zenith-footer__localization.footer__localization {
   padding: 0;
 }
