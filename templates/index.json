@@ -1161,7 +1161,7 @@
         "content_gap": 12,
         "image_fit": "cover",
         "image_padding": 0,
-        "trust_alignment": "left",
+        "trust_alignment": "center",
         "color_scheme": "scheme-6",
         "panel_background": "#203940",
         "media_color_scheme": "scheme-3",

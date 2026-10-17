@@ -96,6 +96,13 @@
           <h1 class="zenith-blog__heading">{{ heading | escape }}</h1>
         {%- endif -%}
 
+        {%- if blog.articles.size == 0 -%}
+          <div class="zenith-blog__empty">
+            <p class="zenith-blog__empty-title">{{ s.empty_title | escape }}</p>
+            {%- if s.empty_text != blank -%}<div class="zenith-blog__empty-text">{{ s.empty_text }}</div>{%- endif -%}
+          </div>
+        {%- endif -%}
+
         {%- if show_featured -%}
           <div class="zenith-blog__top{% if side_shown == 0 %} zenith-blog__top--solo{% endif %}">
             {%- for article in blog.articles limit: 1 -%}
@@ -192,6 +199,19 @@
       "label": "Heading",
       "info": "Leave empty to use the blog's title.",
       "default": "Blog Posts"
+    },
+    {
+      "type": "text",
+      "id": "empty_title",
+      "label": "No posts message",
+      "info": "Shows when the blog has no posts yet.",
+      "default": "No posts yet."
+    },
+    {
+      "type": "richtext",
+      "id": "empty_text",
+      "label": "No posts text",
+      "default": "<p>New articles are on the way. Check back soon.</p>"
     },
     {
       "type": "checkbox",
