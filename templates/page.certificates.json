@@ -324,7 +324,7 @@
       ],
       "settings": {
         "heading": "FDA Notified Products",
-        "subheading": "<p>All Zenith products are FDA-notified and proudly manufactured in a US FDA-certified facility following the highest international quality standards.</p>",
+        "subheading": "<p>All Zenith products are FDA-notified.</p>",
         "title_label": "Product name",
         "number_label": "Notification number",
         "pending_label": "pending",
