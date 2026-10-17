@@ -1,10 +1,10 @@
-{% comment %}
+{%- comment -%}
   Alt text for an image: its own alt (Admin → Content → Files / product media) when set, otherwise the approved
   text from the QA sheet (Launch QA Flags, Fixes tab, A-01 / A-07), matched on the file name. Echoes the alt,
   unescaped (image_tag escapes it). Add a line "file-name-part => alt text" to cover a new image.
   Accepts: image {image}, scope {String} optional prefix for names that repeat across products (product handle),
            fallback {String} optional, used when nothing matches.
-{% endcomment %}
+{%- endcomment -%}
 {%- capture za_map -%}
 home-hero-products-on-shelf-by-marble => Zenith hair and skin care set on a wooden shelf beside a white marble wall
 home-hero-products-on-bench-by-window => Zenith shampoo, spray, cleanser and creams lined up on a wooden bench by a window
