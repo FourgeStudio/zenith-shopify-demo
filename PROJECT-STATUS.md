@@ -88,6 +88,7 @@ flowchart TD
 
 ### Demo exceptions (leave alone when syncing)
 - **Judge.me** blocks: not installed on the demo, so Shopify drops them from its templates (placeholders there).
+- 2026-10-17: demo templates + theme settings copied to `main` (demo = content source of truth). Judge.me blocks + app embed re-added from tag `backup/main-before-demo-copy-2026-10-17` (main before the copy). When copying demo → main again, re-add Judge.me the same way.
 
 ### Go-live checklist
 1. Client says publish.
