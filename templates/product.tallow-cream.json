@@ -914,7 +914,7 @@
           "type": "step",
           "settings": {
             "image": "shopify://shop_images/night-cream-how-to-use-step-3-smiling-man-touching-his-1-desktop.webp",
-            "title": "SPF 30 the next morning",
+            "title": "Day Cream SPF30 the next morning",
             "text": ""
           }
         }
@@ -1417,7 +1417,7 @@
           "type": "question",
           "settings": {
             "question": "How long will one jar of the Zenith Anti-Aging Tallow Cream last?",
-            "answer": "<p>With recommended nightly use, one jar of Zenith Anti-Aging Tallow Cream typically lasts 1 to 2 months.<br/><br/>Since you only need a pea-sized amount for the entire face, a little goes a long way.</p>"
+            "answer": "<p>You only need a pea-sized amount for the face and neck, so a little goes a long way.</p>"
           }
         },
         "question_4": {
