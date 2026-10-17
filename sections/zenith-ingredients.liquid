@@ -70,6 +70,7 @@
                   <span class="zenith-ingredients__lead">
                     <span class="zenith-ingredients__thumb zenith-media">
                       {%- if block.settings.image != blank -%}
+                        {%- capture ing_alt -%}{%- render 'zenith-alt', image: block.settings.image -%}{%- endcapture -%}
                         {{
                           block.settings.image
                           | image_url: width: 240
@@ -77,7 +78,7 @@
                             loading: 'lazy',
                             widths: '60, 104, 160, 240',
                             sizes: '60px',
-                            alt: block.settings.image.alt
+                            alt: ing_alt
                         }}
                       {%- else -%}
                         {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}

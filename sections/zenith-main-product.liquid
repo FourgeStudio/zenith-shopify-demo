@@ -207,7 +207,7 @@
           <ul class="zenith-carousel__track zenith-mp__track" role="list">
             {%- if gallery_media.size > 0 -%}
               {%- for media in gallery_media -%}
-                {%- assign media_alt = media.alt | default: mp_product.title -%}
+                {%- capture media_alt -%}{%- render 'zenith-alt', image: media.preview_image, scope: mp_product.handle, fallback: mp_product.title -%}{%- endcapture -%}
                 {%- assign mp_start_m = s.gallery_start_mobile | default: 1 -%}
                 <li class="zenith-carousel__slide zenith-mp__slide">
                   <div class="zenith-media zenith-mp__media">

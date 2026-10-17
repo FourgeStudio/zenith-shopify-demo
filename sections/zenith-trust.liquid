@@ -68,6 +68,7 @@
           {%- if s.seal_image != blank -%}
             {%- capture seal_sizes -%}(min-width: 750px) {{ s.seal_width }}px, {{ s.seal_width_mobile }}px{%- endcapture -%}
             <div class="zenith-trust__seal">
+              {%- capture trust_seal_alt -%}{%- render 'zenith-alt', image: s.seal_image -%}{%- endcapture -%}
               {{
                 s.seal_image
                 | image_url: width: 600
@@ -75,7 +76,7 @@
                   loading: 'lazy',
                   widths: '80, 130, 160, 240, 300, 450, 600',
                   sizes: seal_sizes,
-                  alt: s.seal_image.alt
+                  alt: trust_seal_alt
               }}
             </div>
           {%- elsif request.design_mode -%}
