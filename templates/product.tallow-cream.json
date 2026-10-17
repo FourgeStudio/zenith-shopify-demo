@@ -1116,6 +1116,20 @@
     },
     "reviews": {
       "type": "zenith-reviews",
+      "blocks": {
+        "judge_me_reviews_review_widget_8KBQ7Y": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "real_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "other_products_reviews"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_8KBQ7Y"
+      ],
       "settings": {
         "jdgm_product": "",
         "eyebrow": "",
@@ -1159,21 +1173,7 @@
         "padding_bottom": 48,
         "padding_top_mobile": 20,
         "padding_bottom_mobile": 48
-      },
-      "blocks": {
-        "judge_me_reviews_review_widget_8KBQ7Y": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-            "review_data": "real_data",
-            "max_width": 1200,
-            "show_shop_reviews": false,
-            "empty_state": "other_products_reviews"
-          }
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_review_widget_8KBQ7Y"
-      ]
+      }
     },
     "guarantee": {
       "type": "zenith-feature-columns",
@@ -1195,7 +1195,7 @@
             "icon": "qr",
             "icon_text": "",
             "title": "",
-            "text": "<p>Every box features a unique, tamper-proof QR code. Scan it upon arrival to instantly verify your gear is 100% authentic.</p>"
+            "text": "<p>Every box has its own holographic QR sticker.</p><p></p>"
           }
         },
         "column_4": {
@@ -1265,7 +1265,7 @@
         "logo_ninjavan"
       ],
       "settings": {
-        "content_source": "global",
+        "content_source": "custom",
         "eyebrow": "",
         "heading": "The Zenith Guarantee",
         "heading_mobile": "The Zenith Guarantee",
