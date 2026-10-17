@@ -848,7 +848,7 @@
         "show_peek": true,
         "show_dots": true,
         "show_arrows": true,
-        "autoplay": 6,
+        "autoplay": 0,
         "heading_max_width": 400,
         "heading_gap": 4,
         "heading_spacing": 32,
