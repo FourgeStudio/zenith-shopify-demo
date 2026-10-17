@@ -1,0 +1,67 @@
+{% comment %}
+  Alt text for an image: its own alt (Admin → Content → Files / product media) when set, otherwise the approved
+  text from the QA sheet (Launch QA Flags, Fixes tab, A-01 / A-07), matched on the file name. Echoes the alt,
+  unescaped (image_tag escapes it). Add a line "file-name-part => alt text" to cover a new image.
+  Accepts: image {image}, scope {String} optional prefix for names that repeat across products (product handle),
+           fallback {String} optional, used when nothing matches.
+{% endcomment %}
+{%- capture za_map -%}
+home-hero-products-on-shelf-by-marble => Zenith hair and skin care set on a wooden shelf beside a white marble wall
+home-hero-products-on-bench-by-window => Zenith shampoo, spray, cleanser and creams lined up on a wooden bench by a window
+home-team-team-in-front-of-banner => Zenith team in black shirts standing in front of a Zenith banner
+Vector.svg => Amare Group Seal of Authenticity
+about-story-man-applying-cream => Silver-haired man smoothing Zenith cream onto his cheek
+ => Zenith FDA notification certificates on display with notification numbers
+about-story-man-holding-products => Silver-haired man in a black polo holding Zenith grooming products
+about-story-zenith-team => The Zenith team standing together in black shirts
+about-cta-product-lineup-on-bench => Zenith product lineup on a wooden bench by a window
+shop-all-hero-hair-skin-care-range-wooden => Zenith hair and skin care range on a wooden bench
+shop-all-hero-product-line-wooden-bench => Zenith product line on a wooden bench by a window
+skin-category-hero-smiling-man-holding-jar-bottle => Smiling man holding a Zenith jar and bottle
+skin-category-cta-tube-bottle-jar-dark-wood => Zenith tube, bottle and jar on dark wood
+hair-category-hero-grey-haired-man-spraying-hair => Grey-haired man spraying Zenith hair density spray on his scalp
+hair-category-cta-hair-density-shampoo-spray-bottles => Zenith hair density shampoo and spray bottles on a bench
+night-cream-ingredients-magnifying-glass-over-golden-tallow-cream => Magnifying glass over golden tallow cream texture
+night-cream-ingredients-golden-retinol-molecule-model => Golden retinol molecule model
+night-cream-ingredients-green-leaves-beside-golden-oil-droplets => Green leaves beside golden oil droplets
+night-cream-cta-older-filipino-man-applying-zenith-tallow => Older Filipino man applying Zenith tallow cream to his cheek, jar in hand
+shop-all-featured-night-cream-jar-its-box => Zenith night cream jar with its box
+cleanser-ingredients-bakuchiol-flower-close-up => Bakuchiol flower close-up
+cleanser-ingredients-clear-gel-cleanser-texture-with-water => Clear gel cleanser texture with water droplets
+cleanser-ingredients-creamy-tallow-texture-close-up => Creamy tallow texture close-up
+cleanser-bottom-banner-older-filipino-man-touching-his-cheek => Older Filipino man touching his cheek while holding the cleanser
+day-cream-ingredients-creamy-tallow-texture-close-up => Creamy tallow texture close-up
+day-cream-ingredients-molecule-model-over-dark-mineral-texture => Molecule model over dark mineral texture
+day-cream-ingredients-golden-oil-bubbles-close-up => Golden oil bubbles close-up
+day-cream-bottom-banner-older-filipino-man-applying-day-cream => Older Filipino man applying day cream to his cheek, tube in hand
+hair-spray-ingredients-blue-cabroxil-molecules => Blue molecular close-up representing CABROXIL Technology
+hair-spray-ingredients-amber-molecule => Amber molecule illustration for the fine mist formula
+hair-spray-ingredients-oil-bottle-rosemary => Glass bottle of oil beside fresh rosemary sprigs
+hair-spray-cta-silver-haired-man-spraying => Silver-haired man spraying Zenith Hair Density Spray onto his hair
+shampoo-ingredients-amber-molecule => Amber molecule illustration for the shampoo formula
+shampoo-ingredients-clear-gel-droplets => Clear gel droplets on a white surface
+shampoo-ingredients-oil-bottle-rosemary => Glass bottle of oil beside fresh rosemary sprigs
+shampoo-cta-wet-hands-holding-shampoo => Wet hands holding a bottle of Zenith Hair Density Shampoo
+verify-products-cta-fda-notification-certificates => Zenith FDA notification certificates on display with notification numbers
+zenith-anti-aging-tallow-cream:05_-_Comparison_table => Comparison chart. High-strength retinol creams: retinol yes, beef tallow base no, made for nightly use no, light in humidity no. Basic men's moisturizers: retinol no, tallow base no, nightly use no, light in humidity yes. Zenith Tallow Cream: yes to all four.
+zenith-anti-aging-tallow-cream:02_-_Jar_with_retinol => Isang jar. Gabi-gabi. Tapos. Zenith Anti-Aging Tallow Cream: retinol 0.2%, strong enough to work, gentle enough for nightly use. Premium beef tallow buffers the retinol. Absorbs fast, no grease.
+zenith-anti-aging-tallow-cream:04_-_Open_jar_with_swatch => Retinol that your skin can take. Retinol 0.2%, gentle enough for nightly use. Beef tallow buffers the retinol and absorbs fast, no grease. Sodium hyaluronate, part of the base. Made for Philippine humidity.
+{%- endcapture -%}
+{%- liquid
+  assign za_alt = image.alt
+  if za_alt == blank and image != blank
+    assign za_file = image | image_url | split: '?' | first | split: '/' | last
+    if scope != blank
+      assign za_file = scope | append: ':' | append: za_file
+    endif
+    assign za_lines = za_map | newline_to_br | split: '<br />'
+    for za_line in za_lines
+      assign za_pair = za_line | strip | split: ' => '
+      if za_pair.size == 2 and za_file contains za_pair[0]
+        assign za_alt = za_pair[1]
+        break
+      endif
+    endfor
+  endif
+  echo za_alt | default: fallback
+-%}

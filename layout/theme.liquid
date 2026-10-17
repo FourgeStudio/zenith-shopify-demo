@@ -25,9 +25,23 @@
       {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
     </title>
 
-    {%- comment -%} zenith: policy pages have no SEO field in Shopify, so their descriptions live here (QA B-06) {%- endcomment -%}
+    {%- comment -%} zenith: policy pages have no SEO field in Shopify, so their descriptions live here (QA B-06).
+      Pages / blog below: the QA text until a description is entered in their Search engine listing. {%- endcomment -%}
     {%- liquid
       assign meta_desc = page_description
+      assign seo_set = page.metafields.global.description_tag | default: blog.metafields.global.description_tag
+      if seo_set == blank
+        case request.path
+          when '/blogs/articles'
+            assign meta_desc = 'Simple skin and hair routines, ingredient guides and grooming tips from Zenith, written for Filipino men and the Philippine heat.'
+          when '/pages/verify-zenith-products'
+            assign meta_desc = 'Every Zenith box has a tamper-proof QR code. Scan it to see the serial number and product, and confirm yours is genuine in three simple steps.'
+          when '/pages/certificates'
+            assign meta_desc = 'All Zenith products are Philippine FDA-notified and made in a US FDA-certified facility. See our SEC, BIR and business permits, and where to buy safely.'
+          when '/pages/disclaimer'
+            assign meta_desc = 'The information on the Zenith website is for general purposes only and is not medical advice. Individual results may vary. Read the full disclaimer.'
+        endcase
+      endif
       case request.path
         when '/policies/privacy-policy'
           assign meta_desc = 'How Zenith collects, uses and protects your personal information when you visit our store, place an order or contact us, and the choices you have.'
