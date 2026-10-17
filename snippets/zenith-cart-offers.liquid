@@ -148,6 +148,11 @@
           assign zco_part = zco_sub | minus: zco_prev_amt | times: 1.0 | divided_by: zco_span
           assign zco_fill = zco_pos | minus: zco_prev_pos | times: zco_part | plus: zco_prev_pos
         endif
+        # Not there yet: the fill stops short of the dot, so ₱1 away never looks reached
+        assign zco_cap = zco_pos | minus: 4
+        if zco_fill > zco_cap
+          assign zco_fill = zco_cap
+        endif
         break
       endif
       assign zco_prev_amt = zco_amt
