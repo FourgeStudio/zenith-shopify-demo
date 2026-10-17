@@ -1019,7 +1019,7 @@ div.zenith-cart-offers__fill {
   overflow: hidden;
   border-radius: inherit;
   background: linear-gradient(90deg, var(--z-dawn-gold, #eabe5f) 0%, var(--z-gold, #c5930e) 100%);
-  transition: width 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* A light sweep across the fill every couple of seconds. */
@@ -1038,7 +1038,7 @@ div.zenith-cart-offers__fill {
 /* Checkpoint reached by the last cart change (class added by the JS as the fill arrives): dot pops, a ring
    spreads out, the label hops. Individual scale/translate props so the existing transforms stay intact. */
 .zenith-cart-offers__step.is-pop .zenith-cart-offers__step-dot {
-  animation: zenith-cart-dot-pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: zenith-cart-dot-pop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .zenith-cart-offers__step.is-pop .zenith-cart-offers__step-dot::after {
@@ -1048,11 +1048,11 @@ div.zenith-cart-offers__fill {
   border-radius: 50%;
   border: 0.2rem solid var(--z-dawn-gold, #eabe5f);
   opacity: 0;
-  animation: zenith-cart-dot-ring 0.8s ease-out;
+  animation: zenith-cart-dot-ring 0.6s ease-out;
 }
 
 .zenith-cart-offers__step.is-pop:not(.is-end) .zenith-cart-offers__step-label {
-  animation: zenith-cart-label-pop 0.6s ease-out;
+  animation: zenith-cart-label-pop 0.45s ease-out;
 }
 
 @keyframes zenith-cart-dot-pop {

@@ -147,6 +147,24 @@ a.zenith-acard__media {
   letter-spacing: 0.01em;
 }
 
+.zenith-blog__empty {
+  padding: var(--z-space-6, 32px) 0;
+  border-top: 1px solid rgba(var(--color-foreground), 0.15);
+}
+
+.zenith-blog__empty-title {
+  margin: 0 0 var(--z-space-2, 8px);
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.zenith-blog__empty-text,
+.zenith-blog__empty-text p {
+  margin: 0;
+  font-size: 1.6rem;
+  color: rgba(var(--color-foreground), 0.7);
+}
+
 .zenith-blog__top {
   display: grid;
   row-gap: var(--z-bl-msp-m, 76px);
