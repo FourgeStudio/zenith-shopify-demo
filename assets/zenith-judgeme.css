@@ -265,3 +265,12 @@ body .zj-busy.zj-busy::after{
 /* Reviewer location + flag: same muted colour as the author and date (QA A-02 contrast), flag sized so it never shifts (QA B-11) */
 body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev__location{ color:var(--zj-muted)!important; }
 body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev__location-country-flag-img{ width:16px!important; height:12px!important; aspect-ratio:4/3; object-fit:cover; }
+/* Same space under every card: the text ends on the card padding. Judge.me leaves empty blocks after the text
+   (videos, transparency badge, share/votes, reply) that added a different gap per card. Phones and desktop. */
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev__content > :last-child,
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev__body > :last-child{ margin-bottom:0!important; padding-bottom:0!important; }
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev__vids:not(:has(*)),
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev__transparency-badge-wrapper,
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev__actions:not(:has(a, button, img, svg)),
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev__reply:not(:has(*)){ display:none!important; }
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev__actions{ margin:calc(var(--zj-pad) * .5) 0 0!important; padding:0!important; min-height:0!important; }
