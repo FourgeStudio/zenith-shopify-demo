@@ -303,7 +303,7 @@ a.zenith-cert__frame:focus-visible {
 .zenith-cert__label {
   font-size: var(--z-cert-lfs-m, 1rem);
   line-height: 1.4;
-  color: var(--z-cert-label, #777);
+  color: var(--z-cert-label, #a3a3a3); /* ≥4.5:1 on the dark card (QA A-02) */
 }
 
 .zenith-cert--label-caps .zenith-cert__label {

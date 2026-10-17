@@ -230,7 +230,7 @@
         "fda_number": "NN-1000015997846",
         "button_label": "Add to Cart",
         "button_icon": "cart",
-        "quantity_pad": true,
+        "quantity_pad": false,
         "show_cod": true,
         "cod_label": "Cash on Delivery",
         "cod_icon": "cash",

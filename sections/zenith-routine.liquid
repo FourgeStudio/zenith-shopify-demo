@@ -72,7 +72,9 @@
         <li class="zenith-rt__step" {{ block.shopify_attributes }}>
           <div class="zenith-media zenith-rt__image">
             {%- if block.settings.image != blank -%}
-              {%- assign step_alt = block.settings.image.alt | default: block.settings.title -%}
+              {%- comment -%} The step title sits right beside the image: no alt that repeats it (QA A-08) {%- endcomment -%}
+              {%- assign step_alt = block.settings.image.alt | default: '' -%}
+              {%- if step_alt == block.settings.title -%}{%- assign step_alt = '' -%}{%- endif -%}
               {{
                 block.settings.image
                 | image_url: width: 900

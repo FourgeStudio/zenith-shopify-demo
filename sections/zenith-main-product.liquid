@@ -208,9 +208,11 @@
             {%- if gallery_media.size > 0 -%}
               {%- for media in gallery_media -%}
                 {%- assign media_alt = media.alt | default: mp_product.title -%}
+                {%- assign mp_start_m = s.gallery_start_mobile | default: 1 -%}
                 <li class="zenith-carousel__slide zenith-mp__slide">
                   <div class="zenith-media zenith-mp__media">
-                    {%- if forloop.first -%}
+                    {%- comment -%} First image (desktop) and the phone start image load right away: they are the largest paint {%- endcomment -%}
+                    {%- if forloop.first or forloop.index == mp_start_m -%}
                       {{
                         media.preview_image
                         | image_url: width: 1200
@@ -837,7 +839,7 @@
         { "value": "none", "label": "None" }
       ]
     },
-    { "type": "checkbox", "id": "quantity_pad", "label": "Show quantity as 01, 02…", "default": true },
+    { "type": "checkbox", "id": "quantity_pad", "label": "Show quantity as 01, 02…", "default": false },
     { "type": "checkbox", "id": "show_cod", "label": "Show Cash on Delivery chip", "default": true },
     { "type": "text", "id": "cod_label", "label": "Cash on Delivery label", "default": "Cash on Delivery", "visible_if": "{{ section.settings.show_cod }}" },
     {
