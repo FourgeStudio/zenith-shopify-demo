@@ -912,7 +912,7 @@
             "icon": "phone",
             "icon_text": "",
             "title": "",
-            "text": "<p>Our local team will text or call to verify your details, ensuring your order gets exactly where it needs to go.</p>"
+            "text": "<p>Our team texts or calls to confirm your details, ensuring your order gets exactly where it needs to go.</p>"
           }
         },
         "column_2": {
@@ -944,8 +944,8 @@
       "settings": {
         "content_source": "custom",
         "eyebrow": "",
-        "heading": "The Zenith Guarantee",
-        "heading_mobile": "The Zenith Guarantee",
+        "heading": " What happens after you order",
+        "heading_mobile": " What happens after you order",
         "subheading": "",
         "footer_image": "shopify://shop_images/payments.svg",
         "show_payment_icons": false,
@@ -1154,6 +1154,7 @@
         "image_position": "right",
         "full_width": false,
         "media_width": 48,
+        "slide_autoplay": 6,
         "media_ratio": "square",
         "media_min_height": 540,
         "content_max_width": 500,
@@ -1308,8 +1309,8 @@
       "settings": {
         "eyebrow": "All Products",
         "heading": "The Zenith Grooming Collection",
-        "subheading": "<p>Deep, comfortable hydration in one pea-sized step at night.</p>",
-        "subheading_mobile": "<p>The products men come back for.</p>",
+        "subheading": "<p>The products men come back for. Simple routines, named ingredients.</p>",
+        "subheading_mobile": "<p>The products men come back for. Simple. Effective. Proven.</p>",
         "view_all_label": "Shop All Products",
         "view_all_link": "shopify://collections/shop-all",
         "collection": "shop-all",
@@ -1491,8 +1492,8 @@
       ],
       "settings": {
         "content_source": "global",
-        "heading": "Our Official Pages",
-        "heading_mobile": "Our Official Pages",
+        "heading": "High Performance Skincare For Men, For Filipino Men's Self Care, Zenith PH",
+        "heading_mobile": "High Performance Skincare For Men, For Filipino Men's Self Care, Zenith PH",
         "text_mobile": "",
         "hover_effect": true,
         "heading_alignment": "center",
