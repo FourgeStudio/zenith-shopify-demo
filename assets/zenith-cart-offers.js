@@ -6,12 +6,12 @@
    Drawer and cart page are tracked separately. Nothing moves under prefers-reduced-motion. */
 if (!customElements.get('zenith-cart-offers')) {
   const last = {};
-  const POP_DELAY = 550; // ms into the 0.7s change slide
+  const POP_DELAY = 400; // ms into the 0.5s change slide
   // ms before the open fill starts: past Dawn's drawer slide (200ms) and, after an add, usually past the
   // cart-drawer-items refetch (cart.js onCartUpdate) that swaps the panel out again.
   const OPEN_DELAY = 500;
   const REPLAY_WINDOW = 2000; // ms after opening in which a swapped-in panel restarts the open fill
-  const MS_PER_PCT = 12; // open fill speed: the whole track in 1.2s
+  const MS_PER_PCT = 9; // open fill speed: the whole track in 0.9s
   const still = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const pctOf = (value) => parseFloat(value) || 0;
 

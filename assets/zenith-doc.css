@@ -118,7 +118,7 @@
   font-family: var(--font-heading-family);
   line-height: 1.2;
   letter-spacing: 0;
-  color: var(--z-doc-accent);
+  color: rgb(var(--color-foreground)); /* white headings; the eyebrow above stays gold */
   scroll-margin-top: calc(var(--header-height, 7.2rem) + var(--z-ann-h, 0px) + var(--z-space-5));
 }
 

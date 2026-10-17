@@ -33,12 +33,23 @@
   // Policy names are also left as plain text in titles and menus.
   const POLICY_SKIP = 'h1, h2, h3, h4, h5, h6, nav, .zenith-doc__toc';
 
+  // One link per destination per paragraph: a repeated mention ("…an Amare Group brand… the Amare Group Seal") stays
+  // plain text when the same paragraph / list item already links there (written or auto link).
+  const BLOCK = 'p, li, dd, dt, td, th, blockquote, figcaption, h1, h2, h3, h4, h5, h6';
+  const norm = (href) => new URL(href, location.href).href.replace(/\/$/, '');
+  const linkedIn = (block, href) => {
+    const want = norm(href);
+    return [...block.querySelectorAll('a[href]')].some((a) => norm(a.href) === want);
+  };
+
   const linkify = (textNode) => {
     const text = textNode.nodeValue;
     const parent = textNode.parentElement;
     if (!parent || parent.closest(SKIP)) return;
     const policyOk = !parent.closest(POLICY_SKIP);
     const hiddenCopy = parent.closest('[aria-hidden="true"]');
+    const block = parent.closest(BLOCK) || parent;
+    const used = new Set();
 
     const fragment = document.createDocumentFragment();
     let last = 0;
@@ -46,6 +57,8 @@
     for (let match; (match = ANY.exec(text)); ) {
       const rule = RULES[match.slice(1).findIndex((g) => g !== undefined)];
       if (!rule.external && !policyOk) continue;
+      if (used.has(rule.href) || linkedIn(block, rule.href)) continue;
+      used.add(rule.href);
       if (match.index > last) fragment.append(text.slice(last, match.index));
       const a = document.createElement('a');
       a.href = rule.href;
@@ -75,12 +88,15 @@
   };
 
   // Policy pages (Privacy, Refund, Shipping, Terms…) always open in a new tab (client 2026-10-14): written links,
-  // menu links and the auto-links above. Set on click, so links added later are covered too.
+  // menu links and the auto-links above. Links to other sites (social icons, Lazada/Shopee…) too (client 2026-10-17).
+  // Set on click, so links added later are covered too.
+  const external = (a) => /^https?:$/.test(a.protocol) && a.hostname !== location.hostname;
   document.addEventListener(
     'click',
     (e) => {
-      const link = e.target.closest && e.target.closest('a[href*="/policies/"]');
+      const link = e.target.closest && e.target.closest('a[href]');
       if (!link || link.target === '_blank') return;
+      if (!link.pathname.startsWith('/policies/') && !external(link)) return;
       link.target = '_blank';
       link.rel = 'noopener';
     },

@@ -90,7 +90,7 @@
           {%- endif -%}
 
           <h2 class="zenith-fp__title{% if s.heading_uppercase %} zenith-fp__title--uppercase{% endif %}">
-            {%- if fp_product != blank -%}{{ fp_product.title | escape }}{%- else -%}{{ 'Zenith Anti-Aging Tallow Cream' }}{%- endif -%}
+            {%- if fp_product != blank -%}<a href="{{ fp_product.url }}" class="zenith-fp__title-link">{{ fp_product.title | escape }}</a>{%- else -%}{{ 'Zenith Anti-Aging Tallow Cream' }}{%- endif -%}
           </h2>
 
           {%- if fp_product != blank and settings.zfp_show_rating and fp_product.metafields.reviews.rating.value != blank -%}
@@ -228,7 +228,7 @@
         {%- endif -%}
 
         {%- if use_slides -%}
-          <zenith-carousel class="zenith-fp__carousel" data-slide-label="Image">
+          <zenith-carousel class="zenith-fp__carousel" data-slide-label="Image" data-loop{% if s.slide_autoplay > 0 %} data-autoplay="{{ s.slide_autoplay }}"{% endif %}>
             <ul class="zenith-carousel__track zenith-fp__track" role="list">
               {%- for media in product_images -%}
                 {%- assign media_alt = media.alt | default: fp_product.title -%}
@@ -342,6 +342,17 @@
       "default": 48
     },
     {
+      "type": "range",
+      "id": "slide_autoplay",
+      "label": "Image slides: auto-advance",
+      "info": "Seconds per image, endless loop. 0 = off. Pauses on hover/focus; a pause button is added.",
+      "min": 0,
+      "max": 15,
+      "step": 1,
+      "unit": "s",
+      "default": 6
+    },
+    {
       "type": "select",
       "id": "media_ratio",
       "label": "Image shape (desktop)",
@@ -428,7 +439,7 @@
       "type": "select",
       "id": "trust_alignment",
       "label": "Trust items alignment",
-      "default": "left",
+      "default": "center",
       "options": [
         {
           "value": "left",
