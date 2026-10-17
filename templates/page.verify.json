@@ -959,7 +959,7 @@
           "type": "question",
           "settings": {
             "question": "Safe for sensitive skin?",
-            "answer": "<p>Yes. Every product is tested in tropical humidity and designed to be gentle. We avoid harsh sulfates and synthetic fragrances that cause irritation. If your skin reacts, stop use and message us right away with photos. Covered by the Zenith Money-Back Guarantee.</p>"
+            "answer": "<p>Yes. Every product is made to be gentle. Check the full ingredient list first and do a small patch test. If your skin reacts, stop use and message us right away with photos. Covered by the Zenith Money-Back Guarantee.</p>"
           }
         },
         "question_3": {
@@ -973,7 +973,7 @@
           "type": "question",
           "settings": {
             "question": "What is coming next?",
-            "answer": "<p>We are developing a full body wash, a deodorant that respects your skin, and a shave cream that reduces razor burn. The toothpaste is in development. Sign up for notifications on the product page to know the moment they launch.</p>"
+            "answer": "<p>We are developing a full body wash, a deodorant that respects your skin, and a shave cream. The toothpaste is in development. Sign up for notifications on the product page to know the moment they launch.</p>"
           }
         },
         "question_5": {
@@ -992,7 +992,7 @@
         "question_5"
       ],
       "settings": {
-        "content_source": "global",
+        "content_source": "custom",
         "eyebrow": "",
         "heading": "Frequently Asked Questions",
         "subheading": "<p>No-nonsense answers about your daily essentials.</p>",

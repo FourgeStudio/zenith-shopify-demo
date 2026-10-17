@@ -39,7 +39,8 @@
   endif
 
   assign modifiers = ''
-  if section.settings.jdgm_masonry
+  # The Dark Judge.me review style (Theme settings) lays the cards out itself with Judge.me's own masonry.
+  if section.settings.jdgm_masonry and settings.jdgm_custom_style == false
     assign modifiers = modifiers | append: ' zenith-reviews--masonry'
   endif
   if section.settings.button_style != 'scheme'
@@ -240,7 +241,7 @@
       "type": "checkbox",
       "id": "jdgm_masonry",
       "label": "Masonry review cards",
-      "info": "Lays Judge.me review cards out in columns (overrides the app's own card layout). Turn off to use the app layout.",
+      "info": "Lays Judge.me review cards out in columns (overrides the app's own card layout). Ignored while Theme settings → Dark Judge.me review style is on (that style has its own 5-column layout).",
       "default": true
     },
     {
