@@ -15,7 +15,7 @@
         "benefit_1": {
           "type": "benefit",
           "settings": {
-            "text": "Broad-spectrum SPF 30, six UV filters",
+            "text": "Broad Spectrum SPF30, six UV filters",
             "hide_on_desktop": false,
             "hide_on_mobile": false
           }
@@ -93,7 +93,7 @@
           "settings": {
             "title": "About this product",
             "content_source": "custom",
-            "text": "<p>Most sunscreens feel heavy in our heat, and most anti-aging creams are made for night.</p><p>This does the morning in one step: broad-spectrum SPF 30 from six UV filters, Bakuchiol and Niacinamide, on a beef tallow base with Zinc PCA and silica for a matte finish. No white cast.</p>",
+            "text": "<p>Most sunscreens feel heavy in our heat, and most anti-aging creams are made for night.</p><p>This does the morning in one step: Broad spectrum SPF30 from six UV filters, Bakuchiol and Niacinamide, on a beef tallow base with Zinc PCA and silica for a matte finish. No white cast.</p>",
             "open": true,
             "hide_on_mobile": false,
             "hide_on_desktop": false
@@ -104,7 +104,7 @@
           "settings": {
             "title": "How to use",
             "content_source": "custom",
-            "text": "<p>1. Every morning, on clean, dry skin, apply about a quarter teaspoon to the face and neck.</p><p>2. Massage until absorbed, 15 minutes before heading out.</p><p>3. Reapply every 2 hours when you are outdoors or sweating.</p>",
+            "text": "<p>1. At night, apply 3 to 5 sprays directly onto a clean, towel-dried scalp.</p><p>2. Massage until absorbed, 15 minutes before heading out.</p><p>3. Reapply at least every 2 hours, and after sweating or towelling.</p>",
             "open": false,
             "hide_on_mobile": false,
             "hide_on_desktop": false
@@ -163,7 +163,7 @@
           "type": "question",
           "settings": {
             "question": "How often should I reapply?",
-            "answer": "<p>Every 2 hours when you are outdoors or sweating. Put it on every morning, even on cloudy days.</p>",
+            "answer": "<p>At least every 2 hours, and again after sweating or towelling. It is not water-resistant. Put it on every morning, even on cloudy days.</p>",
             "open": false
           }
         },
@@ -179,7 +179,7 @@
           "type": "question",
           "settings": {
             "question": "Is it the same as the Tallow Cream?",
-            "answer": "<p>No. The Day Cream has SPF 30 for the day. The Tallow Cream has 0.2% retinol for the night. Use both for the full routine.</p>",
+            "answer": "<p>No. The Day Cream has SPF30 for the day. The Tallow Cream has 0.2% retinol for the night. Use both for the full routine.</p>",
             "open": false
           }
         },
@@ -217,14 +217,14 @@
       ],
       "settings": {
         "show_money_back": true,
-        "placeholder_title": "Zenith Anti-Aging Tallow Day Cream SPF 30",
-        "show_variant_picker": false,
+        "placeholder_title": "Zenith Anti-Aging Tallow Day Cream SPF30",
         "show_rating": true,
+        "show_stars": false,
         "rating_value": "4.69",
         "rating_count": "2,158",
         "rating_label": "Trusted by [customers] Filipino men",
-        "subtitle": "<p>Light day cream with SPF 30. No white cast.</p>",
-        "price_badge": "UP TO 33% OFF + ₱300 OFF",
+        "subtitle": "<p>Light day cream with Broad Spectrum SPF30.</p>",
+        "price_badge": "",
         "show_fda": true,
         "fda_label": "FDA-Notified",
         "fda_number": "NN-1000015050772",
@@ -246,6 +246,7 @@
         "show_thumbnails": true,
         "show_dots": true,
         "reviews_source": "judgeme",
+        "show_variant_picker": false,
         "variant_style": "cards",
         "variant_card_badge": "[percent]% OFF",
         "variant_card_ship_free": "FREE SHIPPING",
@@ -253,6 +254,7 @@
         "content_max_width": 1080,
         "gap": 80,
         "content_gap": 12,
+        "head_gap": 8,
         "gallery_ratio": 108,
         "dot_size": 8,
         "dot_width": 40,
@@ -335,6 +337,7 @@
         "subtitle_mobile": true,
         "gap_mobile": 18,
         "content_gap_mobile": 12,
+        "head_gap_mobile": 6,
         "variant_card_min_mobile": 88,
         "gallery_ratio_mobile": 100,
         "gallery_start_mobile": 2,
@@ -403,6 +406,7 @@
         "heading_spacing": 24,
         "gap": 24,
         "controls_spacing": 32,
+        "video_max_height": 0,
         "video_ratio": "13-18",
         "play_size": 80,
         "play_position": 53,
@@ -412,6 +416,7 @@
         "thumb_size": 56,
         "color_scheme": "scheme-1",
         "card_color_scheme": "scheme-6",
+        "subheading_opacity": 70,
         "card_border_color": "#294850",
         "title_color": "#d6b356",
         "overlay_style": "bottom",
@@ -429,6 +434,7 @@
         "title_font_size": 14,
         "handle_font_size": 14,
         "heading_alignment_mobile": "left",
+        "video_max_height_mobile": 0,
         "mobile_slide_width": 83,
         "heading_font_size_mobile": 36,
         "subheading_font_size_mobile": 16,
@@ -455,7 +461,7 @@
           "type": "ingredient",
           "settings": {
             "image": "shopify://shop_images/day-cream-ingredients-creamy-tallow-texture-close-up-1-desktop.webp",
-            "title": "Broad-spectrum SPF 30",
+            "title": "Broad-spectrum SPF30",
             "text": "<p>Six modern UV filters. No white cast.</p>",
             "title_mobile": "",
             "text_mobile": ""
@@ -493,13 +499,15 @@
         "subheading": "<p>Three things, named on the label.</p>",
         "image": "{{ product.featured_image }}",
         "image_mobile": "{{ product.featured_image }}",
-        "open_first": true,
         "item_display": "open",
+        "open_first": true,
         "show_list": true,
         "list_title": "View Full Ingredient List",
         "list_text": "<p>Water, Isohexadecane, Methylene Bis-Benzotriazolyl Tetramethylbutylphenol, Ethylhexyl Salicylate, Phenylbenzimidazole Sulfonic Acid, Ethylhexyl Triazone, Butylene Glycol, Homosalate, Cetearyl Olivate, C12-15 Alkyl Benzoate, Bis-Ethylhexyloxyphenol Methoxyphenyl Triazine, Niacinamide, Aminomethyl Propanol, Adeps Bovis, Polysorbate 60, Cetearyl Glucoside, Silica, Dimethicone/Vinyl Dimethicone Crosspolymer, Bakuchiol, Zinc PCA, Hydroxyacetophenone, 1,2-Hexanediol, Oryza Sativa Extract, Phragmites Communis Extract, Zea Mays Silk Extract, Malva Sylvestris Extract, Aloe Barbadensis Extract, Stephania Tetrandra Extract, Taraxacum Officinale Extract, Saururus Chinensis Extract, Xanthan Gum, Sodium Hyaluronate, Disodium EDTA.</p>",
         "heading_alignment": "center",
         "image_position": "right",
+        "item_style": "cards",
+        "item_gap": 8,
         "heading_max_width": 800,
         "media_width": 46,
         "media_min_height": 640,
@@ -553,9 +561,7 @@
         "padding_top": 52,
         "padding_bottom": 64,
         "padding_top_mobile": 20,
-        "padding_bottom_mobile": 20,
-        "item_style": "cards",
-        "item_gap": 8
+        "padding_bottom_mobile": 20
       }
     },
     "routine": {
@@ -582,7 +588,7 @@
           "settings": {
             "image": "shopify://shop_images/day-cream-how-to-use-step-3-smiling-man-ready-for-1-mobile.webp",
             "title": "",
-            "text": "Reapply every 2 hours outdoors"
+            "text": "Reapply at least every 2 hours"
           }
         }
       },
@@ -595,10 +601,12 @@
         "eyebrow": "",
         "heading": "3-Step Process",
         "subheading": "<p>One morning step, then reapply when you are out.</p>",
+        "show_used": true,
         "products": [],
         "used_text": "",
         "note": "",
         "show_number": true,
+        "step_label": "",
         "show_divider": true,
         "divider_breakpoint": "mobile",
         "step_layout": "beside",
@@ -617,6 +625,7 @@
         "divider_spacing": 56,
         "color_scheme": "scheme-1",
         "title_color": "#d6b356",
+        "title_heading_font": false,
         "number_background": "#c5930e",
         "number_color": "#121212",
         "text_opacity": 70,
@@ -666,7 +675,7 @@
         "row-1": {
           "type": "row",
           "settings": {
-            "label": "Broad-spectrum SPF 30",
+            "label": "Broad Spectrum SPF30",
             "zenith_value": "Yes",
             "value_1": "Yes",
             "value_2": "No",
@@ -780,21 +789,8 @@
     },
     "reviews": {
       "type": "zenith-reviews",
-      "blocks": {
-        "judge_me_reviews_review_widget_zn": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-            "review_data": "real_data",
-            "max_width": 1200,
-            "show_shop_reviews": true,
-            "empty_state": "other_products_reviews"
-          }
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_review_widget_zn"
-      ],
       "settings": {
+        "jdgm_product": "",
         "eyebrow": "",
         "heading": "What Filipino men say about the Day Cream SPF 30",
         "subheading": "<p>Reviews from customers who bought the Zenith Anti-Aging Tallow Day Cream SPF 30, shown as they wrote them.</p>",
@@ -930,20 +926,21 @@
       "settings": {
         "content_source": "global",
         "eyebrow": "",
-        "heading": "What happens after you order",
+        "heading": "The Zenith Guarantee",
+        "heading_mobile": "The Zenith Guarantee",
         "subheading": "",
         "show_payment_icons": false,
         "footer_text": "<p>Delivered by LBC, J&T, Gogo Express, Ninja Van, and Amare Group's own rider fleet.</p>",
         "heading_alignment": "center",
         "columns_desktop": 3,
         "show_media": true,
+        "image_zoom": false,
         "media_position": "left",
         "image_ratio": "square",
         "image_size": 152,
         "text_alignment": "left",
         "icon_position": "top",
         "vertical_alignment": "center",
-        "image_zoom": false,
         "heading_max_width": 760,
         "heading_spacing": 36,
         "gap": 32,
@@ -1042,7 +1039,7 @@
         "eyebrow_font_size": 14,
         "text_font_size": 18,
         "button_font_size": 22,
-        "text_mobile": "<p>Zenith Money-Back Guarantee.</p><p>Kung hindi ka masaya sa resulta, message mo lang kami. Full refund. Walang hassle. Proof lang. Full terms on our <a href=\"/policies/refund-policy\">Refunds and Returns</a> page.</p>",
+        "text_mobile": "<p>Every order carries the Zenith Money-Back Guarantee. No hassle. Just show us proof. Full terms on our <a href=\"/policies/refund-policy\">Refunds and Returns</a> page.</p>",
         "heading_font_size_mobile": 32,
         "text_font_size_mobile": 18,
         "text_opacity_mobile": 70,
@@ -1065,49 +1062,49 @@
           "type": "question",
           "settings": {
             "question": "Will this work even if I've never used sunscreen with anti-aging before?",
-            "answer": "<p>Yes! The Zenith Anti-Aging Tallow Day Cream SPF 30 is specifically designed for Filipino men who are new to comprehensive daytime protection. Our lightweight formula is engineered to work with your skin’s natural processes, making it perfect for beginners. You’ll get professional protection and anti-aging results even if this is your first SPF product.</p>"
+            "answer": "<p>Yes. It is made for men new to daytime skincare. One step every morning, and reapply at least every 2 hours. Results vary from person to person.</p>"
           }
         },
         "question_2": {
           "type": "question",
           "settings": {
             "question": "Hindi ba ito magiging white cast or greasy sa face? Ayoko kasing parang typical sunscreen yung feeling.",
-            "answer": "<p>Not at all! We’ve specially formulated the Zenith Anti-Aging Tallow Day Cream SPF 30 for the Philippine climate with zero white cast technology.</p><p>Unlike heavy sunscreens, the Zenith Anti-Aging Tallow Day Cream SPF 30 absorbs instantly with a natural matte finish. It’s lightweight enough for daily use but powerful enough to give real protection and anti-aging results.</p>"
+            "answer": "<p>Not at all! We’ve specially formulated the Zenith Anti-Aging Tallow Day Cream SPF30 for the Philippine climate with zero white cast technology.</p><p>Unlike heavy sunscreens, the Zenith Anti-Aging Tallow Day Cream SPF30 absorbs instantly with a natural matte finish. It is lightweight enough for daily use, with Broad Spectrum SPF30 and daytime anti-aging care.</p>"
           }
         },
         "question_3": {
           "type": "question",
           "settings": {
             "question": "Can I use this if I have sensitive skin?",
-            "answer": "<p>Yes! Beef tallow actually matches your skin’s natural oils, making the Zenith Anti-Aging Tallow Day Cream SPF 30 ideal for sensitive skin.</p><p>Our formula uses bakuchiol instead of harsh retinol and botanical extracts that are perfect for sensitive skin that still needs strong sun protection.</p>"
+            "answer": "<p>Tallow has lipids similar to those found in skin, and the formula uses bakuchiol, a gentle plant-based alternative to retinol, with soothing botanicals. Do a small patch test first.</p>"
           }
         },
         "question_4": {
           "type": "question",
           "settings": {
             "question": "How long will one tube last?",
-            "answer": "<p>One 50g tube of the Zenith Anti-Aging Tallow Day Cream SPF 30 typically lasts 30 days when used as directed (once daily). You only need a quarter-teaspoon amount for full face and neck coverage, making it excellent value for comprehensive protection.</p>"
+            "answer": "<p>That depends on how often you reapply. Use it every morning and reapply at least every 2 hours when you are out in the sun. A quarter-teaspoon covers the face and neck.</p>"
           }
         },
         "question_5": {
           "type": "question",
           "settings": {
             "question": "Can I use this with my other products like cleanser and night cream?",
-            "answer": "<p>Yes! The Zenith Anti-Aging Tallow Day Cream SPF 30 works perfectly as your final morning step. For complete anti-aging care, start with Zenith Anti-Aging Tallow Cleanser, then apply the Zenith Anti-Aging Tallow Day Cream SPF 30 for protection. At night, use Zenith Anti-Aging Tallow Cream for maximum repair and renewal.</p>"
+            "answer": "<p>Yes! The Zenith Anti-Aging Tallow Day Cream SPF 30 works perfectly as your final morning step. For complete anti-aging care, start with Zenith Anti-Aging Tallow Cleanser, then apply the Zenith Anti-Aging Tallow Day Cream SPF 30 for protection. At night, use Zenith Anti-Aging Tallow Cream which works overnight while you sleep.</p>"
           }
         },
         "question_6": {
           "type": "question",
           "settings": {
             "question": "Bakit mas mahal compared sa ibang sunscreen sa mall?",
-            "answer": "<p>While the Zenith Anti-Aging Tallow Day Cream SPF 30 costs more upfront, you’re getting premium tallow, advanced 6-filter UV protection, and concentrated anti-aging actives in one product.</p><p>Most mall sunscreens only offer basic protection with white cast and greasy feel, requiring you to buy separate moisturizer and anti-aging products that don’t work safely under sun.</p>"
+            "answer": "<p>While the Zenith Anti-Aging Tallow Day Cream SPF 30 costs more upfront, you’re getting premium tallow, advanced 6-filter UV protection, and concentrated anti-aging actives in one product.</p><p>It replaces a separate sunscreen, moisturizer and daytime serum.</p>"
           }
         },
         "question_7": {
           "type": "question",
           "settings": {
             "question": "When will I see results?",
-            "answer": "<p>Sun protection and comfort from the first use with the Zenith Anti-Aging Tallow Day Cream SPF 30.</p><p>That’s why we offer the Zenith Money-Back Guarantee – we’re confident you’ll see real protection and anti-aging results.</p>"
+            "answer": "<p>Sun protection and a comfortable, matte-looking finish from the first use. The look of fine lines and tone improves with daily use, and results vary from person to person.&nbsp;<br/><br/>Every order carries the Zenith Money-Back Guarantee.</p>"
           }
         }
       },
@@ -1121,6 +1118,7 @@
         "question_7"
       ],
       "settings": {
+        "content_source": "custom",
         "eyebrow": "",
         "heading": "Frequently Asked Questions",
         "subheading": "<p>No-nonsense answers about your daily essentials.</p>",
@@ -1141,6 +1139,7 @@
         "subheading_font_size": 18,
         "subheading_opacity": 100,
         "eyebrow_font_size": 14,
+        "question_font": "body",
         "title_font_size": 22,
         "text_font_size": 16,
         "icon_size": 20,
@@ -1201,9 +1200,11 @@
       "settings": {
         "show_money_back": true,
         "eyebrow": "",
-        "heading": "Zenith Anti-Aging Tallow Day Cream SPF 30",
+        "use_collection_content": false,
+        "heading": "Zenith Anti-Aging Tallow Day Cream SPF30",
         "heading_mobile": "",
         "text": "<p>Light day cream with SPF 30. No white cast. Made for daytime in the Philippines.</p>",
+        "show_button": true,
         "button_label": "Add to Cart",
         "button_link": "",
         "button_product": "zenith-anti-aging-tallow-day-cream-spf30",
@@ -1257,6 +1258,7 @@
         "overlay_color": "#203940",
         "overlay_opacity": 100,
         "overlay_coverage": 50,
+        "overlay_solid": 0,
         "ribbon_color": "#f6233b",
         "ribbon_text_color": "#ffffff",
         "highlight_color": "#eabe5f",
@@ -1294,10 +1296,12 @@
         "mobile_button_bottom": false,
         "mobile_button_full": true,
         "mobile_hide_button": false,
+        "mobile_height_mode": "same",
         "mobile_height_screen": 65,
         "mobile_height": 520,
         "mobile_overlay_style": "bottom",
         "mobile_overlay_coverage": 70,
+        "mobile_overlay_solid": 0,
         "vertical_padding_mobile": 24,
         "heading_font_size_mobile": 32,
         "subheading_font_size_mobile": 16,

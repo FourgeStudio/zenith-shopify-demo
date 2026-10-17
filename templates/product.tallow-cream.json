@@ -159,7 +159,7 @@
           "settings": {
             "title": "How to use",
             "content_source": "custom",
-            "text": "<p>1. At night, on a clean, dry face, take a pea-sized amount.<br/><br/>2. Dot it on forehead, cheeks and chin, then massage upward into the face and neck until absorbed.<br/><br/>3. New to retinol? Use it 2 to 3 nights a week for the first two weeks, then move to nightly. Always wear SPF 30 in the morning.</p>",
+            "text": "<p>1. At night, on a clean, dry face, take a pea-sized amount.<br/><br/>2. Dot it on forehead, cheeks and chin, then massage upward into the face and neck until absorbed.<br/><br/>3. New to retinol? Start 2 to 3 nights a week, then go nightly as your skin adjusts. Use sun protection every day.</p>",
             "open": false,
             "hide_on_mobile": false,
             "hide_on_desktop": false
@@ -202,7 +202,7 @@
           "type": "question",
           "settings": {
             "question": "Will the retinol make my skin peel?",
-            "answer": "<p>0.2% is a gentle retinol level, and the tallow base buffers it. New to retinol? Start 2 to 3 nights a week for the first two weeks, then go nightly. If anything feels wrong, stop and message us.</p>",
+            "answer": "<p>0.2% is a gentle retinol level, and the tallow base buffers it. New to retinol? Start 2 to 3 nights a week, then go nightly as your skin adjusts.</p>",
             "open": false
           }
         },
@@ -226,7 +226,7 @@
           "type": "question",
           "settings": {
             "question": "Do I still need sunscreen?",
-            "answer": "<p>Yes. Retinol makes skin more sensitive to the sun, so wear SPF 30 every morning. The Zenith Anti-Aging Tallow Day Cream SPF 30 is made for that.</p>",
+            "answer": "<p>Yes. Retinol makes skin more sensitive to the sun, so use sun protection every day. The Zenith Anti-Aging Tallow Day Cream SPF30 is the daytime pair.</p>",
             "open": false
           }
         },
@@ -234,7 +234,7 @@
           "type": "question",
           "settings": {
             "question": "Can I use it with the Cleanser and the Day Cream?",
-            "answer": "<p>Yes. Cleanser morning and night, Day Cream SPF 30 in the morning, Tallow Cream at night. The directions are on every label.</p>",
+            "answer": "<p>Yes. Cleanser morning and night, Day Cream SPF30 in the morning, Tallow Cream at night. The directions are on every label.</p>",
             "open": false
           }
         },
@@ -286,7 +286,7 @@
         "subtitle": "<p>Night cream with 0.2% retinol on a beef tallow base.</p>",
         "price_badge": "",
         "show_fda": true,
-        "fda_label": "Philippine FDA Notified",
+        "fda_label": "FDA-Notified",
         "fda_number": "NN-1000015008540",
         "button_label": "Add to Cart",
         "button_icon": "cart",
@@ -951,7 +951,7 @@
         "note_spacing": 24,
         "divider_spacing": 56,
         "color_scheme": "scheme-1",
-        "title_color": "#d6b356",
+        "title_color": "#ffffff",
         "title_heading_font": false,
         "number_background": "#c5930e",
         "number_color": "#121212",
@@ -1116,20 +1116,6 @@
     },
     "reviews": {
       "type": "zenith-reviews",
-      "blocks": {
-        "judge_me_reviews_review_widget_8KBQ7Y": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-            "review_data": "real_data",
-            "max_width": 1200,
-            "show_shop_reviews": false,
-            "empty_state": "other_products_reviews"
-          }
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_review_widget_8KBQ7Y"
-      ],
       "settings": {
         "jdgm_product": "",
         "eyebrow": "",
@@ -1267,7 +1253,7 @@
       "settings": {
         "content_source": "global",
         "eyebrow": "",
-        "heading": "What happens after you order",
+        "heading": "The Zenith Guarantee",
         "heading_mobile": "The Zenith Guarantee",
         "subheading": "",
         "show_payment_icons": false,
@@ -1403,7 +1389,7 @@
           "type": "question",
           "settings": {
             "question": "Is the Zenith Anti-Aging Tallow Cream suitable for all skin types?",
-            "answer": "<p>Yes, the Zenith Anti-Aging Tallow Cream is formulated to benefit all skin types, including sensitive skin. The tallow helps buffer potential retinol irritation.<br/><br/>However, as with any skincare product containing active ingredients, we recommend starting with less frequent application (2-3 times weekly) until your skin adjusts.</p>"
+            "answer": "<p>Yes, the Zenith Anti-Aging Tallow Cream is made to be gentle. The tallow helps buffer potential retinol irritation.<br/><br/>However, as with any skincare product containing active ingredients, we recommend starting with less frequent application (2-3 times weekly) until your skin adjusts.</p>"
           }
         },
         "question_2": {
@@ -1438,7 +1424,7 @@
           "type": "question",
           "settings": {
             "question": "How long will it take for the product to ship to me?",
-            "answer": "<p>We ship within 1 business day using LBC, J&T, Gogo Express, Ninja Van or Amare Group's own riders.<br/><br/>Delivery typically takes 3 business days for Metro Manila and 3-7 business days for Visayas and Mindanao regions.</p>"
+            "answer": "<p>We ship within 1 business day using GoGoXpress, NinjaVan, and SPX.<br/><br/>Delivery typically takes 3-5 business days for Metro Manila and 5-7 business days for Visayas and Mindanao regions.</p>"
           }
         }
       },
@@ -1532,11 +1518,12 @@
       ],
       "settings": {
         "show_money_back": true,
-        "eyebrow": "Trusted by [customers] Filipino men",
+        "eyebrow": "",
         "use_collection_content": false,
         "heading": "{{ section.settings.button_product.title }}",
         "heading_mobile": "",
         "text": "<p>One thin layer before bed. That is the whole night routine.</p>",
+        "show_button": true,
         "button_label": "Add to Cart",
         "button_link": "",
         "button_product": "zenith-anti-aging-tallow-cream",
@@ -1627,6 +1614,7 @@
         "mobile_button_bottom": false,
         "mobile_button_full": true,
         "mobile_hide_button": false,
+        "mobile_height_mode": "same",
         "mobile_height_screen": 65,
         "mobile_height": 520,
         "mobile_overlay_style": "bottom",

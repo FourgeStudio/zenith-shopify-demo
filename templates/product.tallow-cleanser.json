@@ -147,7 +147,7 @@
           "type": "question",
           "settings": {
             "question": "Will the tallow feel greasy?",
-            "answer": "<p>No. It conditions while you wash and rinses off with the lather. Skin feels clean and soft, not coated.</p>",
+            "answer": "<p>Yes. It is a simple first step for men new to skincare. Use it morning and night.</p>",
             "open": false
           }
         },
@@ -171,7 +171,7 @@
           "type": "question",
           "settings": {
             "question": "Can I use it with the Tallow Cream and the Day Cream?",
-            "answer": "<p>Yes. It is the first step: Cleanser, then Day Cream SPF 30 in the morning and Tallow Cream at night.</p>",
+            "answer": "<p>Yes. It is the first step: Cleanser, then Day Cream SPF30 in the morning and Tallow Cream at night.</p>",
             "open": false
           }
         },
@@ -218,8 +218,8 @@
       "settings": {
         "show_money_back": true,
         "placeholder_title": "Zenith Anti-Aging Tallow Cleanser",
-        "show_variant_picker": false,
         "show_rating": true,
+        "show_stars": false,
         "rating_value": "4.69",
         "rating_count": "2,158",
         "rating_label": "Trusted by [customers] Filipino men",
@@ -246,6 +246,7 @@
         "show_thumbnails": true,
         "show_dots": true,
         "reviews_source": "judgeme",
+        "show_variant_picker": false,
         "variant_style": "cards",
         "variant_card_badge": "[percent]% OFF",
         "variant_card_ship_free": "FREE SHIPPING",
@@ -253,6 +254,7 @@
         "content_max_width": 1080,
         "gap": 80,
         "content_gap": 12,
+        "head_gap": 8,
         "gallery_ratio": 108,
         "dot_size": 8,
         "dot_width": 40,
@@ -335,6 +337,7 @@
         "subtitle_mobile": true,
         "gap_mobile": 18,
         "content_gap_mobile": 12,
+        "head_gap_mobile": 6,
         "variant_card_min_mobile": 88,
         "gallery_ratio_mobile": 100,
         "gallery_start_mobile": 2,
@@ -406,6 +409,7 @@
         "heading_spacing": 32,
         "gap": 24,
         "controls_spacing": 32,
+        "video_max_height": 0,
         "video_ratio": "13-18",
         "play_size": 80,
         "play_position": 53,
@@ -415,6 +419,7 @@
         "thumb_size": 56,
         "color_scheme": "scheme-1",
         "card_color_scheme": "scheme-6",
+        "subheading_opacity": 70,
         "card_border_color": "#294850",
         "title_color": "#d6b356",
         "overlay_style": "bottom",
@@ -432,6 +437,7 @@
         "title_font_size": 14,
         "handle_font_size": 14,
         "heading_alignment_mobile": "left",
+        "video_max_height_mobile": 0,
         "mobile_slide_width": 83,
         "heading_font_size_mobile": 36,
         "subheading_font_size_mobile": 16,
@@ -479,7 +485,7 @@
           "settings": {
             "image": "shopify://shop_images/cleanser-ingredients-creamy-tallow-texture-close-up-1-desktop.webp",
             "title": "Bakuchiol and Niacinamide",
-            "text": "<p>Bakuchiol, a plant-based retinol alternative. Niacinamide for tone and oil balance.</p>",
+            "text": "<p>Bakuchiol, a plant-based retinol alternative. Niacinamide to help even the look of skin tone.</p>",
             "title_mobile": "",
             "text_mobile": ""
           }
@@ -495,14 +501,15 @@
         "heading": "What's in the bottle",
         "subheading": "<p>Three things, named on the label.</p>",
         "image": "{{ product.featured_image }}",
-        "image_mobile": "shopify://shop_images/cleanser-ingredients-close-up-of-zenith-tallow-cleanser-1-mobile.webp",
-        "open_first": true,
         "item_display": "open",
+        "open_first": true,
         "show_list": true,
         "list_title": "View Full Ingredient List",
         "list_text": "<p>Water, Sodium Cocoyl Glycinate, Cocamidopropyl Betaine, Glycerin, Adeps Bovis (Tallow), Polyquaternium-7, Sodium Chloride, Lauryl Glucoside, Cocamide MEA, Sodium Lauroyl Sarcosinate, Aloe Barbadensis Extract, Centella Asiatica Extract, Colloidal Oatmeal, Panthenol, Niacinamide, Tocopherol, Bakuchiol, Hydroxyacetophenone, 1,2-Hexanediol, Phenoxyethanol, Parfum, Disodium EDTA, PEG-75 Lanolin, Citric Acid, Ethylhexylglycerin, Sodium Hyaluronate.</p>",
         "heading_alignment": "center",
         "image_position": "right",
+        "item_style": "cards",
+        "item_gap": 8,
         "heading_max_width": 800,
         "media_width": 46,
         "media_min_height": 640,
@@ -556,9 +563,7 @@
         "padding_top": 52,
         "padding_bottom": 64,
         "padding_top_mobile": 24,
-        "padding_bottom_mobile": 20,
-        "item_style": "cards",
-        "item_gap": 8
+        "padding_bottom_mobile": 20
       }
     },
     "routine": {
@@ -598,10 +603,12 @@
         "eyebrow": "",
         "heading": "3-Step Process",
         "subheading": "<p>Thirty to sixty seconds, morning and night.</p>",
+        "show_used": true,
         "products": [],
         "used_text": "",
         "note": "",
         "show_number": true,
+        "step_label": "",
         "show_divider": true,
         "divider_breakpoint": "mobile",
         "step_layout": "beside",
@@ -620,6 +627,7 @@
         "divider_spacing": 56,
         "color_scheme": "scheme-1",
         "title_color": "#d6b356",
+        "title_heading_font": false,
         "number_background": "#c5930e",
         "number_color": "#121212",
         "text_opacity": 70,
@@ -783,21 +791,8 @@
     },
     "reviews": {
       "type": "zenith-reviews",
-      "blocks": {
-        "judge_me_reviews_review_widget_zn": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-            "review_data": "real_data",
-            "max_width": 1200,
-            "show_shop_reviews": true,
-            "empty_state": "other_products_reviews"
-          }
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_review_widget_zn"
-      ],
       "settings": {
+        "jdgm_product": "zenith-anti-aging-tallow-cleanser",
         "eyebrow": "",
         "heading": "What Filipino men say about the Tallow Cleanser",
         "subheading": "<p>Reviews from customers who bought the Zenith Anti-Aging Tallow Cleanser, shown as they wrote them.</p>",
@@ -933,20 +928,21 @@
       "settings": {
         "content_source": "global",
         "eyebrow": "",
-        "heading": "What happens after you order",
+        "heading": "The Zenith Guarantee",
+        "heading_mobile": "The Zenith Guarantee",
         "subheading": "",
         "show_payment_icons": false,
         "footer_text": "<p>Delivered by LBC, J&T, Gogo Express, Ninja Van, and Amare Group's own rider fleet.</p>",
         "heading_alignment": "center",
         "columns_desktop": 3,
         "show_media": true,
+        "image_zoom": false,
         "media_position": "left",
         "image_ratio": "square",
         "image_size": 152,
         "text_alignment": "left",
         "icon_position": "top",
         "vertical_alignment": "center",
-        "image_zoom": false,
         "heading_max_width": 760,
         "heading_spacing": 32,
         "gap": 32,
@@ -1075,28 +1071,28 @@
           "type": "question",
           "settings": {
             "question": "Hindi ba ito magiging tight or stripping sa face? Ayoko kasing parang soap yung feeling.",
-            "answer": "<p>Not at all! We’ve specially formulated the Zenith Anti-Aging Tallow Cleanser with premium amino acid cleansers for the Philippine climate. Unlike harsh cleansers, the Zenith Anti-Aging Tallow Cleanser conditions your skin with tallow while cleansing deeply. It’s gentle enough for daily use but powerful enough to give real results.</p>"
+            "answer": "<p>Not at all! We’ve specially formulated the Zenith Anti-Aging Tallow Cleanser with premium amino acid cleansers for the Philippine climate. Unlike harsh cleansers, the Zenith Anti-Aging Tallow Cleanser conditions your skin with tallow while cleansing deeply. It is gentle enough for twice-daily use.</p>"
           }
         },
         "question_3": {
           "type": "question",
           "settings": {
             "question": "Can I use this if I have sensitive skin?",
-            "answer": "<p>Yes! Tallow actually matches your skin’s natural oils, making it ideal for sensitive skin. The Zenith Anti-Aging Tallow Cleanser uses gentle amino acid cleansers and botanical extracts that are free from harsh chemicals that typically cause irritation.</p>"
+            "answer": "<p>It is made to be gentle. Tallow has lipids similar to those found in skin, and the amino acid cleanser leaves skin soft and comfortable, not tight. If your skin is sensitive, do a small patch test first.</p>"
           }
         },
         "question_4": {
           "type": "question",
           "settings": {
             "question": "How long will one bottle last?",
-            "answer": "<p>One 100ml bottle of the Zenith Anti-Aging Tallow Cleanser typically lasts 30 days when used as directed (once daily). A little goes a long way – you only need 2-3 pea-sized pumps as it creates rich lather for your entire face.</p>"
+            "answer": "<p>A little goes a long way. A pea-sized amount makes a rich lather for your whole face.</p>"
           }
         },
         "question_5": {
           "type": "question",
           "settings": {
             "question": "Can I use this with my other products like moisturizer and sunscreen?",
-            "answer": "<p>Yes! The Zenith Anti-Aging Tallow Cleanser works perfectly as the foundation of any skincare routine. For complete anti-aging care, follow with Zenith Anti-Aging Tallow Day Cream SPF 30 in the morning for protection, and Zenith Anti-Aging Tallow Cream in the evening for maximum repair and renewal.</p>"
+            "answer": "<p>Yes! The Zenith Anti-Aging Tallow Cleanser works perfectly as the foundation of any skincare routine. For complete anti-aging care, follow with Zenith Anti-Aging Tallow Day Cream SPF30 in the morning for protection, and the Zenith Anti-Aging Tallow Cream at night.</p>"
           }
         },
         "question_6": {
@@ -1124,6 +1120,7 @@
         "question_7"
       ],
       "settings": {
+        "content_source": "custom",
         "eyebrow": "",
         "heading": "Frequently Asked Questions",
         "subheading": "<p>No-nonsense answers about your daily essentials.</p>",
@@ -1144,6 +1141,7 @@
         "subheading_font_size": 18,
         "subheading_opacity": 100,
         "eyebrow_font_size": 14,
+        "question_font": "body",
         "title_font_size": 22,
         "text_font_size": 16,
         "icon_size": 20,
@@ -1204,9 +1202,11 @@
       "settings": {
         "show_money_back": true,
         "eyebrow": "",
+        "use_collection_content": false,
         "heading": "Zenith Anti-Aging Tallow Cleanser",
         "heading_mobile": "",
         "text": "<p>Washes without that tight feeling.</p><p>Morning and night.</p>",
+        "show_button": true,
         "button_label": "Add to Cart",
         "button_link": "",
         "button_product": "zenith-anti-aging-tallow-cleanser",
@@ -1259,6 +1259,7 @@
         "overlay_color": "#203940",
         "overlay_opacity": 100,
         "overlay_coverage": 50,
+        "overlay_solid": 0,
         "ribbon_color": "#f6233b",
         "ribbon_text_color": "#ffffff",
         "highlight_color": "#eabe5f",
@@ -1296,10 +1297,12 @@
         "mobile_button_bottom": false,
         "mobile_button_full": true,
         "mobile_hide_button": false,
+        "mobile_height_mode": "same",
         "mobile_height_screen": 65,
         "mobile_height": 520,
         "mobile_overlay_style": "bottom",
         "mobile_overlay_coverage": 70,
+        "mobile_overlay_solid": 0,
         "vertical_padding_mobile": 24,
         "heading_font_size_mobile": 32,
         "subheading_font_size_mobile": 16,

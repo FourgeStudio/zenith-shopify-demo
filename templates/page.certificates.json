@@ -234,6 +234,7 @@
         "nn_hair_spray": {
           "type": "certificate",
           "settings": {
+            "image": "shopify://shop_images/FDA_cosmetic_notification_for_Zenith_Anti-Aging_Tallow_Cleanser.png",
             "title": "Advanced Hair Density Spray",
             "number": "NN-1000015050639",
             "link": "",
@@ -323,7 +324,7 @@
       ],
       "settings": {
         "heading": "FDA Notified Products",
-        "subheading": "<p>All Zenith products are FDA-notified and proudly manufactured in a US FDA-certified facility following the highest international quality standards.</p>",
+        "subheading": "<p>All Zenith products are FDA-notified.</p>",
         "title_label": "Product name",
         "number_label": "Notification number",
         "pending_label": "pending",
@@ -472,6 +473,7 @@
         "title_font_size": 16,
         "text_font_size": 16,
         "line_height": 150,
+        "hide_mobile": false,
         "heading_alignment_mobile": "left",
         "columns_mobile": 2,
         "card_layout_mobile": "stacked",
@@ -545,14 +547,14 @@
           "type": "question",
           "settings": {
             "question": "Different from drugstore brands?",
-            "answer": "<p>Drugstore products are built for mass appeal and the lowest possible cost. Zenith formulas are built specifically for the Philippine climate and the realities of men over 35. We use higher-grade ingredients with absolutely zero unnecessary fillers.</p>"
+            "answer": "<p>Drugstore products are built for mass appeal and the lowest possible cost. Ours are formulated specifically for the Philippine climate and the needs of men over 35. We use higher-grade ingredients without the unnecessary fillers.</p>"
           }
         },
         "question_2": {
           "type": "question",
           "settings": {
             "question": "Safe for sensitive skin?",
-            "answer": "<p>Yes. Every product is tested in tropical humidity and designed to be gentle. We avoid harsh sulfates and synthetic fragrances that cause irritation. If your skin reacts, the Zenith Money-Back Guarantee has you covered.</p>"
+            "answer": "<p>Yes. Every product is made to be gentle. Check the full ingredient list first and do a small patch test. If your skin reacts, the Zenith Money-Back Guarantee has you covered.</p>"
           }
         },
         "question_3": {
@@ -566,7 +568,7 @@
           "type": "question",
           "settings": {
             "question": "What is coming next?",
-            "answer": "<p>We are developing a full body wash, a deodorant that respects your skin, and a shave cream that reduces razor burn. The toothpaste is in final testing. Sign up for notifications on the product page to know the moment they launch.</p>"
+            "answer": "<p>We are developing a full body wash, a deodorant that respects your skin, and a shave cream. The toothpaste is in final testing. Sign up for notifications on the product page to know the moment they launch.</p>"
           }
         },
         "question_5": {
@@ -585,7 +587,7 @@
         "question_5"
       ],
       "settings": {
-        "content_source": "global",
+        "content_source": "custom",
         "eyebrow": "",
         "heading": "Frequently Asked Questions",
         "subheading": "<p>No-nonsense answers about your daily essentials.</p>",
@@ -628,19 +630,6 @@
     },
     "reviews": {
       "type": "zenith-reviews",
-      "blocks": {
-        "judge_me_reviews_review_widget_homepage_BKCqgw": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget_homepage/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-            "product": "zenith-anti-aging-tallow-cream",
-            "review_data": "real_data",
-            "max_width": 1200
-          }
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_review_widget_homepage_BKCqgw"
-      ],
       "settings": {
         "jdgm_product": "zenith-anti-aging-tallow-cream",
         "eyebrow": "",

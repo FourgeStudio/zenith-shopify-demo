@@ -102,9 +102,9 @@
         "show_money_back": true,
         "eyebrow": "Trusted by [customers] Filipino men",
         "use_collection_content": false,
-        "heading": "Thicker, Fuller Hair Starts at the Scalp.",
+        "heading": "Thicker, Fuller-Looking Hair Starts At The Scalp.",
         "heading_mobile": "",
-        "text": "<p>Powerful, daily maintenance designed to clear buildup, stimulate roots, and visibly increase hair density.</p>",
+        "text": "<p>Daily care that clears buildup, for the appearance of thicker, fuller-looking hair.</p>",
         "show_button": false,
         "button_label": "",
         "button_link": "",
@@ -197,6 +197,7 @@
         "mobile_button_bottom": true,
         "mobile_button_full": true,
         "mobile_hide_button": true,
+        "mobile_height_mode": "same",
         "mobile_height_screen": 65,
         "mobile_height": 540,
         "mobile_overlay_style": "top",
@@ -305,7 +306,7 @@
       "type": "zenith-product-grid",
       "settings": {
         "eyebrow": "Hair Products",
-        "heading": "The Advanced Hair Density System",
+        "heading": "Zenith Complete Hair Density System",
         "subheading": "",
         "collection": "hair-products",
         "products_to_show": 12,
@@ -479,7 +480,7 @@
           "type": "step",
           "settings": {
             "image": "shopify://shop_images/hair-category-gallery-man-rinsing-shampoo-shower-1-desktop.webp",
-            "title": "Activate",
+            "title": "Massage",
             "text": "Massage 60 seconds, leave 2 minutes, rinse."
           }
         },
@@ -500,7 +501,7 @@
       "settings": {
         "eyebrow": "",
         "heading": "Hair Washing Routine",
-        "subheading": "<p>Get a Healthier Scalp In 3 Steps</p>",
+        "subheading": "<p>Thicker, Fuller-Looking Hair In 3 Steps</p>",
         "show_used": true,
         "products": [
           "zenith-advanced-hair-density-shampoo"
@@ -508,7 +509,7 @@
         "used_text": "Used Zenith Advanced Hair Density Shampoo",
         "note": "",
         "show_number": false,
-        "step_label": "Step",
+        "step_label": "",
         "show_divider": true,
         "divider_breakpoint": "all",
         "step_layout": "stacked",
@@ -526,7 +527,7 @@
         "note_spacing": 24,
         "divider_spacing": 40,
         "color_scheme": "scheme-1",
-        "title_color": "#ffffff",
+        "title_color": "#d6b356",
         "title_heading_font": true,
         "number_background": "#c5930e",
         "number_color": "#121212",
@@ -587,7 +588,7 @@
           "settings": {
             "image": "shopify://shop_images/hair-category-gallery-close-up-thinning-hairline-1-desktop.webp",
             "title": "Absorb",
-            "text": "Use your fingertips to massage the serum into the scalp for 30 seconds to stimulate microcirculation. Do not rinse."
+            "text": "Use your fingertips to massage it into the scalp for 30 seconds. Do not rinse."
           }
         },
         "step_3": {
@@ -595,7 +596,7 @@
           "settings": {
             "image": "shopify://shop_images/hair-category-gallery-man-checking-hairline-mirror-1-desktop.webp",
             "title": "Style",
-            "text": "Style your hair as usual. Use once daily for maintenance, or twice daily for maximum density support."
+            "text": "Style your hair as usual. Use at least once daily, at night."
           }
         }
       },
@@ -615,7 +616,7 @@
         "used_text": "Used Zenith Advanced Hair Density Spray",
         "note": "",
         "show_number": false,
-        "step_label": "Step",
+        "step_label": "",
         "show_divider": true,
         "divider_breakpoint": "all",
         "step_layout": "stacked",
@@ -633,7 +634,7 @@
         "note_spacing": 24,
         "divider_spacing": 40,
         "color_scheme": "scheme-1",
-        "title_color": "#ffffff",
+        "title_color": "#d6b356",
         "title_heading_font": true,
         "number_background": "#c5930e",
         "number_color": "#121212",
@@ -1018,7 +1019,7 @@
       "settings": {
         "content_source": "global",
         "eyebrow": "",
-        "heading": "What happens after you order",
+        "heading": "The Zenith Guarantee",
         "heading_mobile": "The Zenith Guarantee",
         "subheading": "",
         "show_payment_icons": false,
@@ -1200,48 +1201,48 @@
         "question_1": {
           "type": "question",
           "settings": {
-            "question": "Different from drugstore brands?",
-            "answer": "<p>Drugstore products are built for mass appeal and the lowest possible cost. Zenith formulas are built specifically for the Philippine climate and the realities of men over 35. We use higher-grade ingredients with absolutely zero unnecessary fillers.</p>"
+            "question": "When will my order arrive?",
+            "answer": "<p>Metro Manila orders arrive in about 3 days. Visayas and Mindanao in 3 to 7 days. Free shipping on the bundle.</p>"
+          }
+        },
+        "question_h9dKrx": {
+          "type": "question",
+          "settings": {
+            "question": "Can I use this if I have a sensitive scalp?",
+            "answer": "<p>Check the full ingredient list on the product page first. Avoid contact with eyes. If your scalp feels irritated, stop using it and message us.</p>"
           }
         },
         "question_2": {
           "type": "question",
           "settings": {
-            "question": "Safe for sensitive skin?",
-            "answer": "<p>Yes. Every product is tested in tropical humidity and designed to be gentle. We avoid harsh sulfates and synthetic fragrances that cause irritation. If your skin reacts, stop use and message us right away with photos. Covered by the Zenith Money-Back Guarantee.</p>"
+            "question": "Can I use just one of them?",
+            "answer": "<p>Yes. The shampoo and the spray each work on their own. Together they are the Zenith Complete Hair Density System.</p>"
           }
         },
         "question_3": {
           "type": "question",
           "settings": {
-            "question": "How to layer with skincare?",
-            "answer": "<p>Keep it simple. Cleanse first with the Tallow Cleanser, then Tallow Day Cream SPF 30 in the morning and Anti-Aging Tallow Cream at night. Three steps, that's it.</p>"
+            "question": "What if it does not work for me?",
+            "answer": "<p>Every order carries the Zenith Money-Back Guarantee. No hassle. Just show us proof. Full terms on our Refunds and Returns page.</p>"
           }
         },
-        "question_4": {
+        "question_zLBRb8": {
           "type": "question",
           "settings": {
-            "question": "What is coming next?",
-            "answer": "<p>We are developing a full body wash, a deodorant that respects your skin, and a shave cream that reduces razor burn. The toothpaste is in development. Sign up for notifications on the product page to know the moment they launch.</p>"
-          }
-        },
-        "question_5": {
-          "type": "question",
-          "settings": {
-            "question": "Why no antiperspirant yet?",
-            "answer": "<p>We are taking our time to get it right. A deodorant that performs in this heat without staining shirts or clogging pores requires real testing. It is coming when it is ready, not a moment sooner.</p>"
+            "question": "Can I use Zenith products together?",
+            "answer": "<p>Yes. Cleanser and day cream in the morning, tallow cream at night, shampoo in the shower, spray on a clean, towel-dried scalp before bed. The directions are on every label.</p>"
           }
         }
       },
       "block_order": [
         "question_1",
+        "question_h9dKrx",
         "question_2",
         "question_3",
-        "question_4",
-        "question_5"
+        "question_zLBRb8"
       ],
       "settings": {
-        "content_source": "global",
+        "content_source": "custom",
         "eyebrow": "",
         "heading": "Frequently Asked Questions",
         "subheading": "<p>No-nonsense answers about your daily essentials.</p>",
@@ -1291,6 +1292,7 @@
         "heading": "The Hair Care System Built for Filipino Men",
         "heading_mobile": "",
         "text": "<p>Everything you need to stay in your prime.</p>",
+        "show_button": true,
         "button_label": "Shop Hair Care Products",
         "button_link": "",
         "button_product": "",
@@ -1382,6 +1384,7 @@
         "mobile_button_bottom": true,
         "mobile_button_full": true,
         "mobile_hide_button": false,
+        "mobile_height_mode": "same",
         "mobile_height_screen": 65,
         "mobile_height": 540,
         "mobile_overlay_style": "top",

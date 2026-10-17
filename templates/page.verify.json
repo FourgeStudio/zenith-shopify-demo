@@ -17,8 +17,8 @@
           "settings": {
             "image": "shopify://shop_images/verify-products-steps-step-1-qr-code-on-box-1-desktop.webp",
             "label": "",
-            "title": "Locate Tamper-proof QR Code",
-            "text": "Each box is equipped with a unique, tamper-proof QR code."
+            "title": "Find The Holographic QR Sticker",
+            "text": "Each box has its own holographic QR sticker. The barcode on the box is a store barcode, not an authenticity check."
           }
         },
         "step_2": {
@@ -68,7 +68,7 @@
       ],
       "settings": {
         "heading": "Verify Your Zenith Product",
-        "subheading": "<p>Every Zenith box carries a tamper-proof QR code. Scan it to confirm yours is genuine.</p>",
+        "subheading": "<p>Every Zenith box carries a holographic QR sticker. Scan it to confirm yours is genuine.</p>",
         "cover_image": "shopify://shop_images/verify-products-how-it-works-hands-scanning-box-qr-1-desktop.webp",
         "video_url": "",
         "play_label": "Play video",
@@ -593,6 +593,7 @@
         "content_source": "custom",
         "eyebrow": "",
         "heading": "Where We Are Located",
+        "heading_mobile": "",
         "subheading": "",
         "show_payment_icons": false,
         "footer_text": "",
@@ -843,6 +844,7 @@
         "title_font_size": 16,
         "text_font_size": 16,
         "line_height": 150,
+        "hide_mobile": false,
         "heading_alignment_mobile": "left",
         "columns_mobile": 2,
         "card_layout_mobile": "stacked",
@@ -876,7 +878,7 @@
         "heading": "Zenith Products are Philippine FDA Notified",
         "shared_text": false,
         "shared_columns": false,
-        "text": "<p>All Zenith products are FDA-notified and proudly manufactured in a US FDA-certified facility following the highest international quality standards.</p><p>For your protection, buy only from our official website, our Facebook page, or our official Shopee, Lazada and TikTok Shop stores.</p>",
+        "text": "<p>All Zenith products are FDA-notified.</p><p>For your protection, buy only from our official website, our Facebook page, or our official Shopee, Lazada and TikTok Shop stores.</p>",
         "button_label": "",
         "button_link": "",
         "image_position": "left",
@@ -919,6 +921,8 @@
         "media_height_mobile": 348,
         "image_full_bleed_mobile": false,
         "image_fade_mobile": 0,
+        "image_focus_mobile": "center",
+        "button_width_mobile": "theme",
         "heading_position_mobile": "below",
         "content_overlap_mobile": 0,
         "heading_font_size_mobile": 32,
@@ -1031,19 +1035,6 @@
     },
     "reviews": {
       "type": "zenith-reviews",
-      "blocks": {
-        "judge_me_reviews_review_widget_homepage_BKCqgw": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget_homepage/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-            "product": "zenith-anti-aging-tallow-cream",
-            "review_data": "real_data",
-            "max_width": 1200
-          }
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_review_widget_homepage_BKCqgw"
-      ],
       "settings": {
         "jdgm_product": "zenith-anti-aging-tallow-cream",
         "eyebrow": "",
