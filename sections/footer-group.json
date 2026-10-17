@@ -36,7 +36,7 @@
           "type": "link_list",
           "settings": {
             "override_title": "Disclaimer",
-            "override_url": "/pages/faq?view=disclaimer",
+            "override_url": "/pages/disclaimer",
             "heading": "",
             "menu": "faq",
             "menu_mobile": "",
