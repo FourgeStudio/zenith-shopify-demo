@@ -42,7 +42,7 @@
     assign logo = nil
   endif
   assign logo_alt = logo.alt | default: shop.name
-  assign seal_alt = s.seal_image.alt | default: shop.name
+  assign seal_alt = s.seal_image.alt | default: 'Amare Group Seal of Authenticity'
   assign payment_alt = s.payment_image.alt
   if payment_alt == blank
     assign payment_alt = 'sections.footer.payment' | t

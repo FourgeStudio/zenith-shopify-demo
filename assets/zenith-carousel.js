@@ -6,6 +6,9 @@ if (!customElements.get('zenith-carousel')) {
         this.track = this.querySelector('.zenith-carousel__track');
         if (!this.track) return;
         this.slides = Array.from(this.track.children);
+        // Keyboard users can focus the scrolling strip and move it with the arrow keys (QA A-04)
+        if (!this.track.hasAttribute('tabindex')) this.track.tabIndex = 0;
+        if (!this.track.hasAttribute('aria-label')) this.track.setAttribute('aria-label', `${this.dataset.slideLabel || 'Slide'}s, scrollable`);
         this.prev = this.querySelector('[data-carousel-prev]');
         this.next = this.querySelector('[data-carousel-next]');
         this.dotsWrap = this.querySelector('.zenith-carousel__dots');

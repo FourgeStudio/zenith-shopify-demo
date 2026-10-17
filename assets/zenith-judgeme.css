@@ -260,3 +260,8 @@ body .zj-busy.zj-busy::after{
 }
 @keyframes zjSpin{ to{ transform:rotate(360deg); } }
 @media (max-width:767px){ body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget){ --zj-fade:110px; } }
+
+/* ---------- Zenith store additions (not on the landing page) ---------- */
+/* Reviewer location + flag: same muted colour as the author and date (QA A-02 contrast), flag sized so it never shifts (QA B-11) */
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev__location{ color:var(--zj-muted)!important; }
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev__location-country-flag-img{ width:16px!important; height:12px!important; aspect-ratio:4/3; object-fit:cover; }

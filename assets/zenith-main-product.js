@@ -83,7 +83,8 @@ if (!customElements.get('zenith-main-product')) {
           { passive: true }
         );
         const current = this.carousel && this.carousel.index;
-        this.setActiveThumb(Number.isFinite(current) ? current : 0, 'instant');
+        // First view: the active thumbnail sits flush left, so the strip starts on a whole thumbnail (QA U-09)
+        this.setActiveThumb(Number.isFinite(current) ? current : 0, 'instant', 'start');
       }
 
       normalizeThumbs() {
@@ -99,7 +100,7 @@ if (!customElements.get('zenith-main-product')) {
         list.style.scrollBehavior = '';
       }
 
-      setActiveThumb(index, behavior) {
+      setActiveThumb(index, behavior, align) {
         this.thumbs.forEach((thumb, i) => {
           if (i === index) thumb.setAttribute('aria-current', 'true');
           else thumb.removeAttribute('aria-current');
@@ -114,7 +115,7 @@ if (!customElements.get('zenith-main-product')) {
         all.forEach((thumb) => {
           if (Number(thumb.dataset.thumb) !== index) return;
           const rect = thumb.getBoundingClientRect();
-          const left = list.scrollLeft + (rect.left - listRect.left) - (list.clientWidth - rect.width) / 2;
+          const left = list.scrollLeft + (rect.left - listRect.left) - (align === 'start' ? 0 : (list.clientWidth - rect.width) / 2);
           if (best === null || Math.abs(left - list.scrollLeft) < Math.abs(best - list.scrollLeft)) best = left;
         });
         if (best !== null) list.scrollTo({ left: best, behavior: behavior || 'smooth' });
