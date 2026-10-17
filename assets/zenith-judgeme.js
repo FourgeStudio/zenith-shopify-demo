@@ -281,3 +281,32 @@
     if(window.jdgm&&jdgm.$){ clearInterval(wb); if(!bound){ bound=true; jdgm.$(document).on('jdgm.doneCustomizeReviews jdgm.doneSetupVideos',function(){ setTimeout(clipAll,0); }); } }
   },100);
 })();
+
+/* Zenith store addition (not on the landing page): Judge.me places the cards once, with the heights they have at that
+   moment. On the store the card CSS loads after the reviews draw and "Read more" / late photos change heights, which
+   left empty holes and overlapping cards. A ResizeObserver re-runs Judge.me's own layout whenever any card changes
+   size (batched to one layout per frame). */
+(function(){
+  if(!('ResizeObserver' in window)){ return; }
+  var queued=new Set(), frame=0;
+  function flush(){
+    frame=0;
+    var $=window.jdgm&&window.jdgm.$;
+    queued.forEach(function(list){
+      if($&&$.fn&&$.fn.masonry&&list.isConnected&&list.offsetParent&&$(list).data('masonry')){ $(list).masonry('layout'); }
+    });
+    queued.clear();
+  }
+  var ro=new ResizeObserver(function(entries){
+    entries.forEach(function(en){ var list=en.target.parentElement; if(list){ queued.add(list); } });
+    if(!frame){ frame=requestAnimationFrame(flush); }
+  });
+  var seen=new WeakSet();
+  function watch(){
+    document.querySelectorAll('.jdgm-rev-widg__reviews > .jdgm-rev, .jdgm-all-reviews__body > .jdgm-rev').forEach(function(card){
+      if(!seen.has(card)){ seen.add(card); ro.observe(card); }
+    });
+  }
+  var n=0, iv=setInterval(function(){ watch(); if(++n>60){ clearInterval(iv); } },500);
+  document.addEventListener('click',function(){ setTimeout(watch,1500); setTimeout(watch,4000); },true);
+})();
