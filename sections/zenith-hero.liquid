@@ -209,36 +209,17 @@
           </div>
         {%- endif -%}
 
-        {%- if hero_heading_mobile != blank -%}
-          {%- render 'zenith-section-heading',
-            eyebrow: s.eyebrow,
-            heading: hero_heading,
-            subheading: hero_text,
-            alignment: s.content_position,
-            uppercase: s.heading_uppercase,
-            tag: s.heading_tag,
-            class: 'zenith-hero__heading zenith-hide-mobile'
-          -%}
-          {%- render 'zenith-section-heading',
-            eyebrow: s.eyebrow,
-            heading: hero_heading_mobile,
-            subheading: hero_text,
-            alignment: s.content_position,
-            uppercase: s.heading_uppercase,
-            tag: s.heading_tag,
-            class: 'zenith-hero__heading zenith-hide-desktop'
-          -%}
-        {%- else -%}
-          {%- render 'zenith-section-heading',
-            eyebrow: s.eyebrow,
-            heading: hero_heading,
-            subheading: hero_text,
-            alignment: s.content_position,
-            uppercase: s.heading_uppercase,
-            tag: s.heading_tag,
-            class: 'zenith-hero__heading'
-          -%}
-        {%- endif -%}
+        {%- comment -%} One heading tag; the phone text (if any) swaps in inside it (snippets/zenith-heading-text) {%- endcomment -%}
+        {%- render 'zenith-section-heading',
+          eyebrow: s.eyebrow,
+          heading: hero_heading,
+          heading_mobile: hero_heading_mobile,
+          subheading: hero_text,
+          alignment: s.content_position,
+          uppercase: s.heading_uppercase,
+          tag: s.heading_tag,
+          class: 'zenith-hero__heading'
+        -%}
 
         {%- liquid
           assign hero_has_button = false

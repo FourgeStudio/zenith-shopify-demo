@@ -1,0 +1,24 @@
+{% comment %}
+  One heading element for a desktop text + an optional phone text (SEO tools read every <h*> in the HTML, so two
+  tags per section showed up as duplicate headings).
+  - Same words (only spaces / line breaks differ): the text once; the phone text's line breaks show on phones only.
+  - Different words: both texts inside the one tag, each hidden on the other screen size.
+  Accepts: heading, heading_mobile, tag ('h1'|'h2'|'h3', default h2), class (on the tag). Output is escaped;
+  [customers] → Theme settings → Customer count; "Money-Back" kept on one line.
+{% endcomment %}
+{%- liquid
+  assign ht_tag = tag | default: 'h2'
+  assign ht_d = heading | escape | replace: '[customers]', settings.customer_count | replace: 'Money-Back', '<span class="zenith-nowrap">Money-Back</span>' | replace: 'Money-back', '<span class="zenith-nowrap">Money-back</span>'
+  assign ht_m = heading_mobile | escape | replace: '[customers]', settings.customer_count | replace: 'Money-Back', '<span class="zenith-nowrap">Money-Back</span>' | replace: 'Money-back', '<span class="zenith-nowrap">Money-back</span>'
+  assign ht_dn = heading | strip_newlines | replace: ' ', '' | downcase
+  assign ht_mn = heading_mobile | strip_newlines | replace: ' ', '' | downcase
+-%}
+{%- if heading_mobile == blank -%}
+  <{{ ht_tag }} class="{{ class }}">{{ ht_d }}</{{ ht_tag }}>
+{%- elsif heading == blank -%}
+  <{{ ht_tag }} class="{{ class }} zenith-hide-desktop">{{ ht_m }}</{{ ht_tag }}>
+{%- elsif ht_dn == ht_mn -%}
+  <{{ ht_tag }} class="{{ class }}">{{ ht_m | newline_to_br | strip_newlines | replace: '<br />', '<br class="zenith-hide-desktop">' }}</{{ ht_tag }}>
+{%- else -%}
+  <{{ ht_tag }} class="{{ class }}"><span class="zenith-hide-mobile">{{ ht_d }}</span><span class="zenith-hide-desktop">{{ ht_m }}</span></{{ ht_tag }}>
+{%- endif -%}

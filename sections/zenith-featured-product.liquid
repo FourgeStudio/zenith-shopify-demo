@@ -228,7 +228,7 @@
         {%- endif -%}
 
         {%- if use_slides -%}
-          <zenith-carousel class="zenith-fp__carousel" data-slide-label="Image" data-loop{% if s.slide_autoplay > 0 %} data-autoplay="{{ s.slide_autoplay }}"{% endif %}>
+          <zenith-carousel class="zenith-fp__carousel" data-slide-label="Image" data-loop{% if s.slide_autoplay > 0 %} data-autoplay="{{ s.slide_autoplay }}" data-pause-button="false"{% endif %}>
             <ul class="zenith-carousel__track zenith-fp__track" role="list">
               {%- for media in product_images -%}
                 {%- assign media_alt = media.alt | default: fp_product.title -%}
@@ -345,7 +345,7 @@
       "type": "range",
       "id": "slide_autoplay",
       "label": "Image slides: auto-advance",
-      "info": "Seconds per image, endless loop. 0 = off. Pauses on hover/focus; a pause button is added.",
+      "info": "Seconds per image, endless loop. 0 = off. Pauses on hover/focus.",
       "min": 0,
       "max": 15,
       "step": 1,

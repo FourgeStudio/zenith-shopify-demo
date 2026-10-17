@@ -60,7 +60,7 @@
         "countdown_digit_color": "#ffffff",
         "confetti_opacity": 100,
         "heading_font_size": 48,
-        "heading_tag": "h1",
+        "heading_tag": "h2",
         "heading_uppercase": false,
         "subheading_font_size": 18,
         "button_font_size": 22,
