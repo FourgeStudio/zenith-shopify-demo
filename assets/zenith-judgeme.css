@@ -1,316 +1,262 @@
-/* Zenith · Judge.me dark style (client-supplied). Loaded by layout/theme.liquid when
-   Theme settings → Zenith → "Dark Judge.me review style" is on. Overrides the app's own CSS with !important.
-   Only change from the original: rem font sizes → px (this theme's root font size is 10px, so 0.9rem would be 9px). */
+/* =====================================================================
+   Zenith · Judge.me review cards (dark) · v21 · Oct 17, 2026 — same style as the landing page
+   (lp.tryzenith.ph, Elementor › Custom Code › "Judge.me · Review Cards CSS"). Paste updates from there
+   into this file unchanged; the helper script is assets/zenith-judgeme.js.
+   Loaded by layout/theme.liquid when Theme settings → Zenith → "Dark Judge.me review style" is on.
+   Applies to: every Judge.me product review widget (.jdgm-rev-widg) and the
+               store-wide all-reviews widget (.jdgm-all-reviews-widget). Selectors start with body + the
+               root class twice so they outrank the app's CSS and the Zenith · Reviews section CSS.
+   Columns:    5 desktop · 4 small laptop · 3 tablet · 2 mobile.
+   Layout:     Judge.me positions cards itself (Masonry, gutter fixed at 16px,
+               column width = the card's outer width). The negative right
+               margin shrinks that outer width, so the visible gap is --zj-gap.
+               The script re-runs the layout once card heights
+               settle, so the gap below each card equals the gap beside it.
+   ===================================================================== */
 
-.jdgm-rev-widg__reviews .jdgm-divider-top {
-  padding: 20px !important;
-  background: #191919 !important;
-  margin-bottom: 10px !important;
+/* ---------- Tokens: change sizes here only ---------- */
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget){
+  --zj-cols:5;
+  --zj-gap:14px;          /* space between cards */
+  --zj-pad:14px;          /* inside each card */
+  --zj-font:16px;
+  --zj-lh:1.5;
+  --zj-bg:#0F1115;
+  --zj-bg-2:#111827;
+  --zj-text:#F3F4F6;
+  --zj-text-2:#E5E7EB;
+  --zj-muted:#CBD5E1;
+  --zj-gold:#F5C518;
+  --zj-line:rgba(255,255,255,.08);
+  --zj-photo-ratio:4/5;    /* every review photo gets this frame, so cards never jump */
+  --zj-min:720px;          /* review preview is at least this tall (2 or 3 rows) */
+}
+@media (max-width:1279px){ body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget){ --zj-cols:4; } }
+@media (max-width:1024px){
+  body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget){ --zj-cols:3; --zj-gap:10px; --zj-pad:12px; --zj-font:14px; --zj-lh:1.4; --zj-min:820px; }
+}
+@media (max-width:767px){
+  body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget){ --zj-cols:2; --zj-gap:8px; --zj-pad:12px; --zj-font:13px; --zj-lh:1.4; --zj-min:960px; }
+}
+@media (max-width:360px){ body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget){ --zj-gap:6px; --zj-pad:10px; --zj-font:12.5px; } }
+
+/* Square corners and no drop shadows anywhere (Henson, Oct 16, 2026) */
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget),
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) *{ border-radius:0!important; box-shadow:none!important; }
+/* Loading spinners stay round */
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-spinner,
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-spinner::before,
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-spinner::after{ border-radius:50%!important; }
+
+/* ---------- Base ---------- */
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget){
+  background:transparent!important;
+  color:var(--zj-text)!important;
+  font-size:var(--zj-font)!important;
+  line-height:var(--zj-lh)!important;
+  padding-left:0!important;
+  padding-right:0!important;
+}
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev-widg__header,
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev-widg__summary,
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev-widg__actions,
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev-widg__reviews{ background:transparent!important; }
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev-widg__title,
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev-widg__summary,
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev-widg__header{ color:var(--zj-text)!important; }
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-star,
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-star.jdgm--on,
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-star.jdgm--half{ color:var(--zj-gold)!important; }
+
+/* Summary, histogram */
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-histogram__bar{ background:rgba(255,255,255,.12)!important; }
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-histogram__bar-fill{ background:var(--zj-gold)!important; }
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-histogram__frequency,
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev-widg__summary-text,
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev-widg__summary-average{ color:var(--zj-text-2)!important; }
+
+/* Sort dropdown */
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-sort-dropdown{
+  background:var(--zj-bg)!important;
+  border:1px solid rgba(255,255,255,.15)!important;
+  color:var(--zj-text-2)!important;
+  border-radius:0!important;
+  padding:6px 32px 6px 10px!important;
+  max-width:100%!important;
 }
 
-.jdgm--leex-script-loaded .jdgm-rev,
-.jdgm--leex-script-loaded .jdgm-rev-widg__header,
-.jdgm--leex-script-loaded .jdgm-rev-widg__title,
-.jdgm--leex-script-loaded .jdgm-quest {
-  color: white !important;
+/* Buttons */
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-btn,
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-write-rev-link{
+  background:transparent!important;
+  color:var(--zj-text)!important;
+  border:1px solid rgba(255,255,255,.22)!important;
+  border-radius:0!important;
+  padding:8px 14px!important;
 }
-
-.jdgm--leex-script-loaded .jdgm-rev-widg__header,
-.jdgm--leex-script-loaded .jdgm-rev-widg__actions,
-.jdgm--leex-script-loaded .jdgm-rev,
-.jdgm--leex-script-loaded .jdgm-quest {
-  background: #191919 !important;
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-btn:hover,
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-write-rev-link:hover{
+  background:var(--zj-bg-2)!important;
+  border-color:rgba(255,255,255,.35)!important;
 }
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) a{ color:var(--zj-gold)!important; }
 
-.jdgm-rev-widg.jdgm-rev-widg {
-  background: transparent !important; /* let the page background show through */
-  color: #F3F4F6 !important;
+/* ---------- Cards ---------- */
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev-widg__reviews,
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-all-reviews__body{ overflow:hidden!important; }
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev.jdgm-rev{
+  box-sizing:border-box!important;
+  width:calc((100% - (var(--zj-cols) - 1) * var(--zj-gap)) / var(--zj-cols) - .1px)!important;
+  margin:0 calc(var(--zj-gap) - 16px) var(--zj-gap) 0!important;  /* see Layout note */
+  padding:var(--zj-pad)!important;
+  background:var(--zj-bg)!important;
+  color:var(--zj-text-2)!important;
+  border:1px solid var(--zj-line)!important;
+  border-radius:0!important;
+  overflow:hidden!important;
 }
-
-/* Headers / summary / stars */
-.jdgm-rev-widg__title,
-.jdgm-rev-widg__summary,
-.jdgm-rev-widg__header {
-  color: #F3F4F6 !important;
+/* Inner blocks sit on the card padding, no extra side padding */
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev__header,
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev__content,
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev__pics,
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev__actions{
+  padding-left:0!important;
+  padding-right:0!important;
 }
-
-.jdgm-rev-widg .jdgm-star,
-.jdgm-rev-widg .jdgm-star.jdgm--on {
-  color: #F5C518 !important;
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev__pics{
+  margin-top:calc(var(--zj-pad) * .6)!important;
+  padding-top:calc(var(--zj-pad) * .6)!important;
+  border-top:1px solid rgba(255,255,255,.06)!important;
 }
-
-/* Sorting dropdown */
-.jdgm-rev-widg .jdgm-sort-dropdown {
-  background-color: #0F1115 !important;
-  border: 1px solid rgba(255, 255, 255, 0.15) !important;
-  color: #E5E7EB !important;
-  border-radius: 10px !important;
-  padding: 8px 36px 8px 12px !important;
-}
-
-/* Review cards */
-.jdgm-rev.jdgm-rev {
-  background: #0F1115 !important;
-  color: #E5E7EB !important;
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
-  border-radius: 16px !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35) !important;
-  overflow: hidden !important;
-}
-
-.jdgm-rev-widg .jdgm-rev__content,
-.jdgm-rev-widg .jdgm-rev__header,
-.jdgm-rev-widg .jdgm-rev__pics,
-.jdgm-rev-widg .jdgm-rev__actions {
-  padding-left: 14px !important;
-  padding-right: 14px !important;
-}
-
-.jdgm-rev-widg .jdgm-rev__pics {
-  margin-top: 8px !important;
-  border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev__body,
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev__body p{
+  font-size:inherit!important;
+  line-height:inherit!important;
+  overflow-wrap:anywhere;
 }
 
 /* Reviewer meta */
-.jdgm-rev-widg .jdgm-rev__author,
-.jdgm-rev-widg .jdgm-rev__timestamp,
-.jdgm-rev-widg .jdgm-rev__buyer-badge,
-.jdgm-rev-widg .jdgm-rev__title {
-  color: #CBD5E1 !important;
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev__author,
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev__timestamp,
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev__buyer-badge,
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev__title{ color:var(--zj-muted)!important; }
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev__title{ display:none!important; }   /* titles hidden to keep cards tight */
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev__author-wrapper{ overflow-wrap:anywhere; }
+
+/* Photos */
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev__pic-img,
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev__pics a{
+  width:100%!important;
+  height:auto!important;
+  border-radius:0!important;
 }
 
-/* Review titles hidden to tighten cards */
-.jdgm-rev-widg .jdgm-rev__title {
-  display: none !important;
+/* ---------- Steady layout (v9) ----------
+   Photos load late and come in many shapes, so cards used to grow and slide
+   into new places. Every review photo now fills a fixed frame (--zj-photo-ratio),
+   so each card's height is known before its photo loads; cards snap instead of
+   sliding; and the list fades in once the first layout has settled. */
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev.jdgm-rev{ transition:none!important; }
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev__pic-link{ display:block!important; width:100%!important; }
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev__pic-img{
+  display:block!important;
+  width:100%!important;
+  height:auto!important;
+  aspect-ratio:var(--zj-photo-ratio)!important;
+  object-fit:cover!important;
+  background:#16181d;
+}
+/* At most 2 photos per card (v11): photos stack full width, the 3rd onward
+   stay hidden but still open in Judge.me's viewer arrows. */
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev__pics{ display:grid!important; grid-template-columns:1fr; gap:6px!important; }
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev__pics > .jdgm-rev__pic-link{ margin:0!important; }
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev__pics > .jdgm-rev__pic-link:nth-child(n+3){ display:none!important; }
+@keyframes zjFadeIn{ from{opacity:0} to{opacity:1} }
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev-widg__reviews,
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-all-reviews__body{ animation:zjFadeIn .25s ease .5s both; }
+
+/* ---------- All-reviews widget extras (v12, bundle pages) ---------- */
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev-widg__actions,
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-all-reviews__header{ background:transparent!important; border-color:var(--zj-line)!important; }
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-subtab{ border-bottom:1px solid var(--zj-line)!important; }
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-subtab__name{ color:var(--zj-muted)!important; background:transparent!important; }
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-subtab__name.jdgm--active{ color:var(--zj-gold)!important; background:rgba(245,197,24,.08)!important; }
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-all-reviews__summary-text,
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-all-reviews__summary-text *{ color:var(--zj-text-2)!important; }
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-gallery-title{ color:var(--zj-muted)!important; }
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-gallery__thumbnail-link,
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-gallery__thumbnail-link *{ background-color:var(--zj-bg)!important; }
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-row-media{ border-color:var(--zj-line)!important; }
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-medals-wrapper{ border-color:var(--zj-line)!important; }
+/* Product packshot Judge.me adds to each all-reviews card: hidden, the
+   "about <product>" line already names the product */
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev__pics > .jdgm-rev__product-picture{ display:none!important; }
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev__prod-link,
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev__prod-info-wrapper{ color:var(--zj-muted)!important; }
+
+/* Small screens: stars and meta scale with the text */
+@media (max-width:767px){
+  body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev .jdgm-star{ font-size:12px!important; }
+  body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev__timestamp,
+  body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev__buyer-badge{ font-size:11px!important; }
+  body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev__author{ font-size:12px!important; }
+  body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-rev-widg__header{ text-align:center!important; }
 }
 
-/* Buttons (Write a review / Read more) */
-.jdgm-rev-widg .jdgm-btn,
-.jdgm-rev-widg .jdgm-write-rev-link {
-  background: transparent !important;
-  color: #F3F4F6 !important;
-  border: 1px solid rgba(255, 255, 255, 0.22) !important;
-  border-radius: 9999px !important;
-  padding: 10px 16px !important;
+/* ---------- Write-a-review form (dark) ---------- */
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-write-review-modal,
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-form{ background:var(--zj-bg)!important; color:var(--zj-text-2)!important; }
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-form input:not([type="submit"]),
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-form textarea,
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .jdgm-form select{
+  background:var(--zj-bg-2)!important;
+  color:var(--zj-text-2)!important;
+  border:1px solid rgba(255,255,255,.18)!important;
+  border-radius:0!important;
 }
-
-.jdgm-rev-widg .jdgm-btn:hover,
-.jdgm-rev-widg .jdgm-write-rev-link:hover {
-  background: #111827 !important;
-  border-color: rgba(255, 255, 255, 0.35) !important;
+/* ---------- Review lists: preview rows, mask fade, load more (v13/v14) ---------- */
+body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget):is(.jdgm-rev-widg,.jdgm-all-reviews-widget) .zj-clipped{
+  overflow:hidden!important;
+  transition:max-height .35s ease;
+  -webkit-mask-image:linear-gradient(to bottom,#000 calc(100% - var(--zj-fade,160px)),transparent);
+          mask-image:linear-gradient(to bottom,#000 calc(100% - var(--zj-fade,160px)),transparent);
 }
-
-/* Layout: cards in rows with clean gaps */
-.jdgm-rev-widg .jdgm-rev-list {
-  display: flex !important;
-  flex-wrap: wrap !important;
-  gap: 16px !important;
+body .jdgm-review-widget.zj-load-more-on .jdgm-rev-widg__body .jdgm-paginate{ display:none!important; }
+/* the view stays where the visitor is when the list grows (no scroll anchoring) */
+body :is(.jdgm-review-widget,.jdgm-all-reviews-widget){ overflow-anchor:none; }
+body .jdgm-all-reviews-widget.jdgm-all-reviews-widget .jdgm-all-reviews-page__load-more-wrapper,
+body .jdgm-review-widget .zj-load-more-wrap{
+  text-align:center!important;
+  margin-top:calc(var(--zj-gap,14px) * 1.5)!important;
 }
-
-/* 5 columns */
-.jdgm-rev.jdgm-rev {
-  width: calc(20% - 16px) !important;
+body .jdgm-all-reviews-widget.jdgm-all-reviews-widget .jdgm-all-reviews-page__load-more,
+body .jdgm-review-widget .zj-load-more.zj-load-more{
+  display:inline-block!important;
+  background:transparent!important;
+  color:var(--zj-text,#F3F4F6)!important;
+  border:1px solid rgba(255,255,255,.22)!important;
+  border-radius:0!important;
+  padding:10px 22px!important;
+  text-decoration:none!important;
 }
-
-/* 4 columns */
-@media (max-width: 1400px) {
-  .jdgm-rev.jdgm-rev {
-    width: calc(25% - 16px) !important;
-  }
+body .jdgm-review-widget .zj-load-more.zj-load-more:hover{ background:var(--zj-bg-2,#111827)!important; }
+/* each list stays hidden (room kept at the preview height) until its preview is ready (script); shown anyway after 9 s */
+body .jdgm-review-widget:not(.zj-sorted) :is(.jdgm-rev-widg__reviews,.zj-load-more-wrap),
+body .jdgm-all-reviews-widget:not(.zj-sorted) :is(.jdgm-all-reviews__body,.jdgm-shop-reviews__body,.jdgm-all-reviews-page__load-more-wrapper){ visibility:hidden; animation:zjShowLate 0s linear 9s forwards; }
+body .jdgm-review-widget:not(.zj-sorted) .jdgm-rev-widg__reviews,
+body .jdgm-all-reviews-widget:not(.zj-sorted) .jdgm-all-reviews__body{ min-height:var(--zj-min); }
+@keyframes zjShowLate{ to{ visibility:visible; } }
+/* the Elementor HTML widget holding Judge.me always spans its container (landing page only; no match here) */
+body .elementor-widget-html:has(> .elementor-widget-container > .jdgm-widget){ align-self:stretch!important; width:100%!important; max-width:100%!important; }
+/* loading: spinner inside the button, Judge.me's ring hidden, button kept in place */
+body .zj-fetching .jdgm-rev-widg__paginate-spinner-wrapper,
+body .jdgm-all-reviews-widget.zj-fetching > .jdgm-spinner{ display:none!important; }
+body .jdgm-all-reviews-widget.zj-fetching .jdgm-all-reviews-page__load-more-wrapper{ display:block!important; }
+body .zj-busy.zj-busy{ pointer-events:none!important; opacity:.7!important; }
+body .zj-busy.zj-busy::after{
+  content:""; display:inline-block; width:12px; height:12px; margin-left:10px; vertical-align:-1px;
+  border:2px solid currentColor; border-right-color:transparent; border-radius:50%!important;
+  animation:zjSpin .7s linear infinite;
 }
-
-/* 3 columns */
-@media (max-width: 1100px) {
-  .jdgm-rev.jdgm-rev {
-    width: calc(33.333% - 16px) !important;
-  }
-}
-
-/* 2 columns */
-@media (max-width: 820px) {
-  .jdgm-rev.jdgm-rev {
-    width: calc(50% - 16px) !important;
-  }
-}
-
-/* Images inside cards */
-.jdgm-rev-widg .jdgm-rev__pic-img,
-.jdgm-rev-widg .jdgm-rev__pics a {
-  width: 100% !important;
-  height: auto !important;
-  border-radius: 12px !important;
-}
-
-/* Histogram bars on dark */
-.jdgm-rev-widg .jdgm-histogram__bar {
-  background: rgba(255, 255, 255, 0.12) !important;
-}
-
-.jdgm-rev-widg .jdgm-histogram__bar-fill {
-  background: #F5C518 !important;
-}
-
-.jdgm-rev-widg .jdgm-histogram__frequency,
-.jdgm-rev-widg .jdgm-rev-widg__summary-text,
-.jdgm-rev-widg .jdgm-rev-widg__summary-average {
-  color: #E5E7EB !important;
-}
-
-/* Links */
-.jdgm-rev-widg a {
-  color: #F5C518 !important;
-}
-
-/* Dark modal / inputs for write-a-review */
-.jdgm-rev-widg .jdgm-write-review-modal,
-.jdgm-rev-widg .jdgm-form {
-  background: #0F1115 !important;
-  color: #E5E7EB !important;
-}
-
-.jdgm-rev-widg .jdgm-form input:not([type='submit']),
-.jdgm-rev-widg .jdgm-form textarea,
-.jdgm-rev-widg .jdgm-form select {
-  background: #111827 !important;
-  color: #E5E7EB !important;
-  border: 1px solid rgba(255, 255, 255, 0.18) !important;
-  border-radius: 10px !important;
-}
-
-/* Smaller text on small screens (All Reviews page widget) */
-@media (max-width: 820px) {
-  .jdgm-all-reviews__body,
-  .jdgm-all-reviews__body * {
-    font-size: 14px !important;
-  }
-}
-
-@media (max-width: 520px) {
-  .jdgm-all-reviews__body,
-  .jdgm-all-reviews__body * {
-    font-size: 13px !important;
-  }
-}
-
-/* ---------- Overlap fix (theme) ----------
-   Judge.me's card layout positions every review absolutely and sets the list height from its own
-   measurements. The width rules above change the cards after that, so the stored height is too short
-   and the reviews spill over the next section. Let CSS columns do the masonry instead: normal flow,
-   the list grows with its content. Same 5 / 4 / 3 / 2 columns as above. */
-.jdgm-rev-widg .jdgm-rev-widg__reviews {
-  display: block !important;
-  position: relative !important;
-  height: auto !important;
-  column-count: 5;
-  column-gap: 16px;
-}
-
-.jdgm-rev-widg .jdgm-rev-widg__reviews .jdgm-rev {
-  position: relative !important;
-  top: auto !important;
-  left: auto !important;
-  transform: none !important;
-  display: inline-block !important;
-  width: 100% !important;
-  margin: 0 0 16px !important;
-  break-inside: avoid;
-  vertical-align: top;
-}
-
-@media (max-width: 1400px) {
-  .jdgm-rev-widg .jdgm-rev-widg__reviews { column-count: 4; }
-}
-
-@media (max-width: 1100px) {
-  .jdgm-rev-widg .jdgm-rev-widg__reviews { column-count: 3; }
-}
-
-@media (max-width: 820px) {
-  .jdgm-rev-widg .jdgm-rev-widg__reviews { column-count: 2; }
-}
-
-/* ---------- Phones: tighter widget (2026-10-08 client request) ----------
-   Roughly half the spacing of the app + rules above; desktop untouched. Buttons keep a 44px hit area. */
-@media screen and (max-width: 749px) {
-  .jdgm-rev-widg.jdgm-rev-widg {
-    padding: var(--z-space-2, 8px) 0 !important;
-  }
-
-  .jdgm-rev-widg .jdgm-rev-widg__header {
-    padding: var(--z-space-3, 12px) var(--z-space-2, 8px) !important;
-    margin-bottom: var(--z-space-2, 8px) !important;
-  }
-
-  .jdgm-rev-widg .jdgm-rev-widg__title {
-    margin-bottom: var(--z-space-2, 8px) !important;
-  }
-
-  .jdgm-rev-widg .jdgm-rev-widg__summary,
-  .jdgm-rev-widg .jdgm-histogram {
-    margin-top: 0 !important;
-    margin-bottom: var(--z-space-2, 8px) !important;
-  }
-
-  .jdgm-rev-widg .jdgm-histogram__row {
-    margin-bottom: var(--z-space-1, 4px) !important;
-  }
-
-  .jdgm-rev-widg .jdgm-rev-widg__actions,
-  .jdgm-rev-widg .jdgm-rev-widg__sort-wrapper {
-    padding: var(--z-space-2, 8px) !important;
-    margin: 0 0 var(--z-space-2, 8px) !important;
-  }
-
-  .jdgm-rev-widg__reviews .jdgm-divider-top {
-    padding: 10px !important;
-    margin-bottom: 6px !important;
-  }
-
-  .jdgm-rev-widg .jdgm-rev-list {
-    gap: var(--z-space-2, 8px) !important;
-  }
-
-  .jdgm-rev-widg .jdgm-rev-widg__reviews {
-    column-gap: var(--z-space-2, 8px);
-  }
-
-  .jdgm-rev-widg .jdgm-rev-widg__reviews .jdgm-rev {
-    margin-bottom: var(--z-space-2, 8px) !important;
-  }
-
-  .jdgm-rev-widg .jdgm-rev__content,
-  .jdgm-rev-widg .jdgm-rev__header,
-  .jdgm-rev-widg .jdgm-rev__pics,
-  .jdgm-rev-widg .jdgm-rev__actions {
-    padding-left: var(--z-space-2, 8px) !important;
-    padding-right: var(--z-space-2, 8px) !important;
-  }
-
-  .jdgm-rev-widg .jdgm-rev__header {
-    margin-bottom: var(--z-space-1, 4px) !important;
-  }
-
-  .jdgm-rev-widg .jdgm-rev__content,
-  .jdgm-rev-widg .jdgm-rev__pics {
-    margin-top: var(--z-space-1, 4px) !important;
-  }
-
-  .jdgm-rev-widg .jdgm-btn,
-  .jdgm-rev-widg .jdgm-write-rev-link {
-    min-height: 44px;
-    padding: 8px 12px !important;
-    display: inline-flex !important;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .jdgm-rev-widg .jdgm-paginate {
-    margin-top: var(--z-space-3, 12px) !important;
-  }
-}
-
-/* Whatever the app does, never let the widget paint outside its section */
-.zenith-reviews .zenith-reviews__apps,
-.shopify-app-block:has(.jdgm-rev-widg) {
-  display: flow-root;
-}
+@keyframes zjSpin{ to{ transform:rotate(360deg); } }
+@media (max-width:767px){ body :is(.jdgm-rev-widg,.jdgm-all-reviews-widget){ --zj-fade:110px; } }

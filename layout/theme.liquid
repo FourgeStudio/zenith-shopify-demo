@@ -515,5 +515,7 @@
       {%- comment -%}zenith: the drawer's "Pairs well with" add buttons use <product-form> on every page{%- endcomment -%}
       <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
+    {%- comment -%}zenith: Judge.me review lists (preview rows, Load More, steady layout) — pairs with zenith-judgeme.css{%- endcomment -%}
+    {%- if settings.jdgm_custom_style -%}<script src="{{ 'zenith-judgeme.js' | asset_url }}" defer="defer"></script>{%- endif -%}
   </body>
 </html>
