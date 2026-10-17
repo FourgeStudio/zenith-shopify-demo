@@ -168,11 +168,8 @@
             {{- section.settings.eyebrow | escape | replace: '[customers]', settings.customer_count -}}
           </p>
         {%- endif -%}
-        {%- if heading_mobile != blank -%}
-          <h2 class="zenith-heading__title zenith-hide-mobile">{{ heading }}</h2>
-          <h2 class="zenith-heading__title zenith-hide-desktop">{{ heading_mobile }}</h2>
-        {%- elsif heading != blank -%}
-          <h2 class="zenith-heading__title">{{ heading }}</h2>
+        {%- if heading != blank or heading_mobile != blank -%}
+          {%- render 'zenith-heading-text', heading: section.settings.heading, heading_mobile: section.settings.heading_mobile, class: 'zenith-heading__title' -%}
         {%- endif -%}
         {%- if section.settings.subheading != blank -%}
           <div class="zenith-subheading{% if section.settings.subheading_mobile_only %} zenith-hide-desktop{% endif %}">
@@ -192,7 +189,7 @@
           assign vc_start = settings.vt_start_slide | default: vc_start
         endif
       -%}
-      <zenith-carousel data-loop data-autoplay="{{ section.settings.autoplay }}" data-slide-label="Video" data-start="{{ vc_start }}">
+      <zenith-carousel data-loop data-autoplay="{{ section.settings.autoplay }}" data-pause-button="false" data-slide-label="Video" data-start="{{ vc_start }}">
         <ul class="zenith-carousel__track" role="list">
           {{- cards -}}
         </ul>
@@ -379,12 +376,12 @@
       "type": "range",
       "id": "autoplay",
       "label": "Auto-advance",
-      "info": "Seconds between slides. 0 turns it off.",
+      "info": "Seconds between slides, endless loop. 0 turns it off. Pauses on hover/focus and stops once a video is played.",
       "min": 0,
       "max": 10,
       "step": 1,
       "unit": "s",
-      "default": 0
+      "default": 6
     },
     {
       "type": "range",

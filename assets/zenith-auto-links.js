@@ -84,7 +84,9 @@
     });
     const hits = [];
     while (walker.nextNode()) hits.push(walker.currentNode);
-    hits.forEach(linkify);
+    // Bold mentions first, so when a paragraph names the same thing twice the bold one gets the link (client 2026-10-17)
+    const bold = (node) => (node.parentElement && node.parentElement.closest('strong, b') ? 0 : 1);
+    hits.sort((x, y) => bold(x) - bold(y)).forEach(linkify);
   };
 
   // Policy pages (Privacy, Refund, Shipping, Terms…) always open in a new tab (client 2026-10-14): written links,

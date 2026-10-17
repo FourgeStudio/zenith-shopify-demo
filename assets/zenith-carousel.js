@@ -54,7 +54,15 @@ if (!customElements.get('zenith-carousel')) {
           this.addEventListener('mouseenter', () => this.stop());
           this.addEventListener('focusin', () => this.stop());
           this.addEventListener('mouseleave', () => this.start());
-          this.addPauseButton();
+          // data-pause-button="false": no pause button (client 2026-10-17); hover / focus still pause it
+          if (this.dataset.pauseButton !== 'false') this.addPauseButton();
+          // A video started in a slide stops the auto-advance for good
+          this.addEventListener('click', (e) => {
+            if (e.target.closest('.zenith-video-card__play, video, iframe')) {
+              this.paused = true;
+              this.stop();
+            }
+          });
           this.start();
         }
       }
