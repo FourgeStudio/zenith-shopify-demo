@@ -108,11 +108,8 @@
             {{- section.settings.eyebrow | escape | replace: '[customers]', settings.customer_count -}}
           </p>
         {%- endif -%}
-        {%- if heading_mobile != blank -%}
-          <h2 class="zenith-heading__title zenith-hide-mobile">{{ heading }}</h2>
-          <h2 class="zenith-heading__title zenith-hide-desktop">{{ heading_mobile }}</h2>
-        {%- elsif heading != blank -%}
-          <h2 class="zenith-heading__title">{{ heading }}</h2>
+        {%- if heading != blank or heading_mobile != blank -%}
+          {%- render 'zenith-heading-text', heading: section.settings.heading, heading_mobile: section.settings.heading_mobile, class: 'zenith-heading__title' -%}
         {%- endif -%}
         {%- if section.settings.subheading != blank -%}
           <div class="zenith-subheading">

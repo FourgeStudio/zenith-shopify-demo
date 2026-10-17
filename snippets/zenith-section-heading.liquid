@@ -14,10 +14,7 @@
       <p class="zenith-eyebrow">{{ eyebrow | escape | replace: '[customers]', settings.customer_count | replace: 'Money-Back', '<span class="zenith-nowrap">Money-Back</span>' | replace: 'Money-back', '<span class="zenith-nowrap">Money-back</span>' }}</p>
     {%- endif -%}
     {%- if heading_mobile != blank -%}
-      {%- if heading != blank -%}
-        <{{ heading_tag }} class="zenith-heading__title zenith-hide-mobile">{{ heading | escape | replace: '[customers]', settings.customer_count | replace: 'Money-Back', '<span class="zenith-nowrap">Money-Back</span>' | replace: 'Money-back', '<span class="zenith-nowrap">Money-back</span>' }}</{{ heading_tag }}>
-      {%- endif -%}
-      <{{ heading_tag }} class="zenith-heading__title zenith-hide-desktop">{{ heading_mobile | escape | replace: '[customers]', settings.customer_count | replace: 'Money-Back', '<span class="zenith-nowrap">Money-Back</span>' | replace: 'Money-back', '<span class="zenith-nowrap">Money-back</span>' }}</{{ heading_tag }}>
+      {%- render 'zenith-heading-text', heading: heading, heading_mobile: heading_mobile, tag: heading_tag, class: 'zenith-heading__title' -%}
     {%- elsif heading != blank -%}
       <{{ heading_tag }} class="zenith-heading__title">{{ heading | escape | replace: '[customers]', settings.customer_count | replace: 'Money-Back', '<span class="zenith-nowrap">Money-Back</span>' | replace: 'Money-back', '<span class="zenith-nowrap">Money-back</span>' }}</{{ heading_tag }}>
     {%- endif -%}
