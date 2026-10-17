@@ -93,7 +93,7 @@
           "settings": {
             "title": "Will this work even if I've never used skincare before?",
             "content_source": "custom",
-            "text": "<p>Yes. Most of our users started with just soap and water. We formulated this with 0.2% Retinol and 5% Tallow to do the heavy lifting while you sleep with no complicated routines needed.</p>",
+            "text": "<p>Yes. Most of our users started with just soap and water.</p>",
             "open": true,
             "hide_on_mobile": true,
             "hide_on_desktop": true

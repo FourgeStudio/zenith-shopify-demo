@@ -147,7 +147,7 @@
           "type": "question",
           "settings": {
             "question": "Will the tallow feel greasy?",
-            "answer": "<p>Yes. It is a simple first step for men new to skincare. Use it morning and night.</p>",
+            "answer": "<p>No. It conditions while you wash and rinses off with the lather. Skin feels clean and soft, not coated.</p>",
             "open": false
           }
         },
@@ -791,6 +791,20 @@
     },
     "reviews": {
       "type": "zenith-reviews",
+      "blocks": {
+        "judge_me_reviews_review_widget_zn": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "real_data",
+            "max_width": 1200,
+            "show_shop_reviews": true,
+            "empty_state": "other_products_reviews"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_zn"
+      ],
       "settings": {
         "jdgm_product": "zenith-anti-aging-tallow-cleanser",
         "eyebrow": "",
@@ -834,21 +848,7 @@
         "padding_bottom": 52,
         "padding_top_mobile": 24,
         "padding_bottom_mobile": 48
-      },
-      "blocks": {
-        "judge_me_reviews_review_widget_zn": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-            "review_data": "real_data",
-            "max_width": 1200,
-            "show_shop_reviews": true,
-            "empty_state": "other_products_reviews"
-          }
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_review_widget_zn"
-      ]
+      }
     },
     "guarantee": {
       "type": "zenith-feature-columns",

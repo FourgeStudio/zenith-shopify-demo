@@ -947,7 +947,7 @@
             "icon": "qr",
             "icon_text": "",
             "title": "",
-            "text": "<p>Every box features a unique, tamper-proof QR code. Scan it upon arrival to instantly verify your gear is 100% authentic.</p>"
+            "text": "<p>Every box has its own QR code. Scan it when it arrives to check it is a real Zenith product.</p>"
           }
         },
         "column_4": {
@@ -1017,7 +1017,7 @@
         "logo_ninjavan"
       ],
       "settings": {
-        "content_source": "global",
+        "content_source": "custom",
         "eyebrow": "",
         "heading": "The Zenith Guarantee",
         "heading_mobile": "The Zenith Guarantee",
