@@ -503,9 +503,9 @@
     "faq8_answer": "<p>Metro Manila orders arrive in about 3 days. Visayas and Mindanao in 3 to 7 days.</p>",
     "faq9_question": "What is your return policy?",
     "faq9_answer": "<p>Every order carries the Zenith Money-Back Guarantee. Skin products are covered for 30 days and hair products for 60 days. Full terms on our <a href=\"/policies/refund-policy\">Refunds and Returns</a> page.</p>",
-    "logo": "shopify://shop_images/header-logo.webp",
+    "logo": "shopify://shop_images/Zenith_Primary_White_2x_c04095db-168f-4151-b6ba-567219bef975.png",
     "logo_width": 120,
-    "favicon": "shopify://shop_images/Logo_2.png",
+    "favicon": "shopify://shop_images/zenith_favicon.webp",
     "type_header_font": "assistant_n4",
     "heading_scale": 120,
     "type_body_font": "assistant_n4",
@@ -638,6 +638,13 @@
       }
     },
     "content_for_index": [],
+    "blocks": {
+      "14060646107696862457": {
+        "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+        "disabled": false,
+        "settings": {}
+      }
+    },
     "color_schemes": {
       "scheme-1": {
         "settings": {
@@ -715,13 +722,6 @@
           "secondary_button_label": "#ffffff",
           "shadow": "#000000"
         }
-      }
-    },
-    "blocks": {
-      "14060646107696862457": {
-        "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-        "disabled": false,
-        "settings": {}
       }
     }
   },
