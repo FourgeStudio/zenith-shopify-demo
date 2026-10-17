@@ -547,14 +547,14 @@
           "type": "question",
           "settings": {
             "question": "Different from drugstore brands?",
-            "answer": "<p>Drugstore products are built for mass appeal and the lowest possible cost. Zenith formulas are built specifically for the Philippine climate and the realities of men over 35. We use higher-grade ingredients with absolutely zero unnecessary fillers.</p>"
+            "answer": "<p>Drugstore products are built for mass appeal and the lowest possible cost. Ours are formulated specifically for the Philippine climate and the needs of men over 35. We use higher-grade ingredients without the unnecessary fillers.</p>"
           }
         },
         "question_2": {
           "type": "question",
           "settings": {
             "question": "Safe for sensitive skin?",
-            "answer": "<p>Yes. Every product is tested in tropical humidity and designed to be gentle. We avoid harsh sulfates and synthetic fragrances that cause irritation. If your skin reacts, the Zenith Money-Back Guarantee has you covered.</p>"
+            "answer": "<p>Yes. Every product is made to be gentle. Check the full ingredient list first and do a small patch test. If your skin reacts, the Zenith Money-Back Guarantee has you covered.</p>"
           }
         },
         "question_3": {
@@ -568,7 +568,7 @@
           "type": "question",
           "settings": {
             "question": "What is coming next?",
-            "answer": "<p>We are developing a full body wash, a deodorant that respects your skin, and a shave cream that reduces razor burn. The toothpaste is in final testing. Sign up for notifications on the product page to know the moment they launch.</p>"
+            "answer": "<p>We are developing a full body wash, a deodorant that respects your skin, and a shave cream. The toothpaste is in final testing. Sign up for notifications on the product page to know the moment they launch.</p>"
           }
         },
         "question_5": {
@@ -587,7 +587,7 @@
         "question_5"
       ],
       "settings": {
-        "content_source": "global",
+        "content_source": "custom",
         "eyebrow": "",
         "heading": "Frequently Asked Questions",
         "subheading": "<p>No-nonsense answers about your daily essentials.</p>",
