@@ -217,3 +217,10 @@
 .zenith-icon-bar--static .zenith-icon-bar__list::-webkit-scrollbar {
   display: none;
 }
+
+/* Visitors who ask for less motion get a still row (QA A-06) */
+@media (prefers-reduced-motion: reduce) {
+  .zenith-icon-bar__track {
+    animation: none !important;
+  }
+}

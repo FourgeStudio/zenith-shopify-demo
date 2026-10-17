@@ -7,7 +7,8 @@
     <meta name="theme-color" content="">
     <link rel="canonical" href="{{ canonical_url }}">
     {%- comment -%} zenith: post-conversion pages stay out of search results {%- endcomment -%}
-    {%- if template.suffix contains 'thank-you' -%}
+    {%- comment -%} zenith: Shopify's default "Home page" and "all" collections duplicate Shop All (QA B-08) {%- endcomment -%}
+    {%- if template.suffix contains 'thank-you' or collection.handle == 'frontpage' or collection.handle == 'all' -%}
       <meta name="robots" content="noindex, follow">
     {%- endif -%}
 
@@ -24,9 +25,23 @@
       {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
     </title>
 
-    {% if page_description %}
-      <meta name="description" content="{{ page_description | escape }}">
-    {% endif %}
+    {%- comment -%} zenith: policy pages have no SEO field in Shopify, so their descriptions live here (QA B-06) {%- endcomment -%}
+    {%- liquid
+      assign meta_desc = page_description
+      case request.path
+        when '/policies/privacy-policy'
+          assign meta_desc = 'How Zenith collects, uses and protects your personal information when you visit our store, place an order or contact us, and the choices you have.'
+        when '/policies/shipping-policy'
+          assign meta_desc = 'Zenith ships nationwide in the Philippines. Orders ship within 1–2 business days; delivery takes 2–3 business days in Luzon. Cash on Delivery available.'
+        when '/policies/terms-of-service'
+          assign meta_desc = 'The terms that apply when you browse the Zenith online store, place an order or use our services. Please read them before you buy.'
+        when '/policies/refund-policy'
+          assign meta_desc = 'Use it as directed and not happy with your results? Get a refund under the Zenith Money-Back Guarantee: 30 days for skin products, 60 days for hair.'
+      endcase
+    -%}
+    {%- if meta_desc != blank -%}
+      <meta name="description" content="{{ meta_desc | escape }}">
+    {%- endif -%}
 
     {% render 'meta-tags' %}
 
@@ -329,7 +344,8 @@
       {{ 'component-cart.css' | asset_url | stylesheet_tag }}
       {{ 'component-totals.css' | asset_url | stylesheet_tag }}
       {{ 'component-price.css' | asset_url | stylesheet_tag }}
-      {{ 'component-discounts.css' | asset_url | stylesheet_tag }}
+      {%- comment -%}zenith: discount lines only show inside the opened drawer, so this one loads without blocking the first paint (QA B-01){%- endcomment -%}
+      <link rel="stylesheet" href="{{ 'component-discounts.css' | asset_url }}" media="print" onload="this.media='all'">
     {%- endif -%}
 
     {%- comment -%} zenith: Dawn font preloads removed; brand fonts are self-hosted and preloaded above via zenith-base.css {%- endcomment -%}

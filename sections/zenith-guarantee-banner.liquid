@@ -40,7 +40,7 @@
     <div class="zenith-guarantee__band color-{{ section.settings.band_color_scheme }}">
       <div class="zenith-guarantee__badge">
         {%- if gb_image != blank -%}
-          {%- comment -%} Seal repeats the heading, so it is decorative unless the image has its own alt text {%- endcomment -%}
+          {%- comment -%} Seal repeats the heading, so it is decorative: empty alt (QA A-01) {%- endcomment -%}
           {{
             gb_image
             | image_url: width: 800
@@ -48,7 +48,7 @@
               loading: 'lazy',
               widths: '160, 240, 320, 480, 600, 800',
               sizes: '(min-width: 750px) 400px, 160px',
-              alt: gb_image.alt
+              alt: ''
           }}
         {%- else -%}
           <div class="zenith-guarantee__badge-placeholder" aria-hidden="true">

@@ -45,7 +45,7 @@
     <zenith-video
       class="zenith-media zenith-video-card__media"
       {% if yt_src != blank %}
-        data-youtube-src="{{ yt_src }}" data-title="{{ title | default: author | escape }}"
+        data-youtube-src="{{ yt_src }}" data-title="{{ title | default: 'Review video' | escape }}{% if author != blank %} – {{ author | strip_html | escape }}{% endif %}"
       {% endif %}
     >
       {%- if yt_src != blank -%}

@@ -1836,6 +1836,24 @@ cart-remove-button .button,
   right: 0;
 }
 
+/* Dots set smaller than 24px wide by a section still get a 24px-wide hit area (QA A-03) */
+.zenith-carousel__dot::after {
+  left: min(0px, calc((100% - 2.4rem) / 2));
+  right: min(0px, calc((100% - 2.4rem) / 2));
+}
+
+/* Links / buttons inside boxes that clip (video cards, media tiles): ring drawn inward so it shows (QA A-05) */
+.zenith-video-card__play:focus-visible,
+.zenith-video-card :focus-visible,
+.zenith-footer__logo-link:focus-visible {
+  outline-offset: -3px;
+}
+
+/* Anchor jumps and tabbing never hide the target under the sticky header (QA A-09) */
+html {
+  scroll-padding-top: calc(var(--header-height, 7.2rem) + var(--z-ann-h, 0px) + var(--z-space-4, 1.6rem));
+}
+
 .button.zenith-btn--small::before,
 .button.zenith-btn--icon-only::before,
 cart-remove-button .button::before {
