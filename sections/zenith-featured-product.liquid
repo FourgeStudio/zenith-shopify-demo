@@ -73,7 +73,7 @@
 
 <section
   id="Zenith-{{ section.id }}"
-  class="zenith-section zenith-fp zenith-fp--fit-{{ s.image_fit }} zenith-fp--d-{{ s.media_ratio | default: 'fill' }} zenith-fp--m-{{ s.media_ratio_mobile }}{% if s.image_position == 'left' %} zenith-fp--image-left{% endif %}{% if s.mobile_image_first %} zenith-fp--m-image-first{% endif %}"
+  class="zenith-section zenith-fp zenith-fp--fit-{{ s.image_fit }} zenith-fp--d-{{ s.media_ratio | default: 'fill' }} zenith-fp--m-{{ s.media_ratio_mobile }}{% if s.image_position == 'left' %} zenith-fp--image-left{% endif %}{% if s.mobile_image_first %} zenith-fp--m-image-first{% endif %}{% if s.content_position == 'center' %} zenith-fp--content-center{% endif %}"
 >
   <div class="{% unless s.full_width %}page-width{% endunless %}">
     <div class="zenith-fp__grid">
@@ -386,6 +386,17 @@
       "step": 20,
       "unit": "px",
       "default": 500
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "Content position",
+      "info": "Where the text block sits in its panel. The text inside stays left-aligned.",
+      "default": "left",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ]
     },
     {
       "type": "range",
