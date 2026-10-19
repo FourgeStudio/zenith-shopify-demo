@@ -2253,6 +2253,7 @@ body cart-drawer cart-drawer-items .zenith-cart-offers::after {
 
 body cart-drawer cart-drawer-items .zenith-cart-offers__box {
   margin-inline: 0; /* edges in line with the title and the close button; bar, divider and items sit 1.3rem further in (design) */
+  border: 0;
   padding: 0.8rem 1.8rem;
 }
 
