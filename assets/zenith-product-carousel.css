@@ -81,8 +81,9 @@
 }
 
 .zenith-pc .zenith-card__title {
+  /* Same card format as the collection grids (client 2026-10-19): 1.15 on phones, 1.55 on desktop */
   font-weight: 600;
-  line-height: 1.4;
+  line-height: 1.15;
   letter-spacing: 0;
 }
 
@@ -101,7 +102,15 @@
 }
 
 .zenith-pc .zenith-card__info .zenith-stars {
-  margin: var(--z-space-1) 0;
+  margin: 0 0 4px;
+}
+
+.zenith-pc .zenith-card__rating {
+  margin-bottom: 4px;
+}
+
+.zenith-pc .zenith-card__rating .zenith-stars {
+  margin: 0;
 }
 
 /* Card stars a bit larger than the base 12px (client 2026-10-19), same as the collection grids */
@@ -121,10 +130,20 @@
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
-  gap: 0 var(--z-space-1);
-  font-weight: 500;
+  gap: 0 var(--z-space-2);
+  font-weight: 400;
   line-height: 1.4;
   color: rgba(var(--color-foreground), 0.7); /* same fade as the section subheading */
+}
+
+@media screen and (min-width: 750px) {
+  .zenith-pc .zenith-card__title {
+    line-height: 1.55;
+  }
+
+  .zenith-pc .zenith-card__price {
+    margin-top: 6px;
+  }
 }
 
 .zenith-pc .zenith-card__price s {
