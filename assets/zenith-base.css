@@ -2232,7 +2232,7 @@ body cart-drawer cart-drawer-items {
 }
 
 body cart-drawer cart-drawer-items .zenith-cart-offers {
-  padding: 0.8rem 0 2rem;
+  padding: 1.4rem 0 2rem;
   border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.15);
 }
 
@@ -2260,6 +2260,11 @@ cart-drawer .drawer__inner .cart-item {
   column-gap: 2rem;
 }
 
+/* Dawn pads every cell after the first by 1rem: the text sat 3rem from the photo and the bin wrapped under the stepper */
+html body cart-drawer .cart-item > td + td {
+  padding-left: 0;
+}
+
 @media screen and (max-width: 749px) {
   cart-drawer .drawer__inner .drawer__header {
     min-height: 0;
@@ -2267,7 +2272,7 @@ cart-drawer .drawer__inner .cart-item {
   }
 
   body cart-drawer cart-drawer-items .zenith-cart-offers {
-    padding: 0.8rem 0 2rem;
+    padding: 1.4rem 0 2rem;
   }
 
   body cart-drawer cart-drawer-items .zenith-cart-offers__box {
