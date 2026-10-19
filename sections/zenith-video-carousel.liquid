@@ -71,21 +71,89 @@
   assign card_count = 0
 -%}
 
-{%- capture cards -%}
-  {%- if section.settings.content_source == 'custom' -%}
-    {%- for block in section.blocks -%}
-      {%- liquid
-        if filter_on
-          if block.settings.product == blank
-            continue
-          endif
-          assign needle = ',' | append: block.settings.product.handle | append: ','
-          unless filter_key contains needle
-            continue
-          endunless
+{%- liquid
+  # Which cards exist (custom blocks or global slots 1–20) and which match the product filter.
+  # The filter no longer hides cards: every video shows, and the matching ones sit in the middle of the row,
+  # where the carousel opens (client 2026-10-19). No filter = the usual order.
+  assign vc_match = ''
+  assign vc_other = ''
+  if section.settings.content_source == 'custom'
+    for block in section.blocks
+      assign vc_hit = false
+      if filter_on and block.settings.product != blank
+        assign needle = ',' | append: block.settings.product.handle | append: ','
+        if filter_key contains needle
+          assign vc_hit = true
         endif
-        assign card_count = card_count | plus: 1
-      -%}
+      endif
+      if vc_hit
+        assign vc_match = vc_match | append: forloop.index0 | append: ','
+      else
+        assign vc_other = vc_other | append: forloop.index0 | append: ','
+      endif
+    endfor
+  else
+    for i in (1..20)
+      assign p = 'vt' | append: i | append: '_'
+      assign k_video = p | append: 'video'
+      assign k_youtube = p | append: 'youtube'
+      assign k_cover = p | append: 'cover'
+      assign k_quote = p | append: 'quote'
+      assign k_product = p | append: 'product'
+      if settings[k_video] == blank and settings[k_youtube] == blank and settings[k_cover] == blank and settings[k_quote] == blank
+        continue
+      endif
+      assign vc_hit = false
+      assign slot_product = settings[k_product]
+      if filter_on and slot_product != blank
+        assign needle = ',' | append: slot_product.handle | append: ','
+        if filter_key contains needle
+          assign vc_hit = true
+        endif
+      endif
+      if vc_hit
+        assign vc_match = vc_match | append: i | append: ','
+      else
+        assign vc_other = vc_other | append: i | append: ','
+      endif
+    endfor
+  endif
+  assign vc_match = vc_match | split: ','
+  assign vc_other = vc_other | split: ','
+  assign vc_half = vc_other.size | divided_by: 2
+  if vc_match.size == 0
+    assign vc_half = vc_other.size
+  endif
+  # Order: first half of the others, the matching ones, the rest of the others
+  assign vc_order = ''
+  for k in vc_other limit: vc_half
+    assign vc_order = vc_order | append: k | append: ','
+  endfor
+  for k in vc_match
+    assign vc_order = vc_order | append: k | append: ','
+  endfor
+  for k in vc_other offset: vc_half
+    assign vc_order = vc_order | append: k | append: ','
+  endfor
+  assign vc_order = vc_order | split: ','
+  assign card_count = vc_order.size
+  # Open with the matching cards centred: desktop shows `cols` cards, so start that many before them
+  assign vc_match_start = vc_half | plus: 1
+  assign vc_pad = cols | minus: vc_match.size | divided_by: 2
+  if vc_pad < 0
+    assign vc_pad = 0
+  endif
+  assign vc_center_start = vc_match_start | minus: vc_pad
+  if vc_center_start < 1
+    assign vc_center_start = vc_center_start | plus: card_count
+  endif
+-%}
+
+{%- capture cards -%}
+  {%- for k in vc_order -%}
+    {%- if section.settings.content_source == 'custom' -%}
+      {%- assign bi = k | plus: 0 -%}
+      {%- assign block = section.blocks[bi] -%}
       {%- capture attrs %}id="Block-{{ block.id }}" {{ block.shopify_attributes }}{% endcapture -%}
       {%- render 'zenith-video-card',
         video: block.settings.video,
@@ -103,12 +171,9 @@
         play_label: play_label,
         show_play_without_video: show_play
       -%}
-    {%- endfor -%}
-  {%- else -%}
-    {%- comment -%} Global: Theme settings → Zenith · Video testimonials, slots 1–20; empty slots are skipped {%- endcomment -%}
-    {%- for i in (1..20) -%}
+    {%- else -%}
       {%- liquid
-        assign p = 'vt' | append: i | append: '_'
+        assign p = 'vt' | append: k | append: '_'
         assign k_video = p | append: 'video'
         assign k_youtube = p | append: 'youtube'
         assign k_cover = p | append: 'cover'
@@ -118,22 +183,8 @@
         assign k_author = p | append: 'author'
         assign k_product = p | append: 'product'
         assign k_thumb = p | append: 'thumb'
-        if settings[k_video] == blank and settings[k_youtube] == blank and settings[k_cover] == blank and settings[k_quote] == blank
-          continue
-        endif
-        if filter_on
-          assign slot_product = settings[k_product]
-          if slot_product == blank
-            continue
-          endif
-          assign needle = ',' | append: slot_product.handle | append: ','
-          unless filter_key contains needle
-            continue
-          endunless
-        endif
-        assign card_count = card_count | plus: 1
       -%}
-      {%- capture attrs %}id="VideoSlot-{{ i }}-{{ section.id }}"{% endcapture -%}
+      {%- capture attrs %}id="VideoSlot-{{ k }}-{{ section.id }}"{% endcapture -%}
       {%- render 'zenith-video-card',
         video: settings[k_video],
         youtube_url: settings[k_youtube],
@@ -150,8 +201,8 @@
         play_label: play_label,
         show_play_without_video: show_play
       -%}
-    {%- endfor -%}
-  {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
 {%- endcapture -%}
 
 {%- comment -%} No matching videos (e.g. a product page without videos): the section isn't shown; the editor gets a note. {%- endcomment -%}
@@ -188,8 +239,13 @@
         if section.settings.content_source != 'custom'
           assign vc_start = settings.vt_start_slide | default: vc_start
         endif
+        assign vc_start_m = vc_start
+        if vc_match.size > 0
+          assign vc_start = vc_center_start
+          assign vc_start_m = vc_match_start
+        endif
       -%}
-      <zenith-carousel data-loop data-autoplay="{{ section.settings.autoplay }}" data-pause-button="false" data-slide-label="Video" data-start="{{ vc_start }}">
+      <zenith-carousel data-loop data-autoplay="{{ section.settings.autoplay }}" data-pause-button="false" data-slide-label="Video" data-start="{{ vc_start }}" data-start-mobile="{{ vc_start_m }}">
         <ul class="zenith-carousel__track" role="list">
           {{- cards -}}
         </ul>
@@ -260,7 +316,7 @@
           "label": "The product or collection on this page"
         }
       ],
-      "info": "Uses each video's Featured product. \"The product or collection on this page\": on a product page that product, on a collection page the products in that collection; elsewhere all videos show. With no matching videos the section is hidden."
+      "info": "Uses each video's Featured product. \"The product or collection on this page\": on a product page that product, on a collection page the products in that collection. Every video still shows: the matching ones sit in the middle of the row, where it opens. No match = the usual order."
     },
     {
       "type": "product_list",
