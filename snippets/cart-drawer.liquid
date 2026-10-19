@@ -30,7 +30,8 @@
     >
       {%- comment -%} zenith: no separate empty screen — the drawer keeps its layout (offers from ₱0, empty message, suggestions, ₱0 totals) {%- endcomment -%}
       <div class="drawer__header">
-        <h2 class="drawer__heading">{{ 'sections.cart.title' | t }}</h2>
+        {%- comment -%} zenith: not an <h2> — the drawer is in every page's HTML, so SEO tools listed "Your cart" as a page heading {%- endcomment -%}
+        <p class="drawer__heading h2" role="heading" aria-level="2">{{ 'sections.cart.title' | t }}</p>
         <button
           class="drawer__close"
           type="button"
@@ -532,7 +533,7 @@
           </div>
 
           <div class="totals" role="status">
-            <h2 class="totals__total">{{ 'sections.cart.estimated_total' | t }}</h2>
+            <p class="totals__total h2" role="heading" aria-level="2">{{ 'sections.cart.estimated_total' | t }}</p>
             <p class="totals__total-value">{{ cart.total_price | money_without_trailing_zeros }}</p>
           </div>
 
