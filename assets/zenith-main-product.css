@@ -340,9 +340,14 @@
   line-height: 1;
 }
 
-.zenith-mp__eyebrow-stars .zenith-stars__icons svg {
-  width: var(--z-mp-star-m, 14px);
-  height: var(--z-mp-star-m, 14px);
+/* Same size as the Judge.me summary stars (Figma); beats the rating-row star size settings */
+.zenith-mp__rating .zenith-mp__eyebrow-stars .zenith-stars__icons {
+  gap: 1px;
+}
+
+.zenith-mp__rating .zenith-mp__eyebrow-stars .zenith-stars__icons svg {
+  width: 15px;
+  height: 15px;
 }
 
 .zenith-mp__eyebrow-score {
