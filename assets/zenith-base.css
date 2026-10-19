@@ -2411,3 +2411,36 @@ cart-items .cart__items {
     padding-top: 2.4rem;
   }
 }
+
+/* ---------- Cart (drawer + page): skeleton while a line updates ----------
+   cart.js un-hides the line's .loading__spinner while a quantity change / removal is in flight; the "Best used with"
+   Add button gets .loading. Meanwhile the content fades out and each cell shows a shimmer block (content box only,
+   so the cell padding stays as gaps between the blocks). */
+.cart-item:has(.loading__spinner:not(.hidden)) > td,
+.zenith-cart-upsell__item:has(.zenith-cart-upsell__add.loading) {
+  background: linear-gradient(
+      90deg,
+      rgba(var(--color-foreground), 0.06) 25%,
+      rgba(var(--color-foreground), 0.14) 50%,
+      rgba(var(--color-foreground), 0.06) 75%
+    )
+    0 0 / 200% 100% content-box;
+  animation: zenith-cart-shimmer 1.2s linear infinite;
+}
+
+.cart-item:has(.loading__spinner:not(.hidden)) > td > *,
+.zenith-cart-upsell__item:has(.zenith-cart-upsell__add.loading) > * {
+  opacity: 0;
+}
+
+@keyframes zenith-cart-shimmer {
+  from { background-position: 100% 0; }
+  to { background-position: -100% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cart-item:has(.loading__spinner:not(.hidden)) > td,
+  .zenith-cart-upsell__item:has(.zenith-cart-upsell__add.loading) {
+    animation: none;
+  }
+}
