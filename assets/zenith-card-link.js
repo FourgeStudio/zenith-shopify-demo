@@ -1,4 +1,4 @@
-/* Zenith: whole-card click for review and video cards.
+/* Zenith: whole-card click for review cards. (Video cards: only the product photo and name link, client 2026-10-19.)
    A click anywhere on the card follows the card's own link (review: the "Used" product link; video: the title
    link), except on real controls (links, buttons, the playing video) and the video area, which plays the video.
    The link itself stays the keyboard / screen-reader target. */
@@ -8,7 +8,6 @@
 
   const CARDS = [
     { card: '.zenith-results__card', link: 'a.zenith-results__meta' },
-    { card: '.zenith-video-card', link: 'a.zenith-video-card__title', ignore: '.zenith-video-card__media' },
   ];
   const CONTROLS = 'a, button, input, select, textarea, label, iframe, video, [role="button"]';
 
