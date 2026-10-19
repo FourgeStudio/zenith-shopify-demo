@@ -1186,13 +1186,13 @@ div.zenith-cart-offers__fill {
    The item list scrolls; its thin scrollbar sat flush against the prices and the last checkpoint label.
    The list reaches 1rem into the drawer's side padding and gives it back as padding, so the bar runs in the
    margin with a gap; the gutter is reserved so nothing shifts when the scrollbar appears.
-   Body inset (--zcd-inset): the list and the summary sit in from the drawer edges; header and the
-   Check out button keep the full width. */
+   Body inset (--zcd-inset): the list itself has no side inset (the goal box at the top keeps the full width);
+   the blocks inside it carry the inset. Header and the Check out button keep the full width. */
 cart-drawer-items {
   --zcd-inset: 1.2rem;
   margin-right: -1rem;
-  padding-left: var(--zcd-inset);
-  padding-right: calc(1rem + var(--zcd-inset));
+  padding-left: 0;
+  padding-right: 1rem;
   scrollbar-gutter: stable;
 }
 
@@ -1200,9 +1200,17 @@ cart-drawer-items {
   padding-inline: 1.2rem;
 }
 
-/* The goal box at the top stays full width. */
-cart-drawer-items .zenith-cart-offers__box {
-  margin-inline: calc(var(--zcd-inset) * -1);
+cart-drawer-items .drawer__cart-items-wrapper,
+cart-drawer-items .zenith-cart-empty,
+cart-drawer-items > .zenith-cart-upsell {
+  width: auto;
+  margin-inline: var(--zcd-inset);
+}
+
+/* the bar keeps its 1.6rem room on the right for the end checkpoint's pop */
+body cart-drawer-items .zenith-cart-offers__steps {
+  margin-left: var(--zcd-inset);
+  margin-right: calc(var(--zcd-inset) + 1.6rem);
 }
 
 /* ---------- Cart drawer on phones (client feedback 2026-10-08) ----------
@@ -2232,12 +2240,18 @@ body cart-drawer cart-drawer-items {
 }
 
 body cart-drawer cart-drawer-items .zenith-cart-offers {
-  padding: 1.4rem 0 2rem;
-  border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.15);
+  padding: 1.4rem 0 0;
+}
+
+/* Divider under the bar, in line with the items (the goal box above it is full width) */
+body cart-drawer cart-drawer-items .zenith-cart-offers::after {
+  content: '';
+  display: block;
+  margin: 2rem var(--zcd-inset) 0;
+  border-top: 0.1rem solid rgba(var(--color-foreground), 0.15);
 }
 
 body cart-drawer cart-drawer-items .zenith-cart-offers__box {
-  margin-inline: -1.2rem; /* 1.6rem from the drawer edges on phones and desktop */
   padding: 0.8rem 1.8rem;
 }
 
@@ -2272,7 +2286,7 @@ html body cart-drawer .cart-item > td + td {
   }
 
   body cart-drawer cart-drawer-items .zenith-cart-offers {
-    padding: 1.4rem 0 2rem;
+    padding: 1.4rem 0 0;
   }
 
   body cart-drawer cart-drawer-items .zenith-cart-offers__box {
