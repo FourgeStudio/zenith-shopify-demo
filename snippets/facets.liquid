@@ -17,6 +17,12 @@
 {{ 'component-swatch.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
+  # zenith: search counts every match, including ones Shopify then leaves out of the list (e.g. a product hidden
+  # from search), so "4 results" showed over 3 cards. On a single page, count the results actually shown.
+  assign shown_count = results.results_count
+  if results.results_count and paginate.pages <= 1
+    assign shown_count = results.results.size
+  endif
   assign sort_by = results.sort_by | default: results.default_sort_by
   assign total_active_values = 0
   assign default_presentation = 'text'
@@ -426,7 +432,7 @@
             <h2 class="product-count__text text-body">
               <span id="ProductCountDesktop">
                 {%- if results.results_count -%}
-                  {{ 'templates.search.results_with_count' | t: terms: results.terms, count: results.results_count }}
+                  {{ 'templates.search.results_with_count' | t: terms: results.terms, count: shown_count }}
                 {%- elsif results.products_count == results.all_products_count -%}
                   {{ 'products.facets.product_count_simple' | t: count: results.products_count }}
                 {%- else -%}
@@ -496,7 +502,7 @@
                 </h2>
                 <p class="mobile-facets__count">
                   {%- if results.results_count -%}
-                    {{ 'templates.search.results_with_count' | t: terms: results.terms, count: results.results_count }}
+                    {{ 'templates.search.results_with_count' | t: terms: results.terms, count: shown_count }}
                   {%- elsif results.products_count == results.all_products_count -%}
                     {{ 'products.facets.product_count_simple' | t: count: results.products_count }}
                   {%- else -%}
@@ -884,7 +890,7 @@
         data-total-count="{{ results.all_products_count | default: results.products_count | default: results.results_count }}"
       >
         {%- if results.results_count -%}
-          {{ 'templates.search.results_with_count' | t: terms: results.terms, count: results.results_count }}
+          {{ 'templates.search.results_with_count' | t: terms: results.terms, count: shown_count }}
         {%- elsif results.products_count == results.all_products_count -%}
           {{ 'products.facets.product_count_simple' | t: count: results.products_count }}
         {%- else -%}

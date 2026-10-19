@@ -64,6 +64,13 @@
 {%- endstyle -%}
 
 {% paginate search.results by 24 %}
+  {%- comment -%} zenith: count only the results shown when they fit on one page (see snippets/facets) {%- endcomment -%}
+  {%- liquid
+    assign shown_count = search.results_count
+    if search.results_count and paginate.pages <= 1
+      assign shown_count = search.results.size
+    endif
+  -%}
   <div class="template-search{% unless search.performed and search.results_count > 0 %} template-search--empty{% endunless %} section-{{ section.id }}-padding">
     <div class="template-search__header page-width{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
       <h1 class="h2 center">
@@ -136,7 +143,7 @@
         {%- unless section.settings.enable_filtering or section.settings.enable_sorting -%}
           {%- if search.results_count > 0 -%}
             <p role="status">
-              {{ 'templates.search.results_with_count_and_term' | t: terms: search.terms, count: search.results_count }}
+              {{ 'templates.search.results_with_count_and_term' | t: terms: search.terms, count: shown_count }}
             </p>
           {%- endif -%}
         {%- endunless -%}
@@ -187,7 +194,7 @@
               <h2 class="product-count__text text-body">
                 <span id="ProductCountDesktop">
                   {%- if search.results_count -%}
-                    {{ 'templates.search.results_with_count' | t: terms: search.terms, count: search.results_count }}
+                    {{ 'templates.search.results_with_count' | t: terms: search.terms, count: shown_count }}
                   {%- elsif search.products_count == search.all_products_count -%}
                     {{ 'products.facets.product_count_simple' | t: count: search.products_count }}
                   {%- else -%}
