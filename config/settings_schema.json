@@ -120,23 +120,6 @@
         "label": "Show compare-at prices outside the cart",
         "info": "Off: product pages, product cards and featured products show only the selling price (the % OFF badges stay). The cart page and cart drawer always show the struck compare-at price.",
         "default": false
-      },
-      {
-        "type": "header",
-        "content": "Background noise"
-      },
-      {
-        "type": "checkbox",
-        "id": "zenith_noise",
-        "label": "Show noise texture",
-        "info": "A fine grain over the whole page, like the Figma background.",
-        "default": true
-      },
-      {
-        "type": "image_picker",
-        "id": "zenith_noise_image",
-        "label": "Noise image",
-        "info": "Tiles across the page at its own size and transparency, centred. Empty = built-in fine grain."
       }
     ]
   },
