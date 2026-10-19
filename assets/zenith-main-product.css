@@ -228,7 +228,7 @@
    strip margin + card padding (8px × 2) + the taller of the photo and name line + gap + two text lines */
 .zenith-mp__jdgm-strip.is-pending {
   --z-mp-rev-card-h: calc(
-    var(--z-mp-rev-pad-m, 8px) * 2 + max(var(--z-mp-rev-photo-m, 40px), var(--z-mp-rev-nfs-m, 13px) * 1.2 + 4px + var(--z-mp-rev-fs-m, 12px) * 2.7)
+    var(--z-mp-rev-pad-m, 8px) * 2 + max(var(--z-mp-rev-photo-m, 40px), var(--z-mp-rev-nfs-m, 13px) * 1.2 + 4px + var(--z-mp-rev-fs-m, 12px) * 1.35 * var(--z-mp-rev-lines, 3))
   );
   display: block;
   min-height: calc(var(--z-mp-rev-sp-m, 9px) + var(--z-mp-rev-card-h));
@@ -237,7 +237,7 @@
 @media screen and (min-width: 750px) {
   .zenith-mp__jdgm-strip.is-pending {
     --z-mp-rev-card-h: calc(
-      16px + max(var(--z-mp-rev-photo, 48px), var(--z-mp-rev-nfs, 16px) * 1.2 + 4px + var(--z-mp-rev-fs, 13px) * 2.7)
+      16px + max(var(--z-mp-rev-photo, 48px), var(--z-mp-rev-nfs, 16px) * 1.2 + 4px + var(--z-mp-rev-fs, 13px) * 1.35 * var(--z-mp-rev-lines, 3))
     );
     min-height: calc(var(--z-mp-rev-sp, 38px) + var(--z-mp-rev-card-h));
   }
@@ -270,10 +270,10 @@
 }
 
 .zenith-mp__review-text {
-  /* Two lines, then "…" — phones and desktop; long words break instead of pushing the card wider */
+  /* Set number of lines (Review text lines), then "…" — phones and desktop; long words break instead of pushing the card wider */
   display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
+  -webkit-line-clamp: var(--z-mp-rev-lines, 3);
+  line-clamp: var(--z-mp-rev-lines, 3);
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
