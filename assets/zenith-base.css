@@ -2257,6 +2257,11 @@ body cart-drawer cart-drawer-items .zenith-cart-offers__box {
   padding: 0.8rem 1.8rem;
 }
 
+/* Drawer shows the sub heading only (client 2026-10-19); the cart page keeps the heading */
+body cart-drawer cart-drawer-items .zenith-cart-offers__title {
+  display: none;
+}
+
 body cart-drawer cart-drawer-items .zenith-cart-offers__steps {
   margin-top: 1rem;
 }
