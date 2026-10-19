@@ -2214,12 +2214,32 @@ cart-drawer p.drawer__heading {
   font-size: calc(var(--font-heading-scale) * 1.6rem);
 }
 
-/* Cart drawer product names in the body font, like the "Best used with" items (client 2026-10-19); Dawn gives them the .h4 heading style */
-cart-drawer .cart-item__name.h4 {
-  font-family: var(--font-body-family);
-  font-weight: 700;
-  font-size: 1.4rem;
-  line-height: 1.3;
-  letter-spacing: 0;
-  text-transform: none;
+/* ---------- Cart drawer: Oct 19 design (client Figma, "updated" frame) ----------
+   Shorter header, goal box 1.6rem from the drawer edges right under it, body text 2.8rem in, a divider under the
+   progress bar, then the items. Phones and desktop. Element-qualified: component-cart-drawer.css loads after this file. */
+cart-drawer .drawer__inner .drawer__header {
+  min-height: 0;
+  padding: 1.2rem 0 0;
+}
+
+cart-drawer .drawer__inner p.drawer__heading {
+  margin: 0;
+}
+
+body cart-drawer cart-drawer-items {
+  --zcd-inset: 2.8rem;
+}
+
+body cart-drawer cart-drawer-items .zenith-cart-offers {
+  padding: 0.8rem 0 2rem;
+  border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.15);
+}
+
+body cart-drawer cart-drawer-items .zenith-cart-offers__box {
+  margin-inline: calc((var(--zcd-inset) - 1.6rem) * -1);
+  padding: 1rem 1.8rem;
+}
+
+body cart-drawer cart-drawer-items .zenith-cart-offers__steps {
+  margin-top: 1.6rem;
 }
