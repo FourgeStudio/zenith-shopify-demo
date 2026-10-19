@@ -182,17 +182,21 @@
 }
 
 .zenith-mp__review {
-  flex: 0 0 var(--z-mp-rev-w-m, 260px);
+  /* Phones: compact cards (QA 09 / Figma) — own photo, name and text sizes; desktop values in the 750px block */
+  --z-mp-rev-photo-c: var(--z-mp-rev-photo-m, 40px);
+  --z-mp-rev-nfs-c: var(--z-mp-rev-nfs-m, 13px);
+  --z-mp-rev-fs-c: var(--z-mp-rev-fs-m, 12px);
+  flex: 0 0 var(--z-mp-rev-w-m, 220px);
   scroll-snap-align: start;
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 8px;
+  padding: var(--z-mp-rev-pad-m, 8px);
   background: var(--z-mp-rev-bg, #202020);
 }
 
 .zenith-mp__review-photo {
-  flex: 0 0 var(--z-mp-rev-photo, 48px);
+  flex: 0 0 var(--z-mp-rev-photo-c, 48px);
   aspect-ratio: 1 / 1;
   background: #dbdbdb;
 }
@@ -205,7 +209,7 @@
   align-items: center;
   justify-content: center;
   font-family: var(--font-heading-family);
-  font-size: calc(var(--z-mp-rev-photo, 48px) * 0.5);
+  font-size: calc(var(--z-mp-rev-photo-c, 48px) * 0.5);
   line-height: 1;
   color: #121212;
   background: linear-gradient(90deg, var(--z-dawn-gold, #eabe5f), var(--z-gold, #c5930e));
@@ -224,7 +228,7 @@
    strip margin + card padding (8px × 2) + the taller of the photo and name line + gap + two text lines */
 .zenith-mp__jdgm-strip.is-pending {
   --z-mp-rev-card-h: calc(
-    16px + max(var(--z-mp-rev-photo, 48px), var(--z-mp-rev-nfs, 16px) * 1.2 + 4px + var(--z-mp-rev-fs, 13px) * 2.7)
+    var(--z-mp-rev-pad-m, 8px) * 2 + max(var(--z-mp-rev-photo-m, 40px), var(--z-mp-rev-nfs-m, 13px) * 1.2 + 4px + var(--z-mp-rev-fs-m, 12px) * 2.7)
   );
   display: block;
   min-height: calc(var(--z-mp-rev-sp-m, 9px) + var(--z-mp-rev-card-h));
@@ -232,6 +236,9 @@
 
 @media screen and (min-width: 750px) {
   .zenith-mp__jdgm-strip.is-pending {
+    --z-mp-rev-card-h: calc(
+      16px + max(var(--z-mp-rev-photo, 48px), var(--z-mp-rev-nfs, 16px) * 1.2 + 4px + var(--z-mp-rev-fs, 13px) * 2.7)
+    );
     min-height: calc(var(--z-mp-rev-sp, 38px) + var(--z-mp-rev-card-h));
   }
 }
@@ -249,7 +256,7 @@
 }
 
 .zenith-mp__review-name {
-  font-size: var(--z-mp-rev-nfs, 16px);
+  font-size: var(--z-mp-rev-nfs-c, 16px);
   font-weight: 500;
   color: var(--z-mp-rev-name, #c5930e);
   white-space: nowrap;
@@ -268,7 +275,7 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   margin: 4px 0 0;
-  font-size: var(--z-mp-rev-fs, 13px);
+  font-size: var(--z-mp-rev-fs-c, 13px);
   line-height: 1.35;
   color: rgba(var(--color-foreground), 0.75);
 }
@@ -1002,7 +1009,11 @@
   }
 
   .zenith-mp__review {
+    --z-mp-rev-photo-c: var(--z-mp-rev-photo, 48px);
+    --z-mp-rev-nfs-c: var(--z-mp-rev-nfs, 16px);
+    --z-mp-rev-fs-c: var(--z-mp-rev-fs, 13px);
     flex-basis: var(--z-mp-rev-w, 220px);
+    padding: 8px;
   }
 
   .zenith-mp__buy {

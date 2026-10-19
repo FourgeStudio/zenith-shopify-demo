@@ -94,6 +94,10 @@
   --z-mp-rev-sp: {{ s.review_spacing }}px;
   --z-mp-rev-sp-m: {{ s.review_spacing_mobile }}px;
   --z-mp-rev-photo: {{ s.review_photo_size }}px;
+  --z-mp-rev-photo-m: {{ s.review_photo_size_mobile | default: 40 }}px;
+  --z-mp-rev-nfs-m: {{ s.review_name_font_size_mobile | default: 13 }}px;
+  --z-mp-rev-fs-m: {{ s.review_text_font_size_mobile | default: 12 }}px;
+  --z-mp-rev-pad-m: {{ s.review_padding_mobile | default: 8 }}px;
   --z-mp-rev-bg: {{ s.card_background }};
   --z-mp-rev-name: {{ s.review_name_color }};
   --z-mp-rev-nfs: {{ s.review_name_font_size }}px;
@@ -1130,7 +1134,11 @@
     { "type": "range", "id": "thumb_width_mobile", "label": "Thumbnail width", "min": 48, "max": 120, "step": 1, "unit": "px", "default": 75 },
     { "type": "range", "id": "thumb_gap_mobile", "label": "Space between thumbnails", "min": 0, "max": 24, "step": 1, "unit": "px", "default": 6 },
     { "type": "range", "id": "thumb_spacing_mobile", "label": "Space above thumbnails", "min": 0, "max": 40, "step": 1, "unit": "px", "default": 9 },
-    { "type": "range", "id": "review_card_width_mobile", "label": "Review card width", "min": 140, "max": 320, "step": 4, "unit": "px", "default": 260 },
+    { "type": "range", "id": "review_card_width_mobile", "label": "Review card width", "min": 140, "max": 320, "step": 4, "unit": "px", "default": 220 },
+    { "type": "range", "id": "review_photo_size_mobile", "label": "Review photo size", "min": 24, "max": 80, "step": 2, "unit": "px", "default": 40 },
+    { "type": "range", "id": "review_name_font_size_mobile", "label": "Review name size", "min": 10, "max": 24, "step": 1, "unit": "px", "default": 13 },
+    { "type": "range", "id": "review_text_font_size_mobile", "label": "Review text size", "min": 10, "max": 20, "step": 1, "unit": "px", "default": 12 },
+    { "type": "range", "id": "review_padding_mobile", "label": "Review card padding", "min": 4, "max": 20, "step": 1, "unit": "px", "default": 8 },
     { "type": "range", "id": "review_spacing_mobile", "label": "Space above review strip", "min": 0, "max": 80, "step": 1, "unit": "px", "default": 9 },
     { "type": "range", "id": "check_size_mobile", "label": "Checklist icon size", "min": 12, "max": 32, "step": 1, "unit": "px", "default": 18 },
     { "type": "range", "id": "check_gap_mobile", "label": "Space between checklist items", "min": 4, "max": 32, "step": 1, "unit": "px", "default": 11 },
