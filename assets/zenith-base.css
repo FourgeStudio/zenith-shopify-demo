@@ -2339,8 +2339,11 @@ body cart-drawer .cart-items td {
   padding-top: 1.6rem;
 }
 
-/* Search results: product titles at the collection-grid size (17px phones / 22px desktop) */
+/* Search results: product titles like the collection grid (body font 500, 17px phones / 22px desktop) */
 .template-search__results .card__heading {
+  font-family: var(--font-body-family);
+  font-weight: 500;
+  letter-spacing: 0.02em;
   font-size: 1.7rem;
   line-height: 1.15;
 }
