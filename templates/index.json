@@ -1312,7 +1312,7 @@
         "subheading": "<p>The products men come back for. Simple routines, named ingredients.</p>",
         "subheading_mobile": "<p>The products men come back for. Simple. Effective. Proven.</p>",
         "view_all_label": "Shop All Products",
-        "view_all_link": "shopify://collections/shop-all",
+        "view_all_link": "shopify://collections",
         "collection": "shop-all",
         "product_list": [],
         "products_to_show": 10,
