@@ -94,6 +94,7 @@
   --z-mp-rev-sp: {{ s.review_spacing }}px;
   --z-mp-rev-sp-m: {{ s.review_spacing_mobile }}px;
   --z-mp-rev-photo: {{ s.review_photo_size }}px;
+  --z-mp-rev-lines: {{ s.review_text_lines | default: 3 }};
   --z-mp-rev-photo-m: {{ s.review_photo_size_mobile | default: 40 }}px;
   --z-mp-rev-nfs-m: {{ s.review_name_font_size_mobile | default: 13 }}px;
   --z-mp-rev-fs-m: {{ s.review_text_font_size_mobile | default: 12 }}px;
@@ -1121,6 +1122,7 @@
     { "type": "range", "id": "question_font_size", "label": "FAQ question size", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 17 },
     { "type": "range", "id": "question_text_font_size", "label": "FAQ answer size", "min": 11, "max": 22, "step": 1, "unit": "px", "default": 15 },
     { "type": "range", "id": "review_name_font_size", "label": "Review name size", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 15 },
+    { "type": "range", "id": "review_text_lines", "label": "Review text lines", "info": "Lines of review text before it ends in …, phones and desktop.", "min": 1, "max": 5, "step": 1, "default": 3 },
     { "type": "range", "id": "review_text_font_size", "label": "Review text size", "min": 10, "max": 20, "step": 1, "unit": "px", "default": 14 },
     { "type": "range", "id": "review_star_size", "label": "Review star size", "min": 8, "max": 20, "step": 1, "unit": "px", "default": 12 },
 
