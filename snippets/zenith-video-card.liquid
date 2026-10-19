@@ -146,13 +146,14 @@
       {%- if thumb != blank or title != blank or handle != blank -%}
         <div class="zenith-video-card__meta">
           {%- if thumb != blank -%}
-            <span class="zenith-video-card__thumb">
+            {%- comment -%} The product photo links to the product too (same link as the name; hidden from screen readers to avoid a double link) {%- endcomment -%}
+            {%- if title_link != blank -%}<a href="{{ title_link }}" class="zenith-video-card__thumb" tabindex="-1" aria-hidden="true">{%- else -%}<span class="zenith-video-card__thumb">{%- endif -%}
               {{
                 thumb
                 | image_url: width: 160
                 | image_tag: loading: 'lazy', widths: '80, 120, 160', sizes: '56px', alt: ''
               }}
-            </span>
+            {%- if title_link != blank -%}</a>{%- else -%}</span>{%- endif -%}
           {%- endif -%}
           <div class="zenith-video-card__info">
             {%- if title != blank -%}
