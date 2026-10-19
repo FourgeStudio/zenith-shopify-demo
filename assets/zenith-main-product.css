@@ -332,6 +332,24 @@
   display: none;
 }
 
+/* Stars + score beside the eyebrow (same look as the product cards) */
+.zenith-mp__eyebrow-stars {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  line-height: 1;
+}
+
+.zenith-mp__eyebrow-stars .zenith-stars__icons svg {
+  width: var(--z-mp-star-m, 14px);
+  height: var(--z-mp-star-m, 14px);
+}
+
+.zenith-mp__eyebrow-score {
+  font-size: 1.4rem;
+  color: rgba(var(--color-foreground), 0.85);
+}
+
 /* Rating text as the universal eyebrow (stars off): heading font, uppercase, Summit gold */
 .zenith-mp__rating--eyebrow .zenith-mp__rating-label {
   font-family: var(--font-heading-family);

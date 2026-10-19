@@ -394,6 +394,13 @@
             {%- if rating_label != blank -%}
               <span class="zenith-mp__rating-label{% unless mp_stars %} zenith-eyebrow{% endunless %}">{{ rating_label | escape }}</span>
             {%- endif -%}
+            {%- comment -%} Stars + score beside the eyebrow, like the product cards {%- endcomment -%}
+            {%- if mp_stars == false and s.show_eyebrow_stars != false and rating_value != blank -%}
+              <span class="zenith-mp__eyebrow-stars">
+                {%- render 'zenith-stars', rating: rating_value -%}
+                <span class="zenith-mp__eyebrow-score" aria-hidden="true">{{ rating_value | round: 1 }}</span>
+              </span>
+            {%- endif -%}
           </div>
         {%- endif -%}
 
@@ -793,6 +800,7 @@
       "default": "Zenith Anti-Aging Tallow Cream"
     },
     { "type": "checkbox", "id": "show_rating", "label": "Show eyebrow (rating text)", "default": true },
+    { "type": "checkbox", "id": "show_eyebrow_stars", "label": "Show stars + score beside the eyebrow", "info": "Same ★★★★★ 4.7 as the product cards. Uses the Judge.me rating, or the Rating value below.", "default": true },
     { "type": "checkbox", "id": "show_stars", "label": "Show star rating", "info": "Off = no stars on the product page (rating row and review cards); the rating text shows as a gold eyebrow above the title.", "default": false },
     {
       "type": "text",
