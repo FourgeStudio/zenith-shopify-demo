@@ -40,7 +40,7 @@
         "zenith_padding_x_mobile": 11,
         "zenith_logo_width_mobile": 114,
         "drawer_button_label": "Shop Zenith Products",
-        "drawer_button_link": "shopify://collections/shop-all",
+        "drawer_button_link": "shopify://collections/all",
         "drawer_button_product": "",
         "drawer_button_icon": "arrow_right",
         "drawer_show_social": true,

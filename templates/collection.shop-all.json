@@ -1299,7 +1299,7 @@
         "button_link": "",
         "button_product": "zenith-anti-aging-tallow-cream",
         "button_label_mobile": "Shop All Zenith Products",
-        "button_link_mobile": "shopify://collections/shop-all",
+        "button_link_mobile": "shopify://collections/all",
         "image": "shopify://shop_images/PDP1_-_IMG1g.png",
         "show_image": true,
         "icon": "none",
