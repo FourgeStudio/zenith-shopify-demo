@@ -187,13 +187,10 @@ a.zenith-results__meta:focus-visible {
   line-height: 0;
 }
 
-.zenith-results__star .zenith-icon {
+.zenith-results__star .zenith-icon,
+.zenith-results__star .zenith-star {
   width: var(--z-star-m, 1.1rem);
   height: var(--z-star-m, 1.1rem);
-}
-
-.zenith-results__star--off {
-  opacity: 0.3;
 }
 
 /* (0,1,0) beats Dawn's blockquote border + italic */
@@ -370,7 +367,8 @@ a.zenith-results__meta:focus-visible {
     padding: var(--z-rv-pad, 2rem);
   }
 
-  .zenith-results__star .zenith-icon {
+  .zenith-results__star .zenith-icon,
+  .zenith-results__star .zenith-star {
     width: var(--z-star, 1.4rem);
     height: var(--z-star, 1.4rem);
   }
