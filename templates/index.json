@@ -1158,7 +1158,7 @@
         "media_ratio": "square",
         "media_min_height": 540,
         "content_max_width": 500,
-        "content_position": "center",
+        "content_position": "left",
         "content_padding": 40,
         "content_gap": 12,
         "image_fit": "cover",
