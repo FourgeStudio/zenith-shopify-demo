@@ -189,7 +189,7 @@
   flex: 0 0 var(--z-mp-rev-w-m, 220px);
   scroll-snap-align: start;
   display: flex;
-  align-items: center;
+  align-items: flex-start; /* photo stays at the top however long the text is */
   gap: 10px;
   padding: var(--z-mp-rev-pad-m, 8px);
   background: var(--z-mp-rev-bg, #202020);
