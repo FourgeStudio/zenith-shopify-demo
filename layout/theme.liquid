@@ -7,8 +7,9 @@
     <meta name="theme-color" content="">
     <link rel="canonical" href="{{ canonical_url }}">
     {%- comment -%} zenith: post-conversion pages stay out of search results {%- endcomment -%}
-    {%- comment -%} zenith: Shopify's default "Home page" and "all" collections duplicate Shop All (QA B-08) {%- endcomment -%}
-    {%- if template.suffix contains 'thank-you' or collection.handle == 'frontpage' or collection.handle == 'all' -%}
+    {%- comment -%} zenith: Shopify's default "Home page" collection stays out of search (QA B-08). /collections/all is the one
+      all-products page (the Shop All collection has the handle "all"), so it is indexed. {%- endcomment -%}
+    {%- if template.suffix contains 'thank-you' or collection.handle == 'frontpage' -%}
       <meta name="robots" content="noindex, follow">
     {%- endif -%}
 
