@@ -5,16 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="">
-    {%- comment -%} zenith: Shopify's automatic /collections/all (and ?view=shop-all) repeats Shop All: point search engines
-      to /collections/shop-all, the one "all products" page (QA #11) {%- endcomment -%}
-    {%- if collection.handle == 'all' -%}
-      <link rel="canonical" href="{{ shop.url }}{{ routes.collections_url }}/shop-all">
-    {%- else -%}
-      <link rel="canonical" href="{{ canonical_url }}">
-    {%- endif -%}
+    <link rel="canonical" href="{{ canonical_url }}">
     {%- comment -%} zenith: post-conversion pages stay out of search results {%- endcomment -%}
-    {%- comment -%} zenith: Shopify's default "Home page" collection stays out of search (QA B-08); /collections/all uses the canonical above {%- endcomment -%}
-    {%- if template.suffix contains 'thank-you' or collection.handle == 'frontpage' -%}
+    {%- comment -%} zenith: Shopify's default "Home page" and "all" collections duplicate Shop All (QA B-08) {%- endcomment -%}
+    {%- if template.suffix contains 'thank-you' or collection.handle == 'frontpage' or collection.handle == 'all' -%}
       <meta name="robots" content="noindex, follow">
     {%- endif -%}
 

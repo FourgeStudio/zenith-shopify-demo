@@ -69,7 +69,7 @@
             {%- if cart == empty -%}
               <div class="zenith-cart-empty">
                 <p class="zenith-cart-empty__title">{{ 'sections.cart.empty' | t }}</p>
-                <a href="{{ routes.collections_url }}/shop-all" class="zenith-cart-empty__link">{{ 'general.continue_shopping' | t }}</a>
+                <a href="{{ routes.all_products_collection_url }}" class="zenith-cart-empty__link">{{ 'general.continue_shopping' | t }}</a>
               </div>
             {%- else -%}
               <div class="drawer__cart-items-wrapper">

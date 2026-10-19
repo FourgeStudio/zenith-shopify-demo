@@ -119,7 +119,7 @@
         "text": "<p>Everything you need to stay in your prime.</p>",
         "show_button": true,
         "button_label": "Shop Zenith Products",
-        "button_link": "shopify://collections/shop-all",
+        "button_link": "shopify://collections/all",
         "button_product": "",
         "button_label_mobile": "Shop Zenith Products",
         "button_link_mobile": "",
@@ -1957,7 +1957,7 @@
         "subheading": "",
         "subheading_mobile": "",
         "view_all_label": "Shop All Products",
-        "view_all_link": "shopify://collections/shop-all",
+        "view_all_link": "shopify://collections/all",
         "collection": "all",
         "product_list": [
           "zenith-anti-aging-tallow-cream",
