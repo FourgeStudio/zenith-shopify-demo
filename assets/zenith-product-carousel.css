@@ -1,4 +1,4 @@
-/* Zenith · Product carousel — per-instance values come from CSS vars on #Zenith-{{ section.id }} */
+/*  Zenith · Product carousel — per-instance values come from CSS vars on #Zenith-{{ section.id }} */
 .zenith-pc--portrait { --z-card-ratio: 4 / 5; }
 .zenith-pc--landscape { --z-card-ratio: 4 / 3; }
 
