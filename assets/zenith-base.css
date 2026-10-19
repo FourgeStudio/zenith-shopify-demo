@@ -2236,7 +2236,7 @@ body cart-drawer cart-drawer-items .zenith-cart-offers {
 }
 
 body cart-drawer cart-drawer-items .zenith-cart-offers__box {
-  margin-inline: calc((var(--zcd-inset) - 1.6rem) * -1);
+  margin-inline: -1.2rem; /* 1.6rem from the drawer edges on phones and desktop */
   padding: 1rem 1.8rem;
 }
 
@@ -2292,4 +2292,18 @@ cart-drawer .drawer__inner .cart-item {
   html .cart-drawer .quantity__input {
     font-size: 1.6rem;
   }
+}
+
+/* The table header row (screen-reader labels) took ~27px above the first item: kept for screen readers only;
+   first item 1.6rem under the divider (design) */
+body cart-drawer .cart-items thead {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+body cart-drawer .cart-items td {
+  padding-top: 1.6rem;
 }
