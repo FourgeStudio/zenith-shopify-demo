@@ -93,12 +93,12 @@
 .zenith-mp__gallery .zenith-carousel__dot {
   width: calc(var(--z-mp-dot-m, 7px) + 16px);
   height: var(--z-mp-dot-m, 7px);
-  --z-dot-c: var(--z-mp-dot-c, #c5c5c6);
+  --z-dot-c: var(--z-mp-dot-c, #f0e4c3);
 }
 
 .zenith-mp__gallery .zenith-carousel__dot[aria-current='true'] {
   width: calc(var(--z-mp-dotw-m, 60px) + 16px);
-  --z-dot-c: var(--z-mp-dot-ac, #010101);
+  --z-dot-c: var(--z-mp-dot-ac, #c5930e);
 }
 
 /* Thumbnails + review strip: scrolling rows that run to the screen edge on mobile */
