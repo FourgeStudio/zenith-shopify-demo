@@ -2366,3 +2366,48 @@ cart-items .cart-item__name.h4 {
     font-size: 2.4rem;
   }
 }
+
+/* ---------- Cart page follows the cart drawer (client 2026-10-19) ----------
+   Goal box: sub heading only, no border; a divider under the progress bar; no visible PRODUCT / QUANTITY / TOTAL
+   row (the th text stays for screen readers, every cell points at those ids); one divider under "Best used with". */
+.zenith-cart-offers--page .zenith-cart-offers__title {
+  display: none;
+}
+
+.zenith-cart-offers--page .zenith-cart-offers__box {
+  border: 0;
+}
+
+.zenith-cart-offers--page {
+  margin-bottom: 0;
+}
+
+.zenith-cart-offers--page::after {
+  content: '';
+  display: block;
+  margin-top: 2rem;
+  border-top: 0.1rem solid rgba(var(--color-foreground), 0.15);
+}
+
+cart-items table.cart-items thead th {
+  height: 0;
+  padding: 0;
+  border: 0;
+  font-size: 0;
+  line-height: 0;
+}
+
+cart-items table.cart-items thead tr {
+  margin-bottom: 2.4rem;
+  border: 0;
+}
+
+cart-items .cart__items {
+  border-bottom: 0;
+}
+
+@media screen and (min-width: 750px) {
+  cart-items table.cart-items td {
+    padding-top: 2.4rem;
+  }
+}
