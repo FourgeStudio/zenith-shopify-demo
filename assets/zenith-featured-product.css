@@ -385,3 +385,8 @@ zenith-fp-checks {
     aspect-ratio: auto;
   }
 }
+
+/* Content position: Center — the text block sits in the middle of its panel (text stays left-aligned) */
+.zenith-fp--content-center .zenith-fp__content {
+  justify-content: center;
+}
