@@ -289,12 +289,20 @@
 (function(){
   if(!('ResizeObserver' in window)){ return; }
   var queued=new Set(), frame=0;
+  /* Judge.me's Masonry slides cards into place with a CSS transition and only writes the final top/left when that
+     transition ends. The card CSS turns transitions off, so the end never came: cards kept a half-way transform and
+     overlapped. Masonry moves them instantly instead (transitionDuration 0) and any stuck transform is cleared. */
+  function fix(list){
+    var $=window.jdgm&&window.jdgm.$;
+    if(!$||!$.fn||!$.fn.masonry||!list.isConnected||!$(list).data('masonry')){ return; }
+    var m=$(list).data('masonry');
+    if(m.options&&m.options.transitionDuration!==0){ $(list).masonry('option',{ transitionDuration:0 }); }
+    for(var i=0;i<list.children.length;i++){ if(list.children[i].style.transform){ list.children[i].style.transform=''; } }
+    if(list.offsetParent){ $(list).masonry('layout'); }
+  }
   function flush(){
     frame=0;
-    var $=window.jdgm&&window.jdgm.$;
-    queued.forEach(function(list){
-      if($&&$.fn&&$.fn.masonry&&list.isConnected&&list.offsetParent&&$(list).data('masonry')){ $(list).masonry('layout'); }
-    });
+    queued.forEach(fix);
     queued.clear();
   }
   var ro=new ResizeObserver(function(entries){
@@ -307,6 +315,8 @@
       if(!seen.has(card)){ seen.add(card); ro.observe(card); }
     });
   }
-  var n=0, iv=setInterval(function(){ watch(); if(++n>60){ clearInterval(iv); } },500);
-  document.addEventListener('click',function(){ setTimeout(watch,1500); setTimeout(watch,4000); },true);
+  function all(){ watch(); document.querySelectorAll('.jdgm-rev-widg__reviews, .jdgm-all-reviews__body').forEach(fix); }
+  var n=0, iv=setInterval(function(){ all(); if(++n>60){ clearInterval(iv); } },500);
+  window.addEventListener('load',function(){ setTimeout(all,300); });
+  document.addEventListener('click',function(){ [800,1800,4000].forEach(function(t){ setTimeout(all,t); }); },true);
 })();
