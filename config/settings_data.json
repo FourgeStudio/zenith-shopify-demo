@@ -19,6 +19,7 @@
     "social_lazada_link": "https://www.lazada.com.ph/shop/tryzenithph/",
     "social_shopee_link": "https://shopee.ph/tryzenithph",
     "jdgm_custom_style": true,
+    "zenith_noise_image": "shopify://shop_images/noise-3.png",
     "cart_show_compare_price": true,
     "cart_shipping_fee": 100,
     "cart_shipping_province": "Metro Manila",

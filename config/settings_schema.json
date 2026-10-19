@@ -133,20 +133,10 @@
         "default": true
       },
       {
-        "type": "range",
-        "id": "zenith_noise_opacity",
-        "label": "Noise strength",
-        "min": 1,
-        "max": 30,
-        "step": 1,
-        "unit": "%",
-        "default": 6
-      },
-      {
         "type": "image_picker",
         "id": "zenith_noise_image",
-        "label": "Noise image (optional)",
-        "info": "Upload your own noise PNG (tiles across the page). Empty = built-in grain."
+        "label": "Noise image",
+        "info": "Tiles across the page at its own size and transparency, centred. Empty = built-in fine grain."
       }
     ]
   },

@@ -2203,3 +2203,13 @@ cart-remove-button .button:has(> .zenith-cart-icon-text--trash) {
   -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
   mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
 }
+
+/* Cart drawer title and total label are <p role="heading"> (not <h2>: the drawer sits in every page's HTML and
+   showed up as a page heading in SEO tools). Same look as the Dawn h2 they replace. */
+cart-drawer p.drawer__heading {
+  margin: 0 0 1rem;
+}
+
+.totals > p.totals__total {
+  font-size: calc(var(--font-heading-scale) * 1.6rem);
+}
