@@ -156,6 +156,17 @@
   margin-top: var(--z-pc-btnsp, var(--z-space-2));
 }
 
+/* Phones: same as the collection grid cards: price at the bottom of the text block, 6px above the button */
+@media screen and (max-width: 749px) {
+  .zenith-pc .zenith-card__price {
+    margin-top: auto;
+  }
+
+  .zenith-pc .zenith-card__form {
+    margin-top: 6px;
+  }
+}
+
 .zenith-pc .zenith-card .button.zenith-atc {
   min-height: var(--z-pc-btnh-m, 44px);
   padding-top: 0;
