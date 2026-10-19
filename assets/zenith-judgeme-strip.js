@@ -8,7 +8,11 @@
   // Same markup as snippets/zenith-stars.liquid; the star SVG comes from a <template data-star> in the strip.
   const stars = (n, svg) => {
     let out = `<span class="zenith-stars"><span class="zenith-stars__icons" role="img" aria-label="${n} out of 5 stars">`;
-    for (let i = 1; i <= 5; i++) out += `<span${i > n ? ' style="opacity: 0.3"' : ''}>${svg}</span>`;
+    // Each star filled to its share of the score (template = a full star; the gold layer is clipped)
+    for (let i = 1; i <= 5; i++) {
+      const pct = Math.round(Math.min(1, Math.max(0, n - (i - 1))) * 100);
+      out += `<span>${svg.replace('inset(0 0% 0 0)', `inset(0 ${100 - pct}% 0 0)`)}</span>`;
+    }
     return out + '</span></span>';
   };
 

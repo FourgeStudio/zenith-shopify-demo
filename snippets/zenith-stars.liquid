@@ -1,11 +1,15 @@
 {% comment %}
   Accepts: rating {Number} 0-5, count {Number} optional
+  Each star fills to the exact share of the rating (4.7 → four full stars and 70% of the fifth); see zenith-star-svg.
 {% endcomment %}
-{%- assign rounded = rating | round -%}
+{%- assign zs_rating = rating | plus: 0 -%}
 <span class="zenith-stars">
   <span class="zenith-stars__icons" role="img" aria-label="{{ rating }} out of 5 stars">
     {%- for i in (1..5) -%}
-      <span{% if i > rounded %} style="opacity: 0.3"{% endif %}>{% render 'zenith-icon', icon: 'star' %}</span>
+      {%- liquid
+        assign zs_fill = zs_rating | minus: forloop.index0 | times: 100 | round | at_least: 0 | at_most: 100
+      -%}
+      <span>{% render 'zenith-star-svg', fill: zs_fill %}</span>
     {%- endfor -%}
   </span>
   {%- if count != blank -%}
