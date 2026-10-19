@@ -72,9 +72,9 @@
 }
 
 .zenith-pg .zenith-card__title {
-  font-weight: 600;
+  font-weight: 500;
   line-height: var(--z-pg-tlh-m, 1.15);
-  letter-spacing: 0;
+  letter-spacing: 0.02em; /* client 2026-10-19 */
 }
 
 .zenith-pg .zenith-card__price {

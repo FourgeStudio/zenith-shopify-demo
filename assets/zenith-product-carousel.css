@@ -82,9 +82,9 @@
 
 .zenith-pc .zenith-card__title {
   /* Same card format as the collection grids (client 2026-10-19): 1.15 on phones, 1.55 on desktop */
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.15;
-  letter-spacing: 0;
+  letter-spacing: 0.02em; /* client 2026-10-19 */
 }
 
 .zenith-pc--title-heading .zenith-card__title {
