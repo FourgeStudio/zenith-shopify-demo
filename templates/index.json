@@ -1153,7 +1153,7 @@
       "settings": {
         "image_position": "right",
         "full_width": false,
-        "media_width": 48,
+        "media_width": 40,
         "slide_autoplay": 6,
         "media_ratio": "square",
         "media_min_height": 540,
