@@ -22,10 +22,11 @@
     const max = Number(strip.dataset.max) || 10;
     const cards = [];
     document.querySelectorAll('.jdgm-rev').forEach((rev) => {
-      if (cards.length >= max || strip.contains(rev)) return;
+      if (strip.contains(rev)) return;
       const score = Number(rev.querySelector('.jdgm-rev__rating')?.dataset.score || 0);
-      const text = (rev.querySelector('.jdgm-rev__body')?.textContent || '').trim();
-      if (score < min || !text) return;
+      // Judge.me adds a "Read more" link inside long bodies; a body that is only a phone number is skipped
+      const text = (rev.querySelector('.jdgm-rev__body')?.textContent || '').replace(/s*Read mores*$/i, '').trim();
+      if (score < min || !text || /^[+d][ds()-]{6,}$/.test(text)) return;
       const name = (rev.querySelector('.jdgm-rev__author')?.textContent || '').trim();
       const pic = rev.querySelector('.jdgm-rev__pic-img');
       const src = pic && (pic.dataset.src || pic.getAttribute('src'));
@@ -40,6 +41,26 @@
           `</p><p class="zenith-mp__review-text">${esc(text)}</p></div></li>`
       );
     });
+    // Only reviews whose text fits the card's line limit (Review text lines) without being cut: lay them all out
+    // off-screen at the real card size, keep the ones that fit, up to the maximum (client 2026-10-19)
+    if (cards.length) {
+      const probe = document.createElement('ul');
+      probe.className = 'zenith-mp__reviews';
+      probe.setAttribute('aria-hidden', 'true');
+      probe.style.cssText = 'position:absolute;left:-9999px;top:0;visibility:hidden;display:flex;';
+      probe.innerHTML = cards.join('');
+      strip.hidden = false;
+      strip.appendChild(probe);
+      const fits = [...probe.children].map((li) => {
+        const t = li.querySelector('.zenith-mp__review-text');
+        return !t || t.scrollHeight <= t.clientHeight + 1;
+      });
+      probe.remove();
+      const kept = cards.filter((c, i) => fits[i]);
+      cards.length = 0;
+      cards.push(...kept.slice(0, max));
+    }
+
     // Nothing to show: drop the element and the row it reserved (.is-pending)
     if (!cards.length) {
       strip.remove();
