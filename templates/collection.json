@@ -231,7 +231,7 @@
         "subheading": "",
         "collection": "",
         "products_to_show": 50,
-        "show_rating": false,
+        "show_rating": true,
         "first_badge": "Selling Fast",
         "badge_icon": "truck",
         "sale_badge": "On Sale",
