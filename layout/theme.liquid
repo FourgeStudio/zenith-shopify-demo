@@ -352,7 +352,12 @@
     {{ 'zenith-special-gothic-condensed-one-400.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
     {{ 'zenith-base.css' | asset_url | stylesheet_tag }}
     {%- if settings.jdgm_custom_style -%}<link rel="stylesheet" href="{{ 'zenith-judgeme.css' | asset_url }}" media="print" onload="this.media='all'">{%- endif -%}
-    <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
+    {%- comment -%}zenith: loaded up front with the drawer — loaded late, a drawer opened right after a reload showed unstyled lines (error icon, underlined name, wrapped bin){%- endcomment -%}
+    {%- if settings.cart_type == 'drawer' -%}
+      {{ 'component-cart-items.css' | asset_url | stylesheet_tag }}
+    {%- else -%}
+      <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
+    {%- endif -%}
 
     {%- if settings.cart_type == 'drawer' -%}
       {{ 'component-cart-drawer.css' | asset_url | stylesheet_tag }}
