@@ -15,7 +15,8 @@
     assign cols_t = cols_t | plus: 0.35
     assign gap_count_t = gap_count_t | plus: 1
   endif
-  assign pc_collection = section.settings.collection
+  # No collection picked (or it was deleted) = all products, the same list as /collections/all
+  assign pc_collection = section.settings.collection | default: collections.all
   assign pc_products = section.settings.product_list
   if pc_products == blank or pc_products.size == 0
     if pc_collection != blank and pc_collection.products_count > 0
@@ -228,7 +229,8 @@
     {
       "type": "collection",
       "id": "collection",
-      "label": "Collection"
+      "label": "Collection",
+      "info": "Empty = all products (the /collections/all page)."
     },
     {
       "type": "product_list",
