@@ -328,7 +328,7 @@
         "variant_card_min": 150,
         "review_gap": 10,
         "review_min_stars": 4,
-        "review_autoplay": 6,
+        "review_autoplay": 7,
         "review_spacing": 12,
         "review_photo_size": 52,
         "check_size": 20,
