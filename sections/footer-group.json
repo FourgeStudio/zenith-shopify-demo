@@ -20,7 +20,9 @@
             "heading": "",
             "menu": "quick-links",
             "menu_mobile": "",
-            "mobile_full_width": false
+            "mobile_full_width": false,
+            "override_title": "",
+            "override_url": ""
           }
         },
         "menu_policies": {
@@ -29,18 +31,20 @@
             "heading": "",
             "menu": "footer-products-new-theme",
             "menu_mobile": "",
-            "mobile_full_width": false
+            "mobile_full_width": false,
+            "override_title": "",
+            "override_url": ""
           }
         },
         "link_list_YRhAig": {
           "type": "link_list",
           "settings": {
-            "override_title": "Disclaimer",
-            "override_url": "/pages/disclaimer",
             "heading": "",
             "menu": "faq",
             "menu_mobile": "",
-            "mobile_full_width": false
+            "mobile_full_width": false,
+            "override_title": "Disclaimer",
+            "override_url": "/pages/disclaimer"
           }
         }
       },
@@ -50,6 +54,7 @@
         "link_list_YRhAig"
       ],
       "settings": {
+        "use_svg_logo": true,
         "show_social": true,
         "email": "hello@tryzenith.ph",
         "payment_image": "shopify://shop_images/Payment_Options.png",
@@ -75,8 +80,8 @@
         "seal_width": 85,
         "seal_style": "original",
         "top_line_height": 6,
-        "background_color": "#112328",
         "color_scheme": "scheme-1",
+        "background_color": "#1A1A1A",
         "top_line_color": "#d6b356",
         "top_line_gradient": "",
         "divider_color": "#808080",
