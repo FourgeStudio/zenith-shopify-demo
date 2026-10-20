@@ -398,7 +398,7 @@ footer.footer.zenith-footer {
   }
 }
 
-/* Small phones only. "TryZenith PH" and the copyright clear 375 by about 8px and collide below it,
+/* Small phones only. "Zenith PH" and the copyright clear 375 by about 8px and collide below it,
    so there they stack centred. .zenith-footer__legal carries its own flex-end + margin-left: auto +
    text-align: right for the desktop row, which would leave the copyright hanging right while the
    line above it centred — so it is reset here too. Above 375 the row is untouched.
