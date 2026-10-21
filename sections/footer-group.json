@@ -20,7 +20,9 @@
             "heading": "",
             "menu": "quick-links",
             "menu_mobile": "",
-            "mobile_full_width": false
+            "mobile_full_width": false,
+            "override_title": "",
+            "override_url": ""
           }
         },
         "menu_policies": {
@@ -29,18 +31,20 @@
             "heading": "",
             "menu": "footer-products-new-theme",
             "menu_mobile": "",
-            "mobile_full_width": false
+            "mobile_full_width": false,
+            "override_title": "",
+            "override_url": ""
           }
         },
         "link_list_YRhAig": {
           "type": "link_list",
           "settings": {
-            "override_title": "Disclaimer",
-            "override_url": "/pages/disclaimer",
             "heading": "",
             "menu": "faq",
             "menu_mobile": "",
-            "mobile_full_width": false
+            "mobile_full_width": false,
+            "override_title": "Disclaimer",
+            "override_url": "/pages/disclaimer"
           }
         }
       },
@@ -50,14 +54,15 @@
         "link_list_YRhAig"
       ],
       "settings": {
+        "use_svg_logo": true,
         "show_social": true,
         "email": "hello@tryzenith.ph",
-        "payment_image": "shopify://shop_images/Payment_Options.png",
+        "payment_image": "shopify://shop_images/Payment_Options.svg",
         "payment_enable": true,
-        "seal_image": "shopify://shop_images/Vector.svg",
+        "seal_image": "shopify://shop_images/Vector_ca5ad06e-bc85-48fb-93f5-4f04fa4dd696.svg",
         "seal_link": "",
-        "bottom_text": "TryZenith PH",
-        "copyright_text": "© [year] Amare Group Inc. All rights reserved.",
+        "bottom_text": "Zenith PH",
+        "copyright_text": "© [year] An Amare Group Brand. All rights reserved.",
         "show_policy": false,
         "show_powered_by": false,
         "newsletter_enable": false,
@@ -75,8 +80,8 @@
         "seal_width": 85,
         "seal_style": "original",
         "top_line_height": 6,
-        "background_color": "#112328",
         "color_scheme": "scheme-1",
+        "background_color": "#1a1a1a",
         "top_line_color": "#d6b356",
         "top_line_gradient": "",
         "divider_color": "#808080",

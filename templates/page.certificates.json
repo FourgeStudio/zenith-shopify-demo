@@ -208,7 +208,7 @@
         "nn_day_cream": {
           "type": "certificate",
           "settings": {
-            "image": "shopify://shop_images/certificates-fda-notified-products-notification-day-cream-1-desktop.webp",
+            "image": "shopify://shop_images/certificates-fda-notified-products-notification-cleanser-1-desktop.webp",
             "title": "Anti-Aging Day Cream SPF30",
             "number": "NN-1000015050772",
             "link": "",
@@ -221,7 +221,7 @@
         "nn_cleanser": {
           "type": "certificate",
           "settings": {
-            "image": "shopify://shop_images/certificates-fda-notified-products-notification-cleanser-1-desktop.webp",
+            "image": "shopify://shop_images/certificates-fda-notified-products-notification-day-cream-1-desktop.webp",
             "title": "Anti-Aging Tallow Cleanser",
             "number": "NN-1000015038905",
             "link": "",
