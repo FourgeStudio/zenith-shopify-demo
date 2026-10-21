@@ -2444,3 +2444,9 @@ cart-items .cart__items {
     animation: none;
   }
 }
+
+/* Opening the menu / cart drawer locks scrolling: the scrollbar vanished, the page got ~15px wider and was laid out
+   again mid-slide (sideways jump + stutter in desktop Chrome). The gutter stays reserved, so nothing reflows. */
+html {
+  scrollbar-gutter: stable;
+}
