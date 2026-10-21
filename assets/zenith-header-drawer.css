@@ -361,6 +361,26 @@
     transform: translateY(-50%);
   }
 
+  /* Account + cart sit just left of the X, over the drawer (like the phone layout); they fade like the logo */
+  .section-header.menu-open .zenith-header .header__icons {
+    position: absolute;
+    top: 50%;
+    right: calc(100% - var(--zd-w, 40rem) + var(--zd-px, 2rem) + 3rem + 0.4rem);
+    transform: translateY(-50%);
+  }
+
+  .zenith-header .header__icons {
+    transition: opacity 0.2s ease;
+  }
+
+  .section-header.menu-open:not(.menu-closing) .zenith-header .header__icons {
+    animation: zenith-header-fade-in 0.25s ease;
+  }
+
+  .section-header.menu-closing .zenith-header .header__icons {
+    opacity: 0;
+  }
+
   .section-header.menu-open .zenith-header .header__heading-link {
     position: absolute;
     top: calc(50% + var(--zh-logo-y, 0px));
