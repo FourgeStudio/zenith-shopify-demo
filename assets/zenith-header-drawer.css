@@ -505,3 +505,31 @@
   filter: none;
   will-change: transform;
 }
+
+/* Results in the narrow drawer: Dawn's phone layout at every width (one column; on ≥750px Dawn puts suggestions/pages
+   and products side by side, which squashed the products off the panel). predictive-search.js sets an inline
+   max-height (screen bottom): kept to the panel cap so the drawer doesn't get a second scrollbar. */
+.zenith-drawer__search .zenith-drawer__results {
+  max-height: min(60vh, 52rem) !important;
+}
+
+.zenith-drawer__results .predictive-search__results-groups-wrapper {
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.zenith-drawer__results .predictive-search__result-group:first-child .predictive-search__pages-wrapper {
+  display: none;
+}
+
+.zenith-drawer__results .predictive-search__result-group:last-child .predictive-search__pages-wrapper {
+  display: block;
+}
+
+.zenith-drawer__results .predictive-search__results-groups-wrapper--no-products .predictive-search__result-group:nth-child(2) {
+  display: flex;
+}
+
+.zenith-drawer__results .predictive-search__result-group:first-child {
+  flex: 0 0 auto;
+}
