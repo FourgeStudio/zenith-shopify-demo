@@ -339,6 +339,16 @@
    logo on the left, close X on the drawer's right edge (both relative to the full-width .header-wrapper).
    The icon <span> moves, not the <summary>, so the summary's page overlay (::before) keeps its full-width box. */
 @media screen and (min-width: 750px) {
+  /* The <summary> stays where the hamburger was: its empty box there was an invisible "close" button.
+     Only the moved X and the page overlay (::before, pointer-events: auto while open) take clicks. */
+  .section-header.menu-open .zenith-header .header__icon--menu {
+    pointer-events: none;
+  }
+
+  .section-header.menu-open .zenith-header .header__icon--menu > span {
+    pointer-events: auto;
+  }
+
   .section-header.menu-open .zenith-header .header__icon--menu > span {
     position: absolute;
     top: 50%;
