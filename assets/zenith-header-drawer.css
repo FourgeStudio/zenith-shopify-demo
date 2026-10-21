@@ -533,3 +533,9 @@
 .zenith-drawer__results .predictive-search__result-group:first-child {
   flex: 0 0 auto;
 }
+
+/* Chrome skips laying out a closed <details>' content, so the first open had to build the whole drawer mid-click.
+   Keep it rendered while closed (it stays off-screen + visibility: hidden, so nothing shows or takes focus). */
+#Details-menu-drawer-container::details-content {
+  content-visibility: visible;
+}
