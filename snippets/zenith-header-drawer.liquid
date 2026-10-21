@@ -52,6 +52,61 @@
       <div class="menu-drawer__inner-container">
         <div class="menu-drawer__navigation-container">
           <div class="zenith-drawer__main">
+            {%- if s.drawer_show_search -%}
+              {%- comment -%}
+                Search with Shopify's predictive results (Dawn's predictive-search.js + sections/predictive-search.liquid):
+                products as you type, "Search for …" / Enter → the results page. Plain search form when suggestions are off.
+              {%- endcomment -%}
+              {%- liquid
+                assign zd_search_tag = 'search-form'
+                if settings.predictive_search_enabled
+                  assign zd_search_tag = 'predictive-search'
+                endif
+                assign zd_placeholder = s.drawer_search_placeholder | default: 'Search Products...'
+              -%}
+              <{{ zd_search_tag }} class="zenith-drawer__search" data-loading-text="{{ 'accessibility.loading' | t }}">
+                <form action="{{ routes.search_url }}" method="get" role="search" class="search zenith-drawer__search-form">
+                  <div class="field">
+                    <input
+                      class="search__input field__input"
+                      id="Search-In-Menu-Drawer"
+                      type="search"
+                      name="q"
+                      value=""
+                      placeholder="{{ zd_placeholder | escape }}"
+                      {%- if settings.predictive_search_enabled %}
+                        role="combobox"
+                        aria-expanded="false"
+                        aria-owns="predictive-search-results"
+                        aria-controls="predictive-search-results"
+                        aria-haspopup="listbox"
+                        aria-autocomplete="list"
+                        autocorrect="off"
+                        autocomplete="off"
+                        autocapitalize="off"
+                        spellcheck="false"
+                      {%- endif %}
+                    >
+                    <label class="field__label visually-hidden" for="Search-In-Menu-Drawer">{{ 'general.search.search' | t }}</label>
+                    <input type="hidden" name="options[prefix]" value="last">
+                    <button type="reset" class="reset__button field__button hidden" aria-label="{{ 'general.search.reset' | t }}">
+                      <span class="svg-wrapper">{{- 'icon-reset.svg' | inline_asset_content -}}</span>
+                    </button>
+                    <button class="search__button field__button" aria-label="{{ 'general.search.search' | t }}">
+                      <span class="svg-wrapper">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 21L15.0001 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"/></svg>
+                      </span>
+                    </button>
+                  </div>
+                  {%- if settings.predictive_search_enabled -%}
+                    <div class="predictive-search zenith-drawer__results" tabindex="-1" data-predictive-search>
+                      {%- render 'loading-spinner', class: 'predictive-search__loading-state' -%}
+                    </div>
+                    <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span>
+                  {%- endif -%}
+                </form>
+              </{{ zd_search_tag }}>
+            {%- endif -%}
             <nav class="menu-drawer__navigation">
               <ul class="menu-drawer__menu has-submenu list-menu" role="list">
                 {%- for link in section.settings.menu.links -%}
