@@ -578,12 +578,14 @@ class HeaderDrawer extends MenuDrawer {
     // zenith: a close still finishing (menu-closing) is cancelled by reopening
     clearTimeout(this.closingTimer);
     this.header.classList.remove('menu-closing');
-    this.header.classList.add('menu-open');
 
     setTimeout(() => {
       // zenith: flush the closed (off-screen) style first; otherwise the browser often batches the <details> open
       // and `menu-opening` into one style pass and the drawer pops in with no slide.
       this.mainDetailsToggle.querySelector('.menu-drawer')?.getBoundingClientRect();
+      // zenith: header "open" layout in the same frame as the slide start. Set before the timeout, a busy main thread
+      // (right after a reload) showed the moved logo/icon for several frames with no drawer yet.
+      this.header.classList.add('menu-open');
       this.mainDetailsToggle.classList.add('menu-opening');
     });
 
