@@ -468,7 +468,11 @@ class MenuDrawer extends HTMLElement {
       isOpen ? this.closeMenuDrawer(event, summaryElement) : this.openMenuDrawer(summaryElement);
 
       if (window.matchMedia('(max-width: 990px)')) {
-        document.documentElement.style.setProperty('--viewport-height', `${window.innerHeight}px`);
+        // zenith: on the header section, not <html> — a root custom property restyles the whole page (open stutter)
+        (this.closest('.section-header') || document.documentElement).style.setProperty(
+          '--viewport-height',
+          `${window.innerHeight}px`
+        );
       }
     } else {
       setTimeout(() => {
@@ -565,7 +569,9 @@ class HeaderDrawer extends MenuDrawer {
     this.header = this.header || document.querySelector('.section-header');
     this.borderOffset =
       this.borderOffset || this.closest('.header-wrapper').classList.contains('header-wrapper--border-bottom') ? 1 : 0;
-    document.documentElement.style.setProperty(
+    // zenith: set on the header section (the drawer + its overlay live there), not <html>: a root custom property
+    // restyled the whole page on every open
+    this.header.style.setProperty(
       '--header-bottom-position',
       `${parseInt(this.header.getBoundingClientRect().bottom - this.borderOffset)}px`
     );
@@ -599,12 +605,12 @@ class HeaderDrawer extends MenuDrawer {
   }
 
   onResize = () => {
-    this.header &&
-      document.documentElement.style.setProperty(
-        '--header-bottom-position',
-        `${parseInt(this.header.getBoundingClientRect().bottom - this.borderOffset)}px`
-      );
-    document.documentElement.style.setProperty('--viewport-height', `${window.innerHeight}px`);
+    if (!this.header) return;
+    this.header.style.setProperty(
+      '--header-bottom-position',
+      `${parseInt(this.header.getBoundingClientRect().bottom - this.borderOffset)}px`
+    );
+    this.header.style.setProperty('--viewport-height', `${window.innerHeight}px`);
   };
 }
 
