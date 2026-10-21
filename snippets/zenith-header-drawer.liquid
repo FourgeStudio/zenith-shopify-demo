@@ -270,7 +270,8 @@
                     s.drawer_payment_image
                     | image_url: width: 960
                     | image_tag:
-                      loading: 'lazy',
+                      loading: 'eager',
+                      fetchpriority: 'low',
                       widths: '240, 480, 720, 960',
                       sizes: pay_sizes,
                       class: 'zenith-drawer__payments-image',
@@ -292,7 +293,8 @@
                   s.drawer_badge_image
                   | image_url: width: 420
                   | image_tag:
-                    loading: 'lazy',
+                    loading: 'eager',
+                    fetchpriority: 'low',
                     widths: '140, 280, 420',
                     sizes: badge_sizes,
                     class: 'zenith-drawer__badge',

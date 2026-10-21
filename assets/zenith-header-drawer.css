@@ -498,3 +498,10 @@
 .zenith-drawer__results .predictive-search__item-heading {
   text-transform: none;
 }
+
+/* First open felt slow: the drawer slid with Dawn's drop-shadow filter (repainted every frame; the page overlay
+   already separates it) and its footer images only started loading at that moment (lazy → eager, low priority). */
+.menu-drawer.zenith-drawer {
+  filter: none;
+  will-change: transform;
+}
